@@ -760,7 +760,7 @@ def build_graph() -> dict:
 
     # ------------------------------------------------------------------
     # Digital observables alleged as overt acts (text messages, TikTok
-    # posts, internet searches) — the Hermes/Link-Look-style evidence layer
+    # posts, internet searches) — the document-evidence layer
     # ------------------------------------------------------------------
     msg_map = uid("obs-text-dc-map")
     msg_rifle = uid("obs-text-rifle-photo")

@@ -14,11 +14,13 @@ public class WindowsThreadFacet extends Facet {
     private List<Long> creationFlags;
     private java.time.ZonedDateTime creationTime;
     private java.time.ZonedDateTime observableCreatedTime;
+    @org.caseontology.CaseDatatype("xsd:hexBinary")
     private List<byte[]> parameterAddress;
     private Long priority;
     private String runningStatus;
     private String securityAttributes;
     private List<Long> stackSize;
+    @org.caseontology.CaseDatatype("xsd:hexBinary")
     private List<byte[]> startAddress;
     private List<Long> threadID;
 

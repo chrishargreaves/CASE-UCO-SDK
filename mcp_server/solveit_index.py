@@ -21,6 +21,7 @@ import re
 import threading
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Any
 
 from extension_paths import extension_dir as _solveit_dir
 
@@ -60,6 +61,7 @@ class SolveItRecord:
     weakness_ids: tuple[str, ...] = ()       # technique -> weaknesses
     mitigation_ids: tuple[str, ...] = ()     # weakness -> mitigations
     objective_ids: tuple[str, ...] = ()      # technique -> objectives (reverse)
+    citations: tuple[tuple[str, str], ...] = ()  # (DFCite-*, plain text) via hasReference
     name_tokens: frozenset[str] = field(default=frozenset(), repr=False)
     body_tokens: frozenset[str] = field(default=frozenset(), repr=False)
 
@@ -154,6 +156,20 @@ def load_index(kb_path: Path = KB_PATH, *, force: bool = False) -> SolveItIndex:
                     ids.append(target_id)
             return tuple(sorted(ids))
 
+        citation_text: dict[str, tuple[str, str]] = {}
+        for node in graph.subjects(RDF.type, URIRef(core + "Citation")):
+            citation_id = one(node, "citationID")
+            if citation_id:
+                citation_text[str(node)] = (citation_id, one(node, "citationPlaintext"))
+
+        def citations(node) -> tuple[tuple[str, str], ...]:
+            found = (citation_text.get(str(t)) for t in graph.objects(node, URIRef(core + "hasReference")))
+            return tuple(sorted(c for c in found if c))
+
+        for kind in ("technique", "weakness", "mitigation"):
+            for node in nodes_by_kind.get(kind, []):
+                records[iri_to_id[str(node)]].citations = citations(node)
+
         for node in nodes_by_kind.get("objective", []):
             record = records[iri_to_id[str(node)]]
             record.technique_ids = linked_ids(node, "includesTechnique")
@@ -234,7 +250,7 @@ def _score(record: SolveItRecord, query_tokens: set[str], query: str) -> float:
 
 
 def _summary(record: SolveItRecord) -> dict:
-    payload = {
+    payload: dict[str, Any] = {
         "id": record.item_id,
         "kind": record.kind,
         "name": _truncate(record.name, 200),
@@ -308,6 +324,11 @@ def details(item_id: str) -> dict:
         payload["case_input_classes"] = list(record.case_input_classes)
     if record.case_output_classes:
         payload["case_output_classes"] = list(record.case_output_classes)
+    if record.citations:
+        payload["citations"] = [
+            {"id": cite_id, "text": _truncate(text, 300)}
+            for cite_id, text in record.citations[:MAX_LINKED_ITEMS]
+        ]
 
     if record.kind == "objective":
         payload["techniques"] = _expand(index, record.technique_ids)
@@ -325,13 +346,19 @@ def details(item_id: str) -> dict:
             weaknesses.append(entry)
         payload["weaknesses"] = weaknesses
         payload["modeling_guidance"] = (
-            "Record execution as a solveit-core:SolveitInvestigativeAction with "
-            f"solveit-core:usedTechnique <{record.iri}> and "
-            "solveit-core:appliedMitigation for each mitigation actively applied; "
-            "or type the action directly with the punned technique class "
-            "(UCO 1.5.0 metaclass style). Validate with "
+            "Record execution as a solveit-core:SolveitInvestigativeAction that "
+            f"is also typed with the technique class <{record.iri}> (a "
+            "uco-action:Technique; solveit-core:usedTechnique is deprecated "
+            "since SOLVE-IT 0.2.x), with solveit-core:appliedMitigation for "
+            "each mitigation actively applied. Where a graph references the "
+            "technique as a value (e.g. solveit-wa:scopedToTechnique), restate "
+            "its catalogue entry inline (see catalog_entry_jsonld): owl:Class, "
+            "solveit-core:Technique, rdfs:subClassOf "
+            "solveit-core:SolveitInvestigativeAction, rdfs:label and "
+            "solveit-core:techniqueID. Validate with "
             "validate_graph(extensions=['solveit'])."
         )
+        payload["catalog_entry_jsonld"] = technique_catalog_entry(record.item_id)
     elif record.kind == "weakness":
         payload["mitigations"] = _expand(index, record.mitigation_ids)
         techniques = [
@@ -349,6 +376,38 @@ def details(item_id: str) -> dict:
 
     payload["knowledge_base"] = _kb_provenance()
     return payload
+
+
+def technique_catalog_entry(technique_id: str) -> dict:
+    """Minimal inline catalogue entry for a technique referenced as a value.
+
+    ``case_validate`` passes the knowledge base as an ontology graph, and
+    pySHACL copies only class-level triples of ``owl:Class`` nodes into the
+    data graph, so ``solveit-core:TechniqueShape`` (``techniqueID`` exactly
+    one) fails on a bare technique IRI used as the object of e.g.
+    ``solveit-wa:scopedToTechnique``. Upstream's own examples restate the
+    entry; this returns that restatement as an IRI-keyed JSON-LD node.
+    """
+
+    record = load_index().records.get(technique_id.strip().upper())
+    if record is None or record.kind != "technique":
+        raise KeyError(technique_id)
+    return {
+        "@id": record.iri,
+        "@type": [
+            "http://www.w3.org/2002/07/owl#Class",
+            SOLVEIT_CORE + "Technique",
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+            "@id": SOLVEIT_CORE + "SolveitInvestigativeAction"
+        },
+        "http://www.w3.org/2000/01/rdf-schema#label": {
+            "@value": f"{record.item_id}: {record.name}",
+            "@language": "en",
+        },
+        SOLVEIT_CORE + "techniqueID": record.item_id,
+        SOLVEIT_CORE + "techniqueName": record.name,
+    }
 
 
 def plan_workflow(description: str) -> dict:
@@ -419,7 +478,8 @@ def plan_workflow(description: str) -> dict:
         + "(weaknesses are classified per ASTM E3016-18) and decide which "
         + "mitigations to apply.",
         "3. Record each executed step as a solveit-core:SolveitInvestigativeAction "
-        + "with usedTechnique and appliedMitigation, then validate the graph with "
+        + "typed with the technique class it performed, link appliedMitigation, "
+        + "then validate the graph with "
         + "validate_graph(extensions=['solveit']).",
         "4. Optionally rate residual risk with solveit-wa:WeaknessEvaluation "
         + "(likelihood x impact), as shown in the solve-it-investigation-planning "

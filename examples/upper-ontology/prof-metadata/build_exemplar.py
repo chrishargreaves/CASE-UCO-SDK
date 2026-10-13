@@ -12,8 +12,8 @@ from case_uco.case.investigation import Investigation
 HERE = Path(__file__).resolve().parent
 OUTPUT = HERE / "prof-metadata.jsonld"
 
-CASE_SHAPES_IRI = "https://github.com/casework/CASE-UCO/releases/download/case-1.4.0/case-shapes.ttl"
-VALIDATION_ROLE_IRI = "http://www.w3.org/ns/dx/prof/role/ValidationRole"
+CASE_SHAPES_IRI = "https://github.com/casework/CASE-UCO/releases/download/case-1.5.0/case-shapes.ttl"
+VALIDATION_ROLE_IRI = "http://www.w3.org/ns/dx/prof/role/validation"
 TURTLE_MEDIA_TYPE = "https://www.iana.org/assignments/media-types/text/turtle"
 
 EXTRA_CONTEXT = {

@@ -38,7 +38,7 @@
 	a owl:Ontology ;
 	rdfs:label "Cryptocurrency and Financial Crime Investigation Extension"@en ;
 	rdfs:comment "An extension ontology for the Cyber Domain Ontology (CDO) that provides classes and properties for modeling cryptocurrency observables (addresses, transactions, wallets, asset holdings), virtual-asset financial-crime infrastructure (virtual asset service providers, darknet markets, mixing services), and the criminal legal process that resolves such investigations (charges, plea agreements, sentencing outcomes, forfeiture and restitution orders, asset seizures). Definitions cite the FATF Guidance for a Risk-Based Approach to Virtual Assets and Virtual Asset Service Providers (https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Guidance-rba-virtual-assets-2021.html), the INTERPOL Darkweb and Virtual Assets Taxonomy (https://interpol-innovation-centre.github.io/DW-VA-Taxonomy/), and United States federal criminal statutes (https://uscode.house.gov/). The cryptocurrency observable facets track the revised UCO change proposal https://github.com/ucoProject/UCO/issues/675; the local declarations exist so SDK strict concept-coverage validation passes while the upstream proposal is pending, and MUST be retired if UCO adopts the terms."@en ;
-	owl:versionIRI cryptoinv:0.1.0 ;
+	owl:versionIRI cryptoinv:0.2.0 ;
 	dcterms:source
 		<https://github.com/ucoProject/UCO/issues/675> ,
 		<https://github.com/casework/CASE/issues/87> ,
@@ -120,8 +120,7 @@ cryptoinv:blockNumber
 cryptoinv:transactionFee
 	a owl:DatatypeProperty ;
 	rdfs:label "transactionFee"@en ;
-	rdfs:comment "The transaction fee in the native cryptocurrency unit of the network (https://developer.bitcoin.org/devguide/transactions.html#transaction-fees-and-change)."@en ;
-	rdfs:domain cryptoinv:CryptocurrencyTransactionFacet ;
+	rdfs:comment "The transaction fee in the native cryptocurrency unit of the network (https://developer.bitcoin.org/devguide/transactions.html#transaction-fees-and-change). Also used on cryptoinv:VirtualAssetLedgerRecordFacet when a VASP reports a network or platform fee on a ledger row."@en ;
 	rdfs:range xsd:decimal .
 
 cryptoinv:confirmationCount
@@ -134,8 +133,7 @@ cryptoinv:confirmationCount
 cryptoinv:transactionStatus
 	a owl:DatatypeProperty ;
 	rdfs:label "transactionStatus"@en ;
-	rdfs:comment "The status of the transaction at the time of observation, as an open vocabulary. Recommended values: 'Confirmed', 'Pending', 'Failed'."@en ;
-	rdfs:domain cryptoinv:CryptocurrencyTransactionFacet ;
+	rdfs:comment "The status of the transaction or ledger row at the time of observation, as an open vocabulary. Recommended values: 'Confirmed', 'Pending', 'Failed'. Used on cryptoinv:CryptocurrencyTransactionFacet and cryptoinv:VirtualAssetLedgerRecordFacet."@en ;
 	rdfs:range xsd:string .
 
 cryptoinv:transactionType
@@ -188,15 +186,13 @@ cryptoinv:VirtualAssetHoldingFacet
 cryptoinv:assetSymbol
 	a owl:DatatypeProperty ;
 	rdfs:label "assetSymbol"@en ;
-	rdfs:comment "The ticker symbol of the held virtual asset, as an open vocabulary (same recommended values as cryptoinv:cryptocurrencyType, plus platform tokens such as aUSDC, aUSDT, yvUSDT)."@en ;
-	rdfs:domain cryptoinv:VirtualAssetHoldingFacet ;
+	rdfs:comment "The ticker symbol of the held or transferred virtual asset, as an open vocabulary (same recommended values as cryptoinv:cryptocurrencyType, plus platform tokens such as aUSDC, aUSDT, yvUSDT). Used on cryptoinv:VirtualAssetHoldingFacet and cryptoinv:VirtualAssetLedgerRecordFacet. Domain is left open so RDFS inference does not reclassify a ledger row as a holding snapshot."@en ;
 	rdfs:range xsd:string .
 
 cryptoinv:assetQuantity
 	a owl:DatatypeProperty ;
 	rdfs:label "assetQuantity"@en ;
-	rdfs:comment "The quantity of the virtual asset in its native unit at the observation time, e.g. 94643.29837084."@en ;
-	rdfs:domain cryptoinv:VirtualAssetHoldingFacet ;
+	rdfs:comment "The quantity of the virtual asset in its native unit at the observation time, e.g. 94643.29837084. Used on cryptoinv:VirtualAssetHoldingFacet and cryptoinv:VirtualAssetLedgerRecordFacet."@en ;
 	rdfs:range xsd:decimal .
 
 cryptoinv:fiatValue
@@ -219,6 +215,59 @@ cryptoinv:valuationDate
 	rdfs:comment "The date and time at which the fiat valuation of the holding was made. The trading value of virtual assets fluctuates over time depending on market demand."@en ;
 	rdfs:domain cryptoinv:VirtualAssetHoldingFacet ;
 	rdfs:range xsd:dateTime .
+
+cryptoinv:hostedWalletCompartment
+	a owl:DatatypeProperty ;
+	rdfs:label "hostedWalletCompartment"@en ;
+	rdfs:comment "The provider-hosted wallet compartment reported by a VASP, as an open vocabulary. Recommended values observed on exchange legal returns: 'Spot', 'Funding', 'Earn', 'Futures', 'Margin', 'Card'. A hosted wallet is one where a third party retains the customer's funds (INTERPOL DW-VA Taxonomy: https://interpol-innovation-centre.github.io/DW-VA-Taxonomy/taxonomies/entities#hosted-wallet). This is a ledger partition, not proof of on-chain control."@en ;
+	rdfs:domain cryptoinv:CryptocurrencyWalletFacet ;
+	rdfs:range xsd:string .
+
+# =============================================================================
+# VASP ledger records (exchange / wallet-provider warrant returns)
+# =============================================================================
+
+cryptoinv:VirtualAssetLedgerRecordFacet
+	a owl:Class ;
+	rdfs:subClassOf uco-core:Facet ;
+	rdfs:label "VirtualAssetLedgerRecordFacet"@en ;
+	rdfs:comment "A virtual asset ledger record facet is a grouping of characteristics unique to a VASP-reported movement, exchange, or balance snapshot on a provider ledger rather than (or in addition to) a public-blockchain transaction. FATF defines VASP activity to include exchange between virtual assets and fiat currencies, exchange between one or more forms of virtual assets, and transfer of virtual assets for or on behalf of another natural or legal person (FATF Guidance for a Risk-Based Approach to Virtual Assets and VASPs, 2021, https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Guidance-rba-virtual-assets-2021.html). Electronic-service-provider warrant returns commonly deliver this activity as deposit, withdrawal, order, P2P, Pay, and fiat worksheets. Attach to the uco-core:Event that represents the source row. When the same row also reports a public transaction hash, also attach cryptoinv:CryptocurrencyTransactionFacet; do not treat a provider order identifier as a blockchain transactionHash."@en ;
+	dcterms:source <https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Guidance-rba-virtual-assets-2021.html> .
+
+cryptoinv:ledgerRecordType
+	a owl:DatatypeProperty ;
+	rdfs:label "ledgerRecordType"@en ;
+	rdfs:comment "The provider-ledger activity type as an open vocabulary. Recommended values: 'Deposit', 'Withdrawal', 'Trade', 'P2P', 'Pay', 'FiatDeposit', 'FiatWithdrawal', 'InternalTransfer', 'BalanceSnapshot'. These names follow FATF VASP activity categories (exchange, transfer, safekeeping) as recorded on legal-return worksheets, not MITRE ATT&CK techniques."@en ;
+	rdfs:domain cryptoinv:VirtualAssetLedgerRecordFacet ;
+	rdfs:range xsd:string .
+
+cryptoinv:providerTransactionId
+	a owl:DatatypeProperty ;
+	rdfs:label "providerTransactionId"@en ;
+	rdfs:comment "The VASP-assigned identifier for the ledger row (deposit ID, withdrawal ID, order ID, or transfer ID). This is not a blockchain transaction hash. See FATF VASP record-keeping expectations in the 2021 Virtual Assets guidance (https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Guidance-rba-virtual-assets-2021.html)."@en ;
+	rdfs:domain cryptoinv:VirtualAssetLedgerRecordFacet ;
+	rdfs:range xsd:string .
+
+cryptoinv:transferNetwork
+	a owl:DatatypeProperty ;
+	rdfs:label "transferNetwork"@en ;
+	rdfs:comment "The provider-reported chain or token network used for a deposit or withdrawal, e.g. 'BTC', 'ERC20', 'TRC20', 'BSC', 'Bitcoin'. Distinct from cryptoinv:blockchainNetwork on an address when the row names a token-network rather than a base ledger. See FATF's discussion of transfers of virtual assets (https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Guidance-rba-virtual-assets-2021.html)."@en ;
+	rdfs:domain cryptoinv:VirtualAssetLedgerRecordFacet ;
+	rdfs:range xsd:string .
+
+cryptoinv:addressTag
+	a owl:DatatypeProperty ;
+	rdfs:label "addressTag"@en ;
+	rdfs:comment "A destination tag, memo, or payment identifier required by some networks and VASPs to credit a deposit (for example XRP destination tags or XLM memos). This is routing metadata, not an account-holder identity. See typical VASP deposit-credit requirements discussed in FATF virtual-asset guidance (https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Guidance-rba-virtual-assets-2021.html)."@en ;
+	rdfs:domain cryptoinv:VirtualAssetLedgerRecordFacet ;
+	rdfs:range xsd:string .
+
+cryptoinv:isOnChain
+	a owl:DatatypeProperty ;
+	rdfs:label "isOnChain"@en ;
+	rdfs:comment "True when the ledger row includes a public-blockchain transaction hash in addition to the provider identifier. False for internal ledger actions (spot trades, P2P escrow, Pay, fiat) that must not be modeled as CryptocurrencyTransactionFacet."@en ;
+	rdfs:domain cryptoinv:VirtualAssetLedgerRecordFacet ;
+	rdfs:range xsd:boolean .
 
 # =============================================================================
 # Financial-crime infrastructure organizations

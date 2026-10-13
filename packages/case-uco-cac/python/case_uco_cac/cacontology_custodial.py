@@ -11,28 +11,6 @@ class ActiveCustodyPhase:
     """Phase when custodial relationship is actively maintained and operational. Modeled as anti-rigid gUFO Phase."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/custodial#ActiveCustodyPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -51,9 +29,10 @@ class ActiveCustodyPhase:
     start_time: Optional[datetime] = field(default=None)
     target: Optional[UcoObject] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     access_level: Optional[str] = field(default=None)
-    has_custody_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_custody_end_point: Optional[dateTimeStamp] = field(default=None)
+    has_custody_begin_point: Optional[TypedLiteral] = field(default=None)
+    has_custody_end_point: Optional[TypedLiteral] = field(default=None)
     in_custody_phase: Optional[Phase] = field(default=None)
     relationship_duration: Optional[float] = field(default=None)
     relationship_type: Optional[str] = field(default=None)
@@ -65,11 +44,8 @@ class AuthorityAbuse:
     """Abuse of authority position to exploit or harm children. Modeled as gUFO SubKind with authority relationship violations."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/custodial#AuthorityAbuse"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_violation_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_violation_end_point: Optional[dateTimeStamp] = field(default=None)
+    has_violation_begin_point: Optional[TypedLiteral] = field(default=None)
+    has_violation_end_point: Optional[TypedLiteral] = field(default=None)
     perpetrated_by: list[AuthorityFigure] = field(default_factory=list)
     trust_level_after: Optional[str] = field(default=None)
     trust_level_before: Optional[str] = field(default=None)
@@ -93,23 +69,6 @@ class AuthorityFigure:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -128,23 +87,6 @@ class Babysitter:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -165,7 +107,6 @@ class BackgroundCheck:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     check_date: Optional[datetime] = field(default=None)
     check_result: Optional[str] = field(default=None)
     check_type: Optional[str] = field(default=None)
@@ -177,11 +118,8 @@ class BreachOfCare:
     """Failure to provide appropriate care while in custodial role. Modeled as gUFO SubKind with care obligation failures."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/custodial#BreachOfCare"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_violation_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_violation_end_point: Optional[dateTimeStamp] = field(default=None)
+    has_violation_begin_point: Optional[TypedLiteral] = field(default=None)
+    has_violation_end_point: Optional[TypedLiteral] = field(default=None)
     perpetrated_by: list[AuthorityFigure] = field(default_factory=list)
     trust_level_after: Optional[str] = field(default=None)
     trust_level_before: Optional[str] = field(default=None)
@@ -214,8 +152,8 @@ class CaregiverRelationship:
     comment: Optional[str] = field(default=None)
     label: Optional[str] = field(default=None)
     access_level: Optional[str] = field(default=None)
-    has_custody_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_custody_end_point: Optional[dateTimeStamp] = field(default=None)
+    has_custody_begin_point: Optional[TypedLiteral] = field(default=None)
+    has_custody_end_point: Optional[TypedLiteral] = field(default=None)
     in_custody_phase: Optional[Phase] = field(default=None)
     relationship_duration: Optional[float] = field(default=None)
     relationship_type: Optional[str] = field(default=None)
@@ -240,23 +178,6 @@ class ChildcareProvider:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -275,23 +196,6 @@ class Coach:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -299,11 +203,8 @@ class CustodialAbuse:
     """Abuse committed by someone in custodial or caregiving role. Modeled as gUFO SubKind of TrustViolation with role-based context."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/custodial#CustodialAbuse"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_violation_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_violation_end_point: Optional[dateTimeStamp] = field(default=None)
+    has_violation_begin_point: Optional[TypedLiteral] = field(default=None)
+    has_violation_end_point: Optional[TypedLiteral] = field(default=None)
     perpetrated_by: list[AuthorityFigure] = field(default_factory=list)
     trust_level_after: Optional[str] = field(default=None)
     trust_level_before: Optional[str] = field(default=None)
@@ -329,7 +230,6 @@ class CustodialAuthorization:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -337,7 +237,6 @@ class CustodialCrisisSituation:
     """Emergency situation requiring immediate custodial intervention. Modeled as gUFO Situation with crisis characteristics."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/custodial#CustodialCrisisSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -365,8 +264,8 @@ class CustodialRelationship:
     comment: Optional[str] = field(default=None)
     label: Optional[str] = field(default=None)
     access_level: Optional[str] = field(default=None)
-    has_custody_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_custody_end_point: Optional[dateTimeStamp] = field(default=None)
+    has_custody_begin_point: Optional[TypedLiteral] = field(default=None)
+    has_custody_end_point: Optional[TypedLiteral] = field(default=None)
     in_custody_phase: Optional[Phase] = field(default=None)
     relationship_duration: Optional[float] = field(default=None)
     relationship_type: Optional[str] = field(default=None)
@@ -391,7 +290,6 @@ class CustodyArrangement:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -399,28 +297,6 @@ class EmergencyCustody:
     """Temporary custody arrangement due to emergency circumstances. Modeled as anti-rigid gUFO Phase with crisis response characteristics."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/custodial#EmergencyCustody"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -461,8 +337,8 @@ class FamilialRelationship:
     comment: Optional[str] = field(default=None)
     label: Optional[str] = field(default=None)
     access_level: Optional[str] = field(default=None)
-    has_custody_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_custody_end_point: Optional[dateTimeStamp] = field(default=None)
+    has_custody_begin_point: Optional[TypedLiteral] = field(default=None)
+    has_custody_end_point: Optional[TypedLiteral] = field(default=None)
     in_custody_phase: Optional[Phase] = field(default=None)
     relationship_duration: Optional[float] = field(default=None)
     relationship_type: Optional[str] = field(default=None)
@@ -485,23 +361,6 @@ class FamilyFriend:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -522,7 +381,6 @@ class FormalCustody:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -541,23 +399,6 @@ class Guardian:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -578,7 +419,6 @@ class InformalCustody:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -597,23 +437,6 @@ class Mentor:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -634,7 +457,6 @@ class ParentalConsent:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -653,25 +475,8 @@ class PositionOfTrust:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
+    has_role_begin_point: Optional[TypedLiteral] = field(default=None)
+    has_role_end_point: Optional[TypedLiteral] = field(default=None)
     trust_basis: Optional[str] = field(default=None)
     trust_scope: Optional[str] = field(default=None)
 
@@ -681,28 +486,6 @@ class ProbationaryCustodyPhase:
     """Phase when custodial relationship is under evaluation or supervision. Modeled as anti-rigid gUFO Phase."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/custodial#ProbationaryCustodyPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -721,9 +504,10 @@ class ProbationaryCustodyPhase:
     start_time: Optional[datetime] = field(default=None)
     target: Optional[UcoObject] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     access_level: Optional[str] = field(default=None)
-    has_custody_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_custody_end_point: Optional[dateTimeStamp] = field(default=None)
+    has_custody_begin_point: Optional[TypedLiteral] = field(default=None)
+    has_custody_end_point: Optional[TypedLiteral] = field(default=None)
     in_custody_phase: Optional[Phase] = field(default=None)
     relationship_duration: Optional[float] = field(default=None)
     relationship_type: Optional[str] = field(default=None)
@@ -755,8 +539,8 @@ class ProfessionalCareRelationship:
     comment: Optional[str] = field(default=None)
     label: Optional[str] = field(default=None)
     access_level: Optional[str] = field(default=None)
-    has_custody_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_custody_end_point: Optional[dateTimeStamp] = field(default=None)
+    has_custody_begin_point: Optional[TypedLiteral] = field(default=None)
+    has_custody_end_point: Optional[TypedLiteral] = field(default=None)
     in_custody_phase: Optional[Phase] = field(default=None)
     relationship_duration: Optional[float] = field(default=None)
     relationship_type: Optional[str] = field(default=None)
@@ -779,23 +563,6 @@ class Relative:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -816,7 +583,6 @@ class RestrictedContactArrangement:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     contact_restriction_type: Optional[str] = field(default=None)
     custody_schedule: Optional[str] = field(default=None)
 
@@ -826,7 +592,6 @@ class SupervisionBreakdownSituation:
     """Situation where supervision systems have failed or become inadequate. Modeled as gUFO Situation with system failure characteristics."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/custodial#SupervisionBreakdownSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -834,11 +599,8 @@ class SupervisionFailure:
     """Failure to properly supervise or protect child while in position of authority. Modeled as gUFO SubKind with supervision duty violations."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/custodial#SupervisionFailure"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_violation_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_violation_end_point: Optional[dateTimeStamp] = field(default=None)
+    has_violation_begin_point: Optional[TypedLiteral] = field(default=None)
+    has_violation_end_point: Optional[TypedLiteral] = field(default=None)
     perpetrated_by: list[AuthorityFigure] = field(default_factory=list)
     trust_level_after: Optional[str] = field(default=None)
     trust_level_before: Optional[str] = field(default=None)
@@ -854,28 +616,6 @@ class SuspendedCustodyPhase:
     """Phase when custodial relationship is temporarily suspended but not terminated. Modeled as anti-rigid gUFO Phase."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/custodial#SuspendedCustodyPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -894,9 +634,10 @@ class SuspendedCustodyPhase:
     start_time: Optional[datetime] = field(default=None)
     target: Optional[UcoObject] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     access_level: Optional[str] = field(default=None)
-    has_custody_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_custody_end_point: Optional[dateTimeStamp] = field(default=None)
+    has_custody_begin_point: Optional[TypedLiteral] = field(default=None)
+    has_custody_end_point: Optional[TypedLiteral] = field(default=None)
     in_custody_phase: Optional[Phase] = field(default=None)
     relationship_duration: Optional[float] = field(default=None)
     relationship_type: Optional[str] = field(default=None)
@@ -919,23 +660,6 @@ class Teacher:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -943,28 +667,6 @@ class TemporaryCustody:
     """Short-term custody arrangement or supervision of a child. Modeled as anti-rigid gUFO Phase with temporal boundaries."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/custodial#TemporaryCustody"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -983,9 +685,10 @@ class TemporaryCustody:
     start_time: Optional[datetime] = field(default=None)
     target: Optional[UcoObject] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     access_level: Optional[str] = field(default=None)
-    has_custody_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_custody_end_point: Optional[dateTimeStamp] = field(default=None)
+    has_custody_begin_point: Optional[TypedLiteral] = field(default=None)
+    has_custody_end_point: Optional[TypedLiteral] = field(default=None)
     in_custody_phase: Optional[Phase] = field(default=None)
     relationship_duration: Optional[float] = field(default=None)
     relationship_type: Optional[str] = field(default=None)
@@ -997,28 +700,6 @@ class TerminatedCustodyPhase:
     """Phase when custodial relationship has been formally ended. Modeled as anti-rigid gUFO Phase."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/custodial#TerminatedCustodyPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -1037,9 +718,10 @@ class TerminatedCustodyPhase:
     start_time: Optional[datetime] = field(default=None)
     target: Optional[UcoObject] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     access_level: Optional[str] = field(default=None)
-    has_custody_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_custody_end_point: Optional[dateTimeStamp] = field(default=None)
+    has_custody_begin_point: Optional[TypedLiteral] = field(default=None)
+    has_custody_end_point: Optional[TypedLiteral] = field(default=None)
     in_custody_phase: Optional[Phase] = field(default=None)
     relationship_duration: Optional[float] = field(default=None)
     relationship_type: Optional[str] = field(default=None)
@@ -1051,7 +733,6 @@ class TrustBreachSituation:
     """Situation arising from violation of trust or authority position. Modeled as gUFO Situation with trust violation context."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/custodial#TrustBreachSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1059,11 +740,8 @@ class TrustViolation:
     """Action that violates a position of trust or custodial responsibility. Modeled as gUFO Event with temporal boundaries and participation patterns."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/custodial#TrustViolation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_violation_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_violation_end_point: Optional[dateTimeStamp] = field(default=None)
+    has_violation_begin_point: Optional[TypedLiteral] = field(default=None)
+    has_violation_end_point: Optional[TypedLiteral] = field(default=None)
     perpetrated_by: list[AuthorityFigure] = field(default_factory=list)
     trust_level_after: Optional[str] = field(default=None)
     trust_level_before: Optional[str] = field(default=None)
@@ -1089,7 +767,6 @@ class VisitationArrangement:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1097,5 +774,4 @@ class VulnerabilityExposureSituation:
     """Situation where child vulnerability factors create elevated risk. Modeled as gUFO Situation with protection need characteristics."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/custodial#VulnerabilityExposureSituation"
-    label: list[str] = field(default_factory=list)
 

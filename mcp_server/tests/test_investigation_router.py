@@ -345,3 +345,42 @@ def test_gap_guidance_is_self_contained() -> None:
     joined = " ".join(guidance["workflow"])
     for tool in ("search_classes", "get_uco_profiles", "check_existing_proposals", "validate_graph"):
         assert tool in joined
+
+
+AI_SYSTEM_ATTACK_TEXT = (
+    "Incident report: an attacker hid an indirect prompt injection in a shared "
+    "document. When the LLM agent summarized it, the agent tool invocation sent "
+    "the system prompt and customer records to an external URL. We reviewed the "
+    "agent audit log."
+)
+
+EXTORTION_ONLY_TEXT = (
+    "The defendant threatened to publish stolen company data unless the victim "
+    "paid a ransom in bitcoin; the extortion emails demanded payment within 48 "
+    "hours. The FBI traced the wallet."
+)
+
+
+def test_ai_system_attack_routes_to_atlas_only() -> None:
+    matches = detect_families(AI_SYSTEM_ATTACK_TEXT)
+    assert matches and matches[0]["family_id"] == "ai-system-attacks"
+    top = matches[0]
+    assert top["extensions"] == ["atlas-technique"]
+    assert "docs/recipes/ai-system-attacks.md" in top["recipes"]
+    assert all("attack-technique" not in m["extensions"] for m in matches)
+
+
+def test_offense_without_intrusion_evidence_gets_no_technique_catalog() -> None:
+    matches = detect_families(EXTORTION_ONLY_TEXT)
+    pulled = {ext for m in matches for ext in m["extensions"]}
+    assert not pulled & {"attack-technique", "atlas-technique"}
+
+
+def test_multi_family_guidance_requires_evidence() -> None:
+    payload = route_investigation_content(
+        PROJECT_ROOT, content_text=AI_SYSTEM_ATTACK_TEXT + " " + CTI_APT_TEXT
+    )
+    assert len(payload["matched_families"]) > 1
+    steps = " ".join(payload["recommended_workflow"])
+    assert "matched_keywords against the" in steps
+    assert "unrelated by default" in steps

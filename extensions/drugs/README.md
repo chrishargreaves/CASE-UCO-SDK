@@ -57,7 +57,7 @@ meth = {
 Validate with the extension:
 
 ```bash
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph extensions/drugs/drugs.ttl \
   --ontology-graph extensions/drugs/drugs-shapes.ttl \
   --inference rdfs --allow-info graph.jsonld

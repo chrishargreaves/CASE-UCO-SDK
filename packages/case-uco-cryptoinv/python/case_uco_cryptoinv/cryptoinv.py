@@ -108,6 +108,7 @@ class CryptocurrencyWalletFacet:
 
     CLASS_IRI: str = "http://example.org/ontology/cryptoinv/CryptocurrencyWalletFacet"
     address_count: Optional[int] = field(default=None)
+    hosted_wallet_compartment: Optional[str] = field(default=None)
     wallet_identifier: Optional[str] = field(default=None)
     wallet_type: Optional[str] = field(default=None)
 
@@ -213,6 +214,22 @@ class SentencingOutcome:
     sentence_status: Optional[str] = field(default=None)
     sentencing_date: Optional[datetime] = field(default=None)
     supervised_release_months: Optional[int] = field(default=None)
+
+
+@dataclass
+class VirtualAssetLedgerRecordFacet:
+    """A virtual asset ledger record facet is a grouping of characteristics unique to a VASP-reported movement, exchange, or balance snapshot on a provider ledger rather than (or in addition to) a public-blockchain transaction."""
+
+    CLASS_IRI: str = "http://example.org/ontology/cryptoinv/VirtualAssetLedgerRecordFacet"
+    address_tag: Optional[str] = field(default=None)
+    asset_quantity: Optional[float] = field(default=None)
+    asset_symbol: Optional[str] = field(default=None)
+    is_on_chain: Optional[bool] = field(default=None)
+    ledger_record_type: Optional[str] = field(default=None)
+    provider_transaction_id: Optional[str] = field(default=None)
+    transaction_fee: Optional[float] = field(default=None)
+    transaction_status: Optional[str] = field(default=None)
+    transfer_network: Optional[str] = field(default=None)
 
 
 @dataclass

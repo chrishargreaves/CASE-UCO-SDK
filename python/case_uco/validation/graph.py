@@ -1,6 +1,6 @@
 """SHACL validation wrapper around the CASE Utilities ``case_validate`` CLI.
 
-Gives MCP callers (AI agents, Link-Look, scripts) a bounded way to validate a
+Gives MCP callers (AI agents, review tools, scripts) a bounded way to validate a
 produced CASE/UCO graph file before it is submitted for human review. The
 wrapper invokes the locally installed ``case_validate`` tool with an argument
 array (no shell), parses its conformance report, and fails honestly with
@@ -41,14 +41,14 @@ def _discover_project_root() -> Path:
 
 
 PROJECT_ROOT = _discover_project_root()
-DEFAULT_BUILT_VERSION = "case-1.4.0"
+DEFAULT_BUILT_VERSION = "case-1.5.0"
 
 VALIDATOR_NAME = "case_validate"
 SUPPORTED_GRAPH_EXTENSIONS = {".json", ".jsonld", ".json-ld", ".ttl", ".turtle"}
 MAX_GRAPH_BYTES = 50 * 1024 * 1024
 DEFAULT_TIMEOUT_SECONDS = 180
 
-# Markers shared with Link-Look's graph_validation.rs parser so both sides of
+# Markers shared with downstream validation-result parsers so both sides of
 # the roundtrip report the same conformance semantics.
 _CONFORMS_KEY = "conforms"
 _VIOLATION_MARKER = "Constraint Violation"
@@ -87,6 +87,7 @@ class GraphValidationReport:
     requested_profiles: tuple[str, ...] = ()
     selected_extensions: tuple[str, ...] = ()
     bundle_fingerprint: str | None = None
+    extension_versions: tuple[tuple[str, str | None], ...] = ()
     bundle_resources: tuple[dict[str, Any], ...] = ()
     compatibility_notes: tuple[str, ...] = ()
     bundle_cache_status: str | None = None
@@ -112,6 +113,32 @@ def _validator_package_version() -> str | None:
         return None
 
 
+def parse_extension_token(name: str) -> tuple[str, str]:
+    """Split ``cac``, ``cac:full``, or ``cac:missing-child`` into (name, mode).
+
+    ``subset`` is the default press-release subset. ``full`` uses the extension
+    manifest. Any other suffix is a named subset loaded from
+    ``validation-subset-<mode>.json``.
+    """
+
+    if not name or name.endswith(":"):
+        raise ValueError("extension_unknown")
+    if ":" not in name:
+        return name, "subset"
+    ext, mode = name.rsplit(":", 1)
+    if not ext or not mode:
+        raise ValueError("extension_unknown")
+    return ext, mode
+
+
+def named_subset_manifest_path(ext_dir: Path, mode: str) -> Path | None:
+    """Return the named-subset JSON path when ``mode`` is not subset/full."""
+
+    if mode in {"subset", "full"}:
+        return None
+    return ext_dir / f"validation-subset-{mode}.json"
+
+
 def load_extension_ontology_paths(
     ext_name: str,
     *,
@@ -122,22 +149,32 @@ def load_extension_ontology_paths(
 
     mode ``subset`` uses the extension's ``validation-subset.json`` when present
     (recommended for MCP / press-release KGs). mode ``full`` uses the extension
-    manifest (all owl/shacl/bridge files). Extension directories are resolved
+    manifest (all owl/shacl/bridge files). Any other mode loads
+    ``validation-subset-<mode>.json``. Extension directories are resolved
     across both vendoring roots (``extensions/`` and ``ontology/``).
     """
 
     ext_dir = _extension_dir(ext_name, project_root)
     paths: list[Path] = []
+    subset_path = None
     if mode == "subset":
-        subset_path = ext_dir / "validation-subset.json"
-        if subset_path.exists():
-            subset = json.loads(subset_path.read_text(encoding="utf-8"))
-            for rel in subset.get("ontology_files", []):
-                full = ext_dir / rel
-                if full.exists():
-                    paths.append(full)
-            if paths:
-                return paths
+        candidate = ext_dir / "validation-subset.json"
+        if candidate.exists():
+            subset_path = candidate
+    elif mode != "full":
+        subset_path = named_subset_manifest_path(ext_dir, mode)
+        if subset_path is None or not subset_path.is_file():
+            raise ValueError("extension_unknown")
+    if subset_path is not None:
+        subset = json.loads(subset_path.read_text(encoding="utf-8"))
+        for rel in subset.get("ontology_files", []):
+            full = ext_dir / rel
+            if full.exists():
+                paths.append(full)
+        if paths:
+            return paths
+        if mode not in {"subset", "full"}:
+            raise ValueError("extension_unknown")
     manifest_path = ext_dir / "manifest.json"
     if not manifest_path.exists():
         return paths
@@ -159,8 +196,9 @@ def resolve_extension_dependencies(
     An extension whose exemplars/graphs reuse another extension's terms (e.g.
     ``rico`` builds on ``legalproc``) declares ``"depends_on": [...]`` in its
     manifest; callers then only need to name the top-level extension. The
-    ``:full`` suffix on a requested name is preserved; dependencies load in
-    their default (subset-preferred) mode.
+    ``:full`` or a named-subset suffix (``:missing-child``) on a requested
+    name is preserved; dependencies load in their default (subset-preferred)
+    mode.
 
     Fail-closed (issue #55) — typed ``ValueError`` instead of a silently
     partial extension set: ``extension_unknown`` (a requested extension has
@@ -190,7 +228,7 @@ def resolve_extension_dependencies(
     ]
     while queue:
         name, chain, requested = queue.pop(0)
-        clean = name.removesuffix(":full")
+        clean, _mode = parse_extension_token(name)
         if clean in chain:
             raise ValueError("extension_dependency_cycle")
         if clean in seen:
@@ -214,6 +252,90 @@ def extension_has_validation_subset(ext_name: str, project_root: Path = PROJECT_
     return ext_dir is not None and (ext_dir / "validation-subset.json").is_file()
 
 
+def _extension_namespaces(project_root: Path) -> list[tuple[str, str]]:
+    """``(namespace IRI, extension name)`` pairs from every vendored manifest.
+
+    Core CASE/UCO namespaces that a manifest re-declares (``uco-action`` in
+    ``attack-technique``, for example) do not make the extension required.
+    """
+
+    from case_uco.graph import DEFAULT_CONTEXT
+
+    core = {iri for iri in DEFAULT_CONTEXT.values() if isinstance(iri, str)}
+    pairs: list[tuple[str, str]] = []
+    for root in ("extensions", "ontology"):
+        for manifest_path in sorted((project_root / root).glob("*/manifest.json")):
+            try:
+                manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                continue
+            name = manifest.get("name") or manifest_path.parent.name
+            namespaces = manifest.get("namespaces") or {}
+            if not isinstance(namespaces, dict):
+                continue
+            for iri in namespaces.values():
+                if isinstance(iri, str) and iri and iri not in core:
+                    pairs.append((iri, str(name)))
+    pairs.sort(key=lambda pair: len(pair[0]), reverse=True)
+    return pairs
+
+
+def required_extensions_for_graph(
+    document: dict[str, Any],
+    project_root: Path = PROJECT_ROOT,
+) -> list[str]:
+    """Extension names whose namespaces the graph's types or properties use.
+
+    Pass the result as ``extensions=`` to ``validate_graph_file`` (or one
+    ``--ontology-graph`` set per extension to ``case_validate``); core-only
+    validation rejects extension facets that are not ``core:Facet`` in the
+    CASE closure.
+    """
+
+    context = document.get("@context")
+    prefixes = (
+        {k: v for k, v in context.items() if isinstance(v, str)}
+        if isinstance(context, dict)
+        else {}
+    )
+
+    def expand(term: str) -> str:
+        prefix, sep, local = term.partition(":")
+        if sep and not local.startswith("//") and prefix in prefixes:
+            return prefixes[prefix] + local
+        return term
+
+    used: set[str] = set()
+
+    def visit(value: Any) -> None:
+        if isinstance(value, list):
+            for item in value:
+                visit(item)
+            return
+        if not isinstance(value, dict):
+            return
+        for key, item in value.items():
+            if key == "@type":
+                for type_name in item if isinstance(item, list) else [item]:
+                    if isinstance(type_name, str):
+                        used.add(expand(type_name))
+            elif key == "@context":
+                continue
+            elif not key.startswith("@"):
+                used.add(expand(key))
+            visit(item)
+
+    visit(document.get("@graph", document))
+    namespaces = _extension_namespaces(project_root)
+    required: set[str] = set()
+    for iri in used:
+        for namespace, name in namespaces:
+            if iri.startswith(namespace):
+                required.add(name)
+                break
+    return sorted(required)
+
+
 def extension_ontology_args(
     extension_names: list[str] | None,
     project_root: Path = PROJECT_ROOT,
@@ -230,9 +352,10 @@ def extension_ontology_args(
     ]
     used_subset = False
     for ext_name in extension_names:
-        mode = "full" if ext_name.endswith(":full") else "subset"
-        clean_name = ext_name.removesuffix(":full")
-        if mode == "subset" and extension_has_validation_subset(clean_name, project_root):
+        clean_name, mode = parse_extension_token(ext_name)
+        if mode != "full" and (
+            mode != "subset" or extension_has_validation_subset(clean_name, project_root)
+        ):
             used_subset = True
         rel_paths = load_extension_ontology_paths(
             clean_name, mode=mode, project_root=project_root
@@ -261,9 +384,10 @@ def validate_graph_file(
 ) -> GraphValidationReport:
     """Validate a CASE/UCO graph file with the local case_validate tool.
 
-    When ``profiles`` **or** ``extensions`` are set (and ``strict_concepts``
-    is True), resolution goes through ``resolve_validation_bundle`` so SHACL
-    and concept coverage share one fingerprinted ontology set (CQ-27/CQ-28).
+    When ``profiles`` or ``extra_ontology_graphs`` are set, or ``extensions``
+    are set with ``strict_concepts``, resolution goes through
+    ``resolve_validation_bundle`` so SHACL and concept coverage share one
+    fingerprinted ontology set (CQ-27/CQ-28).
     Upper-ontology terms require explicit ``profiles=[...]`` (CQ-29); recipe
     validation always supplies them.
 
@@ -302,11 +426,9 @@ def validate_graph_file(
 
     resolved_bundle = None
     bundle_resolution_status = "skipped"
-    # Construct one shared bundle whenever profiles or extensions need the
-    # same resource set for SHACL + strict coverage (CQ-27/CQ-28).
-    if profiles or (extensions and strict_concepts) or (
-        extra_ontology_graphs and (profiles or extensions)
-    ):
+    # Construct one shared bundle whenever profiles, extensions, or extra
+    # graphs need the same resource set for SHACL + strict coverage (CQ-27/CQ-28).
+    if profiles or (extensions and strict_concepts) or extra_ontology_graphs:
         from case_uco.validation.bundle import ValidationBundleError, resolve_validation_bundle
 
         try:
@@ -469,7 +591,9 @@ def validate_graph_file(
                     parts.append(
                         f"Graph uses {len(unknown_upper)} term(s) inside profiled "
                         f"upper-ontology namespaces that the pinned ontology releases "
-                        f"do not declare: {shown}."
+                        f"do not declare: {shown}. Use the term the pinned release "
+                        f"declares (for QUDT units, lookup_qudt_units); a change "
+                        f"proposal cannot add terms to an external ontology."
                     )
                 if profile_not_selected:
                     shown = ", ".join(
@@ -495,7 +619,7 @@ def validate_graph_file(
                         f"({', '.join(verification_errors)}); the result is "
                         "unverified, not conformant."
                     )
-                else:
+                elif undeclared:
                     parts.append(
                         "Draft a change proposal or add the concept(s) to an extension "
                         "ontology, then re-validate."
@@ -519,6 +643,8 @@ def validate_graph_file(
     if len(diagnostics) > _diag_limit:
         diagnostics = diagnostics[:_diag_limit] + "\n…[truncated]"
 
+    from case_uco.validation.bundle import _extension_versions
+
     return GraphValidationReport(
         conforms=conforms,
         warning_count=warning_count,
@@ -541,6 +667,11 @@ def validate_graph_file(
             tuple(resolved_bundle.extensions) if resolved_bundle else tuple(extensions or ())
         ),
         bundle_fingerprint=resolved_bundle.fingerprint if resolved_bundle else None,
+        extension_versions=(
+            tuple(_extension_versions(resolved_bundle.extensions, project_root).items())
+            if resolved_bundle
+            else ()
+        ),
         bundle_resources=tuple(resolved_bundle.to_manifest(portable=True)["resources"])
         if resolved_bundle
         else (),
@@ -563,6 +694,13 @@ def report_to_dict(report: GraphValidationReport) -> dict[str, Any]:
         "validator_name": report.validator_name,
         "safe_summary": report.safe_summary,
         "verification_status": report.verification_status,
+        "built_version": DEFAULT_BUILT_VERSION,
+        "ontology_identity": {
+            "case": "1.5.0",
+            "uco": "1.5.0",
+            "cac": "3.1.0",
+            "case_utils": report.validator_version,
+        },
     }
     if report.validator_version:
         payload["validator_version"] = report.validator_version
@@ -591,6 +729,8 @@ def report_to_dict(report: GraphValidationReport) -> dict[str, Any]:
         payload["selected_extensions"] = list(report.selected_extensions)
     if report.bundle_fingerprint:
         payload["bundle_fingerprint"] = report.bundle_fingerprint
+    if report.extension_versions:
+        payload["extension_versions"] = dict(report.extension_versions)
     if report.bundle_resources:
         payload["bundle_resources"] = list(report.bundle_resources)
     if report.compatibility_notes:
@@ -627,7 +767,10 @@ __all__ = [
     "extension_has_validation_subset",
     "extension_ontology_args",
     "load_extension_ontology_paths",
+    "named_subset_manifest_path",
+    "parse_extension_token",
     "report_to_dict",
+    "required_extensions_for_graph",
     "resolve_extension_dependencies",
     "validate_graph_file",
     "validator_available",

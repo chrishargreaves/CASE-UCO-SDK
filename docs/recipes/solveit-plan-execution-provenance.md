@@ -20,7 +20,7 @@ Pair with [solve-it-investigation-planning.md](solve-it-investigation-planning.m
 |---|---|---|
 | Acquisition plan | `prov:Plan` | What was **intended** before execution |
 | Plan | `prov:Plan` + `uco-core:UcoObject` | What was **intended** — not an `InvestigativeAction` |
-| Executed step | `solveit-core:SolveitInvestigativeAction` + `prov:Activity` | What **happened** — with `usedTechnique`, `appliedMitigation`, times |
+| Executed step | `solveit-core:SolveitInvestigativeAction` + `prov:Activity` | What **happened** — typed with the DFT-* technique class performed, plus `appliedMitigation` and times |
 | Plan linkage | `prov:Association` + `prov:qualifiedAssociation` | Agent + `prov:hadPlan` on Association; Activity references it |
 | Partial / corrected results | `prov:Entity` observables | `prov:wasRevisionOf` between results; `prov:wasInvalidatedBy` on partial |
 | Re-execution | `solveit-core:SolveitInvestigativeAction` | Document in `uco-core:description`; link corrected Entity with `prov:wasRevisionOf` partial result |
@@ -29,7 +29,7 @@ Pair with [solve-it-investigation-planning.md](solve-it-investigation-planning.m
 
 1. **One `prov:Plan` per procedure** — link actions with `prov:hadPlan`.
 2. **Planned ≠ executed.** Do not copy plan steps into executed actions without recording deviations in `uco-core:description`.
-3. **`usedTechnique` on execution only** when the technique was actually applied; planned actions may reference techniques prospectively.
+3. **Type with a technique on execution only** when the technique was actually applied; the plan names intended techniques in its description. (`solveit-core:usedTechnique` is deprecated since SOLVE-IT 0.2.x.)
 4. **Partial completion** — document stop reason; link re-execution with `prov:wasRevisionOf`.
 5. **SOLVE-IT KB IRIs** — use `solveit-data:techniqueDFT-*` / `mitigationDFM-*` from the vendored knowledge base.
 
@@ -62,10 +62,10 @@ executed_id = "kb:action-executed"
 graph.upsert_node(executed_id, types=[
     "case-investigation:InvestigativeAction",
     "solveit-core:SolveitInvestigativeAction",
+    "solveit-data:techniqueDFT-1002",
     "prov:Activity",
 ], properties={
     "uco-core:name": "Acquire image (partial)",
-    "solveit-core:usedTechnique": [{"@id": "solveit-data:techniqueDFT-1002"}],
     "solveit-core:appliedMitigation": [{"@id": "solveit-data:mitigationDFM-1003"}],
     "prov:qualifiedAssociation": {"@id": association_id},
 })
@@ -75,14 +75,20 @@ reexec_id = "kb:action-reexec"
 graph.upsert_node(reexec_id, types=[
     "case-investigation:InvestigativeAction",
     "solveit-core:SolveitInvestigativeAction",
+    "solveit-data:techniqueDFT-1002",
     "prov:Activity",
 ], properties={
     "uco-core:name": "Re-execute imaging",
-    "solveit-core:usedTechnique": [{"@id": "solveit-data:techniqueDFT-1002"}],
     "prov:qualifiedAssociation": {"@id": association_id},
 })
 graph.link(corrected_image_id, "prov:wasRevisionOf", partial_image_id)
 graph.link(partial_image_id, "prov:wasInvalidatedBy", reexec_action_id)
+
+# A WeaknessEvaluationSet's scopedToTechnique uses DFT-1002 as a value, so
+# restate its catalogue entry (see solve-it-investigation-planning.md).
+from solveit_index import technique_catalog_entry  # mcp_server on sys.path
+entry = technique_catalog_entry("DFT-1002")
+graph.upsert_node(entry.pop("@id"), types=entry.pop("@type"), properties=entry)
 graph.write("solveit-plan-execution.jsonld")
 ```
 
@@ -97,10 +103,9 @@ python examples/upper-ontology/solveit-plan-execution/build_exemplar.py
 ```bash
 validate_graph("solveit-plan-execution.jsonld", extensions=["solveit"], profiles=["prov-o"])
 
-case_validate --built-version case-1.4.0 \
-  --ontology-graph ontology/solveit/solveit-core.ttl \
-  --ontology-graph ontology/upper/shapes/sh-prov-o.ttl \
-  --inference rdfs --allow-info solveit-plan-execution.jsonld
+# validate_graph assembles the full solveit bundle (ontology modules,
+# knowledge base, technique catalog, SOLVE-IT shapes, attack-technique);
+# prefer it over a hand-built case_validate command line.
 ```
 
 ## Anti-patterns
@@ -108,7 +113,7 @@ case_validate --built-version case-1.4.0 \
 | Anti-pattern | Fix |
 |---|---|
 | Plan without linked executions | `prov:hadPlan` on each action |
-| Executed action missing technique IRI | `solveit-core:usedTechnique` → KB individual |
+| Executed action missing its technique | Add the `solveit-data:techniqueDFT-*` class to the action's `@type` |
 | Re-run modeled as unrelated action | `prov:wasRevisionOf` |
 | Plan typed as `InvestigativeAction` only | Add `prov:Plan` for intent |
 | Mitigations listed but not applied | `appliedMitigation` = positive assertions only |

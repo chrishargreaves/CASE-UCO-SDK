@@ -99,7 +99,7 @@ Anti-pattern reference: `examples/upper-ontology/foundational-typing/invalid_cat
 validate_graph("foundational-typing-gufo.jsonld", profiles=["gufo"])
 
 # CLI (vendored CDO-Shapes)
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph ontology/upper/shapes/sh-gufo.ttl \
   --allow-info foundational-typing-gufo.jsonld
 ```

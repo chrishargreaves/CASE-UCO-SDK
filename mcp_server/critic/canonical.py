@@ -7,13 +7,14 @@ Heuristics must use this API rather than substring type checks on compact JSON.
 
 from __future__ import annotations
 
+import functools
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterable, Literal
 
 from rdflib import Graph, URIRef
-from rdflib.namespace import RDF
+from rdflib.namespace import RDF, RDFS
 
 ParseKind = Literal["jsonld", "turtle", "unknown"]
 ParseStatus = Literal[
@@ -79,6 +80,39 @@ IRI_ROLE = DEFAULT_PREFIXES["uco-identity"] + "Role"
 
 MAX_GRAPH_BYTES = 50 * 1024 * 1024
 SUPPORTED_EXTENSIONS = {".json", ".jsonld", ".json-ld", ".ttl", ".turtle"}
+_ONTOLOGY_ROOT = Path(__file__).resolve().parents[2] / "ontology"
+
+
+@functools.lru_cache(maxsize=1)
+def core_superclasses() -> dict[str, frozenset[str]]:
+    """Transitive rdfs:subClassOf closure over the vendored UCO and CASE TBox."""
+
+    graph = Graph()
+    files = sorted(_ONTOLOGY_ROOT.glob("UCO/ontology/uco/*/*.ttl"))
+    files += sorted(_ONTOLOGY_ROOT.glob("CASE/ontology/*/*.ttl"))
+    for path in files:
+        if path.name.endswith("-shapes.ttl"):
+            continue
+        try:
+            graph.parse(path, format="turtle")
+        except Exception:  # noqa: BLE001 - a missing submodule leaves nominal matching
+            continue
+    parents: dict[str, set[str]] = {}
+    for child, parent in graph.subject_objects(RDFS.subClassOf):
+        if isinstance(child, URIRef) and isinstance(parent, URIRef):
+            parents.setdefault(str(child), set()).add(str(parent))
+    closure: dict[str, frozenset[str]] = {}
+    for child in parents:
+        seen: set[str] = set()
+        stack = list(parents[child])
+        while stack:
+            current = stack.pop()
+            if current in seen:
+                continue
+            seen.add(current)
+            stack.extend(parents.get(current, ()))
+        closure[child] = frozenset(seen)
+    return closure
 
 
 @dataclass(frozen=True)
@@ -105,6 +139,15 @@ class CanonicalNode:
 
     def has_type(self, *type_iris: str) -> bool:
         return any(t in self.types for t in type_iris)
+
+    def is_a(self, *type_iris: str) -> bool:
+        """Like ``has_type`` but also true for UCO/CASE subclasses."""
+
+        wanted = set(type_iris)
+        if wanted & self.types:
+            return True
+        ancestors = core_superclasses()
+        return any(wanted & ancestors.get(t, frozenset()) for t in self.types)
 
     def values(self, prop_iri: str) -> list[CanonicalValue]:
         return list(self.properties.get(prop_iri) or [])
@@ -597,6 +640,9 @@ def _index_embedded(
         items = value if isinstance(value, list) else [value]
         for i, item in enumerate(items):
             if not isinstance(item, dict) or not isinstance(item.get("@id"), str):
+                continue
+            # {"@id": ...} alone is a reference, not a node description.
+            if set(item) == {"@id"}:
                 continue
             iri = _expand_term(item["@id"], prefixes) or item["@id"]
             if iri in nodes:

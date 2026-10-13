@@ -12,6 +12,7 @@ public class GlobalFlagType extends UcoInherentCharacterizationThing {
 
     private String abbreviation;
     private String destination;
+    @org.caseontology.CaseDatatype("xsd:hexBinary")
     private List<byte[]> hexadecimalValue;
     private String symbolicName;
 

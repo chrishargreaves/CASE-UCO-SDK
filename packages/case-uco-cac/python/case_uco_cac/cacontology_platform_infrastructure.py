@@ -11,9 +11,6 @@ class AccountFreezing:
     """Freezing financial accounts and cryptocurrency wallets associated with platform operations (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#AccountFreezing"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -26,7 +23,7 @@ class AccountFreezing:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -39,9 +36,6 @@ class AccountFreezing:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    has_takedown_completeness: Optional[float] = field(default=None)
-    has_takedown_effectiveness: Optional[float] = field(default=None)
-    has_takedown_speed: Optional[str] = field(default=None)
     takedown_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
@@ -65,23 +59,6 @@ class AnalystRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -102,18 +79,7 @@ class AnonymityInfrastructure:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_infrastructure_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_performance: Optional[str] = field(default=None)
-    has_infrastructure_reliability: Optional[float] = field(default=None)
-    has_infrastructure_scalability: Optional[str] = field(default=None)
-    has_infrastructure_vulnerability: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
-    has_anonymity_effectiveness: Optional[float] = field(default=None)
-    has_obfuscation_complexity: Optional[str] = field(default=None)
-    has_security_strength: Optional[str] = field(default=None)
     obfuscation_methods: list[str] = field(default_factory=list)
     anonymity_level: Optional[str] = field(default=None)
 
@@ -136,14 +102,6 @@ class ContentDeliveryNetwork:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_infrastructure_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_performance: Optional[str] = field(default=None)
-    has_infrastructure_reliability: Optional[float] = field(default=None)
-    has_infrastructure_scalability: Optional[str] = field(default=None)
-    has_infrastructure_vulnerability: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
     bandwidth_capacity: Optional[float] = field(default=None)
 
@@ -166,8 +124,6 @@ class CryptocurrencyInfrastructure:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    has_financial_complexity: Optional[str] = field(default=None)
-    has_financial_traceability: Optional[float] = field(default=None)
     monthly_revenue: Optional[float] = field(default=None)
     payment_methods: list[str] = field(default_factory=list)
     created_time: Optional[datetime] = field(default=None)
@@ -179,9 +135,6 @@ class DataMirrorCreation:
     """Creating forensic mirrors of seized infrastructure for analysis and evidence preservation (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#DataMirrorCreation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -194,7 +147,7 @@ class DataMirrorCreation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -207,9 +160,6 @@ class DataMirrorCreation:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    has_takedown_completeness: Optional[float] = field(default=None)
-    has_takedown_effectiveness: Optional[float] = field(default=None)
-    has_takedown_speed: Optional[str] = field(default=None)
     takedown_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
@@ -235,14 +185,6 @@ class DatabaseInfrastructure:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_infrastructure_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_performance: Optional[str] = field(default=None)
-    has_infrastructure_reliability: Optional[float] = field(default=None)
-    has_infrastructure_scalability: Optional[str] = field(default=None)
-    has_infrastructure_vulnerability: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
     storage_capacity: Optional[float] = field(default=None)
 
@@ -265,14 +207,6 @@ class DomainInfrastructure:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_infrastructure_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_performance: Optional[str] = field(default=None)
-    has_infrastructure_reliability: Optional[float] = field(default=None)
-    has_infrastructure_scalability: Optional[str] = field(default=None)
-    has_infrastructure_vulnerability: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
     domain_count: Optional[int] = field(default=None)
 
@@ -282,9 +216,6 @@ class DomainSinkholing:
     """Redirecting domain traffic to law enforcement controlled servers to gather intelligence (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#DomainSinkholing"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -297,7 +228,7 @@ class DomainSinkholing:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -310,9 +241,6 @@ class DomainSinkholing:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    has_takedown_completeness: Optional[float] = field(default=None)
-    has_takedown_effectiveness: Optional[float] = field(default=None)
-    has_takedown_speed: Optional[str] = field(default=None)
     takedown_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
@@ -338,18 +266,7 @@ class EncryptionInfrastructure:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_infrastructure_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_performance: Optional[str] = field(default=None)
-    has_infrastructure_reliability: Optional[float] = field(default=None)
-    has_infrastructure_scalability: Optional[str] = field(default=None)
-    has_infrastructure_vulnerability: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
-    has_anonymity_effectiveness: Optional[float] = field(default=None)
-    has_obfuscation_complexity: Optional[str] = field(default=None)
-    has_security_strength: Optional[str] = field(default=None)
     obfuscation_methods: list[str] = field(default_factory=list)
     encryption_strength: Optional[str] = field(default=None)
 
@@ -359,9 +276,6 @@ class FinancialFlowAnalysis:
     """Analysis of financial transactions and payment flows through platform monetization systems (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#FinancialFlowAnalysis"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -374,7 +288,7 @@ class FinancialFlowAnalysis:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -387,9 +301,6 @@ class FinancialFlowAnalysis:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    has_analysis_accuracy: Optional[float] = field(default=None)
-    has_analysis_depth: Optional[str] = field(default=None)
-    has_analysis_timeliness: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
     financial_complexity: Optional[str] = field(default=None)
@@ -413,8 +324,6 @@ class FinancialObfuscation:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    has_financial_complexity: Optional[str] = field(default=None)
-    has_financial_traceability: Optional[float] = field(default=None)
     monthly_revenue: Optional[float] = field(default=None)
     payment_methods: list[str] = field(default_factory=list)
     created_time: Optional[datetime] = field(default=None)
@@ -438,14 +347,6 @@ class GeographicDistribution:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_infrastructure_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_performance: Optional[str] = field(default=None)
-    has_infrastructure_reliability: Optional[float] = field(default=None)
-    has_infrastructure_scalability: Optional[str] = field(default=None)
-    has_infrastructure_vulnerability: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
     geographic_locations: Optional[int] = field(default=None)
 
@@ -475,9 +376,6 @@ class InfrastructureAnalysis:
     """Analysis of seized infrastructure to understand platform operations and identify additional targets (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#InfrastructureAnalysis"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -490,7 +388,7 @@ class InfrastructureAnalysis:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -503,9 +401,6 @@ class InfrastructureAnalysis:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    has_analysis_accuracy: Optional[float] = field(default=None)
-    has_analysis_depth: Optional[str] = field(default=None)
-    has_analysis_timeliness: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
 
@@ -515,7 +410,6 @@ class InfrastructureCompromiseSituation:
     """Situation where platform infrastructure has been compromised or breached (gUFO Situation)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#InfrastructureCompromiseSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -523,28 +417,6 @@ class InfrastructureDecommissionPhase:
     """Phase during which infrastructure is being decommissioned or shut down (gUFO Phase - anti-rigid)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#InfrastructureDecommissionPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -552,28 +424,6 @@ class InfrastructureDeploymentPhase:
     """Phase during which platform infrastructure is being deployed and configured (gUFO Phase - anti-rigid)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#InfrastructureDeploymentPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -581,7 +431,6 @@ class InfrastructureDiscoverySituation:
     """Situation involving the discovery of previously unknown infrastructure components (gUFO Situation)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#InfrastructureDiscoverySituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -589,7 +438,6 @@ class InfrastructureFailureSituation:
     """Situation involving infrastructure failure or outage (gUFO Situation)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#InfrastructureFailureSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -597,28 +445,6 @@ class InfrastructureMaintenancePhase:
     """Phase during which infrastructure undergoes maintenance and updates (gUFO Phase - anti-rigid)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#InfrastructureMaintenancePhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -626,28 +452,6 @@ class InfrastructureOperationalPhase:
     """Phase during which platform infrastructure is actively supporting operations (gUFO Phase - anti-rigid)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#InfrastructureOperationalPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -655,9 +459,6 @@ class InfrastructureTakedown:
     """Coordinated operation to dismantle platform infrastructure including servers, domains, and supporting systems (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#InfrastructureTakedown"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -670,7 +471,7 @@ class InfrastructureTakedown:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -683,9 +484,6 @@ class InfrastructureTakedown:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    has_takedown_completeness: Optional[float] = field(default=None)
-    has_takedown_effectiveness: Optional[float] = field(default=None)
-    has_takedown_speed: Optional[str] = field(default=None)
     takedown_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
@@ -710,14 +508,6 @@ class LoadBalancer:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_infrastructure_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_performance: Optional[str] = field(default=None)
-    has_infrastructure_reliability: Optional[float] = field(default=None)
-    has_infrastructure_scalability: Optional[str] = field(default=None)
-    has_infrastructure_vulnerability: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
 
 
@@ -739,14 +529,6 @@ class NetworkInfrastructure:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_infrastructure_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_performance: Optional[str] = field(default=None)
-    has_infrastructure_reliability: Optional[float] = field(default=None)
-    has_infrastructure_scalability: Optional[str] = field(default=None)
-    has_infrastructure_vulnerability: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
 
 
@@ -755,9 +537,6 @@ class NetworkTopologyAnalysis:
     """Analysis of network architecture and connectivity patterns within platform infrastructure (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#NetworkTopologyAnalysis"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -770,7 +549,7 @@ class NetworkTopologyAnalysis:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -783,9 +562,6 @@ class NetworkTopologyAnalysis:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    has_analysis_accuracy: Optional[float] = field(default=None)
-    has_analysis_depth: Optional[str] = field(default=None)
-    has_analysis_timeliness: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
     network_complexity: Optional[str] = field(default=None)
@@ -809,8 +585,6 @@ class PaymentProcessing:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    has_financial_complexity: Optional[str] = field(default=None)
-    has_financial_traceability: Optional[float] = field(default=None)
     monthly_revenue: Optional[float] = field(default=None)
     payment_methods: list[str] = field(default_factory=list)
     created_time: Optional[datetime] = field(default=None)
@@ -834,14 +608,6 @@ class PlatformInfrastructure:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_infrastructure_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_performance: Optional[str] = field(default=None)
-    has_infrastructure_reliability: Optional[float] = field(default=None)
-    has_infrastructure_scalability: Optional[str] = field(default=None)
-    has_infrastructure_vulnerability: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
 
 
@@ -863,14 +629,6 @@ class ProxyInfrastructure:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_infrastructure_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_performance: Optional[str] = field(default=None)
-    has_infrastructure_reliability: Optional[float] = field(default=None)
-    has_infrastructure_scalability: Optional[str] = field(default=None)
-    has_infrastructure_vulnerability: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
 
 
@@ -892,18 +650,7 @@ class SecurityInfrastructure:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_infrastructure_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_performance: Optional[str] = field(default=None)
-    has_infrastructure_reliability: Optional[float] = field(default=None)
-    has_infrastructure_scalability: Optional[str] = field(default=None)
-    has_infrastructure_vulnerability: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
-    has_anonymity_effectiveness: Optional[float] = field(default=None)
-    has_obfuscation_complexity: Optional[str] = field(default=None)
-    has_security_strength: Optional[str] = field(default=None)
     obfuscation_methods: list[str] = field(default_factory=list)
 
 
@@ -923,23 +670,6 @@ class SecurityOperatorRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -960,14 +690,6 @@ class ServerInfrastructure:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_infrastructure_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_infrastructure_performance: Optional[str] = field(default=None)
-    has_infrastructure_reliability: Optional[float] = field(default=None)
-    has_infrastructure_scalability: Optional[str] = field(default=None)
-    has_infrastructure_vulnerability: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
     cloud_platform: Optional[str] = field(default=None)
     server_count: Optional[int] = field(default=None)
@@ -978,9 +700,6 @@ class ServerSeizure:
     """Physical or virtual seizure of servers hosting platform infrastructure (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#ServerSeizure"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -993,7 +712,7 @@ class ServerSeizure:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1006,9 +725,6 @@ class ServerSeizure:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    has_takedown_completeness: Optional[float] = field(default=None)
-    has_takedown_effectiveness: Optional[float] = field(default=None)
-    has_takedown_speed: Optional[str] = field(default=None)
     takedown_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
@@ -1034,8 +750,6 @@ class SubscriptionManagement:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    has_financial_complexity: Optional[str] = field(default=None)
-    has_financial_traceability: Optional[float] = field(default=None)
     monthly_revenue: Optional[float] = field(default=None)
     payment_methods: list[str] = field(default_factory=list)
     created_time: Optional[datetime] = field(default=None)
@@ -1058,23 +772,6 @@ class SystemAdministratorRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1093,23 +790,6 @@ class TakedownOperatorRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1117,9 +797,6 @@ class UserAccessPatternAnalysis:
     """Analysis of user access patterns and geographic distribution based on infrastructure logs (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/infrastructure#UserAccessPatternAnalysis"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -1132,7 +809,7 @@ class UserAccessPatternAnalysis:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1145,9 +822,6 @@ class UserAccessPatternAnalysis:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    has_analysis_accuracy: Optional[float] = field(default=None)
-    has_analysis_depth: Optional[str] = field(default=None)
-    has_analysis_timeliness: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
     user_geographic_spread: Optional[int] = field(default=None)

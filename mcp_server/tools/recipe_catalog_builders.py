@@ -11,6 +11,7 @@ from case_uco.uco.observable import ContentDataFacet, FileFacet, ObservableObjec
 from case_uco.uco.tool import Tool
 from case_uco.uco.types import Hash
 
+
 LEGALPROC_CONTEXT = {
     "legalproc": "https://ontology.caseontology.org/case/criminal/",
 }
@@ -19,7 +20,7 @@ LEGALPROC_CONTEXT = {
 def _core_graph(title: str) -> CASEGraph:
     graph = CASEGraph()
     tz = timezone.utc
-    tool = graph.create(Tool, name="CASE-UCO-SDK", version="1.30.0")
+    tool = graph.create(Tool, name="CASE-UCO-SDK", version="1.31.0")
     evidence = graph.create(
         ObservableObject,
         name=f"{title} evidence",
@@ -92,6 +93,8 @@ _LEGAL_SLUGS = frozenset(
         "racketeering-enterprise",
     }
 )
+
+
 
 
 def build(slug: str) -> CASEGraph:

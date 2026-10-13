@@ -1,6 +1,6 @@
 """Route any investigation submission to recipes, extensions, and ontologies.
 
-Hermes, Link-Look, and other MCP callers submit warrant returns, legal
+MCP agents and other callers submit warrant returns, legal
 filings, case files, semi-structured and fully-structuredextraction reports, existing CASE/UCO graphs,and free-text narratives covering
 many investigation types — not only CAC. This module classifies the
 submission into one or more investigation families and, for each, returns
@@ -123,7 +123,11 @@ INVESTIGATION_FAMILIES: tuple[InvestigationFamily, ...] = (
             "language. A CAC offender targets children and other "
             "vulnerable people; ATT&CK models hackers and attackers. "
             "Do not emit ATT&CK techniques or call the subject a threat "
-            "actor unless the source describes that rare overlap."
+            "actor unless the source describes that rare overlap. "
+            "Validate missing-child / AMBER graphs with "
+            "extensions=['cac:missing-child'] (CASE 1.5.0 / CAC 3.1.0); "
+            "the default cac press-release subset will reject abduction "
+            "and case-management terms as a subset miss."
         ),
     ),
     InvestigationFamily(
@@ -220,6 +224,7 @@ INVESTIGATION_FAMILIES: tuple[InvestigationFamily, ...] = (
             "green dot", "gift card", "prepaid card", "tech support scam",
             "grandparent scam", "romance scam", "call center",
             "spoofed", "caller id",
+            "pig butchering", "pig-butchering", "investment scam",
         ),
         recipes=(
             "docs/recipes/fraud-crypto-laundering.md",
@@ -316,11 +321,16 @@ INVESTIGATION_FAMILIES: tuple[InvestigationFamily, ...] = (
             "phishing", "spear phishing", "command and control", "c2 server",
             "ip address", "exfiltration", "lateral movement", "botnet",
             "ddos", "vulnerability", "exploit", "backdoor", "compromise",
+            # Industrial control systems / operational technology.
+            "scada", "plc", "programmable logic controller", "hmi", "modbus",
+            "dnp3", "industrial control", "ics", "operational technology",
+            "setpoint", "engineering workstation",
         ),
         recipes=(
             "docs/recipes/network-investigation.md",
             "docs/recipes/network-artifacts.md",
             "docs/recipes/spear-phishing.md",
+            "docs/recipes/otics-scada-intrusion.md",
         ),
         core_namespaces=("uco-observable", "uco-action", "case-investigation"),
         upper_profiles=("PROV-O", "OWL-Time"),
@@ -425,8 +435,8 @@ INVESTIGATION_FAMILIES: tuple[InvestigationFamily, ...] = (
         notes=(
             "Document forensic method with the pinned SOLVE-IT knowledge "
             "base (ontology/solveit/): record each step as a "
-            "solveit-core:SolveitInvestigativeAction with usedTechnique "
-            "(DFT-*) and appliedMitigation (DFM-*), and rate residual risk "
+            "solveit-core:SolveitInvestigativeAction typed with the technique "
+            "class (DFT-*) and linked to appliedMitigation (DFM-*), and rate residual risk "
             "with solveit-wa:WeaknessEvaluation (ASTM E3016-18 categories). "
             "Use plan_solveit_workflow(text) to go from an investigation "
             "goal to candidate techniques with per-technique weakness/"
@@ -628,9 +638,11 @@ INVESTIGATION_FAMILIES: tuple[InvestigationFamily, ...] = (
             "uco-action:techniqueID, and a behavior Action that exhibits it is "
             "rdf:typed with that technique class (punning) — not a plain "
             "instance node and not a Uses_Technique relationship. The "
-            "attack-technique extension forward-implements the metaclass, the "
-            "uco-core:UcoType anchor, and a partial ATT&CK catalog; validate "
-            "with extensions=['attack-technique:full'] (RDFS inference). "
+            "attack-technique extension vendors the complete MITRE ATT&CK "
+            "v19.2 catalog (Enterprise, Mobile, ICS; sub-techniques specialize "
+            "their parent); validate with extensions=['attack-technique:full'] "
+            "(RDFS inference). AI-system attacks use the MITRE ATLAS catalog "
+            "(extensions=['atlas-technique']). "
             "Enrich from the MITRE group/software pages (e.g. Lotus Blossom "
             "G0030, Sagerunex S1156) even when the report prose omits IDs. "
             "Contrast with network-intrusion (single incident with acquired "
@@ -638,6 +650,49 @@ INVESTIGATION_FAMILIES: tuple[InvestigationFamily, ...] = (
             "Do not use this family for crimes-against-children investigations. "
             "ATT&CK is attacker/hacker tradecraft, not the language for a CAC "
             "offender who targets children or other vulnerable people."
+        ),
+    ),
+    InvestigationFamily(
+        family_id="ai-system-attacks",
+        title="Attacks on AI Systems (MITRE ATLAS)",
+        keywords=(
+            "mitre atlas",
+            "prompt injection", "indirect prompt injection", "jailbreak",
+            "llm jailbreak", "system prompt", "system prompt extraction",
+            "adversarial example", "adversarial examples", "model evasion",
+            "evade the model", "data poisoning", "training data poisoning",
+            "model poisoning", "rag poisoning", "poisoned dataset",
+            "model extraction", "model inversion", "membership inference",
+            "model stealing", "stolen model weights", "model weights",
+            "ai agent", "llm agent", "agentic", "agent tool", "tool invocation",
+            "mcp server", "ai supply chain", "malicious model",
+            "machine learning model", "ml model", "large language model",
+        ),
+        recipes=(
+            "docs/recipes/ai-system-attacks.md",
+            "docs/recipes/cyber-threat-intelligence.md",
+        ),
+        core_namespaces=(
+            "case-investigation", "uco-observable", "uco-action",
+            "uco-tool", "uco-identity",
+        ),
+        extensions=("atlas-technique",),
+        upper_profiles=("PROV-O",),
+        notes=(
+            "For incidents and reports where the target is an AI system "
+            "itself — prompt injection, jailbreaks, evasion, poisoning, model "
+            "extraction or stealing, abuse of an AI agent's tools — follow "
+            "ai-system-attacks.md (exemplar: examples/ai-system-attacks/). "
+            "The atlas-technique extension vendors the complete MITRE ATLAS "
+            "2026.09 catalog in the UCO 1.5.0 uco-action:Technique metaclass "
+            "pattern: type each evidenced uco-action:Action with the ATLAS "
+            "technique class (search_adversary_techniques(query, "
+            "catalog='atlas')). Add ATT&CK (attack-technique) only when the "
+            "evidence also shows conventional host or network intrusion; an "
+            "ATLAS technique's rdfs:seeAlso link to ATT&CK is not that "
+            "evidence. A case that merely uses AI tools (an offender using a "
+            "chatbot, AI-generated media) is not an AI-system attack; route "
+            "it by the offense instead."
         ),
     ),
 )
@@ -835,9 +890,15 @@ def score_family(text: str, family: InvestigationFamily) -> tuple[int, list[str]
 
 
 def _family_document_text(family: InvestigationFamily) -> str:
-    """Catalog text a family is semantically retrieved against."""
+    """Catalog text a family is semantically retrieved against.
 
-    return " ".join([family.title, " ".join(family.keywords), family.notes])
+    Modeling notes stay on the match payload for the agent to read. They
+    are not retrieval text: notes contain ordinary words (membership,
+    asset, model) that pull unrelated submissions over the abstain line
+    with a keyword score of zero.
+    """
+
+    return " ".join([family.title, " ".join(family.keywords)])
 
 
 def _family_match_payload(
@@ -1110,7 +1171,10 @@ def _build_ordered_recommendations_model(
         titles = ", ".join(m["title"] for m in matches)
         warnings.append(
             f"Multiple families matched ({titles}): build ONE investigation "
-            f"graph composing every matched family's recipes — see {COMPOSITION_RECIPE}."
+            f"graph composing the recipes of each family the evidence "
+            f"supports — see {COMPOSITION_RECIPE}. Confirm every family's "
+            "matched_keywords reflect evidence, not incidental wording, "
+            "before enabling its extensions."
         )
     if "cac" in required_extensions and "bfo" in recommended:
         recommended = [p for p in recommended if p != "bfo"]
@@ -1223,12 +1287,18 @@ def build_general_workflow(matches: list[dict[str, Any]], installed: dict[str, d
         steps.append(
             f"Multiple families matched ({titles}): this is ONE "
             "investigation spanning several domains, not several "
-            "investigations. Build a single graph, compose the recipes from "
-            "every matched family on it, and enable the union of their "
-            f"extensions — see {COMPOSITION_RECIPE}. Do "
-            "not split the case per family or model only the top-scoring "
-            "one. Prefer ordered_recommendations for the primary composition "
-            "recipe, supporting domain recipes, profiles, and validation bundle preview."
+            "investigations. Build a single graph and compose the recipes "
+            "from each family the evidence actually supports — see "
+            f"{COMPOSITION_RECIPE}. Do not split the case per family or "
+            "model only the top-scoring one, but do not assume a family "
+            "either: check each family's matched_keywords against the "
+            "evidence, and drop one whose match is incidental wording. "
+            "Vocabularies such as ATT&CK/ATLAS (adversary tradecraft), the "
+            "offense-conduct extensions, SOLVE-IT and CAC are unrelated by "
+            "default; combine them only where an artifact shows facts of "
+            "both kinds, and type only the nodes it supports. Prefer "
+            "ordered_recommendations for the primary composition recipe, "
+            "supporting domain recipes, profiles, and validation bundle preview."
         )
     steps.extend([
         "Process binary source files with process_document_file (keeps "

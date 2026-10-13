@@ -142,7 +142,7 @@ def compute_review_config_sha256(
     if validator_version is None:
         validator_version = case_utils_version()
     if built_version is None:
-        built_version = "case-1.4.0"
+        built_version = "case-1.5.0"
     if resolver_schema_version is None:
         from validation_bundle import RESOLVER_SCHEMA_VERSION
 

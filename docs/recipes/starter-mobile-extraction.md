@@ -155,7 +155,7 @@ graph.write("mobile-extraction.jsonld")
 ## Validation
 
 ```bash
-case_validate --built-version case-1.4.0 mobile-extraction.jsonld
+case_validate --built-version case-1.5.0 mobile-extraction.jsonld
 ```
 
 When the extraction log establishes a filesystem extract (DFT-1020) or

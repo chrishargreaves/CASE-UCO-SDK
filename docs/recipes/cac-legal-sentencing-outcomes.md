@@ -21,7 +21,7 @@ non-CAC dockets. Use [cac-federal-prosecution-relationships.md](cac-federal-pros
 for numbered federal-count wiring. Use [cac-icac-search-warrant-arrest.md](cac-icac-search-warrant-arrest.md)
 for warrant/booking workflow. Use [technique-evidence-outcome.md](technique-evidence-outcome.md)
 to join later lab or PACER method claims to these outcomes; press releases
-do not establish `usedTechnique` or hashed `ContentDataFacet` nodes.
+do not establish a SOLVE-IT technique type or hashed `ContentDataFacet` nodes.
 
 ## Fail-closed legal-stage table
 
@@ -122,7 +122,7 @@ Validated against `examples/press-release-legal/`.
 - Collapsing a state arrest and a later federal adoption into one proceeding
 - Copying a prior conviction onto the current case without `prior-history`
 - Treating omitted victim facts as zero victims
-- Inferring SOLVE-IT `usedTechnique` or emitting empty `ContentDataFacet`
+- Inferring a SOLVE-IT DFT-* technique type or emitting empty `ContentDataFacet`
   nodes because the release mentioned digital evidence
 
 ## CaseLinker remodeling

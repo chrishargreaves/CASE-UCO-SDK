@@ -6,7 +6,12 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Base64;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -1078,6 +1083,13 @@ public class CaseGraph {
                 if (raw instanceof String) {
                     String s = (String) raw;
                     if (target == String.class) return s;
+                    Object datatype = map.get("@type");
+                    if (target == byte[].class) {
+                        return decodeBinary(s, datatype instanceof String ? (String) datatype : null);
+                    }
+                    if (target == ZonedDateTime.class) {
+                        return ZonedDateTime.parse(s.replaceFirst("\\[[^\\]]*\\]$", ""));
+                    }
                     try {
                         if (target == int.class || target == Integer.class) return Integer.parseInt(s);
                         if (target == long.class || target == Long.class) return Long.parseLong(s);
@@ -1831,7 +1843,8 @@ public class CaseGraph {
                 } catch (NoSuchFieldException | IllegalAccessException ignored) {}
 
                 String propKey = nsPrefix + ":" + field.getName();
-                result.put(propKey, convertValue(value));
+                CaseDatatype datatype = field.getAnnotation(CaseDatatype.class);
+                result.put(propKey, convertValue(value, datatype != null ? datatype.value() : null));
             } catch (IllegalAccessException ignored) {}
         }
 
@@ -1850,10 +1863,55 @@ public class CaseGraph {
         return fields;
     }
 
-    @SuppressWarnings("unchecked")
     private Object convertValue(Object value) {
+        return convertValue(value, null);
+    }
+
+    /** Canonical xsd:dateTime: seconds always present, numeric offset or Z, no [zone id]. */
+    static String formatDateTime(ZonedDateTime value) {
+        return value.toOffsetDateTime().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+    }
+
+    static String encodeBinary(byte[] bytes, String datatype) {
+        if ("xsd:base64Binary".equals(datatype)) {
+            return Base64.getEncoder().encodeToString(bytes);
+        }
+        StringBuilder sb = new StringBuilder(bytes.length * 2);
+        for (byte b : bytes) {
+            sb.append(Character.toUpperCase(Character.forDigit((b >> 4) & 0xF, 16)));
+            sb.append(Character.toUpperCase(Character.forDigit(b & 0xF, 16)));
+        }
+        return sb.toString();
+    }
+
+    static byte[] decodeBinary(String lexical, String datatype) {
+        if (datatype != null && datatype.endsWith("base64Binary")) {
+            return Base64.getDecoder().decode(lexical.trim());
+        }
+        String hex = lexical.trim();
+        if (hex.length() % 2 != 0) {
+            throw new IllegalArgumentException("hexBinary has odd length: " + hex.length());
+        }
+        byte[] out = new byte[hex.length() / 2];
+        for (int i = 0; i < out.length; i++) {
+            int hi = Character.digit(hex.charAt(2 * i), 16);
+            int lo = Character.digit(hex.charAt(2 * i + 1), 16);
+            if (hi < 0 || lo < 0) {
+                throw new IllegalArgumentException("hexBinary has a non-hex digit");
+            }
+            out[i] = (byte) ((hi << 4) | lo);
+        }
+        return out;
+    }
+
+    @SuppressWarnings("unchecked")
+    private Object convertValue(Object value, String datatype) {
         if (value == null) {
             return null;
+        }
+        if (value instanceof byte[]) {
+            String type = "xsd:base64Binary".equals(datatype) ? datatype : "xsd:hexBinary";
+            return typedLiteral(type, encodeBinary((byte[]) value, type));
         }
         if (value instanceof String) {
             return value;
@@ -1868,12 +1926,18 @@ public class CaseGraph {
             return typedLiteral("xsd:decimal", value.toString());
         }
         if (value instanceof ZonedDateTime) {
-            return typedLiteral("xsd:dateTime", value.toString());
+            return typedLiteral("xsd:dateTime", formatDateTime((ZonedDateTime) value));
+        }
+        if (value instanceof OffsetDateTime) {
+            return typedLiteral("xsd:dateTime", formatDateTime(((OffsetDateTime) value).toZonedDateTime()));
+        }
+        if (value instanceof Instant) {
+            return typedLiteral("xsd:dateTime", formatDateTime(((Instant) value).atZone(ZoneOffset.UTC)));
         }
         if (value instanceof List<?>) {
             List<Object> converted = new ArrayList<>();
             for (Object item : (List<Object>) value) {
-                converted.add(convertValue(item));
+                converted.add(convertValue(item, datatype));
             }
             return converted;
         }
@@ -2050,10 +2114,21 @@ public class CaseGraph {
                 switch (json.charAt(pos[0])) {
                     case '"': sb.append('"'); break;
                     case '\\': sb.append('\\'); break;
+                    case '/': sb.append('/'); break;
+                    case 'b': sb.append('\b'); break;
+                    case 'f': sb.append('\f'); break;
                     case 'n': sb.append('\n'); break;
                     case 'r': sb.append('\r'); break;
                     case 't': sb.append('\t'); break;
-                    default: sb.append(json.charAt(pos[0])); break;
+                    case 'u':
+                        if (pos[0] + 4 >= json.length()) {
+                            throw new IllegalArgumentException("truncated \\u escape in JSON string");
+                        }
+                        sb.append((char) Integer.parseInt(json.substring(pos[0] + 1, pos[0] + 5), 16));
+                        pos[0] += 4;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("invalid JSON escape \\" + json.charAt(pos[0]));
                 }
             } else {
                 sb.append(json.charAt(pos[0]));

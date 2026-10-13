@@ -8,11 +8,12 @@ organizations, persons described in law-enforcement narratives, and a
 bounded narrative Event when charge/arrest language is present.
 
 Tier T0 synthetic fixtures only in committed tests; real officer documents
-belong in local T1/T2 verification per Link-Look test-data handling.
+belong in local T1/T2 verification per local test-data handling rules.
 """
 
 from __future__ import annotations
 
+import hashlib
 import re
 import uuid
 from dataclasses import dataclass, field
@@ -20,7 +21,155 @@ from typing import Any
 
 from document_models import ExtractedRecord
 
-MAX_SEMANTIC_ENTITIES = 96
+_B58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+_B58_INDEX = {char: index for index, char in enumerate(_B58_ALPHABET)}
+OCR_EMAIL_REPAIRS = (
+    (re.compile(r"@9gc0m\b", re.IGNORECASE), "@qq.com"),
+    (re.compile(r"@gqc0m\b", re.IGNORECASE), "@qq.com"),
+    (re.compile(r"@qqcom\b", re.IGNORECASE), "@qq.com"),
+    (re.compile(r"@hotmai[l1]\.com\b", re.IGNORECASE), "@hotmail.com"),
+)
+# OCR often splits Base58 addresses with spaces or punctuation. The
+# reconstruction walk below uses this character class; intact checksummed
+# addresses are left unchanged because they have no separators.
+_B58_OCR_CHARS = set("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyzIlO0")
+_B58_SEPARATORS = set(" \t\n\r:][,.'’/\\")
+_MIN_BASE58_ADDRESS_LEN = 26
+_MAX_BASE58_ADDRESS_LEN = 42
+
+
+def _b58decode(value: str) -> bytes | None:
+    if not value or any(char not in _B58_INDEX for char in value):
+        return None
+    number = 0
+    for char in value:
+        number = number * 58 + _B58_INDEX[char]
+    combined = number.to_bytes((number.bit_length() + 7) // 8, "big") if number else b""
+    pad = 0
+    for char in value:
+        if char != "1":
+            break
+        pad += 1
+    return b"\x00" * pad + combined
+
+
+def base58check_is_valid(value: str) -> bool:
+    """Return True when ``value`` has a valid Bitcoin/Tron Base58Check checksum."""
+
+    raw = _b58decode(value)
+    if raw is None or len(raw) < 5:
+        return False
+    payload, checksum = raw[:-4], raw[-4:]
+    digest = hashlib.sha256(hashlib.sha256(payload).digest()).digest()[:4]
+    return digest == checksum
+
+
+def base58check_version(value: str) -> int | None:
+    """Return the version byte of a valid Base58Check address, else None."""
+
+    if not base58check_is_valid(value):
+        return None
+    raw = _b58decode(value)
+    if raw is None:
+        return None
+    return raw[0]
+
+
+def _normalize_ocr_base58(blob: str) -> str:
+    cleaned = re.sub(r"[\s:\]\[,.'’/\\]+", "", blob)
+    return (
+        cleaned.replace("I", "1")
+        .replace("l", "1")
+        .replace("O", "o")
+        .replace("0", "o")
+    )
+
+
+def _try_reconstruct_base58(window: str) -> tuple[str | None, int]:
+    """Return (address, consumed_window_chars) when a checksummed prefix exists."""
+
+    positions: list[tuple[str, int]] = []
+    for index, char in enumerate(window):
+        if char in _B58_OCR_CHARS:
+            positions.append((char, index))
+    if len(positions) < _MIN_BASE58_ADDRESS_LEN:
+        return None, 0
+    raw = "".join(char for char, _ in positions)
+    variants = [raw]
+    normalized = _normalize_ocr_base58(raw)
+    if normalized != raw:
+        variants.append(normalized)
+    max_len = min(_MAX_BASE58_ADDRESS_LEN, len(positions))
+    for variant in variants:
+        for length in range(max_len, _MIN_BASE58_ADDRESS_LEN - 1, -1):
+            candidate = variant[:length]
+            if base58check_is_valid(candidate):
+                return candidate, positions[length - 1][1] + 1
+    return None, 0
+
+
+def _repair_ocr_base58_addresses(text: str) -> str:
+    if not text:
+        return text
+    out: list[str] = []
+    index = 0
+    length = len(text)
+    while index < length:
+        char = text[index]
+        if char in "13T" and (index == 0 or not text[index - 1].isalnum()):
+            cursor = index
+            alnum_count = 0
+            last_alnum = index
+            while cursor < length and cursor - index < 120:
+                current = text[cursor]
+                if current in _B58_OCR_CHARS:
+                    alnum_count += 1
+                    last_alnum = cursor
+                    cursor += 1
+                    continue
+                if current in _B58_SEPARATORS:
+                    ahead = cursor
+                    while (
+                        ahead < length
+                        and text[ahead] in _B58_SEPARATORS
+                        and ahead - cursor <= 3
+                    ):
+                        ahead += 1
+                    if ahead < length and text[ahead] in _B58_OCR_CHARS:
+                        cursor = ahead
+                        continue
+                break
+            window = text[index : last_alnum + 1]
+            if alnum_count >= _MIN_BASE58_ADDRESS_LEN:
+                repaired, consumed = _try_reconstruct_base58(window)
+                if repaired and consumed:
+                    out.append(repaired)
+                    index += consumed
+                    continue
+        out.append(char)
+        index += 1
+    return "".join(out)
+
+
+def repair_ocr_cyber_identifiers(text: str) -> str:
+    """Repair common OCR breaks in emails and Base58 crypto addresses.
+
+    Only a reconstructed address with a valid Base58Check checksum replaces
+    the broken span. Failed reconstructions stay in the original text.
+    """
+
+    if not text:
+        return text
+    repaired = text
+    for pattern, replacement in OCR_EMAIL_REPAIRS:
+        repaired = pattern.sub(replacement, repaired)
+    return _repair_ocr_base58_addresses(repaired)
+
+# Evidence documents routinely contain hundreds or thousands of distinct
+# identifiers.  The former limit of 96 silently discarded later matches and
+# was especially visible in warrant-return workbooks.  This remains a high
+# safety ceiling for hostile inputs, but normal large documents are complete.
+MAX_SEMANTIC_ENTITIES = 50_000
 
 EMAIL_RE = re.compile(
     r"\b[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}\b"
@@ -310,8 +459,35 @@ ACCOUNT_HOLDER_RE = re.compile(
 TELEGRAM_HANDLE_RE = re.compile(r"(?<![A-Za-z0-9])@([A-Za-z0-9_]{3,64})\b")
 ETH_WALLET_RE = re.compile(r"\b(0x[a-fA-F0-9]{40})\b")
 TRON_WALLET_RE = re.compile(r"\b(T[1-9A-HJ-NP-Za-km-z]{33})\b")
+BTC_BECH32_RE = re.compile(r"\b(bc1[ac-hj-np-z02-9]{11,71})\b", re.IGNORECASE)
+BTC_P2PKH_RE = re.compile(r"\b(1[1-9A-HJ-NP-Za-km-z]{25,33})\b")
+BTC_P2SH_RE = re.compile(r"\b(3[1-9A-HJ-NP-Za-km-z]{25,33})\b")
 DOMAIN_HOST_RE = re.compile(
     r"\b([A-Za-z0-9](?:[A-Za-z0-9\-]{0,62}[A-Za-z0-9])\.example\.invalid)\b",
+    re.IGNORECASE,
+)
+BARE_DOMAIN_RE = re.compile(
+    r"\b((?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+(?:com|cc|net|org|io|co|info|app))\b",
+    re.IGNORECASE,
+)
+EMAIL_HOST_STOPWORDS = frozenset(
+    {
+        "hotmail.com",
+        "gmail.com",
+        "qq.com",
+        "yahoo.com",
+        "outlook.com",
+        "icloud.com",
+        "live.com",
+        "aol.com",
+    }
+)
+VASP_NAME_RE = re.compile(
+    r"\b(Binance|Coinbase|Kraken|OKX|OKEX|Bitfinex|Gemini|Cash App)\b"
+)
+LEGAL_PROCESS_RE = re.compile(
+    r"\b(?:search\s+warrant|affidavit\s+for\s+search|legal\s+process\s+attached|"
+    r"attachment\s+[a-d]\s+of\s+affidavit)\b",
     re.IGNORECASE,
 )
 PERSON_NAME_STOPWORDS = frozenset(
@@ -1044,31 +1220,153 @@ def extract_semantic_entities(
             matches,
             seen_spans,
             ontology_class="uco-observable:ObservableObject",
-            label=f"Ethereum wallet {value[:10]}…",
+            label=f"Ethereum address {value[:10]}…",
             matched_text=value,
             start=match.start(),
             end=match.end(),
             section_id=section_id,
             run_seed=run_seed,
+            facets=(
+                {
+                    "@id": _facet_id(run_seed, f"eth-address-{match.start()}"),
+                    "@type": "cryptoinv:CryptocurrencyAddressFacet",
+                    "cryptoinv:addressValue": value,
+                    "cryptoinv:addressFormat": "Hex",
+                    "cryptoinv:cryptocurrencyType": "ETH",
+                    "cryptoinv:blockchainNetwork": "Ethereum",
+                },
+            ),
             extra_properties={
-                "uco-core:description": f"Ethereum wallet address referenced in document text: {value}",
+                "uco-core:description": (
+                    "Ethereum-format address referenced in document text; "
+                    "network ownership and control are not inferred."
+                ),
             },
         )
 
     for match in TRON_WALLET_RE.finditer(full_text):
         value = match.group(1)
+        if base58check_version(value) != 0x41:
+            continue
         _add_match(
             matches,
             seen_spans,
             ontology_class="uco-observable:ObservableObject",
-            label=f"Tron wallet {value[:10]}…",
+            label=f"Tron address {value[:10]}…",
             matched_text=value,
             start=match.start(),
             end=match.end(),
             section_id=section_id,
             run_seed=run_seed,
+            facets=(
+                {
+                    "@id": _facet_id(run_seed, f"trx-address-{match.start()}"),
+                    "@type": "cryptoinv:CryptocurrencyAddressFacet",
+                    "cryptoinv:addressValue": value,
+                    "cryptoinv:addressFormat": "Base58Check",
+                    "cryptoinv:cryptocurrencyType": "TRX",
+                    "cryptoinv:blockchainNetwork": "Tron",
+                },
+            ),
             extra_properties={
-                "uco-core:description": f"Tron wallet address referenced in document text: {value}",
+                "uco-core:description": (
+                    "Tron-format address referenced in document text; "
+                    "network ownership and control are not inferred."
+                ),
+            },
+        )
+
+    for match in BTC_BECH32_RE.finditer(full_text):
+        value = match.group(1)
+        _add_match(
+            matches,
+            seen_spans,
+            ontology_class="uco-observable:ObservableObject",
+            label=f"Bitcoin address {value[:12]}…",
+            matched_text=value,
+            start=match.start(),
+            end=match.end(),
+            section_id=section_id,
+            run_seed=run_seed,
+            facets=(
+                {
+                    "@id": _facet_id(run_seed, f"btc-address-{match.start()}"),
+                    "@type": "cryptoinv:CryptocurrencyAddressFacet",
+                    "cryptoinv:addressValue": value,
+                    "cryptoinv:addressFormat": "Bech32",
+                    "cryptoinv:cryptocurrencyType": "BTC",
+                    "cryptoinv:blockchainNetwork": "Bitcoin",
+                },
+            ),
+            extra_properties={
+                "uco-core:description": (
+                    "Bitcoin Bech32 address referenced in document text; "
+                    "network ownership and control are not inferred."
+                ),
+            },
+        )
+
+    for match in BTC_P2PKH_RE.finditer(full_text):
+        value = match.group(1)
+        if base58check_version(value) != 0x00:
+            continue
+        _add_match(
+            matches,
+            seen_spans,
+            ontology_class="uco-observable:ObservableObject",
+            label=f"Bitcoin address {value[:12]}…",
+            matched_text=value,
+            start=match.start(),
+            end=match.end(),
+            section_id=section_id,
+            run_seed=run_seed,
+            facets=(
+                {
+                    "@id": _facet_id(run_seed, f"btc-p2pkh-{match.start()}"),
+                    "@type": "cryptoinv:CryptocurrencyAddressFacet",
+                    "cryptoinv:addressValue": value,
+                    "cryptoinv:addressFormat": "Base58Check",
+                    "cryptoinv:cryptocurrencyType": "BTC",
+                    "cryptoinv:blockchainNetwork": "Bitcoin",
+                },
+            ),
+            extra_properties={
+                "uco-core:description": (
+                    "Bitcoin P2PKH address referenced in document text; "
+                    "network ownership and control are not inferred."
+                ),
+            },
+        )
+
+    for match in BTC_P2SH_RE.finditer(full_text):
+        value = match.group(1)
+        if base58check_version(value) != 0x05:
+            continue
+        _add_match(
+            matches,
+            seen_spans,
+            ontology_class="uco-observable:ObservableObject",
+            label=f"Bitcoin address {value[:12]}…",
+            matched_text=value,
+            start=match.start(),
+            end=match.end(),
+            section_id=section_id,
+            run_seed=run_seed,
+            facets=(
+                {
+                    "@id": _facet_id(run_seed, f"btc-p2sh-{match.start()}"),
+                    "@type": "cryptoinv:CryptocurrencyAddressFacet",
+                    "cryptoinv:addressValue": value,
+                    "cryptoinv:addressFormat": "Base58Check",
+                    "cryptoinv:cryptocurrencyType": "BTC",
+                    "cryptoinv:blockchainNetwork": "Bitcoin",
+                },
+            ),
+            extra_properties={
+                "uco-core:description": (
+                    "Bitcoin P2SH address referenced in document text; "
+                    "network ownership and control are not inferred."
+                ),
             },
         )
 
@@ -1084,8 +1382,68 @@ def extract_semantic_entities(
             end=match.end(),
             section_id=section_id,
             run_seed=run_seed,
+            facets=(
+                {
+                    "@id": _facet_id(run_seed, f"domain-{match.start()}"),
+                    "@type": "uco-observable:DomainNameFacet",
+                    "uco-observable:value": value,
+                },
+            ),
             extra_properties={
                 "uco-core:description": f"Domain referenced in document text: {value}",
+            },
+        )
+
+    for match in BARE_DOMAIN_RE.finditer(full_text):
+        value = match.group(1)
+        if value.lower() in EMAIL_HOST_STOPWORDS:
+            continue
+        _add_match(
+            matches,
+            seen_spans,
+            ontology_class="uco-observable:DomainName",
+            label=f"Domain {value}",
+            matched_text=value,
+            start=match.start(),
+            end=match.end(),
+            section_id=section_id,
+            run_seed=run_seed,
+            facets=(
+                {
+                    "@id": _facet_id(run_seed, f"domain-{match.start()}"),
+                    "@type": "uco-observable:DomainNameFacet",
+                    "uco-observable:value": value,
+                },
+            ),
+            extra_properties={
+                "uco-core:description": f"Domain referenced in document text: {value}",
+            },
+        )
+
+    seen_vasps: set[str] = set()
+    for match in VASP_NAME_RE.finditer(full_text):
+        value = match.group(1)
+        key = value.casefold()
+        if key in seen_vasps:
+            continue
+        seen_vasps.add(key)
+        _add_match(
+            matches,
+            seen_spans,
+            ontology_class="cryptoinv:VirtualAssetServiceProvider",
+            label=f"VASP {value}",
+            matched_text=value,
+            start=match.start(),
+            end=match.end(),
+            section_id=section_id,
+            run_seed=run_seed,
+            extra_properties={
+                "uco-core:name": value,
+                "uco-core:description": (
+                    f"{value} is named as a virtual asset service provider in "
+                    "the document text; a named mention is not a finding of "
+                    "account control."
+                ),
             },
         )
 
@@ -1417,6 +1775,63 @@ def extract_semantic_entities(
 
     # Stable ordering for deterministic graphs and tests.
     matches.sort(key=lambda item: (item.start, item.end, item.ontology_class, item.label))
+    legal = LEGAL_PROCESS_RE.search(full_text)
+    if legal:
+        phrase = re.sub(r"\s+", " ", legal.group(0)).strip()
+        auth_type = (
+            "search warrant"
+            if re.search(r"warrant", phrase, re.IGNORECASE)
+            else "legal process"
+        )
+        focus = "legal process"
+        if re.search(r"cryptocurrency investment scam", full_text, re.IGNORECASE):
+            focus = "cryptocurrency investment scam"
+        elif re.search(r"cryptocurrency", full_text, re.IGNORECASE) and re.search(
+            r"\bscam\b", full_text, re.IGNORECASE
+        ):
+            focus = "cryptocurrency fraud"
+        _add_match(
+            matches,
+            seen_spans,
+            ontology_class="case-investigation:Authorization",
+            label=f"Authorization ({auth_type})",
+            matched_text=phrase,
+            start=legal.start(),
+            end=legal.end(),
+            section_id=section_id,
+            run_seed=run_seed,
+            extra_properties={
+                "uco-core:name": phrase[:120],
+                "case-investigation:authorizationType": auth_type,
+                "uco-core:description": (
+                    "Legal authorization described in the source document. "
+                    "The node records the authorization type from the text; "
+                    "it does not assert that the warrant was issued or executed."
+                ),
+            },
+        )
+        _add_match(
+            matches,
+            seen_spans,
+            ontology_class="case-investigation:Investigation",
+            label="Investigation described in legal process",
+            matched_text=phrase,
+            start=legal.start(),
+            end=legal.end(),
+            section_id=section_id,
+            run_seed=run_seed,
+            extra_properties={
+                "uco-core:name": "Investigation described in legal process",
+                "case-investigation:investigationForm": "case",
+                "case-investigation:focus": [focus],
+                "uco-core:description": (
+                    "Investigation compilation induced from warrant, affidavit, "
+                    "or attached legal-process language. Contained objects are "
+                    "linked after entity mapping."
+                ),
+            },
+        )
+
     return matches[:MAX_SEMANTIC_ENTITIES]
 
 

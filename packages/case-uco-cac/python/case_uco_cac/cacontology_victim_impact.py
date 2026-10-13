@@ -11,28 +11,6 @@ class AcuteImpactPhase:
     """Immediate phase following victimization with acute psychological impact."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#AcuteImpactPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -75,8 +53,6 @@ class BehavioralIndicator:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     frequency: Optional[str] = field(default=None)
@@ -131,9 +107,6 @@ class CognitiveBehavioralTherapy:
     """CBT-based therapeutic intervention for trauma and behavioral issues."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#CognitiveBehavioralTherapy"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     intervention_type: Optional[str] = field(default=None)
     session_count: Optional[int] = field(default=None)
     treatment_duration: Optional[float] = field(default=None)
@@ -158,8 +131,6 @@ class CognitiveIndicator:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     frequency: Optional[str] = field(default=None)
@@ -172,9 +143,6 @@ class CommunitySupport:
     """Community-based support services for trafficking victims during reintegration."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#CommunitySupport"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     service_provider: Optional[str] = field(default=None)
     service_type: Optional[str] = field(default=None)
 
@@ -222,11 +190,10 @@ class ComprehensiveImpactAssessment:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: Optional[str] = field(default=None)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     assessment_date: Optional[datetime] = field(default=None)
     assessment_duration: Optional[float] = field(default=None)
     assessment_type: Optional[str] = field(default=None)
@@ -241,9 +208,6 @@ class CrisisIntervention:
     """Immediate therapeutic intervention for acute crisis situations."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#CrisisIntervention"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     intervention_type: Optional[str] = field(default=None)
     session_count: Optional[int] = field(default=None)
     treatment_duration: Optional[float] = field(default=None)
@@ -284,9 +248,6 @@ class EducationalSupport:
     """Educational accommodations and support for victim's schooling."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#EducationalSupport"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     service_provider: Optional[str] = field(default=None)
     service_type: Optional[str] = field(default=None)
 
@@ -315,7 +276,7 @@ class EmergencyResponse:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -345,8 +306,6 @@ class EmotionalIndicator:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     frequency: Optional[str] = field(default=None)
@@ -355,11 +314,30 @@ class EmotionalIndicator:
 
 
 @dataclass
+class FamilyRejectionVulnerability:
+    """A vulnerability factor where rejection by caregivers or family contributes to isolation, homelessness, dependency, or reduced reporting options."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#FamilyRejectionVulnerability"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    associated_with_family_rejection: Optional[bool] = field(default=None)
+    associated_with_housing_instability: Optional[bool] = field(default=None)
+
+
+@dataclass
 class FamilyReunification:
     """Process of reuniting trafficking victims with their families."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#FamilyReunification"
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -384,9 +362,6 @@ class FamilyTherapy:
     """Therapeutic intervention involving the victim's family."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#FamilyTherapy"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     intervention_type: Optional[str] = field(default=None)
     session_count: Optional[int] = field(default=None)
     treatment_duration: Optional[float] = field(default=None)
@@ -400,9 +375,6 @@ class FearlessHudsonValleySupport:
     """Support services provided by Fearless! Hudson Valley organization for trafficking victims."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#FearlessHudsonValleySupport"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     service_provider: Optional[str] = field(default=None)
     service_type: Optional[str] = field(default=None)
 
@@ -412,9 +384,6 @@ class GroupTherapy:
     """Therapeutic intervention conducted in group settings with other victims."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#GroupTherapy"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     intervention_type: Optional[str] = field(default=None)
     session_count: Optional[int] = field(default=None)
     treatment_duration: Optional[float] = field(default=None)
@@ -464,7 +433,6 @@ class HometownReturn:
     """Return of trafficking victim to their hometown or place of origin."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#HometownReturn"
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -501,7 +469,7 @@ class HospitalDischarge:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -532,7 +500,7 @@ class HospitalIntervention:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -544,6 +512,26 @@ class HospitalIntervention:
     result: list[UcoObject] = field(default_factory=list)
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
+
+
+@dataclass
+class HousingInstabilityVulnerability:
+    """A vulnerability factor where unstable housing (homelessness, runaway status, couch-surfing) increases susceptibility to grooming, coercion, trafficking, or survival-based exploitation."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#HousingInstabilityVulnerability"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    associated_with_family_rejection: Optional[bool] = field(default=None)
+    associated_with_housing_instability: Optional[bool] = field(default=None)
 
 
 @dataclass
@@ -580,11 +568,10 @@ class InitialImpactAssessment:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: Optional[str] = field(default=None)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     assessment_date: Optional[datetime] = field(default=None)
     assessment_duration: Optional[float] = field(default=None)
     assessment_type: Optional[str] = field(default=None)
@@ -597,9 +584,6 @@ class InterstateVictimServices:
     """Victim services coordination across state lines for trafficking cases."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#InterstateVictimServices"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     service_provider: Optional[str] = field(default=None)
     service_type: Optional[str] = field(default=None)
 
@@ -609,9 +593,6 @@ class LegalSupport:
     """Legal assistance and representation for victims in proceedings."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#LegalSupport"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     service_provider: Optional[str] = field(default=None)
     service_type: Optional[str] = field(default=None)
 
@@ -621,7 +602,6 @@ class LongTermEffect:
     """Long-term consequences of victimization on the child's life."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#LongTermEffect"
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -646,28 +626,6 @@ class LongTermMonitoringPhase:
     """Extended phase monitoring long-term effects and continued support needs."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#LongTermMonitoringPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -686,11 +644,10 @@ class MedicalTraumaAssessment:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: Optional[str] = field(default=None)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     assessment_date: Optional[datetime] = field(default=None)
     assessment_duration: Optional[float] = field(default=None)
     assessment_type: Optional[str] = field(default=None)
@@ -703,9 +660,6 @@ class MultiAgencyVictimResponse:
     """Coordinated victim assistance involving multiple agencies across jurisdictions."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#MultiAgencyVictimResponse"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     service_provider: Optional[str] = field(default=None)
     service_type: Optional[str] = field(default=None)
 
@@ -722,9 +676,6 @@ class NonOffendingCaregiverSupport:
     """Support services directed to the non-offending caregiver to stabilize the child-support system after disclosure and reduce pressure toward recantation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#NonOffendingCaregiverSupport"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     service_provider: Optional[str] = field(default=None)
     service_type: Optional[str] = field(default=None)
 
@@ -745,11 +696,10 @@ class OngoingDangerAssessment:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: Optional[str] = field(default=None)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     assessment_date: Optional[datetime] = field(default=None)
     assessment_duration: Optional[float] = field(default=None)
     assessment_type: Optional[str] = field(default=None)
@@ -773,11 +723,10 @@ class OngoingImpactMonitoring:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: Optional[str] = field(default=None)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     assessment_date: Optional[datetime] = field(default=None)
     assessment_duration: Optional[float] = field(default=None)
     assessment_type: Optional[str] = field(default=None)
@@ -790,9 +739,6 @@ class PeerSupportService:
     """Support rooted in peer connection, mutuality, and survivor- or youth-informed encouragement."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#PeerSupportService"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     service_provider: Optional[str] = field(default=None)
     service_type: Optional[str] = field(default=None)
 
@@ -813,8 +759,6 @@ class PhysicalIndicator:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     frequency: Optional[str] = field(default=None)
@@ -827,6 +771,24 @@ class PortAuthorityYouthServices:
     """Specialized youth services unit within Port Authority Police Department."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#PortAuthorityYouthServices"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+
+
+@dataclass
+class ProtectiveAffirmingSupport:
+    """A protective factor representing access to affirming adults, services, shelters, school personnel, advocates, or community resources that mitigate vulnerability."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#ProtectiveAffirmingSupport"
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -869,9 +831,6 @@ class RecoveryMilestone:
     """Significant achievement or progress point in victim recovery."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#RecoveryMilestone"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -879,28 +838,6 @@ class RecoveryPhase:
     """Phase focused on healing and therapeutic intervention."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#RecoveryPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -908,7 +845,6 @@ class RecoveryProcess:
     """Process of healing and recovery from victimization."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#RecoveryProcess"
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -933,28 +869,6 @@ class ReintegrationPhase:
     """Phase involving return to normal activities and social reintegration."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#ReintegrationPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -978,13 +892,30 @@ class ResilienceFactors:
 
 
 @dataclass
+class SOGIVulnerabilityContext:
+    """A vulnerability context related to sexual orientation, gender identity, or expression — typically arising from family rejection, housing instability, lack of trusted adults, coercive dependency, or ba"""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#SOGIVulnerabilityContext"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    associated_with_family_rejection: Optional[bool] = field(default=None)
+    associated_with_housing_instability: Optional[bool] = field(default=None)
+
+
+@dataclass
 class SafetyPlanning:
     """Development of safety plans to protect victims from further harm."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#SafetyPlanning"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     service_provider: Optional[str] = field(default=None)
     service_type: Optional[str] = field(default=None)
 
@@ -1005,8 +936,6 @@ class SocialIndicator:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     frequency: Optional[str] = field(default=None)
@@ -1031,7 +960,7 @@ class SuicidalIdeationResponse:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1050,9 +979,6 @@ class TherapeuticIntervention:
     """Professional therapeutic treatment or intervention for victim recovery."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#TherapeuticIntervention"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     intervention_type: Optional[str] = field(default=None)
     session_count: Optional[int] = field(default=None)
     treatment_duration: Optional[float] = field(default=None)
@@ -1077,23 +1003,6 @@ class TherapistRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1112,23 +1021,6 @@ class TherapyParticipant:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1165,8 +1057,6 @@ class TraumaIndicator:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     frequency: Optional[str] = field(default=None)
@@ -1179,9 +1069,6 @@ class TraumaTherapy:
     """Specialized therapy for treating trauma and its effects."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#TraumaTherapy"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     intervention_type: Optional[str] = field(default=None)
     session_count: Optional[int] = field(default=None)
     treatment_duration: Optional[float] = field(default=None)
@@ -1208,23 +1095,6 @@ class TraumatizedVictim:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1232,9 +1102,6 @@ class VictimAdvocacy:
     """Advocacy services to protect victim rights and interests."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#VictimAdvocacy"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     service_provider: Optional[str] = field(default=None)
     service_type: Optional[str] = field(default=None)
 
@@ -1255,23 +1122,6 @@ class VictimAdvocateRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1291,7 +1141,7 @@ class VictimExtraction:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1321,11 +1171,10 @@ class VictimImpactAssessment:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: Optional[str] = field(default=None)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     assessment_date: Optional[datetime] = field(default=None)
     assessment_duration: Optional[float] = field(default=None)
     assessment_type: Optional[str] = field(default=None)
@@ -1349,23 +1198,6 @@ class VictimInRecovery:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1373,7 +1205,6 @@ class VictimReintegration:
     """Process of reintegrating trafficking victims back into their communities and families."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#VictimReintegration"
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -1398,9 +1229,6 @@ class VictimSafetyPlanning:
     """Development of safety plan for trafficking victim to prevent re-victimization."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#VictimSafetyPlanning"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     service_provider: Optional[str] = field(default=None)
     service_type: Optional[str] = field(default=None)
 
@@ -1429,7 +1257,7 @@ class VictimServiceCoordination:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1448,9 +1276,6 @@ class VictimSupport:
     """Support services provided to child victims and their families."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#VictimSupport"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     service_provider: Optional[str] = field(default=None)
     service_type: Optional[str] = field(default=None)
 
@@ -1460,9 +1285,26 @@ class VictimTransportationAssistance:
     """Provision of transportation assistance to trafficking victims (bus tickets, safe transport)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#VictimTransportationAssistance"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     service_provider: Optional[str] = field(default=None)
     service_type: Optional[str] = field(default=None)
+
+
+@dataclass
+class VulnerabilityContext:
+    """A contextual circumstance that may increase a minor's risk of exploitation or trafficking (e.g., family rejection, housing instability, coercive dependency, barriers to reporting). A context describes"""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/victim-impact#VulnerabilityContext"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    associated_with_family_rejection: Optional[bool] = field(default=None)
+    associated_with_housing_instability: Optional[bool] = field(default=None)
 

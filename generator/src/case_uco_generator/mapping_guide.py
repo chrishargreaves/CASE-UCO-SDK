@@ -584,12 +584,14 @@ def _render_extensions(lines: list[str], schema: OntologySchema) -> None:
         if key.startswith("ext.")
     }
 
-    if not ext_modules:
+    if not ext_modules and not schema.catalog_extensions:
         lines.append(
             "*No extension ontologies loaded. Use `--extensions-dir` to include them.*"
         )
         lines.append("")
         return
+
+    _render_catalog_extensions(lines, schema)
 
     for module_key in sorted(ext_modules):
         ext_name = module_key.split(".", 1)[1]
@@ -609,6 +611,32 @@ def _render_extensions(lines: list[str], schema: OntologySchema) -> None:
                     desc = desc[:97] + "..."
                 lines.append(f"| **{cls.name}** | {cls_type} | {desc} |")
             lines.append("")
+
+
+def _render_catalog_extensions(lines: list[str], schema: OntologySchema) -> None:
+    lines.extend(catalog_extensions_section(schema, heading="###", link_prefix="../"))
+
+
+def catalog_extensions_section(
+    schema: OntologySchema, heading: str = "##", link_prefix: str = ""
+) -> list[str]:
+    """Pointer section for extensions whose classes are not in the generated registry."""
+    if not schema.catalog_extensions:
+        return []
+    lines = [f"{heading} Technique Catalogs", ""]
+    lines.append(
+        "These extensions ship complete technique catalogs as Turtle for "
+        "validation. Their classes are not listed here or in the generated "
+        "class registries; search them with the `search_adversary_techniques` "
+        "and `get_adversary_technique` MCP tools."
+    )
+    lines.append("")
+    lines.append("| Extension | Catalog |")
+    lines.append("|-----------|---------|")
+    for name, display_name in sorted(schema.catalog_extensions.items()):
+        lines.append(f"| [`{name}`]({link_prefix}extensions/{name}/) | {display_name} |")
+    lines.append("")
+    return lines
 
 
 def _render_tips(lines: list[str]) -> None:

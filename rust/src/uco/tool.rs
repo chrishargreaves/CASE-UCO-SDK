@@ -4,6 +4,10 @@ use serde::Serialize;
 use crate::graph::CaseObject;
 
 use crate::uco::configuration::Configuration;
+use crate::uco::core::ExternalReference;
+use crate::uco::core::Facet;
+use crate::uco::core::IdentityAbstraction;
+use crate::uco::core::MarkingDefinitionAbstraction;
 use crate::uco::identity::Identity;
 
 /// An analytic tool is an artifact of hardware and/or software utilized to accomplish a task or purpose of explanation, interpretation or logical reasoning.
@@ -11,6 +15,38 @@ use crate::uco::identity::Identity;
 pub struct AnalyticTool {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-tool:creator")]
+    pub creator: Option<Identity>,
+    #[serde(rename = "uco-tool:references")]
+    pub references: Vec<String>,
+    #[serde(rename = "uco-tool:servicePack")]
+    pub service_pack: Option<String>,
+    #[serde(rename = "uco-tool:toolType")]
+    pub tool_type: Option<String>,
+    #[serde(rename = "uco-tool:version")]
+    pub version: Option<String>,
 }
 
 impl AnalyticTool {
@@ -19,18 +55,146 @@ impl AnalyticTool {
 
     pub fn builder() -> AnalyticToolBuilder {
         AnalyticToolBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            creator: None,
+            references: Vec::new(),
+            service_pack: None,
+            tool_type: None,
+            version: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct AnalyticToolBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    creator: Option<Identity>,
+    references: Vec<String>,
+    service_pack: Option<String>,
+    tool_type: Option<String>,
+    version: Option<String>,
 }
 
 impl AnalyticToolBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn creator(mut self, value: Identity) -> Self {
+        self.creator = Some(value);
+        self
+    }
+
+    pub fn references(mut self, value: Vec<String>) -> Self {
+        self.references = value;
+        self
+    }
+
+    pub fn service_pack(mut self, value: String) -> Self {
+        self.service_pack = Some(value);
+        self
+    }
+
+    pub fn tool_type(mut self, value: String) -> Self {
+        self.tool_type = Some(value);
+        self
+    }
+
+    pub fn version(mut self, value: String) -> Self {
+        self.version = Some(value);
+        self
+    }
+
     pub fn build(self) -> AnalyticTool {
         AnalyticTool {
             class_iri: AnalyticTool::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            creator: self.creator,
+            references: self.references,
+            service_pack: self.service_pack,
+            tool_type: self.tool_type,
+            version: self.version,
         }
     }
 }
@@ -365,6 +529,38 @@ pub struct ConfiguredTool {
     pub is_configuration_of: Option<Tool>,
     #[serde(rename = "uco-configuration:usesConfiguration")]
     pub uses_configuration: Option<Configuration>,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-tool:creator")]
+    pub creator: Option<Identity>,
+    #[serde(rename = "uco-tool:references")]
+    pub references: Vec<String>,
+    #[serde(rename = "uco-tool:servicePack")]
+    pub service_pack: Option<String>,
+    #[serde(rename = "uco-tool:toolType")]
+    pub tool_type: Option<String>,
+    #[serde(rename = "uco-tool:version")]
+    pub version: Option<String>,
 }
 
 impl ConfiguredTool {
@@ -375,6 +571,22 @@ impl ConfiguredTool {
         ConfiguredToolBuilder {
             is_configuration_of: None,
             uses_configuration: None,
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            creator: None,
+            references: Vec::new(),
+            service_pack: None,
+            tool_type: None,
+            version: None,
         }
     }
 }
@@ -383,6 +595,22 @@ impl ConfiguredTool {
 pub struct ConfiguredToolBuilder {
     is_configuration_of: Option<Tool>,
     uses_configuration: Option<Configuration>,
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    creator: Option<Identity>,
+    references: Vec<String>,
+    service_pack: Option<String>,
+    tool_type: Option<String>,
+    version: Option<String>,
 }
 
 impl ConfiguredToolBuilder {
@@ -396,11 +624,107 @@ impl ConfiguredToolBuilder {
         self
     }
 
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn creator(mut self, value: Identity) -> Self {
+        self.creator = Some(value);
+        self
+    }
+
+    pub fn references(mut self, value: Vec<String>) -> Self {
+        self.references = value;
+        self
+    }
+
+    pub fn service_pack(mut self, value: String) -> Self {
+        self.service_pack = Some(value);
+        self
+    }
+
+    pub fn tool_type(mut self, value: String) -> Self {
+        self.tool_type = Some(value);
+        self
+    }
+
+    pub fn version(mut self, value: String) -> Self {
+        self.version = Some(value);
+        self
+    }
+
     pub fn build(self) -> ConfiguredTool {
         ConfiguredTool {
             class_iri: ConfiguredTool::CLASS_IRI,
             is_configuration_of: self.is_configuration_of,
             uses_configuration: self.uses_configuration,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            creator: self.creator,
+            references: self.references,
+            service_pack: self.service_pack,
+            tool_type: self.tool_type,
+            version: self.version,
         }
     }
 }
@@ -415,6 +739,38 @@ impl CaseObject for ConfiguredTool {
 pub struct DefensiveTool {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-tool:creator")]
+    pub creator: Option<Identity>,
+    #[serde(rename = "uco-tool:references")]
+    pub references: Vec<String>,
+    #[serde(rename = "uco-tool:servicePack")]
+    pub service_pack: Option<String>,
+    #[serde(rename = "uco-tool:toolType")]
+    pub tool_type: Option<String>,
+    #[serde(rename = "uco-tool:version")]
+    pub version: Option<String>,
 }
 
 impl DefensiveTool {
@@ -423,18 +779,146 @@ impl DefensiveTool {
 
     pub fn builder() -> DefensiveToolBuilder {
         DefensiveToolBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            creator: None,
+            references: Vec::new(),
+            service_pack: None,
+            tool_type: None,
+            version: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct DefensiveToolBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    creator: Option<Identity>,
+    references: Vec<String>,
+    service_pack: Option<String>,
+    tool_type: Option<String>,
+    version: Option<String>,
 }
 
 impl DefensiveToolBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn creator(mut self, value: Identity) -> Self {
+        self.creator = Some(value);
+        self
+    }
+
+    pub fn references(mut self, value: Vec<String>) -> Self {
+        self.references = value;
+        self
+    }
+
+    pub fn service_pack(mut self, value: String) -> Self {
+        self.service_pack = Some(value);
+        self
+    }
+
+    pub fn tool_type(mut self, value: String) -> Self {
+        self.tool_type = Some(value);
+        self
+    }
+
+    pub fn version(mut self, value: String) -> Self {
+        self.version = Some(value);
+        self
+    }
+
     pub fn build(self) -> DefensiveTool {
         DefensiveTool {
             class_iri: DefensiveTool::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            creator: self.creator,
+            references: self.references,
+            service_pack: self.service_pack,
+            tool_type: self.tool_type,
+            version: self.version,
         }
     }
 }
@@ -503,6 +987,38 @@ impl CaseObject for LibraryType {
 pub struct MaliciousTool {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-tool:creator")]
+    pub creator: Option<Identity>,
+    #[serde(rename = "uco-tool:references")]
+    pub references: Vec<String>,
+    #[serde(rename = "uco-tool:servicePack")]
+    pub service_pack: Option<String>,
+    #[serde(rename = "uco-tool:toolType")]
+    pub tool_type: Option<String>,
+    #[serde(rename = "uco-tool:version")]
+    pub version: Option<String>,
 }
 
 impl MaliciousTool {
@@ -511,18 +1027,146 @@ impl MaliciousTool {
 
     pub fn builder() -> MaliciousToolBuilder {
         MaliciousToolBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            creator: None,
+            references: Vec::new(),
+            service_pack: None,
+            tool_type: None,
+            version: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct MaliciousToolBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    creator: Option<Identity>,
+    references: Vec<String>,
+    service_pack: Option<String>,
+    tool_type: Option<String>,
+    version: Option<String>,
 }
 
 impl MaliciousToolBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn creator(mut self, value: Identity) -> Self {
+        self.creator = Some(value);
+        self
+    }
+
+    pub fn references(mut self, value: Vec<String>) -> Self {
+        self.references = value;
+        self
+    }
+
+    pub fn service_pack(mut self, value: String) -> Self {
+        self.service_pack = Some(value);
+        self
+    }
+
+    pub fn tool_type(mut self, value: String) -> Self {
+        self.tool_type = Some(value);
+        self
+    }
+
+    pub fn version(mut self, value: String) -> Self {
+        self.version = Some(value);
+        self
+    }
+
     pub fn build(self) -> MaliciousTool {
         MaliciousTool {
             class_iri: MaliciousTool::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            creator: self.creator,
+            references: self.references,
+            service_pack: self.service_pack,
+            tool_type: self.tool_type,
+            version: self.version,
         }
     }
 }
@@ -537,6 +1181,28 @@ impl CaseObject for MaliciousTool {
 pub struct Tool {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
     #[serde(rename = "uco-tool:creator")]
     pub creator: Option<Identity>,
     #[serde(rename = "uco-tool:references")]
@@ -555,6 +1221,17 @@ impl Tool {
 
     pub fn builder() -> ToolBuilder {
         ToolBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
             creator: None,
             references: Vec::new(),
             service_pack: None,
@@ -566,6 +1243,17 @@ impl Tool {
 
 #[derive(Debug, Default, Clone)]
 pub struct ToolBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
     creator: Option<Identity>,
     references: Vec<String>,
     service_pack: Option<String>,
@@ -574,6 +1262,61 @@ pub struct ToolBuilder {
 }
 
 impl ToolBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
     pub fn creator(mut self, value: Identity) -> Self {
         self.creator = Some(value);
         self
@@ -602,6 +1345,17 @@ impl ToolBuilder {
     pub fn build(self) -> Tool {
         Tool {
             class_iri: Tool::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
             creator: self.creator,
             references: self.references,
             service_pack: self.service_pack,

@@ -21,8 +21,12 @@
   "exemplar_files": [
     "toolcap-exemplar.ttl"
   ],
-  "uco_compat": ["1.4.0", "1.5.0"],
-  "upper_ontology": "none (Capability subClassOf uco-core:UcoObject; aligns with the proposed UCO capability namespace, change_proposals/capability-namespace.md)",
+  "uco_compat": [
+    "1.4.0",
+    "1.5.0"
+  ],
+  "upper_ontology": "none",
+  "upper_ontology_notes": "none (Capability subClassOf uco-core:UcoObject; aligns with the proposed UCO capability namespace, change_proposals/capability-namespace.md)",
   "cdo_shapes_compatibility": {
     "CDO-Shapes-gufo": "compatible",
     "CDO-Shapes-BFO": "compatible",

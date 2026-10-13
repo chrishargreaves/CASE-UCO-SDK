@@ -24,7 +24,6 @@ class Artifact:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -43,8 +42,13 @@ class AssessmentResult:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
+
+
+@dataclass
+class ConditioningPhase:
+    """Temporal phase in which an offender shapes victim readiness, situational constraints, or compliance preparatory to the primary exploitation act — through rapport, deception, isolation, normalization, """
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/core#ConditioningPhase"
 
 
 @dataclass
@@ -52,9 +56,6 @@ class CoordinationEvent:
     """An event representing coordination, information sharing, or collaborative activity among stakeholders."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/core#CoordinationEvent"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -62,9 +63,6 @@ class DetectionEvent:
     """An event representing the detection, identification, or flagging of content, behavior, or indicators relevant to child exploitation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/core#DetectionEvent"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -115,9 +113,6 @@ class Event:
     """Something that happens or unfolds in time — an action, interaction, incident, hearing, or process step."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/core#Event"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -125,9 +120,6 @@ class ExploitationEvent:
     """An event representing an act of exploitation, abuse, or victimization of a child."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/core#ExploitationEvent"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -135,9 +127,6 @@ class InvestigativeAction:
     """An event that is specifically an investigative action within a CAC investigation. Aligned to both CASE InvestigativeAction and UCO Action for investigation interoperability."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/core#InvestigativeAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -150,7 +139,7 @@ class InvestigativeAction:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -170,9 +159,6 @@ class LegalEvent:
     """An event representing a legal proceeding, judicial action, sentencing hearing, or other court-related occurrence."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/core#LegalEvent"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -198,7 +184,6 @@ class OrganizationLikeEntity:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -217,7 +202,6 @@ class PersonLikeEntity:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -225,28 +209,6 @@ class Phase:
     """A temporal stage of some enduring entity, process, or situation. The bearer remains the same entity while changing phase. Aligned to gUFO Phase."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/core#Phase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -283,23 +245,6 @@ class Role:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -307,7 +252,6 @@ class Situation:
     """A context, state, or configuration that holds at a time and may involve multiple participants. Aligned to gUFO Situation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/core#Situation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -315,7 +259,4 @@ class SupportEvent:
     """An event representing victim support, advocacy, training, or welfare-related activity."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/core#SupportEvent"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 

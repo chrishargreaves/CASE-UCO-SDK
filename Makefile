@@ -2,7 +2,7 @@
        test-proposal validate-proposal sparql-test-proposal \
        test-extension-compat test-extension-main test-extension-develop test-extension-develop2 \
        playground-test test-docs sync-solveit sync-solveit-offline \
-       sync-attack sync-attack-offline \
+       sync-attack sync-attack-offline sync-atlas sync-atlas-offline \
        rebuild-upper-registry sync-upper sync-upstream lint-recipes
 
 VENV := .venv
@@ -115,20 +115,33 @@ sync-solveit:
 sync-solveit-offline:
 	PYTHONPATH=python:mcp_server $(PYTHON) mcp_server/tools/sync_solveit.py --skip-fetch
 
-# Refresh the pinned MITRE ATT&CK catalog labels/comments from STIX 2.1
-# (partial membership: current catalog ∪ exemplar citations):
-#   make sync-attack                        # ATT&CK v19.1 (or manifest pin)
-#   make sync-attack ATTACK_VERSION=19.1
+# Regenerate the complete MITRE ATT&CK catalog (Enterprise, Mobile, ICS;
+# every technique and sub-technique) from STIX 2.1:
+#   make sync-attack                        # ATT&CK v19.2 (or manifest pin)
+#   make sync-attack ATTACK_VERSION=19.2
 sync-attack:
 	$(PYTHON) mcp_server/tools/sync_attack_catalog.py \
-		--attack-version $(or $(ATTACK_VERSION),19.1) \
-		--keep-existing --from-exemplars
+		--attack-version $(or $(ATTACK_VERSION),19.2)
 
-# Regenerate the ATT&CK catalog from a local enterprise-attack STIX file:
-#   make sync-attack-offline STIX=/path/to/enterprise-attack-19.1.json
+# Regenerate from local STIX bundles (a directory holding
+# enterprise-attack-<v>.json, mobile-attack-<v>.json, ics-attack-<v>.json):
+#   make sync-attack-offline STIX_DIR=/path/to/stix ATTACK_VERSION=19.2
 sync-attack-offline:
 	$(PYTHON) mcp_server/tools/sync_attack_catalog.py \
-		--stix-file $(STIX) --keep-existing --from-exemplars
+		--stix-dir $(STIX_DIR) --attack-version $(or $(ATTACK_VERSION),19.2)
+
+# Regenerate the complete MITRE ATLAS catalog from atlas-data dist/v6:
+#   make sync-atlas                         # ATLAS 2026.09 (or manifest pin)
+#   make sync-atlas ATLAS_RELEASE=2026.09
+sync-atlas:
+	$(PYTHON) mcp_server/tools/sync_atlas_catalog.py \
+		--atlas-release $(or $(ATLAS_RELEASE),2026.09)
+
+# Regenerate from a local ATLAS-<release>.yaml:
+#   make sync-atlas-offline ATLAS_FILE=/path/to/ATLAS-2026.09.yaml ATLAS_RELEASE=2026.09
+sync-atlas-offline:
+	$(PYTHON) mcp_server/tools/sync_atlas_catalog.py \
+		--atlas-file $(ATLAS_FILE) --atlas-release $(or $(ATLAS_RELEASE),2026.09)
 
 # Rebuild the strict upper-ontology term registry from the vendored
 # snapshot in ontology/upper/ (offline; no network needed):
@@ -141,13 +154,15 @@ sync-upper:
 	$(PYTHON) mcp_server/tools/build_upper_ontology_registry.py --fetch
 
 # Refresh every vendored upstream source: CASE + UCO submodules, CAC and
-# AEO submodules, the SOLVE-IT snapshot, and the upper-ontology snapshot.
+# AEO submodules, the SOLVE-IT snapshot, the ATT&CK and ATLAS catalogs,
+# and the upper-ontology snapshot.
 #   make sync-upstream
 sync-upstream:
 	git submodule update --remote --checkout ontology/UCO ontology/CASE \
 		ontology/cac/ontology ontology/aeo/ontology
 	$(MAKE) sync-solveit
 	$(MAKE) sync-attack
+	$(MAKE) sync-atlas
 	$(MAKE) sync-upper
 	@echo "All upstream snapshots refreshed; review diffs, run 'make test-mcp', and commit."
 
@@ -201,7 +216,8 @@ clean-venv:
 #   make test-proposal PROPOSAL=cryptocurrency-address-and-sanctions-designation
 #
 # Expects:
-#   change_proposals/<PROPOSAL>.md          — the proposal markdown
+#   change_proposals/<PROPOSAL>.md          — the proposal markdown (the issue body)
+#   change_proposals/<PROPOSAL>.review.md   — lint findings and hand checks (not filed)
 #   change_proposals/<PROPOSAL>.jsonld      — example instance data (JSON-LD)
 #   change_proposals/<PROPOSAL>.sparql      — SPARQL queries (optional, one per file or multi-query)
 #   change_proposals/<PROPOSAL>.ttl         — extension ontology (optional, for validation)
@@ -217,7 +233,7 @@ PROPOSAL_SHAPES := $(PROPOSAL_DIR)/$(PROPOSAL)-shapes.ttl
 validate-proposal:
 	@echo "=== Validating proposal graph: $(PROPOSAL_JSONLD) ==="
 	@if [ -f "$(PROPOSAL_JSONLD)" ]; then \
-		VALIDATE_ARGS="--built-version case-1.4.0 --inference rdfs --allow-info"; \
+		VALIDATE_ARGS="--built-version case-1.5.0 --inference rdfs --allow-info"; \
 		if [ -f "$(PROPOSAL_TTL)" ]; then \
 			VALIDATE_ARGS="$$VALIDATE_ARGS --ontology-graph $(PROPOSAL_TTL)"; \
 		fi; \

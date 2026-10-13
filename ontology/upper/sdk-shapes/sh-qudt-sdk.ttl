@@ -1,0 +1,80 @@
+# CASE/UCO SDK minimal SHACL shapes for QUDT 3.5.2
+#
+# Written by the SDK, not published by QUDT or the CDO project. QUDT's own
+# SHACL schema (SCHEMA_QUDT_NoOWL) imports a large closure (SKOS by its
+# unversioned IRI, VAEM, DTYPE); see the risk notes in ucoProject/UCO#404.
+# These shapes cover only what an investigation graph needs from a quantity
+# value: one number and one unit IRI.
+#
+# The constraints follow QUDT's own property shapes
+# (qudt:Quantifiable-value and qudt:Quantifiable-hasUnit: sh:maxCount 1;
+# hasUnit sh:class qudt:Unit). The SDK adds sh:minCount 1 to both, because a
+# value without a number or a unit cannot be compared or converted. Use
+# unit:NUM for counts and unit:UNITLESS for dimensionless ratios.
+#
+# Whether a unit IRI exists in QUDT is checked by strict concept coverage
+# (profile "qudt"), not here: the 4 MB unit vocabulary is not loaded into
+# every validation run.
+#
+# QUDT 3 dropped qudt:unit; use qudt:hasUnit. qudt:numericValue survives
+# only as a legacy label-only property; use qudt:value.
+
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sdk-qudt: <http://example.org/shapes/sdk-qudt/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+sdk-qudt:QuantityValue-shape
+	a sh:NodeShape ;
+	rdfs:comment "A QUDT quantity value in an investigation graph carries exactly one number (qudt:value) and exactly one unit IRI (qudt:hasUnit)."@en ;
+	sh:targetClass qudt:QuantityValue ;
+	sh:property
+		[
+			sh:path qudt:value ;
+			sh:minCount 1 ;
+			sh:maxCount 1 ;
+			sh:nodeKind sh:Literal ;
+			sh:or (
+				[ sh:datatype xsd:decimal ]
+				[ sh:datatype xsd:double ]
+				[ sh:datatype xsd:float ]
+				[ sh:datatype xsd:integer ]
+				[ sh:datatype xsd:long ]
+				[ sh:datatype xsd:int ]
+				[ sh:datatype xsd:nonNegativeInteger ]
+				[ sh:datatype xsd:positiveInteger ]
+			) ;
+			sh:message "qudt:QuantityValue needs exactly one numeric qudt:value (xsd:decimal, xsd:double, xsd:float, or an integer type)."@en ;
+		] ,
+		[
+			sh:path qudt:hasUnit ;
+			sh:minCount 1 ;
+			sh:maxCount 1 ;
+			sh:nodeKind sh:IRI ;
+			sh:message "qudt:QuantityValue needs exactly one unit IRI on qudt:hasUnit, such as unit:KiloM-PER-HR. Use unit:NUM for counts and unit:UNITLESS for ratios."@en ;
+		] ,
+		[
+			sh:path qudt:standardUncertainty ;
+			sh:maxCount 1 ;
+			sh:datatype xsd:decimal ;
+		]
+		;
+	.
+
+sdk-qudt:Quantity-shape
+	a sh:NodeShape ;
+	rdfs:comment "A QUDT quantity links quantity kinds and quantity values by IRI."@en ;
+	sh:targetClass qudt:Quantity ;
+	sh:property
+		[
+			sh:path qudt:hasQuantityKind ;
+			sh:nodeKind sh:IRI ;
+		] ,
+		[
+			sh:path qudt:quantityValue ;
+			sh:nodeKind sh:BlankNodeOrIRI ;
+			sh:class qudt:QuantityValue ;
+		]
+		;
+	.

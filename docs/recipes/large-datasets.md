@@ -125,6 +125,24 @@ for i, chunk in enumerate(chunks):
 
 See [PERFORMANCE_GUIDE.md](../PERFORMANCE_GUIDE.md) for hardware sizing, memory benchmarks, and validation scaling guidance.
 
+## Electronic service provider productions
+
+Warrant-return folders are a natural first partition: **one graph per source file**, mirroring the provider directory tree. Do not merge every exchange workbook or every Takeout ZIP into a single graph just because they belong to the same investigation.
+
+Multi-sheet VASP workbooks need a second cut. Deposit history, access logs, and KYC are different evidence types. `process_document_file(..., partition_worksheets=True)` writes:
+
+- a thin workbook index at the source-file output path (file hash, VASP, part inventory)
+- one CASE/UCO graph per worksheet under `<source>.jsonld.parts/`
+- source-row windows on a worksheet only when that sheet exceeds `MAX_WORKSHEET_GRAPH_ROWS` (500 rows; validation ceiling, not an investigative drop)
+
+This is source-level partitioning, not `split()`. Cross-sheet and cross-return joins stay on facet values (address, tx hash, IP, advertising ID), not on per-file node IRIs. Load later as named graphs if a store is approved; do not import until each part SHACL-conforms and a human promotes.
+
+- Hash-duplicate files (for example an "Updated Return" ZIP that matches an earlier archive) are inventory facts. Model the first path only.
+- High-entropy ciphertext in wallet-provider folders is not a table. Skip row extraction.
+- Do not drop evidence to keep a graph small. If a worksheet is still too large for SHACL after row-windowing, record an explicit timeout; do not silently truncate.
+- Validate each part independently, then compose investigative claims in a later review graph.
+
+
 ## Related
 
 - [round-trip.md](round-trip.md) — serialize/deserialize at scale

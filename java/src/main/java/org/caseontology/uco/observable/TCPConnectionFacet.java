@@ -10,7 +10,9 @@ public class TCPConnectionFacet extends Facet {
     public static final String CLASS_IRI = "https://ontology.unifiedcyberontology.org/uco/observable/TCPConnectionFacet";
     public static final String NAMESPACE_PREFIX = "uco-observable";
 
+    @org.caseontology.CaseDatatype("xsd:hexBinary")
     private List<byte[]> destinationFlags;
+    @org.caseontology.CaseDatatype("xsd:hexBinary")
     private List<byte[]> sourceFlags;
 
     public TCPConnectionFacet() {

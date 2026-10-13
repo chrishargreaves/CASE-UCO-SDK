@@ -1,6 +1,6 @@
 """Route incoming content to one or more CAC Ontology modeling recipes.
 
-Hermes, Link-Look, and other MCP callers submit free text, structured
+MCP agents and other callers submit free text, structured
 artifacts, document paths, or partial CASE/UCO/CAC graphs. This module
 scores the submission against CAC domain families and returns multiple
 matching recipes plus validation guidance. Guidance-only: callers (or
@@ -15,7 +15,11 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+import workspace_policy
 from domain_index import MAPPING_GUIDE_INDEX, RECIPE_INDEX
+
+# Routing reads text only; anything larger belongs in process_document_file.
+MAX_SUBMISSION_BYTES = 64 * 1024 * 1024
 
 GRAPH_EXTENSIONS = {".json", ".jsonld", ".json-ld", ".ttl", ".turtle"}
 DOCUMENT_EXTENSIONS = {
@@ -548,22 +552,27 @@ def build_validation_guidance(project_root: Path, output_format: str) -> dict[st
 
     subset_path = extension_paths.extension_dir("cac", project_root) / "validation-subset.json"
     return {
-        "built_version": "case-1.4.0",
+        "built_version": "case-1.5.0",
         "extension": "cac",
         "validation_mode": "subset",
         "subset_manifest": str(subset_path.relative_to(project_root)),
         "allow_info": True,
         "make_command": f"make validate-extension EXT=cac DATA={sample_output}",
         "mcp_tool": "validate_graph(graph_path, extensions=['cac'])",
+        "missing_child_tool": "validate_graph(graph_path, extensions=['cac:missing-child'])",
         "full_manifest_tool": "validate_graph(graph_path, extensions=['cac:full'])",
         "output_formats": {
             "jsonld": "graph.write('output.jsonld') via CASEGraph (default SDK path)",
             "ttl": "graph.write('output.ttl', format='turtle') or serialize with rdflib after graph.write",
         },
         "note": (
-            "MCP validate_graph uses the CAC validation-subset.json by default. "
-            "Pass extensions=['cac:full'] for the complete CAC manifest when upstream "
-            "SHACL SPARQL constraints are repaired."
+            "MCP validate_graph uses the CAC press-release validation-subset.json "
+            "by default (case-utils 0.18.0 / CASE 1.5.0 / CAC 3.1.0). "
+            "Pass extensions=['cac:missing-child'] for abduction and "
+            "case-management graphs. Pass extensions=['cac:full'] for the "
+            "complete CAC manifest when upstream SHACL SPARQL constraints "
+            "are repaired. A term in ontology/cac/_registry.json that fails "
+            "subset validation is a subset miss, not a missing concept."
         ),
     }
 
@@ -972,7 +981,7 @@ def build_workflow_steps(matched_domains: list[dict[str, Any]], output_format: s
     layers_present = sorted({item["layer"] for item in matched_domains})
     steps = [
         "Set CASE_UCO_EXTENSIONS=cac in the MCP server and SDK environment.",
-        f"Target output format: {output_format} (JSON-LD for Link-Look/Hermes default; TTL when requested).",
+        f"Target output format: {output_format} (JSON-LD by default; TTL when requested).",
     ]
     if 1 in layers_present:
         steps.append(
@@ -999,7 +1008,7 @@ def build_workflow_steps(matched_domains: list[dict[str, Any]], output_format: s
             "phases→actions, defendant→counts, enterprise→indictment, and charges→offenses."
         ),
         "Call validate_graph with extensions=['cac'] on the finished graph.",
-        "Link-Look users may perform additional visual validation in Normalize view.",
+        "Reviewers may perform additional visual validation in their review tool.",
     ])
     return steps
 
@@ -1015,12 +1024,16 @@ def resolve_submission_text(
     if source_path:
         path = Path(source_path).expanduser()
         if not path.is_absolute():
-            path = (project_root / path).resolve()
-        else:
-            path = path.resolve()
-        metadata["source_path"] = str(path)
-        if not path.exists():
+            path = project_root / path
+        path = workspace_policy.check_read_path(path, include_write_roots=True)
+        try:
+            metadata["source_path"] = str(path.relative_to(project_root.resolve()))
+        except ValueError:
+            metadata["source_path"] = path.name
+        if not path.is_file():
             raise ValueError("source_missing")
+        if path.stat().st_size > MAX_SUBMISSION_BYTES:
+            raise ValueError("source_too_large")
 
         input_kind = classify_input_path(path)
         if input_kind == "graph":
@@ -1141,7 +1154,7 @@ def route_cac_content(
         "modeling_checklist": build_modeling_checklist(trimmed),
         "validation": build_validation_guidance(project_root, normalized_format),
         "integration_note": (
-            "Hermes and Link-Look share this MCP server. Return JSON-LD for default "
+            "Agents share this MCP server. Return JSON-LD for default "
             "SDK serialization; request TTL when the downstream tool consumes Turtle."
         ),
         **input_metadata,

@@ -15,9 +15,9 @@
       "@id": "urn:uuid:8209d4b8-5f20-5d9e-9ff5-1562145c28a6",
       "@type": "uco-observable:ObservableObject",
       "uco-core:name": "Source file pacer -- doj_ceos_2025_014 -- trial brief.pdf",
-      "uco-core:description": "Link-Look pdf upload (upload reference doj-ceos-2025-014-trial-brief)",
+      "uco-core:description": "Uploaded pdf file (upload reference doj-ceos-2025-014-trial-brief)",
       "uco-core:tag": [
-        "link-look-file-kind:pdf"
+        "source-file-kind:pdf"
       ],
       "uco-core:hasFacet": [
         {

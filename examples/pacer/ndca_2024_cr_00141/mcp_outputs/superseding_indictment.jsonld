@@ -15,9 +15,9 @@
       "@id": "urn:uuid:5753f7e5-1146-52e0-83e7-893e59a8da2b",
       "@type": "uco-observable:ObservableObject",
       "uco-core:name": "Source file pacer -- insider threat -- superseding indictment.pdf",
-      "uco-core:description": "Link-Look pdf upload",
+      "uco-core:description": "Uploaded pdf file",
       "uco-core:tag": [
-        "link-look-file-kind:pdf"
+        "source-file-kind:pdf"
       ],
       "uco-core:hasFacet": [
         {

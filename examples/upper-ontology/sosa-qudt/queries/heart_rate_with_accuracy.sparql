@@ -1,0 +1,26 @@
+# Competency question: what heart rate was recorded for the wearer, and what
+# accuracy does the sensor that recorded it claim?
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX ssn-system: <http://www.w3.org/ns/ssn/systems/>
+PREFIX qudt: <http://qudt.org/schema/qudt/>
+PREFIX kb: <http://example.org/kb/>
+
+SELECT ?time ?bpm ?unit ?accuracy ?accuracyUnit
+WHERE {
+  ?observation a sosa:Observation ;
+      sosa:hasFeatureOfInterest kb:wearer-1 ;
+      sosa:observedProperty kb:heart-rate ;
+      sosa:madeBySensor ?sensor ;
+      sosa:resultTime ?t ;
+      sosa:hasResult ?result .
+  ?result qudt:value ?v ;
+      qudt:hasUnit ?unit .
+  ?sensor ssn-system:hasSystemCapability/ssn-system:hasSystemProperty ?property .
+  ?property a ssn-system:Accuracy ;
+      qudt:quantityValue ?accuracyValue .
+  ?accuracyValue qudt:value ?a ;
+      qudt:hasUnit ?accuracyUnit .
+  BIND (STR(?t) AS ?time)
+  BIND (STR(?v) AS ?bpm)
+  BIND (STR(?a) AS ?accuracy)
+}

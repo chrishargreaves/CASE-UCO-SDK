@@ -25,7 +25,6 @@ class CompliancePattern:
     """gUFO pattern for modeling compliance with registration requirements as temporal situation with monitoring."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/integration-patterns#CompliancePattern"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -33,7 +32,6 @@ class CoordinationSituationPattern:
     """gUFO pattern for modeling multi-jurisdiction coordination situations with participating organizations and temporal constraints."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/integration-patterns#CoordinationSituationPattern"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -52,7 +50,6 @@ class CriminalOrganizationPattern:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -60,7 +57,6 @@ class CrossBorderPattern:
     """gUFO pattern for modeling cross-border investigations as complex situations spanning multiple jurisdictions."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/integration-patterns#CrossBorderPattern"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -88,7 +84,6 @@ class EvidenceObjectPattern:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -128,23 +123,6 @@ class InstitutionalRolePattern:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -152,28 +130,6 @@ class JudicialPhasePattern:
     """gUFO pattern for modeling judicial process phases (pre-trial, trial, sentencing, appeals) with legal constraints."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/integration-patterns#JudicialPhasePattern"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -181,9 +137,6 @@ class LegalEventPattern:
     """gUFO pattern for modeling legal events (hearings, sentencing, appeals) with temporal boundaries and legal effects."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/integration-patterns#LegalEventPattern"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -230,7 +183,6 @@ class OrganizationalPattern:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -266,9 +218,6 @@ class PreventiveActionPattern:
     """gUFO pattern for modeling prevention activities as actions with preventive intent and outcome measurement."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/integration-patterns#PreventiveActionPattern"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -276,7 +225,6 @@ class RegistrationPattern:
     """gUFO pattern for modeling sex offender registration as ongoing situation with compliance requirements."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/integration-patterns#RegistrationPattern"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -302,23 +250,6 @@ class SpecializedRolePattern:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -339,7 +270,6 @@ class SyntheticArtifactPattern:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -358,23 +288,6 @@ class TaskforceRolePattern:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass

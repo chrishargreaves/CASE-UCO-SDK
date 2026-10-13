@@ -19,49 +19,57 @@ Mitigation Analysis alongside CASE/UCO evidence modeling.
 
 | File | Role |
 | --- | --- |
-| `solve_it_core.ttl` | Objective/Technique/Weakness/Mitigation classes, `SolveitInvestigativeAction` (subclass of `case-investigation:InvestigativeAction`) with `usedTechnique`/`appliedMitigation` |
+| `solve_it_core.ttl` | Objective/Technique/Weakness/Mitigation/Citation classes; `SolveitInvestigativeAction` (subclass of `case-investigation:InvestigativeAction`) with `appliedMitigation`; `usedTechnique` is `owl:deprecated` |
+| `solve_it_core_shapes.ttl` | SHACL for the core: a `Technique` must be an `owl:Class` with an `rdfs:subClassOf` and exactly one `techniqueID` |
 | `solve_it_observable*.ttl` (4 files) | ~60 forensic observable classes (image containers, bitstreams, timelines, keyword search artifacts, acquisition records, ...) |
 | `solve_it_observable_shapes.ttl` | SHACL shapes constraining the observables |
-| `solve_it_analysis.ttl` | Hypothesis/analysis classes (subclasses of `uco-analysis` types) |
+| `solve_it_analysis.ttl` | Hypothesis classes (subclasses of `uco-analysis` types), including `HypothesisedRecord`, `HypothesisedConfiguration`, `HypothesisedTableAttribution` |
+| `solve_it_analysis_shapes.ttl` | SHACL for the hypothesis classes |
 | `solve_it_sqlite.ttl` | SQLite internals observables |
 | `solve_it_tool_profile.ttl` | Tool capability profiles |
 | `solve_it_weakness_assessment.ttl` | `WeaknessEvaluation`/`WeaknessEvaluationSet` risk-rating classes |
-| `solve-it-kb.ttl` | Compiled knowledge base: 23 objectives, 191 techniques, 339 weaknesses, 270 mitigations, cross-linked with CASE/UCO input/output classes |
-| `solveit-technique-catalog.ttl` | **Generated** — every technique punned as `owl:Class` typed `uco-action:Technique` (UCO 1.5.0 metaclass pattern, ucoProject/UCO PR #676); regenerate with `make sync-solveit-offline` |
+| `solve-it-kb.ttl` | Compiled knowledge base: 24 objectives, 200 techniques, 441 weaknesses, 336 mitigations, 164 citations. Each technique is an `owl:Class` subclass of `SolveitInvestigativeAction` |
+| `solveit-technique-catalog.ttl` | **Generated** UCO bridge: types each knowledge-base technique `uco-action:Technique` with `action:techniqueID`, label and comment, so SOLVE-IT techniques sit under the same UCO metaclass as MITRE ATT&CK and ATLAS; regenerate with `make sync-solveit-offline` |
 | `solveit-local-anchors.ttl` | SDK-local bridge anchoring three upstream enumeration classes to `owl:Thing` |
 | `solveit-exemplar.ttl` | Validated exemplar (disk imaging with mitigations + weakness evaluation) |
 | `solveit-invalid-exemplar.ttl` | Expected-invalid fixture proving the shapes constrain |
 | `queries/*.sparql` | Competency queries run by the lifecycle gates |
 
-## Two modeling styles
+## Modeling a performed technique
 
-**Native SOLVE-IT style (works today, UCO 1.4.0):** record each executed
-step as a `solveit-core:SolveitInvestigativeAction` linking the canonical
-knowledge-base individuals:
+Since SOLVE-IT 0.2.x a technique is a class, and the action that performed
+it is an instance of that class (the `uco-action:Technique` metaclass
+pattern from UCO 1.5.0):
 
 ```turtle
-<urn:uuid:...> a solveit-core:SolveitInvestigativeAction ;
+<urn:uuid:...> a solveit-core:SolveitInvestigativeAction , solveit-data:techniqueDFT-1002 ;
     uco-core:name "acquire-laptop-image" ;
-    solveit-core:usedTechnique solveit-data:techniqueDFT-1002 ;
     solveit-core:appliedMitigation solveit-data:mitigationDFM-1004 ;
     uco-action:performer <urn:uuid:...> ;
     uco-action:result <urn:uuid:...> .
 ```
 
-**UCO 1.5.0 metaclass style (forward-implemented):** type the action
-directly with the punned technique class from
-`solveit-technique-catalog.ttl`, exactly like a MITRE ATT&CK technique
-(see `extensions/attack-technique/`):
+A plain `uco-action:Action` typed with a technique class works too, and
+becomes a `SolveitInvestigativeAction` under RDFS inference.
 
-```turtle
-<urn:uuid:...> a uco-action:Action , solveit-data:techniqueDFT-1042 ;
-    uco-core:name "verify-image-hash" .
-```
+**When a technique is a value** (for example
+`solveit-wa:scopedToTechnique`), restate its minimal catalogue entry in
+the case graph, as upstream's examples do: `owl:Class`,
+`solveit-core:Technique`, `rdfs:subClassOf
+solveit-core:SolveitInvestigativeAction`, `rdfs:label`, and
+`solveit-core:techniqueID`. The reason is that `case_validate` passes the
+knowledge base as an ontology graph, and pySHACL copies only the
+class-level triples of `owl:Class` nodes into the data graph, so
+`TechniqueShape` can't see the KB's `techniqueID`.
+`get_solveit_details` returns the entry as `catalog_entry_jsonld`;
+builders can call `solveit_index.technique_catalog_entry("DFT-1002")`.
+The same interaction is why the deprecated `usedTechnique` now fails
+validation.
 
-Both styles share the same IRIs (the catalog puns the knowledge-base
-individuals), coexist in one graph, and validate together. The manifest
-declares `depends_on: ["attack-technique"]` so the `uco-action:Technique`
-metaclass is always in scope.
+The `uco-action:Technique` metaclass ships in UCO 1.5.0, so the manifest
+has no dependencies. The MITRE ATT&CK catalog (`attack-technique`) is a
+separate vocabulary; request it alongside `solveit` only when a graph also
+records observed hacking techniques.
 
 ## Usage
 
@@ -90,8 +98,9 @@ make sync-solveit             # pin current upstream main
 make sync-solveit REF=<sha>   # pin a specific solve-it-ontology commit
 ```
 
-The sync tool re-vendors every file, regenerates the punned technique
-catalog, and rewrites manifest provenance. A weekly GitHub Actions check
+The sync tool re-vendors every file, regenerates the technique catalog
+bridge, and rewrites manifest provenance (commits, release tag, and
+SHA-256 digests of every vendored file). A weekly GitHub Actions check
 (`.github/workflows/upstream-freshness.yml`) fails when the pinned snapshot
 falls behind the newest upstream release.
 

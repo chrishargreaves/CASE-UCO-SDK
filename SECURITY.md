@@ -75,7 +75,7 @@ It does **not** cover:
 ## MCP Server Threat Model and Trust Boundaries
 
 The MCP server is designed for **local, stdio-based deployment** beside the
-agent host (Cursor, Hermes, Link-Look). Its network-capable tools are
+agent host (Cursor or another MCP harness). Its network-capable tools are
 `check_existing_proposals` (GitHub API, outbound HTTPS only) and
 `execute_sparql_query` (operator-selected SPARQL endpoint, with the controls
 below).
@@ -90,7 +90,12 @@ egress boundary: SELECT/ASK/CONSTRUCT/DESCRIBE only; no SPARQL Update or
 SERVICE federation; bounded query, timeout, and response sizes; no redirects;
 no URL credentials; public HTTPS only by default; DNS/address checks that
 reject loopback, private, link-local, multicast, unspecified, and reserved
-targets; and typed errors that do not echo remote error bodies.
+targets; and typed errors that do not echo remote error bodies. Every query
+must parse with rdflib's SPARQL 1.1 query grammar before any network request,
+and `SERVICE` is rejected from the parse tree, so lexical tricks such as a
+whitespace-free comparison (`?o<1)SERVICE<…>`) cannot hide federation or
+update operations. Queries that rdflib cannot parse are refused
+(`sparql_query_parse_failed`).
 
 The built-in CaseLinker host and an operator-configured default endpoint are
 allowed; every other public target requires an exact

@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 import secrets
+import shutil
 import tempfile
 import time
 import uuid
@@ -209,7 +210,12 @@ def _atomic_write_json(path: Path, data: dict[str, Any]) -> str:
     """
 
     path.parent.mkdir(parents=True, exist_ok=True)
-    raw = json.dumps(data, indent=2, sort_keys=True) + "\n"
+    try:
+        raw = json.dumps(data, indent=2, sort_keys=True, allow_nan=False) + "\n"
+    except ValueError as exc:
+        raise CriticSessionError(
+            "critic_session_non_finite_number", str(path.name)
+        ) from exc
     encoded = raw.encode("utf-8")
     digest = hashlib.sha256(encoded).hexdigest()
     fd, tmp_name = tempfile.mkstemp(prefix=path.name, dir=str(path.parent))
@@ -756,8 +762,8 @@ def _resolve_artifact_path(
 ) -> Path:
     """Resolve artifact paths: generated graph/serializer may live under write roots.
 
-    Evidence/source paths stay read-root-only when ``allow_write_roots`` is False,
-    matching ``analyze_artifact`` for graphs/serializers.
+    Every caller must use the policy ``analyze_artifact`` applied at start, or a
+    session that started cleanly cannot be finalized.
     """
 
     try:
@@ -783,7 +789,11 @@ def _rehash_config_artifacts(cfg: dict[str, Any]) -> dict[str, Any]:
         cfg["graph_path"], allow_write_roots=True, label="graph"
     )
     serializer_sha = None
-    if cfg.get("serializer_path"):
+    # Graph-only reviews record serializer_path but leave serializer_sha256
+    # empty, matching analyze_artifact. Hashing the file here makes finalize
+    # disagree with the reviewed artifact set.
+    scope = cfg.get("critic_scope") or "both"
+    if cfg.get("serializer_path") and scope in {"serializer", "both"}:
         ser_path = _resolve_artifact_path(
             cfg["serializer_path"], allow_write_roots=True, label="serializer"
         )
@@ -791,7 +801,7 @@ def _rehash_config_artifacts(cfg: dict[str, Any]) -> dict[str, Any]:
     source_sha: dict[str, str] = {}
     for idx, raw in enumerate(cfg.get("source_paths") or [], start=1):
         path = _resolve_artifact_path(
-            raw, allow_write_roots=False, label=f"source:{idx}"
+            raw, allow_write_roots=True, label=f"source:{idx}"
         )
         source_sha[f"source-{idx}:{path.name}"] = sha256_file(path)
     coverage_sha = None
@@ -1364,7 +1374,11 @@ def start_critic_review(
     try:
         review = analyze_artifact(request)
     except CriticError as exc:
+        shutil.rmtree(directory, ignore_errors=True)
         raise CriticSessionError(exc.code, str(exc)) from exc
+    except BaseException:
+        shutil.rmtree(directory, ignore_errors=True)
+        raise
 
     config = asdict(
         SessionConfig(

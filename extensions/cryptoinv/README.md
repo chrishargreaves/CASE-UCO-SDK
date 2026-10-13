@@ -29,7 +29,7 @@ Grounded in three sources:
 
 | Module | Classes |
 |---|---|
-| Cryptocurrency observables (facets) | `CryptocurrencyAddressFacet`, `CryptocurrencyTransactionFacet`, `CryptocurrencyWalletFacet`, `VirtualAssetHoldingFacet` |
+| Cryptocurrency observables (facets) | `CryptocurrencyAddressFacet`, `CryptocurrencyTransactionFacet`, `CryptocurrencyWalletFacet`, `VirtualAssetHoldingFacet`, `VirtualAssetLedgerRecordFacet` |
 | Financial-crime infrastructure | `VirtualAssetServiceProvider`, `DarknetMarket`, `CryptocurrencyMixingService` (all subclasses of `uco-identity:Organization`) |
 | Legal process | `CriminalCharge`, `PleaAgreement`, `SentencingOutcome`, `ForfeitureOrder`, `RestitutionOrder`, `AssetSeizureAction` |
 | Annotations | `launderingTechnique` (open vocabulary on actions), `transferAmount` (on Transaction_Input/Output relationships) |
@@ -44,6 +44,10 @@ Deliberately **out of scope**:
   [UCO issue #535](https://github.com/ucoProject/UCO/issues/535) (Qualities).
   `VirtualAssetHoldingFacet` records point-in-time snapshots with a
   `valuationDate` instead.
+- **VASP ledger rows** (exchange and wallet-provider warrant returns) use
+  `VirtualAssetLedgerRecordFacet` on the source-row `Event`. A public
+  transaction hash, when present, is a separate `CryptocurrencyTransactionFacet`.
+  Do not put a provider order ID in `transactionHash`.
 
 ## Transaction input/output pattern
 
@@ -56,7 +60,7 @@ and a `cryptoinv:transferAmount`. This natively supports UTXO chains
 ## Validation
 
 ```bash
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph extensions/cryptoinv/cryptoinv.ttl \
   --ontology-graph extensions/cryptoinv/cryptoinv-shapes.ttl \
   --inference rdfs --allow-info \

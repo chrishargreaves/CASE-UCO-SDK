@@ -22,6 +22,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from collections.abc import Iterator
 from typing import Any
 
 import workspace_policy
@@ -55,6 +56,13 @@ UPDATE_OPERATIONS = frozenset({
 })
 
 _KEYWORD_BOUNDARY = r"(?<![\w?:$-]){}(?![\w:-])"
+_IRIREF_FORBIDDEN = frozenset('<>"{}|^`\\')
+_AST_QUERY_FORMS = {
+    "SelectQuery": "SELECT",
+    "AskQuery": "ASK",
+    "ConstructQuery": "CONSTRUCT",
+    "DescribeQuery": "DESCRIBE",
+}
 _TRUE_VALUES = frozenset({"1", "true", "yes"})
 _CONTENT_TRUST = "untrusted-external-sparql-results"
 
@@ -111,10 +119,12 @@ def _mask_sparql_data(query: str) -> str:
         if ch == "<":
             iri_end = query.find(">", i + 1)
             iri_body = query[i + 1:iri_end] if iri_end >= 0 else ""
-            # A SPARQL IRIREF may not contain raw whitespace. Treat comparison
-            # operators such as ``?count < 2`` as syntax rather than masking
-            # the rest of the query up to some later ``>``.
-            if iri_end >= 0 and iri_body and not any(c.isspace() for c in iri_body):
+            # SPARQL IRIREF excludes whitespace and <>"{}|^`\. Treat comparison
+            # operators such as ``?count<2`` as syntax rather than masking the
+            # rest of the query up to some later ``>``.
+            if iri_end >= 0 and iri_body and not any(
+                c.isspace() or c in _IRIREF_FORBIDDEN for c in iri_body
+            ):
                 while i <= iri_end:
                     chars[i] = " "
                     i += 1
@@ -189,7 +199,43 @@ def validate_query(query: str) -> str:
     # match the keyword boundaries above.
     if any(_contains_keyword(masked, op) for op in UPDATE_OPERATIONS):
         raise SparqlClientError("sparql_update_forbidden")
-    return first_operation
+
+    # The lexical checks above are a fast path; the parse tree is the
+    # authority. SPARQL Update is not in the query grammar, so any update
+    # operation that slipped past the mask fails to parse here.
+    return _validate_query_ast(query, first_operation)
+
+
+def _ast_node_names(node: Any) -> Iterator[str]:
+    from pyparsing import ParseResults
+    from rdflib.plugins.sparql.parserutils import CompValue
+
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        if isinstance(current, CompValue):
+            yield current.name
+            stack.extend(current.values())
+        elif isinstance(current, (list, tuple, ParseResults)):
+            stack.extend(current)
+
+
+def _validate_query_ast(query: str, lexical_form: str) -> str:
+    from rdflib.plugins.sparql.parser import parseQuery
+
+    try:
+        parsed = parseQuery(query)
+    except Exception as exc:  # noqa: BLE001 - pyparsing raises several types
+        raise SparqlClientError("sparql_query_parse_failed") from exc
+    names = set(_ast_node_names(parsed))
+    if "ServiceGraphPattern" in names:
+        raise SparqlClientError("sparql_service_forbidden")
+    forms = [_AST_QUERY_FORMS[name] for name in names if name in _AST_QUERY_FORMS]
+    if len(forms) != 1:
+        raise SparqlClientError("sparql_query_form_unsupported")
+    if forms[0] != lexical_form:
+        raise SparqlClientError("sparql_query_form_unsupported")
+    return forms[0]
 
 
 def _resolve_addresses(hostname: str, port: int) -> tuple[ipaddress.IPv4Address | ipaddress.IPv6Address, ...]:

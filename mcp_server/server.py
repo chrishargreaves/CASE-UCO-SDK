@@ -2,7 +2,7 @@
 validation, content routing, and change-proposal drafting for AI agents.
 
 Exposes the SDK's capabilities as MCP tools so AI agents in Cursor, Claude
-Code, Hermes/Link-Look, and similar tools can build validated CASE/UCO graphs
+Code, and similar agent tools can build validated CASE/UCO graphs
 programmatically instead of parsing markdown documentation. Tool groups:
 
 - Ontology discovery: search_classes, get_class_details, list_all_facets,
@@ -26,8 +26,9 @@ programmatically instead of parsing markdown documentation. Tool groups:
   closed-world concept coverage check against core, loaded extensions, and
   profiled upper ontologies).
 - Change proposals: check_existing_proposals (UCO/CASE/CAC issue trackers)
-  and draft_change_proposal (writes proposal markdown, example JSON-LD, and
-  SPARQL query files to change_proposals/).
+  and draft_change_proposal (a provenance-marked discussion draft built on
+  competency questions, a lint and hand-check review file, and local OWL,
+  SHACL, example JSON-LD, and SPARQL test files in change_proposals/).
 - Critic loop (#75–#78): start_critic_review, start_critic_review_with_sampling,
   submit_manual_critic_response, submit_critic_revision,
   submit_critic_revision_with_sampling, extend_critic_review,
@@ -41,8 +42,8 @@ Run: python mcp_server/server.py
 Or:  fastmcp dev mcp_server/server.py
 
 Set CASE_UCO_EXTENSIONS to a comma-separated list of extension names (e.g.
-cac,aeo,cryptoinv,legalproc,rico,weapons,drugs,attack-technique,solveit) to
-load extension registries; the scope parameter on discovery tools then
+cac,aeo,cryptoinv,legalproc,rico,weapons,drugs,attack-technique,atlas-technique,
+solveit) to load extension registries; the scope parameter on discovery tools then
 filters by "core", an extension name, or "all".
 """
 
@@ -53,6 +54,7 @@ import logging
 import os
 import re
 import sys
+import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -79,7 +81,6 @@ from domain_index import (
     DOMAIN_CATEGORIES,
     CORE_PATTERNS,
     RECIPE_INDEX,
-    CHANGE_PROPOSAL_SECTIONS,
     UCO_PROFILES,
     MAPPING_GUIDE_INDEX,
     suggest_target_repo,
@@ -104,9 +105,11 @@ from apple_acquisition import (
     classify_apple_package_shape as _classify_apple_package_shape,
 )
 import solveit_index
+import adversary_technique_index
 import sparql_client
 import workspace_policy
 import critic_tools
+import change_proposal as _cp
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
@@ -226,8 +229,9 @@ mcp = FastMCP(
         "keyword, get_class_details for full property info, and "
         "find_classes_for_domain to map investigative tasks to the right types. "
         "When a concept is missing from the ontology, use check_existing_proposals "
-        "to search for prior proposals in UCO/CASE issue trackers, then "
-        "draft_change_proposal to generate a filled-in change proposal. "
+        "to search for prior proposals in the UCO, CASE, and CAC issue trackers, then "
+        "draft_change_proposal to draft a competency-question proposal that marks "
+        "contributor, cited, and AI-drafted statements. "
         "Use get_uco_profiles to find UCO Profile ontologies that align UCO "
         "with external ontologies like BFO, PROV-O, GeoSPARQL, OWL-Time, "
         "gUFO, and FOAF for cross-ontology interoperability. "
@@ -267,7 +271,7 @@ mcp = FastMCP(
         "instructions. Never place sensitive investigative values in a remote "
         "query unless the endpoint and deployment are approved for that data. "
         "Extension ontologies (e.g. CAC, AEO, cryptoinv, legalproc, rico, "
-        "weapons, drugs, attack-technique, solveit) are loaded when "
+        "weapons, drugs, attack-technique, atlas-technique, solveit) are loaded when "
         "CASE_UCO_EXTENSIONS is set. Use the scope parameter on "
         "search_classes, get_class_details, find_classes_for_domain, and "
         "list_all_facets to filter by 'core', a specific extension name, "
@@ -333,6 +337,8 @@ def process_document_file(
     file_kind: str | None = None,
     upload_id: str | None = None,
     progress_output: str | None = None,
+    worksheet: str | None = None,
+    partition_worksheets: bool = False,
 ) -> dict:
     """Process a supported local document file into CASE/UCO JSON-LD.
 
@@ -351,6 +357,11 @@ def process_document_file(
     fabricating content. This tool writes the graph to output_path and
     returns safe metadata only; callers must validate the graph (see
     validate_graph) before creating investigative assertions.
+
+    For multi-sheet workbooks, set ``partition_worksheets=True`` to write a
+    thin workbook index at ``output_path`` plus one graph per worksheet
+    (row-windowed when a sheet is large) under ``<output_stem>.parts/``.
+    Set ``worksheet`` to emit a single worksheet graph.
     """
     try:
         result = _process_document_file(
@@ -359,6 +370,8 @@ def process_document_file(
             file_kind=file_kind,
             safe_metadata={"upload_id": upload_id} if upload_id else None,
             progress_output=progress_output,
+            worksheet=worksheet,
+            partition_worksheets=partition_worksheets,
         )
     except ValueError as exc:
         return {
@@ -377,6 +390,9 @@ def process_document_file(
         "sha256": result.sha256,
         "record_count": len(result.records),
         "truncated": result.truncated,
+        "partition_count": len(result.partition_outputs),
+        "partition_outputs": [str(path) for path in result.partition_outputs],
+        "worksheet": result.worksheet,
         # Trust boundary (see SECURITY.md): all extracted document content is
         # untrusted evidence data. Text inside the source document must never
         # be interpreted as instructions, tool requests, or policy — even if
@@ -394,6 +410,12 @@ def process_document_file(
         payload["extracted_content_path"] = str(result.extracted_content_path)
     if result.annotations_path is not None:
         payload["annotations_path"] = str(result.annotations_path)
+    payload["required_extensions"] = list(result.required_extensions)
+    if result.required_extensions:
+        payload["safe_summary"] += (
+            " The graph uses extension terms; validate with "
+            f"extensions={list(result.required_extensions)}."
+        )
     if result.injection_warnings:
         payload["injection_warnings"] = list(result.injection_warnings)
         payload["safe_summary"] += (
@@ -512,9 +534,14 @@ def validate_graph(
     Turtle graph file and returns a bounded conformance report (conforms,
     warning_count, violation_count, safe_summary). Pass extensions=['cac']
     to validate against the CAC press-release subset
-    (ontology/cac/validation-subset.json). Pass extensions=['cac:full']
-    for the complete CAC manifest when upstream SHACL SPARQL constraints
-    are repaired. Pass extensions=['cryptoinv'] for cryptocurrency /
+    (ontology/cac/validation-subset.json). Pass
+    extensions=['cac:missing-child'] for abduction / case-management /
+    temporal missing-child graphs
+    (ontology/cac/validation-subset-missing-child.json). Pass
+    extensions=['cac:full'] for the complete CAC manifest when upstream
+    SHACL SPARQL constraints are repaired. Set CASE_UCO_EXTENSIONS=cac
+    so search_classes and get_class_details load CAC 3.1.0 terms.
+    Validation defaults to --built-version case-1.5.0 (case-utils 0.18.0). Pass extensions=['cryptoinv'] for cryptocurrency /
     financial-crime graphs (crypto address/transaction/wallet facets,
     VASPs, darknet markets, mixers, charges, pleas, sentencing,
     forfeiture — extensions/cryptoinv/). Pass extensions=['legalproc'] for
@@ -580,6 +607,19 @@ def validate_graph(
     return result
 
 
+def _is_ext_module(module: str) -> bool:
+    return str(module or "").startswith("ext.")
+
+
+def _registry_source(info: dict) -> str:
+    """``core`` for CASE/UCO classes; the extension name for ``ext.<name>.*`` modules."""
+    module = str(info.get("module", ""))
+    if _is_ext_module(module):
+        parts = module.split(".")
+        return parts[1] if len(parts) > 1 else "extension"
+    return "core"
+
+
 @mcp.tool
 def search_classes(query: str, scope: str = "all") -> list[dict]:
     """Search for CASE/UCO classes by keyword.
@@ -599,13 +639,15 @@ def search_classes(query: str, scope: str = "all") -> list[dict]:
     results = []
     if scope in ("all", "core"):
         for r in search(query):
+            if scope == "core" and _is_ext_module(r["module"]):
+                continue
             entry = {
                 "name": r["name"],
                 "module": r["module"],
                 "description": r.get("description", "")[:200],
                 "property_count": len(r.get("properties", [])),
                 "is_facet": r.get("is_facet", False),
-                "source": "core",
+                "source": _registry_source(r),
             }
             results.append(entry)
 
@@ -638,9 +680,9 @@ def get_class_details(name: str, scope: str = "all") -> dict | None:
     """
     cls = None
     if scope in ("all", "core"):
-        cls = get_class(name)
+        cls = get_class(name, core_only=scope == "core")
         if cls:
-            cls["source"] = "core"
+            cls["source"] = _registry_source(cls)
 
     if cls is None and scope != "core":
         cls = _get_class_from_extensions(name, scope)
@@ -827,13 +869,37 @@ def find_classes_for_domain(domain: str, scope: str = "all") -> dict:
 
 
 @mcp.tool
+def lookup_qudt_units(query: str = "", quantity_kind: str = "", limit: int = 10) -> dict:
+    """Find the pinned QUDT unit IRI for a measurement before writing it.
+
+    Searches QUDT 3.5.2 units by symbol ("km/h", "°C", "kph"), UCUM code
+    ("km.h-1"), unit id ("KiloM-PER-HR"), or English label ("kilometre per
+    hour"). Pass quantity_kind (e.g. "Velocity", "Length", "HeartRate") to
+    filter, or alone to list every unit of that kind.
+
+    Every returned id is accepted by strict concept coverage under
+    profiles=["qudt"]; a guessed unit IRI is not. Model the value as a
+    qudt:QuantityValue with one qudt:value and one qudt:hasUnit (QUDT 3 has
+    no qudt:unit). See docs/recipes/qudt-quantities-and-units.md.
+
+    Examples: lookup_qudt_units("km/h"), lookup_qudt_units("mph"),
+              lookup_qudt_units("", quantity_kind="HeartRate")
+    """
+    import qudt_units
+
+    return qudt_units.lookup_units(query, quantity_kind, limit)
+
+
+@mcp.tool
 def get_uco_profiles(query: str = "") -> dict:
     """Find UCO Profile ontologies that align UCO with other established ontologies.
 
     UCO maintains profile repositories that map UCO concepts to external
-    ontologies (BFO, gUFO, PROV-O, OWL-Time, GeoSPARQL, FOAF). These
-    profiles enable interoperability and help developers familiar with
-    those ontologies use CASE/UCO effectively.
+    ontologies (BFO, gUFO, PROV-O, OWL-Time, GeoSPARQL, FOAF, ORG, PROF).
+    The SDK also pins QUDT (quantities and units) and W3C SOSA/SSN (sensors
+    and observations), which have no CDO-Shapes profile yet; those report
+    profile_type "sdk-pinned". These profiles enable interoperability and
+    help developers familiar with those ontologies use CASE/UCO effectively.
 
     Pass a keyword to filter (e.g., "provenance", "geospatial", "time"),
     or leave empty to list all profiles.
@@ -931,12 +997,14 @@ def list_all_facets(scope: str = "all") -> list[dict]:
     results = []
     if scope in ("all", "core"):
         for r in find_facets():
+            if scope == "core" and _is_ext_module(r["module"]):
+                continue
             results.append({
                 "name": r["name"],
                 "module": r["module"],
                 "description": r.get("description", "")[:200],
                 "property_count": len(r.get("properties", [])),
-                "source": "core",
+                "source": _registry_source(r),
             })
 
     if scope != "core":
@@ -1148,7 +1216,7 @@ def route_investigation_content(
 ) -> dict:
     """Classify ANY investigation submission and route it to the right resources.
 
-    This is the general entry point for Hermes/Link-Look and other agents
+    This is the general entry point for agents
     submitting warrant returns, legal filings, case files, extraction
     reports, or free text — of any investigation type, including types the
     SDK has never seen before. It detects investigation families (CAC,
@@ -1381,6 +1449,85 @@ def plan_solveit_workflow(description: str) -> dict:
         }
 
 
+_ADVERSARY_CATALOG_MISSING = {
+    "error": "adversary_technique_catalog_missing",
+    "detail": "extensions/attack-technique/mitre-attack-catalog.ttl and "
+              "extensions/atlas-technique/mitre-atlas-catalog.ttl not found; "
+              "run `make sync-attack` / `make sync-atlas`",
+}
+
+
+@mcp.tool
+def search_adversary_techniques(
+    query: str,
+    catalog: str | None = None,
+    tactic: str | None = None,
+    platform: str | None = None,
+    include_deprecated: bool = False,
+    limit: int = 10,
+) -> dict:
+    """Search the pinned MITRE ATT&CK and MITRE ATLAS technique catalogs.
+
+    ATT&CK (Enterprise, Mobile, ICS) and ATLAS (attacks on AI systems)
+    describe adversary tradecraft. Both are vendored complete, in the UCO
+    1.5.0 uco-action:Technique metaclass pattern: each technique is a class,
+    and a sub-technique specializes its parent. Use them only for behavior
+    the evidence shows; they are a separate vocabulary from SOLVE-IT
+    (forensic practice) and from the offense-conduct and CAC extensions.
+
+    catalog filters to "attack" or "atlas"; tactic accepts a tactic name or
+    ID ("Persistence", "TA0003", "AML.TA0005"); platform is an exact
+    platform name ("Windows", "Android", "Generative AI"). Deprecated and
+    revoked techniques are hidden unless include_deprecated=True or the
+    query is their exact ID. Follow up with get_adversary_technique(id).
+
+    Examples:
+      search_adversary_techniques("prompt injection")
+      search_adversary_techniques("registry run keys", catalog="attack")
+      search_adversary_techniques("T1059")
+    """
+    try:
+        return adversary_technique_index.search(
+            query,
+            catalog=catalog,
+            tactic=tactic,
+            platform=platform,
+            include_deprecated=include_deprecated,
+            limit=limit,
+        )
+    except FileNotFoundError:
+        return dict(_ADVERSARY_CATALOG_MISSING)
+    except ValueError as exc:
+        return {"error": "invalid_catalog", "detail": str(exc)}
+
+
+@mcp.tool
+def get_adversary_technique(technique_id: str) -> dict:
+    """Full ATT&CK or ATLAS technique record with modeling guidance.
+
+    Accepts an ATT&CK ID (T1027, T1027.002, T0800), an ATLAS ID (AML.T0051,
+    AML.T0051.000), or the technique IRI. Returns the description, tactics,
+    platforms, parent and sub-techniques, the replacement for a revoked
+    technique, ATT&CK techniques an ATLAS technique adapts, and
+    modeling_guidance: type the evidenced uco-action:Action with the
+    technique class and validate with the returned extension name.
+
+    Examples:
+      get_adversary_technique("T1543.003")   # Windows Service
+      get_adversary_technique("AML.T0051")   # LLM Prompt Injection
+    """
+    try:
+        return adversary_technique_index.details(technique_id)
+    except FileNotFoundError:
+        return dict(_ADVERSARY_CATALOG_MISSING)
+    except KeyError:
+        return {
+            "error": "technique_not_found",
+            "detail": f"{technique_id!r} is not in the pinned ATT&CK or ATLAS "
+                      "catalog; search_adversary_techniques(query) lists matches",
+        }
+
+
 @mcp.tool
 def list_all_vocabs() -> list[dict]:
     """List all vocabulary/enum types in the CASE/UCO ontology.
@@ -1519,440 +1666,340 @@ def check_existing_proposals(
 
 
 def _slugify(text: str) -> str:
-    slug = text.lower().strip()
-    slug = re.sub(r"[^a-z0-9]+", "-", slug)
-    return slug.strip("-")[:80]
+    slug = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
+    slug = re.sub(r"[^a-z0-9]+", "-", slug.lower())
+    return slug.strip("-")[:80].strip("-")
 
 
-def _build_example_graph(proposed_classes: list[dict] | None) -> dict | None:
-    """Build an example JSON-LD graph dict from proposed classes."""
-    if not proposed_classes:
-        return None
+def _proposal_reference_terms(target_repo: str) -> tuple[frozenset[str], dict[str, str]]:
+    """Declared IRIs and the CASE/UCO/CAC prefixes proposal lint checks against."""
 
-    cls = proposed_classes[0]
-    cls_name = cls.get("name", "ProposedClass")
-    example_obj: dict = {
-        "@type": f"proposed:{cls_name}",
-    }
-    for p in cls.get("properties", []):
-        p_name = p.get("name", "")
-        p_type = p.get("type", "xsd:string")
-        if "decimal" in p_type or "float" in p_type or "double" in p_type:
-            example_obj[f"proposed:{p_name}"] = 0.0
-        elif "integer" in p_type or "int" in p_type:
-            example_obj[f"proposed:{p_name}"] = 0
-        elif "boolean" in p_type:
-            example_obj[f"proposed:{p_name}"] = False
-        else:
-            example_obj[f"proposed:{p_name}"] = f"example-{p_name}"
+    from case_uco.graph import DEFAULT_CONTEXT
+    from case_uco.validation.coverage import load_declared_terms
 
-    return {
-        "@context": {
-            "kb": "http://example.org/kb/",
-            "proposed": "http://example.org/ontology/proposed/",
-            "uco-observable": "https://ontology.unifiedcyberontology.org/uco/observable/",
-            "uco-core": "https://ontology.unifiedcyberontology.org/uco/core/",
-        },
-        "@graph": [
-            {
-                "@id": "kb:observable-1",
-                "@type": "uco-observable:ObservableObject",
-                "uco-core:hasFacet": [example_obj],
-            }
-        ],
-    }
-
-
-def _build_sparql_queries(proposed_classes: list[dict] | None) -> str | None:
-    """Build SPARQL query text from proposed classes for testing."""
-    if not proposed_classes:
-        return None
-
-    cls = proposed_classes[0]
-    cls_name = cls.get("name", "ProposedClass")
-    props = cls.get("properties", [])
-    prop_names = [p.get("name", "") for p in props[:3]]
-
-    if not prop_names:
-        return None
-
-    sparql_vars = " ".join(f"?{p}" for p in prop_names)
-    sparql_bindings = "\n".join(
-        f"           proposed:{p} ?{p} ;"
-        for p in prop_names
+    extra: dict[str, str] = {}
+    extensions = None
+    if target_repo == "CAC":
+        extensions = ["cac:full"]
+        manifest = json.loads((PROJECT_ROOT / "ontology" / "cac" / "manifest.json").read_text(encoding="utf-8"))
+        extra = {k: v for k, v in (manifest.get("namespaces") or {}).items() if isinstance(v, str)}
+    declared = load_declared_terms(
+        project_root=PROJECT_ROOT, extensions=extensions, fail_on_parse_error=False
     )
-    if sparql_bindings.endswith(" ;"):
-        sparql_bindings = sparql_bindings[:-2] + " ."
+    terms = declared.classes | declared.properties | declared.shapes | declared.unknown_role
+    return frozenset(terms), _cp.reference_prefixes(dict(DEFAULT_CONTEXT), extra)
 
-    query = (
-        f"# CQ 1.1: What values are recorded for {cls_name} instances?\n"
-        f"PREFIX uco-observable: <https://ontology.unifiedcyberontology.org/uco/observable/>\n"
-        f"PREFIX uco-core: <https://ontology.unifiedcyberontology.org/uco/core/>\n"
-        f"PREFIX proposed: <http://example.org/ontology/proposed/>\n\n"
-        f"SELECT ?obj {sparql_vars}\n"
-        f"WHERE {{\n"
-        f"    ?obj a uco-observable:ObservableObject ;\n"
-        f"         uco-core:hasFacet ?facet .\n"
-        f"    ?facet a proposed:{cls_name} ;\n"
-        f"{sparql_bindings}\n"
-        f"}}\n"
+
+def _fetch_proposal_link(url: str) -> tuple[int | None, str]:
+    request = urllib.request.Request(
+        url, headers={"User-Agent": "CASE-UCO-SDK-MCP/1.0", "Accept": "text/html,*/*"}
     )
+    try:
+        with urllib.request.urlopen(request, timeout=10) as response:
+            charset = response.headers.get_content_charset() or "utf-8"
+            return response.status, response.read(2_000_000).decode(charset, errors="replace")
+    except urllib.error.HTTPError as exc:
+        return exc.code, ""
+    except (urllib.error.URLError, OSError, ValueError):
+        return None, ""
 
-    return query
+
+def _run_proposal_sparql(jsonld_path: Path, sparql_text: str) -> list[dict[str, Any]]:
+    import rdflib
+
+    graph = rdflib.Graph()
+    graph.parse(jsonld_path, format="json-ld")
+    results: list[dict[str, Any]] = []
+    for index, raw in enumerate((q.strip() for q in sparql_text.split("# ---")), 1):
+        if not raw:
+            continue
+        comments = [line for line in raw.splitlines() if line.startswith("#")]
+        label = comments[0].lstrip("# ").strip() if comments else f"query {index}"
+        query = "\n".join(line for line in raw.splitlines() if not line.startswith("#"))
+        try:
+            sparql_client.validate_query(query)
+            count = len(list(graph.query(query)))
+            status = "ok" if count else "no results"
+        except Exception as exc:  # noqa: BLE001 - reported per query, never raised
+            count, status = 0, f"failed: {type(exc).__name__}"
+        results.append({"label": label, "status": status, "result_count": count})
+    return results
 
 
-def _build_proposal_markdown(
-    concept: str,
-    description: str,
-    scenario: str,
-    proposed_classes: list[dict] | None,
-    proposed_properties: list[dict] | None,
-    target_repo: str,
-    target_release: str,
-    existing_issue_refs: list[str] | None,
-    slug: str,
-) -> str:
-    """Render a filled-in change proposal from the official template."""
-
-    # --- Target release ---
-    target_release_section = (
-        f"# Target release\n\n"
-        f"**Target**: CASE/UCO {target_release}\n"
-    )
-
-    # --- Background ---
-    refs_text = ""
-    if existing_issue_refs:
-        refs_text = "\n\n**Related issues**: " + ", ".join(existing_issue_refs)
-    background = f"{description}{refs_text}"
-
-    # --- Requirements ---
-    req_lines = []
-    req_num = 1
-    if proposed_classes:
-        for cls in proposed_classes:
-            cls_name = cls.get("name", "NewClass")
-            cls_type = cls.get("type", "Class")
-            parent = cls.get("parent", "")
-            parent_text = f" as a subclass of `{parent}`" if parent else ""
-            req_lines.append(
-                f"## Requirement {req_num}\n\n"
-                f"Define a new `{cls_name}` {cls_type}{parent_text}."
-            )
-            props = cls.get("properties", [])
-            if props:
-                req_lines.append("\nProperties:\n")
-                for p in props:
-                    p_name = p.get("name", "")
-                    p_type = p.get("type", "xsd:string")
-                    p_desc = p.get("description", "")
-                    req_lines.append(f"- `{p_name}` ({p_type}): {p_desc}")
-            req_num += 1
-
-    if proposed_properties:
-        for prop in proposed_properties:
-            p_name = prop.get("name", "")
-            p_target = prop.get("target_class", "")
-            p_type = prop.get("type", "xsd:string")
-            p_desc = prop.get("description", "")
-            req_lines.append(
-                f"## Requirement {req_num}\n\n"
-                f"Add property `{p_name}` ({p_type}) to `{p_target}`. {p_desc}"
-            )
-            req_num += 1
-
-    if not req_lines:
-        req_lines.append("## Requirement 1\n\n*(Describe the required change.)*")
-
-    requirements = "\n\n".join(req_lines)
-
-    # --- Risk / Benefit ---
-    benefits_lines = [
-        f"- Enables modeling of {concept} data in CASE/UCO-compliant graphs",
-        "- Improves interoperability between tools that encounter this data type",
-    ]
-    if proposed_classes:
-        for cls in proposed_classes:
-            benefits_lines.append(
-                f"- The `{cls.get('name', '')}` class provides a structured "
-                f"representation where none currently exists"
-            )
-    benefits = "\n".join(benefits_lines)
-    risks = "The submitter is unaware of risks associated with this change."
-
-    # --- Competencies ---
-    comp_lines = [f"## Competency 1\n\n{scenario}"]
-
-    if proposed_classes:
-        cls_name = proposed_classes[0].get("name", "ProposedClass")
-        props = proposed_classes[0].get("properties", [])
-        prop_names = [p.get("name", "") for p in props[:3]]
-
-        comp_lines.append(
-            f"\n### Competency Question 1.1\n\n"
-            f"What {', '.join(prop_names)} values are recorded for "
-            f"objects with a `{cls_name}`?"
+def _test_proposal_companions(
+    jsonld_path: Path, ontology_paths: list[Path], sparql_text: str | None
+) -> dict[str, Any]:
+    results: dict[str, Any] = {}
+    try:
+        report = _validate_graph_file(
+            jsonld_path,
+            extra_ontology_graphs=ontology_paths,
+            force_rdfs_inference=True,
+            strict_concepts=True,
         )
-        result_parts = [f"`{p}`" for p in prop_names]
-        comp_lines.append(
-            f"\n#### Result 1.1\n\n"
-            f"A SPARQL query selecting {', '.join(result_parts)} from instances "
-            f"of `{cls_name}` returns the recorded values."
-        )
+        results["validation"] = {
+            "conforms": report.conforms,
+            "violation_count": report.violation_count,
+            "warning_count": report.warning_count,
+            "summary": report.safe_summary,
+            "undeclared_concepts": list(report.undeclared_concepts),
+        }
+    except ValueError as exc:
+        results["validation"] = {"conforms": None, "summary": f"not run: {exc}"}
+    if sparql_text:
+        results["sparql"] = _run_proposal_sparql(jsonld_path, sparql_text)
+    return results
 
-        if len(props) >= 2:
-            filter_prop = props[0]
-            comp_lines.append(
-                f"\n### Competency Question 1.2\n\n"
-                f"Which objects have a `{filter_prop.get('name', '')}` value "
-                f"exceeding a given threshold?"
-            )
-            comp_lines.append(
-                f"\n#### Result 1.2\n\n"
-                f"A SPARQL query with a FILTER on `{filter_prop.get('name', '')}` "
-                f"returns the matching subset of objects."
-            )
 
-        # Draft SPARQL (inline in markdown)
-        sparql_vars = " ".join(f"?{p}" for p in prop_names)
-        sparql_bindings = "\n".join(
-            f"           proposed:{p} ?{p} ;"
-            for p in prop_names
-        )
-        if sparql_bindings.endswith(" ;"):
-            sparql_bindings = sparql_bindings[:-2] + " ."
-        sparql = (
-            f"\n### Draft SPARQL\n\n"
-            f"```sparql\n"
-            f"PREFIX uco-observable: <https://ontology.unifiedcyberontology.org/uco/observable/>\n"
-            f"PREFIX uco-core: <https://ontology.unifiedcyberontology.org/uco/core/>\n"
-            f"PREFIX proposed: <http://example.org/ontology/proposed/>\n\n"
-            f"SELECT ?obj {sparql_vars}\n"
-            f"WHERE {{\n"
-            f"    ?obj a uco-observable:ObservableObject ;\n"
-            f"         uco-core:hasFacet ?facet .\n"
-            f"    ?facet a proposed:{cls_name} ;\n"
-            f"{sparql_bindings}\n"
-            f"}}\n"
-            f"```"
-        )
-        comp_lines.append(sparql)
+def _display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(PROJECT_ROOT))
+    except ValueError:
+        return str(path)
 
-    competencies = "\n".join(comp_lines)
 
-    # --- Example instance data ---
-    example_graph = _build_example_graph(proposed_classes)
-    example_lines = ["\n# Example instance data\n"]
-    if example_graph:
-        example_lines.append(
-            f"The example graph is also available as a standalone file at "
-            f"`change_proposals/{slug}.jsonld` for validation and SPARQL testing.\n"
-        )
-        example_lines.append("```json")
-        example_lines.append(json.dumps(example_graph, indent=2))
-        example_lines.append("```")
-    example_lines.append(
-        "\nI am fine with my examples being transcribed and credited."
-    )
-    example_section = "\n".join(example_lines)
-
-    # --- Solution suggestion ---
-    sol_lines = []
-    if proposed_classes:
-        for cls in proposed_classes:
-            cls_name = cls.get("name", "NewClass")
-            parent = cls.get("parent", "uco-core:UcoObject")
-            sol_lines.append(f"* Define new class `{cls_name}` as a subclass of `{parent}`")
-            for p in cls.get("properties", []):
-                sol_lines.append(
-                    f"* Define property `{p.get('name', '')}` "
-                    f"with range `{p.get('type', 'xsd:string')}`"
-                )
-            sol_lines.append(f"* Add SHACL shape for `{cls_name}` with property constraints")
-
-    if proposed_properties:
-        for prop in proposed_properties:
-            sol_lines.append(
-                f"* Add property `{prop.get('name', '')}` to "
-                f"`{prop.get('target_class', '')}`"
-            )
-
-    sol_lines.append("* Add unit test(s) demonstrating valid and invalid usage")
-    solution = "\n".join(sol_lines)
-
-    # --- Pre-submission testing ---
-    cq_count = 1
-    if proposed_classes and len(proposed_classes[0].get("properties", [])) >= 2:
-        cq_count = 2
-    testing_rows = "\n".join(
-        f"| CQ 1.{i} | Not yet | — | |"
-        for i in range(1, cq_count + 1)
-    )
-    testing_section = (
-        f"# Pre-submission testing\n\n"
-        f"Run `make test-proposal PROPOSAL={slug}` to execute all tests.\n\n"
-        f"## SPARQL query testing\n\n"
-        f"| Query | Tested | Expected results match | Notes |\n"
-        f"|-------|--------|----------------------|-------|\n"
-        f"{testing_rows}\n\n"
-        f"## Graph validation\n\n"
-        f"```\n"
-        f"$ make validate-proposal PROPOSAL={slug}\n"
-        f"(results pending)\n"
-        f"```\n\n"
-        f"## Unresolved issues\n\n"
-        f"Testing not yet run. Execute `make test-proposal PROPOSAL={slug}` "
-        f"and update this section before submission.\n"
-    )
-
-    # --- Assemble ---
-    sections = [
-        target_release_section,
-        CHANGE_PROPOSAL_SECTIONS["background"].format(background=background),
-        CHANGE_PROPOSAL_SECTIONS["requirements"].format(requirements=requirements),
-        CHANGE_PROPOSAL_SECTIONS["risk_benefit"].format(
-            benefits=benefits, risks=risks
-        ),
-        CHANGE_PROPOSAL_SECTIONS["competencies"].format(competencies=competencies),
-        example_section,
-        CHANGE_PROPOSAL_SECTIONS["solution"].format(solution=solution),
-        testing_section,
-    ]
-
-    header = (
-        f"<!-- Change Proposal: {concept} -->\n"
-        f"<!-- Target repository: {target_repo} -->\n"
-        f"<!-- Target release: {target_release} -->\n"
-        f"<!-- Generated by CASE/UCO SDK draft_change_proposal tool -->\n\n"
-    )
-
-    return header + "\n".join(sections)
+def _statement_text(value: Any) -> str:
+    if isinstance(value, str):
+        return value
+    if isinstance(value, dict):
+        return str(value.get("text") or "")
+    if isinstance(value, list):
+        return " ".join(_statement_text(item) for item in value)
+    return ""
 
 
 @mcp.tool
 def draft_change_proposal(
     concept: str,
-    description: str,
-    scenario: str,
-    proposed_classes: list[dict] | None = None,
-    proposed_properties: list[dict] | None = None,
+    description: str | dict[str, Any] | list[Any] | None = None,
+    scenario: str | dict[str, Any] | None = None,
+    proposed_classes: list[dict[str, Any]] | None = None,
+    proposed_properties: list[dict[str, Any]] | None = None,
     target_repo: str | None = None,
-    target_release: str = "1.6.0",
+    target_release: str | None = None,
     existing_issue_refs: list[str] | None = None,
+    title: str | None = None,
+    contributor: str | None = None,
+    ai_model: str | None = None,
+    competency_questions: list[dict[str, Any]] | None = None,
+    terms: list[dict[str, Any]] | None = None,
+    open_questions: list[Any] | None = None,
+    references: list[Any] | None = None,
+    include_design_sketch: bool = False,
+    verify_links: bool = False,
+    run_tests: bool = True,
+    output_dir: str | None = None,
 ) -> dict:
-    """Draft a CASE/UCO change proposal for a concept not in the ontology.
+    """Draft a discussion-draft change proposal for the CASE, UCO, or CAC Ontology tracker.
 
-    Generates a filled-in change proposal markdown file, a companion
-    example JSON-LD graph file, and a SPARQL query file for testing.
-    The agent should call check_existing_proposals first to avoid duplicates.
+    The proposal is built around competency questions and marks where every
+    statement came from, so ontologists can respond to it quickly. Call
+    check_existing_proposals first.
 
-    After drafting, run `make test-proposal PROPOSAL=<slug>` to validate
-    the example graph and test SPARQL queries before submission.
+    Provenance. Each statement (background, scenario, CQ question and
+    expected answer, term definition and "might connect to", open question)
+    is a plain string or a dict ``{"text", "provenance", "source_label",
+    "source_url"}``:
 
-    Returns the file paths, rendered markdown, and target repository info.
+    - ``provenance="contributor"``: only for text the contributor wrote or
+      approved in this conversation. Rendered unmarked.
+    - ``provenance="cited"`` with ``source_label`` and ``source_url``: quoted
+      from a person or publication. The URL must be the exact comment or page
+      quoted (a GitHub ``#issuecomment-`` link for a comment).
+    - ``provenance="ai"``: written by you. Plain strings default to this.
+
+    Never mark your own text as the contributor's.
 
     Args:
-        concept: Short name for the proposed concept (e.g., "Drone telemetry facet")
-        description: Why the concept is needed and what gap it fills
-        scenario: A concrete forensic scenario demonstrating the concept's value
-        proposed_classes: List of dicts with keys: name, type, parent, properties
-            (each property: name, type, description)
-        proposed_properties: List of dicts with keys: name, target_class, type, description
-        target_repo: "UCO" or "CASE" — auto-detected if omitted
-        target_release: Target ontology release version (e.g., "1.6.0", "2.0.0").
-            Defaults to "1.6.0", the next backward-compatible release: CASE and
-            UCO 1.5.0 are both released, so a new proposal cannot target them.
-            Use "2.0.0" for breaking changes. The ontology committee may
-            reassign the milestone during review.
-        existing_issue_refs: Links to related existing issues
+        concept: Short name of the gap (used for triage and the file name).
+        description: Background statement(s): why the change is needed.
+        scenario: A concrete scenario the competency questions are asked against.
+        proposed_classes: Optional draft classes ``{name, parent, description,
+            properties: [{name, type, description}]}``. They become local test
+            files (OWL, SHACL, example graph, SPARQL), not issue text.
+        proposed_properties: Optional draft properties ``{name, target_class, type, description}``.
+        target_repo: "UCO", "CASE", or "CAC"; triaged from the concept if omitted.
+        target_release: e.g. "1.6.0" or "2.0.0" for CASE/UCO. Defaults to 1.6.0
+            for CASE/UCO (1.5.0 is released) and to the next release for CAC.
+        existing_issue_refs: Related issue URLs (added to the references).
+        title: Issue title; defaults to ``concept``.
+        contributor: Contributor name and GitHub handle, e.g. "Cory Hall (@vulnmaster)".
+        ai_model: The model drafting with you, named in the visible AI disclosure.
+        competency_questions: ``[{question, expected_answer, sparql?}]``.
+        terms: Requirements as sourced terms ``[{name, vocabulary, concept_url,
+            definition, might_connect_to}]``. A term from an outside vocabulary
+            needs ``concept_url`` linking its definition page.
+        open_questions: Statements, or ``{question, subquestions: [...]}``.
+        references: ``[{label, url, note}]`` or URL strings.
+        include_design_sketch: Put the draft classes in the collapsed committee
+            section as an AI-drafted sketch. Off by default; the committee
+            designs the change.
+        verify_links: Fetch each outside link and check that quoted definitions
+            appear on the page. A person still has to confirm each link.
+        run_tests: Validate the example graph and run its SPARQL when draft
+            classes or properties were given.
+        output_dir: Where to write; defaults to ``change_proposals/``. Writes
+            obey the workspace write roots.
 
-    Examples:
-        draft_change_proposal(
-            concept="Drone telemetry facet",
-            description="No existing facet captures UAV flight data...",
-            scenario="An investigator extracts telemetry from a DJI drone...",
-            proposed_classes=[{"name": "DroneTelemetryFacet", ...}],
-            target_repo="UCO",
-            target_release="1.6.0"
-        )
+    Returns the proposal markdown, a ``<slug>.review.md`` with lint findings
+    and a hand-check list, companion files, test results, and
+    ``ready_to_file`` (no lint errors).
     """
-    triage = suggest_target_repo(concept, description)
-    if target_repo is None:
-        target_repo = triage["suggestion"]
 
-    slug = _slugify(concept)
+    triage = suggest_target_repo(concept, _statement_text(description))
+    repo = (target_repo or triage["suggestion"]).strip().upper()
+    repo = {"CAC-ONTOLOGY": "CAC", "CACONTOLOGY": "CAC"}.get(repo, repo)
+    if repo not in _cp.TRACKERS and repo != "UNSURE":
+        return {"ok": False, "error": "proposal_target_repo_unknown", "detail": target_repo}
+    if repo == "UNSURE":
+        repo = "TBD"
+    release = target_release or _cp.DEFAULT_TARGET_RELEASE.get(repo)
 
-    content = _build_proposal_markdown(
-        concept=concept,
-        description=description,
-        scenario=scenario,
-        proposed_classes=proposed_classes,
-        proposed_properties=proposed_properties,
-        target_repo=target_repo if target_repo != "unsure" else "TBD",
-        target_release=target_release,
-        existing_issue_refs=existing_issue_refs,
+    slug = _slugify(title or concept)
+    if not slug:
+        return {
+            "ok": False,
+            "error": "proposal_slug_empty",
+            "detail": "The title or concept has no letters or digits to name the files with.",
+        }
+
+    from case_uco import __version__ as sdk_version
+    from case_uco.graph import DEFAULT_CONTEXT
+    from critic.canonical import core_superclasses
+
+    try:
+        proposal = _cp.build_proposal(
+            title=title or concept,
+            target_repo=repo,
+            target_release=release,
+            contributor=contributor,
+            ai_model=ai_model,
+            sdk_version=sdk_version,
+            background=description,
+            scenario=scenario,
+            competency_questions=competency_questions,
+            terms=terms,
+            open_questions=open_questions,
+            references=list(references or []) + list(existing_issue_refs or []),
+            proposed_classes=proposed_classes,
+            proposed_properties=proposed_properties,
+            include_design_sketch=include_design_sketch,
+        )
+    except _cp.ProposalInputError as exc:
+        return {"ok": False, "error": exc.code, "detail": exc.detail}
+
+    declared, prefixes = _proposal_reference_terms(repo)
+    proposed_ns = f"http://example.org/ontology/proposed/{slug}/"
+    findings = _cp.lint_proposal(
+        proposal, declared=declared, prefixes=prefixes, proposed_ns=proposed_ns
+    )
+    companions = _cp.build_companions(
+        proposal,
         slug=slug,
+        base_context=dict(DEFAULT_CONTEXT),
+        superclasses=core_superclasses(),
+        extra_prefixes={k: v for k, v in prefixes.items() if v.startswith(_cp.CAC_BASE)},
     )
 
-    out_dir = PROJECT_ROOT / "change_proposals"
+    out_dir = Path(output_dir).expanduser() if output_dir else PROJECT_ROOT / "change_proposals"
+    planned: dict[str, Path] = {
+        "markdown": out_dir / f"{slug}.md",
+        "review": out_dir / f"{slug}.review.md",
+    }
+    if companions is not None:
+        planned["ttl"] = out_dir / f"{slug}.ttl"
+        planned["shapes"] = out_dir / f"{slug}-shapes.ttl"
+        planned["jsonld"] = out_dir / f"{slug}.jsonld"
+        if companions.sparql:
+            planned["sparql"] = out_dir / f"{slug}.sparql"
+    try:
+        paths = {
+            key: workspace_policy.check_write_path(path, error_code="proposal_outside_write_roots")
+            for key, path in planned.items()
+        }
+    except ValueError as exc:
+        return {"ok": False, "error": str(exc), "detail": _display_path(out_dir)}
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    # Write the proposal markdown
-    out_path = out_dir / f"{slug}.md"
-    out_path.write_text(content, encoding="utf-8")
+    companion_files: list[str] = []
+    test_results: dict[str, Any] | None = None
+    if companions is not None:
+        paths["ttl"].write_text(companions.ttl, encoding="utf-8")
+        paths["shapes"].write_text(companions.shapes, encoding="utf-8")
+        paths["jsonld"].write_text(json.dumps(companions.jsonld, indent=2) + "\n", encoding="utf-8")
+        if companions.sparql:
+            paths["sparql"].write_text(companions.sparql, encoding="utf-8")
+        companion_files = [
+            _display_path(paths[key]) for key in ("ttl", "shapes", "jsonld", "sparql") if key in paths
+        ]
+        if run_tests:
+            test_results = _test_proposal_companions(
+                paths["jsonld"], [paths["ttl"], paths["shapes"]], companions.sparql
+            )
 
-    generated_files = [str(out_path.relative_to(PROJECT_ROOT))]
+    link_checks = _cp.verify_links(proposal, _fetch_proposal_link) if verify_links else None
+    checklist = _cp.review_checklist(proposal, findings)
+    content = _cp.render_markdown(proposal, _cp.design_sketch(proposal))
+    review = _cp.render_review(
+        proposal,
+        findings=findings,
+        checklist=checklist,
+        link_checks=link_checks,
+        companion_files=companion_files,
+        test_results=test_results,
+        slug=slug,
+    )
+    paths["markdown"].write_text(content, encoding="utf-8")
+    paths["review"].write_text(review, encoding="utf-8")
 
-    # Write companion example JSON-LD graph
-    example_graph = _build_example_graph(proposed_classes)
-    if example_graph:
-        jsonld_path = out_dir / f"{slug}.jsonld"
-        jsonld_path.write_text(
-            json.dumps(example_graph, indent=2) + "\n", encoding="utf-8"
-        )
-        generated_files.append(str(jsonld_path.relative_to(PROJECT_ROOT)))
-
-    # Write companion SPARQL queries
-    sparql_text = _build_sparql_queries(proposed_classes)
-    if sparql_text:
-        sparql_path = out_dir / f"{slug}.sparql"
-        sparql_path.write_text(sparql_text, encoding="utf-8")
-        generated_files.append(str(sparql_path.relative_to(PROJECT_ROOT)))
-
-    repo_urls = {
-        "UCO": "https://github.com/ucoProject/UCO/issues/new",
-        "CASE": "https://github.com/casework/CASE/issues/new",
-    }
-
-    result: dict = {
-        "file_path": str(out_path.relative_to(PROJECT_ROOT)),
-        "generated_files": generated_files,
-        "target_repo": target_repo,
-        "target_release": target_release,
+    errors = [f for f in findings if f.severity == "error"]
+    tracker = _cp.TRACKERS.get(repo)
+    result: dict[str, Any] = {
+        "ok": True,
+        "file_path": _display_path(paths["markdown"]),
+        "review_path": _display_path(paths["review"]),
+        "generated_files": [_display_path(paths["markdown"]), _display_path(paths["review"])]
+        + companion_files,
+        "target_repo": repo,
+        "target_release": _cp.release_line(proposal),
         "triage_reasoning": triage["reasoning"],
-        "content_preview": content[:500] + "..." if len(content) > 500 else content,
+        "ready_to_file": not errors,
+        "lint": [f.as_dict() for f in findings],
+        "human_review_checklist": checklist,
+        "content": content,
     }
-
-    if target_repo in repo_urls:
-        result["submit_url"] = repo_urls[target_repo]
-
-    if target_repo == "unsure":
+    if tracker:
+        result["tracker_url"] = tracker["issues_url"]
+        result["submit_url"] = tracker["new_issue_url"]
+    else:
         result["action_needed"] = (
-            "Could not determine whether this belongs in UCO or CASE. "
-            "Please review the triage reasoning and set the target manually. "
-            "UCO covers general cyber-domain concepts; CASE covers "
-            "investigation-specific concepts."
+            "Could not tell whether this belongs in UCO, CASE, or the CAC Ontology. "
+            "UCO covers general cyber-domain concepts, CASE covers investigation-specific "
+            "concepts, and the CAC Ontology covers crimes-against-children investigations. "
+            "Ask the contributor and set target_repo."
         )
-
-    result["next_steps"] = [
-        f"Review the draft at {out_path.relative_to(PROJECT_ROOT)}",
-        f"Run `make test-proposal PROPOSAL={slug}` to validate the example graph and test SPARQL queries",
-        "Update the Pre-submission testing section with test results",
-        "Refine the requirements, competency questions, and example data",
-        "Optionally create a local extension for immediate use (see extensions recipe)",
-        f"Submit as a GitHub issue at {repo_urls.get(target_repo, 'the appropriate repo')}",
+    if link_checks is not None:
+        result["link_checks"] = link_checks
+    if test_results is not None:
+        result["tests"] = test_results
+    next_steps = []
+    if errors:
+        next_steps.append(
+            f"Fix the {len(errors)} lint error(s) in the review notes, then redraft"
+        )
+    next_steps += [
+        f"Have the contributor work through the hand checks in {result['review_path']}",
+        "Show the contributor every *[AI-drafted]* statement; keep, rewrite, or delete each",
     ]
-
+    if companion_files:
+        next_steps.append(
+            f"Companion files are a local test sketch; re-run `make test-proposal PROPOSAL={slug}` after edits"
+        )
+    next_steps.append(
+        f"File the body of {result['file_path']} at {tracker['new_issue_url'] if tracker else 'the right tracker'} "
+        "only after the contributor approves it"
+    )
+    result["next_steps"] = next_steps
     return result
 
 

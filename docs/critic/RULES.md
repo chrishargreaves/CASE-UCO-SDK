@@ -65,13 +65,13 @@ together. Sessions created on pre-release v1.22 builds before full-session
 projection binding may fail closed after upgrade — restart them rather than
 manually migrating state.
 
-## Graph heuristics (`CRIT-H-*`, `graph_heuristics` v1.3.3)
+## Graph heuristics (`CRIT-H-*`, `graph_heuristics` v1.4.0)
 
 | Rule ID | Intent |
 |---------|--------|
 | `CRIT-H-INV-NO-OBJECT` | Investigation missing `uco-core:object` |
 | `CRIT-H-AUTH-NON-INVESTIGATION` | `relevantAuthorization` on non-Investigation |
-| `CRIT-H-ACQ-INPUT-RESULT-INVERSION` | Acquisition-like action uses file only as input |
+| `CRIT-H-ACQ-INPUT-RESULT-INVERSION` | Action named with an acquisition verb (acquire, extract, export, imaging, or a leading "Image …") uses a file only as input. "Examine the disk image" is not an acquisition |
 | `CRIT-H-RELATED-TO-OVERUSE` | Excessive generic `Related_To` |
 | `CRIT-H-CHARGED-WITH-REVERSED` | `Charged_With` charge→person |
 | `CRIT-H-DICT-ENTRY-COLLISION` | Dictionary entry IRI under multiple parents |
@@ -83,10 +83,12 @@ manually migrating state.
 | `CRIT-H-DERIVED-NO-PROVENANCE` | Derived node with no container membership or inbound provenance |
 | `CRIT-H-MARKING-INHERITANCE` | Source has `objectMarking`, derived does not |
 | `CRIT-H-CUSTODY-UNPAIRED` | Custody/transfer/release/receipt action without object+result or Transferred_To |
-| `CRIT-H-IMAGE-CONTAINER-MISMATCH` | RasterPicture as forensic image, or File Contained_Within RasterPicture |
-| `CRIT-H-CONTEXTUAL-COMPILATION-OMISSION` | Action-result File/Observable not in Investigation/ProvenanceRecord/ContextualCompilation |
-| `CRIT-H-ACTION-ROLE-CONTRADICTION` | Action name implies victim/user execution but performer is a threat-actor/operator |
-| `CRIT-H-ORPHAN-TOP-LEVEL` | Top-level `/@graph/N` node unreachable from Investigation/ProvenanceRecord/Bundle roots (compilations/groupings count only after reached; nested facet/hash expansions are ignored) |
+| `CRIT-H-IMAGE-CONTAINER-MISMATCH` | RasterPicture named like a forensic image (a `.E01`/`.dd`/`.aff4`/`.ufd` suffix, an `EWF`/`UFED` token, or "disk/raw/forensic image"), or File Contained_Within RasterPicture. Camera `.raw` photos are not flagged |
+| `CRIT-H-CONTEXTUAL-COMPILATION-OMISSION` | Action-result File/Observable not in Investigation/ProvenanceRecord/ContextualCompilation/Grouping |
+| `CRIT-H-ACTION-ROLE-CONTRADICTION` | Action name implies victim/user execution but the performer is named or tagged as a threat actor, adversary, attacker, or `APT<n>` |
+| `CRIT-H-ORPHAN-TOP-LEVEL` | Top-level `/@graph/N` node unreachable from Investigation/ProvenanceRecord/Bundle roots. Every IRI a reached node references (including through embedded facets, so email `from`/`to`, `hash`, `objectMarking`, `createdBy`) is reached; Relationship subclasses such as ObservableRelationship join their endpoints; compilations/groupings count only after reached |
+| `CRIT-H-LEGAL-PROCESS-NO-INVESTIGATION` | Warrant / affidavit / attached legal-process language in graph literals without a `case-investigation:Investigation` |
+| `CRIT-H-BROKEN-CRYPTO-ADDRESS-STRING` | Extracted string or description still contains a spaced/punctuated Base58-like address that was never reconstructed |
 
 Source-path coverage (`CRIT-C-SOURCE-HASH`, coverage v1.2.0): when a submitted source file is **not** embedded as a domain-graph node, the rule is `not_applicable` — builders/recipes belong in the critic session manifest, not the investigation graph. Embedded source nodes are still hash-checked when present.
 

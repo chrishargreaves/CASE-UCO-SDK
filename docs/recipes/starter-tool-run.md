@@ -156,17 +156,18 @@ graph.write("tool-run.jsonld")
 ## Validation
 
 ```bash
-case_validate --built-version case-1.4.0 tool-run.jsonld
+case_validate --built-version case-1.5.0 tool-run.jsonld
 ```
 
-When a lab export names the method, attach `solveit-core:usedTechnique`
-and a real `ContentDataFacet` hash per
+When a lab export names the method, type the action with the SOLVE-IT
+`solveit-data:techniqueDFT-*` class and attach a real `ContentDataFacet` hash per
 [technique-evidence-outcome.md](technique-evidence-outcome.md). Product
 name alone is not enough to assert a DFT-* IRI.
 
 ## Related
 
 - [forensic-tool.md](forensic-tool.md) — the base tool + action pattern
+- [public-record-capture.md](public-record-capture.md) — fetched public records when no tool name was recorded
 - [configured-tool.md](configured-tool.md) — tool configurations
 - [chain-of-custody.md](chain-of-custody.md) — custody and provenance records
 - [forensic-lifecycle.md](forensic-lifecycle.md) — placing runs into phases

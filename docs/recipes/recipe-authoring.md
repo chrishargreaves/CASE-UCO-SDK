@@ -4,7 +4,7 @@ How to write a **new** recipe when an investigation pattern has no existing
 recipe, and how to **improve an existing** recipe when a case exposes a gap
 in one — including on the fly, mid-investigation, by an AI agent. Recipes
 are the SDK's offline knowledge base: on closed systems running local
-inference (Link-Look deployments), the recipe catalog is what lets the MCP
+inference (closed deployments), the recipe catalog is what lets the MCP
 server grow with the investigator without internet access. The investigators
 it serves are mostly not technical — the automation carries the modeling for
 them — so the catalog is the system's accumulated judgment and must be
@@ -214,7 +214,7 @@ silently influence future investigations:
      back with `git checkout <ref> -- docs/recipes/<file>.md`.
 
 `make lifecycle-status` lists every extension's lifecycle state. Offline
-Link-Look deployments follow the same flow against their local clone; the
+Closed deployments follow the same flow against their local clone; the
 promotion gates run entirely offline (`case_validate` + rdflib).
 
 ## Registering the recipe (required — an unregistered recipe is invisible)

@@ -135,7 +135,7 @@ namespace CaseUco.Uco.Observable
         public new const string NamespacePrefix = "uco-observable";
         [global::CaseUco.JsonLdProperty("uco-observable:androidFingerprint")]
         public string AndroidFingerprint { get; set; }
-        [global::CaseUco.JsonLdProperty("uco-observable:androidID")]
+        [global::CaseUco.JsonLdProperty("uco-observable:androidID", Datatype = "xsd:hexBinary")]
         public byte[] AndroidID { get; set; }
         [global::CaseUco.JsonLdProperty("uco-observable:androidVersion")]
         public string AndroidVersion { get; set; }
@@ -1311,7 +1311,7 @@ namespace CaseUco.Uco.Observable
     {
         public new const string ClassIri = "https://ontology.unifiedcyberontology.org/uco/observable/ExtractedString";
         public new const string NamespacePrefix = "uco-observable";
-        [global::CaseUco.JsonLdProperty("uco-observable:byteStringValue")]
+        [global::CaseUco.JsonLdProperty("uco-observable:byteStringValue", Datatype = "xsd:base64Binary")]
         public byte[] ByteStringValue { get; set; }
         [global::CaseUco.JsonLdProperty("uco-observable:encoding")]
         public string Encoding { get; set; }
@@ -1517,7 +1517,7 @@ namespace CaseUco.Uco.Observable
         public string Abbreviation { get; set; }
         [global::CaseUco.JsonLdProperty("uco-observable:destination")]
         public string Destination { get; set; }
-        [global::CaseUco.JsonLdProperty("uco-observable:hexadecimalValue")]
+        [global::CaseUco.JsonLdProperty("uco-observable:hexadecimalValue", Datatype = "xsd:hexBinary")]
         public List<byte[]> HexadecimalValue { get; set; }
         [global::CaseUco.JsonLdProperty("uco-observable:symbolicName")]
         public string SymbolicName { get; set; }
@@ -1568,9 +1568,9 @@ namespace CaseUco.Uco.Observable
     {
         public new const string ClassIri = "https://ontology.unifiedcyberontology.org/uco/observable/ICMPConnectionFacet";
         public new const string NamespacePrefix = "uco-observable";
-        [global::CaseUco.JsonLdProperty("uco-observable:icmpCode")]
+        [global::CaseUco.JsonLdProperty("uco-observable:icmpCode", Datatype = "xsd:hexBinary")]
         public List<byte[]> IcmpCode { get; set; }
-        [global::CaseUco.JsonLdProperty("uco-observable:icmpType")]
+        [global::CaseUco.JsonLdProperty("uco-observable:icmpType", Datatype = "xsd:hexBinary")]
         public List<byte[]> IcmpType { get; set; }
     }
 
@@ -1763,11 +1763,11 @@ namespace CaseUco.Uco.Observable
         public bool? IsProtected { get; set; }
         [global::CaseUco.JsonLdProperty("uco-observable:isVolatile")]
         public bool? IsVolatile { get; set; }
-        [global::CaseUco.JsonLdProperty("uco-observable:regionEndAddress")]
+        [global::CaseUco.JsonLdProperty("uco-observable:regionEndAddress", Datatype = "xsd:hexBinary")]
         public List<byte[]> RegionEndAddress { get; set; }
         [global::CaseUco.JsonLdProperty("uco-observable:regionSize")]
         public long? RegionSize { get; set; }
-        [global::CaseUco.JsonLdProperty("uco-observable:regionStartAddress")]
+        [global::CaseUco.JsonLdProperty("uco-observable:regionStartAddress", Datatype = "xsd:hexBinary")]
         public List<byte[]> RegionStartAddress { get; set; }
     }
 
@@ -2151,8 +2151,10 @@ namespace CaseUco.Uco.Observable
     {
         public new const string ClassIri = "https://ontology.unifiedcyberontology.org/uco/observable/ObservableRelationship";
         public new const string NamespacePrefix = "uco-observable";
+        [global::CaseUco.CaseRequired]
         [global::CaseUco.JsonLdProperty("uco-core:source")]
         public new List<CaseUco.Uco.Observable.Observable> Source { get; set; }
+        [global::CaseUco.CaseRequired]
         [global::CaseUco.JsonLdProperty("uco-core:target")]
         public new List<CaseUco.Uco.Observable.Observable> Target { get; set; }
     }
@@ -2687,9 +2689,9 @@ namespace CaseUco.Uco.Observable
     {
         public new const string ClassIri = "https://ontology.unifiedcyberontology.org/uco/observable/TCPConnectionFacet";
         public new const string NamespacePrefix = "uco-observable";
-        [global::CaseUco.JsonLdProperty("uco-observable:destinationFlags")]
+        [global::CaseUco.JsonLdProperty("uco-observable:destinationFlags", Datatype = "xsd:hexBinary")]
         public List<byte[]> DestinationFlags { get; set; }
-        [global::CaseUco.JsonLdProperty("uco-observable:sourceFlags")]
+        [global::CaseUco.JsonLdProperty("uco-observable:sourceFlags", Datatype = "xsd:hexBinary")]
         public List<byte[]> SourceFlags { get; set; }
     }
 
@@ -3326,7 +3328,7 @@ namespace CaseUco.Uco.Observable
         public CaseUco.Uco.Observable.WindowsPEOptionalHeader OptionalHeader { get; set; }
         [global::CaseUco.JsonLdProperty("uco-observable:peType")]
         public string PeType { get; set; }
-        [global::CaseUco.JsonLdProperty("uco-observable:pointerToSymbolTable")]
+        [global::CaseUco.JsonLdProperty("uco-observable:pointerToSymbolTable", Datatype = "xsd:hexBinary")]
         public List<byte[]> PointerToSymbolTable { get; set; }
         [global::CaseUco.JsonLdProperty("uco-observable:sections")]
         public List<CaseUco.Uco.Observable.WindowsPESection> Sections { get; set; }
@@ -3645,7 +3647,7 @@ namespace CaseUco.Uco.Observable
         public System.DateTime? CreationTime { get; set; }
         [global::CaseUco.JsonLdProperty("uco-observable:observableCreatedTime")]
         public System.DateTime? ObservableCreatedTime { get; set; }
-        [global::CaseUco.JsonLdProperty("uco-observable:parameterAddress")]
+        [global::CaseUco.JsonLdProperty("uco-observable:parameterAddress", Datatype = "xsd:hexBinary")]
         public List<byte[]> ParameterAddress { get; set; }
         [global::CaseUco.JsonLdProperty("uco-observable:priority")]
         public long? Priority { get; set; }
@@ -3655,7 +3657,7 @@ namespace CaseUco.Uco.Observable
         public string SecurityAttributes { get; set; }
         [global::CaseUco.JsonLdProperty("uco-observable:stackSize")]
         public List<ulong> StackSize { get; set; }
-        [global::CaseUco.JsonLdProperty("uco-observable:startAddress")]
+        [global::CaseUco.JsonLdProperty("uco-observable:startAddress", Datatype = "xsd:hexBinary")]
         public List<byte[]> StartAddress { get; set; }
         [global::CaseUco.JsonLdProperty("uco-observable:threadID")]
         public List<ulong> ThreadID { get; set; }

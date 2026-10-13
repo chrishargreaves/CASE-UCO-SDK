@@ -284,7 +284,7 @@ was recovered from unallocated or from a tombstoned row.
 6. Build the `extraInfo` -> `nodeInfo` join as `Contained_Within` edges from each
    decoded artifact to its source file.
 7. Apply `RecoveredObjectFacet` wherever `deleted_state="Deleted"`.
-8. Validate: `case_validate --built-version case-1.4.0 ufed-report.jsonld`, or
+8. Validate: `case_validate --built-version case-1.5.0 ufed-report.jsonld`, or
    `validate_graph(path)` through the MCP server for strict concept coverage.
 
 ## Validated exemplar
@@ -301,7 +301,7 @@ computed over bytes the builder defines rather than invented.
 
 ```bash
 python3 examples/vendor-exports/build_cellebrite_ufed_xml.py
-case_validate --built-version case-1.4.0 examples/vendor-exports/cellebrite-ufed-xml.jsonld
+case_validate --built-version case-1.5.0 examples/vendor-exports/cellebrite-ufed-xml.jsonld
 ```
 
 ## Related

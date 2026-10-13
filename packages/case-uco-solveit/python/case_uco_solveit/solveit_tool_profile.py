@@ -29,6 +29,8 @@ class MitigationCapability:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
+    established_for_weakness: list[Weakness] = field(default_factory=list)
+    supporting_citation: list[Citation] = field(default_factory=list)
 
 
 @dataclass
@@ -70,4 +72,5 @@ class ToolCapabilityProfile:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
+    published_by: Optional[Identity] = field(default=None)
 

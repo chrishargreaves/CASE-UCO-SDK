@@ -15,9 +15,9 @@
       "@id": "urn:uuid:3886cfe8-319f-553b-8d7c-c1f4c56b15ad",
       "@type": "uco-observable:ObservableObject",
       "uco-core:name": "Source file pacer -- racketeering -- statement of offense.pdf",
-      "uco-core:description": "Link-Look pdf upload",
+      "uco-core:description": "Uploaded pdf file",
       "uco-core:tag": [
-        "link-look-file-kind:pdf"
+        "source-file-kind:pdf"
       ],
       "uco-core:hasFacet": [
         {

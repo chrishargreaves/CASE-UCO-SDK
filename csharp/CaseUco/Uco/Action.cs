@@ -92,6 +92,8 @@ namespace CaseUco.Uco.Action
         public new const string NamespacePrefix = "uco-action";
         [global::CaseUco.JsonLdProperty("uco-action:actionCount")]
         public new List<ulong> ActionCount { get; set; }
+        [global::CaseUco.JsonLdProperty("uco-action:actionStatus")]
+        public new string ActionStatus { get; set; }
         [global::CaseUco.JsonLdProperty("uco-action:endTime")]
         public new List<System.DateTime> EndTime { get; set; }
         [global::CaseUco.JsonLdProperty("uco-action:error")]

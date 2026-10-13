@@ -1,25 +1,23 @@
 {
   "name": "attack-technique",
-  "display_name": "Technique Meta-Class Extension (released upstream in UCO 1.5.0)",
-  "version": "0.2.0",
+  "display_name": "MITRE ATT&CK Technique Catalog (uco-action:Technique, UCO 1.5.0)",
+  "version": "1.0.0",
+  "class_registry": false,
   "upstream_repo": "https://github.com/ucoProject/UCO",
   "upstream_ref": "1.5.0",
-  "license": "Apache-2.0",
+  "license": "Apache-2.0 (SDK tooling); catalog content under the MITRE ATT&CK Terms of Use",
   "namespaces": {
     "uco-action": "https://ontology.unifiedcyberontology.org/uco/action/",
-    "attack": "https://attack.mitre.org/techniques/"
+    "attack": "https://attack.mitre.org/techniques/",
+    "attack-tactic": "https://attack.mitre.org/tactics/"
   },
   "owl_files": [
-    "attack-technique.ttl",
     "mitre-attack-catalog.ttl"
   ],
-  "shacl_files": [
-    "attack-technique-shapes.ttl"
-  ],
+  "shacl_files": [],
   "bridge_files": [],
   "exemplar_files": [],
   "uco_compat": [
-    "1.4.0",
     "1.5.0"
   ],
   "upper_ontology": "none",
@@ -33,10 +31,26 @@
   },
   "provenance": {
     "attack_stix_repo": "https://github.com/mitre-attack/attack-stix-data",
-    "attack_version": "19.1",
-    "attack_stix_source": "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack-19.1.json",
-    "technique_count": 27,
-    "synced": "2026-07-15T03:26:15+00:00",
-    "sync_tool": "mcp_server/tools/sync_attack_catalog.py"
+    "attack_version": "19.2",
+    "domains": {
+      "enterprise": {
+        "source": "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack-19.2.json",
+        "sha256": "dc1639caa5501d720e280cf1cbd8fbe009884a0c9b3e6e9ed9d0c25166c3d8f4"
+      },
+      "mobile": {
+        "source": "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/mobile-attack/mobile-attack-19.2.json",
+        "sha256": "acfa5ca2d93484476f79bf38590e2b55bb675fc0ce85e76bffa0af2c82dada64"
+      },
+      "ics": {
+        "source": "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/ics-attack/ics-attack-19.2.json",
+        "sha256": "08b83d2cea6b6d6752468ef0e62e2ab2a53c9443ef72c439ecccb07ab9e89da9"
+      }
+    },
+    "technique_count": 1166,
+    "subtechnique_count": 558,
+    "deprecated_count": 248,
+    "synced": "2026-10-12T19:21:52+00:00",
+    "sync_tool": "mcp_server/tools/sync_attack_catalog.py",
+    "license": "MITRE ATT&CK Terms of Use (https://attack.mitre.org/resources/legal-and-branding/terms-of-use/)"
   }
 }

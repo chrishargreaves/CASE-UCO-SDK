@@ -8,13 +8,13 @@
 [![Upstream Freshness](https://github.com/vulnmaster/CASE-UCO-SDK/actions/workflows/upstream-freshness.yml/badge.svg?branch=main)](https://github.com/vulnmaster/CASE-UCO-SDK/actions/workflows/upstream-freshness.yml)
 [![Release](https://img.shields.io/github/v/release/vulnmaster/CASE-UCO-SDK)](https://github.com/vulnmaster/CASE-UCO-SDK/releases/latest)
 
-**v1.30.0** · CASE 1.5.0 · UCO 1.5.0 · CAC 3.1.0 · [Changelog](CHANGELOG.md#1300---2026-09-10)
+**v1.31.0** · CASE 1.5.0 · UCO 1.5.0 · CAC 3.1.0 · [Changelog](CHANGELOG.md#1310---2026-10-12)
 
 A multi-language data modeling library for digital forensics, cyber-investigation, and cyber-observable data. If your software produces or consumes forensic evidence, this SDK gives you typed, validated builders in **Python**, **C#**, **Java**, and **Rust** — so you can model investigation data in your language and produce interoperable [CASE/UCO](https://caseontology.org/) JSON-LD output.
 
-The SDK is more than the four language bindings. It ships with a growing family of [extension ontologies](#bundled-extension-ontologies) (crimes against children, adversary engagement, cryptocurrency and financial crime, legal process, racketeering, weapons, controlled substances, MITRE ATT&CK techniques, the SOLVE-IT digital forensics knowledge base, forensic tool capabilities), a [recipe cookbook](docs/recipes/INDEX.md) of 85 modeling patterns, and an [MCP server](#ai-assisted-development) that gives AI agents a working knowledge of the Linux Foundation [Cyber Domain Ontology](https://cyberdomainontology.org/) ecosystem — the ontologies themselves, the upper-ontology profiles (BFO, gUFO, PROV-O, OWL-Time, GeoSPARQL, FOAF, ORG, PROF), the [CDO Community Playground](https://docs.google.com/document/d/1EiXQiAeUGk-629xdKx7HZHVn927k891LGkPcQzNLLr8/edit?usp=sharing), and the change-proposal process. Together these let an agent model **any concept adjacent to the cyber domain — or work done on, in, or through it** — and route any investigation submission to validated modeling patterns, drafting upstream ontology proposals when a concept doesn't exist yet.
+The SDK is more than the four language bindings. It ships with a growing family of [extension ontologies](#bundled-extension-ontologies) (crimes against children, adversary engagement, cryptocurrency and financial crime, legal process, racketeering, weapons, controlled substances, MITRE ATT&CK techniques, the SOLVE-IT digital forensics knowledge base, forensic tool capabilities), a [recipe cookbook](docs/recipes/INDEX.md) of 99 modeling patterns, and an [MCP server](#ai-assisted-development) that gives AI agents a working knowledge of the Linux Foundation [Cyber Domain Ontology](https://cyberdomainontology.org/) ecosystem — the ontologies themselves, the upper-ontology profiles (BFO, gUFO, PROV-O, OWL-Time, GeoSPARQL, FOAF, ORG, PROF), the [CDO Community Playground](https://docs.google.com/document/d/1EiXQiAeUGk-629xdKx7HZHVn927k891LGkPcQzNLLr8/edit?usp=sharing), and the change-proposal process. Together these let an agent model **any concept adjacent to the cyber domain — or work done on, in, or through it** — and route any investigation submission to validated modeling patterns, drafting upstream ontology proposals when a concept doesn't exist yet.
 
-The SDK works with AI coding assistants (Cursor, Claude Code, Hermes, etc.) — see [AI-Assisted Development](#ai-assisted-development) below.
+The SDK works with AI coding assistants (Cursor, Claude Code, and others) — see [AI-Assisted Development](#ai-assisted-development) below.
 
 ## What the SDK Does
 
@@ -31,7 +31,7 @@ The SDK is auto-generated from the official CASE 1.5.0 and UCO 1.5.0 ontology so
 Beyond the generated code, the repository provides:
 
 - **Bundled extension ontologies** — queryable through the same registry and MCP tools as core CASE/UCO (see [Bundled Extension Ontologies](#bundled-extension-ontologies))
-- **85 modeling recipes** — end-to-end modeling patterns for forensic workflows and whole investigation types, each grounded in example graphs ([docs/recipes/](docs/recipes/INDEX.md))
+- **99 modeling recipes** — end-to-end modeling patterns for forensic workflows and whole investigation types, each grounded in example graphs ([docs/recipes/](docs/recipes/INDEX.md))
 - **An MCP server for AI agents** — ontology discovery, investigation routing, document processing, SHACL + concept-coverage validation, remote SPARQL query/analysis, change-proposal drafting, and a resumable critic acceptance loop ([AI-Assisted Development](#ai-assisted-development))
 - **A change-proposal pipeline** — when a concept is missing, the tooling searches the UCO, CASE, and CAC issue trackers, drafts a filled-in proposal with tested example data, and supports local extension declarations so work is never blocked on upstream adoption ([change_proposals/](change_proposals/README.md))
 
@@ -41,7 +41,8 @@ Beyond the generated code, the repository provides:
 
 Install the SDK package for your language. No need to clone the repo or run the generator.
 
-[**v1.30.0**](https://github.com/vulnmaster/CASE-UCO-SDK/releases/tag/v1.30.0) adds modeling recipes for the three commercial mobile forensic suites — Cellebrite UFED, Magnet AXIOM, and MSAB XRY — each with a validated exemplar graph and full MCP routing. Release artifacts (wheel, sdist, NuGet package, Maven JAR, and Rust crate, with checksums and attestations) are built from the reviewed tag. Registry publication to PyPI, NuGet, Maven Central, and crates.io remains opt-in. You can also build from source via the CLI or MCP (see [Getting Started](#getting-started) below).
+[**v1.31.0**](https://github.com/vulnmaster/CASE-UCO-SDK/releases/tag/v1.31.0) completes MITRE ATT&CK v19.2 adoption (Enterprise, Mobile and ICS) and adopts MITRE ATLAS, both as classes under the UCO `uco-action:Technique` metaclass. It also re-syncs SOLVE-IT 0.2.11, adds QUDT 3.5.2 and SOSA/SSN profiles, and rebuilds change-proposal drafting around competency questions with marked provenance. Validation stays pinned to [case-utils 0.18.0](https://pypi.org/project/case-utils/) (`--built-version case-1.5.0`) for CASE/UCO 1.5.0 and CAC 3.1.0. You can also build from source via the CLI or MCP (see [Getting Started](#getting-started) below).
+
 
 When registry packages are published in a later release:
 
@@ -57,7 +58,7 @@ For Java (once on Maven Central), add to your `pom.xml`:
 <dependency>
     <groupId>org.caseontology</groupId>
     <artifactId>case-uco</artifactId>
-    <version>1.30.0</version>
+    <version>1.31.0</version>
 </dependency>
 ```
 
@@ -73,7 +74,7 @@ Only install what you need for your language:
 
 | Language | Requirement |
 |----------|-------------|
-| Python | Python 3.9+ |
+| Python | Python 3.10+ |
 | C# | .NET SDK 8.0+ |
 | Java | JDK 11+ and Maven |
 | Rust | Rust toolchain (cargo) |
@@ -284,10 +285,11 @@ Core CASE/UCO covers cyber-observables and investigation management, but real in
 
 | Extension | Version | Domain |
 |-----------|---------|--------|
-| [`cac`](ontology/cac/) | 3.0.0 | [Crimes Against Children Ontology](https://site.cacontology.projectvic.org) — 35+ modules for CSAM, trafficking, grooming, sextortion, hotline intake, task force operations, and federal prosecution |
+| [`cac`](ontology/cac/) | 3.1.0 | [Crimes Against Children Ontology](https://site.cacontology.projectvic.org) — 35+ modules for CSAM, trafficking, grooming, sextortion, hotline intake, task force operations, and federal prosecution |
 | [`aeo`](ontology/aeo/) | 0.2.1 | [Adversary Engagement Ontology](https://github.com/UNHSAILLab/Adversary-Engagement-Ontology) — cyber deception, honeypots, and adversary engagement operations |
-| [`attack-technique`](extensions/attack-technique/) | 0.1.0 | MITRE ATT&CK technique metaclass (forward-implementation of UCO PR #676) plus a technique catalog for CTI and APT reporting |
-| [`solveit`](ontology/solveit/) | 0.1.9 | [SOLVE-IT](https://solveit-df.org) digital forensics knowledge base — objectives, techniques, weaknesses (ASTM E3016-18), mitigations; pinned upstream snapshot with `SolveitInvestigativeAction`, method-centric observables, weakness assessment, and a punned technique catalog for the UCO 1.5.0 metaclass style |
+| [`attack-technique`](extensions/attack-technique/) | 1.0.0 | Complete [MITRE ATT&CK](https://attack.mitre.org) v19.2 technique catalog (Enterprise, Mobile, ICS; 1,166 techniques and sub-techniques) as `uco-action:Technique` classes (UCO 1.5.0 metaclass), for intrusion tradecraft in CTI and incident graphs |
+| [`atlas-technique`](extensions/atlas-technique/) | 1.0.0 | Complete [MITRE ATLAS](https://atlas.mitre.org) 2026.09 technique catalog (208 techniques and sub-techniques) as `uco-action:Technique` classes, for attacks on AI systems |
+| [`solveit`](ontology/solveit/) | 0.2.11 | [SOLVE-IT](https://solveit-df.org) digital forensics knowledge base — objectives, techniques, weaknesses (ASTM E3016-18), mitigations, citations; pinned upstream snapshot with `SolveitInvestigativeAction`, technique classes bridged to the UCO `uco-action:Technique` metaclass, method-centric observables, hypotheses, and weakness assessment |
 | [`cryptoinv`](extensions/cryptoinv/) | 0.1.0 | Cryptocurrency and financial-crime investigation — typed crypto facets, blockchain tracing, exchange records |
 | [`legalproc`](extensions/legalproc/) | 0.1.0 | Legal process — charges, verdicts, pleas, sentences, forfeiture, restitution for any investigation type |
 | [`rico`](extensions/rico/) | 0.1.0 | Racketeering and criminal enterprise — association-in-fact enterprises, enterprise roles, predicate statutes |
@@ -370,7 +372,7 @@ If you plan to share your extension with the CDO community, validate your exempl
 ```bash
 pip install case-utils
 
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph path/to/myext.ttl \
   --inference rdfs --allow-info \
   path/to/myext-exemplar.ttl
@@ -488,7 +490,7 @@ Switching between languages? The parity contract documents what is identical vs.
 
 ### Recipes
 
-85 step-by-step patterns, each grounded in example graphs. Coverage spans classic forensic workflows (disk imaging, file systems, network artifacts, chain of custody, mobile forensics including iOS/macOS sysdiagnose, Apple Unified Logs, and the Cellebrite UFED, Magnet AXIOM, and MSAB XRY commercial export formats) and whole investigation types: fraud and cryptocurrency laundering, elder fraud, espionage and classified disclosure, export control and sanctions evasion, cyber threat intelligence and APT reporting, insider threat and trade secrets, racketeering, weapons and drug evidence, cargo theft, upper-ontology composition, and a 16-recipe Crimes Against Children series (trafficking networks, CSAM provenance, sextortion, hotline intake, task force operations, federal prosecution, PACER document ingestion):
+98 step-by-step patterns, each grounded in example graphs. Coverage spans classic forensic workflows (disk imaging, file systems, network artifacts, chain of custody, mobile forensics including iOS/macOS sysdiagnose, Apple Unified Logs, and the Cellebrite UFED, Magnet AXIOM, and MSAB XRY commercial export formats) and whole investigation types: fraud and cryptocurrency laundering, elder fraud, espionage and classified disclosure, export control and sanctions evasion, cyber threat intelligence and APT reporting, insider threat and trade secrets, racketeering, weapons and drug evidence, cargo theft, upper-ontology composition, and a 16-recipe Crimes Against Children series (trafficking networks, CSAM provenance, sextortion, hotline intake, task force operations, federal prosecution, PACER document ingestion):
 
 - **[docs/recipes/](docs/recipes/INDEX.md)** — practical cookbook with copy-paste examples (one file per recipe)
 
@@ -500,9 +502,9 @@ The catalog is self-improving: the [recipe-authoring recipe](docs/recipes/recipe
 CASE-UCO-SDK/
 ├── generator/              Code generator + CLI explorer + docs generators
 ├── ontology/               Upstream-vendored ontologies (refreshed via `make sync-upstream`)
-│   ├── UCO/                UCO 1.4.0 sources (git submodule)
-│   ├── CASE/               CASE 1.4.0 sources (git submodule)
-│   ├── cac/                Crimes Against Children Ontology (Project VIC, submodule)
+│   ├── UCO/                UCO 1.5.0 sources (git submodule)
+│   ├── CASE/               CASE 1.5.0 sources (git submodule)
+│   ├── cac/                Crimes Against Children Ontology v3.1.0 (Project VIC, submodule)
 │   ├── aeo/                Adversary Engagement Ontology (submodule)
 │   ├── solveit/            SOLVE-IT knowledge base + ontology (pinned snapshot)
 │   └── upper/              Pinned upper-ontology sources + CDO-Shapes profiles (offline)
@@ -546,7 +548,7 @@ CASE-UCO-SDK/
 │       ├── forensic-tool.md
 │       ├── starter-*.md     End-to-end mapping starter kits (4 recipes)
 │       ├── cac-*.md         Crimes Against Children recipe series (16 recipes)
-│       └── ...              (85 recipes total)
+│       └── ...              (98 recipes total)
 ├── ONTOLOGY_REFERENCE.md   Complete class reference (auto-generated)
 ├── SECURITY.md             Vulnerability reporting policy
 ├── .github/workflows/      CI, CodeQL, Rust security, dependency review, release workflows
@@ -580,6 +582,8 @@ All four language packages are released in lockstep from the same ontology sourc
 
 | SDK Version | UCO | CASE | Python `case-uco` | C# `CaseUco` | Java `case-uco` | Rust `case-uco` |
 |-------------|-----|------|-------------------|--------------|-----------------|-----------------|
+| 1.31.0 | 1.5.0 | 1.5.0 | 1.31.0 | 1.31.0 | 1.31.0 | 1.31.0 |
+| 1.30.1 | 1.5.0 | 1.5.0 | 1.30.1 | 1.30.1 | 1.30.1 | 1.30.1 |
 | 1.30.0 | 1.5.0 | 1.5.0 | 1.30.0 | 1.30.0 | 1.30.0 | 1.30.0 |
 | 1.29.0 | 1.5.0 | 1.5.0 | 1.29.0 | 1.29.0 | 1.29.0 | 1.29.0 |
 | 1.28.0 | 1.5.0 | 1.5.0 | 1.28.0 | 1.28.0 | 1.28.0 | 1.28.0 |
@@ -622,9 +626,9 @@ The SDK is designed to work with AI coding assistants like Cursor, Claude Code, 
 The MCP server is the centerpiece. It carries a working knowledge of the entire Linux Foundation [Cyber Domain Ontology](https://cyberdomainontology.org/) project — not just class lookup, but the ecosystem around it:
 
 - **Core + extension discovery** — every tool accepts a `scope` parameter, so the agent can search core CASE/UCO, the CAC Ontology, the Adversary Engagement Ontology, or any bundled extension with the same calls.
-- **Upper-ontology profiles** — `get_uco_profiles` surfaces UCO's alignments with BFO, gUFO, PROV-O, OWL-Time, GeoSPARQL, and FOAF, so graphs can interoperate with formal-reasoning, provenance, temporal, geospatial, and social-network tooling. Since v1.19.0 the upper-ontology sources and CDO-Shapes SHACL profiles are vendored under `ontology/upper/` (each profile reports its `local_source` / `local_shapes` paths), so profile inspection, conformance checks, and registry rebuilds all work fully offline. Remote SPARQL is an optional, explicitly controlled network capability rather than a prerequisite for local modeling or validation.
+- **Upper-ontology profiles** — `get_uco_profiles` surfaces UCO's alignments with BFO, gUFO, PROV-O, OWL-Time, GeoSPARQL, FOAF, ORG, and PROF, plus SDK-pinned QUDT 3.5.2 and W3C SOSA/SSN profiles for quantities, units, and sensor observations, so graphs can interoperate with formal-reasoning, provenance, temporal, geospatial, social-network, and measurement tooling. Since v1.19.0 the upper-ontology sources and CDO-Shapes SHACL profiles are vendored under `ontology/upper/` (each profile reports its `local_source` / `local_shapes` paths), so profile inspection, conformance checks, and registry rebuilds all work fully offline. Remote SPARQL is an optional, explicitly controlled network capability rather than a prerequisite for local modeling or validation.
 - **Investigation routing** — `route_investigation_content` classifies any submission (text, documents, partial graphs) into investigation families and returns the matching recipes, extensions, namespaces, and profiles; `route_cac_content` does deep routing within the crimes-against-children domain. Since v1.16.0 routing is hybrid: a deterministic keyword baseline plus an offline lexical-semantic stage with synonym expansion, per-family confidence scores, explainable match evidence, and calibrated abstention — colloquial phrasings route correctly, unknown content gets extension-gap guidance instead of a weak guess.
-- **Forensic method planning** — `plan_solveit_workflow` maps an investigation goal to [SOLVE-IT](https://solveit-df.org) objectives, candidate techniques, and per-technique weakness/mitigation checklists (ASTM E3016-18 Error Mitigation Analysis); `search_solveit` and `get_solveit_details` query the pinned knowledge base (23 objectives, 187 techniques, 339 weaknesses, 270 mitigations), and the `solveit` extension records the method in the graph via `SolveitInvestigativeAction` or the punned technique classes — kept current against SOLVE-IT's rapid release cycle with `make sync-solveit` and a weekly CI freshness check.
+- **Forensic method planning** — `plan_solveit_workflow` maps an investigation goal to [SOLVE-IT](https://solveit-df.org) objectives, candidate techniques, and per-technique weakness/mitigation checklists (ASTM E3016-18 Error Mitigation Analysis); `search_solveit` and `get_solveit_details` query the pinned knowledge base (24 objectives, 200 techniques, 441 weaknesses, 336 mitigations, 164 citations), and the `solveit` extension records the method in the graph by typing each `SolveitInvestigativeAction` with the technique class it performed (the `uco-action:Technique` metaclass shared with ATT&CK and ATLAS) — kept current against SOLVE-IT's rapid release cycle with `make sync-solveit` and a weekly CI freshness check.
 - **Document processing** — `process_document_file` turns images, PDFs, Office documents, CSV tables, and PACER court filings into bounded CASE/UCO JSON-LD for human review. All extracted content is labeled untrusted evidence data, scanned for prompt-injection patterns, and confined by the configurable filesystem workspace policy (see [SECURITY.md](SECURITY.md)).
 - **Remote SPARQL query and analysis** — `execute_sparql_query` combines local ontology discovery with a bounded query-only SPARQL 1.1 client. It targets CaseLinker's public CASE/UCO/CAC corpus by default, accepts other standards-compliant endpoints, normalizes bindings/ASK/RDF results, and labels every remote value as untrusted external data. See [Remote SPARQL Query and Graph-Store Roadmap](docs/SPARQL.md).
 - **Validation** — the public Python API `case_uco.validation.validate_graph_file` (and MCP `validate_graph`) runs SHACL validation plus a closed-world concept-coverage check against core, loaded extensions, and profiled upper ontologies. Coverage is exact-term and role-aware: profiled upper-ontology terms (BFO, gUFO, PROV-O, OWL-Time, GeoSPARQL, FOAF, ORG, PROF) are checked against pinned releases (`python/case_uco/validation/upper_ontology_registry.json`) so fabricated terms fail, and declared terms used in the wrong RDF position (a class as a predicate, a property as a type) are reported as role mismatches. The declared-term set refreshes automatically when ontology files change mid-process. Since v1.17.0 strict validation fails closed: reports carry a `verification_status`, and a missing or invalid registry, malformed extension manifest, missing dependency, or dependency cycle is a typed error rather than a silent pass. **Named extensions are an external-bundle contract:** the PyPI/GitHub wheel does not vendor `extensions/` Turtle files; pass `project_root=` (or explicit ontology paths) pointing at a CASE-UCO-Libraries checkout when using names such as `attack-technique:full`.
@@ -693,7 +697,8 @@ calls behind the scenes:
 | `find_classes_for_domain` | Map a natural-language forensic task to the right classes, with related recipes and starter kits |
 | `list_all_facets` | All Facet classes for the ObservableObject + Facet pattern |
 | `list_all_vocabs` | All vocabulary/enum types with their valid members |
-| `get_uco_profiles` | UCO profile alignments with BFO, gUFO, PROV-O, OWL-Time, GeoSPARQL, and FOAF |
+| `get_uco_profiles` | UCO profile alignments with BFO, gUFO, PROV-O, OWL-Time, GeoSPARQL, FOAF, ORG, and PROF, plus the SDK-pinned QUDT and SOSA/SSN profiles |
+| `lookup_qudt_units` | Find pinned QUDT unit IRIs by symbol, label, UCUM code, currency code, or quantity kind |
 | `suggest_classes_for_input` | Prescriptive class suggestions with modeling warnings for a concept |
 | `get_recipe` | Retrieve the single best-matching recipe with full content inline |
 | `get_recipes` | Ranked multi-recipe retrieval for scenarios spanning several patterns |
@@ -703,11 +708,13 @@ calls behind the scenes:
 | `search_solveit` | Keyword search across the pinned SOLVE-IT knowledge base (objectives, techniques, weaknesses, mitigations) |
 | `get_solveit_details` | Full SOLVE-IT record with relationships — technique → weaknesses → mitigations, ASTM categories, CASE I/O classes |
 | `plan_solveit_workflow` | Map an investigation goal to SOLVE-IT objectives, candidate techniques, and an error-mitigation checklist |
+| `search_adversary_techniques` | Search the complete pinned MITRE ATT&CK v19.2 (Enterprise, Mobile, ICS) and MITRE ATLAS 2026.09 technique catalogs by keyword, ID, tactic, or platform |
+| `get_adversary_technique` | Full ATT&CK/ATLAS technique record — tactics, platforms, parent and sub-techniques, revoked-technique replacement, ATLAS→ATT&CK links — with typing guidance and the extension to validate with |
 | `execute_sparql_query` | Run bounded query-only SPARQL 1.1 against CaseLinker by default or another standards-compliant endpoint |
 | `process_document_file` | Process images, PDFs, Office docs, CSV tables, and PACER filings into bounded CASE/UCO JSON-LD |
 | `validate_graph` | SHACL validation plus closed-world concept-coverage check against core, extensions, and profiles |
 | `check_existing_proposals` | Search open UCO/CASE/CAC GitHub issues for prior change proposals |
-| `draft_change_proposal` | Generate a filled-in change proposal from concept, scenario, and proposed classes |
+| `draft_change_proposal` | Draft a competency-question change proposal for the UCO, CASE, or CAC tracker, with contributor / cited / AI-drafted provenance markers, lint, and a hand-check review file |
 
 Resources (read-only context): `case-uco://domains`, `case-uco://profiles`, `case-uco://modules`, `case-uco://patterns`, `case-uco://sparql`.
 
@@ -746,22 +753,22 @@ The agent also applies conventions from the recipes automatically — for exampl
 
 ### Gap Detection and Change Proposals
 
-When you ask to model something the ontology doesn't cover yet, the agent detects the gap and offers to draft a formal change proposal for the UCO or CASE ontology committees:
+When you ask to model something the ontology doesn't cover yet, the agent detects the gap and offers to draft a change proposal for the UCO, CASE, or CAC Ontology committees:
 
 ```
-1. search_classes("cryptocurrency"), search_classes("wallet")  → no matches
-2. find_classes_for_domain("blockchain forensics")             → no task templates
-3. get_class_details("DigitalAddress")                         → confirm near-miss
-4. check_existing_proposals("cryptocurrency wallet")           → no prior proposals
-5. Agent drafts proposal with proposed classes, SPARQL, JSON-LD examples
-6. Writes filled-in template to change_proposals/              → ready for review
+1. search_classes("drone"), search_classes("telemetry")      → no matches
+2. find_classes_for_domain("drone forensics")                → no task templates
+3. get_class_details("DeviceFacet")                          → confirm near-miss
+4. check_existing_proposals("drone telemetry")               → no prior proposals
+5. draft_change_proposal(...)                                → discussion draft + review notes
+6. You work through the review notes and file the issue
 ```
 
-The agent automatically determines whether the concept belongs in UCO (general cyber-domain) or CASE (investigation-specific), checks for existing proposals in the UCO, CASE, and CAC GitHub issue trackers, and generates a complete proposal with competency questions, tested SPARQL queries, and validated example instance data. See the [change proposal recipe](docs/recipes/change-proposal.md) for details.
+Proposals are discussion drafts built around competency questions: a scenario, the questions a graph should answer, and the expected answers. They leave the ontology design to the committee. Every statement is marked as yours, *[from …]* a linked source, or *[AI-drafted]*, and the contributor line names the AI model. Lint flags missing competency questions, unlinked citations and vocabulary terms, CASE/UCO terms that do not exist, and wording the committees have asked contributors to avoid. The review notes list the checks only a person can make. Draft classes, if you have them, become local OWL, SHACL, example-data, and SPARQL files that the tool validates. See the [change proposal recipe](docs/recipes/change-proposal.md).
 
 Crucially, a gap never blocks the work: the agent can declare a local extension ontology (following the [Community Playground](https://docs.google.com/document/d/1EiXQiAeUGk-629xdKx7HZHVn927k891LGkPcQzNLLr8/edit?usp=sharing) rules) so the investigation graph validates today, while the formal proposal works its way through upstream review. Several of the [bundled extensions](#bundled-extension-ontologies) began exactly this way. This gap-detect → extend-locally → propose-upstream → recipe-update cycle is the SDK's self-improvement loop.
 
-Drafted proposals are saved to `change_proposals/` and can be submitted as GitHub issues to [UCO](https://github.com/ucoProject/UCO/issues/new) or [CASE](https://github.com/casework/CASE/issues/new).
+Drafted proposals are saved to `change_proposals/` and can be submitted as GitHub issues to [UCO](https://github.com/ucoProject/UCO/issues/new), [CASE](https://github.com/casework/CASE/issues/new), or the [CAC Ontology](https://github.com/Project-VIC-International/CAC-Ontology/issues/new).
 
 ### Example Agent Outputs
 
@@ -793,7 +800,7 @@ validate_graph_file("graph.jsonld", profiles=["prov-o", "time"])
 # )
 ```
 
-Recipes and exemplars live under [`docs/recipes/`](docs/recipes/) (see Cross-Ontology Composition) and [`examples/upper-ontology/`](examples/upper-ontology/). The CI `recipe-validation` job is the **upper-ontology exemplar quality gate** for the nine v1.21 entries in [`docs/recipes/recipe-execution.json`](docs/recipes/recipe-execution.json) (#69); full operational catalog migration is planned for v1.22. Profile discovery: MCP `get_uco_profiles` (includes ORG and PROF).
+Recipes and exemplars live under [`docs/recipes/`](docs/recipes/) (see Cross-Ontology Composition) and [`examples/upper-ontology/`](examples/upper-ontology/). The CI `recipe-validation` job runs every entry in [`docs/recipes/recipe-execution.json`](docs/recipes/recipe-execution.json). Profile discovery: MCP `get_uco_profiles` (includes ORG, PROF, QUDT, SOSA, and SSN); unit IRIs: MCP `lookup_qudt_units`.
 
 ### Operation PHANTOM GATE — fictitious scenario stress test
 

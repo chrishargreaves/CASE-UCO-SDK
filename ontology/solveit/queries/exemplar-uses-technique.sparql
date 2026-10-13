@@ -1,10 +1,11 @@
 # Competency: the exemplar must record at least one investigative action
-# linked to the SOLVE-IT technique it executed and a mitigation it applied.
+# typed with the SOLVE-IT technique class it executed (uco-action:Technique
+# metaclass pattern) and linked to a mitigation it applied.
 PREFIX solveit-core: <https://ontology.solveit-df.org/solveit/core/>
 
 SELECT ?action ?technique ?mitigation
 WHERE {
-  ?action a solveit-core:SolveitInvestigativeAction ;
-          solveit-core:usedTechnique ?technique ;
+  ?action a solveit-core:SolveitInvestigativeAction , ?technique ;
           solveit-core:appliedMitigation ?mitigation .
+  FILTER(STRSTARTS(STR(?technique), "https://ontology.solveit-df.org/solveit/data/technique"))
 }

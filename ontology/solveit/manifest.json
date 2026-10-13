@@ -1,7 +1,7 @@
 {
   "name": "solveit",
   "display_name": "SOLVE-IT Digital Forensics Knowledge Base and Ontology",
-  "version": "0.1.10",
+  "version": "0.2.11",
   "upstream_repo": "https://github.com/SOLVE-IT-DF/solve-it-ontology",
   "upstream_ref": "main",
   "license": "MIT",
@@ -14,9 +14,7 @@
     "solveit-wa": "https://ontology.solveit-df.org/solveit/weakness-assessment/",
     "solveit-data": "https://ontology.solveit-df.org/solveit/data/"
   },
-  "depends_on": [
-    "attack-technique"
-  ],
+  "depends_on": [],
   "owl_files": [
     "solve_it_core.ttl",
     "solve_it_observable.ttl",
@@ -31,7 +29,9 @@
     "solve-it-kb.ttl"
   ],
   "shacl_files": [
-    "solve_it_observable_shapes.ttl"
+    "solve_it_observable_shapes.ttl",
+    "solve_it_core_shapes.ttl",
+    "solve_it_analysis_shapes.ttl"
   ],
   "bridge_files": [
     "solveit-local-anchors.ttl"
@@ -55,7 +55,7 @@
     }
   ],
   "uco_compat": [
-    "1.4.0"
+    "1.5.0"
   ],
   "upper_ontology": "none",
   "cdo_shapes_compatibility": {
@@ -68,12 +68,29 @@
   },
   "provenance": {
     "ontology_repo": "https://github.com/SOLVE-IT-DF/solve-it-ontology",
-    "ontology_commit": "79d556dc14c1f5a283522e911c9a76f6a4af5c1b",
+    "ontology_commit": "cec0315da8e740ccd73452b4890e43f5d328779c",
     "knowledge_base_repo": "https://github.com/SOLVE-IT-DF/solve-it",
     "knowledge_base_release": "v0.2026-06",
-    "ontology_version": "0.1.10",
+    "ontology_version": "0.2.11",
     "sync_tool": "mcp_server/tools/sync_solveit.py",
-    "technique_count": 191,
-    "synced": "2026-08-12T00:59:29+00:00"
+    "technique_count": 200,
+    "synced": "2026-10-12T18:26:36+00:00",
+    "knowledge_base_source": "docs/data/solve-it-kb.ttl at solve-it-ontology cec0315da8e7, compiled hourly from SOLVE-IT main; it can be newer than knowledge_base_release",
+    "sha256": {
+      "solve_it_core.ttl": "0510f43e61386c0742283d078dd2bd0e749b2685c4c657b5553fd3d4373c5017",
+      "solve_it_core_shapes.ttl": "02dd5a5d81de6275b9a863c8359154f8384bf042c3abc2aef637967ca4e038d8",
+      "solve_it_observable.ttl": "769d407a61f51486b8e40714260e782ade8235ef2d7f11d54ec973b8db58a241",
+      "solve_it_observable_acquisition.ttl": "17150455f11184aec8871b72d5532d8248a9748c5aa3de568f43d8c1901c482f",
+      "solve_it_observable_search.ttl": "a3f58ec980f2d52aa578297eaf19ae70dab6d2747823a4bf469fe3aa382fb73e",
+      "solve_it_observable_timeline.ttl": "c362c00855a36e5940032bca63ca062c5756d0a4429c13b547b071d7ac81579d",
+      "solve_it_observable_shapes.ttl": "643e2ba9b7f21ecb80a643bbbc33c3ab729f998e943714e0a758fe10bf04cc33",
+      "solve_it_analysis.ttl": "a0e1d4bb03eea29581aeda3eb3f85dd2d6143d208eb67e8c953a1eab46f3a837",
+      "solve_it_analysis_shapes.ttl": "3575452779ad1453a1bb122bbfff6baa767dcec1f1a423aea9b4a615d8a521de",
+      "solve_it_sqlite.ttl": "5e858f439e4be645fa2af76f79977ea4a77c64c1498da5aab97f7305876a0e80",
+      "solve_it_tool_profile.ttl": "f6c4adf1f6ec54022c85471a05378b3c30dbaa8b4a0127f69662fdc50be51241",
+      "solve_it_weakness_assessment.ttl": "9ca805d09a6bdc1fbbba2dedbe22efd3414f9344bc641af193bd465b2f839755",
+      "solve-it-kb.ttl": "39890d22601044b4f123c36d2553334bacaebace5c94c5987013e8c95c9b6626",
+      "solveit-technique-catalog.ttl": "43b9a7af477f9e2caf9978a4a92a039507aca1bc96daab1f5a593fa956f536f3"
+    }
   }
 }

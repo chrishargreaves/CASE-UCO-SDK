@@ -1,7 +1,7 @@
 {
   "name": "cac",
   "display_name": "CAC Ontology - Crimes Against Children",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "upstream_repo": "https://github.com/Project-VIC-International/CAC-Ontology",
   "upstream_ref": "main",
   "license": "Apache-2.0",
@@ -163,9 +163,7 @@
     "ontology/ontology/cacontology-bridge-gufo.ttl"
   ],
   "exemplar_files": [],
-  "uco_compat": [
-    "1.4.0"
-  ],
+  "uco_compat": ["1.5.0"],
   "upper_ontology": "gufo",
   "cdo_shapes_compatibility": {
     "CDO-Shapes-gufo": "included",

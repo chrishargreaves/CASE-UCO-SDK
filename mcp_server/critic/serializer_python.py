@@ -228,7 +228,28 @@ def _exec(
     )
 
 
+class SerializerTooComplexError(ValueError):
+    """Source parses in principle but nests deeper than the AST passes can walk."""
+
+
 def analyze_python_serializer(
+    path: Path,
+    source: str,
+    *,
+    serializer_mode: Literal[
+        "typed_sdk", "raw_fixture", "auto", "casegraph_raw"
+    ] = "auto",
+    artifact_hash: str | None = None,
+) -> tuple[list[CriticFinding], list[RuleExecution]]:
+    try:
+        return _analyze_python_serializer(
+            path, source, serializer_mode=serializer_mode, artifact_hash=artifact_hash
+        )
+    except RecursionError as exc:
+        raise SerializerTooComplexError("critic_serializer_too_complex") from exc
+
+
+def _analyze_python_serializer(
     path: Path,
     source: str,
     *,

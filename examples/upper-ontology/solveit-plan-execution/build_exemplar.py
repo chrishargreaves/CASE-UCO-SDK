@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -11,6 +12,12 @@ from case_uco.case.investigation import Investigation
 from case_uco.uco.identity import Person
 from case_uco.uco.observable import ObservableObject, FileFacet
 from case_uco.uco.tool import Tool
+
+try:
+    from solveit_index import technique_catalog_entry
+except ImportError:  # run from a checkout without mcp_server on PYTHONPATH
+    sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "mcp_server"))
+    from solveit_index import technique_catalog_entry
 
 HERE = Path(__file__).resolve().parent
 OUTPUT = HERE / "solveit-plan-execution.jsonld"
@@ -94,6 +101,7 @@ def build() -> CASEGraph:
         types=[
             "case-investigation:InvestigativeAction",
             "solveit-core:SolveitInvestigativeAction",
+            "solveit-data:techniqueDFT-1002",
             "prov:Activity",
         ],
         properties={
@@ -101,7 +109,6 @@ def build() -> CASEGraph:
             "uco-core:description": [
                 "Deviation: imaging stopped at 40% due to bad sector cluster; re-execution scheduled.",
             ],
-            "solveit-core:usedTechnique": [{"@id": "solveit-data:techniqueDFT-1002"}],
             "solveit-core:appliedMitigation": [{"@id": "solveit-data:mitigationDFM-1003"}],
             "uco-action:startTime": {
                 "@type": "xsd:dateTime",
@@ -127,11 +134,11 @@ def build() -> CASEGraph:
         types=[
             "case-investigation:InvestigativeAction",
             "solveit-core:SolveitInvestigativeAction",
+            "solveit-data:techniqueDFT-1002",
             "prov:Activity",
         ],
         properties={
             "uco-core:name": "Re-execute imaging after bad-sector remediation",
-            "solveit-core:usedTechnique": [{"@id": "solveit-data:techniqueDFT-1002"}],
             "solveit-core:appliedMitigation": [
                 {"@id": "solveit-data:mitigationDFM-1003"},
                 {"@id": "solveit-data:mitigationDFM-1004"},
@@ -199,6 +206,13 @@ def build() -> CASEGraph:
             ],
             "solveit-wa:evaluationDate": {"@type": "xsd:date", "@value": "2026-03-14"},
         },
+    )
+    # scopedToTechnique uses DFT-1002 as a value: restate its catalogue entry.
+    entry = technique_catalog_entry("DFT-1002")
+    graph.upsert_node(
+        entry.pop("@id"),
+        types=entry.pop("@type"),
+        properties=entry,
     )
 
     graph.create(

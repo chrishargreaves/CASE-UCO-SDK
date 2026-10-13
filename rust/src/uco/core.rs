@@ -10,8 +10,32 @@ use crate::uco::types::Dictionary;
 pub struct Annotation {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
     #[serde(rename = "uco-core:object")]
     pub object: Vec<UcoObject>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:statement")]
+    pub statement: Vec<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl Annotation {
@@ -20,26 +44,122 @@ impl Annotation {
 
     pub fn builder() -> AnnotationBuilder {
         AnnotationBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
             object: Vec::new(),
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            statement: Vec::new(),
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct AnnotationBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
     object: Vec<UcoObject>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    statement: Vec<String>,
+    tag: Vec<String>,
 }
 
 impl AnnotationBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
     pub fn object(mut self, value: Vec<UcoObject>) -> Self {
         self.object = value;
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn statement(mut self, value: Vec<String>) -> Self {
+        self.statement = value;
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
         self
     }
 
     pub fn build(self) -> Annotation {
         Annotation {
             class_iri: Annotation::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
             object: self.object,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            statement: self.statement,
+            tag: self.tag,
         }
     }
 }
@@ -60,8 +180,30 @@ impl CaseObject for Annotation {
 pub struct Assertion {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
     #[serde(rename = "uco-core:statement")]
     pub statement: Vec<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl Assertion {
@@ -70,26 +212,114 @@ impl Assertion {
 
     pub fn builder() -> AssertionBuilder {
         AssertionBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
             statement: Vec::new(),
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct AssertionBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
     statement: Vec<String>,
+    tag: Vec<String>,
 }
 
 impl AssertionBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
     pub fn statement(mut self, value: Vec<String>) -> Self {
         self.statement = value;
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
         self
     }
 
     pub fn build(self) -> Assertion {
         Assertion {
             class_iri: Assertion::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
             statement: self.statement,
+            tag: self.tag,
         }
     }
 }
@@ -104,8 +334,30 @@ impl CaseObject for Assertion {
 pub struct AttributedName {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
     #[serde(rename = "uco-core:namingAuthority")]
     pub naming_authority: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl AttributedName {
@@ -114,26 +366,114 @@ impl AttributedName {
 
     pub fn builder() -> AttributedNameBuilder {
         AttributedNameBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
             naming_authority: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct AttributedNameBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
     naming_authority: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl AttributedNameBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
     pub fn naming_authority(mut self, value: String) -> Self {
         self.naming_authority = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
         self
     }
 
     pub fn build(self) -> AttributedName {
         AttributedName {
             class_iri: AttributedName::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
             naming_authority: self.naming_authority,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -148,6 +488,30 @@ impl CaseObject for AttributedName {
 pub struct Bundle {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:object")]
+    pub object: Vec<UcoObject>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl Bundle {
@@ -156,18 +520,114 @@ impl Bundle {
 
     pub fn builder() -> BundleBuilder {
         BundleBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object: Vec::new(),
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct BundleBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object: Vec<UcoObject>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl BundleBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object(mut self, value: Vec<UcoObject>) -> Self {
+        self.object = value;
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
     pub fn build(self) -> Bundle {
         Bundle {
             class_iri: Bundle::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object: self.object,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -175,6 +635,12 @@ impl BundleBuilder {
 impl CaseObject for Bundle {
     fn class_iri() -> &'static str { Bundle::CLASS_IRI }
     fn type_name() -> &'static str { "Bundle" }
+    fn validate(&self) -> Result<(), String> {
+        if self.object.is_empty() {
+            return Err("Bundle.object requires at least one value.".to_string());
+        }
+        Ok(())
+    }
 }
 
 /// A compilation is a grouping of things.
@@ -182,6 +648,28 @@ impl CaseObject for Bundle {
 pub struct Compilation {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl Compilation {
@@ -190,18 +678,106 @@ impl Compilation {
 
     pub fn builder() -> CompilationBuilder {
         CompilationBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct CompilationBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl CompilationBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
     pub fn build(self) -> Compilation {
         Compilation {
             class_iri: Compilation::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -266,8 +842,30 @@ impl CaseObject for ConfidenceFacet {
 pub struct ContextualCompilation {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
     #[serde(rename = "uco-core:object")]
     pub object: Vec<UcoObject>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl ContextualCompilation {
@@ -276,26 +874,114 @@ impl ContextualCompilation {
 
     pub fn builder() -> ContextualCompilationBuilder {
         ContextualCompilationBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
             object: Vec::new(),
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ContextualCompilationBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
     object: Vec<UcoObject>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl ContextualCompilationBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
     pub fn object(mut self, value: Vec<UcoObject>) -> Self {
         self.object = value;
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
         self
     }
 
     pub fn build(self) -> ContextualCompilation {
         ContextualCompilation {
             class_iri: ContextualCompilation::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
             object: self.object,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -314,6 +1000,28 @@ pub struct ControlledVocabulary {
     pub constraining_vocabulary_name: Option<String>,
     #[serde(rename = "uco-core:constrainingVocabularyReference")]
     pub constraining_vocabulary_reference: Option<String>,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
     #[serde(rename = "uco-core:value")]
     pub value: Option<String>,
 }
@@ -326,6 +1034,17 @@ impl ControlledVocabulary {
         ControlledVocabularyBuilder {
             constraining_vocabulary_name: None,
             constraining_vocabulary_reference: None,
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
             value: None,
         }
     }
@@ -335,6 +1054,17 @@ impl ControlledVocabulary {
 pub struct ControlledVocabularyBuilder {
     constraining_vocabulary_name: Option<String>,
     constraining_vocabulary_reference: Option<String>,
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
     value: Option<String>,
 }
 
@@ -349,6 +1079,61 @@ impl ControlledVocabularyBuilder {
         self
     }
 
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
     pub fn value(mut self, value: String) -> Self {
         self.value = Some(value);
         self
@@ -359,6 +1144,17 @@ impl ControlledVocabularyBuilder {
             class_iri: ControlledVocabulary::CLASS_IRI,
             constraining_vocabulary_name: self.constraining_vocabulary_name,
             constraining_vocabulary_reference: self.constraining_vocabulary_reference,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
             value: self.value,
         }
     }
@@ -380,8 +1176,30 @@ impl CaseObject for ControlledVocabulary {
 pub struct EnclosingCompilation {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
     #[serde(rename = "uco-core:object")]
     pub object: Vec<UcoObject>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl EnclosingCompilation {
@@ -390,26 +1208,114 @@ impl EnclosingCompilation {
 
     pub fn builder() -> EnclosingCompilationBuilder {
         EnclosingCompilationBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
             object: Vec::new(),
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct EnclosingCompilationBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
     object: Vec<UcoObject>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl EnclosingCompilationBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
     pub fn object(mut self, value: Vec<UcoObject>) -> Self {
         self.object = value;
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
         self
     }
 
     pub fn build(self) -> EnclosingCompilation {
         EnclosingCompilation {
             class_iri: EnclosingCompilation::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
             object: self.object,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -430,6 +1336,10 @@ impl CaseObject for EnclosingCompilation {
 pub struct Event {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
     #[serde(rename = "uco-core:endTime")]
     pub end_time: Vec<String>,
     #[serde(rename = "uco-core:eventAttribute")]
@@ -438,8 +1348,26 @@ pub struct Event {
     pub event_context: Vec<UcoObject>,
     #[serde(rename = "uco-core:eventType")]
     pub event_type: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
     #[serde(rename = "uco-core:startTime")]
     pub start_time: Vec<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl Event {
@@ -448,25 +1376,57 @@ impl Event {
 
     pub fn builder() -> EventBuilder {
         EventBuilder {
+            created_by: None,
+            description: Vec::new(),
             end_time: Vec::new(),
             event_attribute: Vec::new(),
             event_context: Vec::new(),
             event_type: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
             start_time: Vec::new(),
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct EventBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
     end_time: Vec<String>,
     event_attribute: Vec<Dictionary>,
     event_context: Vec<UcoObject>,
     event_type: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
     start_time: Vec<String>,
+    tag: Vec<String>,
 }
 
 impl EventBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
     pub fn end_time(mut self, value: Vec<String>) -> Self {
         self.end_time = value;
         self
@@ -487,19 +1447,75 @@ impl EventBuilder {
         self
     }
 
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
     pub fn start_time(mut self, value: Vec<String>) -> Self {
         self.start_time = value;
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
         self
     }
 
     pub fn build(self) -> Event {
         Event {
             class_iri: Event::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
             end_time: self.end_time,
             event_attribute: self.event_attribute,
             event_context: self.event_context,
             event_type: self.event_type,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
             start_time: self.start_time,
+            tag: self.tag,
         }
     }
 }
@@ -614,6 +1630,30 @@ pub struct Grouping {
     pub class_iri: &'static str,
     #[serde(rename = "uco-core:context")]
     pub context: Vec<String>,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:object")]
+    pub object: Vec<UcoObject>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl Grouping {
@@ -623,6 +1663,18 @@ impl Grouping {
     pub fn builder() -> GroupingBuilder {
         GroupingBuilder {
             context: Vec::new(),
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object: Vec::new(),
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
@@ -630,6 +1682,18 @@ impl Grouping {
 #[derive(Debug, Default, Clone)]
 pub struct GroupingBuilder {
     context: Vec<String>,
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object: Vec<UcoObject>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl GroupingBuilder {
@@ -638,10 +1702,82 @@ impl GroupingBuilder {
         self
     }
 
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object(mut self, value: Vec<UcoObject>) -> Self {
+        self.object = value;
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
     pub fn build(self) -> Grouping {
         Grouping {
             class_iri: Grouping::CLASS_IRI,
             context: self.context,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object: self.object,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -656,6 +1792,28 @@ impl CaseObject for Grouping {
 pub struct IdentityAbstraction {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<Box<IdentityAbstraction>>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl IdentityAbstraction {
@@ -664,18 +1822,106 @@ impl IdentityAbstraction {
 
     pub fn builder() -> IdentityAbstractionBuilder {
         IdentityAbstractionBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct IdentityAbstractionBuilder {
+    created_by: Option<Box<IdentityAbstraction>>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl IdentityAbstractionBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(Box::new(value));
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
     pub fn build(self) -> IdentityAbstraction {
         IdentityAbstraction {
             class_iri: IdentityAbstraction::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -690,6 +1936,28 @@ impl CaseObject for IdentityAbstraction {
 pub struct Item {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl Item {
@@ -698,18 +1966,106 @@ impl Item {
 
     pub fn builder() -> ItemBuilder {
         ItemBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ItemBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl ItemBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
     pub fn build(self) -> Item {
         Item {
             class_iri: Item::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -724,6 +2080,28 @@ impl CaseObject for Item {
 pub struct MarkingDefinitionAbstraction {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl MarkingDefinitionAbstraction {
@@ -732,18 +2110,106 @@ impl MarkingDefinitionAbstraction {
 
     pub fn builder() -> MarkingDefinitionAbstractionBuilder {
         MarkingDefinitionAbstractionBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct MarkingDefinitionAbstractionBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl MarkingDefinitionAbstractionBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
     pub fn build(self) -> MarkingDefinitionAbstraction {
         MarkingDefinitionAbstraction {
             class_iri: MarkingDefinitionAbstraction::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -758,6 +2224,28 @@ impl CaseObject for MarkingDefinitionAbstraction {
 pub struct ModusOperandi {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl ModusOperandi {
@@ -766,18 +2254,106 @@ impl ModusOperandi {
 
     pub fn builder() -> ModusOperandiBuilder {
         ModusOperandiBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ModusOperandiBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl ModusOperandiBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
     pub fn build(self) -> ModusOperandi {
         ModusOperandi {
             class_iri: ModusOperandi::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -792,16 +2368,38 @@ impl CaseObject for ModusOperandi {
 pub struct Relationship {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
     #[serde(rename = "uco-core:endTime")]
     pub end_time: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
     #[serde(rename = "uco-core:isDirectional")]
     pub is_directional: Option<bool>,
     #[serde(rename = "uco-core:kindOfRelationship")]
     pub kind_of_relationship: Option<String>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
     #[serde(rename = "uco-core:source")]
     pub source: Vec<UcoObject>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
     #[serde(rename = "uco-core:startTime")]
     pub start_time: Vec<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
     #[serde(rename = "uco-core:target")]
     pub target: Option<UcoObject>,
 }
@@ -812,11 +2410,22 @@ impl Relationship {
 
     pub fn builder() -> RelationshipBuilder {
         RelationshipBuilder {
+            created_by: None,
+            description: Vec::new(),
             end_time: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
             is_directional: None,
             kind_of_relationship: None,
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
             source: Vec::new(),
+            spec_version: None,
             start_time: Vec::new(),
+            tag: Vec::new(),
             target: None,
         }
     }
@@ -824,17 +2433,48 @@ impl Relationship {
 
 #[derive(Debug, Default, Clone)]
 pub struct RelationshipBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
     end_time: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
     is_directional: Option<bool>,
     kind_of_relationship: Option<String>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
     source: Vec<UcoObject>,
+    spec_version: Option<String>,
     start_time: Vec<String>,
+    tag: Vec<String>,
     target: Option<UcoObject>,
 }
 
 impl RelationshipBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
     pub fn end_time(mut self, value: Vec<String>) -> Self {
         self.end_time = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
         self
     }
 
@@ -848,13 +2488,48 @@ impl RelationshipBuilder {
         self
     }
 
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
     pub fn source(mut self, value: Vec<UcoObject>) -> Self {
         self.source = value;
         self
     }
 
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
     pub fn start_time(mut self, value: Vec<String>) -> Self {
         self.start_time = value;
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
         self
     }
 
@@ -866,11 +2541,22 @@ impl RelationshipBuilder {
     pub fn build(self) -> Relationship {
         Relationship {
             class_iri: Relationship::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
             end_time: self.end_time,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
             is_directional: self.is_directional,
             kind_of_relationship: self.kind_of_relationship,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
             source: self.source,
+            spec_version: self.spec_version,
             start_time: self.start_time,
+            tag: self.tag,
             target: self.target,
         }
     }

@@ -514,7 +514,7 @@ class CASEGraph:
         with open(path, "r", encoding="utf-8") as f:
             self.load(f.read(), on_duplicate=on_duplicate)
 
-    def validate(self, *, case_version: str = "case-1.4.0") -> str:
+    def validate(self, *, case_version: str = "case-1.5.0") -> str:
         """Validate this graph against CASE/UCO SHACL constraints.
 
         Thin CLI wrapper that returns ``case_validate`` stdout. For the rich
@@ -709,7 +709,7 @@ class CASEGraph:
                     extra_context=dict(self._context),
                 )
                 partitions[key].on_duplicate = "merge_compatible"
-            partitions[key]._append_object(dict(obj))
+            partitions[key]._append_object(copy.deepcopy(obj))
 
         # Copy shared + cross-partition relationship endpoints (heuristic only).
         by_id = {o.get("@id"): o for o in self._objects if o.get("@id")}
@@ -743,7 +743,7 @@ class CASEGraph:
                     if nid and nid in by_id:
                         try:
                             pg._ingest_raw_node(
-                                dict(by_id[nid]), policy="merge_compatible"
+                                copy.deepcopy(by_id[nid]), policy="merge_compatible"
                             )
                         except DuplicateNodeError:
                             # Already present under merge_compatible; keep existing node.
@@ -1047,7 +1047,7 @@ class CASEGraph:
                     ):
                         continue
                 try:
-                    pg._ingest_raw_node(dict(by_id[nid]), policy="merge_compatible")
+                    pg._ingest_raw_node(copy.deepcopy(by_id[nid]), policy="merge_compatible")
                 except DuplicateNodeError:
                     # Already present under merge_compatible; ignore.
                     pass
@@ -1062,7 +1062,7 @@ class CASEGraph:
                 if count > 1:
                     try:
                         shared._ingest_raw_node(
-                            dict(by_id[nid]), policy="merge_compatible"
+                            copy.deepcopy(by_id[nid]), policy="merge_compatible"
                         )
                     except DuplicateNodeError:
                         # Already present under merge_compatible; ignore.
@@ -1654,10 +1654,26 @@ class CASEGraph:
             return self._typed_literal("xsd:integer", value)
         if isinstance(value, float):
             return self._typed_literal("xsd:decimal", value)
+        if isinstance(value, (bytes, bytearray, memoryview)):
+            raise TypeError(
+                "bytes values need an xsd:hexBinary range or an explicit "
+                "TypedLiteral; they are not stringified"
+            )
 
         return value
 
     def _typed_literal(self, xsd_type: str, value: Any) -> dict[str, str]:
+        if xsd_type == "xsd:dateTime" and isinstance(value, date) and not isinstance(
+            value, datetime
+        ):
+            value = datetime.combine(value, datetime.min.time())
+        if isinstance(value, (bytes, bytearray, memoryview)):
+            if xsd_type != "xsd:hexBinary":
+                raise TypeError(
+                    f"bytes cannot be written as {xsd_type}; pass a "
+                    f"{xsd_type.split(':')[-1]} value instead"
+                )
+            return {"@type": xsd_type, "@value": bytes(value).hex().upper()}
         if isinstance(value, bool):
             rendered = str(value).lower()
         elif isinstance(value, datetime):
@@ -1684,6 +1700,11 @@ class CASEGraph:
                 continue
 
             value = getattr(instance, field_info.name)
+            if metadata.get("forbidden") and value not in (None, [], ()):
+                raise ValueError(
+                    f"{type(instance).__name__}.{field_info.name} is not allowed on "
+                    f"{type(instance).__name__} (its SHACL shape sets sh:maxCount 0)."
+                )
             required = bool(metadata.get("required", False))
             cardinality = metadata.get("cardinality")
 
@@ -1766,12 +1787,17 @@ class CASEGraph:
                 stored = graph._find_object(node_id)
                 if stored is not None:
                     source = stored
-            obj, warn = _rehydrate_with_diagnostics(source, iri_to_class, ctx)
+            node_warnings: list[DeserializationWarning] = []
+            obj, warn = _rehydrate_with_diagnostics(
+                source, iri_to_class, ctx, node_warnings
+            )
             if warn is not None:
-                graph.deserialization_warnings.append(warn)
+                node_warnings.append(warn)
+            for item in node_warnings:
+                graph.deserialization_warnings.append(item)
                 warnings.warn(
-                    f"Deserialization fallback for {warn.node_id!r}: "
-                    f"{warn.reason} — {warn.detail}".rstrip(" —"),
+                    f"Deserialization fallback for {item.node_id!r}: "
+                    f"{item.reason} — {item.detail}".rstrip(" —"),
                     UserWarning,
                     stacklevel=2,
                 )
@@ -2227,9 +2253,14 @@ def _rehydrate(
     raw: dict[str, Any],
     iri_to_class: dict[str, type],
     context: dict[str, str],
+    nested_warnings: list[DeserializationWarning] | None = None,
 ) -> Any:
     """Convert a JSON-LD dict back to a typed Python dataclass instance."""
-    obj, _warn = _rehydrate_with_diagnostics(raw, iri_to_class, context)
+    obj, warn = _rehydrate_with_diagnostics(
+        raw, iri_to_class, context, nested_warnings
+    )
+    if warn is not None and nested_warnings is not None:
+        nested_warnings.append(warn)
     return obj
 
 
@@ -2237,6 +2268,7 @@ def _rehydrate_with_diagnostics(
     raw: dict[str, Any],
     iri_to_class: dict[str, type],
     context: dict[str, str],
+    nested_warnings: list[DeserializationWarning] | None = None,
 ) -> tuple[Any, DeserializationWarning | None]:
     """Convert a JSON-LD dict back to a typed instance, with fallback diagnostics.
 
@@ -2296,7 +2328,21 @@ def _rehydrate_with_diagnostics(
         if field_info is None:
             continue
         field_name, f = field_info
-        kwargs[field_name] = _coerce_value(value, f, iri_to_class, context)
+        try:
+            kwargs[field_name] = _coerce_value(
+                value, f, iri_to_class, context, nested_warnings
+            )
+        except (TypeError, ValueError, OverflowError) as exc:
+            # Keep the literal as written so it round-trips unchanged.
+            kwargs[field_name] = value
+            if nested_warnings is not None:
+                nested_warnings.append(
+                    DeserializationWarning(
+                        node_id,
+                        "coercion_failed",
+                        f"{cls.__name__}.{field_name}: {exc}",
+                    )
+                )
 
     try:
         return cls(**kwargs), None
@@ -2308,35 +2354,71 @@ def _rehydrate_with_diagnostics(
         )
 
 
+_XSD_INTEGER_TYPES = frozenset({
+    "integer", "nonnegativeinteger", "positiveinteger", "nonpositiveinteger",
+    "negativeinteger", "long", "int", "short", "byte", "unsignedlong",
+    "unsignedint", "unsignedshort", "unsignedbyte",
+})
+_XSD_FLOAT_TYPES = frozenset({"decimal", "float", "double"})
+_XSD_DATETIME_TYPES = frozenset({"datetime", "datetimestamp"})
+_ZONE_ID_SUFFIX = re.compile(r"\[[^\]]*\]$")
+_FRACTION = re.compile(r"\.(\d+)")
+
+
+def _xsd_local_name(datatype: Any) -> str:
+    text = str(datatype or "")
+    return re.split(r"[#:/]", text)[-1].lower()
+
+
+def parse_xsd_datetime(text: str) -> datetime:
+    """Parse an xsd:dateTime lexical form on every supported Python version.
+
+    Accepts a trailing ``Z``, a Java-style ``[Zone/Id]`` suffix, and fractions
+    of any length (truncated to microseconds), none of which
+    ``datetime.fromisoformat`` handles on Python 3.10.
+    """
+    value = _ZONE_ID_SUFFIX.sub("", text.strip())
+    if value.endswith(("Z", "z")):
+        value = value[:-1] + "+00:00"
+    value = _FRACTION.sub(lambda m: "." + (m.group(1) + "000000")[:6], value, count=1)
+    return datetime.fromisoformat(value)
+
+
 def _coerce_value(
     value: Any,
     field_info: Field[Any],
     iri_to_class: dict[str, type],
     context: dict[str, str],
+    nested_warnings: list[DeserializationWarning] | None = None,
 ) -> Any:
     """Coerce a JSON-LD value back to the Python type expected by the field."""
     if isinstance(value, dict):
         if "@value" in value:
             raw_val = value["@value"]
-            xsd_type = value.get("@type", "")
-            if "boolean" in xsd_type:
+            local = _xsd_local_name(value.get("@type", ""))
+            if local == "boolean":
                 return raw_val == "true" or raw_val is True
-            if "integer" in xsd_type:
-                return int(raw_val)
-            if "decimal" in xsd_type or "float" in xsd_type or "double" in xsd_type:
+            if local in _XSD_INTEGER_TYPES:
+                if isinstance(raw_val, bool) or (
+                    isinstance(raw_val, float) and not raw_val.is_integer()
+                ):
+                    raise ValueError(f"not an integer: {raw_val!r}")
+                return int(raw_val) if not isinstance(raw_val, str) else int(raw_val.strip())
+            if local in _XSD_FLOAT_TYPES:
                 return float(raw_val)
-            if "dateTime" in xsd_type:
-                return datetime.fromisoformat(str(raw_val))
+            if local in _XSD_DATETIME_TYPES:
+                return parse_xsd_datetime(str(raw_val))
             return raw_val
         if "@type" in value:
-            return _rehydrate(value, iri_to_class, context)
+            return _rehydrate(value, iri_to_class, context, nested_warnings)
         if "@id" in value:
             return value["@id"]
         return value
 
     if isinstance(value, list):
         return [
-            _coerce_value(item, field_info, iri_to_class, context) for item in value
+            _coerce_value(item, field_info, iri_to_class, context, nested_warnings)
+            for item in value
         ]
 
     return value

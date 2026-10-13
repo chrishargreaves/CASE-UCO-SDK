@@ -4,7 +4,7 @@
 
 When the CASE/UCO ontology doesn't have a class, facet, or property for the concept you need to model, you can draft a **change proposal** — a structured request for the ontology committees to consider adding or modifying a concept in a future specification release.
 
-This recipe covers the full workflow: confirming the gap, checking for existing proposals, determining the right target repository and release, drafting the proposal with testable example data, validating and testing before submission, and creating a local extension to unblock your work.
+This recipe covers the full workflow: confirming the gap, checking for existing proposals, choosing the target tracker and release, drafting a competency-question proposal that marks where each statement came from, testing optional draft classes, and creating a local extension to unblock your work.
 
 ## When to use this recipe
 
@@ -30,8 +30,8 @@ This recipe covers the full workflow: confirming the gap, checking for existing 
 | `search_classes` | Verify the gap — search by keyword to confirm no existing class fits |
 | `get_class_details` | Inspect near-matches to confirm they don't cover the concept |
 | `find_classes_for_domain` | Check if the concept is already mapped under a different name |
-| `check_existing_proposals` | Search open GitHub issues in UCO and CASE for prior proposals |
-| `draft_change_proposal` | Generate the filled-in proposal markdown, example graph, and SPARQL queries |
+| `check_existing_proposals` | Search open GitHub issues in UCO, CASE, and the CAC Ontology for prior proposals |
+| `draft_change_proposal` | Draft the competency-question proposal, its review notes, and optional companion test files |
 
 ---
 
@@ -85,7 +85,7 @@ The gap is confirmed: no existing class models UAV/drone-specific telemetry data
 
 ## Step 2: Check existing proposals
 
-**This step is critical for proposal quality.** Before drafting a new proposal, search the open issues in both the UCO and CASE repositories. Someone may have already proposed the concept, or a related proposal may be in progress. Finding related issues provides essential context — for example, discovering a prerequisite proposal (like UCO #535 "Add Qualities") can change the entire design of your proposal.
+**This step is critical for proposal quality.** Before drafting a new proposal, search the open issues in the UCO, CASE, and CAC Ontology repositories. Someone may have already proposed the concept, or a related proposal may be in progress. Finding related issues provides essential context — for example, discovering a prerequisite proposal (like UCO #535 "Add Qualities") can change the entire design of your proposal.
 
 <details open><summary>MCP — checking existing proposals</summary>
 
@@ -98,34 +98,34 @@ Possible outcomes:
 - **Exact match found**: "UCO Issue #700 proposes a DroneTelemetryFacet — consider commenting on that issue instead of creating a duplicate."
 - **Partial match found**: "CASE Issue #190 discusses aerial surveillance evidence, which overlaps with drone telemetry. Your proposal should reference it."
 - **No match found**: Proceed to Step 3.
-- **GitHub unavailable**: Proceed with local drafting, but search the issue trackers manually before submitting: [UCO issues](https://github.com/ucoProject/UCO/issues), [CASE issues](https://github.com/casework/CASE/issues).
+- **GitHub unavailable**: Proceed with local drafting, but search the issue trackers manually before submitting: [UCO issues](https://github.com/ucoProject/UCO/issues), [CASE issues](https://github.com/casework/CASE/issues), [CAC Ontology issues](https://github.com/Project-VIC-International/CAC-Ontology/issues).
 
 </details>
 
 ---
 
-## Step 3: Determine UCO vs. CASE and target release
+## Step 3: Determine the target tracker and release
 
 ### Target repository
 
-The concept's scope determines which repository receives the proposal:
+The concept's scope determines which tracker receives the proposal:
 
 | Scope | Target | Repository | Examples |
 |---|---|---|---|
 | General cyber-observable, identity, action, or data structure with utility beyond investigation | **UCO** | [ucoProject/UCO](https://github.com/ucoProject/UCO/issues/new) | New device facet, new observable type, new action property |
 | Specific to the investigation process itself | **CASE** | [casework/CASE](https://github.com/casework/CASE/issues/new) | New investigator role, new case metadata, investigation workflow concepts |
+| Specific to crimes-against-children investigations | **CAC** | [Project-VIC-International/CAC-Ontology](https://github.com/Project-VIC-International/CAC-Ontology/issues/new) | Grooming stages, NCMEC CyberTip fields, CSAM provenance |
 
 **Decision logic:**
 
-1. Is this concept specific to the process of conducting an investigation (roles, exhibits, authorization, case metadata, investigative workflows)?
-   - **Yes** → **CASE**
-2. Is this a general cyber-observable, identity, tool, action, location, or data structure that has utility across the broader cyber domain?
-   - **Yes** → **UCO**
-3. **Unsure?** → Ask the developer. Explain the distinction and let them decide.
+1. Is the concept specific to crimes-against-children investigations? **CAC**, unless it is useful outside that domain.
+2. Is it specific to the process of conducting an investigation (roles, exhibits, authorization, case metadata, investigative workflows)? **CASE**.
+3. Is it a general cyber-observable, identity, tool, action, location, or data structure with utility across the cyber domain? **UCO**.
+4. **Unsure?** Ask the developer. `draft_change_proposal` triages from the concept and description, and reports `target_repo_unresolved` when it cannot tell.
 
 ### Target release
 
-Every change proposal must specify which CASE/UCO release it targets. Check the current state of the ontology branches:
+Every change proposal names a suggested release. Check the current state of the CASE/UCO branches:
 
 | Branch | Version | When to target |
 |--------|---------|----------------|
@@ -141,272 +141,212 @@ assuming it — after the 1.5.0 release `develop` still carried
 git -C ontology/UCO show origin/develop:ontology/uco/core/core.ttl | grep versionIRI
 ```
 
-The ontology committee may reassign the proposal to a different milestone
-during review.
+The CAC Ontology versions independently; without a `target_release`, a CAC
+proposal suggests "the next CAC Ontology release". The committee may
+reassign any proposal to a different milestone during review.
 
 ---
 
 ## Step 4: Draft the proposal
 
-Use the `draft_change_proposal` MCP tool or manually fill in the [change proposal template](../templates/change-proposal-template.md). The tool generates three files:
+A proposal is a **discussion draft built around competency questions**. It
+asks what a graph should be able to answer, cites where each idea came from,
+and leaves the ontology design to the committee. This keeps it short and
+easy for ontologists to respond to. The format follows the
+[change proposal template](../templates/change-proposal-template.md):
 
-1. **`<slug>.md`** — the filled-in proposal markdown
-2. **`<slug>.jsonld`** — an example JSON-LD graph for validation and SPARQL testing
-3. **`<slug>.sparql`** — SPARQL queries matching the competency questions
+- **Header**: title and target repository as HTML comments, then a visible
+  suggested release and a contributor line that discloses the AI assistance
+  and names the model.
+- **Background**: why the change is needed.
+- **Competency questions**: a concrete scenario, then each question with its
+  expected answer.
+- **Requirements**: the terms the questions need, each with a sourced
+  definition and what it might connect to.
+- **Open questions**: where input is most wanted.
+- **Related issues and references**.
+- A collapsed **Committee section** (benefits and risks, proposed ontology
+  changes, CQ queries and example data, review checklist) left for review.
+
+### Mark where every statement came from
+
+Each statement is one of three kinds, and the proposal shows which:
+
+| Provenance | Rendered | Use for |
+|---|---|---|
+| `contributor` | unmarked | Text the contributor wrote or approved in the conversation |
+| `cited` | `*[from [label](url)]*` | A quote or paraphrase of a person or publication. The URL must be the exact comment or page quoted; for a GitHub comment, its `#issuecomment-` link |
+| `ai` | `*[AI-drafted]*` | Text an AI assistant wrote. Plain strings default to this |
+
+An agent must never mark its own text as the contributor's. When the
+contributor rewrites or approves an AI-drafted statement, redraft with
+`provenance="contributor"`.
 
 <details open><summary>MCP — drafting a proposal</summary>
 
 ```
 draft_change_proposal(
-    concept="Drone telemetry facet",
-    description="No existing facet captures UAV flight telemetry data. Investigators "
-                "increasingly encounter drones in cases involving surveillance, smuggling, "
-                "and unauthorized airspace intrusion. Flight logs contain altitude, speed, "
-                "GPS coordinates, flight mode, battery level, and gimbal orientation that "
-                "are critical to reconstructing drone activity.",
-    scenario="A law enforcement agency seizes a DJI Mavic drone from a suspect. The "
-             "forensic examiner extracts the flight log using DJI Assistant and needs to "
-             "model the telemetry data points — altitude, speed, coordinates, flight mode, "
-             "and timestamps — alongside the device metadata already captured by DeviceFacet.",
-    proposed_classes=[
-        {
-            "name": "DroneTelemetryFacet",
-            "type": "Facet",
-            "parent": "uco-core:Facet",
-            "properties": [
-                {"name": "altitude", "type": "xsd:decimal", "description": "Altitude in meters above ground level"},
-                {"name": "groundSpeed", "type": "xsd:decimal", "description": "Ground speed in m/s"},
-                {"name": "flightMode", "type": "xsd:string", "description": "Flight mode (GPS, ATTI, Sport, etc.)"},
-                {"name": "batteryLevel", "type": "xsd:integer", "description": "Battery percentage at time of reading"},
-                {"name": "gimbalPitch", "type": "xsd:decimal", "description": "Camera gimbal pitch angle in degrees"},
-                {"name": "homeLatitude", "type": "xsd:decimal", "description": "Home point latitude"},
-                {"name": "homeLongitude", "type": "xsd:decimal", "description": "Home point longitude"},
-            ],
-        }
-    ],
+    concept="Drone telemetry",
+    title="Representing drone flight telemetry",
     target_repo="UCO",
-    target_release="1.5.0",
+    contributor="Jane Examiner (@jexaminer)",
+    ai_model="<the model drafting with you>",
+    description=[
+        {"text": "Our lab extracts DJI flight logs in most drone cases and has "
+                 "nowhere to put altitude, speed, and home point.",
+         "provenance": "contributor"},
+    ],
+    scenario="A drone seized near a prison holds a flight log with 412 points "
+             "over 18 minutes, including a hover over the yard.",
+    competency_questions=[
+        {"question": "Where was the drone, and at what altitude, at a given time?",
+         "expected_answer": "The logged point nearest that time, with its "
+                            "latitude, longitude, and altitude above takeoff."},
+        {"question": "Which flights hovered over a given area for over a minute?",
+         "expected_answer": "The one flight with the 74-second hover over the yard."},
+    ],
+    terms=[
+        {"name": "Observation", "vocabulary": "SOSA",
+         "concept_url": "https://www.w3.org/TR/vocab-ssn/#SOSAObservation",
+         "definition": {"text": "\"Act of carrying out an (Observation) Procedure "
+                                "to estimate or calculate a value of a property "
+                                "of a FeatureOfInterest.\"",
+                        "source_label": "W3C SOSA/SSN",
+                        "source_url": "https://www.w3.org/TR/vocab-ssn/#SOSAObservation"},
+         "might_connect_to": "One telemetry point in the flight log"},
+    ],
+    open_questions=[
+        "Should UCO reuse SOSA observations through a profile, or define its own "
+        "telemetry facet aligned to them?",
+    ],
+    references=[{"label": "W3C SOSA/SSN", "url": "https://www.w3.org/TR/vocab-ssn/"}],
 )
 ```
 
-This generates three files in `change_proposals/`:
-- `drone-telemetry-facet.md` — the proposal
-- `drone-telemetry-facet.jsonld` — example instance data
-- `drone-telemetry-facet.sparql` — SPARQL competency queries
+The tool writes to `change_proposals/` (or `output_dir`):
+
+- `<slug>.md`: the issue body.
+- `<slug>.review.md`: lint findings and a hand-check list for the
+  contributor. Not filed.
+- Companion test files, only when `proposed_classes` or
+  `proposed_properties` are given (Step 5).
 
 </details>
 
-### Writing each section
+### Lint and the review notes
 
-**Target release**: Specify the CASE/UCO version this proposal targets (e.g., 1.5.0, 2.0.0). The ontology committee uses this to assign the proposal to the correct milestone.
+The result carries `lint` findings and `ready_to_file` (no errors). The
+review notes list the same findings plus the checks a person has to make.
 
-**Background**: Explain what you were trying to model, why current classes are insufficient, and who benefits from the addition. Answer: "What do we achieve for whom and why does that matter?"
+| Code | Severity | What it catches |
+|---|---|---|
+| `contributor_missing` | error | No contributor; a person must own the proposal |
+| `ai_model_unspecified` | warning | The AI disclosure does not name the model |
+| `no_competency_questions`, `cq_missing_expected_answer` | error | The proposal has nothing testable for the committee to respond to |
+| `citation_missing_url` | error | A `*[from …]*` tag that does not link what it quotes |
+| `citation_link_not_comment` | info | A person is cited with an issue link rather than the comment quoted |
+| `vocabulary_claim_unlinked` | error | A term attributed to an outside vocabulary with no `concept_url` |
+| `vocabulary_term_unlinked` | warning | Text names a backticked term from an outside vocabulary without a link |
+| `ontology_term_not_found` | error | A CASE/UCO (or CAC) term that the pinned ontology does not declare, the usual sign of a hallucinated term |
+| `parent_class_undeclared` | error | A draft class whose parent does not exist |
+| `avoid_standard_wording` | warning | "Standard", which implies a standards development organization |
+| `exclusionary_phrasing` | warning | Statements about who is or is not in the community; describe who drafted the proposal instead ("This proposal was not posted or drafted by a lawyer.") |
+| `endorsement_wording` | warning | "Lead", "endorse", and similar wording that ranks sources |
 
-**Requirements**: One numbered requirement per proposed change. Be specific:
-- "Define a new `DroneTelemetryFacet` class as a subclass of `uco-core:Facet`"
-- "Add properties for altitude, ground speed, flight mode, battery level, gimbal orientation, and home coordinates"
+Wording rules skip `cited` statements, since a quote cannot be reworded.
 
-**Risk / Benefit analysis**: List concrete benefits (new modeling capability, interoperability with drone forensic tools). For risks, consider backward compatibility, overlap with existing classes, and maintenance burden. If no risks are known, state: "The submitter is unaware of risks associated with this change."
+<!-- recipe-lint: ignore-start anti-pattern -- The terms below are examples of hallucinated CASE/UCO terms that ontology_term_not_found rejects. -->
+For example, a draft that says an action is `uco-core:initiatedBy` its actor, or
+gives a person a `uco-core:role`, fails with `ontology_term_not_found`: neither
+term exists in UCO 1.5.0.
+<!-- recipe-lint: ignore-end anti-pattern -->
 
-**Competencies demonstrated**: This section is critical — it proves the proposal adds real value. Include:
-1. A concrete scenario with enough detail to construct ground truth
-2. At least one competency question the ontology can answer after the change that it couldn't before
-3. The expected result
-4. A draft SPARQL query (will be tested in Step 6)
+The hand checks cannot be automated. They ask the contributor to:
 
-**Example instance data**: A concrete JSON-LD graph showing the proposed concept in use. This is what the submitter eventually wants to build and share with others. It must be complete enough to support the SPARQL queries in the Competencies section.
+- open every outside link and confirm it resolves and says what the
+  statement claims;
+- confirm each `*[from …]*` tag links the exact comment or page quoted;
+- read every AI-drafted statement and keep, rewrite, or delete it;
+- check that no single jurisdiction or locale is treated as the default;
+- check that things that should be objects (statutes, people, roles) are not
+  stood in for by strings, and that roles are kept distinct from the people
+  who hold them;
+- check that sources are not circular;
+- check that existing vocabularies (SOSA/SSN, PROV-O, schema.org) were
+  considered before new terms.
 
-**Related proposals and references**: List any related GitHub issues, prior proposals, external ontologies, or specifications that informed the design. This helps reviewers understand the broader context and dependencies. Include links found during Step 2.
-
-**Solution suggestion**: Enumerate the concrete OWL changes (new class, new properties, new shapes) and any test additions.
-
----
-
-## Step 5: Create example data and extension ontology
-
-The `draft_change_proposal` tool auto-generates a starter example graph at `change_proposals/<slug>.jsonld`. Expand this with realistic data that:
-
-- Exercises all proposed classes and properties
-- Supports the SPARQL queries in the Competencies section
-- Includes both positive and negative ground truth where applicable
-- Represents the kind of graph the submitter eventually wants to build and share
-
-### JSON-LD requirements for validation
-
-Two requirements are commonly missed and will cause `case_validate` to report `Conforms: False`:
-
-1. **Facets MUST have IRIs (not blank nodes).** The `hasFacet` SHACL shape requires `sh:nodeKind sh:IRI`. Every facet object inside a `uco-core:hasFacet` array must include an `@id` property. Convention: use the parent's `@id` with a `-facet` suffix (e.g., `kb:addr-1` → `kb:addr-1-facet`).
-
-   <!-- recipe-lint: ignore-start proposed-term -- The snippet demonstrates terms that the change proposal would declare; they are intentionally unavailable beforehand. -->
-   ```json
-   "uco-core:hasFacet": [
-     {
-       "@id": "kb:observable-1-facet",
-       "@type": "proposed:MyNewFacet",
-       "proposed:someProperty": "value"
-     }
-   ]
-   ```
-   <!-- recipe-lint: ignore-end proposed-term -->
-
-2. **The `.jsonld` and the JSON-LD block embedded in the `.md` must stay in sync.** After fixing validation issues in the `.jsonld`, update the embedded example in the proposal markdown to match. Reviewers read the `.md`; automated tests run against the `.jsonld`.
-
-### Extension ontology (`.ttl`) — required for new Facet subclasses
-
-If the proposal introduces new classes that are subclasses of existing UCO/CASE classes (e.g., a new Facet), you **must** create a `<slug>.ttl` file declaring the `rdfs:subClassOf` relationship. Without this, `case_validate` cannot infer that your proposed type satisfies the `sh:class uco-core:Facet` constraint, and validation will fail.
-
-<!-- recipe-lint: ignore-start proposed-term -- The Turtle example declares the proposed class that validation will load as a local ontology graph. -->
-```turtle
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix uco-core: <https://ontology.unifiedcyberontology.org/uco/core/> .
-@prefix proposed: <http://example.org/ontology/proposed/> .
-
-proposed:MyNewFacet
-    a owl:Class ;
-    rdfs:subClassOf uco-core:Facet ;
-    rdfs:label "MyNewFacet"@en ;
-    rdfs:comment "Description of the facet."@en .
-```
-<!-- recipe-lint: ignore-end proposed-term -->
-
-This file is **not optional** — it is required for any proposal that introduces Facet or UcoObject subclasses. The Makefile `validate-proposal` target automatically includes it when present.
-
-<details open><summary>Python — building a richer example graph</summary>
-
-<!-- recipe-lint: ignore-start proposed-term -- This example instantiates terms declared by the companion proposal ontology. -->
-```python
-from case_uco import CASEGraph
-from case_uco.case.investigation import Investigation, InvestigativeAction
-from case_uco.uco.tool import Tool
-from case_uco.uco.identity import Identity
-from case_uco.uco.observable import ObservableObject, DeviceFacet, FileFacet
-from case_uco.uco.core import Relationship
-import json
-
-graph = CASEGraph(extra_context={
-    "proposed": "http://example.org/ontology/proposed/",
-})
-
-investigation = graph.create(Investigation, name="Drone Surveillance Case 2025-042")
-tool = graph.create(Tool, name="DJI Assistant", version="2.1.2")
-
-dji = graph.create(Identity, name="DJI")
-
-drone = graph.create(ObservableObject, has_facet=[
-    DeviceFacet(
-        device_type="UAV",
-        manufacturer=dji,
-        model="Mavic 3 Pro",
-        serial_number="1ZNBJ...",
-    ),
-])
-
-# The telemetry facet doesn't exist yet — model it as raw JSON-LD
-# and load it into the graph via graph.load().
-telemetry_data = {
-    "@id": "kb:drone-1-telemetry",
-    "@type": "proposed:DroneTelemetryFacet",
-    "proposed:altitude": 120.5,
-    "proposed:groundSpeed": 15.2,
-    "proposed:flightMode": "GPS",
-    "proposed:batteryLevel": 73,
-    "proposed:gimbalPitch": -45.0,
-    "proposed:homeLatitude": 38.8977,
-    "proposed:homeLongitude": -77.0365,
-}
-graph.load(json.dumps({
-    "@context": dict(graph._context, proposed="http://example.org/ontology/proposed/"),
-    "@graph": [telemetry_data],
-}))
-
-graph.write("change_proposals/drone-telemetry-facet.jsonld")
-```
-<!-- recipe-lint: ignore-end proposed-term -->
-
-</details>
+`verify_links=True` fetches each outside link and reports whether a quoted
+definition appears on the page. It helps, but a page can resolve and still
+say something different, so the hand checks stand.
 
 ---
 
-## Step 6: Test before submission
+## Step 5: Companion test files (optional)
 
-**This step is required — a proposal is not finished until all tests pass.** The ontology committee expects proposals to include evidence that the SPARQL queries and example data have been tested prior to submission. Do not present a proposal as complete if testing has not been run or has failures.
+The issue body leaves the design to the committee. A contributor who already
+has draft classes passes them as `proposed_classes` (`name`, `parent`,
+`description`, `properties: [{name, type, description}]`) or
+`proposed_properties` (`name`, `target_class`, `type`). The tool writes local
+files for testing:
 
-### Run all proposal tests
+| File | Contents |
+|---|---|
+| `<slug>.ttl` | `owl:Class` with `rdfs:subClassOf`, label, and comment for each class; `owl:DatatypeProperty` or `owl:ObjectProperty` with `rdfs:range` |
+| `<slug>-shapes.ttl` | SHACL node shapes for the proposed properties, kept apart from the OWL |
+| `<slug>.jsonld` | Example data. A Facet subclass hangs off an `ObservableObject` through `uco-core:hasFacet`; any other class is a top-level node. Every node has an `@id`, and object-range properties point at a typed node |
+| `<slug>.sparql` | The competency questions' `sparql` when given, otherwise one query per draft class |
+
+With `run_tests=True` (the default), the tool validates the example with
+`case_validate` (RDFS inference, the companion ontology and shapes loaded,
+strict concept coverage) and runs the SPARQL. The results go in the review
+notes. Set `include_design_sketch=True` to list the draft classes in the
+committee section as an AI-drafted sketch; by default it stays a placeholder.
+
+Expand the example with realistic data that exercises every draft class and
+property and supports the competency questions.
+
+---
+
+## Step 6: Test
 
 ```bash
-make test-proposal PROPOSAL=drone-telemetry-facet
+make test-proposal PROPOSAL=drone-telemetry
 ```
 
 This runs two checks:
 
-1. **Graph validation** — validates the example `.jsonld` against the current CASE/UCO release using `case_validate` with `--inference rdfs --allow-info`. If a local extension `.ttl` and shapes file exist, they are automatically included via `--ontology-graph`.
+1. **Graph validation** — validates the example `.jsonld` against CASE/UCO 1.5.0 using `case_validate` with `--inference rdfs --allow-info`. The companion `.ttl` and `-shapes.ttl` are included via `--ontology-graph` when present.
 2. **SPARQL query testing** — executes each query in the `.sparql` file against the example graph and reports whether results were returned.
-
-Both checks must pass. If either fails, fix the issues and re-run.
 
 ### Understanding validation flags
 
-The `validate-proposal` Makefile target uses these flags automatically:
-
 - **`--inference rdfs`** — Required when proposed classes are `rdfs:subClassOf` existing UCO/CASE classes (e.g., Facet, UcoObject). Without this, SHACL cannot infer that the proposed facet satisfies the `sh:class uco-core:Facet` constraint.
-- **`--allow-info`** — Allows informational results (UUID IRI suggestions, vocabulary hints) without causing a non-zero exit code. These are advisory, not errors.
-- **`--ontology-graph <slug>.ttl`** — Automatically included when the file exists. Declares your proposed classes so the validator knows their type hierarchy.
-
-### Run tests individually
-
-```bash
-# Validate the example graph
-make validate-proposal PROPOSAL=drone-telemetry-facet
-
-# Test SPARQL queries
-make sparql-test-proposal PROPOSAL=drone-telemetry-facet
-```
+- **`--allow-info`** — Allows informational results (UUID IRI suggestions, vocabulary hints) without causing a non-zero exit code.
+- **`--ontology-graph <slug>.ttl`** — Declares the proposed classes so the validator knows their type hierarchy.
 
 ### Common validation failures and fixes
 
 | Failure | Cause | Fix |
 |---------|-------|-----|
-| `NodeKindConstraintComponent: Value is not of Node Kind sh:IRI` | Facet objects are blank nodes (missing `@id`) | Add `"@id": "kb:<parent>-facet"` to each facet object |
-| `ClassConstraintComponent: Value does not have class uco-core:Facet` | No `.ttl` declaring `rdfs:subClassOf` | Create `<slug>.ttl` with the class hierarchy (see Step 5) |
-| `ClassConstraintComponent` despite `.ttl` present | Missing `--inference rdfs` flag | Ensure the Makefile target passes `--inference rdfs` |
-| Exit code 1 with only informational results | Missing `--allow-info` flag | Ensure the Makefile target passes `--allow-info` |
+| `NodeKindConstraintComponent: Value is not of Node Kind sh:IRI` | Facet objects are blank nodes (missing `@id`) | Give each facet an `@id` |
+| `ClassConstraintComponent: Value does not have class uco-core:Facet` | No `.ttl` declaring `rdfs:subClassOf` | Keep the generated `<slug>.ttl` beside the `.jsonld` |
+| A required property is missing | The parent class's SHACL shape requires it (for example `uco-core:Relationship`) | Add the property to the example |
 
 ### Test extensions against multiple CASE/UCO branches
-
-If you've created a local extension ontology (`.ttl` + shapes), test it against multiple CASE/UCO branches to help the ontology committee assess compatibility:
 
 ```bash
 # Test against all three branches: main (v1.5.0), develop, develop-2.0.0 (v2.0.0)
 make test-extension-compat \
   EXT_TTL=change_proposals/drone-telemetry.ttl \
   EXT_SHAPES=change_proposals/drone-telemetry-shapes.ttl \
-  EXT_DATA=change_proposals/drone-telemetry-facet.jsonld
-
-# Or test against individual branches
-make test-extension-main EXT_TTL=... EXT_DATA=...
-make test-extension-develop EXT_TTL=... EXT_DATA=...
-make test-extension-develop2 EXT_TTL=... EXT_DATA=...
+  EXT_DATA=change_proposals/drone-telemetry.jsonld
 ```
-
-### Update the proposal with test results
-
-After running tests, update the **Pre-submission testing** section of the proposal markdown with:
-
-1. Whether each SPARQL query was tested and returned expected results
-2. The `case_validate` output (Conforms: True/False)
-3. Any informational warnings and their disposition
-4. Any unresolved issues or known failures
-
-The proposal should state that tests have been run. If all tests pass, write "No unresolved issues." If issues remain, document them — this transparency helps the committee.
 
 ---
 
 ## Step 7: Create a local extension (optional)
 
 If you need typed classes immediately rather than raw JSON-LD, create a local extension ontology and scaffold typed classes. See the [Working with Extensions](extensions.md) recipe for the full workflow.
-
-This local extension can be referenced in the change proposal's "Solution suggestion" section as a working prototype.
 
 ```bash
 # After defining your extension TTL files:
@@ -421,33 +361,39 @@ When the concept is officially added to CASE/UCO in a future release, retire the
 
 ## Submitting the proposal
 
-A proposal is **not ready for submission** until `make test-proposal PROPOSAL=<slug>` passes and the Pre-submission testing section documents the results. Once the draft is reviewed, tested, and refined:
+Only the contributor files the proposal. Before filing:
 
-1. Verify `make test-proposal PROPOSAL=<slug>` exits cleanly (graph validation conforms, all SPARQL queries return expected results)
-2. Confirm the Pre-submission testing section in the `.md` reflects the actual test output — do not leave placeholder Yes/No values
-3. Verify the JSON-LD block in the `.md` matches the tested `.jsonld` file
-4. Determine the target repository (UCO or CASE) — see Step 3
-5. Open a new issue in the appropriate GitHub repository:
-   - **UCO**: https://github.com/ucoProject/UCO/issues/new
-   - **CASE**: https://github.com/casework/CASE/issues/new
-5. Copy the proposal markdown into the issue body
-6. Attach or link the example `.jsonld` file
-7. Add the label "Change Proposal" if available
-8. If you included example JSON-LD, add the permission statement: "I am fine with my examples being transcribed and credited"
+1. `ready_to_file` is true: no lint errors remain.
+2. The contributor has worked through every hand check in `<slug>.review.md`.
+3. Every *[AI-drafted]* statement has been kept, rewritten, or deleted by the contributor.
+4. If companion files exist, `make test-proposal PROPOSAL=<slug>` passes.
 
-The ontology committee will review the proposal, assign it to a milestone, and coordinate implementation.
+Then open a new issue in the target tracker and paste the body of `<slug>.md`:
+
+- **UCO**: https://github.com/ucoProject/UCO/issues/new
+- **CASE**: https://github.com/casework/CASE/issues/new
+- **CAC**: https://github.com/Project-VIC-International/CAC-Ontology/issues/new
+
+Use the title from the first HTML comment. Do not paste the review notes. Offer
+the companion files in the discussion if the committee asks for a design.
 
 ## Proposal file conventions
 
-When `draft_change_proposal` generates a proposal, it creates files following this naming convention:
-
 ```
 change_proposals/
-├── <slug>.md              # The proposal markdown
-├── <slug>.jsonld           # Example instance data (JSON-LD graph)
-├── <slug>.sparql           # SPARQL competency queries
-├── <slug>.ttl              # Extension ontology (optional, hand-written)
-└── <slug>-shapes.ttl       # SHACL shapes (optional, hand-written)
+├── <slug>.md              # The issue body
+├── <slug>.review.md       # Lint findings and hand checks (not filed)
+├── <slug>.ttl             # Draft OWL (only with draft classes or properties)
+├── <slug>-shapes.ttl      # Draft SHACL shapes
+├── <slug>.jsonld          # Example instance data
+└── <slug>.sparql          # SPARQL competency queries
 ```
 
-The Makefile `test-proposal` target looks for all of these by convention. Only the `.md` is required; the others enable automated testing.
+The Makefile `test-proposal` target looks for these by convention. Only the
+`.md` is filed.
+
+## Related
+
+- [extensions.md](extensions.md) — local extension playground while a proposal is pending
+- [recipe-authoring.md](recipe-authoring.md) — turn a validated modeling pattern into a catalog recipe
+- [otics-scada-intrusion.md](otics-scada-intrusion.md) — ICS/SCADA recipe whose ontology gaps motivate `IndustrialControlDeviceFacet`

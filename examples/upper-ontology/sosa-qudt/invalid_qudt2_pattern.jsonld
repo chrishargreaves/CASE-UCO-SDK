@@ -1,0 +1,37 @@
+{
+  "@context": {
+    "kb": "http://example.org/kb/",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "qudt": "http://qudt.org/schema/qudt/",
+    "unit": "http://qudt.org/vocab/unit/",
+    "uco-core": "https://ontology.unifiedcyberontology.org/uco/core/",
+    "uco-observable": "https://ontology.unifiedcyberontology.org/uco/observable/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "kb:gnss-receiver-1",
+      "@type": ["uco-observable:Device", "sosa:Sensor"],
+      "uco-core:name": "Infotainment GNSS receiver"
+    },
+    {
+      "@id": "kb:speed-value-1",
+      "@type": "qudt:QuantityValue",
+      "qudt:numericValue": {"@type": "xsd:decimal", "@value": "50"},
+      "qudt:unit": {"@id": "unit:KM-PER-HR"}
+    },
+    {
+      "@id": "kb:speed-observation-1",
+      "@type": "sosa:Observation",
+      "sosa:madeBySensor": {"@id": "kb:gnss-receiver-1"},
+      "sosa:hasResult": {"@id": "kb:speed-value-1"},
+      "sosa:resultTime": {"@type": "xsd:dateTime", "@value": "2023-11-22T15:30:00Z"}
+    },
+    {
+      "@id": "kb:speed-observation-2",
+      "@type": "sosa:Observation",
+      "sosa:madeBySensor": {"@id": "kb:gnss-receiver-1"},
+      "sosa:resultTime": {"@type": "xsd:dateTime", "@value": "2023-11-22T15:32:00Z"}
+    }
+  ]
+}

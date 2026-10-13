@@ -24,6 +24,7 @@ EXT_DIR = PROJECT_ROOT / "ontology" / "solveit"
 
 UCO_ACTION = "https://ontology.unifiedcyberontology.org/uco/action/"
 SOLVEIT_DATA = "https://ontology.solveit-df.org/solveit/data/"
+SOLVEIT_CORE = "https://ontology.solveit-df.org/solveit/core/"
 
 
 # ---------------------------------------------------------------------------
@@ -151,29 +152,38 @@ class TestPunnedCatalog:
         technique_iris = {r.iri for r in index.by_kind("technique")}
         assert {str(s) for s in punned} == technique_iris
 
-    def test_punned_classes_subclass_action_with_technique_id(self, catalog_graph):
+    def test_catalog_bridges_kb_classes_to_uco_technique(self, catalog_graph):
+        import rdflib
         from rdflib import OWL, RDF, RDFS, URIRef
 
         subject = URIRef(SOLVEIT_DATA + "techniqueDFT-1002")
-        types = set(catalog_graph.objects(subject, RDF.type))
-        assert OWL.Class in types
-        assert URIRef(UCO_ACTION + "Technique") in types
-        parents = set(catalog_graph.objects(subject, RDFS.subClassOf))
-        assert URIRef(UCO_ACTION + "Action") in parents
+        assert set(catalog_graph.objects(subject, RDF.type)) == {URIRef(UCO_ACTION + "Technique")}
         tid = catalog_graph.value(subject, URIRef(UCO_ACTION + "techniqueID"))
         assert str(tid) == "DFT-1002"
+        # Class-ness and the Action ancestry come from the knowledge base
+        # itself; the catalog must not restate them.
+        assert (subject, RDFS.subClassOf, None) not in catalog_graph
+
+        kb = rdflib.Graph()
+        kb.parse(str(EXT_DIR / "solve-it-kb.ttl"), format="turtle")
+        assert OWL.Class in set(kb.objects(subject, RDF.type))
+        assert URIRef(SOLVEIT_CORE + "SolveitInvestigativeAction") in set(
+            kb.objects(subject, RDFS.subClassOf)
+        )
 
 
 # ---------------------------------------------------------------------------
 # Extension wiring: dependencies + strict concept coverage
 # ---------------------------------------------------------------------------
 class TestExtensionWiring:
-    def test_dependency_resolution_pulls_attack_technique(self):
+    def test_dependency_resolution_does_not_pull_attack_catalog(self):
+        # SOLVE-IT (forensic practice) and ATT&CK (adversary tradecraft) are
+        # unrelated vocabularies; the shared metaclass is in UCO 1.5.0.
         resolved = graph_validator.resolve_extension_dependencies(
             ["solveit"], PROJECT_ROOT
         )
         assert "solveit" in resolved
-        assert "attack-technique" in resolved
+        assert "attack-technique" not in resolved
 
     def test_concept_coverage_native_style(self, tmp_path):
         import concept_coverage
@@ -184,9 +194,9 @@ class TestExtensionWiring:
             "@prefix solveit-data: <https://ontology.solveit-df.org/solveit/data/> .\n"
             "@prefix uco-core: <https://ontology.unifiedcyberontology.org/uco/core/> .\n"
             "<urn:uuid:11111111-1111-5111-8111-111111111111>\n"
-            "  a solveit-core:SolveitInvestigativeAction ;\n"
+            "  a solveit-core:SolveitInvestigativeAction , solveit-data:techniqueDFT-1002 ;\n"
             "  uco-core:name \"synthetic\" ;\n"
-            "  solveit-core:usedTechnique solveit-data:techniqueDFT-1002 .\n",
+            "  solveit-core:appliedMitigation solveit-data:mitigationDFM-1003 .\n",
             encoding="utf-8",
         )
         report = concept_coverage.check_graph_concepts(

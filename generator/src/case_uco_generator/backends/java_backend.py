@@ -141,6 +141,8 @@ class JavaBackend(CodegenBackend):
             field_name = self.safe_identifier(field_name, "java")
             if prop.cardinality.is_required:
                 lines.append(f"    @org.caseontology.CaseRequired")
+            if prop.binary_datatype:
+                lines.append(f'    @org.caseontology.CaseDatatype("{prop.binary_datatype}")')
             lines.append(f"    private {java_type} {field_name};")
 
         lines.append("")

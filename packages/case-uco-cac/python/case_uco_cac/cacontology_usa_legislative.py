@@ -22,7 +22,6 @@ class AppropriationType:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[langString] = field(default_factory=list)
 
 
 @dataclass
@@ -41,9 +40,6 @@ class FundingNeed:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    need_description: list[str] = field(default_factory=list)
-    priority_level: Optional[str] = field(default=None)
-    requested_amount: list[float] = field(default_factory=list)
 
 
 @dataclass
@@ -69,30 +65,6 @@ class LegislativeStage:
     """Stage in the U.S. legislative process."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/usa-legislative#LegislativeStage"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[langString] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
-    is_final: Optional[bool] = field(default=None)
-    stage_order: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -111,9 +83,6 @@ class Outcome:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[langString] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
-    is_positive: Optional[bool] = field(default=None)
 
 
 @dataclass
@@ -132,8 +101,6 @@ class USCabinetAgency:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[langString] = field(default_factory=list)
-    acronym: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -141,11 +108,6 @@ class USConferenceCommittee:
     """Bicameral reconciliation process between House and Senate versions."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/usa-legislative#USConferenceCommittee"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    process_date: Optional[date] = field(default=None)
-    process_status: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -164,8 +126,6 @@ class USCongressionalCommittee:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[langString] = field(default_factory=list)
-    chamber: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -173,11 +133,6 @@ class USExecutiveAction:
     """Presidential signing or veto of legislation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/usa-legislative#USExecutiveAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    process_date: Optional[date] = field(default=None)
-    process_status: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -196,9 +151,6 @@ class USFederalAgencyOffice:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    acronym: Optional[str] = field(default=None)
-    parent_agency: Optional[Any] = field(default=None)
 
 
 @dataclass
@@ -217,9 +169,6 @@ class USFederalDirectorate:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[langString] = field(default_factory=list)
-    acronym: Optional[str] = field(default=None)
-    parent_agency: Optional[USSubCabinetAgency] = field(default=None)
 
 
 @dataclass
@@ -227,11 +176,6 @@ class USReconciliation:
     """Special budget reconciliation process in U.S. Congress."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/usa-legislative#USReconciliation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    process_date: Optional[date] = field(default=None)
-    process_status: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -239,11 +183,6 @@ class USRulemakingProcess:
     """Administrative Procedure Act rulemaking process."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/usa-legislative#USRulemakingProcess"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    process_date: Optional[date] = field(default=None)
-    process_status: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -262,7 +201,6 @@ class USStateAgency:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[langString] = field(default_factory=list)
 
 
 @dataclass
@@ -281,7 +219,6 @@ class USStateAttorneyGeneral:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[langString] = field(default_factory=list)
 
 
 @dataclass
@@ -300,7 +237,6 @@ class USStateICACtaskForce:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
 
@@ -321,7 +257,6 @@ class USStateLegislature:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -340,7 +275,4 @@ class USSubCabinetAgency:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[langString] = field(default_factory=list)
-    acronym: Optional[str] = field(default=None)
-    parent_agency: Optional[USCabinetAgency] = field(default=None)
 

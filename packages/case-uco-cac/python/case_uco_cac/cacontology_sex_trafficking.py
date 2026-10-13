@@ -22,25 +22,6 @@ class AdultTraffickingVictimRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -59,7 +40,6 @@ class AgingOutVictimProfile:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -78,25 +58,6 @@ class AssociateTraffickerRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    controls_victim: list[TraffickingVictimRole] = field(default_factory=list)
-    has_hierarchy_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -104,9 +65,6 @@ class CommercialSexualExploitation:
     """Forced engagement in commercial sexual activities for the traffickers' profit. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#CommercialSexualExploitation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -114,9 +72,6 @@ class CrossJurisdictionalControl:
     """Maintenance of victim control across multiple jurisdictions through coordinated trafficking network. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#CrossJurisdictionalControl"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -124,28 +79,6 @@ class DisruptionPhase:
     """Phase when trafficking enterprise faces law enforcement intervention."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#DisruptionPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -153,11 +86,6 @@ class EarningsCollection:
     """Collection of money earned through victim exploitation by trafficking operation. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#EarningsCollection"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    earnings_amount: Optional[float] = field(default=None)
-    earnings_period: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -165,28 +93,6 @@ class EstablishmentPhase:
     """Initial phase of trafficking enterprise formation and recruitment setup."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#EstablishmentPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -194,28 +100,6 @@ class ExpansionPhase:
     """Phase of trafficking enterprise growth, adding victims and locations."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#ExpansionPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -234,25 +118,6 @@ class FinancialFacilitatorRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    controls_victim: list[TraffickingVictimRole] = field(default_factory=list)
-    has_hierarchy_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -260,12 +125,6 @@ class InterstateVictimTransport:
     """Transportation of trafficking victims across state lines for commercial sexual exploitation. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#InterstateVictimTransport"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    destination_location: Optional[Location] = field(default=None)
-    origin_location: Optional[Location] = field(default=None)
-    transportation_method: Optional[UcoObject] = field(default=None)
 
 
 @dataclass
@@ -284,25 +143,6 @@ class MinorTraffickingVictimRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -310,11 +150,6 @@ class MultiJurisdictionalSituation:
     """Complex situation involving trafficking operations across multiple jurisdictions requiring coordinated law enforcement response."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#MultiJurisdictionalSituation"
-    label: list[str] = field(default_factory=list)
-    involves_jurisdiction_count: Optional[int] = field(default=None)
-    involves_trafficker_count: Optional[int] = field(default=None)
-    involves_victim_count: Optional[int] = field(default=None)
-    situation_complexity: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -322,9 +157,6 @@ class MultiStateTraffickingConspiracy:
     """Criminal conspiracy spanning multiple states for trafficking operations (e.g., Brooklyn-North Carolina network). Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#MultiStateTraffickingConspiracy"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -332,9 +164,6 @@ class OngoingDangerResponse:
     """Response to situations where victims are identified as being in ongoing danger from traffickers. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#OngoingDangerResponse"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -347,7 +176,7 @@ class OngoingDangerResponse:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -367,28 +196,6 @@ class OperationalPhase:
     """Active operational phase of trafficking enterprise with established victim control."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#OperationalPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -407,25 +214,6 @@ class PrimaryTraffickerRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    controls_victim: list[TraffickingVictimRole] = field(default_factory=list)
-    has_hierarchy_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -444,25 +232,6 @@ class RecruitmentFacilitatorRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    controls_victim: list[TraffickingVictimRole] = field(default_factory=list)
-    has_hierarchy_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -481,7 +250,6 @@ class RunawayVictimProfile:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -500,25 +268,6 @@ class TraffickerRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    controls_victim: list[TraffickingVictimRole] = field(default_factory=list)
-    has_hierarchy_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -537,11 +286,6 @@ class TraffickingCell:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    enterprise_duration: Optional[str] = field(default=None)
-    has_enterprise_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_enterprise_end_point: Optional[dateTimeStamp] = field(default=None)
-    operates_in_jurisdiction: list[Location] = field(default_factory=list)
 
 
 @dataclass
@@ -560,11 +304,6 @@ class TraffickingEnterprise:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    enterprise_duration: Optional[str] = field(default=None)
-    has_enterprise_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_enterprise_end_point: Optional[dateTimeStamp] = field(default=None)
-    operates_in_jurisdiction: list[Location] = field(default_factory=list)
 
 
 @dataclass
@@ -590,7 +329,6 @@ class TraffickingNetworkSituation:
     """Complex situation encompassing active trafficking network operations across multiple jurisdictions."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#TraffickingNetworkSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -598,9 +336,6 @@ class TraffickingOperation:
     """Coordinated trafficking activity involving multiple perpetrators, victims, and locations. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#TraffickingOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -619,11 +354,6 @@ class TraffickingRing:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    enterprise_duration: Optional[str] = field(default=None)
-    has_enterprise_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_enterprise_end_point: Optional[dateTimeStamp] = field(default=None)
-    operates_in_jurisdiction: list[Location] = field(default_factory=list)
 
 
 @dataclass
@@ -631,9 +361,6 @@ class TraffickingVictimRescue:
     """Specialized rescue operation for trafficking victims involving multiple agencies and victim services. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#TraffickingVictimRescue"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -646,7 +373,7 @@ class TraffickingVictimRescue:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -677,25 +404,6 @@ class TraffickingVictimRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -714,25 +422,6 @@ class TransportationFacilitatorRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    controls_victim: list[TraffickingVictimRole] = field(default_factory=list)
-    has_hierarchy_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -740,9 +429,6 @@ class VictimControl:
     """Methods used to maintain psychological and physical control over trafficking victims. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#VictimControl"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -750,7 +436,6 @@ class VictimControlSituation:
     """Ongoing situation of psychological and physical control maintained over trafficking victims."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#VictimControlSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -758,9 +443,6 @@ class VictimEmergencyResponse:
     """Emergency response to 911 calls from trafficking victims seeking help. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#VictimEmergencyResponse"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -773,7 +455,7 @@ class VictimEmergencyResponse:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -793,9 +475,6 @@ class VictimRecruitment:
     """Process of identifying, targeting, and acquiring new victims for trafficking operations. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#VictimRecruitment"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -803,12 +482,6 @@ class VictimRotation:
     """Systematic movement of victims between different locations to avoid detection and maintain control. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#VictimRotation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    destination_location: Optional[Location] = field(default=None)
-    origin_location: Optional[Location] = field(default=None)
-    transportation_method: Optional[UcoObject] = field(default=None)
 
 
 @dataclass
@@ -816,9 +489,6 @@ class VictimSafetyAssessment:
     """Assessment of victim safety and ongoing threats from trafficking network. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#VictimSafetyAssessment"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -831,7 +501,7 @@ class VictimSafetyAssessment:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -851,12 +521,6 @@ class VictimTransportation:
     """Transportation of trafficking victims between locations for commercial sexual exploitation. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/trafficking#VictimTransportation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    destination_location: Optional[Location] = field(default=None)
-    origin_location: Optional[Location] = field(default=None)
-    transportation_method: Optional[UcoObject] = field(default=None)
 
 
 @dataclass
@@ -875,5 +539,4 @@ class VictimVulnerabilityProfile:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
 

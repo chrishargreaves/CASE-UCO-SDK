@@ -1,0 +1,121 @@
+# SmishViz Extension — SHACL shapes
+#
+# Constraints for analytic campaign partitions and PF/PT annotation
+# vocabulary. Core MessageFacet / URLFacet / DomainNameFacet and
+# uco-core:Relationship shapes remain the responsibility of CASE/UCO.
+
+@prefix smish: <https://reactlab.org/smishviz/ontology/> .
+@prefix uco-core: <https://ontology.unifiedcyberontology.org/uco/core/> .
+@prefix uco-observable: <https://ontology.unifiedcyberontology.org/uco/observable/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+smish:CampaignCluster-shape
+	a sh:NodeShape ;
+	sh:targetClass smish:CampaignCluster ;
+	sh:nodeKind sh:IRI ;
+	sh:property
+		[
+			sh:path uco-core:name ;
+			sh:datatype xsd:string ;
+			sh:minCount 1 ;
+			sh:maxCount 1 ;
+			sh:nodeKind sh:Literal ;
+			sh:message "A CampaignCluster must have exactly one uco-core:name (for example MC(5))."@en ;
+		] .
+
+smish:CampaignSubcluster-shape
+	a sh:NodeShape ;
+	sh:targetClass smish:CampaignSubcluster ;
+	sh:nodeKind sh:IRI ;
+	sh:property
+		[
+			sh:path uco-core:name ;
+			sh:datatype xsd:string ;
+			sh:minCount 1 ;
+			sh:maxCount 1 ;
+			sh:nodeKind sh:Literal ;
+			sh:message "A CampaignSubcluster must have exactly one uco-core:name (for example MC(5)-S1)."@en ;
+		] ,
+		[
+			sh:path smish:partOfCluster ;
+			sh:class smish:CampaignCluster ;
+			sh:nodeKind sh:IRI ;
+			sh:minCount 1 ;
+			sh:maxCount 1 ;
+			sh:message "A CampaignSubcluster must link to exactly one parent CampaignCluster via partOfCluster."@en ;
+		] .
+
+smish:Keyword-shape
+	a sh:NodeShape ;
+	sh:targetClass smish:Keyword ;
+	sh:nodeKind sh:IRI ;
+	sh:property
+		[
+			sh:path uco-core:name ;
+			sh:datatype xsd:string ;
+			sh:minCount 1 ;
+			sh:maxCount 1 ;
+			sh:nodeKind sh:Literal ;
+		] .
+
+smish:PsychologicalFactor-shape
+	a sh:NodeShape ;
+	sh:targetClass smish:PsychologicalFactor ;
+	sh:nodeKind sh:IRI ;
+	sh:property
+		[
+			sh:path uco-core:name ;
+			sh:datatype xsd:string ;
+			sh:minCount 1 ;
+			sh:maxCount 1 ;
+			sh:nodeKind sh:Literal ;
+		] .
+
+smish:PersuasionTechnique-shape
+	a sh:NodeShape ;
+	sh:targetClass smish:PersuasionTechnique ;
+	sh:nodeKind sh:IRI ;
+	sh:property
+		[
+			sh:path uco-core:name ;
+			sh:datatype xsd:string ;
+			sh:minCount 1 ;
+			sh:maxCount 1 ;
+			sh:nodeKind sh:Literal ;
+		] .
+
+# Extension properties on Message / SMSMessage instances
+smish:Message-smishviz-shape
+	a sh:NodeShape ;
+	sh:targetClass uco-observable:Message ;
+	sh:property
+		[
+			sh:path smish:belongsToCluster ;
+			sh:class smish:CampaignCluster ;
+			sh:nodeKind sh:IRI ;
+			sh:maxCount 1 ;
+		] ,
+		[
+			sh:path smish:belongsToSubcluster ;
+			sh:class smish:CampaignSubcluster ;
+			sh:nodeKind sh:IRI ;
+			sh:maxCount 1 ;
+		] ,
+		[
+			sh:path smish:hasKeyword ;
+			sh:class smish:Keyword ;
+			sh:nodeKind sh:IRI ;
+			sh:maxCount 3 ;
+			sh:message "SmishViz associates at most three BERTopic keywords per message."@en ;
+		] ,
+		[
+			sh:path smish:hasPsychologicalFactor ;
+			sh:class smish:PsychologicalFactor ;
+			sh:nodeKind sh:IRI ;
+		] ,
+		[
+			sh:path smish:hasPersuasionTechnique ;
+			sh:class smish:PersuasionTechnique ;
+			sh:nodeKind sh:IRI ;
+		] .

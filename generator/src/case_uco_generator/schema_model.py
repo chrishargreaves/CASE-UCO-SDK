@@ -97,6 +97,11 @@ XSD_TYPE_MAP: dict[str, dict[str, str]] = {
     },
 }
 
+_BINARY_DATATYPES: dict[str, str] = {
+    "http://www.w3.org/2001/XMLSchema#hexBinary": "xsd:hexBinary",
+    "http://www.w3.org/2001/XMLSchema#base64Binary": "xsd:base64Binary",
+}
+
 UNION_FALLBACK_TYPE_MAP: dict[str, str] = {
     "python": "Any",
     "csharp": "object",
@@ -136,10 +141,20 @@ class OntologyProperty:
     cardinality: Cardinality
     description: str = ""
     alternate_range_iris: list[str] = field(default_factory=list)
+    # True when a shape targeting the owning class sets sh:maxCount 0, so an
+    # inherited property must not be used on this class or its subclasses.
+    forbidden: bool = False
 
     @property
     def is_xsd_type(self) -> bool:
         return self.range_iri in XSD_TYPE_MAP
+
+    @property
+    def binary_datatype(self) -> str | None:
+        """``xsd:hexBinary`` / ``xsd:base64Binary`` for byte-array ranges, else None."""
+        if self.is_union:
+            return None
+        return _BINARY_DATATYPES.get(self.range_iri)
 
     @property
     def is_custom_rdf_datatype(self) -> bool:
@@ -203,6 +218,7 @@ class OntologyClass:
     properties: list[OntologyProperty] = field(default_factory=list)
     is_facet: bool = False
     description: str = ""
+    equivalent_iris: list[str] = field(default_factory=list)
 
     @property
     def all_parent_names(self) -> list[str]:
@@ -226,6 +242,8 @@ class OntologySchema:
     vocabs: dict[str, OntologyVocab] = field(default_factory=dict)
     namespaces: dict[str, str] = field(default_factory=dict)
     modules: dict[str, list[str]] = field(default_factory=dict)
+    # Extensions whose manifest sets ``class_registry: false``: name -> display name.
+    catalog_extensions: dict[str, str] = field(default_factory=dict)
 
     def without_extensions(self) -> OntologySchema:
         """Return a copy of this schema excluding extension (ext.*) modules."""
@@ -250,10 +268,13 @@ class OntologySchema:
         return self.classes.get(iri)
 
     def resolve_all_properties(self, cls: OntologyClass) -> list[OntologyProperty]:
-        """Get all properties including inherited ones, deduplicating by IRI."""
+        """Get all usable properties including inherited ones, deduplicating by IRI.
+
+        Properties a class forbids (``sh:maxCount 0``) are left out.
+        """
         seen: dict[str, OntologyProperty] = {}
         self._collect_properties(cls, seen)
-        return list(seen.values())
+        return [prop for prop in seen.values() if not prop.forbidden]
 
     def _collect_properties(
         self, cls: OntologyClass, seen: dict[str, OntologyProperty]

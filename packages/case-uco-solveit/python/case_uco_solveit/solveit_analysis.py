@@ -27,7 +27,7 @@ class ForensicToolTagBasedReport:
 
 @dataclass
 class Hypothesis:
-    """A proposition or explanation put forward for consideration during forensic analysis, which may be supported or contradicted by observable artifacts."""
+    """A statement that is either true or false, the truth of which is uncertain."""
 
     CLASS_IRI: str = "https://ontology.solveit-df.org/solveit/analysis/Hypothesis"
     created_by: Optional[IdentityAbstraction] = field(default=None)
@@ -83,6 +83,28 @@ class HypothesisedCommunication:
 
 
 @dataclass
+class HypothesisedConfiguration:
+    """A configuration proposed from the artefacts it left behind, where the configuration itself was never observed - as distinct from one read directly from a settings file or a live system. Settings are g"""
+
+    CLASS_IRI: str = "https://ontology.solveit-df.org/solveit/analysis/HypothesisedConfiguration"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    statement: list[str] = field(default_factory=list)
+    configuration_entry: list[ConfigurationEntry] = field(default_factory=list)
+    dependencies: list[Dependency] = field(default_factory=list)
+    usage_context_assumptions: list[str] = field(default_factory=list)
+
+
+@dataclass
 class HypothesisedDevice:
     """A device that is hypothesised to have been involved, such as a device inferred from artifacts but not yet physically identified or examined."""
 
@@ -121,10 +143,10 @@ class HypothesisedEvent:
 
 
 @dataclass
-class HypothesisedRelationship:
-    """A relationship between entities that is hypothesised to exist, such as an inferred association between persons, accounts, devices, or locations based on co-occurrence patterns, shared identifiers, or """
+class HypothesisedRecord:
+    """A database record hypothesised to have existed, typically reconstructed from deallocated or partially overwritten storage such as freeblocks, unallocated page space, or freelist pages. The claim it ma"""
 
-    CLASS_IRI: str = "https://ontology.solveit-df.org/solveit/analysis/HypothesisedRelationship"
+    CLASS_IRI: str = "https://ontology.solveit-df.org/solveit/analysis/HypothesisedRecord"
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -140,8 +162,58 @@ class HypothesisedRelationship:
 
 
 @dataclass
+class HypothesisedRelationship:
+    """A relationship between entities that is hypothesised to exist. This covers inferred associations between persons, accounts, devices or locations - drawn from co-occurrence patterns, shared identifiers"""
+
+    CLASS_IRI: str = "https://ontology.solveit-df.org/solveit/analysis/HypothesisedRelationship"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    statement: list[str] = field(default_factory=list)
+    end_time: list[datetime] = field(default_factory=list)
+    is_directional: Optional[bool] = field(default=None)
+    kind_of_relationship: Optional[str] = field(default=None)
+    source: list[UcoObject] = field(default_factory=list)
+    start_time: list[datetime] = field(default_factory=list)
+    target: Optional[UcoObject] = field(default=None)
+
+
+@dataclass
+class HypothesisedTableAttribution:
+    """The claim that a recovered record belonged to a particular table. The record is the uco-core:source and the table the uco-core:target; neither is itself in doubt, only the link between them. Attributi"""
+
+    CLASS_IRI: str = "https://ontology.solveit-df.org/solveit/analysis/HypothesisedTableAttribution"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    statement: list[str] = field(default_factory=list)
+    end_time: list[datetime] = field(default_factory=list)
+    is_directional: Optional[bool] = field(default=None)
+    kind_of_relationship: Optional[str] = field(default=None)
+    source: list[UcoObject] = field(default_factory=list)
+    start_time: list[datetime] = field(default_factory=list)
+    target: Optional[UcoObject] = field(default=None)
+
+
+@dataclass
 class HypothesisedUserAccount:
-    """A user account that is hypothesised to have existed, for example inferred from recovered deleted account records, carved registry artifacts, or references to the account in other artifacts. Supporting"""
+    """A user account that is hypothesised to have existed, for example inferred from recovered deleted account records, carved registry artifacts, or references to the account in other artifacts."""
 
     CLASS_IRI: str = "https://ontology.solveit-df.org/solveit/analysis/HypothesisedUserAccount"
     created_by: Optional[IdentityAbstraction] = field(default=None)

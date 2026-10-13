@@ -104,6 +104,37 @@ PROFILE_REGISTRY: dict[str, dict[str, Any]] = {
         "extension_policy": {},
         "inference": "rdfs",
     },
+    # SDK-pinned ontologies without a CDO-Shapes profile (#60). Only the QUDT
+    # schema joins the SHACL run; unit and quantity-kind IRIs are checked
+    # against the term registry by concept coverage.
+    "qudt": {
+        "canonical_id": "urn:case-uco-sdk:profile:qudt",
+        "sources": ["ontology/upper/qudt-schema.ttl"],
+        "shapes": ["ontology/upper/sdk-shapes/sh-qudt-sdk.ttl"],
+        "depends_on": [],
+        "incompatible_with": [],
+        "extension_policy": {},
+        "inference": "rdfs",
+    },
+    "sosa": {
+        "canonical_id": "urn:case-uco-sdk:profile:sosa",
+        "sources": ["ontology/upper/sosa.ttl"],
+        "shapes": ["ontology/upper/sdk-shapes/sh-sosa-sdk.ttl"],
+        "depends_on": [],
+        "incompatible_with": [],
+        "extension_policy": {},
+        "inference": "rdfs",
+    },
+    "ssn": {
+        "canonical_id": "urn:case-uco-sdk:profile:ssn",
+        "sources": ["ontology/upper/ssn.ttl", "ontology/upper/ssn-systems.ttl"],
+        "shapes": [],
+        # SSN imports SOSA.
+        "depends_on": ["sosa"],
+        "incompatible_with": [],
+        "extension_policy": {},
+        "inference": "rdfs",
+    },
 }
 
 # Foundational profiles that must not be selected together without an
@@ -144,7 +175,7 @@ class ResolvedValidationBundle:
     inference: str | None
     compatibility_notes: tuple[str, ...]
     fingerprint: str
-    built_version: str = "case-1.4.0"
+    built_version: str = "case-1.5.0"
     requested_profiles: tuple[str, ...] = ()  # as supplied by the caller (pre-normalize)
     cache_status: str = "miss"  # hit | miss | stale | disabled
     resolver_schema_version: str = RESOLVER_SCHEMA_VERSION
@@ -246,8 +277,10 @@ def _canonical_cache_key(
 ) -> str:
     """Normalize aliases and sort set-like inputs for stable cache keys (CQ-33)."""
     norm_profiles = sorted({_normalize_profile_id(p) for p in profiles})
-    # Preserve :full suffix; sort by clean name for stability.
-    norm_ext = sorted(extensions, key=lambda e: (e.removesuffix(":full"), e.endswith(":full")))
+    # Preserve :full / named-subset suffixes; sort by clean name for stability.
+    from case_uco.validation.graph import parse_extension_token
+
+    norm_ext = sorted(extensions, key=lambda e: parse_extension_token(e))
     extras = sorted(str(Path(p).resolve()) for p in (extra_ontology_graphs or []))
     return json.dumps(
         {
@@ -345,10 +378,13 @@ def _combine_inference(
     if profiles:
         return chosen or "rdfs"
     used_subset = False
+    from case_uco.validation.graph import parse_extension_token
+
     for ext_name in expanded_ext:
-        mode = "full" if ext_name.endswith(":full") else "subset"
-        clean = ext_name.removesuffix(":full")
-        if mode == "subset" and extension_has_validation_subset(clean, project_root):
+        clean, mode = parse_extension_token(ext_name)
+        if mode != "full" and (
+            mode != "subset" or extension_has_validation_subset(clean, project_root)
+        ):
             used_subset = True
             break
     if used_subset:
@@ -487,8 +523,10 @@ def _build_bundle(
 
     for pid in normalized_profiles:
         meta = PROFILE_REGISTRY[pid]
+        from case_uco.validation.graph import parse_extension_token
+
         for ext in expanded_ext:
-            clean = ext.removesuffix(":full")
+            clean, _mode = parse_extension_token(ext)
             policy = meta.get("extension_policy", {}).get(clean)
             if policy == "not_recommended":
                 notes.append(
@@ -538,9 +576,10 @@ def _build_bundle(
             )
         )
 
+    from case_uco.validation.graph import parse_extension_token
+
     for ext_name in expanded_ext:
-        mode = "full" if ext_name.endswith(":full") else "subset"
-        clean = ext_name.removesuffix(":full")
+        clean, mode = parse_extension_token(ext_name)
         for full in load_extension_ontology_paths(clean, mode=mode, project_root=project_root):
             role = "shapes" if "shape" in full.name.lower() else "ontology"
             if "bridge" in full.name.lower():
@@ -634,8 +673,28 @@ def hash_validation_bundle_identity(
         "built_version": bundle.built_version,
         "validator_version": validator_version,
         "extensions": list(bundle.extensions),
+        "extension_versions": _extension_versions(bundle.extensions, project_root),
         "profiles": list(bundle.profiles),
     }
+
+
+def _extension_versions(extensions: tuple[str, ...], project_root: Path) -> dict[str, str | None]:
+    """Manifest ``version`` of each selected extension (None when unreadable)."""
+    from case_uco.validation.extension_paths import find_extension_dir
+    from case_uco.validation.graph import parse_extension_token
+
+    versions: dict[str, str | None] = {}
+    for token in extensions:
+        name, _mode = parse_extension_token(token)
+        ext_dir = find_extension_dir(name, project_root)
+        version = None
+        if ext_dir is not None:
+            try:
+                version = json.loads((ext_dir / "manifest.json").read_text(encoding="utf-8")).get("version")
+            except (OSError, json.JSONDecodeError, AttributeError):
+                version = None
+        versions[name] = version
+    return versions
 
 __all__ = [
     "FOUNDATIONAL_EXCLUSIVE",

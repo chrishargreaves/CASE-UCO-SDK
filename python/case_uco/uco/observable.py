@@ -2173,8 +2173,8 @@ class ObservableRelationship(Relationship):
     CLASS_IRI: str = "https://ontology.unifiedcyberontology.org/uco/observable/ObservableRelationship"
     NAMESPACE_PREFIX: str = "uco-observable"
 
-    source: list[Observable] = field(default_factory=list, metadata={'jsonld_key': 'uco-core:source', 'required': False, 'cardinality': 'zero_or_more', 'range_iri': 'https://ontology.unifiedcyberontology.org/uco/observable/Observable', 'alternate_range_iris': []})
-    target: list[Observable] = field(default_factory=list, metadata={'jsonld_key': 'uco-core:target', 'required': False, 'cardinality': 'zero_or_more', 'range_iri': 'https://ontology.unifiedcyberontology.org/uco/observable/Observable', 'alternate_range_iris': []})
+    source: list[Observable] = field(default_factory=list, metadata={'jsonld_key': 'uco-core:source', 'required': True, 'cardinality': 'one_or_more', 'range_iri': 'https://ontology.unifiedcyberontology.org/uco/observable/Observable', 'alternate_range_iris': []})
+    target: list[Observable] = field(default_factory=list, metadata={'jsonld_key': 'uco-core:target', 'required': True, 'cardinality': 'one_or_more', 'range_iri': 'https://ontology.unifiedcyberontology.org/uco/observable/Observable', 'alternate_range_iris': []})
 
 
 @dataclass

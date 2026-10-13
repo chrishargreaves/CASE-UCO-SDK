@@ -1,0 +1,74 @@
+{
+  "@context": {
+    "kb": "http://example.org/kb/",
+    "proposed": "http://example.org/ontology/proposed/",
+    "uco-core": "https://ontology.unifiedcyberontology.org/uco/core/",
+    "uco-observable": "https://ontology.unifiedcyberontology.org/uco/observable/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "kb:plc-raw-03",
+      "@type": "uco-observable:EmbeddedDevice",
+      "uco-core:name": "PLC-RAW-03",
+      "uco-core:description": [
+        "Synthetic raw-water pump PLC from the Operation COOLING TOWER scenario."
+      ],
+      "uco-core:hasFacet": [
+        {
+          "@id": "kb:plc-raw-03-device-facet",
+          "@type": "uco-observable:DeviceFacet",
+          "uco-observable:deviceType": "programmable-logic-controller",
+          "uco-observable:model": "ControlLogix 1756-L83E (synthetic)",
+          "uco-observable:serialNumber": "SN-T0-PLC-RAW-03"
+        },
+        {
+          "@id": "kb:plc-raw-03-ics-facet",
+          "@type": "proposed:IndustrialControlDeviceFacet",
+          "proposed:controllerRole": "plc",
+          "proposed:firmwareRevision": "32.011",
+          "proposed:programIdentity": "RAW_WATER_PUMP3_v12",
+          "proposed:rackNumber": 0,
+          "proposed:slotNumber": 0,
+          "proposed:otNetworkZone": "Purdue-L1-OT-VLAN-50"
+        }
+      ]
+    },
+    {
+      "@id": "kb:event-hihi-pump3",
+      "@type": "uco-observable:EventRecord",
+      "uco-core:name": "Historian HIHI — PUMP3_DISCHARGE_PSI",
+      "uco-core:hasFacet": [
+        {
+          "@id": "kb:event-hihi-pump3-record-facet",
+          "@type": "uco-observable:EventRecordFacet",
+          "uco-observable:eventType": "HIHI",
+          "uco-observable:eventRecordDevice": {
+            "@id": "kb:plc-raw-03"
+          },
+          "uco-observable:eventRecordText": "PUMP3_DISCHARGE_PSI HIHI active"
+        },
+        {
+          "@id": "kb:event-hihi-pump3-process-facet",
+          "@type": "proposed:IndustrialProcessEventFacet",
+          "proposed:processTagName": "PUMP3_DISCHARGE_PSI",
+          "proposed:engineeringUnit": "psi",
+          "proposed:processValue": {
+            "@type": "xsd:decimal",
+            "@value": "118.4"
+          },
+          "proposed:setpointValue": {
+            "@type": "xsd:decimal",
+            "@value": "95.0"
+          },
+          "proposed:priorSetpointValue": {
+            "@type": "xsd:decimal",
+            "@value": "72.0"
+          },
+          "proposed:protocolFunctionCode": "16",
+          "proposed:protocolObjectAddress": "40010"
+        }
+      ]
+    }
+  ]
+}

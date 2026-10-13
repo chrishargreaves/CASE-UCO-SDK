@@ -24,14 +24,14 @@
             "@id": "kb:descriptor-shacl",
             "@type": "prof:ResourceDescriptor",
             "prof:hasRole": {
-                "@id": "http://www.w3.org/ns/dx/prof/role/ValidationRole"
+                "@id": "http://www.w3.org/ns/dx/prof/role/validation"
             },
             "dcterms:format": {
                 "@id": "https://www.iana.org/assignments/media-types/text/turtle"
             },
             "dcterms:description": "CASE/UCO SHACL shapes bundle used for conformance checking.",
             "prof:hasArtifact": {
-                "@id": "https://github.com/casework/CASE-UCO/releases/download/case-1.4.0/case-shapes.ttl"
+                "@id": "https://github.com/casework/CASE-UCO/releases/download/case-1.5.0/case-shapes.ttl"
             }
         },
         {
@@ -76,7 +76,7 @@
             }
         },
         {
-            "@id": "kb:Investigation-83f6ae86-3840-4808-ba44-bf3f81e68830",
+            "@id": "kb:Investigation-c15ea5b9-c221-4255-adca-32a464e39ff8",
             "@type": "case-investigation:Investigation",
             "uco-core:description": [
                 "Graph carries PROF profile intent; validation results are separate prov:Entity resources.",

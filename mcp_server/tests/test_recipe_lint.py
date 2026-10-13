@@ -226,6 +226,45 @@ def test_declared_terms_and_registered_relationship_kind_pass():
     assert [finding for finding in findings if not finding.excluded] == []
 
 
+def test_subset_tokens_dotted_properties_and_class_diagram_labels_pass():
+    catalog = _catalog()
+    catalog = OntologyCatalog(
+        prefixes={**catalog.prefixes, "cac": "https://cacontology.projectvic.org#"},
+        classes=catalog.classes,
+        properties=catalog.properties,
+        other_terms=catalog.other_terms,
+        class_local_names=catalog.class_local_names,
+        property_local_names=catalog.property_local_names,
+        validation_subsets=frozenset({"cac:missing-child", "cac:full"}),
+    )
+    text = """Validate with `extensions=["cac:missing-child"]`.
+
+| Field | Pattern |
+|---|---|
+| Platform | `cacontology-sextortion:SextortionIncident.conductsOnPlatform` |
+
+```text
+Incident
+  └── Facet ──▶ exhibit number
+```
+"""
+    findings, _checked = lint_recipe_text(
+        text,
+        path="docs/recipes/test.md",
+        catalog=catalog,
+        relationship_kinds=known_relationship_kinds(),
+    )
+    assert [finding for finding in findings if not finding.excluded] == []
+
+    findings, _checked = lint_recipe_text(
+        "| Field | Pattern |\n|---|---|\n| x | `cacontology-sextortion:SextortionIncident.madeUp` |",
+        path="docs/recipes/test.md",
+        catalog=catalog,
+        relationship_kinds=known_relationship_kinds(),
+    )
+    assert any(not finding.excluded for finding in findings)
+
+
 def test_explicit_anti_pattern_and_wildcard_are_reported_as_exclusions():
     text = """## Anti-patterns
 

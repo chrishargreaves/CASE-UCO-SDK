@@ -1,0 +1,13 @@
+{
+  "extension": "atlas-technique",
+  "modules": [
+    "atlas-technique"
+  ],
+  "classes": {},
+  "vocabs": {},
+  "technique_catalog": {
+    "framework": "MITRE ATLAS",
+    "metaclass": "https://ontology.unifiedcyberontology.org/uco/action/Technique",
+    "discovery": "search_adversary_techniques / get_adversary_technique (MCP); the uco-action:Technique metaclass itself is in the core registry (UCO 1.5.0)"
+  }
+}

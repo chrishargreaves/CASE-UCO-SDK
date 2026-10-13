@@ -220,7 +220,7 @@ same way is what lets a two-tool case be queried once.
 6. For every hit, emit the `Source` fragment as a `Contained_Within` edge and
    apply `RecoveredObjectFacet` when `Recovery method` is `Carving`.
 7. Promote EXIF GPS fragments to a `Location` with coordinates.
-8. Validate: `case_validate --built-version case-1.4.0 axiom-export.jsonld`, or
+8. Validate: `case_validate --built-version case-1.5.0 axiom-export.jsonld`, or
    `validate_graph(path)` through the MCP server for strict concept coverage.
 
 ## Validated exemplar
@@ -237,7 +237,7 @@ every hash in the exemplar is computed over bytes the builder defines.
 
 ```bash
 python3 examples/vendor-exports/build_magnet_axiom_export.py
-case_validate --built-version case-1.4.0 examples/vendor-exports/magnet-axiom-export.jsonld
+case_validate --built-version case-1.5.0 examples/vendor-exports/magnet-axiom-export.jsonld
 ```
 
 ## Related

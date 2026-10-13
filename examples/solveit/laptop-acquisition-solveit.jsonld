@@ -63,14 +63,12 @@
     },
     {
       "@id": "urn:uuid:67e2fce1-6aa1-59a1-9ff3-924bbe574b5b",
-      "@type": "solveit-core:SolveitInvestigativeAction",
+      "@type": [
+        "solveit-core:SolveitInvestigativeAction",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1002"
+      ],
       "uco-core:name": "acquire-laptop-image",
       "uco-core:description": "Physical acquisition of the seized laptop SSD (SOLVE-IT DFT-1002) with image-size check (DFM-1003) and source/image hash verification (DFM-1004) applied.",
-      "solveit-core:usedTechnique": [
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1002"
-        }
-      ],
       "solveit-core:appliedMitigation": [
         {
           "@id": "https://ontology.solveit-df.org/solveit/data/mitigationDFM-1003"
@@ -150,13 +148,29 @@
       }
     },
     {
+      "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1002",
+      "@type": [
+        "http://www.w3.org/2002/07/owl#Class",
+        "https://ontology.solveit-df.org/solveit/core/Technique"
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+        "@id": "https://ontology.solveit-df.org/solveit/core/SolveitInvestigativeAction"
+      },
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "DFT-1002: Copy sectors from storage media",
+        "@language": "en"
+      },
+      "https://ontology.solveit-df.org/solveit/core/techniqueID": "DFT-1002",
+      "https://ontology.solveit-df.org/solveit/core/techniqueName": "Copy sectors from storage media"
+    },
+    {
       "@id": "urn:uuid:98f5e555-093f-5685-9114-dc7c13055e4e",
       "@type": [
         "uco-action:Action",
         "solveit-data:techniqueDFT-1042"
       ],
       "uco-core:name": "verify-image-hash",
-      "uco-core:description": "Computed SHA-256 over the acquired image and compared with the source-device hash (SOLVE-IT DFT-1042, metaclass style).",
+      "uco-core:description": "Computed SHA-256 over the acquired image and compared with the source-device hash (SOLVE-IT DFT-1042).",
       "uco-action:performer": {
         "@id": "urn:uuid:e2ce5a80-ace4-5041-b719-fce04884a600"
       },

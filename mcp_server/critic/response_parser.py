@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 from typing import Any
 
@@ -248,7 +249,7 @@ def parse_critic_model_response(
                 finding_id=finding_id,
                 severity=item["severity"],
                 category=category,
-                confidence=float(item["confidence"]),
+                confidence=_finite(item["confidence"], "confidence"),
                 status="new",
                 target=target,
                 evidence_kind="critic_inference",
@@ -379,6 +380,20 @@ def build_assessment_ledger(
     return ledger
 
 
+def _finite(value: Any, field_name: str) -> float:
+    try:
+        number = float(value)
+    except (TypeError, ValueError) as exc:
+        raise CriticResponseError(
+            "critic_response_schema_mismatch", f"{field_name} is not a number"
+        ) from exc
+    if not math.isfinite(number):
+        raise CriticResponseError(
+            "critic_response_non_finite_number", f"{field_name} is not finite"
+        )
+    return number
+
+
 def _parse_scorecard(raw: dict[str, Any]) -> CriticScorecard:
     def dim(key: str) -> ScoreDimension:
         value = raw.get(key)
@@ -395,8 +410,11 @@ def _parse_scorecard(raw: dict[str, Any]) -> CriticScorecard:
                     hard_cap=value.get("hard_cap"),
                     cap_reason=value.get("cap_reason"),
                 )
+            hard_cap = value.get("hard_cap")
+            if hard_cap is not None:
+                _finite(hard_cap, f"scorecard.{key}.hard_cap")
             return ScoreDimension(
-                score=max(0, min(5, int(score))),
+                score=max(0, min(5, int(_finite(score, f"scorecard.{key}.score")))),
                 assessed=True,
                 evidence=list(value.get("evidence") or []),
                 hard_cap=value.get("hard_cap"),

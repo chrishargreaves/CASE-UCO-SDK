@@ -1,0 +1,23 @@
+# Competency question: what was the wallet worth in USD, when was it valued,
+# and which balance and rate source does the valuation rest on?
+PREFIX qudt: <http://qudt.org/schema/qudt/>
+PREFIX unit: <http://qudt.org/vocab/unit/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX uco-action: <https://ontology.unifiedcyberontology.org/uco/action/>
+PREFIX uco-core: <https://ontology.unifiedcyberontology.org/uco/core/>
+PREFIX uco-observable: <https://ontology.unifiedcyberontology.org/uco/observable/>
+
+SELECT ?usd ?valuedAt ?balance ?balanceUnit ?rateSource
+WHERE {
+  ?valuation a qudt:Quantity ;
+      qudt:quantityValue [ qudt:value ?u ; qudt:hasUnit unit:CCY_USD ] ;
+      prov:wasGeneratedBy ?action ;
+      prov:wasDerivedFrom ?balanceQuantity , ?rateSource .
+  ?balanceQuantity a qudt:Quantity ;
+      qudt:quantityValue [ qudt:value ?b ; qudt:hasUnit ?balanceUnit ] .
+  ?rateSource uco-core:hasFacet/a uco-observable:URLFacet .
+  ?action uco-action:startTime ?start .
+  BIND (STR(?u) AS ?usd)
+  BIND (STR(?b) AS ?balance)
+  BIND (STR(?start) AS ?valuedAt)
+}

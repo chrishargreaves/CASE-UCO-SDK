@@ -1,0 +1,46 @@
+{
+  "name": "atlas-technique",
+  "display_name": "MITRE ATLAS Technique Catalog (uco-action:Technique, UCO 1.5.0)",
+  "version": "1.0.0",
+  "class_registry": false,
+  "upstream_repo": "https://github.com/mitre-atlas/atlas-data",
+  "upstream_ref": "v2026.09",
+  "license": "Apache-2.0",
+  "namespaces": {
+    "uco-action": "https://ontology.unifiedcyberontology.org/uco/action/",
+    "atlas": "https://atlas.mitre.org/techniques/",
+    "atlas-tactic": "https://atlas.mitre.org/tactics/"
+  },
+  "owl_files": [
+    "mitre-atlas-catalog.ttl"
+  ],
+  "shacl_files": [],
+  "bridge_files": [],
+  "exemplar_files": [],
+  "depends_on": [],
+  "uco_compat": [
+    "1.5.0"
+  ],
+  "upper_ontology": "none",
+  "cdo_shapes_compatibility": {
+    "CDO-Shapes-gufo": "compatible",
+    "CDO-Shapes-BFO": "compatible",
+    "CDO-Shapes-PROV-O": "compatible",
+    "CDO-Shapes-Time": "compatible",
+    "CDO-Shapes-GeoSPARQL": "compatible",
+    "CDO-Shapes-FOAF": "compatible"
+  },
+  "provenance": {
+    "atlas_data_repo": "https://github.com/mitre-atlas/atlas-data",
+    "atlas_release": "2026.09",
+    "atlas_format_version": "6.0.0",
+    "atlas_source": "https://raw.githubusercontent.com/mitre-atlas/atlas-data/v2026.09/dist/v6/ATLAS-2026.09.yaml",
+    "sha256": "935efa93e28294432d3e2f537eb94991ef8d1f8c58341cd360ea3321ddb66688",
+    "technique_count": 208,
+    "subtechnique_count": 88,
+    "tactic_count": 16,
+    "synced": "2026-10-12T19:21:53+00:00",
+    "sync_tool": "mcp_server/tools/sync_atlas_catalog.py",
+    "license": "Apache-2.0 (https://github.com/mitre-atlas/atlas-data/blob/main/LICENSE)"
+  }
+}

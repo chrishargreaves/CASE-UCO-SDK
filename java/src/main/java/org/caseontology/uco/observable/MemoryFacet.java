@@ -15,8 +15,10 @@ public class MemoryFacet extends Facet {
     private Boolean isMapped;
     private Boolean isProtected;
     private Boolean isVolatile;
+    @org.caseontology.CaseDatatype("xsd:hexBinary")
     private List<byte[]> regionEndAddress;
     private Long regionSize;
+    @org.caseontology.CaseDatatype("xsd:hexBinary")
     private List<byte[]> regionStartAddress;
 
     public MemoryFacet() {

@@ -10,13 +10,13 @@ For the full class reference, see [ONTOLOGY_REFERENCE.md](../../ONTOLOGY_REFEREN
 >
 > ```bash
 > pip install case-utils  # one-time install
-> case_validate --built-version case-1.4.0 my-output.jsonld
+> case_validate --built-version case-1.5.0 my-output.jsonld
 > ```
 >
 > If you use an extension ontology, include its shapes:
 >
 > ```bash
-> case_validate --built-version case-1.4.0 \
+> case_validate --built-version case-1.5.0 \
 >   --ontology-graph path/to/extension.ttl \
 >   --ontology-graph path/to/extension-shapes.ttl \
 >   my-output.jsonld
@@ -46,10 +46,11 @@ End-to-end mapping recipes that walk through source input, modeling choices, ant
 | Modeling a Forensic Tool and Its Output | [forensic-tool.md](forensic-tool.md) | Create an investigation with a tool and investigative action | — |
 | Configured Tools | [configured-tool.md](configured-tool.md) | Tool configurations, rulesets, ConfiguredTool | [configured_tool](https://github.com/casework/CASE-Examples/tree/master/examples/illustrations/configured_tool) |
 | Chain of Custody | [chain-of-custody.md](chain-of-custody.md) | Track evidence handling, transfers, and provenance records | — |
+| Public-Record Capture Bundles | [public-record-capture.md](public-record-capture.md) | Manifested HTTP captures: hashes, redirects, failed fetches, renditions, verified citations, curator labels | [public-record-capture](../../examples/public-record-capture/) |
 | Forensic Analysis and Classification | [analysis.md](analysis.md) | Malware RE, automated artifact classification with confidence scores | [analysis](https://github.com/casework/CASE-Examples/tree/master/examples/illustrations/analysis) |
 | AI/ML Analysis Pipelines | [ai-analysis-pipeline.md](ai-analysis-pipeline.md) | Multi-step AI inference, image search, per-result scoring, ranked outputs | — |
 | Forensic Investigation Lifecycle | [forensic-lifecycle.md](forensic-lifecycle.md) | Ordered phases (survey, preservation, examination, analysis, reporting) | [forensic_lifecycle](https://github.com/casework/CASE-Examples/tree/master/examples/illustrations/forensic_lifecycle) |
-| SOLVE-IT Investigation Planning and Error Mitigation | [solve-it-investigation-planning.md](solve-it-investigation-planning.md) | State objectives, select techniques, record `SolveitInvestigativeAction` with `usedTechnique`/`appliedMitigation`, rate weaknesses (ASTM E3016-18) with `WeaknessEvaluation`; punned DFT-* technique classes for the UCO 1.5.0 metaclass style (`solveit` extension) | `solveit` |
+| SOLVE-IT Investigation Planning and Error Mitigation | [solve-it-investigation-planning.md](solve-it-investigation-planning.md) | State objectives, select techniques, record each `SolveitInvestigativeAction` typed with the DFT-* technique class it performed (`uco-action:Technique` metaclass) plus `appliedMitigation`, rate weaknesses (ASTM E3016-18) with `WeaknessEvaluation`, cite SOLVE-IT sources (`solveit` extension, SOLVE-IT 0.2.11) | `solveit` |
 | Technique, Evidence, and Legal-Outcome Join | [technique-evidence-outcome.md](technique-evidence-outcome.md) | Join sourced SOLVE-IT techniques, hashed evidence, and `legalproc` outcomes; source-fidelity table for press / PACER / lab / CTI; LE product suggestions stay off the graph until the source names the method | `solveit`, `legalproc` |
 | CaseLinker ICAC Remodel | [caselinker-icac-remodel.md](caselinker-icac-remodel.md) | Remodel CaseLinker CAC graphs: CyberTip triggers, share-safe series matches, `legalproc` dual-typing, commander phase clocks, drop private vocab | `cac`, `legalproc` |
 | Criminal Discovery and Disclosure | [legal-discovery-disclosure.md](legal-discovery-disclosure.md) | Sourced Brady / Giglio / Jencks / Rule 16 obligations and productions (`legalproc` 0.3.0) | `legalproc` |
@@ -59,12 +60,14 @@ End-to-end mapping recipes that walk through source input, modeling choices, ant
 | Elder Fraud and Government-Impersonation Schemes | [elder-fraud-impersonation.md](elder-fraud-impersonation.md) | Agent-impersonation call centers, money couriers, prepaid-card and cash-handoff schemes, controlled-delivery stings, records attribution | — |
 | Espionage Act and Classified-Information Disclosure | [espionage-classified-disclosure.md](espionage-classified-disclosure.md) | Classified NDI with `uco-marking` classification banners, SCIF removal chains, § 793/§ 794 counts, obstruction, clearance-holder knowledge timeline | — |
 | Export Control and Sanctions Evasion | [export-control-sanctions.md](export-control-sanctions.md) | IEEPA/EAR counts, dated Entity List designations, gUFO-typed controlled goods, false EEI/AES filings, papered-consignee vs. true-end-user chains | — |
-| Cyber Threat Intelligence and APT Reporting | [cyber-threat-intelligence.md](cyber-threat-intelligence.md) | APT/CTI report + graphics by hash; threat actor as Organization; malware family/variants; native registry persistence (service-DLL *or* fileless registry-buffer); DGA/cloud C2; victimology; ATT&CK via `uco-action:Technique` metaclass (UCO PR #676) | `attack-technique` |
+| Cyber Threat Intelligence and APT Reporting | [cyber-threat-intelligence.md](cyber-threat-intelligence.md) | APT/CTI report + graphics by hash; threat actor as Organization; malware family/variants; native registry persistence (service-DLL *or* fileless registry-buffer); DGA/cloud C2; victimology; complete ATT&CK v19.2 catalog (Enterprise, Mobile, ICS) via the `uco-action:Technique` metaclass | `attack-technique` |
+| Attacks on AI Systems (MITRE ATLAS) | [ai-system-attacks.md](ai-system-attacks.md) | Prompt injection, jailbreaks, evasion, poisoning, model extraction, and AI-agent tool abuse typed with MITRE ATLAS 2026.09 techniques via the `uco-action:Technique` metaclass; ATT&CK only where the evidence also shows intrusion | `atlas-technique` |
 | Insider Threat, Trade Secret Theft, and Economic Espionage | [insider-threat-trade-secrets.md](insider-threat-trade-secrets.md) | Insider exfiltration, corporate detection telemetry, per-category § 1832/§ 1831 counts, foreign-government-benefit evidence, jury verdicts | — |
 | Legal Process Modeling (Charges, Verdicts, Sentences) | [legal-process-modeling.md](legal-process-modeling.md) | Conspiracy/attempt/derivative charges, verdicts, pleas, sentences, forfeiture, restitution for any investigation type via the `legalproc` extension | — |
 | Racketeering (RICO) and Criminal Enterprise | [racketeering-enterprise.md](racketeering-enterprise.md) | Association-in-fact enterprises, enterprise-role division of labor, predicate statute categories on RICO counts, multi-instrument count suffixes (`rico` extension + `legalproc`/`cryptoinv`) | `rico` |
 | Weapons and Drug Evidence | [weapons-drug-evidence.md](weapons-drug-evidence.md) | Firearms/ammunition with make, model, caliber, serial (`weapons` extension, CCO Artifact Ontology + gUFO bridges) and controlled-substance portions with ChEBI identity, CSA schedule, mass, purity basis (`drugs` extension, `gufo:Quantity` bridge) | `weapons`, `drugs` |
 | Cargo Theft and Route Staging | [cargo-theft-route-staging.md](cargo-theft-route-staging.md) | Freight theft, geofence deviation, warehouse staging, manifest anomalies | — |
+| ICS/SCADA and OT Network Intrusion | [otics-scada-intrusion.md](otics-scada-intrusion.md) | PLC/HMI assets, Modbus/TCP process writes, historian alarms, engineering workstation project files | — |
 | NCMEC CyberTip Reporting Workflow | [cybertip-ncmec-workflow.md](cybertip-ncmec-workflow.md) | Platform detection, ESP reporting, CyberTip lifecycle, and CAC investigation | — |
 
 ### Crimes Against Children (CAC Ontology)
@@ -133,13 +136,14 @@ CAC recipes talk about **offenders** who target children and other vulnerable pe
 | SMS Messages and Contacts | [sms-and-contacts.md](sms-and-contacts.md) | SMS/MMS messages, contact entries, account linking | [sms_and_contacts](https://github.com/casework/CASE-Examples/tree/master/examples/illustrations/sms_and_contacts) |
 | Network Artifact Extraction | [network-artifacts.md](network-artifacts.md) | Network connections, DNS records, IP addresses, and URLs | — |
 
+
 ### SDK patterns and extended ontologies
 
 | Recipe | File | Description | CASE-Example |
 |---|---|---|---|
 | Discovering Classes at Runtime | [runtime-discovery.md](runtime-discovery.md) | Use the registry API to search for classes and inspect properties | — |
 | Working with Extensions | [extensions.md](extensions.md) | Use extension ontology classes alongside the core SDK | — |
-| Cross-Ontology Composition | [cross-ontology-composition.md](cross-ontology-composition.md) | Compose CASE/UCO, extensions, and upper-ontology profiles (BFO/gUFO, PROV-O, Time, GeoSPARQL, FOAF, ORG, PROF) | — |
+| Cross-Ontology Composition | [cross-ontology-composition.md](cross-ontology-composition.md) | Compose CASE/UCO, extensions, and upper-ontology profiles (BFO/gUFO, PROV-O, Time, GeoSPARQL, FOAF, ORG, PROF, QUDT, SOSA/SSN) | — |
 | Cross-Domain Extensions (redirect) | [cross-domain-extensions.md](cross-domain-extensions.md) | Legacy title; redirects to Cross-Ontology Composition | — |
 | Foundational Typing (BFO / gUFO) | [foundational-typing-bfo-gufo.md](foundational-typing-bfo-gufo.md) | Domain-first multi-typing with one foundational profile per graph; CAC prefers gUFO | — |
 | PROV-O Evidence Lineage | [prov-o-evidence-lineage.md](prov-o-evidence-lineage.md) | Entity/Activity/Agent enrichment; Tool as instrument; provenance vs acquisition | — |
@@ -147,6 +151,8 @@ CAC recipes talk about **offenders** who target children and other vulnerable pe
 | GeoSPARQL Geospatial Evidence | [geosparql-geospatial-evidence.md](geosparql-geospatial-evidence.md) | Location as geo:Feature; separate Geometry; derived analytics with provenance | — |
 | FOAF / ORG Identity and Roles | [foaf-org-identity-roles.md](foaf-org-identity-roles.md) | Person, account, org, membership; no owl:sameAs for uncertain attribution | — |
 | PROF Profile Metadata | [prof-validation-profile-metadata.md](prof-validation-profile-metadata.md) | Profile intent vs validation result; serialize bundle metadata | — |
+| QUDT Quantities and Units | [qudt-quantities-and-units.md](qudt-quantities-and-units.md) | Numbers with units and quantity kinds (QUDT 3.5.2); unit lookup; valuations as quantities, not observations | — |
+| SOSA/SSN Sensor Observations | [sosa-sensor-observations.md](sosa-sensor-observations.md) | Sensor readings (vehicle telemetry, wearables) as SOSA observations with QUDT results; SSN-System accuracy | — |
 | SOLVE-IT Plan vs Execution | [solveit-plan-execution-provenance.md](solveit-plan-execution-provenance.md) | prov:Plan vs SolveitInvestigativeAction; deviation and re-execution | — |
 | Round-Trip: Serialize and Deserialize | [round-trip.md](round-trip.md) | Write a graph to JSON-LD and load it back with typed deserialization | — |
 | Managing Large Datasets | [large-datasets.md](large-datasets.md) | Partition large evidence sets by forensic boundary | — |

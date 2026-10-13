@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from case_uco_generator.backends.base import CodegenBackend
+from case_uco_generator.mapping_guide import catalog_extensions_section
 from case_uco_generator.schema_model import (
     OntologyClass,
     iri_local_name,
@@ -19,6 +20,7 @@ class DocsBackend(CodegenBackend):
         self._render_header(lines)
         self._render_toc(lines)
         self._render_modules(lines)
+        lines.extend(catalog_extensions_section(self.schema))
         self._render_vocabs(lines)
 
         out_path = self.output_dir / "ONTOLOGY_REFERENCE.md"

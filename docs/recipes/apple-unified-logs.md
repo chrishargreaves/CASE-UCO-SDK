@@ -92,7 +92,7 @@ operator remains responsible for access control and review before sharing.
 | `uco-core:Event` + `Dictionary` / `DictionaryEntry` | Interpreted occurrence + subsystem/category/pid/… |
 | `uco-observable:ObservableObject` + `ApplicationFacet` | Process / subsystem app (e.g. `locationd`) |
 | `uco-tool:AnalyticTool` | unifiedlog_iterator / Notari / iLEAPP |
-| `solveit-core:SolveitInvestigativeAction` | Parse step with `usedTechnique` / `appliedMitigation` |
+| `solveit-core:SolveitInvestigativeAction` | Parse step, also typed with the DFT-* technique classes performed, with `appliedMitigation` |
 | `uco-observable:ObservableObject` + `FileFacet` (+ `ContentDataFacet`) | CSV / SQLite / HTML report outputs |
 | `uco-observable:ObservableRelationship` | `Extracted_From` archive; `Contained_Within` CSV/SQLite |
 
@@ -132,8 +132,7 @@ EventRecord ── Contained_Within ──▶ CSV / SQLite / JSONL output file
           └── uco-core:eventAttribute ──▶ Dictionary (subsystem, mach_continuous_time, boot_uuid, …)
                (omit absolute Event.startTime when the archive has no timesync)
 
-SolveitInvestigativeAction ("Parse logarchive with unifiedlog_iterator")
-  ├── solveit-core:usedTechnique ──▶ DFT-1066, DFT-1076
+SolveitInvestigativeAction + DFT-1066 + DFT-1076 ("Parse logarchive with unifiedlog_iterator")
   ├── solveit-core:appliedMitigation ──▶ DFM-1027, DFM-1175, DFM-1179
   ├── uco-action:instrument ──▶ AnalyticTool (unifiedlog_iterator)
   ├── uco-action:object ──▶ AppleUnifiedLogArchive
@@ -232,7 +231,9 @@ graph.create(Event,
 
 `case_uco_solveit.solveit_core.SolveitInvestigativeAction` (>= 0.2.0)
 serializes `uco-action:*` keys and SOLVE-IT method links natively — pass
-KB technique/mitigation IRIs as `{"@id": …}` references:
+KB mitigation IRIs as `{"@id": …}` references; the techniques performed
+are extra `rdf:type`s on the action (`usedTechnique` is deprecated since
+SOLVE-IT 0.2.x):
 
 ```python
 from case_uco_solveit.solveit_core import SolveitInvestigativeAction
@@ -244,16 +245,14 @@ parse_action = graph.create(SolveitInvestigativeAction,
     instrument=[iterator_tool],
     object=[logarchive],
     result=[csv_out, ul_record],
-    used_technique=[
-        {"@id": SOLVEIT_DATA + "techniqueDFT-1066"},
-        {"@id": SOLVEIT_DATA + "techniqueDFT-1076"},
-    ],
     applied_mitigation=[
         {"@id": SOLVEIT_DATA + "mitigationDFM-1027"},
         {"@id": SOLVEIT_DATA + "mitigationDFM-1175"},
         {"@id": SOLVEIT_DATA + "mitigationDFM-1179"},
     ],
 )
+for technique in ("techniqueDFT-1066", "techniqueDFT-1076"):
+    graph.add_type(graph.get_id(parse_action), SOLVEIT_DATA + technique)
 ```
 
 Prefer dual-tool verification: run Mandiant iterator **and** Notari (or
@@ -296,7 +295,7 @@ not duplicate them.
 - **Using a pre-0.2.0 `case_uco_solveit` package.** Older
   `SolveitInvestigativeAction` dataclasses emitted `uco-core:instrument`
   (failing strict concept coverage); 0.2.0+ serializes `uco-action:*`
-  keys and `usedTechnique`/`appliedMitigation` natively.
+  keys and `appliedMitigation` natively (0.3.0 tracks SOLVE-IT 0.2.11).
 - **Claiming message text you did not parse.** Binary `.tracev3` rows need
   a parser; if you only have the archive, stop at the
   `AppleUnifiedLogArchive` node.

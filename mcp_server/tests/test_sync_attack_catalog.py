@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
+import shutil
 from pathlib import Path
 
 from tools.sync_attack_catalog import (
+    build_catalog,
     catalog_technique_ids,
-    parse_techniques,
+    load_bundles,
     render_catalog,
 )
 
@@ -16,31 +19,41 @@ FIXTURE = (
 )
 
 
-def test_parse_techniques_from_mini_stix():
-    bundle = json.loads(FIXTURE.read_text(encoding="utf-8"))
-    techniques = parse_techniques(bundle)
+def _offline_bundles(tmp_path: Path):
+    shutil.copy(FIXTURE, tmp_path / "enterprise-attack-19.1.json")
+    return load_bundles("19.1", tmp_path, ["enterprise"])
+
+
+def test_offline_load_records_sha256(tmp_path):
+    bundles = _offline_bundles(tmp_path)
+    _, provenance = bundles["enterprise"]
+    assert provenance["sha256"] == hashlib.sha256(FIXTURE.read_bytes()).hexdigest()
+    assert provenance["source"].endswith("(local copy)")
+
+
+def test_build_catalog_from_mini_stix(tmp_path):
+    techniques, _ = build_catalog(_offline_bundles(tmp_path))
     assert "T1566.001" in techniques
-    assert techniques["T1566.001"]["name"] == "Spearphishing Attachment"
-    assert "Initial Access" in techniques["T1566.001"]["tactics"]
+    assert techniques["T1566.001"].name.endswith("Spearphishing Attachment")
 
 
 def test_render_catalog_contains_punning_pattern(tmp_path):
-    bundle = json.loads(FIXTURE.read_text(encoding="utf-8"))
-    techniques = parse_techniques(bundle)
-    ttl = render_catalog(
-        ["T1566.001", "T1059.007"],
-        techniques,
-        attack_version="19.1",
-        source=str(FIXTURE),
-    )
+    bundles = _offline_bundles(tmp_path)
+    techniques, tactics = build_catalog(bundles)
+    ttl = render_catalog(techniques, tactics, attack_version="19.1", bundles=bundles)
     assert "attack:T1566.001" in ttl
     assert "action:Technique" in ttl
     assert 'action:techniqueID "T1566.001"' in ttl
     assert "GENERATED FILE" in ttl
+    assert "The MITRE Corporation" in ttl
 
 
-def test_live_catalog_has_current_membership():
+def test_live_catalog_is_the_complete_release():
     ids = catalog_technique_ids()
-    assert "T1566.001" in ids
-    assert "T1059.007" in ids
-    assert len(ids) >= 20
+    manifest = json.loads(
+        (Path(__file__).resolve().parents[2] / "extensions/attack-technique/manifest.json")
+        .read_text(encoding="utf-8")
+    )
+    assert len(ids) == manifest["provenance"]["technique_count"]
+    assert len(ids) > 1000
+    assert {"T1566.001", "T1059.007", "T0800", "T1398"} <= ids

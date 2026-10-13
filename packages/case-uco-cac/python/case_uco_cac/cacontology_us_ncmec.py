@@ -35,6 +35,30 @@ class AccountLinking:
 
 
 @dataclass
+class AggregateReportStatistic:
+    """A single published aggregate statistic about CyberTipline reporting or related NCMEC program activity (e.g., annual report volume, category growth rate, cumulative hash counts), as stated in NCMEC pub"""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/us/ncmec#AggregateReportStatistic"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    statement: list[str] = field(default_factory=list)
+    percent_change_from_prior_period: Optional[Any] = field(default=None)
+    reporting_period: Optional[str] = field(default=None)
+    statistic_qualifier: Optional[str] = field(default=None)
+    statistic_unit: Optional[str] = field(default=None)
+    statistic_value: Optional[Any] = field(default=None)
+
+
+@dataclass
 class CSAMSolicitationAnnotation:
     """Annotation indicating the report is associated with solicitation of CSAM. Source: NCMEC Cybertip API Section B.1.1, reportAnnotations/csamSolicitation element."""
 
@@ -122,6 +146,83 @@ class CyberTipAnalysis:
     """Analytical processing and assessment of NCMEC CyberTip reports by law enforcement."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/us/ncmec#CyberTipAnalysis"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: Optional[datetime] = field(default=None)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    analysis_confidence: Optional[str] = field(default=None)
+    analysis_of: Optional[NCMECCybertipReport] = field(default=None)
+    performer: Optional[Person] = field(default=None)
+    created_time: Optional[datetime] = field(default=None)
+    end_time: Optional[datetime] = field(default=None)
+    start_time: Optional[datetime] = field(default=None)
+
+
+@dataclass
+class CybertipExtractedIdentifierSet:
+    """An information artifact representing the set of identifiers extracted from a CyberTipline report, used to support triage, enrichment, and routing."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/us/ncmec#CybertipExtractedIdentifierSet"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+
+
+@dataclass
+class CybertipIdentifierExtractionAction:
+    """A CAC-domain action that extracts structured identifiers (screen names, phone numbers, IP addresses, email addresses) from a CyberTipline report document, including by OCR or document parsing."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/us/ncmec#CybertipIdentifierExtractionAction"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    action_count: Optional[int] = field(default=None)
+    action_status: Optional[str] = field(default=None)
+    end_time: Optional[datetime] = field(default=None)
+    environment: Optional[UcoObject] = field(default=None)
+    error: list[UcoObject] = field(default_factory=list)
+    instrument: list[UcoObject] = field(default_factory=list)
+    location: list[Location] = field(default_factory=list)
+    object: list[UcoObject] = field(default_factory=list)
+    participant: list[UcoObject] = field(default_factory=list)
+    performer: Optional[UcoObject] = field(default=None)
+    result: list[UcoObject] = field(default_factory=list)
+    start_time: Optional[datetime] = field(default=None)
+    subaction: list[Action] = field(default_factory=list)
+
+
+@dataclass
+class CybertipJurisdictionRoutingAssessment:
+    """A triage assessment that uses extracted identifiers and enrichment results to recommend or determine the responsible jurisdiction or agency for routing or investigation."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/us/ncmec#CybertipJurisdictionRoutingAssessment"
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)

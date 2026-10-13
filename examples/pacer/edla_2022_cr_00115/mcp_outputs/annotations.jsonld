@@ -4,7 +4,7 @@
   ],
   "@graph": [
     {
-      "id": "urn:link-look:anchor:bf2cac90-f3be-5482-a7dd-adde292a63ff",
+      "id": "urn:case-uco-sdk:anchor:bf2cac90-f3be-5482-a7dd-adde292a63ff",
       "type": "Annotation",
       "body": "urn:uuid:b998d29e-aed4-55e4-b14a-2cc2ea24c071",
       "target": {
@@ -23,7 +23,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:010e5346-499c-5f4f-8480-842d634e962b",
+      "id": "urn:case-uco-sdk:anchor:010e5346-499c-5f4f-8480-842d634e962b",
       "type": "Annotation",
       "body": "urn:uuid:2ee7718e-2597-5507-a0c5-8a0a9bed15b0",
       "target": {
@@ -42,7 +42,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:ccd0761a-38b2-571d-9222-c93f93241f40",
+      "id": "urn:case-uco-sdk:anchor:ccd0761a-38b2-571d-9222-c93f93241f40",
       "type": "Annotation",
       "body": "urn:uuid:96da44e1-cecd-50a9-ad7b-12477ad9c03e",
       "target": {
@@ -61,7 +61,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:7123bb1e-5dc4-5dac-b2e1-7b74d023d49d",
+      "id": "urn:case-uco-sdk:anchor:7123bb1e-5dc4-5dac-b2e1-7b74d023d49d",
       "type": "Annotation",
       "body": "urn:uuid:fe192a73-15fe-58f8-97ea-ef4a36339ab5",
       "target": {
@@ -80,7 +80,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:18059819-0b16-5911-a3bd-1ef4e1fac031",
+      "id": "urn:case-uco-sdk:anchor:18059819-0b16-5911-a3bd-1ef4e1fac031",
       "type": "Annotation",
       "body": "urn:uuid:156d1eb6-aabc-5352-be02-e5b163012d91",
       "target": {
@@ -99,7 +99,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:0646224d-f253-5968-9e6c-45e82561d3bc",
+      "id": "urn:case-uco-sdk:anchor:0646224d-f253-5968-9e6c-45e82561d3bc",
       "type": "Annotation",
       "body": "urn:uuid:7cac326f-ae90-54e5-99c2-e5509f4a64ac",
       "target": {
@@ -118,7 +118,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:b1b79e55-2356-5f80-8ca4-97e89c7b13df",
+      "id": "urn:case-uco-sdk:anchor:b1b79e55-2356-5f80-8ca4-97e89c7b13df",
       "type": "Annotation",
       "body": "urn:uuid:f2316448-4490-5e3f-840b-801afd5214f0",
       "target": {
@@ -137,7 +137,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:1885114d-c40d-52b5-9bba-44888757b4c6",
+      "id": "urn:case-uco-sdk:anchor:1885114d-c40d-52b5-9bba-44888757b4c6",
       "type": "Annotation",
       "body": "urn:uuid:2044c8c6-9fb2-5c16-8fb5-ca4f0e599318",
       "target": {
@@ -156,7 +156,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:38312655-8ecf-5516-ae7e-13f08eb0d4c8",
+      "id": "urn:case-uco-sdk:anchor:38312655-8ecf-5516-ae7e-13f08eb0d4c8",
       "type": "Annotation",
       "body": "urn:uuid:a0134814-1a02-5496-b2fa-3b2b9144736e",
       "target": {
@@ -175,7 +175,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:fc112cda-fa55-5e9f-bb70-f92173019734",
+      "id": "urn:case-uco-sdk:anchor:fc112cda-fa55-5e9f-bb70-f92173019734",
       "type": "Annotation",
       "body": "urn:uuid:709b045c-89a8-5831-b374-12fc6d9ebb1f",
       "target": {
@@ -194,7 +194,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:5dd3958d-6fd2-59cb-8e91-3127909dcdbb",
+      "id": "urn:case-uco-sdk:anchor:5dd3958d-6fd2-59cb-8e91-3127909dcdbb",
       "type": "Annotation",
       "body": "urn:uuid:aa5df255-8f35-57d3-9bed-80d9ee954896",
       "target": {
@@ -213,7 +213,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:6693032d-745d-5cf3-acbc-a93e8a8ddab7",
+      "id": "urn:case-uco-sdk:anchor:6693032d-745d-5cf3-acbc-a93e8a8ddab7",
       "type": "Annotation",
       "body": "urn:uuid:fa1db42c-ccde-5b71-a909-dc581b60c4b5",
       "target": {
@@ -232,7 +232,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:2ffb0bc7-6e87-512a-a47d-0e1e94b27edd",
+      "id": "urn:case-uco-sdk:anchor:2ffb0bc7-6e87-512a-a47d-0e1e94b27edd",
       "type": "Annotation",
       "body": "urn:uuid:bfe1596c-6886-54d4-b79b-a9cd37d17ceb",
       "target": {
@@ -251,7 +251,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:a23cfaf3-ec86-5503-b4a9-1f8c1e545b71",
+      "id": "urn:case-uco-sdk:anchor:a23cfaf3-ec86-5503-b4a9-1f8c1e545b71",
       "type": "Annotation",
       "body": "urn:uuid:a5ff685b-b487-5e5b-878d-5f5250891444",
       "target": {
@@ -270,7 +270,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:a838b957-4402-52e6-819a-36cc7dc2c33c",
+      "id": "urn:case-uco-sdk:anchor:a838b957-4402-52e6-819a-36cc7dc2c33c",
       "type": "Annotation",
       "body": "urn:uuid:bd6fff38-0299-5aa6-9a33-58c87d324914",
       "target": {
@@ -289,7 +289,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:6c76399b-7e1f-5af5-9c6f-57bd09c8f73e",
+      "id": "urn:case-uco-sdk:anchor:6c76399b-7e1f-5af5-9c6f-57bd09c8f73e",
       "type": "Annotation",
       "body": "urn:uuid:bf57ee4c-1f56-5a66-b31e-673c9819c677",
       "target": {
@@ -308,7 +308,7 @@
       }
     },
     {
-      "id": "urn:link-look:anchor:d3da1327-f5dd-5ebb-8be3-5f0b472bfdeb",
+      "id": "urn:case-uco-sdk:anchor:d3da1327-f5dd-5ebb-8be3-5f0b472bfdeb",
       "type": "Annotation",
       "body": "urn:uuid:b06d0923-a69b-5f9c-b3ce-207ed22a44a2",
       "target": {

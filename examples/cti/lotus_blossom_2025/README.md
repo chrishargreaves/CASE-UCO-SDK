@@ -26,13 +26,12 @@ python examples/cti/lotus_blossom_2025/build_lotus_blossom_sagerunex.py
 The builder computes each graphic's SHA-256 and dimensions at build time,
 writes the JSON-LD, and runs `case_validate` plus the strict
 concept-coverage check. Everything except the ATT&CK techniques validates
-against **core UCO**; the `uco-action:Technique` metaclass, `uco-core:UcoType`,
-and the technique classes validate against the local
-[`attack-technique`](../../../extensions/attack-technique/) extension (the
-forward-implementation of
-[ucoProject/UCO PR #676](https://github.com/ucoProject/UCO/pull/676)), which
-the builder loads as `extensions=["attack-technique:full"]` (RDFS inference
-on).
+against **core UCO**, including the `uco-action:Technique` metaclass
+([ucoProject/UCO PR #676](https://github.com/ucoProject/UCO/pull/676), native
+in UCO 1.5.0). The technique classes come from the
+[`attack-technique`](../../../extensions/attack-technique/) ATT&CK v19.2
+catalog, which the builder loads as `extensions=["attack-technique:full"]`
+(RDFS inference on).
 
 ## What it demonstrates
 
@@ -74,7 +73,7 @@ models twelve of them (T1543.003, T1112, T1055.001, T1027.002, T1047,
 T1090.001, T1102.002, T1071.001, T1560.001, T1041, T1016, T1539) using the
 `uco-action:Technique` **metaclass** exactly as defined in
 [ucoProject/UCO PR #676](https://github.com/ucoProject/UCO/pull/676)
-(@ajnelson-nist, UCO 1.5.0). Per that PR, *"a Technique instance is an
+(UCO 1.5.0). Per that PR, *"a Technique instance is an
 `owl:Class` that is a subclass of `uco-action:Action`,"* anchored by the new
 top-level `uco-core:UcoType`. So each ATT&CK technique is an `owl:Class`
 (`a uco-action:Technique`, `rdfs:subClassOf uco-action:Action`, with

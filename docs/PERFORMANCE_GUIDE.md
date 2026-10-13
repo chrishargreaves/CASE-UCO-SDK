@@ -58,7 +58,7 @@ The following data was measured on commodity hardware (64GB RAM) using passive D
 Use [case-utils](https://github.com/casework/CASE-Utilities-Python) (`pip install case-utils`) to validate SDK output. The `case_validate` CLI wraps PyShacl with CASE-specific configuration:
 
 ```bash
-case_validate --built-version case-1.4.0 my-output.jsonld
+case_validate --built-version case-1.5.0 my-output.jsonld
 ```
 
 | Records | Triples | PyShacl (TTL) | PyShacl (JSON-LD) | Memory |

@@ -11,9 +11,6 @@ class AffiliateCoordination:
     """Coordination activities between CAC affiliate organizations for unified prevention efforts."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#AffiliateCoordination"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -21,9 +18,6 @@ class AffiliateResourceSharing:
     """Coordinated sharing of educational resources and prevention materials among CAC affiliates."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#AffiliateResourceSharing"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -31,9 +25,6 @@ class AgeTargetedEducation:
     """Education programs targeted to specific age groups."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#AgeTargetedEducation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     age_group: Optional[str] = field(default=None)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
@@ -62,9 +53,6 @@ class BehavioralPrevention:
     """Prevention strategies focused on behavioral changes."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#BehavioralPrevention"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     participant_count: Optional[int] = field(default=None)
     program_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -79,9 +67,6 @@ class BullyingPrevention:
     """Prevention programs focused on reducing bullying and shaming."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#BullyingPrevention"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     participant_count: Optional[int] = field(default=None)
     program_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -103,9 +88,6 @@ class ChildSafetyEducation:
     """Education programs teaching children about safety."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#ChildSafetyEducation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     age_group: Optional[str] = field(default=None)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
@@ -116,9 +98,6 @@ class CommunityEducation:
     """Education programs for community members."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#CommunityEducation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
 
@@ -221,9 +200,6 @@ class CommunityOutreach:
     """Outreach programs to engage communities in child protection. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#CommunityOutreach"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
 
@@ -252,9 +228,6 @@ class CommunityPartnershipInitiative:
     """Initiative building partnerships with community organizations for child protection."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#CommunityPartnershipInitiative"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
 
@@ -282,9 +255,6 @@ class DigitalLiteracy:
     """Education on digital literacy and safe technology use."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#DigitalLiteracy"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     age_group: Optional[str] = field(default=None)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
@@ -295,9 +265,6 @@ class DigitalSafety:
     """Prevention programs focused on digital safety."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#DigitalSafety"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     participant_count: Optional[int] = field(default=None)
     program_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -352,9 +319,6 @@ class DiscreetAccessSystem:
     """System allowing discreet access to safety information to reduce bullying and shaming."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#DiscreetAccessSystem"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     participant_count: Optional[int] = field(default=None)
     program_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -407,9 +371,6 @@ class EducationalPosterCampaign:
     """School-based poster distribution campaign for prevention education."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#EducationalPosterCampaign"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     participant_count: Optional[int] = field(default=None)
     program_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -445,9 +406,6 @@ class EducatorTraining:
     """Training programs specifically designed for educators."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#EducatorTraining"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
 
@@ -476,9 +434,6 @@ class EnvironmentalPrevention:
     """Prevention strategies focused on environmental factors."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#EnvironmentalPrevention"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     participant_count: Optional[int] = field(default=None)
     program_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -530,9 +485,6 @@ class HealthcareProviderTraining:
     """Training for healthcare providers on child protection."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#HealthcareProviderTraining"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
 
@@ -600,9 +552,6 @@ class InteractiveCourseSystem:
     """Interactive online safety course platform with progression tracking and engagement features."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#InteractiveCourseSystem"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     age_group: Optional[str] = field(default=None)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
@@ -641,9 +590,6 @@ class OnlineSafetyEducation:
     """Education about staying safe online."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#OnlineSafetyEducation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     age_group: Optional[str] = field(default=None)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
@@ -654,9 +600,6 @@ class OutreachTriggeredInvestigation:
     """Investigation initiated as direct result of community outreach presentation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#OutreachTriggeredInvestigation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -669,7 +612,7 @@ class OutreachTriggeredInvestigation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -707,9 +650,6 @@ class ParentEducation:
     """Education programs for parents and caregivers."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#ParentEducation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
 
@@ -739,9 +679,6 @@ class ParentalVigilanceProgram:
     """Program educating parents on recognizing signs of child exploitation and reporting."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#ParentalVigilanceProgram"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
 
@@ -771,9 +708,6 @@ class PodcastEducationSeries:
     """Audio-based educational content delivery system, such as the Protect Kids Online (PKO) Podcast."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PodcastEducationSeries"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     age_group: Optional[str] = field(default=None)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
@@ -803,9 +737,6 @@ class PostPresentationDisclosure:
     """Victim disclosure that occurs following a safety presentation or educational event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PostPresentationDisclosure"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -928,9 +859,6 @@ class PreventionProgram:
     """Structured program designed to prevent child abuse and exploitation. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PreventionProgram"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     participant_count: Optional[int] = field(default=None)
     program_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -963,9 +891,6 @@ class PrimaryPrevention:
     """Prevention strategies that stop abuse before it occurs."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PrimaryPrevention"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     participant_count: Optional[int] = field(default=None)
     program_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -980,9 +905,6 @@ class PublicAwareness:
     """Campaigns to raise public awareness about child protection. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PublicAwareness"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
 
@@ -1029,9 +951,6 @@ class RapidResponseDisclosureWorkflow:
     """Workflow enabling rapid response from victim disclosure to arrest (e.g., 8-hour timeline)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#RapidResponseDisclosureWorkflow"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1057,9 +976,6 @@ class RiskPrevention:
     """Programs focused on preventing risk factors for child abuse. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#RiskPrevention"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     participant_count: Optional[int] = field(default=None)
     program_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -1186,7 +1102,6 @@ class SchoolAllegationProtocol:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1194,9 +1109,6 @@ class SchoolCounselorTraining:
     """Training program for school counselors."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SchoolCounselorTraining"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
 
@@ -1206,9 +1118,6 @@ class SchoolDistribution:
     """Distribution of educational materials to schools."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SchoolDistribution"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1241,9 +1150,6 @@ class SchoolSafetyProgram:
     """Safety program implemented in school settings."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SchoolSafetyProgram"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     participant_count: Optional[int] = field(default=None)
     program_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -1258,9 +1164,6 @@ class SecondaryPrevention:
     """Early intervention strategies to prevent escalation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SecondaryPrevention"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     participant_count: Optional[int] = field(default=None)
     program_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -1275,9 +1178,6 @@ class SextortionAwareness:
     """Prevention program focused on sextortion education and awareness."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SextortionAwareness"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     participant_count: Optional[int] = field(default=None)
     program_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -1292,9 +1192,6 @@ class SextortionEducation:
     """Educational content specifically addressing sextortion risks and prevention."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SextortionEducation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     age_group: Optional[str] = field(default=None)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
@@ -1362,9 +1259,6 @@ class StudentEducation:
     """Safety education program for students."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#StudentEducation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     age_group: Optional[str] = field(default=None)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
@@ -1375,9 +1269,6 @@ class TeacherTraining:
     """Training program specifically for teachers."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#TeacherTraining"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
 
@@ -1387,9 +1278,6 @@ class TertiaryPrevention:
     """Prevention of re-victimization and recurrence."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#TertiaryPrevention"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     participant_count: Optional[int] = field(default=None)
     program_duration: Optional[float] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -1424,9 +1312,6 @@ class TwelvePlusEducation:
     """Safety education targeted specifically for students 12 years and older."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#TwelvePlusEducation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     age_group: Optional[str] = field(default=None)
     name: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)

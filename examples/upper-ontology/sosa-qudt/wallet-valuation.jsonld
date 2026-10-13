@@ -1,0 +1,152 @@
+{
+    "@context": {
+        "case-investigation": "https://ontology.caseontology.org/case/investigation/",
+        "kb": "http://example.org/kb/",
+        "uco-action": "https://ontology.unifiedcyberontology.org/uco/action/",
+        "uco-core": "https://ontology.unifiedcyberontology.org/uco/core/",
+        "uco-observable": "https://ontology.unifiedcyberontology.org/uco/observable/",
+        "uco-tool": "https://ontology.unifiedcyberontology.org/uco/tool/",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "qudt": "http://qudt.org/schema/qudt/",
+        "unit": "http://qudt.org/vocab/unit/",
+        "quantitykind": "http://qudt.org/vocab/quantitykind/",
+        "prov": "http://www.w3.org/ns/prov#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+    },
+    "@graph": [
+        {
+            "@id": "kb:wallet-1",
+            "@type": "uco-observable:ObservableObject",
+            "uco-core:hasFacet": [
+                {
+                    "@id": "kb:FileFacet-6c27680a-51f5-491c-9d21-3aa073f5b5ff",
+                    "@type": "uco-observable:FileFacet",
+                    "uco-observable:fileName": "wallet.dat",
+                    "uco-observable:sizeInBytes": {
+                        "@type": "xsd:integer",
+                        "@value": "1048576"
+                    }
+                }
+            ],
+            "uco-core:name": "Recovered desktop wallet file"
+        },
+        {
+            "@id": "kb:rate-source-1",
+            "@type": "uco-observable:ObservableObject",
+            "uco-core:hasFacet": [
+                {
+                    "@id": "kb:URLFacet-53d90454-197a-436f-8380-b8e08530b222",
+                    "@type": "uco-observable:URLFacet",
+                    "uco-observable:fullValue": "https://rates.example.org/btc-usd"
+                }
+            ],
+            "uco-core:name": "Published BTC/USD reference rate"
+        },
+        {
+            "@id": "kb:wallet-balance-1-value",
+            "@type": "qudt:QuantityValue",
+            "qudt:value": {
+                "@type": "xsd:decimal",
+                "@value": "0.41250000"
+            },
+            "qudt:hasUnit": {
+                "@id": "unit:CCY_BTC"
+            }
+        },
+        {
+            "@id": "kb:wallet-balance-1",
+            "@type": "qudt:Quantity",
+            "rdfs:label": "Wallet balance read from the wallet file",
+            "qudt:hasQuantityKind": {
+                "@id": "quantitykind:Currency"
+            },
+            "qudt:quantityValue": {
+                "@id": "kb:wallet-balance-1-value"
+            },
+            "prov:wasDerivedFrom": {
+                "@id": "kb:wallet-1"
+            }
+        },
+        {
+            "@id": "kb:Tool-5f852187-36f6-4c52-a5be-f3b671cf5c1f",
+            "@type": "uco-tool:Tool",
+            "uco-core:name": "Example valuation script",
+            "uco-tool:version": "0.3"
+        },
+        {
+            "@id": "kb:valuation-action-1",
+            "@type": "case-investigation:InvestigativeAction",
+            "uco-core:description": [
+                "Balance multiplied by the reference rate published for the stated time."
+            ],
+            "uco-core:name": "Value wallet balance in USD",
+            "uco-action:endTime": {
+                "@type": "xsd:dateTime",
+                "@value": "2024-08-14T16:00:00+00:00"
+            },
+            "uco-action:instrument": [
+                {
+                    "@id": "kb:Tool-5f852187-36f6-4c52-a5be-f3b671cf5c1f"
+                }
+            ],
+            "uco-action:object": [
+                {
+                    "@id": "kb:wallet-1"
+                },
+                {
+                    "@id": "kb:rate-source-1"
+                }
+            ],
+            "uco-action:startTime": {
+                "@type": "xsd:dateTime",
+                "@value": "2024-08-14T16:00:00+00:00"
+            }
+        },
+        {
+            "@id": "kb:wallet-valuation-1-value",
+            "@type": "qudt:QuantityValue",
+            "qudt:value": {
+                "@type": "xsd:decimal",
+                "@value": "24537.83"
+            },
+            "qudt:hasUnit": {
+                "@id": "unit:CCY_USD"
+            }
+        },
+        {
+            "@id": "kb:wallet-valuation-1",
+            "@type": "qudt:Quantity",
+            "rdfs:label": "Wallet balance valued in USD at 2024-08-14T16:00:00Z",
+            "qudt:hasQuantityKind": {
+                "@id": "quantitykind:Currency"
+            },
+            "qudt:quantityValue": {
+                "@id": "kb:wallet-valuation-1-value"
+            },
+            "prov:wasGeneratedBy": {
+                "@id": "kb:valuation-action-1"
+            },
+            "prov:wasDerivedFrom": [
+                {
+                    "@id": "kb:wallet-balance-1"
+                },
+                {
+                    "@id": "kb:rate-source-1"
+                }
+            ]
+        },
+        {
+            "@id": "kb:Investigation-c21dccd5-bf31-4deb-8483-03ef9cf33136",
+            "@type": "case-investigation:Investigation",
+            "uco-core:description": [
+                "Valuation of a cryptocurrency wallet recovered from a seized laptop."
+            ],
+            "uco-core:name": "Synthetic case 2024-FIN-031",
+            "uco-core:object": [
+                {
+                    "@id": "kb:wallet-1"
+                }
+            ]
+        }
+    ]
+}

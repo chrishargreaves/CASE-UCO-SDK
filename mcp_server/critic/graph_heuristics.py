@@ -43,13 +43,24 @@ from critic.canonical import (
 )
 from critic.finding_diff import make_stable_finding_id
 from critic.models import CriticFinding, CriticTarget
+from document_semantic_mapping import _try_reconstruct_base58
 
-RULE_VERSION = "1.3.3"
+RULE_VERSION = "1.4.0"
 
 _ACTION_NAME_TOKENS = ("acquir", "extract", "analy", "hash", "image", "export")
-_ACQUISITION_NAME_TOKENS = ("acquir", "extract", "image", "export")
+# "image" counts only as a verb ("Image the laptop", "imaging"); "Examine the
+# disk image" takes an image as input and is not an acquisition.
+_ACQUISITION_VERB = re.compile(
+    r"\b(?:acquir\w*|extract\w*|export\w*|imaging|imaged)\b|^\s*image\b"
+)
 _CUSTODY_NAME_TOKENS = ("custody", "transfer", "release", "receipt")
-_FORENSIC_IMAGE_TOKENS = ("e01", "dd", "ufed", "raw image", ".raw", "aff4", "ewf")
+_FORENSIC_IMAGE_HINT = re.compile(
+    r"\.(?:e0[1-9]|ex01|dd|aff4?|ufdr?|img|001)\b|\b(?:ewf|e01|aff4|ufed)\b|"
+    r"\b(?:raw|dd|disk|forensic|physical|logical)\s+image\b"
+)
+_THREAT_ACTOR_HINT = re.compile(
+    r"\bthreat[- ]actor\b|\badversary\b|\battacker\b|\bapt[- ]?\d+\b"
+)
 _LINK_KINDS = frozenset({
     "Contained_Within",
     "Extracted_From",
@@ -110,6 +121,14 @@ def run_graph_heuristics(
         ("CRIT-H-CONTEXTUAL-COMPILATION-OMISSION", _final_artifact_not_in_compilation),
         ("CRIT-H-ACTION-ROLE-CONTRADICTION", _action_role_contradiction),
         ("CRIT-H-ORPHAN-TOP-LEVEL", _orphan_top_level_nodes),
+        (
+            "CRIT-H-LEGAL-PROCESS-NO-INVESTIGATION",
+            _legal_process_without_investigation,
+        ),
+        (
+            "CRIT-H-BROKEN-CRYPTO-ADDRESS-STRING",
+            _broken_crypto_address_string,
+        ),
     ]
     for rule_id, runner in runners:
         try:
@@ -159,6 +178,8 @@ _ALL_RULE_IDS = [
     "CRIT-H-CONTEXTUAL-COMPILATION-OMISSION",
     "CRIT-H-ACTION-ROLE-CONTRADICTION",
     "CRIT-H-ORPHAN-TOP-LEVEL",
+    "CRIT-H-LEGAL-PROCESS-NO-INVESTIGATION",
+    "CRIT-H-BROKEN-CRYPTO-ADDRESS-STRING",
 ]
 
 
@@ -283,7 +304,11 @@ def _acquisition_input_result_inversion(
         ):
             continue
         names = " ".join(node.literals(IRI_NAME)).lower()
-        if "acquir" not in names and "image" not in names and "extract" not in names:
+        if not _ACQUISITION_VERB.search(names):
+            continue
+        # "Logical export custody" hands over existing evidence; the export is
+        # rightly the object and a custody step has no result.
+        if any(tok in names for tok in _CUSTODY_NAME_TOKENS):
             continue
         examined += 1
         if node.refs(IRI_ACTION_RESULT):
@@ -324,7 +349,7 @@ def _generic_related_to_overuse(
     kinds: list[str] = []
     examined = 0
     for node in view.iter_nodes():
-        if not node.has_type(IRI_RELATIONSHIP):
+        if not node.is_a(IRI_RELATIONSHIP):
             continue
         examined += 1
         for lit in node.literals(IRI_KIND):
@@ -364,7 +389,7 @@ def _charged_with_direction(
     findings: list[CriticFinding] = []
     examined = 0
     for node in view.iter_nodes():
-        if not node.has_type(IRI_RELATIONSHIP):
+        if not node.is_a(IRI_RELATIONSHIP):
             continue
         kinds = set(node.literals(IRI_KIND))
         kinds.update(r.rsplit("/", 1)[-1] for r in node.refs(IRI_KIND))
@@ -504,7 +529,7 @@ def _action_profile_completeness(
         has_actor = bool(node.refs(IRI_PERFORMER) or node.refs(IRI_INSTRUMENT))
         has_object = bool(node.refs(IRI_ACTION_OBJECT))
         has_result = bool(node.refs(IRI_ACTION_RESULT))
-        acquisition_like = any(tok in names for tok in _ACQUISITION_NAME_TOKENS)
+        acquisition_like = bool(_ACQUISITION_VERB.search(names))
         missing: list[str] = []
         if not has_actor:
             missing.append("performer|instrument")
@@ -754,9 +779,9 @@ def _derived_without_provenance(
                 ),
                 evidence=["no_container_membership_or_inbound_provenance_edge"],
                 rationale=(
-                    "Derived artifact is not a member of Investigation/ProvenanceRecord/"
-                    "ContextualCompilation and has no Extracted_From/Created_By/"
-                    "Contained_Within inbound edge."
+                    "Derived artifact is not a member of Investigation, "
+                    "ProvenanceRecord, ContextualCompilation, or Grouping, and "
+                    "has no Extracted_From/Created_By/Contained_Within inbound edge."
                 ),
                 recommended_change=(
                     "Attach the artifact via uco-core:object or add a provenance relationship."
@@ -878,7 +903,7 @@ def _physical_logical_image_mismatch(
             text = " ".join(
                 node.literals(IRI_NAME) + node.literals(IRI_TAG)
             ).lower()
-            if any(tok in text for tok in _FORENSIC_IMAGE_TOKENS):
+            if _FORENSIC_IMAGE_HINT.search(text):
                 findings.append(
                     _finding(
                         rule_id="CRIT-H-IMAGE-CONTAINER-MISMATCH",
@@ -898,7 +923,7 @@ def _physical_logical_image_mismatch(
                         verification_method="RasterPicture name/tag forensic-image tokens.",
                     )
                 )
-        if not node.has_type(IRI_RELATIONSHIP):
+        if not node.is_a(IRI_RELATIONSHIP):
             continue
         kinds = set(node.literals(IRI_KIND))
         kinds.update(r.rsplit("/", 1)[-1] for r in node.refs(IRI_KIND))
@@ -969,11 +994,12 @@ def _final_artifact_not_in_compilation(
                     evidence=[f"action_result_of={node.iri}"],
                     rationale=(
                         "File/Observable action result is not referenced from any "
-                        "Investigation/ProvenanceRecord/ContextualCompilation via object."
+                        "Investigation, ProvenanceRecord, ContextualCompilation, "
+                        "or Grouping via object."
                     ),
                     recommended_change=(
-                        "Add the artifact to Investigation or ProvenanceRecord/"
-                        "ContextualCompilation object lists."
+                        "Add the artifact to an Investigation, ProvenanceRecord, "
+                        "ContextualCompilation, or Grouping object list."
                     ),
                     verification_method="Action result membership in container object sets.",
                 )
@@ -995,14 +1021,6 @@ def _action_role_contradiction(
         "user executes",
         "user execution",
     )
-    actor_tokens = (
-        "threat-actor",
-        "threat actor",
-        "operator",
-        "apt",
-        "adversary",
-        "attacker",
-    )
     findings: list[CriticFinding] = []
     examined = 0
     for node in view.iter_nodes():
@@ -1019,7 +1037,7 @@ def _action_role_contradiction(
             labels = [x.lower() for x in performer.literals(IRI_NAME)]
             tags = [x.lower() for x in performer.literals(IRI_TAG)]
             hay = " ".join(labels + tags)
-            if any(tok in hay for tok in actor_tokens):
+            if _THREAT_ACTOR_HINT.search(hay):
                 findings.append(
                     _finding(
                         rule_id="CRIT-H-ACTION-ROLE-CONTRADICTION",
@@ -1052,6 +1070,26 @@ def _action_role_contradiction(
                 )
                 break
     return findings, examined
+
+
+def _outgoing_refs(view: CanonicalGraphView, node: CanonicalNode) -> set[str]:
+    refs: set[str] = set()
+    stack: list[object] = []
+    for values in node.properties.values():
+        for value in values:
+            refs.update(value.iris)
+            stack.append(value.raw)
+    while stack:
+        current = stack.pop()
+        if isinstance(current, list):
+            stack.extend(current)
+        elif isinstance(current, dict):
+            for key, child in current.items():
+                if key == "@id" and isinstance(child, str):
+                    refs.add(view.expand(child) or child)
+                elif not key.startswith("@"):
+                    stack.append(child)
+    return refs
 
 
 def _orphan_top_level_nodes(
@@ -1088,23 +1126,18 @@ def _orphan_top_level_nodes(
         changed = False
         before = len(reachable)
         for node in view.iter_nodes():
-            if node.has_type(IRI_RELATIONSHIP):
+            if node.is_a(IRI_RELATIONSHIP):
                 srcs = set(node.refs(IRI_SOURCE))
                 tgts = set(node.refs(IRI_TARGET))
                 if (srcs & reachable) or (tgts & reachable):
                     reachable.update(srcs)
                     reachable.update(tgts)
                     reachable.add(node.iri)
-            # Expand membership / annotation / event context from reached nodes
+            # Anything a reached node references, directly or through an
+            # embedded facet (email from/to, hash, marking, creator), is reached.
             if node.iri in reachable:
-                reachable.update(node.refs(IRI_OBJECT))
-                reachable.update(node.refs(_IRI_EVENT_CONTEXT))
-                if _is_action_node(node):
-                    reachable.update(node.refs(IRI_PERFORMER))
-                    reachable.update(node.refs(IRI_INSTRUMENT))
-                    reachable.update(node.refs(IRI_ACTION_OBJECT))
-                    reachable.update(node.refs(IRI_ACTION_RESULT))
-            if node.has_type(
+                reachable.update(_outgoing_refs(view, node))
+            if node.is_a(
                 _IRI_ANNOTATION,
                 _IRI_GROUPING,
                 _IRI_EVENT,
@@ -1125,7 +1158,7 @@ def _orphan_top_level_nodes(
         # Nested facet/hash/registry-value expansions are not independent subjects
         if not _TOP_LEVEL.match(pointer):
             continue
-        if node.has_type(IRI_RELATIONSHIP):
+        if node.is_a(IRI_RELATIONSHIP):
             continue
         if node.has_type(IRI_INVESTIGATION, IRI_PROVENANCE_RECORD, _IRI_BUNDLE):
             continue
@@ -1173,6 +1206,137 @@ def _orphan_top_level_nodes(
     return findings, examined
 
 
+_LEGAL_PROCESS_HINT = re.compile(
+    r"\b(?:search\s+warrant|affidavit\s+for\s+search|legal\s+process\s+attached|"
+    r"attachment\s+[a-d]\s+of\s+affidavit)\b",
+    re.IGNORECASE,
+)
+_BROKEN_BASE58_HINT = re.compile(
+    r"(?<![A-Za-z0-9])"
+    r"([13T][1-9A-HJ-NP-Za-km-zIlO0]{2,}"
+    r"(?:[\s:\]\[,.'’/\\]{1,3}[1-9A-HJ-NP-Za-km-zIlO0]{2,}){1,12})"
+    r"(?![A-Za-z0-9])"
+)
+def _iter_node_literals(node: CanonicalNode) -> list[tuple[str, str]]:
+    pairs: list[tuple[str, str]] = []
+    for prop_iri, values in node.properties.items():
+        for value in values:
+            if value.literal:
+                pairs.append((prop_iri, value.literal))
+    return pairs
+
+
+def _legal_process_without_investigation(
+    view: CanonicalGraphView,
+) -> tuple[list[CriticFinding], int]:
+    findings: list[CriticFinding] = []
+    examined = 0
+    has_investigation = any(
+        node.has_type(IRI_INVESTIGATION) for node in view.iter_nodes()
+    )
+    hits: list[CanonicalNode] = []
+    for node in view.iter_nodes():
+        literals = _iter_node_literals(node)
+        if not literals:
+            continue
+        if not any(_LEGAL_PROCESS_HINT.search(text) for _, text in literals):
+            continue
+        examined += 1
+        hits.append(node)
+    if has_investigation or not hits:
+        return findings, examined
+    node = hits[0]
+    findings.append(
+        _finding(
+            rule_id="CRIT-H-LEGAL-PROCESS-NO-INVESTIGATION",
+            severity="high",
+            category="investigation_structure",
+            target=CriticTarget(
+                node_id=node.iri,
+                json_pointer=node.location.json_pointer,
+                path=node.location.path,
+            ),
+            evidence=[
+                "legal_process_language_present=true",
+                "investigation_present=false",
+                f"literal_hits={examined}",
+            ],
+            rationale=(
+                "Graph literals describe a search warrant, affidavit, or attached "
+                "legal process, but no case-investigation:Investigation compiles "
+                "the extracted entities."
+            ),
+            recommended_change=(
+                "Emit a case-investigation:Investigation with uco-core:object "
+                "links to emails, domains, wallets, and identities, plus "
+                "case-investigation:Authorization when warrant language is present."
+            ),
+            verification_method=(
+                "Scan node literals for warrant/affidavit language; require an "
+                "Investigation node when any hit exists."
+            ),
+        )
+    )
+    return findings, examined
+
+
+def _broken_crypto_address_string(
+    view: CanonicalGraphView,
+) -> tuple[list[CriticFinding], int]:
+    findings: list[CriticFinding] = []
+    examined = 0
+    for node in view.iter_nodes():
+        for prop_iri, text in _iter_node_literals(node):
+            match = None
+            reconstructed = None
+            for item in _BROKEN_BASE58_HINT.finditer(text):
+                span = item.group(1)
+                if not 26 <= len(re.sub(r"[\s:\]\[,.'’/\\]+", "", span)) <= 42:
+                    continue
+                candidate, _consumed = _try_reconstruct_base58(span)
+                if candidate:
+                    match, reconstructed = item, candidate
+                    break
+            if not match:
+                continue
+            examined += 1
+            findings.append(
+                _finding(
+                    rule_id="CRIT-H-BROKEN-CRYPTO-ADDRESS-STRING",
+                    severity="high",
+                    category="identifier_quality",
+                    target=CriticTarget(
+                        node_id=node.iri,
+                        predicate=prop_iri,
+                        json_pointer=node.location.json_pointer,
+                        path=node.location.path,
+                    ),
+                    evidence=[
+                        f"property={prop_iri}",
+                        f"broken_span={match.group(1)[:80]}",
+                        f"reconstructed_address={reconstructed}",
+                    ],
+                    rationale=(
+                        "A recorded string still contains a spaced or punctuated "
+                        "Base58-like cryptocurrency address. Those values cannot be "
+                        "correlated across warrant returns."
+                    ),
+                    recommended_change=(
+                        "Repair OCR-broken Base58 addresses (checksum-validated) "
+                        "before writing ExtractedString.stringValue, and emit a "
+                        "cryptoinv:CryptocurrencyAddressFacet with the reconstructed "
+                        "addressValue."
+                    ),
+                    verification_method=(
+                        "Separated 1/3/T Base58 runs in graph literals whose joined "
+                        "characters pass a Base58Check checksum."
+                    ),
+                )
+            )
+            break
+    return findings, examined
+
+
 # --- helpers -----------------------------------------------------------------
 
 
@@ -1205,7 +1369,7 @@ def _relationship_kinds(node: CanonicalNode) -> set[str]:
 def _linked_pairs(view: CanonicalGraphView, kinds: frozenset[str]) -> set[frozenset[str]]:
     pairs: set[frozenset[str]] = set()
     for node in view.iter_nodes():
-        if not node.has_type(IRI_RELATIONSHIP):
+        if not node.is_a(IRI_RELATIONSHIP):
             continue
         if not (_relationship_kinds(node) & kinds):
             continue
@@ -1280,7 +1444,7 @@ def _derived_file_iris(view: CanonicalGraphView) -> set[str]:
                 if target and target.has_type(IRI_FILE, IRI_OBSERVABLE, IRI_IMAGE):
                     if not any("Facet" in t for t in target.types):
                         derived.add(ref)
-        if not node.has_type(IRI_RELATIONSHIP):
+        if not node.is_a(IRI_RELATIONSHIP):
             continue
         kinds = _relationship_kinds(node)
         if not (kinds & _DERIVED_KINDS):
@@ -1298,9 +1462,7 @@ def _derived_file_iris(view: CanonicalGraphView) -> set[str]:
 def _container_object_members(view: CanonicalGraphView) -> set[str]:
     members: set[str] = set()
     for node in view.iter_nodes():
-        if node.has_type(
-            IRI_INVESTIGATION, IRI_PROVENANCE_RECORD, IRI_CONTEXTUAL_COMPILATION
-        ):
+        if node.is_a(IRI_INVESTIGATION, IRI_PROVENANCE_RECORD, IRI_CONTEXTUAL_COMPILATION):
             members.update(node.refs(IRI_OBJECT))
     return members
 
@@ -1310,7 +1472,7 @@ def _inbound_provenance_targets(view: CanonicalGraphView) -> set[str]:
 
     inbound: set[str] = set()
     for node in view.iter_nodes():
-        if not node.has_type(IRI_RELATIONSHIP):
+        if not node.is_a(IRI_RELATIONSHIP):
             continue
         if not (_relationship_kinds(node) & _PROVENANCE_KINDS):
             continue
@@ -1323,7 +1485,7 @@ def _derived_source_pairs(view: CanonicalGraphView) -> list[tuple[str, str]]:
 
     pairs: list[tuple[str, str]] = []
     for node in view.iter_nodes():
-        if node.has_type(IRI_RELATIONSHIP):
+        if node.is_a(IRI_RELATIONSHIP):
             kinds = _relationship_kinds(node)
             if "Extracted_From" in kinds:
                 for src in node.refs(IRI_SOURCE):

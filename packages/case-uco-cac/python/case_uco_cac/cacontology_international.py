@@ -11,9 +11,6 @@ class AutomatedCrossMatching:
     """Automated system for continuous cross-matching of new data against international databases."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#AutomatedCrossMatching"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -89,9 +86,6 @@ class CrossBorderForensics:
     """Forensic analysis requiring coordination across multiple countries for large-scale evidence processing."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#CrossBorderForensics"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -101,7 +95,6 @@ class CrossBorderInvestigation:
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#CrossBorderInvestigation"
     has_begin_point_in_xsd_date_time_stamp: Optional[datetime] = field(default=None)
     has_end_point_in_xsd_date_time_stamp: Optional[datetime] = field(default=None)
-    label: list[str] = field(default_factory=list)
     coordination_complexity: Optional[str] = field(default=None)
     cross_border_capability: Optional[str] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -122,7 +115,6 @@ class CrossBorderOperation:
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#CrossBorderOperation"
     has_begin_point_in_xsd_date_time_stamp: Optional[datetime] = field(default=None)
     has_end_point_in_xsd_date_time_stamp: Optional[datetime] = field(default=None)
-    label: list[str] = field(default_factory=list)
     coordination_complexity: Optional[str] = field(default=None)
     cross_border_capability: Optional[str] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -170,7 +162,6 @@ class CrossJurisdictionalInvestigation:
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#CrossJurisdictionalInvestigation"
     has_begin_point_in_xsd_date_time_stamp: Optional[datetime] = field(default=None)
     has_end_point_in_xsd_date_time_stamp: Optional[datetime] = field(default=None)
-    label: list[str] = field(default_factory=list)
     coordination_complexity: Optional[str] = field(default=None)
     cross_border_capability: Optional[str] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -189,9 +180,6 @@ class CrossReferenceAnalysis:
     """Analysis correlating data across multiple international databases to identify connections and patterns."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#CrossReferenceAnalysis"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -235,9 +223,6 @@ class DistributedIntelligenceProcessing:
     """Distributed processing of intelligence across multiple international systems for scalable analysis."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#DistributedIntelligenceProcessing"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -300,9 +285,6 @@ class EuropolCoordination:
     """Coordination framework provided by Europol for international law enforcement operations."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#EuropolCoordination"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -312,7 +294,6 @@ class EuropolOperation:
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#EuropolOperation"
     has_begin_point_in_xsd_date_time_stamp: Optional[datetime] = field(default=None)
     has_end_point_in_xsd_date_time_stamp: Optional[datetime] = field(default=None)
-    label: list[str] = field(default_factory=list)
     coordination_complexity: Optional[str] = field(default=None)
     cross_border_capability: Optional[str] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -463,7 +444,6 @@ class GlobalPlatformTakedown:
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#GlobalPlatformTakedown"
     has_begin_point_in_xsd_date_time_stamp: Optional[datetime] = field(default=None)
     has_end_point_in_xsd_date_time_stamp: Optional[datetime] = field(default=None)
-    label: list[str] = field(default_factory=list)
     coordination_complexity: Optional[str] = field(default=None)
     cross_border_capability: Optional[str] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -630,8 +610,6 @@ class InternationalAlert:
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#InternationalAlert"
     has_begin_point_in_xsd_date_time_stamp: Optional[datetime] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     start_time: Optional[datetime] = field(default=None)
 
 
@@ -651,23 +629,6 @@ class InternationalAnalyst:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -675,9 +636,6 @@ class InternationalCoordination:
     """Coordination activities between international law enforcement and child protection organizations."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#InternationalCoordination"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -696,23 +654,6 @@ class InternationalCoordinator:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -851,7 +792,6 @@ class InternationalNetworkDisruption:
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#InternationalNetworkDisruption"
     has_begin_point_in_xsd_date_time_stamp: Optional[datetime] = field(default=None)
     has_end_point_in_xsd_date_time_stamp: Optional[datetime] = field(default=None)
-    label: list[str] = field(default_factory=list)
     coordination_complexity: Optional[str] = field(default=None)
     cross_border_capability: Optional[str] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -897,9 +837,6 @@ class InternationalProsecution:
     """Prosecution strategy coordinated across multiple countries for users identified in large-scale operations."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#InternationalProsecution"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -907,9 +844,6 @@ class InternationalReferral:
     """Referral of cases or information to international partners."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#InternationalReferral"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     response_time_international: Optional[float] = field(default=None)
     undercover_coordination: Optional[bool] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
@@ -920,9 +854,6 @@ class InternationalResourceCoordination:
     """Coordination of technical and human resources across countries for large-scale operations."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#InternationalResourceCoordination"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -995,23 +926,6 @@ class LiaisonOfficer:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1047,9 +961,6 @@ class MassUserAnalysis:
     """Analysis of massive user databases requiring international coordination for processing users across multiple countries."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#MassUserAnalysis"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1059,7 +970,6 @@ class MultiCountryTakedown:
     CLASS_IRI: str = "https://cacontology.projectvic.org/international#MultiCountryTakedown"
     has_begin_point_in_xsd_date_time_stamp: Optional[datetime] = field(default=None)
     has_end_point_in_xsd_date_time_stamp: Optional[datetime] = field(default=None)
-    label: list[str] = field(default_factory=list)
     coordination_complexity: Optional[str] = field(default=None)
     cross_border_capability: Optional[str] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)

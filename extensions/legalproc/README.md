@@ -73,7 +73,7 @@ string vocabularies so any jurisdiction's terminology fits.
 ## Validation
 
 ```bash
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph extensions/legalproc/legalproc.ttl \
   --ontology-graph extensions/legalproc/legalproc-shapes.ttl \
   --inference rdfs --allow-info \

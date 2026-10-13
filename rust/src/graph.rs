@@ -1523,6 +1523,81 @@ impl CaseGraph {
     }
 }
 
+/// Uppercase hex, the lexical form Python's `canonical_hex_binary` writes.
+pub fn encode_hex_binary(bytes: &[u8]) -> String {
+    const DIGITS: &[u8; 16] = b"0123456789ABCDEF";
+    let mut out = String::with_capacity(bytes.len() * 2);
+    for byte in bytes {
+        out.push(DIGITS[(byte >> 4) as usize] as char);
+        out.push(DIGITS[(byte & 0x0F) as usize] as char);
+    }
+    out
+}
+
+/// Standard (RFC 4648, padded) base64.
+pub fn encode_base64_binary(bytes: &[u8]) -> String {
+    const ALPHABET: &[u8; 64] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    let mut out = String::with_capacity(bytes.len().div_ceil(3) * 4);
+    for chunk in bytes.chunks(3) {
+        let b = [chunk[0], *chunk.get(1).unwrap_or(&0), *chunk.get(2).unwrap_or(&0)];
+        let n = ((b[0] as u32) << 16) | ((b[1] as u32) << 8) | b[2] as u32;
+        out.push(ALPHABET[(n >> 18) as usize & 63] as char);
+        out.push(ALPHABET[(n >> 12) as usize & 63] as char);
+        out.push(if chunk.len() > 1 { ALPHABET[(n >> 6) as usize & 63] as char } else { '=' });
+        out.push(if chunk.len() > 2 { ALPHABET[n as usize & 63] as char } else { '=' });
+    }
+    out
+}
+
+fn binary_literal(datatype: &str, bytes: &[u8]) -> Value {
+    let lexical = if datatype == "xsd:base64Binary" {
+        encode_base64_binary(bytes)
+    } else {
+        encode_hex_binary(bytes)
+    };
+    json!({ "@type": datatype, "@value": lexical })
+}
+
+/// `serialize_with` target for generated `Option<Vec<u8>>` xsd:hexBinary fields.
+pub fn serialize_hex_binary_opt<S: serde::Serializer>(
+    value: &Option<Vec<u8>>,
+    serializer: S,
+) -> Result<S::Ok, S::Error> {
+    match value {
+        Some(bytes) => binary_literal("xsd:hexBinary", bytes).serialize(serializer),
+        None => serializer.serialize_none(),
+    }
+}
+
+/// `serialize_with` target for generated `Vec<Vec<u8>>` xsd:hexBinary fields.
+pub fn serialize_hex_binary_vec<S: serde::Serializer>(
+    value: &[Vec<u8>],
+    serializer: S,
+) -> Result<S::Ok, S::Error> {
+    let items: Vec<Value> = value.iter().map(|b| binary_literal("xsd:hexBinary", b)).collect();
+    items.serialize(serializer)
+}
+
+/// `serialize_with` target for generated `Option<Vec<u8>>` xsd:base64Binary fields.
+pub fn serialize_base64_binary_opt<S: serde::Serializer>(
+    value: &Option<Vec<u8>>,
+    serializer: S,
+) -> Result<S::Ok, S::Error> {
+    match value {
+        Some(bytes) => binary_literal("xsd:base64Binary", bytes).serialize(serializer),
+        None => serializer.serialize_none(),
+    }
+}
+
+/// `serialize_with` target for generated `Vec<Vec<u8>>` xsd:base64Binary fields.
+pub fn serialize_base64_binary_vec<S: serde::Serializer>(
+    value: &[Vec<u8>],
+    serializer: S,
+) -> Result<S::Ok, S::Error> {
+    let items: Vec<Value> = value.iter().map(|b| binary_literal("xsd:base64Binary", b)).collect();
+    items.serialize(serializer)
+}
+
 struct GraphSnapshot {
     context: HashMap<String, String>,
     objects: Vec<Value>,

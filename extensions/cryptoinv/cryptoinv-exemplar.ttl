@@ -154,3 +154,38 @@ kb:restitution-8f9d81f0-4c60-5ff2-9be2-3a9a1c07a011
 	uco-core:name "In-kind restitution proposal (synthetic)" ;
 	cryptoinv:restitutionInKind true ;
 	cryptoinv:restitutionDescription "Return of forfeited virtual assets to the victim virtual currency exchange as in-kind restitution." .
+
+kb:hosted-wallet-8f9d81f0-4c60-5ff2-9be2-3a9a1c07a012
+	a uco-observable:ObservableObject ;
+	uco-core:name "Hosted spot-wallet compartment (synthetic)" ;
+	uco-core:hasFacet kb:hosted-wallet-facet-8f9d81f0-4c60-5ff2-9be2-3a9a1c07a012 .
+
+kb:hosted-wallet-facet-8f9d81f0-4c60-5ff2-9be2-3a9a1c07a012
+	a cryptoinv:CryptocurrencyWalletFacet ;
+	cryptoinv:walletType "hosted" ;
+	cryptoinv:walletIdentifier "synthetic-vasp-account" ;
+	cryptoinv:hostedWalletCompartment "Spot" .
+
+kb:ledger-event-8f9d81f0-4c60-5ff2-9be2-3a9a1c07a013
+	a uco-core:Event ;
+	uco-core:name "VASP-reported deposit row (synthetic)" ;
+	uco-core:eventType "Provider-reported financial or account transaction" ;
+	uco-core:eventContext kb:hosted-wallet-8f9d81f0-4c60-5ff2-9be2-3a9a1c07a012 , kb:address-8f9d81f0-4c60-5ff2-9be2-3a9a1c07a007 , kb:victim-vce-8f9d81f0-4c60-5ff2-9be2-3a9a1c07a002 ;
+	uco-core:hasFacet kb:ledger-facet-8f9d81f0-4c60-5ff2-9be2-3a9a1c07a013 , kb:ledger-tx-facet-8f9d81f0-4c60-5ff2-9be2-3a9a1c07a013 .
+
+kb:ledger-facet-8f9d81f0-4c60-5ff2-9be2-3a9a1c07a013
+	a cryptoinv:VirtualAssetLedgerRecordFacet ;
+	cryptoinv:ledgerRecordType "Deposit" ;
+	cryptoinv:providerTransactionId "SYNTHETIC-DEPOSIT-001" ;
+	cryptoinv:transferNetwork "BTC" ;
+	cryptoinv:isOnChain true ;
+	cryptoinv:assetSymbol "BTC" ;
+	cryptoinv:assetQuantity "0.5"^^xsd:decimal ;
+	cryptoinv:transactionFee "0.0001"^^xsd:decimal ;
+	cryptoinv:transactionStatus "Confirmed" .
+
+kb:ledger-tx-facet-8f9d81f0-4c60-5ff2-9be2-3a9a1c07a013
+	a cryptoinv:CryptocurrencyTransactionFacet ;
+	cryptoinv:transactionHash "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" ;
+	cryptoinv:transactionType "Deposit" ;
+	cryptoinv:transactionStatus "Confirmed" .

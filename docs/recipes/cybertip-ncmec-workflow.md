@@ -229,7 +229,7 @@ graph.write("cybertip_workflow.jsonld")
 ### Validation
 
 ```bash
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph ontology/cac/ontology/ontology/cacontology-core-spine.ttl \
   --ontology-graph ontology/cac/ontology/ontology/cacontology-us-ncmec.ttl \
   --ontology-graph ontology/cac/ontology/ontology/cacontology-detection.ttl \

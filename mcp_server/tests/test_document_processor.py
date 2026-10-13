@@ -1,5 +1,7 @@
 """Tests for the canonical-term document processor (Tier T0 synthetic data)."""
 
+import hashlib
+import io
 import json
 import struct
 import sys
@@ -82,10 +84,39 @@ def write_xlsx(path: Path) -> None:
     with zipfile.ZipFile(path, "w") as archive:
         archive.writestr("[Content_Types].xml", "<Types></Types>")
         archive.writestr(
-            "xl/sharedStrings.xml",
-            '<sst><si><t>Synthetic spreadsheet cell Bravo</t></si></sst>',
+            "xl/workbook.xml",
+            '<workbook xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+            '<sheets><sheet name="Accounts" sheetId="1" r:id="rId1"/>'
+            '<sheet name="Transactions" sheetId="2" r:id="rId2"/></sheets></workbook>',
         )
-        archive.writestr("xl/worksheets/sheet1.xml", "<worksheet><sheetData/></worksheet>")
+        archive.writestr(
+            "xl/_rels/workbook.xml.rels",
+            '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+            '<Relationship Id="rId1" Target="worksheets/sheet1.xml"/>'
+            '<Relationship Id="rId2" Target="worksheets/sheet2.xml"/>'
+            "</Relationships>",
+        )
+        archive.writestr(
+            "xl/sharedStrings.xml",
+            '<sst><si><t>Synthetic spreadsheet cell Bravo</t></si>'
+            '<si><t>Account</t></si><si><t>Amount</t></si></sst>',
+        )
+        archive.writestr(
+            "xl/worksheets/sheet1.xml",
+            '<worksheet><sheetData><row r="1"><c r="A1" t="s"><v>1</v></c>'
+            '<c r="B1" t="s"><v>2</v></c></row><row r="2">'
+            '<c r="A2" t="s"><v>0</v></c><c r="B2"><v>1250.50</v></c>'
+            "</row></sheetData></worksheet>",
+        )
+        archive.writestr(
+            "xl/worksheets/sheet2.xml",
+            '<worksheet><sheetData><row r="1"><c r="A1" t="inlineStr">'
+            '<is><t>Transaction ID</t></is></c><c r="B1" t="inlineStr">'
+            '<is><t>Status</t></is></c></row><row r="2">'
+            '<c r="A2" t="inlineStr"><is><t>tx-synthetic-1</t></is></c>'
+            '<c r="B2" t="inlineStr"><is><t>complete</t></is></c>'
+            "</row></sheetData></worksheet>",
+        )
 
 
 def graph_nodes(output: Path) -> list[dict]:
@@ -112,7 +143,15 @@ def test_graph_uses_canonical_action_provenance_terms(tmp_path: Path) -> None:
     assert "case-investigation:object" not in raw
     assert "case-investigation:instrument" not in raw
     assert "case-investigation:result" not in raw
-    assert "link-look:" not in raw
+    document = json.loads(raw)
+    declared = set(document["@context"])
+    used = {
+        key.split(":", 1)[0]
+        for node in document["@graph"]
+        for key in node
+        if ":" in key and not key.startswith("@")
+    }
+    assert used <= declared, used - declared
 
     nodes = graph_nodes(output)
     actions = nodes_of_type(nodes, "case-investigation:InvestigativeAction")
@@ -174,7 +213,7 @@ def test_records_carry_extracted_strings_facets_and_relationships(tmp_path: Path
 
     relationships = nodes_of_type(nodes, "uco-core:Relationship")
     assert len(relationships) == 2
-    assert relationships[0]["uco-core:kindOfRelationship"] == "Derived_From"
+    assert relationships[0]["uco-core:kindOfRelationship"] == "Extracted_From"
     record_ids = {n["@id"] for n in record_nodes}
     assert relationships[0]["uco-core:source"]["@id"] in record_ids
 
@@ -184,22 +223,35 @@ def test_records_carry_extracted_strings_facets_and_relationships(tmp_path: Path
 # ---------------------------------------------------------------------------
 
 
-def test_csv_yields_bounded_per_record_candidates(tmp_path: Path) -> None:
-    rows = "\n".join(f"row-{i},{i}.00" for i in range(1, document_processor.MAX_CSV_RECORDS + 51))
+def test_csv_yields_bounded_per_record_candidates(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr(document_processor, "MAX_CSV_RECORDS", 100)
+    rows = "\n".join(f"row-{i},{i}.00" for i in range(1, 151))
     source = tmp_path / "big.csv"
     source.write_text("item,total\n" + rows + "\n", encoding="utf-8")
     output = tmp_path / "big.jsonld"
     result = document_processor.process_document_file(source, output)
 
-    assert len(result.records) == document_processor.MAX_CSV_RECORDS
+    assert len(result.records) == 100
     assert result.truncated is True
-    assert result.extracted_fields["truncated"].startswith(f"first {document_processor.MAX_CSV_RECORDS}")
+    assert result.extracted_fields["truncated"].startswith("first 100")
 
 
 def test_empty_csv_fails_honestly(tmp_path: Path) -> None:
     source = tmp_path / "empty.csv"
     source.write_text("item,total\n", encoding="utf-8")
     with pytest.raises(ValueError, match="empty_csv"):
+        document_processor.process_document_file(source, tmp_path / "out.jsonld")
+
+
+def test_binary_payload_with_csv_suffix_requires_preprocessing(tmp_path: Path) -> None:
+    source = tmp_path / "decrypted_export.csv"
+    source.write_bytes(
+        b"\x1c\x1b<\\D\x17y6%(*-3[h)\x00\x02\x03"
+        b"apparent,row\n"
+        b"\x0e\x0fnot-actually-csv\x00\x1d"
+    )
+
+    with pytest.raises(ValueError, match="encrypted_or_binary_content"):
         document_processor.process_document_file(source, tmp_path / "out.jsonld")
 
 
@@ -274,6 +326,58 @@ def test_pypdf_fallback_is_used_and_recorded(tmp_path: Path, monkeypatch: pytest
     assert result.extracted_fields["extraction_method"] == "pypdf"
 
 
+def test_confidentiality_stamp_is_sparse_page_text() -> None:
+    assert document_processor.pdf_page_text_is_sparse("Adobe Proprietary and Confidential\n")
+    assert document_processor.pdf_page_text_is_sparse("")
+    assert not document_processor.pdf_page_text_is_sparse(
+        "DECLARATION VERIFYING THE AUTHENTICITY OF CORPORATE RECORDS\n"
+        "I certify that the attached records concern the registered user accounts "
+        "named in the legal process and were kept in the regular course of business.\n"
+    )
+
+
+def test_mixed_pdf_ocrs_sparse_pages_and_keeps_typed_pages(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A typed cover page must not skip OCR on scanned warrant attachments."""
+
+    source = tmp_path / "mixed.pdf"
+    write_pdf(source)
+    typed = (
+        "DECLARATION VERIFYING THE AUTHENTICITY OF CORPORATE RECORDS\n"
+        "I certify that the attached records concern the registered user accounts "
+        "named in the legal process and were kept in the regular course of business.\n"
+    )
+    monkeypatch.setattr(document_processor, "extract_pdf_page_texts_pdftotext", lambda _s: [
+        "Adobe Proprietary and Confidential\n",
+        typed,
+        "Adobe Proprietary and Confidential\n",
+    ])
+    monkeypatch.setattr(document_processor, "extract_pdf_page_texts_pypdf", lambda _s: [])
+    monkeypatch.setattr(document_processor, "pdf_ocr_available", lambda: True)
+
+    def fake_page_ocr(_source: Path, page_number: int) -> str:
+        if page_number == 1:
+            return "Attachment B of Affidavit for Search Warrant synthetic page one."
+        if page_number == 3:
+            return "Attachment B of Affidavit for Search Warrant synthetic page three."
+        return ""
+
+    monkeypatch.setattr(document_processor, "extract_pdf_page_ocr", fake_page_ocr)
+    result = document_processor.process_document_file(source, tmp_path / "out.jsonld")
+    text = json.loads((tmp_path / "extracted-content.json").read_text(encoding="utf-8"))
+    section = text["content"]["sections"][0]["text"]
+    assert result.extracted_fields["extraction_method"] == "pdftotext+ocr_tesseract"
+    assert result.extracted_fields["pdf_ocr_pages"] == "2"
+    assert result.extracted_fields["pdf_text_layer_pages"] == "1"
+    assert "[PDF page 1]" in section
+    assert "[PDF page 2]" in section
+    assert "[PDF page 3]" in section
+    assert "Affidavit for Search Warrant synthetic page one" in section
+    assert "DECLARATION VERIFYING THE AUTHENTICITY" in section
+    assert "Affidavit for Search Warrant synthetic page three" in section
+
+
 def test_scanned_pdf_uses_ocr_fallback_when_available(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     source = tmp_path / "scanned.pdf"
     write_scanned_pdf(source)
@@ -324,12 +428,227 @@ def test_document_text_is_not_truncated_to_summary_bound(tmp_path: Path, monkeyp
     assert result.extracted_fields["extracted_text"] == section_text[:240]
 
 
-def test_xlsx_shared_strings_are_extracted(tmp_path: Path) -> None:
+def test_xlsx_preserves_sheets_numeric_cells_and_row_anchors(tmp_path: Path) -> None:
     source = tmp_path / "sheet.xlsx"
     write_xlsx(source)
     output = tmp_path / "sheet.jsonld"
     result = document_processor.process_document_file(source, output)
+
     assert "Synthetic spreadsheet cell Bravo" in result.extracted_fields["extracted_text"]
+    assert result.extracted_fields["worksheet_count"] == "2"
+    extracted = json.loads((tmp_path / "extracted-content.json").read_text(encoding="utf-8"))
+    sheets = extracted["content"]["sheets"]
+    assert [sheet["name"] for sheet in sheets] == ["Accounts", "Transactions"]
+    assert sheets[0]["header"] == ["Account", "Amount"]
+    assert sheets[0]["rows"][0] == ["Synthetic spreadsheet cell Bravo", "1250.50"]
+    assert sheets[1]["rows"][0] == ["tx-synthetic-1", "complete"]
+    assert result.records[0].anchor == {
+        "selector_kind": "table_fragment",
+        "sheet_name": "Accounts",
+        "row_index": 1,
+        "rfc7111_row": 2,
+        "source_row_number": 2,
+        "col_index": 0,
+    }
+    annotations = json.loads((tmp_path / "annotations.jsonld").read_text(encoding="utf-8"))
+    assert annotations["@graph"][0]["target"]["source"].endswith("#Accounts")
+    assert annotations["@graph"][0]["target"]["selector"][0]["value"] == "row=2;col=1"
+
+
+def test_xlsx_worksheet_filter_emits_one_sheet(tmp_path: Path) -> None:
+    source = tmp_path / "sheet.xlsx"
+    write_xlsx(source)
+    result = document_processor.process_document_file(
+        source, tmp_path / "transactions.jsonld", worksheet="Transactions"
+    )
+    assert result.worksheet == "Transactions"
+    texts = [record.text for record in result.records]
+    assert any("tx-synthetic-1" in text for text in texts)
+    assert not any("Synthetic spreadsheet cell Bravo" in text for text in texts)
+    assert not (tmp_path / "extracted-content.json").exists()
+    assert (tmp_path / "transactions.extracted-content.json").is_file()
+
+
+def test_xlsx_partition_worksheets_writes_index_and_parts(tmp_path: Path) -> None:
+    source = tmp_path / "sheet.xlsx"
+    write_xlsx(source)
+    output = tmp_path / "sheet.xlsx.jsonld"
+    result = document_processor.process_document_file(
+        source, output, partition_worksheets=True
+    )
+    assert result.extracted_fields["partition_count"] == "2"
+    assert len(result.partition_outputs) == 2
+    names = {path.name for path in result.partition_outputs}
+    assert names == {"01-accounts.jsonld", "02-transactions.jsonld"}
+    index_nodes = graph_nodes(output)
+    assert any(
+        node.get("@type") == "case-investigation:InvestigativeAction"
+        and "worksheet graphs" in node.get("uco-core:name", "")
+        for node in index_nodes
+    )
+    tools = nodes_of_type(index_nodes, "uco-tool:Tool")
+    assert tools[0]["uco-tool:version"] == document_processor.TOOL_VERSION
+    tx_graph = json.loads(
+        (tmp_path / "sheet.xlsx.parts" / "02-transactions.jsonld").read_text(encoding="utf-8")
+    )
+    tx_text = json.dumps(tx_graph)
+    assert "tx-synthetic-1" in tx_text
+    assert "Synthetic spreadsheet cell Bravo" not in tx_text
+
+
+def write_xlsx_five_rows(path: Path) -> None:
+    rows_xml = ['<row r="1"><c r="A1" t="inlineStr"><is><t>Item</t></is></c></row>']
+    for index in range(2, 7):
+        rows_xml.append(
+            f'<row r="{index}"><c r="A{index}" t="inlineStr">'
+            f"<is><t>row-synthetic-{index}</t></is></c></row>"
+        )
+    with zipfile.ZipFile(path, "w") as archive:
+        archive.writestr("[Content_Types].xml", "<Types></Types>")
+        archive.writestr(
+            "xl/workbook.xml",
+            '<workbook xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+            '<sheets><sheet name="Ledger" sheetId="1" r:id="rId1"/></sheets></workbook>',
+        )
+        archive.writestr(
+            "xl/_rels/workbook.xml.rels",
+            '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+            '<Relationship Id="rId1" Target="worksheets/sheet1.xml"/>'
+            "</Relationships>",
+        )
+        archive.writestr(
+            "xl/worksheets/sheet1.xml",
+            "<worksheet><sheetData>" + "".join(rows_xml) + "</sheetData></worksheet>",
+        )
+
+
+def test_xlsx_partition_windows_large_worksheets(tmp_path: Path) -> None:
+    source = tmp_path / "ledger.xlsx"
+    write_xlsx_five_rows(source)
+    result = document_processor.process_document_file(
+        source,
+        tmp_path / "ledger.xlsx.jsonld",
+        partition_worksheets=True,
+        max_rows_per_graph=2,
+    )
+    assert len(result.partition_outputs) == 3
+    names = [path.name for path in result.partition_outputs]
+    assert names[0].startswith("01-ledger.r")
+    first = json.dumps(json.loads(result.partition_outputs[0].read_text(encoding="utf-8")))
+    last = json.dumps(json.loads(result.partition_outputs[-1].read_text(encoding="utf-8")))
+    assert "row-synthetic-2" in first
+    assert "row-synthetic-6" in last
+    assert "row-synthetic-6" not in first
+
+
+def test_html_message_export_is_reviewable_structured_text(tmp_path: Path) -> None:
+    source = tmp_path / "return.html"
+    source.write_text(
+        "<html><body><h1>Synthetic provider return</h1><p>Account event Alpha</p></body></html>",
+        encoding="utf-8",
+    )
+    result = document_processor.process_document_file(source, tmp_path / "out.jsonld")
+    assert result.file_kind == "structured_text"
+    assert result.extracted_fields["extraction_method"] == "html_parser"
+    assert "Account event Alpha" in result.extracted_fields["extracted_text"]
+
+
+def test_zip_archive_recurses_and_models_member_provenance(tmp_path: Path) -> None:
+    nested = io.BytesIO()
+    with zipfile.ZipFile(nested, "w") as archive:
+        archive.writestr("inner/transactions.csv", "id,amount\ntx-1,25.00\n")
+    source = tmp_path / "provider-return.zip"
+    with zipfile.ZipFile(source, "w") as archive:
+        archive.writestr("account/report.json", '{"account": "synthetic"}')
+        archive.writestr("takeout.zip", nested.getvalue())
+
+    result = document_processor.process_document_file(source, tmp_path / "out.jsonld")
+    assert result.file_kind == "archive"
+    assert result.extracted_fields["member_count"] == "3"
+    assert result.extracted_fields["nested_archive_count"] == "1"
+    assert any("transactions.csv" in record.label for record in result.records)
+    extracted = json.loads((tmp_path / "extracted-content.json").read_text(encoding="utf-8"))
+    combined = "\n".join(section["text"] for section in extracted["content"]["sections"])
+    assert "tx-1,25.00" in combined
+
+
+def test_zip_image_member_has_hashed_file_facets_and_extracted_from_relationship(
+    tmp_path: Path,
+) -> None:
+    image = tmp_path / "profile.jpg"
+    image.write_bytes(b"\xff\xd8\xffsynthetic-jpeg-evidence")
+    digest = document_processor.hashlib.sha256(image.read_bytes()).hexdigest().upper()
+    source = tmp_path / "provider-return.zip"
+    with zipfile.ZipFile(source, "w") as archive:
+        archive.writestr("images/profile.jpg", image.read_bytes())
+
+    output = tmp_path / "out.jsonld"
+    document_processor.process_document_file(source, output)
+    nodes = graph_nodes(output)
+    images = nodes_of_type(nodes, "uco-observable:RasterPicture")
+    assert len(images) == 1
+    facets = images[0]["uco-core:hasFacet"]
+    file_facet = next(f for f in facets if f["@type"] == "uco-observable:FileFacet")
+    content_facet = next(
+        f for f in facets if f["@type"] == "uco-observable:ContentDataFacet"
+    )
+    assert file_facet["uco-observable:fileName"] == "profile.jpg"
+    assert file_facet["uco-observable:extension"] == "jpg"
+    assert content_facet["uco-observable:hash"][0]["uco-types:hashMethod"] == "SHA256"
+    assert (
+        content_facet["uco-observable:hash"][0]["uco-types:hashValue"]["@value"]
+        == digest
+    )
+
+    source_node = next(
+        node
+        for node in nodes
+        if node.get("@type") == "uco-observable:ObservableObject"
+        and "source-file-kind:archive" in (node.get("uco-core:tag") or [])
+    )
+    relationship = next(
+        node
+        for node in nodes_of_type(nodes, "uco-core:Relationship")
+        if node.get("uco-core:source", {}).get("@id") == images[0]["@id"]
+    )
+    assert relationship["uco-core:target"]["@id"] == source_node["@id"]
+    assert relationship["uco-core:kindOfRelationship"] == "Extracted_From"
+    assert relationship["uco-core:isDirectional"] is True
+
+
+def test_zip_archive_accepts_valid_content_without_zip_suffix(tmp_path: Path) -> None:
+    source = tmp_path / "bounded-upload-name"
+    with zipfile.ZipFile(source, "w") as archive:
+        archive.writestr("account/report.txt", "synthetic account record")
+
+    assert document_processor.normalize_file_kind("archive", source) == "archive"
+    result = document_processor.process_document_file(
+        source, tmp_path / "out.jsonld", file_kind="archive"
+    )
+
+    assert result.file_kind == "archive"
+    assert result.extracted_fields["member_count"] == "1"
+
+
+def test_zip_archive_refuses_path_traversal(tmp_path: Path) -> None:
+    source = tmp_path / "unsafe.zip"
+    with zipfile.ZipFile(source, "w") as archive:
+        archive.writestr("../escape.txt", "synthetic")
+    with pytest.raises(ValueError, match="archive_unsafe_path"):
+        document_processor.process_document_file(source, tmp_path / "out.jsonld")
+
+
+def test_new_warrant_return_extensions_route_to_supported_kinds(tmp_path: Path) -> None:
+    expected = {
+        "return.xls": "legacy_office",
+        "mailbox.mbox": "structured_text",
+        "message.msg": "structured_text",
+        "events.ics": "structured_text",
+        "contacts.vcf": "structured_text",
+        "bundle.zip": "archive",
+    }
+    for name, kind in expected.items():
+        assert document_processor.normalize_file_kind(None, tmp_path / name) == kind
 
 
 def test_office_without_text_fails_honestly(tmp_path: Path) -> None:
@@ -362,17 +681,49 @@ def test_no_placeholder_content_in_output(tmp_path: Path) -> None:
 
 @pytest.mark.skipif(not document_processor.ocr_available(), reason="tesseract OCR CLI not installed")
 def test_image_ocr_extracts_text_when_available(tmp_path: Path) -> None:
-    """Live OCR path: a plain PNG goes through tesseract (may yield empty)."""
+    """Live OCR path preserves a plain image even when no text is found."""
 
     source = tmp_path / "plain.png"
     write_plain_png(source)
     try:
         result = document_processor.process_document_file(source, tmp_path / "out.jsonld")
     except ValueError as exc:
-        # A 1x1 image legitimately has no recognizable text.
-        assert str(exc) == "no_extractable_content"
+        # Some installed Tesseract/image-library combinations reject a 1x1
+        # image before recognition; that remains an honest OCR failure.
+        assert str(exc) == "ocr_failed"
     else:
-        assert result.extracted_fields["extraction_method"] == "ocr_tesseract"
+        assert result.extracted_fields["extraction_method"] in {
+            "ocr_tesseract",
+            "image_metadata_only",
+        }
+        if result.extracted_fields["extraction_method"] == "image_metadata_only":
+            assert result.extracted_fields["ocr_status"] == "no_text_detected"
+            assert result.records == []
+            assert result.extracted_content_path is None
+
+
+def test_image_with_empty_ocr_is_preserved_as_metadata_only(
+    tmp_path: Path, monkeypatch
+) -> None:
+    monkeypatch.setattr(document_processor, "ocr_available", lambda: True)
+    monkeypatch.setattr(document_processor, "run_ocr", lambda _source: "")
+    source = tmp_path / "photo.jpg"
+    source.write_bytes(b"\xff\xd8\xff\xe0synthetic-jpeg-bytes")
+
+    result = document_processor.process_document_file(source, tmp_path / "out.jsonld")
+
+    assert result.file_kind == "receipt_image"
+    assert result.extracted_fields["extraction_method"] == "image_metadata_only"
+    assert result.extracted_fields["ocr_status"] == "no_text_detected"
+    assert result.records == []
+    assert result.extracted_content_path is None
+    source_nodes = [
+        node
+        for node in result.graph["@graph"]
+        if node.get("@type") == "uco-observable:RasterPicture"
+    ]
+    assert len(source_nodes) == 1
+    assert "Synthetic image file" not in json.dumps(result.graph)
 
 
 def test_unsupported_kind_fails_honestly(tmp_path: Path) -> None:
@@ -470,7 +821,6 @@ def assert_bundle_contract_shape(extracted: dict) -> None:
         (write_pdf, "invoice.pdf"),
         (write_flate_pdf, "compressed.pdf"),
         (write_docx, "memo.docx"),
-        (write_xlsx, "sheet.xlsx"),
     ],
 )
 def test_text_kinds_emit_anchored_bundle(tmp_path: Path, writer, name: str) -> None:
@@ -503,7 +853,7 @@ def test_text_kinds_emit_anchored_bundle(tmp_path: Path, writer, name: str) -> N
             "uco-core:Relationship",
         )
         and not any(
-            tag.startswith("link-look-file-kind:")
+            tag.startswith("source-file-kind:")
             for tag in (node.get("uco-core:tag") or [])
         )
     }
@@ -545,20 +895,209 @@ def test_csv_bundle_uses_rfc7111_row_selectors(tmp_path: Path) -> None:
         assert 2 <= row_number <= len(sheet["rows"]) + 1
 
 
-def test_duplicate_values_get_distinct_row_anchors(tmp_path: Path) -> None:
-    """Two identical rows must anchor to distinct occurrences, never merged."""
+def test_duplicate_values_share_entity_but_keep_distinct_row_anchors(tmp_path: Path) -> None:
+    """Repeated identifiers are one graph identity with every occurrence anchored."""
 
     source = tmp_path / "dupes.csv"
-    source.write_text("phone\n555-0100\n555-0100\n", encoding="utf-8")
+    source.write_text("phone\n202-555-0100\n202-555-0100\n", encoding="utf-8")
     output = tmp_path / "dupes.jsonld"
     result = document_processor.process_document_file(source, output)
 
     _, annotations = load_bundle(output)
     annos = annotations["@graph"]
-    assert len(annos) == len(result.records) == 2
+    assert len(result.records) == 1
+    assert len(annos) == 2
     assert annos[0]["target"]["selector"][0]["value"] != annos[1]["target"]["selector"][0]["value"]
-    assert annos[0]["body"] != annos[1]["body"]
+    assert annos[0]["body"] == annos[1]["body"]
     assert annos[0]["id"] != annos[1]["id"]
+
+
+def test_distinct_structured_values_never_share_a_uco_facet(tmp_path: Path) -> None:
+    """Cell-local semantic offsets must not collapse distinct entity facets."""
+
+    source = tmp_path / "accounts.csv"
+    source.write_text(
+        "email,ip\n"
+        "first@example.test,192.0.2.10\n"
+        "second@example.test,192.0.2.11\n",
+        encoding="utf-8",
+    )
+    result = document_processor.process_document_file(source, tmp_path / "out.jsonld")
+    entities = [
+        node
+        for node in result.graph["@graph"]
+        if node.get("@type") in {
+            "uco-observable:EmailAddress",
+            "uco-observable:IPAddress",
+        }
+    ]
+    facet_ids = [facet["@id"] for node in entities for facet in node["uco-core:hasFacet"]]
+    assert len(entities) == 4
+    assert len(facet_ids) == len(set(facet_ids))
+
+
+def test_provider_rows_preserve_timestamped_cross_dataset_context(tmp_path: Path) -> None:
+    """Account-control clues remain linked in a source-row Event."""
+
+    source = tmp_path / "access-log.csv"
+    bitcoin = "bc1q" + "q" * 38
+    source.write_text(
+        "timestamp,email,ip,adid,city,country,wallet_address\n"
+        f"2025-07-09 04:14:00,analyst@example.test,129.224.203.200,"
+        f"00000000-0000-4000-8000-000000000001,Hong Kong,HK,{bitcoin}\n",
+        encoding="utf-8",
+    )
+    result = document_processor.process_document_file(source, tmp_path / "out.jsonld")
+    graph = result.graph["@graph"]
+
+    event = next(node for node in graph if node.get("@type") == "uco-core:Event")
+    assert event["uco-core:startTime"][0]["@value"] == "2025-07-09T04:14:00"
+    context_ids = {ref["@id"] for ref in event["uco-core:eventContext"]}
+    context_nodes = [node for node in graph if node.get("@id") in context_ids]
+    assert {
+        "uco-observable:EmailAddress",
+        "uco-observable:IPAddress",
+        "uco-observable:Device",
+        "uco-location:Location",
+        "uco-observable:ObservableObject",
+    }.issubset({node.get("@type") for node in context_nodes})
+    dictionary = event["uco-core:eventAttribute"][0]
+    assert {entry["uco-types:key"] for entry in dictionary["uco-types:entry"]} == {
+        "timestamp", "email", "ip", "adid", "city", "country", "wallet_address"
+    }
+    address = next(
+        node
+        for node in context_nodes
+        if node.get("@type") == "uco-observable:ObservableObject"
+        and any(
+            facet.get("@type") == "cryptoinv:CryptocurrencyAddressFacet"
+            for facet in node.get("uco-core:hasFacet", [])
+        )
+    )
+    address_facet = next(
+        facet
+        for facet in address["uco-core:hasFacet"]
+        if facet["@type"] == "cryptoinv:CryptocurrencyAddressFacet"
+    )
+    assert address_facet["cryptoinv:addressValue"] == bitcoin
+    assert address_facet["cryptoinv:cryptocurrencyType"] == "BTC"
+    provenance = next(
+        node for node in graph if node.get("@type") == "case-investigation:ProvenanceRecord"
+    )
+    rooted_ids = {ref["@id"] for ref in provenance["uco-core:object"]}
+    assert event["@id"] in rooted_ids
+    assert any(node.get("@type") == "case-investigation:InvestigativeAction" and node["@id"] in rooted_ids for node in graph)
+
+
+def test_vasp_ledger_rows_use_cryptoinv_facets(tmp_path: Path) -> None:
+    """Provider deposit rows keep ledger IDs distinct from on-chain hashes."""
+
+    bitcoin = "bc1q" + "q" * 38
+    onchain = "ab" * 32
+    source = tmp_path / "Report_BNB-108014_deposit.csv"
+    source.write_text(
+        "Date(UTC),Coin,Network,Amount,TransactionFee,Address,TxID,Status,Deposit ID,Wallet\n"
+        f"2024-01-15 12:00:00,BTC,BTC,0.5,0.0001,{bitcoin},{onchain},Completed,DEP-001,Spot\n"
+        "2024-01-16 13:00:00,USDT,TRC20,100,0,,,Successful,DEP-002,Funding\n",
+        encoding="utf-8",
+    )
+    result = document_processor.process_document_file(source, tmp_path / "out.jsonld")
+    graph = result.graph["@graph"]
+    assert result.graph["@context"]["cryptoinv"] == "http://example.org/ontology/cryptoinv/"
+
+    vasp = next(
+        node for node in graph if node.get("@type") == "cryptoinv:VirtualAssetServiceProvider"
+    )
+    assert vasp["uco-core:name"] == "Binance"
+
+    events = [node for node in graph if node.get("@type") == "uco-core:Event"]
+    assert len(events) == 2
+    onchain_event = next(
+        event
+        for event in events
+        if any(
+            facet.get("@type") == "cryptoinv:CryptocurrencyTransactionFacet"
+            for facet in event.get("uco-core:hasFacet", [])
+        )
+    )
+    ledger = next(
+        facet
+        for facet in onchain_event["uco-core:hasFacet"]
+        if facet["@type"] == "cryptoinv:VirtualAssetLedgerRecordFacet"
+    )
+    assert ledger["cryptoinv:ledgerRecordType"] == "Deposit"
+    assert ledger["cryptoinv:providerTransactionId"] == "DEP-001"
+    assert ledger["cryptoinv:isOnChain"] is True
+    assert ledger["cryptoinv:assetSymbol"] == "BTC"
+    tx = next(
+        facet
+        for facet in onchain_event["uco-core:hasFacet"]
+        if facet["@type"] == "cryptoinv:CryptocurrencyTransactionFacet"
+    )
+    assert tx["cryptoinv:transactionHash"] == onchain
+    assert tx["cryptoinv:transactionType"] == "Deposit"
+    assert {"@id": vasp["@id"]} in onchain_event["uco-core:eventContext"]
+
+    internal = next(event for event in events if event is not onchain_event)
+    internal_ledger = next(
+        facet
+        for facet in internal["uco-core:hasFacet"]
+        if facet["@type"] == "cryptoinv:VirtualAssetLedgerRecordFacet"
+    )
+    assert internal_ledger["cryptoinv:isOnChain"] is False
+    assert internal_ledger["cryptoinv:providerTransactionId"] == "DEP-002"
+    assert not any(
+        facet.get("@type") == "cryptoinv:CryptocurrencyTransactionFacet"
+        for facet in internal.get("uco-core:hasFacet", [])
+    )
+
+    compartments = {
+        facet["cryptoinv:hostedWalletCompartment"]
+        for node in graph
+        for facet in node.get("uco-core:hasFacet", [])
+        if facet.get("@type") == "cryptoinv:CryptocurrencyWalletFacet"
+    }
+    assert compartments == {"Spot", "Funding"}
+
+
+def test_advertising_ids_normalize_for_cross_return_join(tmp_path: Path) -> None:
+    """GAID/AdID values are stored case-folded so later SPARQL joins match."""
+
+    adid = "AA000000-0000-4000-8000-000000000001"
+    source = tmp_path / "devices.csv"
+    source.write_text(
+        "timestamp,gaid,ip\n"
+        f"2025-07-09 04:14:00,{adid},203.0.113.10\n"
+        f"2025-07-09 04:15:00,{adid.lower()},203.0.113.11\n",
+        encoding="utf-8",
+    )
+    result = document_processor.process_document_file(source, tmp_path / "out.jsonld")
+    devices = [
+        node
+        for node in result.graph["@graph"]
+        if node.get("@type") == "uco-observable:Device"
+    ]
+    assert len(devices) == 1
+    facet = next(
+        item
+        for item in devices[0]["uco-core:hasFacet"]
+        if item.get("@type") == "uco-observable:OperatingSystemFacet"
+    )
+    assert facet["uco-observable:advertisingID"] == [adid.casefold()]
+
+
+def test_vasp_hint_uses_parent_folder_when_filename_is_opaque(tmp_path: Path) -> None:
+    folder = tmp_path / "OKX Return"
+    folder.mkdir()
+    source = folder / "UUID-615125427199583129.csv"
+    source.write_text("item,total\nalpha,1\n", encoding="utf-8")
+    result = document_processor.process_document_file(source, tmp_path / "out.jsonld")
+    vasp = next(
+        node
+        for node in result.graph["@graph"]
+        if node.get("@type") == "cryptoinv:VirtualAssetServiceProvider"
+    )
+    assert vasp["uco-core:name"] == "OKX"
 
 
 def test_annotations_reference_only_record_nodes(tmp_path: Path) -> None:
@@ -654,3 +1193,61 @@ def test_process_document_file_emits_safe_failure_checkpoint(tmp_path: Path) -> 
     assert events[-1]["stage"] == "failed"
     assert events[-1]["percent"] == 100
     assert str(missing_source) not in json.dumps(events)
+
+
+def _synthetic_p2pkh() -> str:
+    from document_semantic_mapping import _B58_ALPHABET
+
+    body = b"\x00" + bytes(range(20))
+    checksum = hashlib.sha256(hashlib.sha256(body).digest()).digest()[:4]
+    data = body + checksum
+    number = int.from_bytes(data, "big")
+    chars: list[str] = []
+    while number:
+        number, remainder = divmod(number, 58)
+        chars.append(_B58_ALPHABET[remainder])
+    pad = 0
+    for byte in data:
+        if byte == 0:
+            pad += 1
+        else:
+            break
+    return ("1" * pad) + "".join(reversed(chars))
+
+
+def test_plain_text_warrant_emits_investigation_and_typed_address(
+    tmp_path: Path,
+) -> None:
+    address = _synthetic_p2pkh()
+    broken = " ".join(address[i : i + 4] for i in range(0, len(address), 4))
+    source = tmp_path / "warrant.txt"
+    source.write_text(
+        "ATTACHMENT A OF AFFIDAVIT\n"
+        "This search warrant concerns a cryptocurrency investment scam using "
+        f"Binance and wallet-portal.cc. Destination {broken}.\n",
+        encoding="utf-8",
+    )
+    output = tmp_path / "warrant.jsonld"
+    document_processor.process_document_file(source, output)
+    nodes = graph_nodes(output)
+    investigations = nodes_of_type(nodes, "case-investigation:Investigation")
+    assert len(investigations) == 1
+    assert investigations[0].get("uco-core:object")
+    assert investigations[0].get("case-investigation:relevantAuthorization")
+    assert nodes_of_type(nodes, "case-investigation:Authorization")
+    assert nodes_of_type(nodes, "cryptoinv:VirtualAssetServiceProvider")
+    address_values = [
+        facet.get("cryptoinv:addressValue")
+        for node in nodes
+        for facet in node.get("uco-core:hasFacet") or []
+        if facet.get("@type") == "cryptoinv:CryptocurrencyAddressFacet"
+    ]
+    assert address in address_values
+    string_values = [
+        item.get("uco-observable:stringValue", "")
+        for node in nodes
+        for facet in node.get("uco-core:hasFacet") or []
+        for item in facet.get("uco-observable:strings") or []
+    ]
+    assert any(address in value for value in string_values)
+    assert not any(broken in value for value in string_values)

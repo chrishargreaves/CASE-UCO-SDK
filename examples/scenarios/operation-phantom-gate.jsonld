@@ -3104,7 +3104,11 @@
     },
     {
       "@id": "urn:uuid:72285a6b-317b-5421-b88d-4d7fcbcdf09d",
-      "@type": "solveit-core:SolveitInvestigativeAction",
+      "@type": [
+        "solveit-core:SolveitInvestigativeAction",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1002",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1012"
+      ],
       "uco-core:name": "PROC-003 — COC-002 — write-blocked imaging Victim-7 SSD",
       "uco-action:startTime": {
         "@type": "xsd:dateTime",
@@ -3129,14 +3133,6 @@
       "uco-action:result": [
         {
           "@id": "https://example.org/scenarios/operation-phantom-gate-2026/ART-002"
-        }
-      ],
-      "solveit-core:usedTechnique": [
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1002"
-        },
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1012"
         }
       ],
       "solveit-core:appliedMitigation": [
@@ -4201,17 +4197,13 @@
     },
     {
       "@id": "urn:uuid:7f7d3951-a8d9-5991-adcf-30ab92a8f9e0",
-      "@type": "solveit-core:SolveitInvestigativeAction",
+      "@type": [
+        "solveit-core:SolveitInvestigativeAction",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1019",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1042"
+      ],
       "uco-core:name": "PROC-001 — Keel iPhone logical extraction (DFT-1019, DFT-1042)",
       "uco-core:description": "SOLVE-IT overlay for COC-001 step 5; source device → logical UFED output.",
-      "solveit-core:usedTechnique": [
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1019"
-        },
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1042"
-        }
-      ],
       "uco-action:performer": {
         "@id": "urn:uuid:f00f8450-7a69-54ff-851f-80614fbfbb78"
       },
@@ -4253,17 +4245,13 @@
     },
     {
       "@id": "urn:uuid:85f5714c-70ec-5fec-9b33-02ee1391f494",
-      "@type": "solveit-core:SolveitInvestigativeAction",
+      "@type": [
+        "solveit-core:SolveitInvestigativeAction",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1002",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1012"
+      ],
       "uco-core:name": "Victim-7 SSD imaging overlay (DFT-1002, DFT-1012)",
       "uco-core:description": "SOLVE-IT overlay aligned with COC-002 imaging action.",
-      "solveit-core:usedTechnique": [
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1002"
-        },
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1012"
-        }
-      ],
       "uco-action:performer": {
         "@id": "urn:uuid:68ce8587-18f8-55eb-b0a0-b0b1118cdce7"
       },
@@ -4356,14 +4344,12 @@
     },
     {
       "@id": "urn:uuid:2b24e6e8-8fc3-5c35-b1a2-64231b2e794a",
-      "@type": "solveit-core:SolveitInvestigativeAction",
+      "@type": [
+        "solveit-core:SolveitInvestigativeAction",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1046"
+      ],
       "uco-core:name": "Discovery redaction — Keel UFED export (DFT-1046)",
       "uco-core:description": "DH-PGA-003 minimization: redact third-party victim PII before defense discovery; prosecutor vault retains full UFED image.",
-      "solveit-core:usedTechnique": [
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1046"
-        }
-      ],
       "uco-action:performer": {
         "@id": "urn:uuid:f00f8450-7a69-54ff-851f-80614fbfbb78"
       },
@@ -7556,7 +7542,8 @@
       "@type": [
         "solveit-core:SolveitInvestigativeAction",
         "case-investigation:InvestigativeAction",
-        "uco-core:UcoObject"
+        "uco-core:UcoObject",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1019"
       ],
       "uco-core:name": "PROC-009 — PROC-009 — Juvenile J-1 partial logical acquisition",
       "uco-core:description": "DFT-1048 chat-only scope; partial iOS gap documented.",
@@ -7568,11 +7555,6 @@
       "uco-action:result": [
         {
           "@id": "https://example.org/scenarios/operation-phantom-gate-2026/ART-006-LOGICAL"
-        }
-      ],
-      "solveit-core:usedTechnique": [
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1019"
         }
       ]
     },
@@ -7657,7 +7639,9 @@
       "@type": [
         "solveit-core:SolveitInvestigativeAction",
         "case-investigation:InvestigativeAction",
-        "uco-core:UcoObject"
+        "uco-core:UcoObject",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1052",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1054"
       ],
       "uco-core:name": "PROC-002 — Cellebrite Physical Analyzer analysis",
       "uco-action:startTime": {
@@ -7679,14 +7663,6 @@
         {
           "@id": "https://example.org/scenarios/operation-phantom-gate-2026/FS-008"
         }
-      ],
-      "solveit-core:usedTechnique": [
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1052"
-        },
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1054"
-        }
       ]
     },
     {
@@ -7694,7 +7670,10 @@
       "@type": [
         "solveit-core:SolveitInvestigativeAction",
         "case-investigation:InvestigativeAction",
-        "uco-core:UcoObject"
+        "uco-core:UcoObject",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1061",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1064",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1052"
       ],
       "uco-core:name": "PROC-004 — Autopsy filesystem + carve examination",
       "uco-action:startTime": {
@@ -7716,17 +7695,6 @@
         {
           "@id": "https://example.org/scenarios/operation-phantom-gate-2026/FS-003"
         }
-      ],
-      "solveit-core:usedTechnique": [
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1061"
-        },
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1064"
-        },
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1052"
-        }
       ]
     },
     {
@@ -7734,7 +7702,9 @@
       "@type": [
         "solveit-core:SolveitInvestigativeAction",
         "case-investigation:InvestigativeAction",
-        "uco-core:UcoObject"
+        "uco-core:UcoObject",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1069",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1056"
       ],
       "uco-core:name": "PROC-006 — Magnet AXIOM AnyDesk timeline",
       "uco-action:startTime": {
@@ -7756,14 +7726,6 @@
         {
           "@id": "https://example.org/scenarios/operation-phantom-gate-2026/NET-002"
         }
-      ],
-      "solveit-core:usedTechnique": [
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1069"
-        },
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1056"
-        }
       ]
     },
     {
@@ -7771,7 +7733,9 @@
       "@type": [
         "solveit-core:SolveitInvestigativeAction",
         "case-investigation:InvestigativeAction",
-        "uco-core:UcoObject"
+        "uco-core:UcoObject",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1054",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1057"
       ],
       "uco-core:name": "PROC-008 — REMnux + Ghidra malware RE",
       "uco-action:startTime": {
@@ -7789,14 +7753,6 @@
       "uco-action:result": [
         {
           "@id": "urn:uuid:77f9c624-6c47-58c0-91ed-4aaac1498662"
-        }
-      ],
-      "solveit-core:usedTechnique": [
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1054"
-        },
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1057"
         }
       ]
     },
@@ -8510,6 +8466,22 @@
       ]
     },
     {
+      "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1002",
+      "@type": [
+        "http://www.w3.org/2002/07/owl#Class",
+        "https://ontology.solveit-df.org/solveit/core/Technique"
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+        "@id": "https://ontology.solveit-df.org/solveit/core/SolveitInvestigativeAction"
+      },
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "DFT-1002: Copy sectors from storage media",
+        "@language": "en"
+      },
+      "https://ontology.solveit-df.org/solveit/core/techniqueID": "DFT-1002",
+      "https://ontology.solveit-df.org/solveit/core/techniqueName": "Copy sectors from storage media"
+    },
+    {
       "@id": "urn:uuid:8a2824c0-7890-59d8-850d-6fc466ad8d07",
       "@type": "solveit-wa:WeaknessEvaluation",
       "uco-core:name": "art-001-logical — DFW-1019 evaluation",
@@ -8546,6 +8518,22 @@
           "@id": "urn:uuid:8a2824c0-7890-59d8-850d-6fc466ad8d07"
         }
       ]
+    },
+    {
+      "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1019",
+      "@type": [
+        "http://www.w3.org/2002/07/owl#Class",
+        "https://ontology.solveit-df.org/solveit/core/Technique"
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+        "@id": "https://ontology.solveit-df.org/solveit/core/SolveitInvestigativeAction"
+      },
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "DFT-1019: Extract a backup from a mobile device",
+        "@language": "en"
+      },
+      "https://ontology.solveit-df.org/solveit/core/techniqueID": "DFT-1019",
+      "https://ontology.solveit-df.org/solveit/core/techniqueName": "Extract a backup from a mobile device"
     },
     {
       "@id": "urn:uuid:f6d369d7-c6de-5eb6-8e10-5358ece2a0ca",
@@ -8622,6 +8610,22 @@
           "@id": "urn:uuid:6f6df1b3-3e2f-5d5c-9be2-8dbf72677521"
         }
       ]
+    },
+    {
+      "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1046",
+      "@type": [
+        "http://www.w3.org/2002/07/owl#Class",
+        "https://ontology.solveit-df.org/solveit/core/Technique"
+      ],
+      "http://www.w3.org/2000/01/rdf-schema#subClassOf": {
+        "@id": "https://ontology.solveit-df.org/solveit/core/SolveitInvestigativeAction"
+      },
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "DFT-1046: Redact digital forensic tool results to protect privileged material",
+        "@language": "en"
+      },
+      "https://ontology.solveit-df.org/solveit/core/techniqueID": "DFT-1046",
+      "https://ontology.solveit-df.org/solveit/core/techniqueName": "Redact digital forensic tool results to protect privileged material"
     }
   ]
 }

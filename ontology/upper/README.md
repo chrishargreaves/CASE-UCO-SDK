@@ -21,6 +21,14 @@ snapshots exist so the SDK works **fully offline**:
 | `foaf.rdf` | Friend of a Friend (FOAF) 0.99 | <http://xmlns.com/foaf/spec/index.rdf> |
 | `org.ttl` | W3C Organization Ontology (ORG) | <https://www.w3.org/ns/org.ttl> |
 | `prof.ttl` | W3C Profiles Vocabulary (PROF) | <https://www.w3.org/ns/dx/prof/> |
+| `prof-roles.ttl` | W3C PROF Resource Roles vocabulary | <https://www.w3.org/ns/dx/prof/role/> |
+| `qudt-schema.ttl` | QUDT 3.5.2 schema | `schema/SCHEMA_QUDT.ttl` in the [v3.5.2 release](https://github.com/qudt/qudt-public-repo/releases/tag/v3.5.2) |
+| `qudt-units.ttl` | QUDT 3.5.2 units | `vocab/unit/VOCAB_QUDT-UNITS-ALL.ttl` in the same release |
+| `qudt-quantitykinds.ttl` | QUDT 3.5.2 quantity kinds | `vocab/quantitykinds/VOCAB_QUDT-QUANTITY-KINDS-ALL.ttl` in the same release |
+| `qudt-prefixes.ttl` | QUDT 3.5.2 unit prefixes | `vocab/prefixes/VOCAB_QUDT-PREFIXES.ttl` in the same release |
+| `sosa.ttl` | W3C SOSA (2017 Recommendation) | <https://www.w3.org/ns/sosa/> |
+| `ssn.ttl` | W3C SSN (2017 Recommendation) | <https://www.w3.org/ns/ssn/> |
+| `ssn-systems.ttl` | W3C SSN System Capabilities | <https://www.w3.org/ns/ssn/systems/> |
 
 `provenance.json` records the source URL, SHA-256, and fetch timestamp of
 each file.
@@ -35,7 +43,7 @@ pinned to a specific upstream commit recorded in `provenance.json`. They can
 be passed to `case_validate` for offline profile conformance checks:
 
 ```bash
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph ontology/upper/shapes/sh-prov-o.ttl \
   --allow-info output.jsonld
 ```
@@ -43,13 +51,31 @@ case_validate --built-version case-1.4.0 \
 The `get_uco_profiles` MCP tool reports these vendored paths as
 `local_source` / `local_shapes` for each profile.
 
+## SDK-pinned profiles and shapes (`sdk-shapes/`)
+
+UCO has no CDO-Shapes profile for QUDT, SOSA, or SSN yet (see
+[ucoProject/UCO#404](https://github.com/ucoProject/UCO/issues/404)), so the
+SDK pins them itself as the `qudt`, `sosa`, and `ssn` validation profiles.
+The W3C publishes no SHACL for SOSA/SSN, and the SDK does not load QUDT's own
+SHACL (it imports SKOS by an unversioned IRI). `sdk-shapes/sh-qudt-sdk.ttl`
+and `sdk-shapes/sh-sosa-sdk.ttl` hold the minimal shapes the SDK enforces:
+one numeric `qudt:value` and one `qudt:hasUnit` per `qudt:QuantityValue`,
+a result on every `sosa:Observation`, and at most one sensor, feature of
+interest, observed property, phenomenon time, and result time per
+observation. The QUDT unit vocabulary also feeds
+`mcp_server/qudt_unit_index.json`, the index behind the `lookup_qudt_units`
+MCP tool.
+
 ## Licensing
 
 Each file remains under its upstream license and is vendored unmodified for
 interoperability: BFO and gUFO are published under Creative Commons
 Attribution 4.0; the W3C vocabularies (PROV-O, OWL-Time, ORG, PROF) under
 the W3C Software and Document License; GeoSPARQL under the OGC document
-license; FOAF under Creative Commons Attribution. Consult the ontology
+license; FOAF under Creative Commons Attribution; SOSA and SSN under the
+W3C Software and Document License and the OGC Software License; QUDT under
+Creative Commons Attribution 4.0, with the UCUM notice from the Regenstrief
+Institute that the QUDT schema carries. Consult the ontology
 headers inside each file for the authoritative license statement.
 
 ## Refreshing the snapshot

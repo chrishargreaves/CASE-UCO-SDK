@@ -96,7 +96,7 @@ python examples/upper-ontology/prov-o-lineage/build_exemplar.py
 ```bash
 validate_graph("prov-o-lineage.jsonld", profiles=["prov-o"])
 
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph ontology/upper/shapes/sh-prov-o.ttl \
   --allow-info prov-o-lineage.jsonld
 ```

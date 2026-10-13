@@ -7,7 +7,7 @@ setuptools>=68.0
 wheel
 
 # Validation (case_validate CLI)
-case-utils>=0.15.0
+case-utils>=0.18.0
 
 # MCP server — pinned to FastMCP 3.4.4 (Context.sample string/SamplingMessage API)
 fastmcp==3.4.4

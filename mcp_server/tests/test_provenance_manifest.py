@@ -274,3 +274,20 @@ def test_analyze_artifact_binds_manifest_digest(workspace, monkeypatch):
         and f.severity in {"critical", "high"}
         for f in review.deterministic_findings
     )
+
+
+def test_committed_build_manifests_match_listed_files():
+    """A recipe edit without a manifest refresh fails here, not in the critic."""
+
+    root = Path(__file__).resolve().parents[2]
+    manifests = sorted(root.glob("examples/**/build-manifest.json"))
+    assert manifests
+    stale = []
+    for manifest in manifests:
+        payload = json.loads(manifest.read_text(encoding="utf-8"))
+        for artifact in payload.get("artifacts") or []:
+            listed = root / artifact["path"]
+            actual = _sha(listed) if listed.is_file() else "missing"
+            if actual != artifact["sha256"]:
+                stale.append(f"{manifest.relative_to(root)}: {artifact['path']} is {actual}")
+    assert not stale, "Refresh build-manifest.json hashes:\n" + "\n".join(stale)

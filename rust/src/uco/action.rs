@@ -3,6 +3,10 @@
 use serde::Serialize;
 use crate::graph::CaseObject;
 
+use crate::uco::core::ExternalReference;
+use crate::uco::core::Facet;
+use crate::uco::core::IdentityAbstraction;
+use crate::uco::core::MarkingDefinitionAbstraction;
 use crate::uco::core::UcoObject;
 use crate::uco::location::Location;
 
@@ -37,6 +41,28 @@ pub struct Action {
     pub start_time: Option<String>,
     #[serde(rename = "uco-action:subaction")]
     pub subaction: Vec<Action>,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl Action {
@@ -58,6 +84,17 @@ impl Action {
             result: Vec::new(),
             start_time: None,
             subaction: Vec::new(),
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
@@ -77,6 +114,17 @@ pub struct ActionBuilder {
     result: Vec<UcoObject>,
     start_time: Option<String>,
     subaction: Vec<Action>,
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl ActionBuilder {
@@ -145,6 +193,61 @@ impl ActionBuilder {
         self
     }
 
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
     pub fn build(self) -> Action {
         Action {
             class_iri: Action::CLASS_IRI,
@@ -161,6 +264,17 @@ impl ActionBuilder {
             result: self.result,
             start_time: self.start_time,
             subaction: self.subaction,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -401,16 +515,46 @@ impl CaseObject for ActionFrequencyFacet {
 pub struct ActionLifecycle {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
-    #[serde(rename = "uco-action:actionCount")]
-    pub action_count: Vec<u64>,
-    #[serde(rename = "uco-action:endTime")]
-    pub end_time: Vec<String>,
-    #[serde(rename = "uco-action:error")]
-    pub error: Vec<UcoObject>,
+    #[serde(rename = "uco-action:environment")]
+    pub environment: Option<UcoObject>,
+    #[serde(rename = "uco-action:instrument")]
+    pub instrument: Vec<UcoObject>,
+    #[serde(rename = "uco-action:location")]
+    pub location: Vec<Location>,
+    #[serde(rename = "uco-action:object")]
+    pub object: Vec<UcoObject>,
+    #[serde(rename = "uco-action:participant")]
+    pub participant: Vec<UcoObject>,
+    #[serde(rename = "uco-action:performer")]
+    pub performer: Option<UcoObject>,
     #[serde(rename = "uco-action:phase")]
     pub phase: Option<ArrayOfAction>,
-    #[serde(rename = "uco-action:startTime")]
-    pub start_time: Vec<String>,
+    #[serde(rename = "uco-action:result")]
+    pub result: Vec<UcoObject>,
+    #[serde(rename = "uco-action:subaction")]
+    pub subaction: Vec<Action>,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl ActionLifecycle {
@@ -419,37 +563,82 @@ impl ActionLifecycle {
 
     pub fn builder() -> ActionLifecycleBuilder {
         ActionLifecycleBuilder {
-            action_count: Vec::new(),
-            end_time: Vec::new(),
-            error: Vec::new(),
+            environment: None,
+            instrument: Vec::new(),
+            location: Vec::new(),
+            object: Vec::new(),
+            participant: Vec::new(),
+            performer: None,
             phase: None,
-            start_time: Vec::new(),
+            result: Vec::new(),
+            subaction: Vec::new(),
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ActionLifecycleBuilder {
-    action_count: Vec<u64>,
-    end_time: Vec<String>,
-    error: Vec<UcoObject>,
+    environment: Option<UcoObject>,
+    instrument: Vec<UcoObject>,
+    location: Vec<Location>,
+    object: Vec<UcoObject>,
+    participant: Vec<UcoObject>,
+    performer: Option<UcoObject>,
     phase: Option<ArrayOfAction>,
-    start_time: Vec<String>,
+    result: Vec<UcoObject>,
+    subaction: Vec<Action>,
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl ActionLifecycleBuilder {
-    pub fn action_count(mut self, value: Vec<u64>) -> Self {
-        self.action_count = value;
+    pub fn environment(mut self, value: UcoObject) -> Self {
+        self.environment = Some(value);
         self
     }
 
-    pub fn end_time(mut self, value: Vec<String>) -> Self {
-        self.end_time = value;
+    pub fn instrument(mut self, value: Vec<UcoObject>) -> Self {
+        self.instrument = value;
         self
     }
 
-    pub fn error(mut self, value: Vec<UcoObject>) -> Self {
-        self.error = value;
+    pub fn location(mut self, value: Vec<Location>) -> Self {
+        self.location = value;
+        self
+    }
+
+    pub fn object(mut self, value: Vec<UcoObject>) -> Self {
+        self.object = value;
+        self
+    }
+
+    pub fn participant(mut self, value: Vec<UcoObject>) -> Self {
+        self.participant = value;
+        self
+    }
+
+    pub fn performer(mut self, value: UcoObject) -> Self {
+        self.performer = Some(value);
         self
     }
 
@@ -458,19 +647,94 @@ impl ActionLifecycleBuilder {
         self
     }
 
-    pub fn start_time(mut self, value: Vec<String>) -> Self {
-        self.start_time = value;
+    pub fn result(mut self, value: Vec<UcoObject>) -> Self {
+        self.result = value;
+        self
+    }
+
+    pub fn subaction(mut self, value: Vec<Action>) -> Self {
+        self.subaction = value;
+        self
+    }
+
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
         self
     }
 
     pub fn build(self) -> ActionLifecycle {
         ActionLifecycle {
             class_iri: ActionLifecycle::CLASS_IRI,
-            action_count: self.action_count,
-            end_time: self.end_time,
-            error: self.error,
+            environment: self.environment,
+            instrument: self.instrument,
+            location: self.location,
+            object: self.object,
+            participant: self.participant,
+            performer: self.performer,
             phase: self.phase,
-            start_time: self.start_time,
+            result: self.result,
+            subaction: self.subaction,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -491,6 +755,54 @@ impl CaseObject for ActionLifecycle {
 pub struct ActionPattern {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-action:actionCount")]
+    pub action_count: Option<u64>,
+    #[serde(rename = "uco-action:actionStatus")]
+    pub action_status: Option<String>,
+    #[serde(rename = "uco-action:endTime")]
+    pub end_time: Option<String>,
+    #[serde(rename = "uco-action:environment")]
+    pub environment: Option<UcoObject>,
+    #[serde(rename = "uco-action:error")]
+    pub error: Vec<UcoObject>,
+    #[serde(rename = "uco-action:instrument")]
+    pub instrument: Vec<UcoObject>,
+    #[serde(rename = "uco-action:location")]
+    pub location: Vec<Location>,
+    #[serde(rename = "uco-action:object")]
+    pub object: Vec<UcoObject>,
+    #[serde(rename = "uco-action:participant")]
+    pub participant: Vec<UcoObject>,
+    #[serde(rename = "uco-action:performer")]
+    pub performer: Option<UcoObject>,
+    #[serde(rename = "uco-action:result")]
+    pub result: Vec<UcoObject>,
+    #[serde(rename = "uco-action:startTime")]
+    pub start_time: Option<String>,
+    #[serde(rename = "uco-action:subaction")]
+    pub subaction: Vec<Action>,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl ActionPattern {
@@ -499,18 +811,210 @@ impl ActionPattern {
 
     pub fn builder() -> ActionPatternBuilder {
         ActionPatternBuilder {
+            action_count: None,
+            action_status: None,
+            end_time: None,
+            environment: None,
+            error: Vec::new(),
+            instrument: Vec::new(),
+            location: Vec::new(),
+            object: Vec::new(),
+            participant: Vec::new(),
+            performer: None,
+            result: Vec::new(),
+            start_time: None,
+            subaction: Vec::new(),
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ActionPatternBuilder {
+    action_count: Option<u64>,
+    action_status: Option<String>,
+    end_time: Option<String>,
+    environment: Option<UcoObject>,
+    error: Vec<UcoObject>,
+    instrument: Vec<UcoObject>,
+    location: Vec<Location>,
+    object: Vec<UcoObject>,
+    participant: Vec<UcoObject>,
+    performer: Option<UcoObject>,
+    result: Vec<UcoObject>,
+    start_time: Option<String>,
+    subaction: Vec<Action>,
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl ActionPatternBuilder {
+    pub fn action_count(mut self, value: u64) -> Self {
+        self.action_count = Some(value);
+        self
+    }
+
+    pub fn action_status(mut self, value: String) -> Self {
+        self.action_status = Some(value);
+        self
+    }
+
+    pub fn end_time(mut self, value: String) -> Self {
+        self.end_time = Some(value);
+        self
+    }
+
+    pub fn environment(mut self, value: UcoObject) -> Self {
+        self.environment = Some(value);
+        self
+    }
+
+    pub fn error(mut self, value: Vec<UcoObject>) -> Self {
+        self.error = value;
+        self
+    }
+
+    pub fn instrument(mut self, value: Vec<UcoObject>) -> Self {
+        self.instrument = value;
+        self
+    }
+
+    pub fn location(mut self, value: Vec<Location>) -> Self {
+        self.location = value;
+        self
+    }
+
+    pub fn object(mut self, value: Vec<UcoObject>) -> Self {
+        self.object = value;
+        self
+    }
+
+    pub fn participant(mut self, value: Vec<UcoObject>) -> Self {
+        self.participant = value;
+        self
+    }
+
+    pub fn performer(mut self, value: UcoObject) -> Self {
+        self.performer = Some(value);
+        self
+    }
+
+    pub fn result(mut self, value: Vec<UcoObject>) -> Self {
+        self.result = value;
+        self
+    }
+
+    pub fn start_time(mut self, value: String) -> Self {
+        self.start_time = Some(value);
+        self
+    }
+
+    pub fn subaction(mut self, value: Vec<Action>) -> Self {
+        self.subaction = value;
+        self
+    }
+
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
     pub fn build(self) -> ActionPattern {
         ActionPattern {
             class_iri: ActionPattern::CLASS_IRI,
+            action_count: self.action_count,
+            action_status: self.action_status,
+            end_time: self.end_time,
+            environment: self.environment,
+            error: self.error,
+            instrument: self.instrument,
+            location: self.location,
+            object: self.object,
+            participant: self.participant,
+            performer: self.performer,
+            result: self.result,
+            start_time: self.start_time,
+            subaction: self.subaction,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }

@@ -22,7 +22,9 @@ checkout via ``project_root`` (or explicit ontology graph paths). A bare
 """
 
 from case_uco.validation.graph import (
+    DEFAULT_BUILT_VERSION,
     GraphValidationReport,
+    parse_extension_token,
     report_to_dict,
     validate_graph_file,
     validator_available,
@@ -33,8 +35,10 @@ from case_uco.validation.partition import (
 )
 
 __all__ = [
+    "DEFAULT_BUILT_VERSION",
     "GraphValidationReport",
     "PartitionValidationReport",
+    "parse_extension_token",
     "report_to_dict",
     "validate_graph_file",
     "validate_partition_set",

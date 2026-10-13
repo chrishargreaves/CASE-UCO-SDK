@@ -15,9 +15,9 @@
       "@id": "urn:uuid:1ab3c52a-21ce-549b-b61b-7d0130bb34c1",
       "@type": "uco-observable:ObservableObject",
       "uco-core:name": "Source file pacer -- elder fraud -- superseding indictment.pdf",
-      "uco-core:description": "Link-Look pdf upload",
+      "uco-core:description": "Uploaded pdf file",
       "uco-core:tag": [
-        "link-look-file-kind:pdf"
+        "source-file-kind:pdf"
       ],
       "uco-core:hasFacet": [
         {

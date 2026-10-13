@@ -83,11 +83,12 @@ class ActionLifecycle(Action):
     CLASS_IRI: str = "https://ontology.unifiedcyberontology.org/uco/action/ActionLifecycle"
     NAMESPACE_PREFIX: str = "uco-action"
 
-    action_count: list[int] = field(default_factory=list, metadata={'jsonld_key': 'uco-action:actionCount', 'required': False, 'cardinality': 'zero_or_more', 'range_iri': 'http://www.w3.org/2001/XMLSchema#nonNegativeInteger', 'alternate_range_iris': []})
-    end_time: list[datetime] = field(default_factory=list, metadata={'jsonld_key': 'uco-action:endTime', 'required': False, 'cardinality': 'zero_or_more', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': []})
-    error: list[UcoObject] = field(default_factory=list, metadata={'jsonld_key': 'uco-action:error', 'required': False, 'cardinality': 'zero_or_more', 'range_iri': 'https://ontology.unifiedcyberontology.org/uco/core/UcoObject', 'alternate_range_iris': []})
+    action_count: list[int] = field(default_factory=list, metadata={'jsonld_key': 'uco-action:actionCount', 'required': False, 'cardinality': 'zero_or_more', 'range_iri': 'http://www.w3.org/2001/XMLSchema#nonNegativeInteger', 'alternate_range_iris': [], 'forbidden': True})
+    action_status: Optional[str] = field(default=None, metadata={'jsonld_key': 'uco-action:actionStatus', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': [], 'forbidden': True})
+    end_time: list[datetime] = field(default_factory=list, metadata={'jsonld_key': 'uco-action:endTime', 'required': False, 'cardinality': 'zero_or_more', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': [], 'forbidden': True})
+    error: list[UcoObject] = field(default_factory=list, metadata={'jsonld_key': 'uco-action:error', 'required': False, 'cardinality': 'zero_or_more', 'range_iri': 'https://ontology.unifiedcyberontology.org/uco/core/UcoObject', 'alternate_range_iris': [], 'forbidden': True})
     phase: Optional[ArrayOfAction] = field(default=None, metadata={'jsonld_key': 'uco-action:phase', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'https://ontology.unifiedcyberontology.org/uco/action/ArrayOfAction', 'alternate_range_iris': []})
-    start_time: list[datetime] = field(default_factory=list, metadata={'jsonld_key': 'uco-action:startTime', 'required': False, 'cardinality': 'zero_or_more', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': []})
+    start_time: list[datetime] = field(default_factory=list, metadata={'jsonld_key': 'uco-action:startTime', 'required': False, 'cardinality': 'zero_or_more', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': [], 'forbidden': True})
 
 
 @dataclass

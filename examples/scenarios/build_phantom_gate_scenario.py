@@ -1264,17 +1264,17 @@ def build_graph() -> dict:
     add(
         {
             "@id": coc_002_imaging,
-            "@type": "solveit-core:SolveitInvestigativeAction",
+            "@type": [
+                "solveit-core:SolveitInvestigativeAction",
+                SOLVEIT_DATA + "techniqueDFT-1002",
+                SOLVEIT_DATA + "techniqueDFT-1012",
+            ],
             "uco-core:name": "COC-002 — write-blocked imaging Victim-7 SSD",
             "uco-action:startTime": lit("xsd:dateTime", "2024-08-20T10:15:00-04:00"),
             "uco-action:performer": {"@id": examiner_v7},
             "uco-action:instrument": [{"@id": tableau_td3}, {"@id": ftk_imager}],
             "uco-action:object": [{"@id": art_002_source_ssd}],
             "uco-action:result": [{"@id": art_002}],
-            "solveit-core:usedTechnique": [
-                {"@id": SOLVEIT_DATA + "techniqueDFT-1002"},
-                {"@id": SOLVEIT_DATA + "techniqueDFT-1012"},
-            ],
             "solveit-core:appliedMitigation": [
                 {"@id": SOLVEIT_DATA + "mitigationDFM-1003"},
                 {"@id": SOLVEIT_DATA + "mitigationDFM-1004"},
@@ -1777,15 +1777,15 @@ def build_graph() -> dict:
     solveit_keel = uid("solveit-keel-acquisition")
     add({
         "@id": solveit_keel,
-        "@type": "solveit-core:SolveitInvestigativeAction",
+        "@type": [
+            "solveit-core:SolveitInvestigativeAction",
+            SOLVEIT_DATA + "techniqueDFT-1019",
+            SOLVEIT_DATA + "techniqueDFT-1042",
+        ],
         "uco-core:name": "Keel iPhone logical extraction (DFT-1019, DFT-1042)",
         "uco-core:description": (
             "SOLVE-IT overlay for COC-001 step 5; source device → logical UFED output."
         ),
-        "solveit-core:usedTechnique": [
-            {"@id": SOLVEIT_DATA + "techniqueDFT-1019"},
-            {"@id": SOLVEIT_DATA + "techniqueDFT-1042"},
-        ],
         "uco-action:performer": {"@id": examiner_keel},
         "uco-action:instrument": {"@id": ufed_tool},
         "uco-action:object": [{"@id": art_001}],
@@ -1817,13 +1817,13 @@ def build_graph() -> dict:
     add(
         {
             "@id": solveit_v7_acquire,
-            "@type": "solveit-core:SolveitInvestigativeAction",
+            "@type": [
+                "solveit-core:SolveitInvestigativeAction",
+                SOLVEIT_DATA + "techniqueDFT-1002",
+                SOLVEIT_DATA + "techniqueDFT-1012",
+            ],
             "uco-core:name": "Victim-7 SSD imaging overlay (DFT-1002, DFT-1012)",
             "uco-core:description": "SOLVE-IT overlay aligned with COC-002 imaging action.",
-            "solveit-core:usedTechnique": [
-                {"@id": SOLVEIT_DATA + "techniqueDFT-1002"},
-                {"@id": SOLVEIT_DATA + "techniqueDFT-1012"},
-            ],
             "uco-action:performer": {"@id": examiner_v7},
             "uco-action:instrument": [{"@id": tableau_td3}, {"@id": ftk_imager}],
             "uco-action:object": [{"@id": art_002_source_ssd}],
@@ -1877,15 +1877,15 @@ def build_graph() -> dict:
         },
         {
             "@id": redaction_action,
-            "@type": "solveit-core:SolveitInvestigativeAction",
+            "@type": [
+                "solveit-core:SolveitInvestigativeAction",
+                SOLVEIT_DATA + "techniqueDFT-1046",
+            ],
             "uco-core:name": "Discovery redaction — Keel UFED export (DFT-1046)",
             "uco-core:description": (
                 "DH-PGA-003 minimization: redact third-party victim PII before "
                 "defense discovery; prosecutor vault retains full UFED image."
             ),
-            "solveit-core:usedTechnique": [
-                {"@id": SOLVEIT_DATA + "techniqueDFT-1046"},
-            ],
             "uco-action:performer": {"@id": examiner_keel},
             "uco-action:object": [{"@id": art_001_image}],
             "uco-action:result": [{"@id": redacted_keel_export}],

@@ -215,7 +215,7 @@ schema gap.
 7. Join artifacts to the container with `Extracted_From` until a per-artifact
    source path is confirmed.
 8. Tag schema-dependent claims `epistemic:reported` or `epistemic:unattributed`.
-9. Validate: `case_validate --built-version case-1.4.0 xry-export.jsonld`, or
+9. Validate: `case_validate --built-version case-1.5.0 xry-export.jsonld`, or
    `validate_graph(path)` through the MCP server for strict concept coverage.
 
 ## When the Extended XML schema arrives
@@ -247,7 +247,7 @@ element name is asserted anywhere in it.
 
 ```bash
 python3 examples/vendor-exports/build_msab_xry_export.py
-case_validate --built-version case-1.4.0 examples/vendor-exports/msab-xry-export.jsonld
+case_validate --built-version case-1.5.0 examples/vendor-exports/msab-xry-export.jsonld
 ```
 
 ## Related

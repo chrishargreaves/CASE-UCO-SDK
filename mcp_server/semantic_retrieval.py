@@ -17,7 +17,7 @@ deterministic, retrieval stage:
    returned so every result is explainable.
 
 No embeddings, network access, or model downloads are required, which keeps
-closed/offline deployments (Link-Look) fully supported. LLM re-ranking can
+closed/offline deployments fully supported. LLM re-ranking can
 be layered on by the calling agent; it is deliberately not built in so that
 routing controls (extension loading, concept validation, promotion gates)
 cannot be bypassed by a generative step.

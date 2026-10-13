@@ -33,3 +33,8 @@ storage_scope:
     - backups
     - replicas
   evidence_storage: size_separately
+
+cpu_architectures:
+  linux_x86_64: ci_tested
+  linux_aarch64: ci_tested_ubuntu_24_04_arm
+  nvidia_spark: unvalidated

@@ -7,6 +7,393 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.31.0] - 2026-10-12
+
+Completes MITRE ATT&CK adoption (v19.2: Enterprise, Mobile and ICS) and
+adopts MITRE ATLAS 2026.09, both as `owl:Class` techniques under the UCO
+1.5.0 `uco-action:Technique` metaclass. SOLVE-IT is re-synced to 0.2.11,
+QUDT 3.5.2 and SOSA/SSN join the UCO profiles, and change proposals are
+drafted around competency questions with every statement's provenance
+marked. The release integrates the open community pull requests and fixes
+the findings from the security test campaign. Validation stays on
+case-utils 0.18.0 (`--built-version case-1.5.0`) with CASE/UCO 1.5.0 and
+CAC Ontology 3.1.0.
+
+- `trajectories` (candidate): ports the review fixes from [PR #135](https://github.com/vulnmaster/CASE-UCO-SDK/pull/135) by
+  @mrinaalr, which addressed the [#104](https://github.com/vulnmaster/CASE-UCO-SDK/issues/104) review.
+  - `PhaseAssertion` is now `rdfs:subClassOf uco-core:Assertion`, and
+    `StateMachineModel` `rdfs:subClassOf uco-analysis:AnalyticResult`. The
+    exemplars type the producing run as `uco-analysis:Analysis`.
+  - New SHACL constraints: `transitionProbability` must lie in [0, 1],
+    `atInterval` must be a `time:ProperInterval`, and `sequenceIndex` must
+    be unique within a Trajectory. A Trajectory may have at most one
+    terminal, and it must carry the highest `sequenceIndex`. A transition
+    estimate must refer to one of its model's transitions.
+  - `atInterval` and `ofTransition` drop `rdfs:range`, so the SHACL
+    `sh:class` checks are no longer vacuous under RDFS inference.
+  - Five single-rule invalid fixtures, three competency SPARQL queries
+    declared in the manifest, and `test_trajectories.py`.
+  - The elder-fraud trajectory exemplar is now synthetic. It replaces one
+    built from a real federal case, and exercises `enactsAction` and
+    `initialState`.
+  - The namespace stays `http://example.org/ontology/trajectories/`, like
+    the other candidate extensions, until the CASE community agrees a
+    stable IRI.
+  - `manifest-schema.json` gains `competency_queries`. The `elder-fraud`,
+    `extortion` and `trafficking` exemplars still conform.
+- New recipe `public-record-capture.md` ([PR #145](https://github.com/vulnmaster/CASE-UCO-SDK/pull/145) by @mrinaalr), with
+  a validated exemplar, for manifests of fetched public web records: hashed
+  files, per-row retrieval actions, redirects, failed fetches, renditions,
+  verified citations and collector annotations.
+- Rust `uuid` 1.27.0 (Dependabot [#143](https://github.com/vulnmaster/CASE-UCO-SDK/pull/143)). The other open
+  Dependabot updates ([#133](https://github.com/vulnmaster/CASE-UCO-SDK/pull/133), [#136](https://github.com/vulnmaster/CASE-UCO-SDK/pull/136), [#137](https://github.com/vulnmaster/CASE-UCO-SDK/pull/137), [#139](https://github.com/vulnmaster/CASE-UCO-SDK/pull/139), [#144](https://github.com/vulnmaster/CASE-UCO-SDK/pull/144)) were already applied.
+- The candidate `uas` extension from [PR #98](https://github.com/vulnmaster/CASE-UCO-SDK/pull/98) by @seturi was integrated
+  in an earlier release and refined: it reuses `observable:Drone` and
+  `observableCreatedTime`.
+- New recipe `otics-scada-intrusion.md` ([PR #95](https://github.com/vulnmaster/CASE-UCO-SDK/pull/95) by @Burgermeister62,
+  DFRWS Rodeo team Victims First!) for ICS/SCADA intrusions: PLCs, HMIs,
+  Modbus/TCP writes, historian alarms and engineering-workstation project
+  files. Integrated with the review changes:
+  - The exemplar uses `eventRecordID`, gives every facet and hash a
+    deterministic IRI, and keeps team credit out of the data.
+  - Two adversary actions the evidence shows are typed with ATT&CK for ICS
+    T0843 (Program Download) and T0836 (Modify Parameter), with no performer.
+  - The recipe has validation queries, and the router and mapping index
+    recognize SCADA, PLC, HMI and Modbus content.
+  - The `industrial-control-device-facet` change proposal has OWL, SPARQL
+    and a matching example, and passes `make test-proposal`.
+
+- MITRE ATT&CK adoption is complete ([#146](https://github.com/vulnmaster/CASE-UCO-SDK/issues/146)): `attack-technique` 1.0.0 vendors
+  the full ATT&CK v19.2 release — Enterprise, Mobile and ICS, 1,166
+  techniques and sub-techniques, 41 tactics — instead of the previous
+  27-technique Enterprise subset.
+  - Every technique is an `owl:Class` and an instance of the UCO 1.5.0
+    `uco-action:Technique` metaclass with `uco-action:techniqueID`. A
+    sub-technique `rdfs:subClassOf` its parent and is labelled
+    "Parent: Sub-technique".
+  - Tactics (`dcterms:subject`), platforms (`dcterms:coverage`) and matrix
+    (`dcterms:isPartOf`) are annotations, declared `owl:AnnotationProperty`;
+    no vocabulary is minted.
+  - The 248 deprecated and revoked techniques stay, marked
+    `owl:deprecated`, so older graphs still validate; a revoked technique
+    names its successor with `dcterms:isReplacedBy`.
+  - The local copy of `uco-core:UcoType`, `uco-action:Technique` and their
+    shapes (`attack-technique.ttl`, `attack-technique-shapes.ttl`) is
+    removed: UCO 1.5.0 defines them and validation targets `case-1.5.0`.
+  - `sync_attack_catalog.py` reads all three STIX 2.1 bundles, records a
+    SHA-256 per bundle, rejects a bundle whose version doesn't match, and
+    has a `--check` drift mode. `make sync-attack` defaults to 19.2;
+    `make sync-attack-offline` takes `STIX_DIR`.
+- MITRE ATLAS adoption ([#147](https://github.com/vulnmaster/CASE-UCO-SDK/issues/147)): new `atlas-technique` 1.0.0 extension with the
+  complete ATLAS 2026.09 catalog (208 techniques and sub-techniques, 16
+  tactics) in the same metaclass pattern, generated from
+  `mitre-atlas/atlas-data` `dist/v6` (`make sync-atlas`). ATLAS techniques
+  adapted from ATT&CK link to it with `rdfs:seeAlso`; the ATT&CK catalog is
+  not imported. New recipe `ai-system-attacks.md` with a validated exemplar
+  (`examples/ai-system-attacks/`), and a new `ai-system-attacks` routing
+  family.
+- New manifest field `class_registry` (default `true`). Both technique
+  catalogs set it to `false`: the generator leaves their classes out of the
+  per-language `_registry.json`, `ONTOLOGY_REFERENCE.md` and
+  `MAPPING_GUIDE.md`, which list them under "Technique Catalogs" instead.
+  Registering 1,374 property-less classes would have nearly doubled every
+  language registry (13.5 MB to 25.7 MB). The 27 ATT&CK classes previously
+  in the registry are removed; the catalogs are found through the MCP tools,
+  and `generate-extension` refuses a catalog extension. The reference docs
+  and registries are regenerated, which also picks up the SOLVE-IT 0.2.11
+  and CAC 3.1.0 changes.
+- New manifest field `distribution` (`public` by default). The generator
+  never loads a `private` extension into the shared registries or reference
+  docs; `generate-extension` still builds that extension's own
+  `_registry.json`. Validation and MCP discovery treat it like any other
+  extension.
+- Validation reports gain `extension_versions`, each selected extension's
+  manifest version, next to the bundle fingerprint and per-file SHA-256s.
+- The README architecture section lists the UCO and CASE submodules at 1.5.0
+  and the CAC Ontology at v3.1.0 ([#142](https://github.com/vulnmaster/CASE-UCO-SDK/issues/142)).
+- New MCP tools `search_adversary_techniques` and `get_adversary_technique`
+  search both catalogs by keyword, ID, tactic or platform and return parent
+  and sub-techniques, revoked-technique successors, ATLAS→ATT&CK links, and
+  typing guidance.
+- Vocabularies combine only on evidence. `trafficking`, `elder-fraud`,
+  `extortion` and SOLVE-IT no longer declare `depends_on:
+  ["attack-technique"]`; they needed only the metaclass, which UCO 1.5.0
+  provides. A test keeps any extension from depending on a technique
+  catalog. `cross-ontology-composition.md` gains principle 6 (compose only
+  on evidence, with an extortion-to-planted-malware example), and the
+  router's multi-family guidance now tells the modeler to check each
+  family's matched keywords against the evidence instead of enabling the
+  union of extensions.
+- SOLVE-IT pinned to ontology 0.2.11 (solve-it-ontology `cec0315`) and the
+  current compiled knowledge base: 24 objectives, 200 techniques, 441
+  weaknesses, 336 mitigations, 164 citations ([#149](https://github.com/vulnmaster/CASE-UCO-SDK/issues/149)):
+  - Each knowledge-base technique is now an `owl:Class` subclass of
+    `SolveitInvestigativeAction`. The SDK's generated
+    `solveit-technique-catalog.ttl` is now a bridge that types each one
+    `uco-action:Technique` with `action:techniqueID`, so SOLVE-IT, ATT&CK
+    and ATLAS techniques share the UCO metaclass. The sync tool fails if a
+    KB technique is not a class, and the manifest records SHA-256 digests
+    for every vendored file.
+  - New upstream shape files `solve_it_core_shapes.ttl` and
+    `solve_it_analysis_shapes.ttl` are loaded with the extension. New
+    upstream terms include `Citation`, `HypothesisedRecord`,
+    `HypothesisedConfiguration` and `HypothesisedTableAttribution`.
+    `publishedBy` now takes an Identity object.
+  - `solveit-core:usedTechnique` is `owl:deprecated` upstream. Every
+    builder, query, recipe and MCP guidance string now types the action
+    with the technique class instead. When a graph uses a technique as a
+    value (`solveit-wa:scopedToTechnique`), it restates the minimal
+    catalogue entry, as upstream's examples do: pySHACL copies only the
+    class-level triples of the knowledge base into the data graph, so
+    `TechniqueShape` can't otherwise see `techniqueID`.
+    `solveit_index.technique_catalog_entry()` builds that entry, and
+    `get_solveit_details` returns it as `catalog_entry_jsonld`, along with
+    each record's SOLVE-IT `citations`.
+  - `case-uco-solveit` 0.3.0 (`case-uco>=1.5.0`) adds the new classes and
+    200 technique classes, whose action fields now serialize under the
+    right namespaces. `used_technique` remains for backward compatibility
+    only.
+  - The extension package and scaffold generators now emit valid
+    identifiers for hyphenated class names (`techniqueDFT-1001` becomes
+    `techniqueDFT_1001`; `CLASS_IRI` is unchanged).
+- CAC Ontology v3.1.0 (CASE/UCO 1.5.0 imports) is now reflected in
+  discovery, not only validation: the CAC registry and `case-uco-cac`
+  3.1.0 (`case-uco>=1.5.0`) were regenerated, adding the 53 v3.1.0 classes.
+  Fourteen SDK-local pending terms that v3.1.0 now declares were retired
+  from `ontology/cac/local/cacontology-sdk-pending.ttl` (`ConvictionRecord`,
+  `chargedWith`, `countNumber`, `caseNumber`, `Subject`, ...). The
+  extension registry no longer lets an alias class overwrite the canonical
+  class with the same local name; the alias is keyed `prefix:Name`.
+- QUDT and SOSA/SSN profiles ([#148](https://github.com/vulnmaster/CASE-UCO-SDK/issues/148)):
+  - QUDT 3.5.2 (schema, units, quantity kinds, prefixes) and the W3C SSN
+    2017 Recommendation (SOSA, SSN, SSN-System) are vendored under
+    `ontology/upper/` and added to the upper-ontology registry, with
+    provenance and SHA-256 for each file. The registry builder reads files
+    out of the QUDT release zip and takes `--only`.
+  - New validation profiles `qudt`, `sosa`, and `ssn` (`ssn` pulls in
+    `sosa`). UCO has no CDO-Shapes profile for them (ucoProject/UCO#404), so
+    the SDK ships minimal shapes in `ontology/upper/sdk-shapes/`: one numeric
+    `qudt:value` and one `qudt:hasUnit` per `qudt:QuantityValue`; a result on
+    every `sosa:Observation`; at most one sensor, feature of interest,
+    observed property, phenomenon time, and result time.
+  - Strict concept coverage now also checks IRIs in the object position
+    inside profiled namespaces, so a guessed unit such as `unit:KM-PER-HR`
+    fails, and a unit used without the `qudt` profile is reported as
+    profile-not-selected. This caught a wrong PROF role IRI in the PROF
+    exemplar and recipe (`role/ValidationRole`, now `role/validation`); the
+    W3C PROF roles vocabulary is vendored as `prof-roles.ttl`.
+  - New MCP tool `lookup_qudt_units` finds pinned unit IRIs by symbol,
+    label (British or American spelling), UCUM code, ISO 4217 currency
+    code, or quantity kind. `get_uco_profiles` lists the new profiles.
+  - New recipes `sosa-sensor-observations.md` and
+    `qudt-quantities-and-units.md`, with three validated exemplars (vehicle
+    telemetry, wearable health data with SSN-System accuracy, a wallet
+    valuation as a quantity rather than an observation), a negative fixture
+    for the QUDT 2 pattern, and competency queries in the recipe gate.
+  - The validation summary no longer suggests a change proposal for unknown
+    terms in external ontologies or for an unselected profile.
+- `draft_change_proposal` writes discussion drafts built around competency
+  questions, in the format of the CDO "Mock Change Proposal" and the
+  ontology reviewers' comments on it:
+  - The header names the suggested release and a contributor line that
+    discloses the AI assistance and names the model (`contributor`,
+    `ai_model`). The hidden "Generated by" comment is gone.
+  - Every statement is marked as the contributor's (unmarked),
+    *[from [source](link)]*, or *[AI-drafted]*. Plain strings are
+    AI-drafted. A citation must link the exact comment or page quoted.
+  - Sections are Background, Competency questions (a scenario, then each
+    question with its expected answer), Requirements (sourced terms),
+    Open questions, and Related issues and references. A collapsed
+    Committee section holds benefits and risks, the proposed ontology
+    changes, CQ queries and example data, and a review checklist.
+  - Lint returns `ready_to_file` and flags missing competency questions or
+    expected answers, citations without links, vocabulary terms without a
+    definition link, CASE/UCO/CAC terms the pinned ontology does not declare
+    (hallucinated terms), "standard", exclusionary phrasing, and "lead" or
+    endorsement wording.
+  - `<slug>.review.md` holds the lint findings and the checks a person must
+    make: links resolve and say what the text claims, citations point at the
+    exact comment, every AI-drafted statement is reviewed, no default
+    jurisdiction, no strings standing in for objects, roles distinct from
+    people, no circular sources, existing vocabularies considered.
+    `verify_links=True` also fetches each link and looks for quoted
+    definitions on the page.
+  - The CAC Ontology is a target alongside CASE and UCO, with its tracker
+    URL and its own release line. Triage suggests CAC for
+    crimes-against-children concepts.
+  - The recipe, template, `change_proposals/README.md`, README, and Cursor
+    rule describe the new format.
+- Draft classes and properties passed to `draft_change_proposal` become
+  local test files: OWL (`owl:Class` with `rdfs:subClassOf`, typed
+  properties with ranges), separate SHACL shapes, an example graph, and
+  SPARQL. In the example graph, Facet subclasses hang off an
+  `ObservableObject` and other classes are top-level nodes. Every node has
+  an `@id`, and object-range properties point at a typed node. The tool
+  validates the example and runs the SPARQL (`run_tests`); proposal SPARQL
+  goes through the outbound query guard. The design reaches the issue body
+  only with `include_design_sketch=True`.
+- `draft_change_proposal` writes through the workspace write roots and
+  returns `proposal_outside_write_roots` outside them. A title that
+  slugifies to nothing returns `proposal_slug_empty` instead of writing
+  `change_proposals/.md`. `output_dir` selects another directory.
+- `make validate-proposal` validates against `case-1.5.0`.
+- Semantic family retrieval matches on title and keywords only. Modeling
+  notes stay in the match payload and no longer pull a zero-keyword
+  submission, such as a physics abstract or a securities filing, into
+  `matched_families` just above the abstain line.
+- Critic container membership treats `uco-core:Grouping` as a
+  `ContextualCompilation`. Explicit `@type` matching does not see the
+  subclass axiom, so a publication graph whose files already sit on a
+  Grouping was reported as omitted from every container.
+- Graph-scoped critic finalize no longer hashes a serializer path that
+  the review left out of `serializer_sha256`. Finalize was raising
+  `artifact set changed after last review` after a clean graph-only pass.
+- Refreshed the DarkWatchman build manifest so its recipe hash matches the
+  committed recipe. A new test checks every committed
+  `build-manifest.json` against the files it lists.
+- `CRIT-H-BROKEN-CRYPTO-ADDRESS-STRING` fires only when the joined span
+  passes a Base58Check checksum. Task GUIDs, spaced dates, bank transaction
+  numbers, and photo counts no longer trip it.
+- Recipe lint accepts names from bundled validation subsets, dotted
+  `Class.property` references, and class names used as diagram labels.
+- The outbound SPARQL guard parses each query with rdflib and walks the
+  parse tree. `SERVICE` is rejected wherever it appears, including inside
+  IRIs that the old text mask skipped, and the query form comes from the
+  parse tree.
+- `route_cac_content` and `route_investigation_content` read files only
+  under the configured read or write roots, cap reads at 64 MiB, and echo a
+  project-relative `source_path` instead of the absolute path.
+- The prompt-injection scan also checks an NFKC-normalized copy of the text
+  with zero-width characters removed and Cyrillic/Greek look-alike letters
+  mapped to Latin, plus up to 16 decoded base64 runs.
+- Critic fixes from the red-team audit:
+  - A reference written as `{"@id": ...}` is no longer indexed as a node,
+    so `CRIT-G-DANGLING-REF` reports it when nothing defines it. References
+    in the document's own `kb:` namespace are checked too.
+  - `CRIT-H-IMAGE-CONTAINER-MISMATCH` matches forensic-image suffixes and
+    whole tokens instead of substrings such as `dd` in "Add".
+    `CRIT-H-ACTION-ROLE-CONTRADICTION` needs threat-actor wording (`APT28`,
+    "threat actor", "adversary", "attacker"), not "operator" or "Apterix".
+    `CRIT-H-ACQ-INPUT-RESULT-INVERSION` needs an acquisition verb, so
+    "Examine the disk image" is not treated as an acquisition.
+  - Start and finalize apply the same path policy to `source_paths`. A
+    source that lives under a write root now finalizes. A failed start
+    removes its session directory.
+  - Relationship rules and the orphan walk match subclasses of
+    `uco-core:Relationship` (for example `ObservableRelationship`) through
+    the vendored `rdfs:subClassOf` closure.
+  - The orphan walk follows every reference from a reached node, including
+    through embedded facets. Email senders, hashes, markings, and creators
+    are no longer reported as orphans.
+  - `CRIT-V-PROFILE-NOT-SELECTED` names the term IRI. It reads `iri`, and
+    still reads `term` from older payloads.
+  - A Python serializer over 256 KiB is refused from `stat` without being
+    read. Deeply nested source is reported as
+    `critic_serializer_too_complex` instead of raising `RecursionError`.
+  - Model responses with a NaN or infinite confidence, score, or hard cap
+    are rejected with `critic_response_non_finite_number`, and session JSON
+    is written with `allow_nan=False`.
+- Python `CASEGraph.from_jsonld` coerces each field separately. A literal
+  that does not parse keeps its JSON-LD form, records a `coercion_failed`
+  `DeserializationWarning` naming the field, and no longer aborts the whole
+  document. Warnings from nested facets are recorded too.
+- Python reads every XSD integer subtype (`nonNegativeInteger`, `long`,
+  `unsignedInt`, and the rest) as `int`, and parses `xsd:dateTime`
+  values with a trailing `Z`, a Java `[Zone/Id]` suffix, or a fraction
+  longer than six digits on Python 3.10 and later.
+- A `datetime.date` passed to an `xsd:dateTime` field is written as
+  midnight (`2024-12-31T00:00:00`) instead of a bare date.
+- `bytes` passed to a non-binary field raises `TypeError` instead of
+  writing the Python repr as the literal. An `xsd:hexBinary` field writes
+  the bytes as uppercase hex.
+- `partition_by` and `partition_by_roots` deep-copy nodes, so editing a
+  partition no longer changes the source graph.
+- The generator carries a parent shape's `sh:minCount` onto a subclass
+  that redeclares the property. `ObservableRelationship.source` and
+  `.target` are required in every language, matching
+  `uco-core:Relationship`.
+- A subclass shape with `sh:maxCount 0` at Violation severity forbids the
+  inherited property. Python `create()` rejects `end_time`, `start_time`,
+  `error`, `action_count`, and `action_status` on `ActionLifecycle`, and
+  the registry no longer lists them for that class. Warning-severity
+  deprecation shapes (`manufacturer` on `OperatingSystemFacet`) are
+  unaffected.
+- The shipped registry keeps the bare-name key for the CASE/UCO class when
+  an extension reuses a local name. The extension class is stored as
+  `Name@module` (for example `Subject@ext.cac.cacontology`). Every entry
+  now carries a `name` field. `get_class` prefers the core class and
+  accepts `core_only=True`. The MCP `search_classes`, `get_class_details`,
+  and `find_facets` tools drop `ext.*` classes when `scope="core"` and
+  label them with their extension name otherwise.
+- Generated Rust structs include inherited properties, so a Rust
+  `Relationship` can set `name`, `description`, `object_marking`, and the
+  other `UcoObject` fields that Python, Java, and C# already expose. A
+  self-typed scalar field is boxed (`IdentityAbstraction.created_by`).
+- Regenerated the registries and reference docs for the cryptoinv
+  `VirtualAssetLedgerRecordFacet`, which had been added to the extension
+  without a regeneration.
+- The Java and C# JSON readers decode `\uXXXX`, `\/`, `\b`, and `\f`
+  escapes and reject invalid escapes instead of dropping the backslash.
+  The C# writer escapes `\b`, `\f`, and other control characters as
+  `\u00XX`.
+- Java writes `ZonedDateTime`, `OffsetDateTime`, and `Instant` values as
+  ISO-8601 with an offset, without the `[UTC]` region suffix that
+  `ZonedDateTime.toString()` adds, and the Java and C# readers accept
+  values that carry the suffix. C# writes UTC `DateTime` values with `Z`,
+  local values with their offset, and unspecified values without a zone.
+  C# reads offset-bearing values as UTC instead of converting them to the
+  machine's local time.
+- `xsd:hexBinary` and `xsd:base64Binary` properties such as
+  `Hash.hashValue` serialize as typed literals in Java, C#, and Rust.
+  hexBinary is uppercase hex, matching Python. Java and C# decode them
+  back to `byte[]`. Rust had been writing an array of `xsd:integer`
+  literals.
+- C# `FromJsonLd` sets nullable value-type properties (`long?`, `bool?`,
+  `DateTime?`, and so on). They had been left null.
+- Concept coverage loads the case-utils `case-1.5.0` build that
+  `case_validate` uses, so Collections Ontology terms such as `co:size` and
+  `co:index` are declared instead of being reported as an ontology gap.
+- `validate_graph_file` routes `extra_ontology_graphs` through the shared
+  validation bundle even without `extensions` or `profiles`, so SHACL and
+  concept coverage see the same ontology files.
+- `process_document_file` returns `required_extensions`, the extensions
+  whose namespaces the output graph uses (for example `cryptoinv` for a
+  wallet CSV). The MCP tool response and the CLI include it, and the MCP
+  summary names the `extensions=` argument to validate with. The new
+  `required_extensions_for_graph` helper computes it for any graph. The CLI
+  reports `validation_status: not_validated`; it had claimed `valid`.
+- The document processor copies the source once into a private snapshot
+  while hashing it, and extracts from that snapshot. The recorded SHA-256
+  now always matches the extracted rows, and the source is no longer read a
+  second time for hashing.
+- **Breaking:** the document processor (0.11.0) emits identifiers that no
+  longer name a particular upload front end. Run anchors are
+  `urn:case-uco-sdk:anchor:<uuid>`, source-kind tags are
+  `source-file-kind:<kind>`, source descriptions read "Uploaded <kind>
+  file", and archive members use a new IRI seed, so their IRIs change.
+  Consumers that match the earlier prefixes must migrate. The committed
+  PACER exemplars are rewritten to the new identifiers.
+- The critic's acquisition input/result rule skips custody steps, so
+  "Discord logical export custody" (export as a noun) is no longer flagged
+  as an inverted acquisition. This fixes a regression from the acquisition-verb change above,
+  caught by the `phantom-gate-gold` oracle.
+- Shared docs, tool descriptions and comments describe callers generically
+  ("MCP agents", "upload front ends") instead of naming particular
+  deployments.
+
+- Warrant PDFs are modeled as investigations. Sparse PDF pages are OCR'd
+  even when a typed cover page has a text layer, and OCR-broken wallet
+  strings are rejected. Multi-sheet workbooks emit one validated graph per
+  worksheet, in windows of 500 source rows for wide sheets.
+- Pinned validation to [case-utils 0.18.0](https://pypi.org/project/case-utils/)
+  (`--built-version case-1.5.0`) for CASE/UCO 1.5.0 and CAC Ontology 3.1.0.
+- Added named CAC subset `cac:missing-child` and T0 fixture
+  `examples/cac/t0-missing-child.jsonld`.
+- Linux `aarch64` CI on `ubuntu-24.04-arm`; NVIDIA Spark still
+  unvalidated.
+- Dependabot bumps on main: `actions/setup-java@v6`, maven-compiler-plugin
+  3.16.0, rust `uuid` 1.26.0, Microsoft.NET.Test.Sdk 18.10.0.
+
 ## [1.30.0] - 2026-09-10
 
 Modeling recipes for the three commercial mobile forensic suites —
@@ -137,7 +524,7 @@ extractors and builders.
 
 - The CASE/UCO MCP server can run as a shared SSE/HTTP listener
   (`scripts/run-mcp-server.sh`, default `http://127.0.0.1:8765/sse`)
-  so Cursor, Hermes, Claude Desktop, and other MCP clients use one
+  so Cursor, Claude Desktop, and other MCP clients use one
   process. Do not set a Linux `PATH` on a Windows `wsl.exe` stdio
   wrapper — that made Cursor fail with `spawn wsl.exe ENOENT`.
   `PATH` and `CASE_UCO_EXTENSIONS` are set inside the Linux process.
@@ -1552,7 +1939,7 @@ review issues [#47](https://github.com/vulnmaster/CASE-UCO-SDK/issues/47)–[#54
 
 #### Hybrid routing (issue #53)
 
-- **Hybrid retrieval with calibrated abstention** (`mcp_server/semantic_retrieval.py`, closes [#53](https://github.com/vulnmaster/CASE-UCO-SDK/issues/53)): `route_investigation_content` now layers an offline, deterministic lexical-semantic stage (token normalization, curated synonym-group expansion, bounded overlap scoring) over the keyword baseline. Every match reports `match_stages`, `scoring` (`keyword_score`, `semantic_score`, calibrated `confidence`), and `semantic_evidence`; the keyword-only result is always returned as `deterministic_baseline` for auditability. Below the abstention threshold the router returns `extension_gap_guidance` plus `abstained_candidates` instead of a weak guess; `routing_confidence` reports the level and thresholds. Colloquial paraphrases now route ("my daughter was blackmailed into sending photos" → CAC; "somebody hacked our network and encrypted our files, demanding bitcoin" → network intrusion + crypto). A labeled benchmark corpus (`mcp_server/tests/test_routing_benchmark.py`) proves recall improvement over the keyword baseline with zero precision regression on negatives. Adjusted from the issue: embeddings/LLM re-ranking were deliberately not built in — the semantic stage is curated-lexical so closed/offline Link-Look deployments work unchanged and generative steps cannot bypass validation or promotion controls.
+- **Hybrid retrieval with calibrated abstention** (`mcp_server/semantic_retrieval.py`, closes [#53](https://github.com/vulnmaster/CASE-UCO-SDK/issues/53)): `route_investigation_content` now layers an offline, deterministic lexical-semantic stage (token normalization, curated synonym-group expansion, bounded overlap scoring) over the keyword baseline. Every match reports `match_stages`, `scoring` (`keyword_score`, `semantic_score`, calibrated `confidence`), and `semantic_evidence`; the keyword-only result is always returned as `deterministic_baseline` for auditability. Below the abstention threshold the router returns `extension_gap_guidance` plus `abstained_candidates` instead of a weak guess; `routing_confidence` reports the level and thresholds. Colloquial paraphrases now route ("my daughter was blackmailed into sending photos" → CAC; "somebody hacked our network and encrypted our files, demanding bitcoin" → network intrusion + crypto). A labeled benchmark corpus (`mcp_server/tests/test_routing_benchmark.py`) proves recall improvement over the keyword baseline with zero precision regression on negatives. Adjusted from the issue: embeddings/LLM re-ranking were deliberately not built in — the semantic stage is curated-lexical so closed/offline deployments work unchanged and generative steps cannot bypass validation or promotion controls.
 
 #### Extensions
 
@@ -1666,7 +2053,7 @@ review issues [#47](https://github.com/vulnmaster/CASE-UCO-SDK/issues/47)–[#54
 
 ### Added
 
-- Markdown document processing in `document_processor_cli` (`--file-kind markdown`) with warrant-oriented `return_kinds` filtering and extraction bundle output aligned with Link-Look document review.
+- Markdown document processing in `document_processor_cli` (`--file-kind markdown`) with warrant-oriented `return_kinds` filtering and extraction bundle output aligned with downstream document review.
 - Semantic entity extraction for investigation markdown: US street addresses, bold/table person names, Telegram `@handle`, ETH/Tron wallet addresses, and `.example.invalid`-style domains; regression test `test_semantic_mapping_extracts_warrant_markdown_anchors`.
 
 ### Changed
@@ -1732,17 +2119,17 @@ review issues [#47](https://github.com/vulnmaster/CASE-UCO-SDK/issues/47)–[#54
 - Document processor PDF extraction ladder (tool 0.4.0): `pdftotext` (poppler) → `pypdf` → built-in literal-string scrape gated by a readability check → OCR fallback for scanned/image-only PDFs (`pdftoppm` page render, or `pypdf` embedded-image extraction when poppler is absent, then `tesseract`, bounded to 25 pages). The previous Latin-1 literal-string scrape showed glyph-index mojibake to reviewers for subset-font PDFs and produced nothing for scanned PDFs; mojibake is now structurally refused (`text_looks_readable` gate applies to the untrusted scrape only) with a new typed `pdf_text_unreadable` error, and `pdf_text_missing` keeps meaning scanned/no-text-layer with OCR tooling absent. `extraction_method` (`pdftotext`/`pypdf`/`literal_strings`/`ocr_tesseract`) is recorded in extracted summary fields for provenance. All optional dependencies (`poppler-utils`, `pypdf`, `tesseract`) are detected at runtime and their absence fails honestly (`mcp_server/document_processor.py`; ladder, gate, and honest-failure tests in `mcp_server/tests/test_document_processor.py`).
 - `pypdf` added to `mcp_server/requirements.txt` as the pure-Python, offline-safe PDF extraction fallback.
 - MCP server `validate_graph` tool: wraps the local CASE Utilities `case_validate` SHACL validator for produced JSON-LD/Turtle graph files and returns a bounded conformance report (`conforms`, `warning_count`, `violation_count`, `safe_summary`); fails honestly with typed errors (`validator_unavailable`, `graph_missing`, `unsupported_graph_extension`, `graph_oversized`, `validation_timeout`) and never fabricates a passing result (`mcp_server/graph_validator.py`, tests in `mcp_server/tests/test_graph_validator.py`).
-- MCP server README: `process_document_file`/`validate_graph` tool table entries and a "Running under Hermes Agent" deployment section with stdio config example and law-enforcement egress posture notes (supports Link-Look Spec025 agent-teaming planning).
-- Document processor extraction breadth with honest failure modes (Link-Look #103): real PDF text extraction (pypdf), OCR for receipt/scan images when an OCR engine is present (typed `ocr_unavailable` otherwise), per-record CSV row nodes, and real DOCX/XLSX extraction in `mcp_server/document_processor.py`; pytest coverage per document kind and per failure mode in `mcp_server/tests/test_document_processor.py`.
+- MCP server README: `process_document_file`/`validate_graph` tool table entries and an agent-harness deployment section with stdio config example and law-enforcement egress posture notes (supports agent-teaming planning).
+- Document processor extraction breadth with honest failure modes: real PDF text extraction (pypdf), OCR for receipt/scan images when an OCR engine is present (typed `ocr_unavailable` otherwise), per-record CSV row nodes, and real DOCX/XLSX extraction in `mcp_server/document_processor.py`; pytest coverage per document kind and per failure mode in `mcp_server/tests/test_document_processor.py`.
 
 ### Changed
 
 - Canonical reviewable document text (PDF/Office/image OCR) is now bounded by `MAX_DOCUMENT_TEXT` (100,000 chars, line breaks preserved, same printable/number-redaction cleaning) instead of being truncated to the 500-char summary bound — full reports are reviewable in extraction-bundle consumers while summary fields stay tightly bounded (`sanitize_document_text` in `mcp_server/document_processor.py`).
 
-- Document processor extraction bundle (Link-Look Spec026 contract 1.0): `process_document_file` now writes `extracted-content.json` (canonical extracted content — text sections or table model — with `content_sha256`, tool identity, and typed `failures[]`) and `annotations.jsonld` (W3C Web Annotation companion graph anchoring each extracted-record case-graph node into the content via `TextPositionSelector`+`TextQuoteSelector` for text kinds and RFC 7111 `FragmentSelector` row selectors for tabular kinds) beside the existing `case-uco-mcp-output.jsonld`. Anchors are never fabricated: unanchorable nodes are simply absent. Repeated identical values get distinct per-occurrence anchors. The case graph vocabulary is unchanged. CLI JSON output gains additive `extracted_content_path`/`annotations_path` keys; tool version bumped to 0.3.0 (`mcp_server/document_processor.py`, bundle contract tests in `mcp_server/tests/test_document_processor.py`).
+- Document processor extraction bundle (contract 1.0): `process_document_file` now writes `extracted-content.json` (canonical extracted content — text sections or table model — with `content_sha256`, tool identity, and typed `failures[]`) and `annotations.jsonld` (W3C Web Annotation companion graph anchoring each extracted-record case-graph node into the content via `TextPositionSelector`+`TextQuoteSelector` for text kinds and RFC 7111 `FragmentSelector` row selectors for tabular kinds) beside the existing `case-uco-mcp-output.jsonld`. Anchors are never fabricated: unanchorable nodes are simply absent. Repeated identical values get distinct per-occurrence anchors. The case graph vocabulary is unchanged. CLI JSON output gains additive `extracted_content_path`/`annotations_path` keys; tool version bumped to 0.3.0 (`mcp_server/document_processor.py`, bundle contract tests in `mcp_server/tests/test_document_processor.py`).
 
-- Document processor output now uses canonical CASE/UCO terms instead of invented predicates (Link-Look #102; every term verified via the registry tools, output passes `validate_graph` with zero `NonExistentCDOConceptWarning`s): `uco-action:object`/`instrument`/`result`/`startTime`/`endTime` on `case-investigation:InvestigativeAction` (replacing ad-hoc `case-investigation:*` action properties), `uco-observable:FileFacet` (fileName/extension/sizeInBytes) plus `uco-observable:ContentDataFacet` with `uco-types:Hash` (SHA256, hexBinary) replacing `link-look:*` vocabulary, `uco-tool:version`, `uco-observable:ExtractedStringsFacet`/`ExtractedString` per extracted record, and directional `uco-core:Relationship` `Derived_From` edges. Consumers parsing the previous ad-hoc predicates must migrate (Link-Look migrated in Spec025 T007/T009).
-- CAC content routing for Hermes/Link-Look: `route_cac_content` and `get_recipes` MCP tools, `cac_content_router.py` multi-recipe domain detection, `modeling_checklist` completeness guidance, and CAC press-release validation subset (`extensions/cac/validation-subset.json`) with `validate_graph(..., extensions=['cac'])` defaulting to subset mode (`cac:full` for full manifest).
+- Document processor output now uses canonical CASE/UCO terms instead of invented predicates (every term verified via the registry tools, output passes `validate_graph` with zero `NonExistentCDOConceptWarning`s): `uco-action:object`/`instrument`/`result`/`startTime`/`endTime` on `case-investigation:InvestigativeAction` (replacing ad-hoc `case-investigation:*` action properties), `uco-observable:FileFacet` (fileName/extension/sizeInBytes) plus `uco-observable:ContentDataFacet` with `uco-types:Hash` (SHA256, hexBinary) replacing the earlier invented vocabulary, `uco-tool:version`, `uco-observable:ExtractedStringsFacet`/`ExtractedString` per extracted record, and directional `uco-core:Relationship` `Derived_From` edges. Consumers parsing the previous ad-hoc predicates must migrate.
+- CAC content routing for MCP agents: `route_cac_content` and `get_recipes` MCP tools, `cac_content_router.py` multi-recipe domain detection, `modeling_checklist` completeness guidance, and CAC press-release validation subset (`extensions/cac/validation-subset.json`) with `validate_graph(..., extensions=['cac'])` defaulting to subset mode (`cac:full` for full manifest).
 - Twelve CAC recipe family markdown files (`docs/recipes/cac-*.md`), ICAC search-warrant-arrest press-release recipe, Maryland ICAC Annapolis exemplar graph (`examples/maryland-icac-annapolis-arrest-2025.jsonld`), and `pyrightconfig.json` for IDE resolution of the local `python/case_uco` package.
 - CAC Ontology submodule (`extensions/cac/ontology`) updated to `ce95084` (upstream [CAC-Ontology#30](https://github.com/Project-VIC-International/CAC-Ontology/pull/30) on `main`, atop v3.0.0) so v1.13.0 checkouts include ontology files for CAC validation and the resolved Python CodeQL warnings in demonstration/test scripts.
 
@@ -2734,7 +3121,9 @@ digital forensics, cyber-investigation, and cyber-observable data.
 - GitHub Actions workflows: CI, CodeQL, dependency review, release
 - Dependabot configuration for automated dependency updates
 
-[Unreleased]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.29.0...HEAD
+[Unreleased]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.31.0...HEAD
+[1.31.0]: https://github.com/vulnmaster/CASE-UCO-SDK/releases/tag/v1.31.0
+[1.30.0]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.29.0...v1.30.0
 [1.29.0]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.28.0...v1.29.0
 [1.28.0]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.27.0...v1.28.0
 [1.27.0]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.26.0...v1.27.0

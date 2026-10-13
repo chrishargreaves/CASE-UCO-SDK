@@ -64,7 +64,7 @@ SOLVE-IT. See [cyber-threat-intelligence.md](cyber-threat-intelligence.md).
 
 | CaseLinker shape | Remodel as | Do not emit |
 |---|---|---|
-| Tip + investigation in one named graph | `InvestigationTrigger` with `triggeredBy` + `resultedInInvestigation` | Tip as the only `hasStep`; `usedTechnique` from `…/tech/cybertipline` |
+| Tip + investigation in one named graph | `InvestigationTrigger` with `triggeredBy` + `resultedInInvestigation` | Tip as the only `hasStep`; a DFT-* technique type from `…/tech/cybertipline` |
 | Tip `rdfs:label` only | Keep the report; add `hasNCMECIncidentType` only when the source names a type | Invented incident classes |
 | Type-only `ContentDataFacet` | Drop the facet, or replace with hash/size/MIME from a lab source | Empty facets; invented PhotoDNA hex |
 | `CriminalCharge` + `CSAM_Possession` | `legalproc:StateCharge` or `FederalCharge` when jurisdiction is sourced | `legalproc:FederalCharge` inferred from an agency name |
@@ -113,7 +113,7 @@ partner edge so CAC `maxCount 1` still validates. Phase clocks use
 ## Anti-patterns
 
 - Emitting `https://caselinker.up.railway.app/resource/vocab/*`
-- `solveit-core:usedTechnique` for a CyberTipline method IRI
+- A SOLVE-IT DFT-* technique type for a CyberTipline method IRI
 - Empty `ContentDataFacet()`
 - Inferring Brady from unlabeled exam notes
 - Inventing warrant or phase-end times the source does not state

@@ -1,0 +1,151 @@
+# SmishViz Extension — exemplar A-Box
+#
+# Synthetic but realistic SMS phishing message drawn from the public
+# SmishViz campaign / PF-PT sample pattern: a Netflix-impersonation SMS
+# with a malicious URL, domain, campaign cluster/subcluster, BERTopic
+# keywords, and psychological-factor / persuasion-technique annotations.
+#
+# Canonical CASE/UCO modeling:
+#   - Message text and ID live on MessageFacet (not custom smish:messageText)
+#   - URL value lives on URLFacet.fullValue
+#   - Domain value lives on DomainNameFacet.value
+#   - URL host link uses URLFacet.host
+#   - Containment / impersonation use uco-core:Relationship
+#
+# Validation command (run from the SDK root):
+#   case_validate --built-version case-1.4.0 \
+#     --ontology-graph extensions/smishviz/smishviz.ttl \
+#     --ontology-graph extensions/smishviz/smishviz-shapes.ttl \
+#     --inference rdfs --allow-info \
+#     extensions/smishviz/smishviz-exemplar.ttl
+
+@prefix kb: <http://example.org/kb/> .
+@prefix smish: <https://reactlab.org/smishviz/ontology/> .
+@prefix uco-core: <https://ontology.unifiedcyberontology.org/uco/core/> .
+@prefix uco-identity: <https://ontology.unifiedcyberontology.org/uco/identity/> .
+@prefix uco-observable: <https://ontology.unifiedcyberontology.org/uco/observable/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+#################################################################
+# Analytic partitions and annotation vocabulary
+#################################################################
+
+kb:cluster-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b001
+	a smish:CampaignCluster ;
+	uco-core:name "MC(1)"^^xsd:string .
+
+kb:subcluster-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b002
+	a smish:CampaignSubcluster ;
+	uco-core:name "MC(1)-S11"^^xsd:string ;
+	smish:partOfCluster kb:cluster-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b001 .
+
+kb:keyword-netflix-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b003
+	a smish:Keyword ;
+	uco-core:name "netflix"^^xsd:string .
+
+kb:keyword-billing-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b004
+	a smish:Keyword ;
+	uco-core:name "billing"^^xsd:string .
+
+kb:keyword-membership-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b005
+	a smish:Keyword ;
+	uco-core:name "membership"^^xsd:string .
+
+kb:pf-authority-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b006
+	a smish:PsychologicalFactor ;
+	uco-core:name "authority"^^xsd:string .
+
+kb:pf-trust-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b007
+	a smish:PsychologicalFactor ;
+	uco-core:name "trust"^^xsd:string .
+
+kb:pt-impersonation-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b008
+	a smish:PersuasionTechnique ;
+	uco-core:name "impersonation"^^xsd:string .
+
+kb:pt-pretexting-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b009
+	a smish:PersuasionTechnique ;
+	uco-core:name "pretexting"^^xsd:string .
+
+kb:pt-urgency-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b00a
+	a smish:PersuasionTechnique ;
+	uco-core:name "urgency"^^xsd:string .
+
+#################################################################
+# Core observables and facets
+#################################################################
+
+kb:message-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b010
+	a uco-observable:SMSMessage ;
+	uco-core:name "SmishTank message 721"^^xsd:string ;
+	uco-core:description "Raw capture text of a Netflix-impersonation smishing SMS (synthetic exemplar)."^^xsd:string ;
+	uco-core:hasFacet kb:message-facet-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b011 ;
+	smish:belongsToCluster kb:cluster-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b001 ;
+	smish:belongsToSubcluster kb:subcluster-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b002 ;
+	smish:hasKeyword
+		kb:keyword-netflix-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b003 ,
+		kb:keyword-billing-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b004 ,
+		kb:keyword-membership-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b005 ;
+	smish:hasPsychologicalFactor
+		kb:pf-authority-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b006 ,
+		kb:pf-trust-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b007 ;
+	smish:hasPersuasionTechnique
+		kb:pt-impersonation-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b008 ,
+		kb:pt-pretexting-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b009 ,
+		kb:pt-urgency-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b00a .
+
+kb:message-facet-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b011
+	a uco-observable:MessageFacet ;
+	uco-observable:messageID "721"^^xsd:string ;
+	uco-observable:messageText "We regret to inform you that your Netflix membership has been placed on hold due to issues with your billing information. We kindly request to update your billing information as soon as possible. Please follow the instructions by clicking the link below."^^xsd:string ;
+	uco-observable:messageType "SMS"^^xsd:string .
+
+kb:url-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b012
+	a uco-observable:URL ;
+	uco-core:name "Malicious billing-update URL"^^xsd:string ;
+	uco-core:hasFacet kb:url-facet-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b013 .
+
+kb:url-facet-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b013
+	a uco-observable:URLFacet ;
+	uco-observable:fullValue "https://billingupdate.example-phish.test/gac"^^xsd:string ;
+	uco-observable:scheme "https"^^xsd:string ;
+	uco-observable:host kb:domain-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b014 ;
+	uco-observable:path "/gac"^^xsd:string .
+
+kb:domain-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b014
+	a uco-observable:DomainName ;
+	uco-core:name "billingupdate.example-phish.test"^^xsd:string ;
+	uco-core:hasFacet kb:domain-facet-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b015 .
+
+kb:domain-facet-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b015
+	a uco-observable:DomainNameFacet ;
+	uco-observable:value "billingupdate.example-phish.test"^^xsd:string .
+
+kb:organization-netflix-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b016
+	a uco-identity:Organization ;
+	uco-core:name "Netflix"^^xsd:string .
+
+#################################################################
+# Core Relationships (replace smish:containsURL / impersonates)
+#################################################################
+
+kb:rel-contains-url-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b017
+	a uco-core:Relationship ;
+	uco-core:source kb:message-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b010 ;
+	uco-core:target kb:url-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b012 ;
+	uco-core:kindOfRelationship "Contains"^^xsd:string ;
+	uco-core:isDirectional true .
+
+kb:rel-references-domain-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b018
+	a uco-core:Relationship ;
+	uco-core:source kb:message-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b010 ;
+	uco-core:target kb:domain-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b014 ;
+	uco-core:kindOfRelationship "References"^^xsd:string ;
+	uco-core:isDirectional true .
+
+kb:rel-impersonates-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b019
+	a uco-core:Relationship ;
+	uco-core:source kb:message-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b010 ;
+	uco-core:target kb:organization-netflix-8f9d81f0-4c60-5ff2-9be2-3a9a1c07b016 ;
+	uco-core:kindOfRelationship "Impersonates"^^xsd:string ;
+	uco-core:isDirectional true .

@@ -150,7 +150,8 @@ class CSharpBackend(CodegenBackend):
             modifier = "new " if prop.name in inherited_names else ""
             if prop.cardinality.is_required:
                 lines.append(f"{pad}    [global::CaseUco.CaseRequired]")
-            lines.append(f'{pad}    [global::CaseUco.JsonLdProperty("{compact_ontology_iri(prop.iri)}")]')
+            datatype = f', Datatype = "{prop.binary_datatype}"' if prop.binary_datatype else ""
+            lines.append(f'{pad}    [global::CaseUco.JsonLdProperty("{compact_ontology_iri(prop.iri)}"{datatype})]')
             lines.append(f"{pad}    public {modifier}{cs_type} {prop_name} {{ get; set; }}")
 
         lines.append(f"{pad}}}")

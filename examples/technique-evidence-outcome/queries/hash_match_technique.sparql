@@ -1,7 +1,5 @@
-PREFIX solveit-core: <https://ontology.solveit-df.org/solveit/core/>
-
 SELECT DISTINCT ?action
 WHERE {
-  ?action solveit-core:usedTechnique <https://ontology.solveit-df.org/solveit/data/techniqueDFT-1050> .
+  ?action a <https://ontology.solveit-df.org/solveit/data/techniqueDFT-1050> .
 }
 ORDER BY ?action

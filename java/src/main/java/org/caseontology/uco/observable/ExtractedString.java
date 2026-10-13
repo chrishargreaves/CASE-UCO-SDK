@@ -10,6 +10,7 @@ public class ExtractedString extends UcoInherentCharacterizationThing {
     public static final String CLASS_IRI = "https://ontology.unifiedcyberontology.org/uco/observable/ExtractedString";
     public static final String NAMESPACE_PREFIX = "uco-observable";
 
+    @org.caseontology.CaseDatatype("xsd:base64Binary")
     private byte[] byteStringValue;
     private String encoding;
     private String englishTranslation;

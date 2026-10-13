@@ -18,7 +18,7 @@ Validate a graph produced by the SDK:
 
 ```bash
 case_validate \
-  --built-version case-1.4.0 \
+  --built-version case-1.5.0 \
   my-output.jsonld
 ```
 
@@ -26,7 +26,7 @@ Validate with a custom extension ontology:
 
 ```bash
 case_validate \
-  --built-version case-1.4.0 \
+  --built-version case-1.5.0 \
   --ontology-graph path/to/myext.ttl \
   --ontology-graph path/to/myext-shapes.ttl \
   my-output.jsonld
@@ -74,9 +74,15 @@ case-uco-generate scaffold \
 
 **[SOLVE-IT](https://github.com/SOLVE-IT-DF)** (Systematic Objective-based Listing of Various Established digital Investigation Techniques, [solveit-df.org](https://solveit-df.org)) organizes digital forensic practice as objectives → techniques → weaknesses (classified per ASTM E3016-18) → mitigations, enabling systematic Error Mitigation Analysis. The [solve-it-ontology](https://github.com/SOLVE-IT-DF/solve-it-ontology) companion is a CASE/UCO extension ontology (core classes, `SolveitInvestigativeAction`, ~60 method-centric observables, analysis and weakness-assessment modules, SHACL shapes) with an hourly-compiled RDF knowledge base. SOLVE-IT also includes an extension framework ([SOLVE-IT-X](https://github.com/SOLVE-IT-DF/solve-it-x)) for building domain-specific additions.
 
-*Bundled with this SDK* (`ontology/solveit/`) as a pinned snapshot: the ontology modules, the compiled knowledge base (23 objectives, 187 techniques, 339 weaknesses, 270 mitigations), and a generated punned technique catalog for the UCO 1.5.0 `uco-action:Technique` metaclass style. Query it with the `search_solveit` / `get_solveit_details` / `plan_solveit_workflow` MCP tools, model with the [solve-it-investigation-planning recipe](recipes/solve-it-investigation-planning.md), and keep pace with upstream's rapid release cycle via `make sync-solveit` plus a weekly CI freshness check.
+*Bundled with this SDK* (`ontology/solveit/`) as a pinned snapshot: the ontology modules, the compiled knowledge base (24 objectives, 200 techniques, 441 weaknesses, 336 mitigations, 164 citations), and a generated catalog that bridges each technique class to the UCO 1.5.0 `uco-action:Technique` metaclass. Query it with the `search_solveit` / `get_solveit_details` / `plan_solveit_workflow` MCP tools, model with the [solve-it-investigation-planning recipe](recipes/solve-it-investigation-planning.md), and keep pace with upstream's rapid release cycle via `make sync-solveit` plus a weekly CI freshness check.
 
 **Domains covered:** forensic method and technique selection, error mitigation analysis, tool testing and quality assurance, investigative knowledge management, educational materials.
+
+### MITRE ATT&CK and MITRE ATLAS — Adversary Technique Catalogs (included in SDK)
+
+**[MITRE ATT&CK](https://attack.mitre.org)** catalogs adversary tradecraft against computer systems (Enterprise, Mobile, ICS); **[MITRE ATLAS](https://atlas.mitre.org)** catalogs attacks on AI systems. *Bundled with this SDK* as the `attack-technique` (ATT&CK v19.2, 1,166 techniques and sub-techniques) and `atlas-technique` (ATLAS 2026.09, 208) extensions. Both are complete, generated from MITRE's published data (`make sync-attack`, `make sync-atlas`), and express every technique as a class under the UCO 1.5.0 `uco-action:Technique` metaclass, with sub-techniques specializing their parent. Query them with the `search_adversary_techniques` / `get_adversary_technique` MCP tools; model with the [cyber-threat-intelligence](recipes/cyber-threat-intelligence.md) and [ai-system-attacks](recipes/ai-system-attacks.md) recipes.
+
+These are separate vocabularies from SOLVE-IT, which describes the examiner's method rather than the adversary's, and from the offense-conduct and CAC ontologies. No extension depends on them; add them to a graph only when the evidence shows the tradecraft ([cross-ontology-composition](recipes/cross-ontology-composition.md) principle 6).
 
 ### Adversary Engagement Ontology — Cyber Denial & Deception
 
@@ -125,7 +131,7 @@ The SDK supports extension ontologies as separate, opt-in packages that provide 
 
 | Package | Extension | Version | Upper Ontology |
 |---------|-----------|---------|----------------|
-| `case-uco-cac` | [CAC Ontology](https://github.com/Project-VIC-International/CAC-Ontology) | 3.0.0 | gUFO |
+| `case-uco-cac` | [CAC Ontology](https://github.com/Project-VIC-International/CAC-Ontology) | 3.1.0 | gUFO |
 | `case-uco-aeo` | [Adversary Engagement Ontology](https://github.com/UNHSAILLab/Adversary-Engagement-Ontology) | 0.2.1 | None |
 
 ### Installing Extension Packages
@@ -196,6 +202,10 @@ All profiles are currently in **exploratory** status. They define `owl:subClassO
 | [CDO-Shapes-Time](https://github.com/Cyber-Domain-Ontology/CDO-Shapes-Time) | [W3C OWL-Time](https://www.w3.org/TR/owl-time/) | UCO temporal concepts → OWL-Time instants and intervals | Temporal reasoning, calendar/clock time modeling, time-bounded existence |
 | [CDO-Shapes-GeoSPARQL](https://github.com/Cyber-Domain-Ontology/CDO-Shapes-GeoSPARQL) | [OGC GeoSPARQL 1.1](https://github.com/opengeospatial/ogc-geosparql) | UCO locations → GeoSPARQL Features and Geometries | Geospatial queries, coordinate reference systems, spatial reasoning |
 | [CDO-Shapes-FOAF](https://github.com/Cyber-Domain-Ontology/CDO-Shapes-FOAF) | [Friend-of-a-Friend (FOAF)](http://xmlns.com/foaf/0.1/) | UCO identities → FOAF Persons, Organizations, Agents | Social network data, identity linkage, Linked Data interop |
+
+### SDK-pinned profiles: QUDT and SOSA/SSN
+
+UCO has no CDO-Shapes profile for quantities or sensor observations yet ([ucoProject/UCO#404](https://github.com/ucoProject/UCO/issues/404), [ucoProject/UCO#567](https://github.com/ucoProject/UCO/issues/567)). The SDK pins [QUDT 3.5.2](https://github.com/qudt/qudt-public-repo/releases/tag/v3.5.2) and the [W3C SSN 2017 Recommendation](https://www.w3.org/TR/2017/REC-vocab-ssn-20171019/) (SOSA, SSN, SSN-System) and validates them as the `qudt`, `sosa`, and `ssn` profiles, with minimal SDK shapes under `ontology/upper/sdk-shapes/`. Use SOSA only for real sensor readings; a looked-up or computed value is a QUDT quantity. See [qudt-quantities-and-units.md](recipes/qudt-quantities-and-units.md) and [sosa-sensor-observations.md](recipes/sosa-sensor-observations.md); the `lookup_qudt_units` MCP tool returns pinned unit IRIs.
 
 ### Using Profiles with the SDK
 

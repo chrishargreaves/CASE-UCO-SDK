@@ -1,0 +1,130 @@
+# SmishViz Campaign and Social-Engineering Annotation Extension (T-Box)
+#
+# Analytic partitions and annotation vocabulary for SMS phishing (smishing)
+# message corpora produced by the SmishViz research pipeline
+# (https://github.com/varnicm/smishviz-case-uco). The five classes model
+# ML-derived campaign clusters/subclusters, BERTopic keywords, and
+# psychological-factor / persuasion-technique annotation labels.
+#
+# Design:
+#   - Every class subclasses uco-core:UcoObject so instances participate in
+#     CASE/UCO graphs (Relationships, Actions, provenance) natively.
+#   - Message text, message IDs, URL strings, and domain names MUST use
+#     core MessageFacet / URLFacet / DomainNameFacet — they are not
+#     re-declared here. URL containment, domain reference, and brand
+#     impersonation SHOULD use uco-core:Relationship with
+#     kindOfRelationship Contains / References / Impersonates.
+#   - CampaignCluster is an analytic partition from SmishViz clustering,
+#     not a confirmed adversary operation or CAC SocialEngineeringCampaign.
+#   - PersuasionTechnique is a vocabulary label, not a subclass of
+#     uco-action:Technique (which is a metaclass for Action subclasses).
+#
+# Validated against synthetic SmishViz exemplar data derived from the
+# public SmishViz campaign export and PF/PT annotation sample.
+
+@prefix smish: <https://reactlab.org/smishviz/ontology/> .
+@prefix uco-core: <https://ontology.unifiedcyberontology.org/uco/core/> .
+@prefix uco-observable: <https://ontology.unifiedcyberontology.org/uco/observable/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://reactlab.org/smishviz/ontology/>
+	a owl:Ontology ;
+	rdfs:label "SmishViz campaign and social-engineering annotation ontology"@en ;
+	rdfs:comment "Extension classes and properties for analytic campaign clusters, BERTopic keywords, and psychological-factor / persuasion-technique annotations on SMS phishing messages, as produced by the SmishViz research pipeline (https://github.com/varnicm/smishviz-case-uco). Canonical CASE/UCO facets and Relationships cover message text, URLs, domains, and impersonation."@en ;
+	dcterms:source
+		"https://github.com/varnicm/smishviz-case-uco"^^xsd:anyURI ,
+		"https://datatracker.ietf.org/doc/html/rfc4122"^^xsd:anyURI .
+
+#################################################################
+# Classes
+#################################################################
+
+smish:CampaignCluster
+	a owl:Class ;
+	rdfs:subClassOf uco-core:UcoObject ;
+	rdfs:label "Campaign cluster"@en ;
+	rdfs:comment "An analytic partition of smishing messages produced by the SmishViz clustering pipeline (merged cluster label such as MC(5)). This is an ML-derived grouping for corpus analysis, not a confirmed adversary operation. See the SmishViz CASE/UCO repository (https://github.com/varnicm/smishviz-case-uco) and NIST SP 800-83 Rev. 1 guidance on analyzing malicious messaging campaigns (https://csrc.nist.gov/publications/detail/sp/800-83/rev-1/final)."@en ;
+	dcterms:source "https://github.com/varnicm/smishviz-case-uco"^^xsd:anyURI .
+
+smish:CampaignSubcluster
+	a owl:Class ;
+	rdfs:subClassOf uco-core:UcoObject ;
+	rdfs:label "Campaign subcluster"@en ;
+	rdfs:comment "A finer analytic sub-partition within a SmishViz campaign cluster (adjusted subgroup label such as MC(5)-S1). Subclusters are partitions within clusters, not a subtype of CampaignCluster. See https://github.com/varnicm/smishviz-case-uco."@en ;
+	dcterms:source "https://github.com/varnicm/smishviz-case-uco"^^xsd:anyURI .
+
+smish:Keyword
+	a owl:Class ;
+	rdfs:subClassOf uco-core:UcoObject ;
+	rdfs:label "Topic keyword"@en ;
+	rdfs:comment "A top topic term associated with a smishing message by the SmishViz BERTopic analysis (for example 'netflix' or 'billing'). This is an analytic vocabulary node for graph queries, not a forensic keyword-search hit. BERTopic documentation: https://maartengr.github.io/BERTopic/."@en ;
+	dcterms:source "https://maartengr.github.io/BERTopic/"^^xsd:anyURI .
+
+smish:PsychologicalFactor
+	a owl:Class ;
+	rdfs:subClassOf uco-core:UcoObject ;
+	rdfs:label "Psychological factor"@en ;
+	rdfs:comment "A victim-side psychological lever annotated on a smishing message (for example authority, fear, liking, or trust). Labels follow the SmishViz PF/PT annotation vocabulary (https://github.com/varnicm/smishviz-case-uco). Related social-engineering principles are surveyed in NIST SP 800-83 Rev. 1 (https://csrc.nist.gov/publications/detail/sp/800-83/rev-1/final)."@en ;
+	dcterms:source "https://github.com/varnicm/smishviz-case-uco"^^xsd:anyURI .
+
+smish:PersuasionTechnique
+	a owl:Class ;
+	rdfs:subClassOf uco-core:UcoObject ;
+	rdfs:label "Persuasion technique"@en ;
+	rdfs:comment "A message-side social-engineering tactic annotated on a smishing message (for example pretexting, urgency, or impersonation). Labels follow the SmishViz PF/PT annotation vocabulary (https://github.com/varnicm/smishviz-case-uco). This class is a vocabulary term for analytic annotation, not a subclass of uco-action:Technique."@en ;
+	dcterms:source "https://github.com/varnicm/smishviz-case-uco"^^xsd:anyURI .
+
+#################################################################
+# Object properties
+#################################################################
+
+smish:belongsToCluster
+	a owl:ObjectProperty ;
+	rdfs:label "belongs to cluster"@en ;
+	rdfs:comment "Associates a Message with the SmishViz CampaignCluster assigned by the clustering pipeline. Domain is uco-observable:Message so SMS and other message subclasses may use it. See https://github.com/varnicm/smishviz-case-uco."@en ;
+	rdfs:domain uco-observable:Message ;
+	rdfs:range smish:CampaignCluster ;
+	dcterms:source "https://github.com/varnicm/smishviz-case-uco"^^xsd:anyURI .
+
+smish:belongsToSubcluster
+	a owl:ObjectProperty ;
+	rdfs:label "belongs to subcluster"@en ;
+	rdfs:comment "Associates a Message with the SmishViz CampaignSubcluster assigned by the clustering pipeline. When present, the message should also belong to the parent CampaignCluster linked from that subcluster via partOfCluster. See https://github.com/varnicm/smishviz-case-uco."@en ;
+	rdfs:domain uco-observable:Message ;
+	rdfs:range smish:CampaignSubcluster ;
+	dcterms:source "https://github.com/varnicm/smishviz-case-uco"^^xsd:anyURI .
+
+smish:partOfCluster
+	a owl:ObjectProperty ;
+	rdfs:label "part of cluster"@en ;
+	rdfs:comment "Links a CampaignSubcluster to its parent CampaignCluster in the SmishViz hierarchy (for example MC(5)-S1 partOfCluster MC(5)). See https://github.com/varnicm/smishviz-case-uco."@en ;
+	rdfs:domain smish:CampaignSubcluster ;
+	rdfs:range smish:CampaignCluster ;
+	dcterms:source "https://github.com/varnicm/smishviz-case-uco"^^xsd:anyURI .
+
+smish:hasKeyword
+	a owl:ObjectProperty ;
+	rdfs:label "has keyword"@en ;
+	rdfs:comment "Associates a Message with a SmishViz Keyword topic term (typically the top one to three BERTopic terms for that message). See https://maartengr.github.io/BERTopic/ and https://github.com/varnicm/smishviz-case-uco."@en ;
+	rdfs:domain uco-observable:Message ;
+	rdfs:range smish:Keyword ;
+	dcterms:source "https://github.com/varnicm/smishviz-case-uco"^^xsd:anyURI .
+
+smish:hasPsychologicalFactor
+	a owl:ObjectProperty ;
+	rdfs:label "has psychological factor"@en ;
+	rdfs:comment "Associates a Message with a PsychologicalFactor annotation from the SmishViz PF/PT vocabulary. See https://github.com/varnicm/smishviz-case-uco."@en ;
+	rdfs:domain uco-observable:Message ;
+	rdfs:range smish:PsychologicalFactor ;
+	dcterms:source "https://github.com/varnicm/smishviz-case-uco"^^xsd:anyURI .
+
+smish:hasPersuasionTechnique
+	a owl:ObjectProperty ;
+	rdfs:label "has persuasion technique"@en ;
+	rdfs:comment "Associates a Message with a PersuasionTechnique annotation from the SmishViz PF/PT vocabulary. See https://github.com/varnicm/smishviz-case-uco."@en ;
+	rdfs:domain uco-observable:Message ;
+	rdfs:range smish:PersuasionTechnique ;
+	dcterms:source "https://github.com/varnicm/smishviz-case-uco"^^xsd:anyURI .

@@ -1,6 +1,6 @@
 # Cryptocurrency and Financial Crime Investigation Extension — SHACL Shapes
 #
-# Validation shapes for the cryptoinv extension ontology (v0.1.0).
+# Validation shapes for the cryptoinv extension ontology (v0.2.0).
 # OWL definitions are in cryptoinv.ttl; exemplar instances are in
 # cryptoinv-exemplar.ttl. Shapes are kept separate from OWL definitions
 # per CDO Community Playground guidance.
@@ -107,6 +107,11 @@ cryptoinv:CryptocurrencyWalletFacet-shape
 			sh:path cryptoinv:addressCount ;
 			sh:datatype xsd:nonNegativeInteger ;
 			sh:maxCount "1"^^xsd:integer ;
+		] ,
+		[
+			sh:path cryptoinv:hostedWalletCompartment ;
+			sh:datatype xsd:string ;
+			sh:maxCount "1"^^xsd:integer ;
 		] .
 
 cryptoinv:VirtualAssetHoldingFacet-shape
@@ -142,6 +147,59 @@ cryptoinv:VirtualAssetHoldingFacet-shape
 		[
 			sh:path cryptoinv:valuationDate ;
 			sh:datatype xsd:dateTime ;
+			sh:maxCount "1"^^xsd:integer ;
+		] .
+
+cryptoinv:VirtualAssetLedgerRecordFacet-shape
+	a sh:NodeShape ;
+	sh:targetClass cryptoinv:VirtualAssetLedgerRecordFacet ;
+	sh:property
+		[
+			sh:path cryptoinv:ledgerRecordType ;
+			sh:datatype xsd:string ;
+			sh:minCount "1"^^xsd:integer ;
+			sh:maxCount "1"^^xsd:integer ;
+			sh:name "ledgerRecordType" ;
+			sh:description "The provider-ledger activity type (exactly one required)." ;
+		] ,
+		[
+			sh:path cryptoinv:providerTransactionId ;
+			sh:datatype xsd:string ;
+			sh:maxCount "1"^^xsd:integer ;
+		] ,
+		[
+			sh:path cryptoinv:transferNetwork ;
+			sh:datatype xsd:string ;
+			sh:maxCount "1"^^xsd:integer ;
+		] ,
+		[
+			sh:path cryptoinv:addressTag ;
+			sh:datatype xsd:string ;
+			sh:maxCount "1"^^xsd:integer ;
+		] ,
+		[
+			sh:path cryptoinv:isOnChain ;
+			sh:datatype xsd:boolean ;
+			sh:maxCount "1"^^xsd:integer ;
+		] ,
+		[
+			sh:path cryptoinv:assetSymbol ;
+			sh:datatype xsd:string ;
+			sh:maxCount "1"^^xsd:integer ;
+		] ,
+		[
+			sh:path cryptoinv:assetQuantity ;
+			sh:datatype xsd:decimal ;
+			sh:maxCount "1"^^xsd:integer ;
+		] ,
+		[
+			sh:path cryptoinv:transactionFee ;
+			sh:datatype xsd:decimal ;
+			sh:maxCount "1"^^xsd:integer ;
+		] ,
+		[
+			sh:path cryptoinv:transactionStatus ;
+			sh:datatype xsd:string ;
 			sh:maxCount "1"^^xsd:integer ;
 		] .
 

@@ -75,7 +75,7 @@ python examples/upper-ontology/geosparql/build_exemplar.py
 ```bash
 validate_graph("geosparql-geospatial.jsonld", profiles=["geosparql"])
 
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph ontology/upper/shapes/sh-geo.ttl \
   --allow-info geosparql-geospatial.jsonld
 ```

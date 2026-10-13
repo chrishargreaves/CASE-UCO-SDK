@@ -15,9 +15,9 @@
       "@id": "urn:uuid:fe8f20e9-b9fa-5921-9537-97315cf0786c",
       "@type": "uco-observable:ObservableObject",
       "uco-core:name": "Source file pacer -- insider threat -- SECOND SUPERSEDING INDICTMENT.pdf",
-      "uco-core:description": "Link-Look pdf upload",
+      "uco-core:description": "Uploaded pdf file",
       "uco-core:tag": [
-        "link-look-file-kind:pdf"
+        "source-file-kind:pdf"
       ],
       "uco-core:hasFacet": [
         {

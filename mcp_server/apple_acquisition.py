@@ -1254,7 +1254,7 @@ def build_acquisition_package_graph(
         events.append(event)
 
     collect_action = graph.add(
-        "solveit-core:SolveitInvestigativeAction",
+        ["solveit-core:SolveitInvestigativeAction", SOLVEIT_DATA + "techniqueDFT-1016"],
         **{
             "uco-core:name": "Preserve Apple acquisition package inventory",
             "uco-core:description": [
@@ -1262,15 +1262,16 @@ def build_acquisition_package_graph(
             ],
             "uco-action:object": [graph.ref(device)],
             "uco-action:result": [graph.ref(package), graph.ref(logarchive)],
-            "solveit-core:usedTechnique": [
-                {"@id": SOLVEIT_DATA + "techniqueDFT-1016"}
-            ],
         },
     )
     actions = [collect_action]
     if excerpt_node is not None:
         parse_action = graph.add(
-            "solveit-core:SolveitInvestigativeAction",
+            [
+                "solveit-core:SolveitInvestigativeAction",
+                SOLVEIT_DATA + "techniqueDFT-1066",
+                SOLVEIT_DATA + "techniqueDFT-1076",
+            ],
             **{
                 "uco-core:name": "Sample external Apple log decoder excerpt",
                 "uco-core:description": [
@@ -1278,10 +1279,6 @@ def build_acquisition_package_graph(
                 ],
                 "uco-action:object": [graph.ref(logarchive)],
                 "uco-action:result": [graph.ref(excerpt_node), *[graph.ref(item) for item in event_records], *[graph.ref(item) for item in events]],
-                "solveit-core:usedTechnique": [
-                    {"@id": SOLVEIT_DATA + "techniqueDFT-1066"},
-                    {"@id": SOLVEIT_DATA + "techniqueDFT-1076"},
-                ],
                 "solveit-core:appliedMitigation": [
                     {"@id": SOLVEIT_DATA + "mitigationDFM-1179"}
                 ],

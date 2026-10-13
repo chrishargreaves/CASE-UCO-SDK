@@ -1,0 +1,80 @@
+# CASE/UCO SDK minimal SHACL shapes for SOSA (W3C Recommendation 2017)
+#
+# Written by the SDK. Neither the W3C nor the CDO project publishes SHACL
+# shapes for SOSA or SSN (ucoProject/UCO#404). These shapes hold under both
+# the SOSA core, which has no cardinality axioms, and SSN, whose OWL axioms
+# give sosa:Observation exactly one sensor, feature of interest, observed
+# property, phenomenon time, and result time, and at least one result.
+#
+# The SDK checks the upper bounds and datatypes, requires each observation
+# to carry a result (sosa:hasResult or sosa:hasSimpleResult), and requires
+# sensors and features of interest to be IRIs so they can be the same nodes
+# as the UCO devices and objects they describe.
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sdk-sosa: <http://example.org/shapes/sdk-sosa/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+sdk-sosa:Observation-shape
+	a sh:NodeShape ;
+	rdfs:comment "A SOSA observation in an investigation graph names at most one sensor, feature of interest, observed property, and result time, and carries at least one result."@en ;
+	sh:targetClass sosa:Observation ;
+	sh:or (
+		[ sh:path sosa:hasResult ; sh:minCount 1 ]
+		[ sh:path sosa:hasSimpleResult ; sh:minCount 1 ]
+	) ;
+	sh:message "sosa:Observation needs a result: sosa:hasResult (e.g. a qudt:QuantityValue) or sosa:hasSimpleResult."@en ;
+	sh:property
+		[
+			sh:path sosa:madeBySensor ;
+			sh:maxCount 1 ;
+			sh:nodeKind sh:IRI ;
+		] ,
+		[
+			sh:path sosa:hasFeatureOfInterest ;
+			sh:maxCount 1 ;
+			sh:nodeKind sh:IRI ;
+		] ,
+		[
+			sh:path sosa:observedProperty ;
+			sh:maxCount 1 ;
+			sh:nodeKind sh:IRI ;
+		] ,
+		[
+			sh:path sosa:phenomenonTime ;
+			sh:maxCount 1 ;
+		] ,
+		[
+			sh:path sosa:resultTime ;
+			sh:maxCount 1 ;
+			sh:datatype xsd:dateTime ;
+		]
+		;
+	.
+
+sdk-sosa:Actuation-shape
+	a sh:NodeShape ;
+	rdfs:comment "A SOSA actuation names at most one actuator and result time."@en ;
+	sh:targetClass sosa:Actuation ;
+	sh:property
+		[
+			sh:path sosa:madeByActuator ;
+			sh:maxCount 1 ;
+			sh:nodeKind sh:IRI ;
+		] ,
+		[
+			sh:path sosa:resultTime ;
+			sh:maxCount 1 ;
+			sh:datatype xsd:dateTime ;
+		]
+		;
+	.
+
+sdk-sosa:Sensor-shape
+	a sh:NodeShape ;
+	rdfs:comment "A SOSA sensor is an IRI node, so it can also be the UCO device that hosts or is the sensor."@en ;
+	sh:targetClass sosa:Sensor ;
+	sh:nodeKind sh:IRI ;
+	.

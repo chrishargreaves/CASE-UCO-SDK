@@ -234,6 +234,13 @@ def _cmd_generate_extension(args) -> int:
         return 1
 
     ext_name = manifest["name"]
+    if manifest.get("class_registry", True) is False:
+        logging.error(
+            "Extension '%s' is a catalog (class_registry: false); it ships as "
+            "Turtle for validation and has no generated package.",
+            ext_name,
+        )
+        return 1
     ext_version = manifest["version"]
     display_name = manifest["display_name"]
     pkg_name = f"case-uco-{ext_name}"
@@ -251,7 +258,9 @@ def _cmd_generate_extension(args) -> int:
     ext_roots = [ext_dir.parent, repo_root / "extensions", repo_root / "ontology"]
     # Dedupe while preserving priority: the requested extension's own root first.
     unique_roots = list(dict.fromkeys(r.resolve() for r in ext_roots))
-    schema = parse_ontology(ontology_dir, extensions_dir=unique_roots)
+    schema = parse_ontology(
+        ontology_dir, extensions_dir=unique_roots, include_private=frozenset({ext_dir.name})
+    )
 
     ext_schema = _filter_extension_schema(schema, ext_name)
     if not ext_schema.classes:
@@ -334,7 +343,25 @@ def _emit_extension_registry(ext_schema, full_schema, output_dir: Path, ext_name
         "vocabs": {},
     }
 
-    for cls in sorted(ext_schema.classes.values(), key=lambda c: c.name):
+    by_name: dict[str, list] = {}
+    for cls in ext_schema.classes.values():
+        by_name.setdefault(cls.name, []).append(cls)
+
+    def registry_key(cls) -> str:
+        # Same-named classes in different modules all stay discoverable: one
+        # keeps the bare name and the rest are keyed "prefix:Name". The bare
+        # name goes to the last-parsed class (the historical behaviour that
+        # existing lookups rely on), except that an owl:equivalentClass alias
+        # never displaces the class it aliases.
+        rivals = by_name[cls.name]
+        if len(rivals) == 1:
+            return cls.name
+        rival_iris = {r.iri for r in rivals}
+        canonical = [r for r in rivals if not (rival_iris - {r.iri}).intersection(r.equivalent_iris)]
+        winner = (canonical or rivals)[-1]
+        return cls.name if cls is winner else f"{cls.namespace_prefix}:{cls.name}"
+
+    for cls in sorted(ext_schema.classes.values(), key=lambda c: (c.name, c.iri)):
         all_props = full_schema.resolve_all_properties(cls)
         props_data = []
         for prop in all_props:
@@ -346,7 +373,7 @@ def _emit_extension_registry(ext_schema, full_schema, output_dir: Path, ext_name
                 "required": prop.cardinality.is_required,
                 "description": prop.description,
             })
-        registry["classes"][cls.name] = {
+        registry["classes"][registry_key(cls)] = {
             "iri": cls.iri,
             "module": _module_display_name(cls.module, ext_name),
             "description": cls.description,
@@ -375,6 +402,12 @@ def _sanitize_module_id(name: str) -> str:
     """
     sanitized = re.sub(r"[^a-z0-9]+", "_", name.lower()).strip("_")
     return sanitized or "core"
+
+
+def _ext_class_name(name: str, lang: str) -> str:
+    from case_uco_generator.backends.base import CodegenBackend
+
+    return CodegenBackend.safe_identifier(name, lang)
 
 
 def _generate_extension_package(
@@ -445,7 +478,7 @@ def _gen_python_extension(ext_schema, full_schema, output_dir, ext_name, ext_ver
 
         for cls in classes:
             lines.append("@dataclass")
-            lines.append(f"class {cls.name}:")
+            lines.append(f"class {_ext_class_name(cls.name, 'python')}:")
             desc = cls.description[:200] if cls.description else cls.name
             lines.append(f'    """{desc}"""\n')
             lines.append(f'    CLASS_IRI: str = "{cls.iri}"')
@@ -519,7 +552,7 @@ def _gen_csharp_extension(ext_schema, output_dir, ext_name, ext_version, display
             "{",
         ]
         for cls in sorted(classes, key=lambda c: c.name):
-            lines.append(f"    public class {cls.name}")
+            lines.append(f"    public class {_ext_class_name(cls.name, 'csharp')}")
             lines.append("    {")
             lines.append(f'        public static readonly string ClassIri = "{cls.iri}";')
             for prop in cls.properties:
@@ -581,7 +614,7 @@ def _gen_java_extension(ext_schema, output_dir, ext_name, ext_version, display_n
                 "import java.util.ArrayList;",
                 "import java.util.List;",
                 "",
-                f"public class {cls.name} {{",
+                f"public class {_ext_class_name(cls.name, 'java')} {{",
                 f'    public static final String CLASS_IRI = "{cls.iri}";',
                 "",
             ]
@@ -605,7 +638,7 @@ def _gen_java_extension(ext_schema, output_dir, ext_name, ext_version, display_n
 
             mod_dir = java_base / mod_name
             mod_dir.mkdir(parents=True, exist_ok=True)
-            (mod_dir / f"{cls.name}.java").write_text("\n".join(lines), encoding="utf-8")
+            (mod_dir / f"{_ext_class_name(cls.name, 'java')}.java").write_text("\n".join(lines), encoding="utf-8")
             count += 1
 
     return count
@@ -650,7 +683,7 @@ def _gen_rust_extension(ext_schema, output_dir, ext_name, ext_version, display_n
             desc = cls.description[:120] if cls.description else cls.name
             lines.append(f"/// {desc}")
             lines.append("#[derive(Debug, Clone, Serialize, Default)]")
-            lines.append(f"pub struct {cls.name} {{")
+            lines.append(f"pub struct {_ext_class_name(cls.name, 'rust')} {{")
             for prop in cls.properties:
                 rust_type = prop.type_name_for("rust")
                 field_name = _to_snake(prop.name)
@@ -660,7 +693,7 @@ def _gen_rust_extension(ext_schema, output_dir, ext_name, ext_version, display_n
                     lines.append(f"    pub {field_name}: Option<{rust_type}>,")
             lines.append("}")
             lines.append("")
-            lines.append(f"impl {cls.name} {{")
+            lines.append(f"impl {_ext_class_name(cls.name, 'rust')} {{")
             lines.append(f'    pub fn class_iri() -> &\'static str {{ "{cls.iri}" }}')
             lines.append("}")
             lines.append("")

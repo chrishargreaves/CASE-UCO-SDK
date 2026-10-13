@@ -13,6 +13,7 @@ public class Hash extends UcoInherentCharacterizationThing {
     @org.caseontology.CaseRequired
     private String hashMethod;
     @org.caseontology.CaseRequired
+    @org.caseontology.CaseDatatype("xsd:hexBinary")
     private byte[] hashValue;
 
     public Hash() {

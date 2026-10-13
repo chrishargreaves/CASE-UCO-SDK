@@ -15,9 +15,10 @@ assessed — the systematic Error Mitigation Analysis that examination
 reports and quality-assurance reviews increasingly expect.
 
 The SDK vendors a pinned SOLVE-IT snapshot in `ontology/solveit/`
-(ontology + compiled knowledge base: 23 objectives, 187 techniques, 339
-weaknesses, 270 mitigations; see the manifest `provenance` block for exact
-versions; refresh with `make sync-solveit`).
+(SOLVE-IT ontology 0.2.11 + compiled knowledge base: 24 objectives, 200
+techniques, 441 weaknesses, 336 mitigations, 164 citations; see the
+manifest `provenance` block for the exact commit and SHA-256 digests;
+refresh with `make sync-solveit`).
 
 Validated against `examples/solveit/` (synthetic laptop acquisition) and
 `ontology/solveit/solveit-exemplar.ttl`.
@@ -48,12 +49,18 @@ plan_solveit_workflow("image the seized laptop and verify integrity")
      per-technique error_mitigation_checklist (weaknesses + mitigations)
 
 search_solveit("hash", kind="mitigation")   # keyword search, any kind
-get_solveit_details("DFT-1002")             # full record + relationships
+get_solveit_details("DFT-1002")             # full record, relationships,
+                                            # citations (DFCite-*) and the
+                                            # inline catalog_entry_jsonld
 ```
+
+Cite SOLVE-IT's own sources when you justify a technique choice:
+`get_solveit_details` returns each technique's, weakness's and
+mitigation's `citations` (identifier plus plain-text reference).
 
 `search_classes(scope="solveit")` finds the ontology classes
 (SolveitInvestigativeAction, PhysicalImageContainer, WeaknessEvaluation,
-punned DFT-* technique classes) when `CASE_UCO_EXTENSIONS=solveit`.
+the DFT-* technique classes) when `CASE_UCO_EXTENSIONS=solveit`.
 
 ## Classes and properties
 
@@ -61,30 +68,35 @@ punned DFT-* technique classes) when `CASE_UCO_EXTENSIONS=solveit`.
 |---|---|
 | `case-investigation:Investigation` | Case container; state the SOLVE-IT objective (DFO-*) in `description` |
 | `solveit-core:SolveitInvestigativeAction` | An investigative action that records its method — subclass of `case-investigation:InvestigativeAction` |
-| `solveit-core:usedTechnique` | The knowledge-base technique executed (DFT-* individual) |
+| `solveit-data:techniqueDFT-*` | The technique performed: an `owl:Class` (subclass of `SolveitInvestigativeAction`) that is also a `uco-action:Technique`; type the action with it |
 | `solveit-core:appliedMitigation` | Each mitigation actively applied (DFM-* individual) |
 | `solveit-observable:PhysicalImageContainer` / `LogicalImageContainer` / `RawImage` | Acquisition outputs; SHACL requires `solveit-observable:contains` a `Bitstream`/`FileSet` |
 | `solveit-observable:HashVerificationResult` | Outcome of an integrity check |
 | `solveit-observable:Timeline` / `TimelineEntry` / `KeywordIndex` / `Wordlist` / ... | ~60 method-centric observables across the observable modules |
 | `solveit-wa:WeaknessEvaluation` | Risk rating of one weakness (likelihood × impact, optional detectability → RPN) — subclass of `uco-analysis:AnalyticResult` |
 | `solveit-wa:WeaknessEvaluationSet` | One assessment session, `scopedToTechnique`, `evaluatedBy` an Identity |
-| `solveit-data:techniqueDFT-*` (punned classes) | UCO 1.5.0 metaclass style: type an Action directly with the technique class |
+| `solveit-analysis:Hypothesis` subclasses (`HypothesisedRecord`, `HypothesisedConfiguration`, `HypothesisedTableAttribution`, ...) | Claims inferred from artefacts rather than observed, e.g. a carved SQLite record or its table attribution |
 
 ## Modeling patterns
 
-### 1. State the objective, then record method with SolveitInvestigativeAction
+### 1. State the objective, then type the action with the technique it performed
 
-Reference the canonical knowledge-base IRIs
-(`https://ontology.solveit-df.org/solveit/data/techniqueDFT-1002` etc.) —
-they are typed individuals in the vendored KB, so the graph stays
-resolvable and validation sees their types:
+SOLVE-IT 0.2.x models each technique as a class: `techniqueDFT-1002` is an
+`owl:Class` and `rdfs:subClassOf solveit-core:SolveitInvestigativeAction`,
+and the SDK's catalog (`solveit-technique-catalog.ttl`) also types it
+`uco-action:Technique`, the UCO 1.5.0 metaclass used for MITRE ATT&CK and
+ATLAS. An action that performed the technique is an instance of that
+class. `solveit-core:usedTechnique` is `owl:deprecated` upstream; don't
+use it in new graphs.
 
 ```json
 {
   "@id": "kb:acquire-action",
-  "@type": "solveit-core:SolveitInvestigativeAction",
+  "@type": [
+    "solveit-core:SolveitInvestigativeAction",
+    "solveit-data:techniqueDFT-1002"
+  ],
   "uco-core:name": "acquire-laptop-image",
-  "solveit-core:usedTechnique": [{"@id": "solveit-data:techniqueDFT-1002"}],
   "solveit-core:appliedMitigation": [
     {"@id": "solveit-data:mitigationDFM-1003"},
     {"@id": "solveit-data:mitigationDFM-1004"}
@@ -137,27 +149,36 @@ categories) and rate the residual risk for *this* case:
 Group a session's evaluations in a `solveit-wa:WeaknessEvaluationSet` with
 `scopedToTechnique`, `evaluatedBy`, and `evaluationDate`.
 
-### 4. Both technique styles interoperate (UCO 1.5.0 readiness)
+### 4. Restate the catalogue entry when a technique is a value
 
-The extension ships a generated catalog
-(`solveit-technique-catalog.ttl`) punning every DFT-* individual as an
-`owl:Class` typed `uco-action:Technique` (ucoProject/UCO PR #676 — the
-same pattern as MITRE ATT&CK in `extensions/attack-technique/`). So an
-action may equivalently be *typed with* the technique:
+`scopedToTechnique` uses the technique as an *object*, and SOLVE-IT's
+`TechniqueShape` then requires exactly one `solveit-core:techniqueID` on
+it. `case_validate` loads the knowledge base as an ontology graph, and
+pySHACL copies only class-level triples (types, `rdfs:subClassOf`,
+labels) of `owl:Class` nodes into the data graph, so a bare IRI fails.
+Do what upstream's own examples do and restate the minimal entry in the
+case graph. `get_solveit_details` returns it as `catalog_entry_jsonld`,
+and builders can call `solveit_index.technique_catalog_entry("DFT-1002")`:
 
 ```json
 {
-  "@id": "kb:verify-hash-action",
-  "@type": ["uco-action:Action", "solveit-data:techniqueDFT-1042"],
-  "uco-core:name": "verify-image-hash"
+  "@id": "solveit-data:techniqueDFT-1002",
+  "@type": ["owl:Class", "solveit-core:Technique"],
+  "rdfs:subClassOf": {"@id": "solveit-core:SolveitInvestigativeAction"},
+  "rdfs:label": {"@value": "DFT-1002: Copy sectors from storage media", "@language": "en"},
+  "solveit-core:techniqueID": "DFT-1002",
+  "solveit-core:techniqueName": "Copy sectors from storage media"
 }
 ```
 
-Use the native style (pattern 1) when you want `appliedMitigation` on the
-same node today; use the metaclass style for forward-compatibility with
-UCO 1.5.0's meta `Technique` class and for graphs that already type
-actions with ATT&CK techniques. The IRIs are identical, so both styles can
-appear in one graph and cross-query.
+Typing an action with the technique (pattern 1) doesn't need this. The
+same metaclass pattern works on a plain `uco-action:Action`
+(`"@type": ["uco-action:Action", "solveit-data:techniqueDFT-1042"]`); the
+technique class makes it a `SolveitInvestigativeAction` under RDFS
+inference. ATT&CK and ATLAS are different vocabularies: they describe the
+adversary, while SOLVE-IT describes the examiner. Add them to the same graph
+only when the evidence shows the adversary's tradecraft
+([cross-ontology composition](cross-ontology-composition.md), principle 6).
 
 ### 5. Validate with the solveit extension
 
@@ -165,10 +186,11 @@ appear in one graph and cross-query.
 validate_graph(path, extensions=["solveit"])
 ```
 
-The manifest pulls in `attack-technique` automatically (`depends_on`) so
-the `uco-action:Technique` metaclass is declared, and loads the knowledge
-base so referenced DFT-*/DFW-*/DFM-* individuals are typed. Strict concept
-coverage passes for both modeling styles.
+The `uco-action:Technique` metaclass comes from UCO 1.5.0, so the extension
+has no dependencies. It loads the knowledge base so referenced
+DFT-*/DFW-*/DFM-* terms are typed, and adds SOLVE-IT's own
+shapes (`solve_it_observable_shapes.ttl`, `solve_it_core_shapes.ttl`,
+`solve_it_analysis_shapes.ttl`).
 
 ## Anti-patterns
 
@@ -178,23 +200,27 @@ coverage passes for both modeling styles.
   that is an upstream SOLVE-IT contribution, not a local IRI.
 - **Asserting `appliedMitigation` for mitigations merely considered.**
   The property documents what was done; rationale text captures the rest.
-- **Duplicating KB metadata into the case graph.** Don't copy technique
-  descriptions/weakness lists onto your action nodes — link the canonical
-  individual; the KB travels with the extension.
+- **Using the deprecated `solveit-core:usedTechnique`.** Type the action
+  with the technique class instead (pattern 1). With the knowledge base
+  loaded it also fails `TechniqueShape`, for the reason in pattern 4.
+- **Duplicating KB metadata into the case graph.** Beyond the minimal
+  catalogue entry in pattern 4, don't copy technique descriptions or
+  weakness lists onto your nodes; the KB travels with the extension.
 - **Using `solveit-core:Technique` as a facet or observable.** Techniques
   describe method, not evidence; evidence stays in UCO observables.
 - **Auto-asserting DFT-* from a product catalog.**
-  `le_tool_solveit_profiles.json` is a suggestion list. Write
-  `usedTechnique` only when the lab report or affidavit establishes the
+  `le_tool_solveit_profiles.json` is a suggestion list. Type an action
+  with a DFT-* class only when the lab report or affidavit establishes the
   method. See [technique-evidence-outcome.md](technique-evidence-outcome.md).
 
 ## Worked example
 
 `examples/solveit/build_laptop_acquisition_solveit.py` builds
-`laptop-acquisition-solveit.jsonld` (12 nodes: investigation, examiner,
-tool, device, image container + bitstream, hash result, native-style
-acquisition action, weakness evaluation + set, metaclass-style
-verification action) and validates it with `extensions=["solveit"]`.
+`laptop-acquisition-solveit.jsonld` (13 nodes: investigation, examiner,
+tool, device, image container + bitstream, hash result, the acquisition
+action typed with DFT-1002, weakness evaluation + set, the restated
+DFT-1002 catalogue entry, and a `uco-action:Action` typed with DFT-1042)
+and validates it with `extensions=["solveit"]`.
 
 ## Related
 

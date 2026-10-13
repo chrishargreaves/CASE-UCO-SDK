@@ -289,7 +289,7 @@ def test_upper_registry_has_pinned_provenance():
     for key, entry in registry["ontologies"].items():
         assert entry["source_url"], key
         assert entry["namespace_prefixes"], key
-        assert entry["classes"] or entry["properties"], key
+        assert entry["classes"] or entry["properties"] or entry["individuals"], key
 
 
 @pytest.mark.skipif(not UPPER_REGISTRY_AVAILABLE, reason="upper ontology registry missing")

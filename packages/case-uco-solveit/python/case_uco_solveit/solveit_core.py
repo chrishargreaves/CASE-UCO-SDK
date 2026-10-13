@@ -14,6 +14,24 @@ class ASTMErrorCategory:
 
 
 @dataclass
+class Citation:
+    """An academic or professional reference cited by a Technique, Weakness or Mitigation. Each citation carries an identifier (DFCite-NNNN), a plain text form, and where available a BibTeX form."""
+
+    CLASS_IRI: str = "https://ontology.solveit-df.org/solveit/core/Citation"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+
+
+@dataclass
 class Mitigation:
     """An action that can be performed to prevent a weakness from occurring or to minimize its impact."""
 
@@ -65,13 +83,17 @@ class Objective:
 
 @dataclass
 class SolveitInvestigativeAction:
-    """A SOLVE-IT aware InvestigativeAction that links an investigative action to the SOLVE-IT technique(s) used (1..n via usedTechnique) and any mitigations applied (0..n via appliedMitigation) during its execution.
+    """A SOLVE-IT aware InvestigativeAction. Since SOLVE-IT 0.2.x the technique performed is stated by typing the action with the catalogue technique class (``solveit-data:techniqueDFT-NNNN``, a ``uco-action:Technique``) rather than via ``usedTechnique``; mitigations applied are linked via appliedMitigation (0..n).
 
     Action-namespace fields carry explicit ``jsonld_key`` metadata so
     serialization emits ``uco-action:*`` / ``case-investigation:*`` keys
     (the metadata-less fallback would wrongly emit ``uco-core:*``).
-    ``used_technique`` / ``applied_mitigation`` accept catalog IRI
-    references, e.g. ``[{"@id": ".../solveit/data/techniqueDFT-1066"}]``.
+    ``applied_mitigation`` accepts catalogue IRI references, e.g.
+    ``[{"@id": ".../solveit/data/mitigationDFM-1001"}]``. Add the technique
+    type with ``graph.add_type(action_id, ".../solveit/data/techniqueDFT-1066")``.
+    ``used_technique`` is kept for backward compatibility only: the property
+    is ``owl:deprecated`` upstream and fails SOLVE-IT's TechniqueShape when
+    the knowledge base is passed as an ontology graph.
     """
 
     CLASS_IRI: str = "https://ontology.solveit-df.org/solveit/core/SolveitInvestigativeAction"
@@ -106,34 +128,9 @@ class SolveitInvestigativeAction:
 
 @dataclass
 class Technique:
-    """A digital forensic technique representing how one might achieve an objective by performing an action. Based on the SOLVE-IT knowledge base."""
+    """A digital forensic technique representing how one might achieve an objective by performing an action. Based on the SOLVE-IT knowledge base. This class is a metaclass: its instances are owl:Class entit"""
 
     CLASS_IRI: str = "https://ontology.solveit-df.org/solveit/core/Technique"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    action_count: Optional[int] = field(default=None)
-    action_status: Optional[str] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    environment: Optional[UcoObject] = field(default=None)
-    error: list[UcoObject] = field(default_factory=list)
-    instrument: list[UcoObject] = field(default_factory=list)
-    location: list[Location] = field(default_factory=list)
-    object: list[UcoObject] = field(default_factory=list)
-    participant: list[UcoObject] = field(default_factory=list)
-    performer: Optional[UcoObject] = field(default=None)
-    result: list[UcoObject] = field(default_factory=list)
-    start_time: Optional[datetime] = field(default=None)
-    subaction: list[Action] = field(default_factory=list)
-    was_informed_by: list[InvestigativeAction] = field(default_factory=list)
 
 
 @dataclass

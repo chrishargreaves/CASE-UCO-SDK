@@ -912,7 +912,7 @@ The original proposal included a `SanctionsDesignationFacet` for modeling sancti
 
 1. **Sanctions are a classification, not a crypto concept** (Sean): A sanction is a classification applied to an entity — it can apply to IP addresses, domain names, organizations, and individuals, not just cryptocurrency addresses. Coupling it to the crypto proposal limits its generality.
 
-2. **Sanctions may belong in CASE, not UCO** (Alex): The act of checking whether an observable is on a sanctions list is investigation-specific. The designating authority, list name, and designation details are contextual to an investigative or compliance workflow, making `case-investigation` the more appropriate namespace.
+2. **Sanctions may belong in CASE, not UCO**: The act of checking whether an observable is on a sanctions list is investigation-specific. The designating authority, list name, and designation details are contextual to an investigative or compliance workflow, making `case-investigation` the more appropriate namespace.
 
 3. **Alignment with `uco-analysis:ArtifactClassification`**: The existing `ArtifactClassification` class provides a pattern for asserting that a classification applies to something. A sanctions designation is structurally similar — it asserts that a government authority has classified an entity under a specific sanctions program. The separate proposal should explore whether `SanctionsDesignationFacet` can subclass or complement `ArtifactClassification`.
 

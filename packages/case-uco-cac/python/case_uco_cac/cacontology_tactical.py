@@ -11,9 +11,6 @@ class ArrestOperation:
     """Law enforcement operation to apprehend and take suspect into custody. Extends investigation:InvestigativeAction for proper CASE ontology integration."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/tactical#ArrestOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[langString] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -26,7 +23,7 @@ class ArrestOperation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -39,6 +36,7 @@ class ArrestOperation:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
+    label: Optional[TypedLiteral] = field(default=None)
     arrest_type: Optional[str] = field(default=None)
     resistance_expected: Optional[bool] = field(default=None)
     target_count: Optional[int] = field(default=None)
@@ -64,12 +62,12 @@ class ArrestReport:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[langString] = field(default=None)
     object: list[UcoObject] = field(default_factory=list)
     exhibit_number: Optional[str] = field(default=None)
     root_exhibit_number: list[str] = field(default_factory=list)
+    label: Optional[TypedLiteral] = field(default=None)
     documents_arrest: Optional[ArrestOperation] = field(default=None)
-    report_date: Optional[date] = field(default=None)
+    report_date: Optional[TypedLiteral] = field(default=None)
 
 
 @dataclass
@@ -77,7 +75,6 @@ class BarricadeSituation:
     """Situation where suspect has barricaded themselves and refuses to surrender. A state/context, not an operation; TacticalOperation may occurInSituation a BarricadeSituation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/tactical#BarricadeSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -85,9 +82,6 @@ class BookingAction:
     """Process of booking a suspect into a correctional facility including fingerprinting, photography, and data entry. Extends investigation:InvestigativeAction for CASE ontology integration."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/tactical#BookingAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[langString] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -100,7 +94,7 @@ class BookingAction:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -113,7 +107,8 @@ class BookingAction:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    booking_date: Optional[date] = field(default=None)
+    label: Optional[TypedLiteral] = field(default=None)
+    booking_date: Optional[TypedLiteral] = field(default=None)
     booking_officer: Optional[str] = field(default=None)
     occurs_at_facility: Optional[CorrectionalFacility] = field(default=None)
 
@@ -202,7 +197,7 @@ class CorrectionalFacility:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: Optional[langString] = field(default=None)
+    label: Optional[TypedLiteral] = field(default=None)
     correctional_facility_name: Optional[str] = field(default=None)
 
 
@@ -211,9 +206,6 @@ class DynamicEntry:
     """Rapid forced entry into a location to apprehend suspects and secure evidence."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/tactical#DynamicEntry"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -226,7 +218,7 @@ class DynamicEntry:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -240,6 +232,7 @@ class DynamicEntry:
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     operation_scope: Optional[str] = field(default=None)
     operation_status: Optional[str] = field(default=None)
     operation_type: Optional[str] = field(default=None)
@@ -255,9 +248,6 @@ class HighRiskArrest:
     """Arrest operation involving suspects who pose significant threat or flight risk."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/tactical#HighRiskArrest"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -270,7 +260,7 @@ class HighRiskArrest:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -284,6 +274,7 @@ class HighRiskArrest:
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     operation_scope: Optional[str] = field(default=None)
     operation_status: Optional[str] = field(default=None)
     operation_type: Optional[str] = field(default=None)
@@ -312,7 +303,7 @@ class ImmigrationHold:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[langString] = field(default=None)
+    label: Optional[TypedLiteral] = field(default=None)
     immigration_hold_reason: Optional[str] = field(default=None)
     immigration_status: Optional[str] = field(default=None)
 
@@ -322,9 +313,6 @@ class InterviewWithoutCounsel:
     """Suspect interview conducted after suspect waives right to legal counsel. Extends investigation:InvestigativeAction."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/tactical#InterviewWithoutCounsel"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[langString] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -337,7 +325,7 @@ class InterviewWithoutCounsel:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -350,6 +338,7 @@ class InterviewWithoutCounsel:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
+    label: Optional[TypedLiteral] = field(default=None)
 
 
 @dataclass
@@ -464,9 +453,6 @@ class SWATOperation:
     """Special Weapons and Tactics team operation for high-risk situations."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/tactical#SWATOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -479,7 +465,7 @@ class SWATOperation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -493,6 +479,7 @@ class SWATOperation:
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     operation_scope: Optional[str] = field(default=None)
     operation_status: Optional[str] = field(default=None)
     operation_type: Optional[str] = field(default=None)
@@ -508,9 +495,6 @@ class SurrenderNegotiation:
     """Attempt to negotiate peaceful surrender of barricaded or resistant suspects."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/tactical#SurrenderNegotiation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -523,7 +507,7 @@ class SurrenderNegotiation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -537,6 +521,7 @@ class SurrenderNegotiation:
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     operation_scope: Optional[str] = field(default=None)
     operation_status: Optional[str] = field(default=None)
     operation_type: Optional[str] = field(default=None)
@@ -638,9 +623,6 @@ class TacticalOperation:
     """Specialized law enforcement operation requiring tactical teams and advanced planning."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/tactical#TacticalOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -653,7 +635,7 @@ class TacticalOperation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -667,6 +649,7 @@ class TacticalOperation:
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     operation_scope: Optional[str] = field(default=None)
     operation_status: Optional[str] = field(default=None)
     operation_type: Optional[str] = field(default=None)
@@ -736,9 +719,6 @@ class TrafficStop:
     """Investigative traffic stop used as part of undercover operation or to apprehend suspect. Extends investigation:InvestigativeAction."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/tactical#TrafficStop"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -751,7 +731,7 @@ class TrafficStop:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)

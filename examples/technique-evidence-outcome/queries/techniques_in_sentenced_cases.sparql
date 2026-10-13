@@ -6,6 +6,7 @@ WHERE {
   ?sentence a legalproc:Sentence ;
             legalproc:sentenceStatus "imposed" ;
             legalproc:outcomeScope "current-case" .
-  ?action solveit-core:usedTechnique ?technique .
+  ?action a solveit-core:SolveitInvestigativeAction , ?technique .
+  FILTER(STRSTARTS(STR(?technique), "https://ontology.solveit-df.org/solveit/data/technique"))
 }
 ORDER BY ?technique

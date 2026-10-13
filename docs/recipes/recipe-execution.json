@@ -154,6 +154,113 @@
       "strict_concepts": true
     },
     {
+      "id": "sosa-vehicle-telemetry",
+      "category": "upper-ontology",
+      "recipe": "docs/recipes/sosa-sensor-observations.md",
+      "builder": "examples/upper-ontology/sosa-qudt/build_vehicle_telemetry.py",
+      "output": "examples/upper-ontology/sosa-qudt/vehicle-telemetry.jsonld",
+      "profiles": [
+        "sosa",
+        "qudt",
+        "prov-o"
+      ],
+      "extensions": null,
+      "strict_concepts": true,
+      "expect_invalid": [
+        {
+          "path": "examples/upper-ontology/sosa-qudt/invalid_qudt2_pattern.jsonld",
+          "expected_constraint": "MinCountConstraintComponent",
+          "expected_failure_code": "http://qudt.org/vocab/unit/KM-PER-HR"
+        },
+        {
+          "path": "examples/upper-ontology/sosa-qudt/invalid_qudt2_pattern.jsonld",
+          "expected_violation": "sdk-sosa:Observation-shape",
+          "expected_failure_code": "http://qudt.org/schema/qudt/unit"
+        }
+      ],
+      "competency_queries": [
+        {
+          "query": "examples/upper-ontology/sosa-qudt/queries/vehicle_speed_timeline.sparql",
+          "expected_bindings": [
+            {
+              "time": "2023-11-22T15:30:00+00:00",
+              "speed": "50",
+              "unit": "http://qudt.org/vocab/unit/KiloM-PER-HR",
+              "source": "http://example.org/kb/telemetry-log-1"
+            },
+            {
+              "time": "2023-11-22T15:32:00+00:00",
+              "speed": "70",
+              "unit": "http://qudt.org/vocab/unit/KiloM-PER-HR",
+              "source": "http://example.org/kb/telemetry-log-1"
+            },
+            {
+              "time": "2023-11-22T15:33:30+00:00",
+              "speed": "30",
+              "unit": "http://qudt.org/vocab/unit/KiloM-PER-HR",
+              "source": "http://example.org/kb/telemetry-log-1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ssn-wearable-health",
+      "category": "upper-ontology",
+      "recipe": "docs/recipes/sosa-sensor-observations.md",
+      "builder": "examples/upper-ontology/sosa-qudt/build_wearable_health.py",
+      "output": "examples/upper-ontology/sosa-qudt/wearable-health.jsonld",
+      "profiles": [
+        "ssn",
+        "qudt",
+        "time",
+        "prov-o"
+      ],
+      "extensions": null,
+      "strict_concepts": true,
+      "competency_queries": [
+        {
+          "query": "examples/upper-ontology/sosa-qudt/queries/heart_rate_with_accuracy.sparql",
+          "expected_bindings": [
+            {
+              "time": "2024-04-30T21:47:12-04:00",
+              "bpm": "142",
+              "unit": "http://qudt.org/vocab/unit/BEAT-PER-MIN",
+              "accuracy": "5",
+              "accuracyUnit": "http://qudt.org/vocab/unit/BEAT-PER-MIN"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "qudt-wallet-valuation",
+      "category": "upper-ontology",
+      "recipe": "docs/recipes/qudt-quantities-and-units.md",
+      "builder": "examples/upper-ontology/sosa-qudt/build_wallet_valuation.py",
+      "output": "examples/upper-ontology/sosa-qudt/wallet-valuation.jsonld",
+      "profiles": [
+        "qudt",
+        "prov-o"
+      ],
+      "extensions": null,
+      "strict_concepts": true,
+      "competency_queries": [
+        {
+          "query": "examples/upper-ontology/sosa-qudt/queries/wallet_valuation_source.sparql",
+          "expected_bindings": [
+            {
+              "usd": "24537.83",
+              "valuedAt": "2024-08-14T16:00:00+00:00",
+              "balance": "0.41250000",
+              "balanceUnit": "http://qudt.org/vocab/unit/CCY_BTC",
+              "rateSource": "http://example.org/kb/rate-source-1"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "cross-ontology-composition",
       "category": "upper-ontology",
       "recipe": "docs/recipes/cross-ontology-composition.md",
@@ -543,7 +650,7 @@
           ]
         },
         {
-          "query": "examples/technique-evidence-outcome/queries/no_used_technique.sparql",
+          "query": "examples/technique-evidence-outcome/queries/no_asserted_technique.sparql",
           "expected_bindings": []
         }
       ]
@@ -555,7 +662,10 @@
       "builder": "examples/caselinker-icac-remodel/build_cybertip_join.py",
       "output": "examples/caselinker-icac-remodel/cybertip-join.jsonld",
       "profiles": [],
-      "extensions": ["cac", "legalproc"],
+      "extensions": [
+        "cac",
+        "legalproc"
+      ],
       "strict_concepts": true,
       "competency_queries": [
         {
@@ -576,7 +686,9 @@
       "builder": "examples/caselinker-icac-remodel/build_share_safe_cvip.py",
       "output": "examples/caselinker-icac-remodel/share-safe-cvip.jsonld",
       "profiles": [],
-      "extensions": ["legalproc"],
+      "extensions": [
+        "legalproc"
+      ],
       "strict_concepts": true,
       "competency_queries": [
         {
@@ -596,7 +708,9 @@
       "builder": "examples/caselinker-icac-remodel/build_legalproc_dual_type.py",
       "output": "examples/caselinker-icac-remodel/legalproc-dual-type.jsonld",
       "profiles": [],
-      "extensions": ["legalproc"],
+      "extensions": [
+        "legalproc"
+      ],
       "strict_concepts": true,
       "expect_invalid": [
         {
@@ -623,7 +737,10 @@
       "builder": "examples/caselinker-icac-remodel/build_commander_clocks.py",
       "output": "examples/caselinker-icac-remodel/commander-clocks.jsonld",
       "profiles": [],
-      "extensions": ["cac", "legalproc"],
+      "extensions": [
+        "cac",
+        "legalproc"
+      ],
       "strict_concepts": true,
       "competency_queries": [
         {
@@ -650,7 +767,9 @@
       "builder": "examples/caselinker-icac-remodel/build_discovery_disclosure.py",
       "output": "examples/caselinker-icac-remodel/discovery-disclosure.jsonld",
       "profiles": [],
-      "extensions": ["legalproc"],
+      "extensions": [
+        "legalproc"
+      ],
       "strict_concepts": true,
       "expect_invalid": [
         {
@@ -677,7 +796,10 @@
       "builder": "examples/caselinker-icac-remodel/pilot/build_pilot.py",
       "output": "examples/caselinker-icac-remodel/pilot/ncmec_2025_356.jsonld",
       "profiles": [],
-      "extensions": ["cac", "legalproc"],
+      "extensions": [
+        "cac",
+        "legalproc"
+      ],
       "strict_concepts": true,
       "support_dirs": [
         "examples/caselinker-icac-remodel/pilot/sources"
@@ -728,7 +850,10 @@
       "builder": "examples/caselinker-icac-remodel/pilot/build_pilot.py",
       "output": "examples/caselinker-icac-remodel/pilot/illinois_ag_2025_001.jsonld",
       "profiles": [],
-      "extensions": ["cac", "legalproc"],
+      "extensions": [
+        "cac",
+        "legalproc"
+      ],
       "strict_concepts": true,
       "support_dirs": [
         "examples/caselinker-icac-remodel/pilot/sources"
@@ -763,7 +888,10 @@
       "builder": "examples/caselinker-icac-remodel/pilot/build_pilot.py",
       "output": "examples/caselinker-icac-remodel/pilot/usss_2017_007.jsonld",
       "profiles": [],
-      "extensions": ["cac", "legalproc"],
+      "extensions": [
+        "cac",
+        "legalproc"
+      ],
       "strict_concepts": true,
       "support_dirs": [
         "examples/caselinker-icac-remodel/pilot/sources"
@@ -815,7 +943,10 @@
       "builder": "examples/caselinker-icac-remodel/pilot/build_pilot.py",
       "output": "examples/caselinker-icac-remodel/pilot/ncmec_2023_609.jsonld",
       "profiles": [],
-      "extensions": ["cac", "legalproc"],
+      "extensions": [
+        "cac",
+        "legalproc"
+      ],
       "strict_concepts": true,
       "support_dirs": [
         "examples/caselinker-icac-remodel/pilot/sources"
@@ -858,7 +989,10 @@
       "builder": "examples/caselinker-icac-remodel/pilot/build_pilot.py",
       "output": "examples/caselinker-icac-remodel/pilot/illinois_ag_2025_023.jsonld",
       "profiles": [],
-      "extensions": ["cac", "legalproc"],
+      "extensions": [
+        "cac",
+        "legalproc"
+      ],
       "strict_concepts": true,
       "support_dirs": [
         "examples/caselinker-icac-remodel/pilot/sources"
@@ -1585,6 +1719,16 @@
       "strict_concepts": true
     },
     {
+      "id": "public-record-capture",
+      "category": "catalog-coverage",
+      "recipe": "docs/recipes/public-record-capture.md",
+      "builder": "examples/public-record-capture/build_capture.py",
+      "output": "examples/public-record-capture/capture.jsonld",
+      "profiles": [],
+      "extensions": [],
+      "strict_concepts": true
+    },
+    {
       "id": "threaded-messaging",
       "category": "catalog-coverage",
       "recipe": "docs/recipes/threaded-messaging.md",
@@ -1612,6 +1756,30 @@
       "output": "examples/recipes/weapons-drug-evidence.jsonld",
       "profiles": [],
       "extensions": [],
+      "strict_concepts": true
+    },
+    {
+      "id": "ai-system-attacks",
+      "category": "adversary-techniques",
+      "recipe": "docs/recipes/ai-system-attacks.md",
+      "builder": "examples/ai-system-attacks/build_ai_system_attack.py",
+      "output": "examples/ai-system-attacks/ai-system-attack.jsonld",
+      "profiles": [],
+      "extensions": [
+        "atlas-technique"
+      ],
+      "strict_concepts": true
+    },
+    {
+      "id": "otics-scada-intrusion",
+      "category": "adversary-techniques",
+      "recipe": "docs/recipes/otics-scada-intrusion.md",
+      "builder": "examples/otics/build_otics_scada_intrusion.py",
+      "output": "examples/otics/otics-scada-intrusion.jsonld",
+      "profiles": [],
+      "extensions": [
+        "attack-technique"
+      ],
       "strict_concepts": true
     }
   ]
