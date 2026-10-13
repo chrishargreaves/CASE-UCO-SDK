@@ -614,7 +614,7 @@
     "per_source_mapping": "guide_mapping(evidence_source)",
     "validation": "validate_graph(graph_path, extensions=[...])"
   },
-  "source_path": "/home/cory/CASE-UCO-Libraries/examples/scenarios/operation-phantom-gate.md",
+  "source_path": "examples/scenarios/operation-phantom-gate.md",
   "extraction_quality": {
     "noisy_extraction": true,
     "noise_marker_hits": 0,

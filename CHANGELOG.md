@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.31.1] - 2026-10-12
+
+Example graphs no longer carry local developer paths.
+
+- `examples/receipt-image-ocr-example.jsonld`: the receipt image's
+  `fileName` and `filePath` are neutral (`receipt_example2.png`,
+  `images/receipt_example2.png`). The hash and size are unchanged.
+- The ChatLoop scenario builder records repo-relative `filePath` values
+  and states CASE/UCO 1.5.0. The regenerated graph passes
+  `case_validate --built-version case-1.5.0`.
+- `examples/scenarios/mcp_outputs/route_investigation_content.json`:
+  `source_path` is repo-relative.
+
+Package versions bumped to **1.31.1**.
+
 ## [1.31.0] - 2026-10-12
 
 Completes MITRE ATT&CK adoption (v19.2: Enterprise, Mobile and ICS) and
@@ -3126,7 +3141,8 @@ digital forensics, cyber-investigation, and cyber-observable data.
 - GitHub Actions workflows: CI, CodeQL, dependency review, release
 - Dependabot configuration for automated dependency updates
 
-[Unreleased]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.31.0...HEAD
+[Unreleased]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.31.1...HEAD
+[1.31.1]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.31.0...v1.31.1
 [1.31.0]: https://github.com/vulnmaster/CASE-UCO-SDK/releases/tag/v1.31.0
 [1.30.0]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.29.0...v1.30.0
 [1.29.0]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.28.0...v1.29.0

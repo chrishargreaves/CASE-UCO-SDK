@@ -49,6 +49,7 @@ from case_uco.uco.types import Hash
 
 TZ = ZoneInfo("America/New_York")
 DIR = Path(__file__).resolve().parent
+REPO_ROOT = DIR.parent.parent
 SOURCE_PATH = DIR / "chatloop-dm-ritchie-highway-source.md"
 OUT_PATH = DIR / "chatloop-dm-ritchie-highway.jsonld"
 VALIDATION_PATH = DIR / "chatloop-dm-ritchie-highway.validation.txt"
@@ -276,7 +277,7 @@ def build() -> Path:
         tool_type="CASE/UCO graph serialization",
         description=[
             f"Built with case-uco {CASE_UCO_VERSION}; validate with "
-            "case_validate --built-version case-1.5.0 (CASE 1.4.0 / UCO 1.4.0)."
+            "case_validate --built-version case-1.5.0 (CASE 1.5.0 / UCO 1.5.0)."
         ],
     )
 
@@ -284,7 +285,7 @@ def build() -> Path:
     graph.add(source_hash, id=kid("Hash", "source-transcript"))
     source_file_facet = FileFacet(
         file_name=[SOURCE_PATH.name],
-        file_path=[str(SOURCE_PATH)],
+        file_path=[SOURCE_PATH.relative_to(REPO_ROOT).as_posix()],
         extension="md",
         size_in_bytes=len(source_bytes),
         is_directory=[False],
@@ -704,7 +705,7 @@ def build() -> Path:
     # embedding the graph hash inside the graph is circular).
     out_file_facet = FileFacet(
         file_name=[OUT_PATH.name],
-        file_path=[str(OUT_PATH)],
+        file_path=[OUT_PATH.relative_to(REPO_ROOT).as_posix()],
         extension="jsonld",
         is_directory=[False],
     )
@@ -765,7 +766,7 @@ def build() -> Path:
         description=[
             "Fictional ChatLoop direct-message transcript (Tier T0). All persons, "
             "accounts, locations, and events are synthetic.",
-            f"Builder: case-uco {CASE_UCO_VERSION}; CASE/UCO 1.4.0 validation target.",
+            f"Builder: case-uco {CASE_UCO_VERSION}; CASE/UCO 1.5.0 validation target.",
         ],
         tag=["synthetic", "tier-t0"],
         focus=["messaging", "juvenile shoplifting discussion (fictional)"],
