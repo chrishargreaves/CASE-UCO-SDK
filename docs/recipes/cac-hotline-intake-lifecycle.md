@@ -63,3 +63,4 @@ make validate-extension EXT=cac DATA=hotline-intake.jsonld
 
 - [cybertip-ncmec-workflow.md](cybertip-ncmec-workflow.md)
 - [cac-victim-rescue-extraction.md](cac-victim-rescue-extraction.md)
+- [resource-catalog.md](resource-catalog.md) — hotline *directories* and desk references, which list hotlines rather than report to them

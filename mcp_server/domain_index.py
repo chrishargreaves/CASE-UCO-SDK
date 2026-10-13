@@ -1217,6 +1217,12 @@ RECIPE_INDEX: list[dict[str, str]] = [
         "file": "docs/recipes/cac-hotline-intake-lifecycle.md",
     },
     {
+        "title": "Resource Catalogs and Desk References",
+        "description": "Model a quick-reference guide, resource directory, or training catalog as the document plus the organizations, tools, and material it lists, without case nodes.",
+        "keywords": "resource catalog desk reference quick reference guide resource guide resource list directory starter kit bookmark training catalog training directory hotline directory educational resource training institution hotline organization investigator resources",
+        "file": "docs/recipes/resource-catalog.md",
+    },
+    {
         "title": "CSAM Forensic Provenance and Victim Identification",
         "description": "Model CSAM acquisition, chain of custody, hashing, correlation, and victim identification.",
         "keywords": "csam forensic provenance photodna hash chain of custody victim identification cac ontology crimes against children purchasing operation csam purchasing",

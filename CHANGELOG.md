@@ -7,6 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.31.2] - 2026-10-13
+
+Routing recognizes resource catalogs, and `case-uco-cac` ships typed Python
+classes that serialize with CAC prefixes.
+
+### Added
+
+- Document-genre gate in `route_investigation_content` and
+  `route_cac_content`. A quick-reference
+  guide, resource directory, or training document (task headers, access
+  badges, dense resource links, and no case artifacts such as docket numbers,
+  hashes, IP addresses, or charging language) returns `document_genre` and
+  leads with `docs/recipes/resource-catalog.md`. The topical families move to
+  `topic_families` with their case recipes listed as deferred; case evidence
+  routes as before, and the held-out routing evaluation is unchanged.
+- `docs/recipes/resource-catalog.md`: model the catalog document, one
+  `uco-core:Grouping` per section, and the listed organizations, tools, and
+  material, with no case nodes. The builder
+  `examples/recipes/build_resource_catalog.py` reads a synthetic source text
+  and writes `examples/recipes/resource-catalog.jsonld` (`Conforms: True`
+  with `extensions=['cac:catalog']`).
+- `cac:catalog` validation profile (`ontology/cac/validation-subset-catalog.json`):
+  the CAC core spine plus the hotline, training, and prevention modules.
+- `case-uco-cac` Python classes are typed.
+  Each class subclasses its nearest CASE/UCO class (`TrainingInstitution` is a
+  `uco-identity:Organization`, `EducationalResource` a `uco-core:UcoObject`),
+  adds only the fields its base lacks, and carries field metadata with
+  CAC-prefixed JSON-LD keys and required flags. Root classes have a `label`
+  field (`rdfs:label`), which the CAC spine shapes require.
+  `case_uco_cac.register()` and the `case_uco.class_registry` entry point let
+  `CASEGraph.from_jsonld` rehydrate CAC nodes, and each CAC registry entry
+  names its `python_class`.
+
+### Fixed
+
+- `graph.create(VictimSupport, service_type=...)` wrote
+  `uco-core:serviceType`; it now writes
+  `cacontology-victim-impact:serviceType` and adds the CAC prefix to the
+  graph context. `CASEGraph` merges the `JSONLD_CONTEXT` that extension
+  classes declare.
+- The CAC README's Python example imported modules that do not exist.
+- `recipe-execution.json` accepts named validation subsets
+  (`cac:missing-child`, `cac:catalog`).
+- The class registries listed the trajectories `PhaseAssertion` and
+  `StateMachineModel` under `UcoObject`. They now name the parents the
+  ontology declares (`uco-core:Assertion`, `uco-analysis:AnalyticResult`),
+  and `PhaseAssertion` lists the inherited `statement` and required
+  `atInterval` properties.
+
+Package versions bumped to **1.31.2**.
+
 ## [1.31.1] - 2026-10-12
 
 Example graphs no longer carry local developer paths.
@@ -3141,7 +3192,8 @@ digital forensics, cyber-investigation, and cyber-observable data.
 - GitHub Actions workflows: CI, CodeQL, dependency review, release
 - Dependabot configuration for automated dependency updates
 
-[Unreleased]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.31.1...HEAD
+[Unreleased]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.31.2...HEAD
+[1.31.2]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.31.1...v1.31.2
 [1.31.1]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.31.0...v1.31.1
 [1.31.0]: https://github.com/vulnmaster/CASE-UCO-SDK/releases/tag/v1.31.0
 [1.30.0]: https://github.com/vulnmaster/CASE-UCO-SDK/compare/v1.29.0...v1.30.0

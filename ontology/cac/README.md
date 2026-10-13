@@ -26,13 +26,24 @@ pip install case-uco-cac
 
 ```python
 from case_uco import CASEGraph
-from case_uco_cac import core, grooming, forensics
+from case_uco_cac.cacontology_training import TrainingInstitution
+from case_uco_cac.cacontology_victim_impact import VictimSupport
 
-graph = CASEGraph(extra_context={
-    "cac-core": "https://cacontology.projectvic.org/core#",
-    "cacontology": "https://cacontology.projectvic.org#",
-})
+graph = CASEGraph()
+graph.create(TrainingInstitution, name="Regional Training Center", label="Regional Training Center")
+support = graph.create(VictimSupport, label="Family support referral", service_type="family_support")
+# Spine-only gUFO terms that have no generated field use set_property:
+graph.set_property(graph.get_id(support), "http://purl.org/nemo/gufo#hasBeginPointInXSDDateTimeStamp",
+                   {"@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp", "@value": "2026-10-01T09:00:00Z"})
 ```
+
+Generated classes subclass their nearest CASE/UCO class (`TrainingInstitution`
+is a `uco-identity:Organization`), carry CAC-prefixed JSON-LD keys, and add their
+prefixes to the graph context on `create`. Every root class has a `label` field
+(`rdfs:label`), which the CAC spine shapes require. Call `case_uco_cac.register()`
+(or `case_uco.graph.discover_extension_class_providers()`) before
+`CASEGraph.from_jsonld` to rehydrate CAC nodes as typed objects. Each registry
+entry's `python_class` names the class to import.
 
 ### MCP Server
 

@@ -1,335 +1,301 @@
-"""CAC Ontology - Crimes Against Children — cacontology-sextortion module."""
+"""CAC Ontology - Crimes Against Children — cacontology_sextortion module (generated; do not edit)."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Optional
+from datetime import datetime
+from typing import ClassVar, Optional, Union
+
+import case_uco.uco.observable as _uco_observable
+from case_uco.typed_literal import TypedLiteral
+from case_uco_cac import cac_core as _cac_core
+from case_uco_cac import cacontology as _cacontology
+from case_uco_cac._context import NAMESPACES
+
+__all__ = ["AdditionalContentDemand", "AgeDeceptionSextortion", "AgeDeceptionTactic", "CoercionCycle", "ComplianceResponse", "ContactListThreat", "ConversationReconstruction", "DemandMessage", "DeviceForensicAnalysis", "DisappearingMessageFeature", "DoxxingThreat", "EmotionalManipulation", "ExtortionDemand", "ExtortionPhase", "FalseProfileCreation", "GiftCardDemand", "IdentityImpersonation", "ImageAcquisitionPhase", "ImageLeakThreat", "ImageSharingFeature", "ImageSolicitationMessage", "InitialDeceptionPhase", "InstantMessagingPlatform", "InstantMessagingSextortion", "ManipulationTactic", "MonetaryDemand", "PeerImpersonation", "PersonalMeetingDemand", "PrivateMessagingFeature", "ProgressiveEscalation", "PropertyDestructionThreat", "RefusalResponse", "ReportingResponse", "SadisticSextortion", "ScreenshotThreat", "SelfHarmThreat", "SextortionCommunication", "SextortionIncident", "SextortionInvestigation", "SextortionProgression", "SexualSolicitationPhase", "SexuallyExplicitConversation", "SharingThreat", "SilentVictimization", "SocialMediaSextortion", "SocialMediaSharingThreat", "SwattingThreat", "ThreatMechanism", "ThreatMessage", "TrustBuildingPhase", "VictimIdentification", "VictimIsolation", "VictimResponse", "ViolenceThreat"]
 
 
 @dataclass
-class AdditionalContentDemand:
-    """Demand for more graphic content or additional intimate images."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#AdditionalContentDemand"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
-
-
-@dataclass
-class AgeDeceptionSextortion:
-    """Sextortion incident involving offender lying about their age when interacting with children (e.g., posing as juvenile)."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#AgeDeceptionSextortion"
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    incident_duration: Optional[float] = field(default=None)
-    incident_type: Optional[str] = field(default=None)
-    severity_level: Optional[str] = field(default=None)
-    victim_count: Optional[int] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
-
-
-@dataclass
-class AgeDeceptionTactic:
-    """Tactic of lying about age when interacting with children (e.g., adult posing as juvenile)."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#AgeDeceptionTactic"
-
-
-@dataclass
-class CoercionCycle:
-    """Self-sustaining sextortion loop in which retained imagery becomes perpetual leverage: the offender redeploys the same retained material to demand new content, extending leverage further without acquir"""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#CoercionCycle"
-    coercion_cycle_demand_type: Optional[str] = field(default=None)
-    cycles_between: list[Phase] = field(default_factory=list)
-    sustained_by: list[Artifact] = field(default_factory=list)
-    termination_condition: Optional[str] = field(default=None)
-
-
-@dataclass
-class ComplianceResponse:
-    """Victim complies with initial requests before recognizing threat."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ComplianceResponse"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
-    emotional_impact: Optional[str] = field(default=None)
-    response_speed: Optional[str] = field(default=None)
-    response_type: Optional[str] = field(default=None)
-    compliance_duration: Optional[float] = field(default=None)
-    compliance_level: Optional[str] = field(default=None)
-
-
-@dataclass
-class ContactListThreat:
-    """Threat to send intimate images to victim's contact list."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ContactListThreat"
-
-
-@dataclass
-class ConversationReconstruction:
-    """Reconstruction of conversation patterns and progression timelines."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ConversationReconstruction"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    action_count: Optional[int] = field(default=None)
-    action_status: Optional[str] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    environment: Optional[UcoObject] = field(default=None)
-    error: list[UcoObject] = field(default_factory=list)
-    instrument: list[UcoObject] = field(default_factory=list)
-    location: list[Location] = field(default_factory=list)
-    object: list[UcoObject] = field(default_factory=list)
-    participant: list[UcoObject] = field(default_factory=list)
-    performer: Optional[UcoObject] = field(default=None)
-    result: list[UcoObject] = field(default_factory=list)
-    start_time: Optional[datetime] = field(default=None)
-    subaction: list[Action] = field(default_factory=list)
-    was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-
-
-@dataclass
-class DemandMessage:
-    """Message making specific demands backed by threats."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#DemandMessage"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
-
-
-@dataclass
-class DeviceForensicAnalysis:
-    """Forensic examination of seized devices for sextortion evidence."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#DeviceForensicAnalysis"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    action_count: Optional[int] = field(default=None)
-    action_status: Optional[str] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    environment: Optional[UcoObject] = field(default=None)
-    error: list[UcoObject] = field(default_factory=list)
-    instrument: list[UcoObject] = field(default_factory=list)
-    location: list[Location] = field(default_factory=list)
-    object: list[UcoObject] = field(default_factory=list)
-    participant: list[UcoObject] = field(default_factory=list)
-    performer: Optional[UcoObject] = field(default=None)
-    result: list[UcoObject] = field(default_factory=list)
-    start_time: Optional[datetime] = field(default=None)
-    subaction: list[Action] = field(default_factory=list)
-    was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-
-
-@dataclass
-class DisappearingMessageFeature:
-    """Platform feature where messages automatically delete after viewing."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#DisappearingMessageFeature"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
-
-
-@dataclass
-class DoxxingThreat:
-    """Threat mechanism involving doxxing (threatened release of identifying/personal information) to intimidate or coerce a victim."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#DoxxingThreat"
-    threat_type: Optional[str] = field(default=None)
-
-
-@dataclass
-class EmotionalManipulation:
-    """Use of emotional tactics (false love, friendship, etc.) to control victim."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#EmotionalManipulation"
-
-
-@dataclass
-class ExtortionDemand:
+class ExtortionDemand(_uco_observable.ObservableObject):
     """Specific demand made by sextortion offender using threat leverage."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ExtortionDemand"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class ExtortionPhase:
+class AdditionalContentDemand(ExtortionDemand):
+    """Demand for more graphic content or additional intimate images."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#AdditionalContentDemand"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class SextortionIncident(_cacontology.Sextortion):
+    """Online blackmail incident where offender tricks or coerces someone into sending sexual images, then threatens to share unless demands are met. May involve demands for money, gift cards, or more graphi"""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SextortionIncident"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    comment: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:comment', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    incident_duration: Optional[float] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:incidentDuration', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#decimal', 'alternate_range_iris': []})
+    incident_type: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:incidentType', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    severity_level: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:severityLevel', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    victim_count: Optional[int] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:victimCount', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#nonNegativeInteger', 'alternate_range_iris': []})
+    end_time: Optional[datetime] = field(default=None, metadata={'jsonld_key': 'uco-core:endTime', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': []})
+    start_time: Optional[Union[str, TypedLiteral]] = field(default=None, metadata={'jsonld_key': 'uco-core:startTime', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': [], 'literal_datatype': True})
+
+
+@dataclass
+class AgeDeceptionSextortion(SextortionIncident):
+    """Sextortion incident involving offender lying about their age when interacting with children (e.g., posing as juvenile)."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#AgeDeceptionSextortion"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class AgeDeceptionTactic(_cac_core.ExploitationEvent):
+    """Tactic of lying about age when interacting with children (e.g., adult posing as juvenile)."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#AgeDeceptionTactic"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class CoercionCycle(_cac_core.ExploitationEvent):
+    """Self-sustaining sextortion loop in which retained imagery becomes perpetual leverage: the offender redeploys the same retained material to demand new content, extending leverage further without acquir"""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#CoercionCycle"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    coercion_cycle_demand_type: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:coercionCycleDemandType', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    cycles_between: list[Phase] = field(default_factory=list, metadata={'jsonld_key': 'cacontology-sextortion:cyclesBetween', 'required': True, 'cardinality': 'one_or_more', 'range_iri': 'https://cacontology.projectvic.org/core#Phase', 'alternate_range_iris': []})
+    sustained_by: list[Artifact] = field(default_factory=list, metadata={'jsonld_key': 'cacontology-sextortion:sustainedBy', 'required': True, 'cardinality': 'one_or_more', 'range_iri': 'https://cacontology.projectvic.org/core#Artifact', 'alternate_range_iris': []})
+    termination_condition: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:terminationCondition', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+
+
+@dataclass
+class VictimResponse(_uco_observable.ObservableObject):
+    """Pattern of victim response to sextortion attempts."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#VictimResponse"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    emotional_impact: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:emotionalImpact', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    response_speed: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:responseSpeed', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    response_type: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:responseType', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+
+
+@dataclass
+class ComplianceResponse(VictimResponse):
+    """Victim complies with initial requests before recognizing threat."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ComplianceResponse"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    compliance_duration: Optional[float] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:complianceDuration', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#decimal', 'alternate_range_iris': []})
+    compliance_level: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:complianceLevel', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+
+
+@dataclass
+class ThreatMechanism(_cac_core.ExploitationEvent):
+    """Specific method of threatening or coercing victims using obtained material."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ThreatMechanism"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class SharingThreat(ThreatMechanism):
+    """Threat to share intimate images with contacts, family, or publicly."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SharingThreat"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class ContactListThreat(SharingThreat):
+    """Threat to send intimate images to victim's contact list."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ContactListThreat"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class SextortionInvestigation(_cac_core.InvestigativeAction):
+    """Investigation specifically focused on sextortion incidents."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SextortionInvestigation"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class ConversationReconstruction(SextortionInvestigation):
+    """Reconstruction of conversation patterns and progression timelines."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ConversationReconstruction"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class SextortionCommunication(_uco_observable.Message):
+    """Communication patterns specific to sextortion incidents."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SextortionCommunication"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+
+
+@dataclass
+class DemandMessage(SextortionCommunication):
+    """Message making specific demands backed by threats."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#DemandMessage"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class DeviceForensicAnalysis(SextortionInvestigation):
+    """Forensic examination of seized devices for sextortion evidence."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#DeviceForensicAnalysis"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class DisappearingMessageFeature(_uco_observable.ObservableObject):
+    """Platform feature where messages automatically delete after viewing."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#DisappearingMessageFeature"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+
+
+@dataclass
+class DoxxingThreat(ThreatMechanism):
+    """Threat mechanism involving doxxing (threatened release of identifying/personal information) to intimidate or coerce a victim."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#DoxxingThreat"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    threat_type: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:threatType', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+
+
+@dataclass
+class ManipulationTactic(_cac_core.ExploitationEvent):
+    """Psychological manipulation technique used to control and exploit victims."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ManipulationTactic"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class EmotionalManipulation(ManipulationTactic):
+    """Use of emotional tactics (false love, friendship, etc.) to control victim."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#EmotionalManipulation"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class ExtortionPhase(_cac_core.Phase):
     """Final phase involving threats and blackmail using obtained images."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ExtortionPhase"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class FalseProfileCreation:
-    """Creating fake profiles on platforms with false age and personal information."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#FalseProfileCreation"
-
-
-@dataclass
-class GiftCardDemand:
-    """Demand for gift cards as form of payment."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#GiftCardDemand"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
-
-
-@dataclass
-class IdentityImpersonation:
+class IdentityImpersonation(AgeDeceptionTactic):
     """Creating false identity or persona to deceive victims."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#IdentityImpersonation"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class ImageAcquisitionPhase:
+class FalseProfileCreation(IdentityImpersonation):
+    """Creating fake profiles on platforms with false age and personal information."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#FalseProfileCreation"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class GiftCardDemand(ExtortionDemand):
+    """Demand for gift cards as form of payment."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#GiftCardDemand"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class ImageAcquisitionPhase(_cac_core.Phase):
     """Phase where intimate images are obtained from victims."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ImageAcquisitionPhase"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class ImageLeakThreat:
+class ImageLeakThreat(ThreatMechanism):
     """Threat mechanism involving threatened release of the victim's sexual imagery to family, friends, school, or the public to compel compliance (Issue #36). Provides typed coercion semantics beyond boolea"""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ImageLeakThreat"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class ImageSharingFeature:
+class ImageSharingFeature(_uco_observable.ObservableObject):
     """Platform feature enabling image sharing in private conversations."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ImageSharingFeature"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class ImageSolicitationMessage:
+class ImageSolicitationMessage(SextortionCommunication):
     """Message requesting intimate images from victim."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ImageSolicitationMessage"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class InitialDeceptionPhase:
+class InitialDeceptionPhase(_cac_core.Phase):
     """First phase involving age deception and false identity establishment."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#InitialDeceptionPhase"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
@@ -337,458 +303,236 @@ class InstantMessagingPlatform:
     """Digital platform used for instant messaging in sextortion incidents."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#InstantMessagingPlatform"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class InstantMessagingSextortion:
+class InstantMessagingSextortion(SextortionIncident):
     """Sextortion conducted through instant messaging platforms with direct private communication."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#InstantMessagingSextortion"
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    incident_duration: Optional[float] = field(default=None)
-    incident_type: Optional[str] = field(default=None)
-    severity_level: Optional[str] = field(default=None)
-    victim_count: Optional[int] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class ManipulationTactic:
-    """Psychological manipulation technique used to control and exploit victims."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ManipulationTactic"
-
-
-@dataclass
-class MonetaryDemand:
+class MonetaryDemand(ExtortionDemand):
     """Demand for money or financial payment."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#MonetaryDemand"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class PeerImpersonation:
+class PeerImpersonation(IdentityImpersonation):
     """Posing as age-appropriate peer to gain victim trust."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#PeerImpersonation"
-    impersonation_method: Optional[str] = field(default=None)
-    target_age_group: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    impersonation_method: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:impersonationMethod', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    target_age_group: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:targetAgeGroup', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class PersonalMeetingDemand:
+class PersonalMeetingDemand(ExtortionDemand):
     """Demand for in-person meeting or physical contact."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#PersonalMeetingDemand"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class PrivateMessagingFeature:
+class PrivateMessagingFeature(_uco_observable.ObservableObject):
     """Platform feature enabling private direct communication."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#PrivateMessagingFeature"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class ProgressiveEscalation:
+class ProgressiveEscalation(ManipulationTactic):
     """Gradual increase in sexual content and requests to avoid triggering victim resistance."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ProgressiveEscalation"
-    escalation_stages: Optional[int] = field(default=None)
-    stage_progression: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    escalation_stages: Optional[int] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:escalationStages', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#nonNegativeInteger', 'alternate_range_iris': []})
+    stage_progression: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:stageProgression', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class PropertyDestructionThreat:
+class PropertyDestructionThreat(ThreatMechanism):
     """Threat mechanism involving destruction of property to compel compliance (e.g., 'destruction' threats in sadistic sextortion framing)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#PropertyDestructionThreat"
-    threat_type: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    threat_type: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:threatType', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class RefusalResponse:
+class RefusalResponse(VictimResponse):
     """Victim refuses demands triggering threat escalation (as in WA case)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#RefusalResponse"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
-    emotional_impact: Optional[str] = field(default=None)
-    response_speed: Optional[str] = field(default=None)
-    response_type: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class ReportingResponse:
+class ReportingResponse(VictimResponse):
     """Victim reports incident to authorities or trusted adults."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ReportingResponse"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
-    emotional_impact: Optional[str] = field(default=None)
-    response_speed: Optional[str] = field(default=None)
-    response_type: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SadisticSextortion:
+class SadisticSextortion(SextortionIncident):
     """Sextortion incident in which the coercive leverage includes threats compelling suffering, submission, or harm (e.g., violence, coerced self-harm, or destruction), often coordinated through organized n"""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SadisticSextortion"
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    incident_duration: Optional[float] = field(default=None)
-    incident_type: Optional[str] = field(default=None)
-    severity_level: Optional[str] = field(default=None)
-    victim_count: Optional[int] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
-    employs_threat: list[ThreatMechanism] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    employs_threat: list[ThreatMechanism] = field(default_factory=list, metadata={'jsonld_key': 'cacontology-sextortion:employsThreat', 'required': True, 'cardinality': 'one_or_more', 'range_iri': 'https://cacontology.projectvic.org/sextortion#ThreatMechanism', 'alternate_range_iris': []})
 
 
 @dataclass
-class ScreenshotThreat:
+class ScreenshotThreat(ThreatMechanism):
     """Threat to screenshot images when victim refuses demands (specific to WA case)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ScreenshotThreat"
-    screenshot_count: Optional[int] = field(default=None)
-    screenshot_evidence: Optional[bool] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    screenshot_count: Optional[int] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:screenshotCount', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#nonNegativeInteger', 'alternate_range_iris': []})
+    screenshot_evidence: Optional[bool] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:screenshotEvidence', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#boolean', 'alternate_range_iris': []})
 
 
 @dataclass
-class SelfHarmThreat:
+class SelfHarmThreat(ThreatMechanism):
     """Threat mechanism involving threats that compel or pressure the victim to engage in self-harm as a condition of compliance."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SelfHarmThreat"
-    threat_type: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    threat_type: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:threatType', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class SextortionCommunication:
-    """Communication patterns specific to sextortion incidents."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SextortionCommunication"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
-
-
-@dataclass
-class SextortionIncident:
-    """Online blackmail incident where offender tricks or coerces someone into sending sexual images, then threatens to share unless demands are met. May involve demands for money, gift cards, or more graphi"""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SextortionIncident"
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    incident_duration: Optional[float] = field(default=None)
-    incident_type: Optional[str] = field(default=None)
-    severity_level: Optional[str] = field(default=None)
-    victim_count: Optional[int] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
-
-
-@dataclass
-class SextortionInvestigation:
-    """Investigation specifically focused on sextortion incidents."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SextortionInvestigation"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    action_count: Optional[int] = field(default=None)
-    action_status: Optional[str] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    environment: Optional[UcoObject] = field(default=None)
-    error: list[UcoObject] = field(default_factory=list)
-    instrument: list[UcoObject] = field(default_factory=list)
-    location: list[Location] = field(default_factory=list)
-    object: list[UcoObject] = field(default_factory=list)
-    participant: list[UcoObject] = field(default_factory=list)
-    performer: Optional[UcoObject] = field(default=None)
-    result: list[UcoObject] = field(default_factory=list)
-    start_time: Optional[datetime] = field(default=None)
-    subaction: list[Action] = field(default_factory=list)
-    was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-
-
-@dataclass
-class SextortionProgression:
+class SextortionProgression(_cac_core.ExploitationEvent):
     """Sequential phases of sextortion from initial contact through exploitation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SextortionProgression"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SexualSolicitationPhase:
+class SexualSolicitationPhase(_cac_core.Phase):
     """Phase involving sexually explicit conversations and image solicitation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SexualSolicitationPhase"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SexuallyExplicitConversation:
+class SexuallyExplicitConversation(SextortionCommunication):
     """Conversation containing sexually explicit content directed at children."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SexuallyExplicitConversation"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SharingThreat:
-    """Threat to share intimate images with contacts, family, or publicly."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SharingThreat"
-
-
-@dataclass
-class SilentVictimization:
+class SilentVictimization(VictimResponse):
     """Victim does not report due to shame, fear, or manipulation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SilentVictimization"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
-    emotional_impact: Optional[str] = field(default=None)
-    response_speed: Optional[str] = field(default=None)
-    response_type: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SocialMediaSextortion:
+class SocialMediaSextortion(SextortionIncident):
     """Sextortion conducted through social media platforms and networks."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SocialMediaSextortion"
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    incident_duration: Optional[float] = field(default=None)
-    incident_type: Optional[str] = field(default=None)
-    severity_level: Optional[str] = field(default=None)
-    victim_count: Optional[int] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SocialMediaSharingThreat:
+class SocialMediaSharingThreat(SharingThreat):
     """Threat to post intimate images on social media platforms."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SocialMediaSharingThreat"
-    contact_list_access: Optional[bool] = field(default=None)
-    target_platforms: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    contact_list_access: Optional[bool] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:contactListAccess', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#boolean', 'alternate_range_iris': []})
+    target_platforms: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:targetPlatforms', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class SwattingThreat:
+class SwattingThreat(ThreatMechanism):
     """Threat mechanism involving swatting (threatened or induced false emergency report leading to armed law enforcement response) to intimidate or coerce a victim."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#SwattingThreat"
-    threat_type: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    threat_type: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:threatType', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class ThreatMechanism:
-    """Specific method of threatening or coercing victims using obtained material."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ThreatMechanism"
-
-
-@dataclass
-class ThreatMessage:
+class ThreatMessage(SextortionCommunication):
     """Message containing explicit threats about sharing images."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ThreatMessage"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class TrustBuildingPhase:
+class TrustBuildingPhase(_cac_core.ConditioningPhase):
     """Phase focused on building trust and rapport with victim."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#TrustBuildingPhase"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class VictimIdentification:
+class VictimIdentification(SextortionInvestigation):
     """Process of identifying and locating sextortion victims."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#VictimIdentification"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    action_count: Optional[int] = field(default=None)
-    action_status: Optional[str] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    environment: Optional[UcoObject] = field(default=None)
-    error: list[UcoObject] = field(default_factory=list)
-    instrument: list[UcoObject] = field(default_factory=list)
-    location: list[Location] = field(default_factory=list)
-    object: list[UcoObject] = field(default_factory=list)
-    participant: list[UcoObject] = field(default_factory=list)
-    performer: Optional[UcoObject] = field(default=None)
-    result: list[UcoObject] = field(default_factory=list)
-    start_time: Optional[datetime] = field(default=None)
-    subaction: list[Action] = field(default_factory=list)
-    was_informed_by: list[InvestigativeAction] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class VictimIsolation:
+class VictimIsolation(ManipulationTactic):
     """Tactics to isolate victim from support systems and reporting mechanisms."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#VictimIsolation"
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class VictimResponse:
-    """Pattern of victim response to sextortion attempts."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#VictimResponse"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
-    emotional_impact: Optional[str] = field(default=None)
-    response_speed: Optional[str] = field(default=None)
-    response_type: Optional[str] = field(default=None)
-
-
-@dataclass
-class ViolenceThreat:
+class ViolenceThreat(ThreatMechanism):
     """Threat mechanism involving threatened physical violence to compel compliance."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sextortion#ViolenceThreat"
-    threat_type: Optional[str] = field(default=None)
-
+    NAMESPACE_PREFIX: str = "cacontology-sextortion"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    threat_type: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-sextortion:threatType', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})

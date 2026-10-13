@@ -5,7 +5,7 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | Metric | Count |
 |--------|-------|
 | Classes | 2961 |
-| Direct properties | 2544 |
+| Direct properties | 2545 |
 | Modules | 84 |
 | Vocabulary types | 54 |
 
@@ -52746,7 +52746,7 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 
 *An OBSERVED assertion that a subject occupied a traj:State during an owl-time interval, derived from evidence (prov:wasDerivedFrom) and carrying a uco-core:ConfidenceFacet via uco-core:hasFacet. Must never be used for inferred model outputs — those are traj:StateMachineModel / traj:TransitionEstimate.*
 
-**Parents:** UcoObject | **IRI:** `http://example.org/ontology/trajectories/PhaseAssertion`
+**Parents:** Assertion | **IRI:** `http://example.org/ontology/trajectories/PhaseAssertion`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -52761,7 +52761,9 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
 | specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
 | tag | string | zero_or_more | No | A generic tag/label. |
+| statement | string | zero_or_more | No | A textual statement of an assertion. |
 | assertsState | State | exactly_one | Yes | The state this observed assertion claims was occupied. |
+| atInterval | ProperInterval | exactly_one | Yes | owl-time ProperInterval during which the asserted state occupancy held. Type is SHACL-only (sh:class time:ProperInter... |
 | isTerminal | boolean | zero_or_one | No | Marks this PhaseAssertion as the terminal (final observed) occupancy in its traj:Trajectory. When true, traj:terminal... |
 | sequenceIndex | nonNegativeInteger | exactly_one | Yes | Zero-based (or one-based, consistently per graph) order of this PhaseAssertion within its Trajectory. Prefer this ove... |
 | terminalPolarity | string | zero_or_one | No | Controlled-vocabulary outcome type for a terminal traj:PhaseAssertion (traj:isTerminal true). Current vocabulary: 'co... |
@@ -52790,7 +52792,7 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 
 *An INFERRED analytic artifact representing a learned or estimated state machine over traj:State / traj:Transition. Must carry prov:wasGeneratedBy to the producing tool run (uco-tool:Tool / uco-action:Action / InvestigativeAction). Takes traj:Trajectory instances as inputs via traj:learnedFrom; never the reverse.*
 
-**Parents:** UcoObject | **IRI:** `http://example.org/ontology/trajectories/StateMachineModel`
+**Parents:** AnalyticResult | **IRI:** `http://example.org/ontology/trajectories/StateMachineModel`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -52805,6 +52807,7 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
 | specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
 | tag | string | zero_or_more | No | A generic tag/label. |
+| statement | string | zero_or_more | No | A textual statement of an assertion. |
 | hasTransitionEstimate | TransitionEstimate | one_or_more | Yes | Links a state-machine model to one of its transition estimates. |
 | initialState | State | zero_or_one | No | Marks the s₀ (start) traj:State of a traj:StateMachineModel. At most one per model (SHACL sh:maxCount 1); models with... |
 | learnedFrom | Trajectory | one_or_more | Yes | Observed trajectory(ies) used as input when estimating this state-machine model. Models take trajectories as inputs; ... |

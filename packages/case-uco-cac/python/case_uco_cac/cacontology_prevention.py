@@ -1,79 +1,102 @@
-"""CAC Ontology - Crimes Against Children — cacontology-prevention module."""
+"""CAC Ontology - Crimes Against Children — cacontology_prevention module (generated; do not edit)."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Optional
+from datetime import datetime
+from typing import ClassVar, Optional, Union
+
+import case_uco.uco.core as _uco_core
+import case_uco.uco.identity as _uco_identity
+import case_uco.uco.role as _uco_role
+from case_uco.typed_literal import TypedLiteral
+from case_uco_cac import cac_core as _cac_core
+from case_uco_cac._context import NAMESPACES
+
+__all__ = ["AffiliateCoordination", "AffiliateResourceSharing", "AgeTargetedEducation", "ArchivePublicationSystem", "BehavioralPrevention", "BullyingPrevention", "ChildAbusePreventionMonth", "ChildSafetyEducation", "CommunityEducation", "CommunityEducator", "CommunityEmailList", "CommunityEngagement", "CommunityEngagementMetrics", "CommunityNewsletterSystem", "CommunityOutreach", "CommunityOutreachEffectiveness", "CommunityPartnershipInitiative", "CourseCompletionTracking", "DigitalLiteracy", "DigitalSafety", "DisclosureBarrierReduction", "DisclosureEncouragementStrategy", "DiscreetAccessSystem", "EducationPlatformIntegration", "EducationPortal", "EducationalPosterCampaign", "EducationalResource", "EducatorTraining", "EmailListEngagementMetrics", "EnvironmentalPrevention", "FAQKnowledgeBase", "FAQUsageMetrics", "HealthcareProviderTraining", "ICACAffiliateNetwork", "InformationPoster", "InteractiveCourseMetrics", "InteractiveCourseSystem", "MultimediaEducationContent", "NationwideAwarenessInitiative", "OnlineSafetyEducation", "OutreachTriggeredInvestigation", "ParentCommunityEmailList", "ParentEducation", "ParentalControl", "ParentalVigilanceProgram", "PlatformSafety", "PodcastEducationSeries", "PodcastEngagementMetrics", "PostPresentationDisclosure", "PosterDistributionMetrics", "PreventionAdvocate", "PreventionCurriculum", "PreventionEffectiveness", "PreventionMaterial", "PreventionMetrics", "PreventionProgram", "PreventionSpecialist", "PrimaryPrevention", "PublicAwareness", "QRCodeEngagementMetrics", "QRCodeIntegration", "RapidResponseDisclosureWorkflow", "RiskAssessmentTool", "RiskPrevention", "RiskReduction", "SafeDisclosureEnvironment", "SafetyCoordinator", "SafetyGuideline", "SafetyProtocol", "SchoolAllegationProtocol", "SchoolCounselorTraining", "SchoolDistribution", "SchoolPolicy", "SchoolPresentationProgram", "SchoolSafetyProgram", "SecondaryPrevention", "SextortionAwareness", "SextortionEducation", "SextortionResponse", "SextortionWarningSign", "StatewideCampaignMetrics", "StudentEducation", "TeacherTraining", "TertiaryPrevention", "TrustedAdultIdentification", "TwelvePlusEducation", "VictimDisclosureTriggering"]
 
 
 @dataclass
-class AffiliateCoordination:
+class AffiliateCoordination(_cac_core.SupportEvent):
     """Coordination activities between CAC affiliate organizations for unified prevention efforts."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#AffiliateCoordination"
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class AffiliateResourceSharing:
+class AffiliateResourceSharing(_cac_core.SupportEvent):
     """Coordinated sharing of educational resources and prevention materials among CAC affiliates."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#AffiliateResourceSharing"
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class AgeTargetedEducation:
+class ChildSafetyEducation(_cac_core.SupportEvent):
+    """Education programs teaching children about safety."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#ChildSafetyEducation"
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    age_group: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-prevention:ageGroup', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    name: Optional[str] = field(default=None, metadata={'jsonld_key': 'uco-core:name', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    start_time: Optional[Union[str, TypedLiteral]] = field(default=None, metadata={'jsonld_key': 'uco-core:startTime', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': [], 'literal_datatype': True})
+
+
+@dataclass
+class AgeTargetedEducation(ChildSafetyEducation):
     """Education programs targeted to specific age groups."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#AgeTargetedEducation"
-    age_group: Optional[str] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class ArchivePublicationSystem:
+class ArchivePublicationSystem(_uco_core.UcoObject):
     """Knowledge repository system providing access to archived educational publications and historical safety information."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#ArchivePublicationSystem"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class BehavioralPrevention:
+class PreventionProgram(_cac_core.SupportEvent):
+    """Structured program designed to prevent child abuse and exploitation. Modeled as gUFO Event."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PreventionProgram"
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    participant_count: Optional[int] = field(default=None, metadata={'jsonld_key': 'cacontology-prevention:participantCount', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#nonNegativeInteger', 'alternate_range_iris': []})
+    program_duration: Optional[float] = field(default=None, metadata={'jsonld_key': 'cacontology-prevention:programDuration', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#decimal', 'alternate_range_iris': []})
+    created_time: Optional[datetime] = field(default=None, metadata={'jsonld_key': 'uco-core:createdTime', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': []})
+    end_time: Optional[datetime] = field(default=None, metadata={'jsonld_key': 'uco-core:endTime', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': []})
+    modified_time: Optional[datetime] = field(default=None, metadata={'jsonld_key': 'uco-core:modifiedTime', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': []})
+    name: Optional[str] = field(default=None, metadata={'jsonld_key': 'uco-core:name', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    start_time: Optional[Union[str, TypedLiteral]] = field(default=None, metadata={'jsonld_key': 'uco-core:startTime', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': [], 'literal_datatype': True})
+
+
+@dataclass
+class BehavioralPrevention(PreventionProgram):
     """Prevention strategies focused on behavioral changes."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#BehavioralPrevention"
-    participant_count: Optional[int] = field(default=None)
-    program_duration: Optional[float] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class BullyingPrevention:
+class BullyingPrevention(PreventionProgram):
     """Prevention programs focused on reducing bullying and shaming."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#BullyingPrevention"
-    participant_count: Optional[int] = field(default=None)
-    program_duration: Optional[float] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
@@ -81,501 +104,332 @@ class ChildAbusePreventionMonth:
     """National Child Abuse Prevention Month coordinated awareness activities."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#ChildAbusePreventionMonth"
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class ChildSafetyEducation:
-    """Education programs teaching children about safety."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#ChildSafetyEducation"
-    age_group: Optional[str] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
-
-
-@dataclass
-class CommunityEducation:
+class CommunityEducation(_cac_core.SupportEvent):
     """Education programs for community members."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#CommunityEducation"
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    name: Optional[str] = field(default=None, metadata={'jsonld_key': 'uco-core:name', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    start_time: Optional[Union[str, TypedLiteral]] = field(default=None, metadata={'jsonld_key': 'uco-core:startTime', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': [], 'literal_datatype': True})
 
 
 @dataclass
-class CommunityEducator:
+class CommunityEducator(_uco_role.Role):
     """Educator working in community prevention programs."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#CommunityEducator"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class CommunityEmailList:
+class CommunityEmailList(_uco_core.UcoObject):
     """Organized email communication system for ongoing safety updates to parents and community members."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#CommunityEmailList"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class CommunityEngagement:
+class PreventionMetrics(_uco_core.UcoObject):
+    """Metrics for measuring prevention program effectiveness."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PreventionMetrics"
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    created_time: Optional[datetime] = field(default=None, metadata={'jsonld_key': 'uco-core:createdTime', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': []})
+
+
+@dataclass
+class CommunityEngagement(PreventionMetrics):
     """Measurement of community engagement in prevention."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#CommunityEngagement"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    created_time: Optional[datetime] = field(default=None)
-    community_participation: Optional[float] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    community_participation: Optional[float] = field(default=None, metadata={'jsonld_key': 'cacontology-prevention:communityParticipation', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#decimal', 'alternate_range_iris': []})
 
 
 @dataclass
-class CommunityEngagementMetrics:
+class CommunityEngagementMetrics(PreventionMetrics):
     """Comprehensive metrics for measuring community engagement across multiple communication channels."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#CommunityEngagementMetrics"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class CommunityNewsletterSystem:
+class CommunityNewsletterSystem(CommunityEmailList):
     """Regular newsletter communication system for ongoing community engagement and safety updates."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#CommunityNewsletterSystem"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class CommunityOutreach:
+class CommunityOutreach(_cac_core.SupportEvent):
     """Outreach programs to engage communities in child protection. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#CommunityOutreach"
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    name: Optional[str] = field(default=None, metadata={'jsonld_key': 'uco-core:name', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    start_time: Optional[Union[str, TypedLiteral]] = field(default=None, metadata={'jsonld_key': 'uco-core:startTime', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': [], 'literal_datatype': True})
 
 
 @dataclass
-class CommunityOutreachEffectiveness:
+class CommunityOutreachEffectiveness(PreventionMetrics):
     """Measurement of community outreach program effectiveness in generating victim disclosures and arrests."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#CommunityOutreachEffectiveness"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class CommunityPartnershipInitiative:
+class CommunityPartnershipInitiative(CommunityOutreach):
     """Initiative building partnerships with community organizations for child protection."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#CommunityPartnershipInitiative"
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class CourseCompletionTracking:
+class CourseCompletionTracking(_uco_core.UcoObject):
     """System for tracking participant progress and completion rates in interactive safety courses."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#CourseCompletionTracking"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class DigitalLiteracy:
+class DigitalLiteracy(ChildSafetyEducation):
     """Education on digital literacy and safe technology use."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#DigitalLiteracy"
-    age_group: Optional[str] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class DigitalSafety:
+class DigitalSafety(PreventionProgram):
     """Prevention programs focused on digital safety."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#DigitalSafety"
-    participant_count: Optional[int] = field(default=None)
-    program_duration: Optional[float] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class DisclosureBarrierReduction:
-    """Strategies to reduce barriers preventing victim disclosure."""
+class SafetyProtocol(_uco_core.UcoObject):
+    """Protocol designed to ensure child safety in various settings."""
 
-    CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#DisclosureBarrierReduction"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    implementation_status: Optional[str] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
+    CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SafetyProtocol"
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    implementation_status: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-prevention:implementationStatus', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    created_time: Optional[datetime] = field(default=None, metadata={'jsonld_key': 'uco-core:createdTime', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': []})
 
 
 @dataclass
-class DisclosureEncouragementStrategy:
+class DisclosureEncouragementStrategy(SafetyProtocol):
     """Strategy for encouraging victims to disclose abuse through education and support."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#DisclosureEncouragementStrategy"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    implementation_status: Optional[str] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class DiscreetAccessSystem:
+class DisclosureBarrierReduction(DisclosureEncouragementStrategy):
+    """Strategies to reduce barriers preventing victim disclosure."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#DisclosureBarrierReduction"
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class DiscreetAccessSystem(DigitalSafety):
     """System allowing discreet access to safety information to reduce bullying and shaming."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#DiscreetAccessSystem"
-    participant_count: Optional[int] = field(default=None)
-    program_duration: Optional[float] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class EducationPlatformIntegration:
+class EducationPlatformIntegration(_uco_core.UcoObject):
     """Integration capabilities between different educational delivery platforms and content management systems."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#EducationPlatformIntegration"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class EducationPortal:
+class EducationPortal(_cac_core.DigitalSystemEntity):
     """Online portal providing educational resources for child protection. Modeled as gUFO Object."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#EducationPortal"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    education_portal_reach: Optional[int] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    education_portal_reach: Optional[int] = field(default=None, metadata={'jsonld_key': 'cacontology-prevention:educationPortalReach', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#nonNegativeInteger', 'alternate_range_iris': []})
+    created_time: Optional[datetime] = field(default=None, metadata={'jsonld_key': 'uco-core:createdTime', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': []})
 
 
 @dataclass
-class EducationalPosterCampaign:
+class EducationalPosterCampaign(PreventionProgram):
     """School-based poster distribution campaign for prevention education."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#EducationalPosterCampaign"
-    participant_count: Optional[int] = field(default=None)
-    program_duration: Optional[float] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class EducationalResource:
+class EducationalResource(_uco_core.UcoObject):
     """Resource designed for educational purposes in child protection."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#EducationalResource"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: Optional[str] = field(default=None)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    language_availability: list[str] = field(default_factory=list)
-    target_audience: Optional[str] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    language_availability: list[str] = field(default_factory=list, metadata={'jsonld_key': 'cacontology-prevention:languageAvailability', 'required': False, 'cardinality': 'zero_or_more', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    target_audience: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-prevention:targetAudience', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    created_time: Optional[datetime] = field(default=None, metadata={'jsonld_key': 'uco-core:createdTime', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': []})
 
 
 @dataclass
-class EducatorTraining:
+class EducatorTraining(_cac_core.SupportEvent):
     """Training programs specifically designed for educators."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#EducatorTraining"
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    name: Optional[str] = field(default=None, metadata={'jsonld_key': 'uco-core:name', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    start_time: Optional[Union[str, TypedLiteral]] = field(default=None, metadata={'jsonld_key': 'uco-core:startTime', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': [], 'literal_datatype': True})
 
 
 @dataclass
-class EmailListEngagementMetrics:
+class EmailListEngagementMetrics(CommunityEngagementMetrics):
     """Metrics tracking email list subscription rates, open rates, and engagement patterns."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#EmailListEngagementMetrics"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class EnvironmentalPrevention:
+class EnvironmentalPrevention(PreventionProgram):
     """Prevention strategies focused on environmental factors."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#EnvironmentalPrevention"
-    participant_count: Optional[int] = field(default=None)
-    program_duration: Optional[float] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class FAQKnowledgeBase:
+class FAQKnowledgeBase(_uco_core.UcoObject):
     """Structured question and answer system for Internet Crimes Against Children frequently asked questions."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#FAQKnowledgeBase"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class FAQUsageMetrics:
+class FAQUsageMetrics(CommunityEngagementMetrics):
     """Metrics tracking FAQ access patterns, most searched questions, and help-seeking behaviors."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#FAQUsageMetrics"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class HealthcareProviderTraining:
+class HealthcareProviderTraining(_cac_core.SupportEvent):
     """Training for healthcare providers on child protection."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#HealthcareProviderTraining"
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    name: Optional[str] = field(default=None, metadata={'jsonld_key': 'uco-core:name', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    start_time: Optional[Union[str, TypedLiteral]] = field(default=None, metadata={'jsonld_key': 'uco-core:startTime', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': [], 'literal_datatype': True})
 
 
 @dataclass
-class ICACAffiliateNetwork:
+class ICACAffiliateNetwork(_uco_identity.Organization):
     """Network of formally affiliated CAC organizations for coordinated child protection efforts."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#ICACAffiliateNetwork"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class InformationPoster:
+class InformationPoster(EducationalResource):
     """Physical poster containing educational information and QR codes."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#InformationPoster"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: Optional[str] = field(default=None)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    language_availability: list[str] = field(default_factory=list)
-    target_audience: Optional[str] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class InteractiveCourseMetrics:
+class InteractiveCourseMetrics(CommunityEngagementMetrics):
     """Metrics tracking course enrollment, completion rates, and learning effectiveness."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#InteractiveCourseMetrics"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class InteractiveCourseSystem:
+class OnlineSafetyEducation(ChildSafetyEducation):
+    """Education about staying safe online."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#OnlineSafetyEducation"
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class InteractiveCourseSystem(OnlineSafetyEducation):
     """Interactive online safety course platform with progression tracking and engagement features."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#InteractiveCourseSystem"
-    age_group: Optional[str] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class MultimediaEducationContent:
+class MultimediaEducationContent(EducationalResource):
     """Educational content incorporating multiple media types including audio, video, and interactive elements."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#MultimediaEducationContent"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: Optional[str] = field(default=None)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    language_availability: list[str] = field(default_factory=list)
-    target_audience: Optional[str] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
@@ -583,559 +437,292 @@ class NationwideAwarenessInitiative:
     """Nationwide coordinated awareness campaign involving multiple agencies and communities."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#NationwideAwarenessInitiative"
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class OnlineSafetyEducation:
-    """Education about staying safe online."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#OnlineSafetyEducation"
-    age_group: Optional[str] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
-
-
-@dataclass
-class OutreachTriggeredInvestigation:
+class OutreachTriggeredInvestigation(_cac_core.InvestigativeAction):
     """Investigation initiated as direct result of community outreach presentation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#OutreachTriggeredInvestigation"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    action_count: Optional[int] = field(default=None)
-    action_status: Optional[str] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    environment: Optional[UcoObject] = field(default=None)
-    error: list[UcoObject] = field(default_factory=list)
-    instrument: list[UcoObject] = field(default_factory=list)
-    location: list[Location] = field(default_factory=list)
-    object: list[UcoObject] = field(default_factory=list)
-    participant: list[UcoObject] = field(default_factory=list)
-    performer: Optional[UcoObject] = field(default=None)
-    result: list[UcoObject] = field(default_factory=list)
-    start_time: Optional[datetime] = field(default=None)
-    subaction: list[Action] = field(default_factory=list)
-    was_informed_by: list[InvestigativeAction] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class ParentCommunityEmailList:
+class ParentCommunityEmailList(CommunityEmailList):
     """Specialized email list for parent and community safety updates and archived publication access."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#ParentCommunityEmailList"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class ParentEducation:
+class ParentEducation(_cac_core.SupportEvent):
     """Education programs for parents and caregivers."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#ParentEducation"
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    name: Optional[str] = field(default=None, metadata={'jsonld_key': 'uco-core:name', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    start_time: Optional[Union[str, TypedLiteral]] = field(default=None, metadata={'jsonld_key': 'uco-core:startTime', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': [], 'literal_datatype': True})
 
 
 @dataclass
-class ParentalControl:
+class ParentalControl(SafetyProtocol):
     """Technology tools for parental oversight."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#ParentalControl"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    implementation_status: Optional[str] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class ParentalVigilanceProgram:
+class ParentalVigilanceProgram(CommunityOutreach):
     """Program educating parents on recognizing signs of child exploitation and reporting."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#ParentalVigilanceProgram"
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class PlatformSafety:
+class PlatformSafety(SafetyProtocol):
     """Safety measures implemented by technology platforms."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PlatformSafety"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    implementation_status: Optional[str] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class PodcastEducationSeries:
+class PodcastEducationSeries(ChildSafetyEducation):
     """Audio-based educational content delivery system, such as the Protect Kids Online (PKO) Podcast."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PodcastEducationSeries"
-    age_group: Optional[str] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class PodcastEngagementMetrics:
+class PodcastEngagementMetrics(CommunityEngagementMetrics):
     """Metrics tracking podcast download rates, completion rates, and listener engagement."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PodcastEngagementMetrics"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class PostPresentationDisclosure:
+class PostPresentationDisclosure(_cac_core.SupportEvent):
     """Victim disclosure that occurs following a safety presentation or educational event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PostPresentationDisclosure"
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class PosterDistributionMetrics:
+class PosterDistributionMetrics(PreventionMetrics):
     """Metrics tracking poster distribution and reach."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PosterDistributionMetrics"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class PreventionAdvocate:
+class PreventionAdvocate(_uco_role.Role):
     """Advocate promoting prevention initiatives."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PreventionAdvocate"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class PreventionCurriculum:
+class PreventionCurriculum(_uco_core.UcoObject):
     """Structured curriculum for prevention education."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PreventionCurriculum"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class PreventionEffectiveness:
+class PreventionEffectiveness(PreventionMetrics):
     """Assessment of prevention program effectiveness."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PreventionEffectiveness"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    created_time: Optional[datetime] = field(default=None)
-    prevention_effectiveness: Optional[float] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    prevention_effectiveness: Optional[float] = field(default=None, metadata={'jsonld_key': 'cacontology-prevention:preventionEffectiveness', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#decimal', 'alternate_range_iris': []})
 
 
 @dataclass
-class PreventionMaterial:
+class PreventionMaterial(EducationalResource):
     """Educational material focused on prevention strategies."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PreventionMaterial"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: Optional[str] = field(default=None)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    language_availability: list[str] = field(default_factory=list)
-    target_audience: Optional[str] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class PreventionMetrics:
-    """Metrics for measuring prevention program effectiveness."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PreventionMetrics"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    created_time: Optional[datetime] = field(default=None)
-
-
-@dataclass
-class PreventionProgram:
-    """Structured program designed to prevent child abuse and exploitation. Modeled as gUFO Event."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PreventionProgram"
-    participant_count: Optional[int] = field(default=None)
-    program_duration: Optional[float] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
-
-
-@dataclass
-class PreventionSpecialist:
+class PreventionSpecialist(_uco_role.Role):
     """Professional specializing in prevention programs."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PreventionSpecialist"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class PrimaryPrevention:
+class PrimaryPrevention(PreventionProgram):
     """Prevention strategies that stop abuse before it occurs."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PrimaryPrevention"
-    participant_count: Optional[int] = field(default=None)
-    program_duration: Optional[float] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class PublicAwareness:
+class PublicAwareness(_cac_core.SupportEvent):
     """Campaigns to raise public awareness about child protection. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#PublicAwareness"
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    name: Optional[str] = field(default=None, metadata={'jsonld_key': 'uco-core:name', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    start_time: Optional[Union[str, TypedLiteral]] = field(default=None, metadata={'jsonld_key': 'uco-core:startTime', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': [], 'literal_datatype': True})
 
 
 @dataclass
-class QRCodeEngagementMetrics:
+class QRCodeEngagementMetrics(PreventionMetrics):
     """Metrics tracking QR code usage and engagement."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#QRCodeEngagementMetrics"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class QRCodeIntegration:
+class QRCodeIntegration(_uco_core.UcoObject):
     """QR code system for discreet access to prevention information."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#QRCodeIntegration"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class RapidResponseDisclosureWorkflow:
+class RapidResponseDisclosureWorkflow(_cac_core.SupportEvent):
     """Workflow enabling rapid response from victim disclosure to arrest (e.g., 8-hour timeline)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#RapidResponseDisclosureWorkflow"
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class RiskAssessmentTool:
+class RiskAssessmentTool(_uco_core.UcoObject):
     """Tool for assessing risks to child safety."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#RiskAssessmentTool"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class RiskPrevention:
+class RiskPrevention(PreventionProgram):
     """Programs focused on preventing risk factors for child abuse. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#RiskPrevention"
-    participant_count: Optional[int] = field(default=None)
-    program_duration: Optional[float] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class RiskReduction:
+class RiskReduction(PreventionMetrics):
     """Measurement of risk reduction achieved."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#RiskReduction"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    created_time: Optional[datetime] = field(default=None)
-    risk_reduction_level: Optional[float] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    risk_reduction_level: Optional[float] = field(default=None, metadata={'jsonld_key': 'cacontology-prevention:riskReductionLevel', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#decimal', 'alternate_range_iris': []})
 
 
 @dataclass
-class SafeDisclosureEnvironment:
+class SafeDisclosureEnvironment(SafetyProtocol):
     """Creation of safe environment where victims feel comfortable disclosing abuse."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SafeDisclosureEnvironment"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    implementation_status: Optional[str] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SafetyCoordinator:
+class SafetyCoordinator(_uco_role.Role):
     """Coordinator responsible for safety programs."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SafetyCoordinator"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class SafetyGuideline:
+class SafetyGuideline(EducationalResource):
     """Guidelines for maintaining child safety."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SafetyGuideline"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: Optional[str] = field(default=None)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    language_availability: list[str] = field(default_factory=list)
-    target_audience: Optional[str] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SafetyProtocol:
-    """Protocol designed to ensure child safety in various settings."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SafetyProtocol"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    implementation_status: Optional[str] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
-
-
-@dataclass
-class SchoolAllegationProtocol:
+class SchoolAllegationProtocol(_cac_core.Artifact):
     """Protocol for managing allegations of abuse in school settings. Modeled as gUFO Object."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SchoolAllegationProtocol"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SchoolCounselorTraining:
+class SchoolCounselorTraining(EducatorTraining):
     """Training program for school counselors."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SchoolCounselorTraining"
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SchoolDistribution:
+class SchoolDistribution(_cac_core.SupportEvent):
     """Distribution of educational materials to schools."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SchoolDistribution"
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SchoolPolicy:
+class SchoolPolicy(_uco_core.UcoObject):
     """Policy governing child protection in schools."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SchoolPolicy"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
@@ -1143,178 +730,118 @@ class SchoolPresentationProgram:
     """FBI school presentation program for child safety education and disclosure encouragement."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SchoolPresentationProgram"
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class SchoolSafetyProgram:
+class SchoolSafetyProgram(PreventionProgram):
     """Safety program implemented in school settings."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SchoolSafetyProgram"
-    participant_count: Optional[int] = field(default=None)
-    program_duration: Optional[float] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SecondaryPrevention:
+class SecondaryPrevention(PreventionProgram):
     """Early intervention strategies to prevent escalation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SecondaryPrevention"
-    participant_count: Optional[int] = field(default=None)
-    program_duration: Optional[float] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SextortionAwareness:
+class SextortionAwareness(PreventionProgram):
     """Prevention program focused on sextortion education and awareness."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SextortionAwareness"
-    participant_count: Optional[int] = field(default=None)
-    program_duration: Optional[float] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SextortionEducation:
+class SextortionEducation(ChildSafetyEducation):
     """Educational content specifically addressing sextortion risks and prevention."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SextortionEducation"
-    age_group: Optional[str] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SextortionResponse:
+class SextortionResponse(SafetyProtocol):
     """Response protocol for sextortion incidents."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SextortionResponse"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    implementation_status: Optional[str] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class SextortionWarningSign:
+class SextortionWarningSign(_uco_core.UcoObject):
     """Identifiable warning signs of sextortion activities."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#SextortionWarningSign"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class StatewideCampaignMetrics:
+class StatewideCampaignMetrics(PreventionMetrics):
     """Metrics for measuring statewide prevention campaign effectiveness."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#StatewideCampaignMetrics"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class StudentEducation:
+class StudentEducation(ChildSafetyEducation):
     """Safety education program for students."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#StudentEducation"
-    age_group: Optional[str] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class TeacherTraining:
+class TeacherTraining(EducatorTraining):
     """Training program specifically for teachers."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#TeacherTraining"
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class TertiaryPrevention:
+class TertiaryPrevention(PreventionProgram):
     """Prevention of re-victimization and recurrence."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#TertiaryPrevention"
-    participant_count: Optional[int] = field(default=None)
-    program_duration: Optional[float] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class TrustedAdultIdentification:
+class TrustedAdultIdentification(DisclosureEncouragementStrategy):
     """Education helping children identify trusted adults for disclosure."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#TrustedAdultIdentification"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    implementation_status: Optional[str] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class TwelvePlusEducation:
+class TwelvePlusEducation(AgeTargetedEducation):
     """Safety education targeted specifically for students 12 years and older."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#TwelvePlusEducation"
-    age_group: Optional[str] = field(default=None)
-    name: Optional[str] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
@@ -1322,4 +849,6 @@ class VictimDisclosureTriggering:
     """Safety education event that triggers victim disclosure of ongoing abuse."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/prevention#VictimDisclosureTriggering"
-
+    NAMESPACE_PREFIX: str = "cacontology-prevention"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})

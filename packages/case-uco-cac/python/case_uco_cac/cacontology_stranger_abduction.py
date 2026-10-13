@@ -1,660 +1,607 @@
-"""CAC Ontology - Crimes Against Children — cacontology-stranger-abduction module."""
+"""CAC Ontology - Crimes Against Children — cacontology_stranger_abduction module (generated; do not edit)."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Optional
+from datetime import datetime
+from typing import ClassVar, Optional
+
+import case_uco.case.investigation as _case_investigation
+import case_uco.uco.core as _uco_core
+import case_uco.uco.observable as _uco_observable
+from case_uco_cac import cac_core as _cac_core
+from case_uco_cac import cacontology as _cacontology
+from case_uco_cac import cacontology_physical_evidence as _cacontology_physical_evidence
+from case_uco_cac._context import NAMESPACES
+
+__all__ = ["AbductionExploitationPattern", "AbductionSceneEvidence", "AgeBasedVulnerability", "ApartmentIsolation", "BluntObjectThreats", "ClothingDisguise", "ComplianceEnforcement", "ComplianceUnderThreat", "ControlledEnvironmentExploitation", "DelayedDisclosure", "DisguiseBasedConcealment", "DisguiseEvidence", "EscapeAttempt", "ExploitationSceneEvidence", "FacialConcealment", "FireEscapeEntry", "FirearmThreats", "ForcedLocationEntry", "HoodedConcealment", "HumiliationBasedExploitation", "ImmediateDisclosure", "ImmediateExploitation", "ImpliedWeaponThreats", "InitialResistance", "IsolatedChildTargeting", "IsolationVulnerability", "KnifeThreats", "LocationBasedExploitation", "LocationIsolation", "MaskConcealment", "MovementRestriction", "OpportunisticPredation", "OpportunityBasedTargeting", "PhysicalForceWithWeapon", "PhysicalIntimidation", "PostAbductionReporting", "PublicSpaceAbduction", "RandomVictimSelection", "RitualizedExploitation", "RoutineActivityTargeting", "SchoolRouteAbduction", "SchoolRouteTargeting", "SecondaryLocationControl", "SilenceEnforcement", "SizeBasedVulnerability", "SkiMaskConcealment", "StrangerAbduction", "StrangerAbductionInvestigation", "StreetLevelAbduction", "SurveillanceEvidence", "SurvivalBehavior", "ThreatBasedControl", "UnconventionalEntry", "VehicleConcealment", "VerbalThreats", "VictimAbductionResponse", "VictimControlMechanism", "VictimTargetingPattern", "VulnerabilityExploitation", "WeaponBasedCoercion", "WeaponDisplayIntimidation", "WeaponEvidence", "WindowEntry", "WitnessEvidence"]
 
 
 @dataclass
-class AbductionExploitationPattern:
+class AbductionExploitationPattern(_cacontology.ChildSexualAbuseEvent):
     """Patterns of sexual exploitation following stranger abduction."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#AbductionExploitationPattern"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class AbductionSceneEvidence:
+class AbductionSceneEvidence(_uco_observable.ObservableObject):
     """Physical evidence collected from abduction scene."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#AbductionSceneEvidence"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
 
 
 @dataclass
-class AgeBasedVulnerability:
-    """Exploitation of victim's young age and limited ability to resist or escape."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#AgeBasedVulnerability"
-
-
-@dataclass
-class ApartmentIsolation:
-    """Use of apartment or residential unit for victim isolation and exploitation."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ApartmentIsolation"
-
-
-@dataclass
-class BluntObjectThreats:
-    """Use of blunt objects as weapons to threaten and control victim."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#BluntObjectThreats"
-
-
-@dataclass
-class ClothingDisguise:
-    """Use of specific clothing to alter appearance or blend into environment."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ClothingDisguise"
-
-
-@dataclass
-class ComplianceEnforcement:
-    """Methods used to enforce victim compliance with perpetrator demands."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ComplianceEnforcement"
-
-
-@dataclass
-class ComplianceUnderThreat:
-    """Victim compliance due to weapon threats or intimidation."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ComplianceUnderThreat"
-
-
-@dataclass
-class ControlledEnvironmentExploitation:
-    """Exploitation in environment controlled by perpetrator to prevent escape or discovery."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ControlledEnvironmentExploitation"
-
-
-@dataclass
-class DelayedDisclosure:
-    """Delayed disclosure due to trauma, threats, or other factors."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#DelayedDisclosure"
-
-
-@dataclass
-class DisguiseBasedConcealment:
-    """Use of disguises or concealment methods to hide identity during approach and abduction."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#DisguiseBasedConcealment"
-
-
-@dataclass
-class DisguiseEvidence:
-    """Disguise items or concealment materials recovered as evidence."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#DisguiseEvidence"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
-
-
-@dataclass
-class EscapeAttempt:
-    """Victim's attempts to escape during or after abduction."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#EscapeAttempt"
-
-
-@dataclass
-class ExploitationSceneEvidence:
-    """Physical evidence collected from exploitation location."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ExploitationSceneEvidence"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
-
-
-@dataclass
-class FacialConcealment:
-    """Concealment of facial features to prevent identification."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#FacialConcealment"
-
-
-@dataclass
-class FireEscapeEntry:
-    """Forcing victim to climb fire escapes to enter buildings through windows."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#FireEscapeEntry"
-
-
-@dataclass
-class FirearmThreats:
-    """Use of firearm to threaten and control victim during abduction."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#FirearmThreats"
-
-
-@dataclass
-class ForcedLocationEntry:
-    """Forcing victim to enter buildings, apartments, or other locations for exploitation."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ForcedLocationEntry"
-
-
-@dataclass
-class HoodedConcealment:
-    """Use of hooded clothing to partially conceal identity."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#HoodedConcealment"
-
-
-@dataclass
-class HumiliationBasedExploitation:
-    """Exploitation designed to humiliate and degrade victim beyond sexual assault."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#HumiliationBasedExploitation"
-
-
-@dataclass
-class ImmediateDisclosure:
-    """Immediate disclosure of abduction and assault upon release or escape."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ImmediateDisclosure"
-
-
-@dataclass
-class ImmediateExploitation:
-    """Sexual exploitation occurring immediately following abduction without delay."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ImmediateExploitation"
-
-
-@dataclass
-class ImpliedWeaponThreats:
-    """Threats suggesting weapon possession without displaying actual weapon."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ImpliedWeaponThreats"
-
-
-@dataclass
-class InitialResistance:
-    """Victim's initial attempts to resist abduction or escape."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#InitialResistance"
-
-
-@dataclass
-class IsolatedChildTargeting:
-    """Targeting children who are alone without adult supervision or companions."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#IsolatedChildTargeting"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-
-
-@dataclass
-class IsolationVulnerability:
-    """Exploitation of victim being alone without potential helpers or witnesses."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#IsolationVulnerability"
-
-
-@dataclass
-class KnifeThreats:
-    """Use of knife or bladed weapon to threaten and control victim."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#KnifeThreats"
-
-
-@dataclass
-class LocationBasedExploitation:
-    """Exploitation occurring at specific location following victim transportation."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#LocationBasedExploitation"
-
-
-@dataclass
-class LocationIsolation:
-    """Use of isolated or secluded locations to prevent victim escape or discovery."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#LocationIsolation"
-
-
-@dataclass
-class MaskConcealment:
-    """Use of masks or face coverings to hide identity."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#MaskConcealment"
-
-
-@dataclass
-class MovementRestriction:
-    """Physical or psychological restriction of victim movement and escape attempts."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#MovementRestriction"
-
-
-@dataclass
-class OpportunisticPredation:
-    """Spontaneous targeting and exploitation of vulnerable children encountered by chance."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#OpportunisticPredation"
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    abduction_location: Optional[str] = field(default=None)
-    abduction_time: Optional[datetime] = field(default=None)
-    abduction_type: Optional[str] = field(default=None)
-    reported_time: Optional[datetime] = field(default=None)
-    response_time: Optional[float] = field(default=None)
-    risk_level: Optional[str] = field(default=None)
-    victim_age: Optional[int] = field(default=None)
-
-
-@dataclass
-class OpportunityBasedTargeting:
-    """Targeting based on immediate opportunity rather than planned surveillance."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#OpportunityBasedTargeting"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-
-
-@dataclass
-class PhysicalForceWithWeapon:
-    """Combination of physical force and weapon use to control victim."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#PhysicalForceWithWeapon"
-
-
-@dataclass
-class PhysicalIntimidation:
-    """Use of physical presence and intimidation to control victim behavior."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#PhysicalIntimidation"
-
-
-@dataclass
-class PostAbductionReporting:
-    """Victim's reporting of abduction and exploitation to authorities or family."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#PostAbductionReporting"
-
-
-@dataclass
-class PublicSpaceAbduction:
-    """Abduction occurring in public spaces such as parks, playgrounds, or commercial areas."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#PublicSpaceAbduction"
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    abduction_location: Optional[str] = field(default=None)
-    abduction_time: Optional[datetime] = field(default=None)
-    abduction_type: Optional[str] = field(default=None)
-    reported_time: Optional[datetime] = field(default=None)
-    response_time: Optional[float] = field(default=None)
-    risk_level: Optional[str] = field(default=None)
-    victim_age: Optional[int] = field(default=None)
-
-
-@dataclass
-class RandomVictimSelection:
-    """Selection of victim based on opportunity rather than specific targeting or grooming."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#RandomVictimSelection"
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    abduction_location: Optional[str] = field(default=None)
-    abduction_time: Optional[datetime] = field(default=None)
-    abduction_type: Optional[str] = field(default=None)
-    reported_time: Optional[datetime] = field(default=None)
-    response_time: Optional[float] = field(default=None)
-    risk_level: Optional[str] = field(default=None)
-    victim_age: Optional[int] = field(default=None)
-
-
-@dataclass
-class RitualizedExploitation:
-    """Exploitation following specific ritualized patterns (forced showering, specific commands)."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#RitualizedExploitation"
-
-
-@dataclass
-class RoutineActivityTargeting:
-    """Targeting children during predictable routine activities (school, recreation, errands)."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#RoutineActivityTargeting"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-
-
-@dataclass
-class SchoolRouteAbduction:
-    """Abduction of child while traveling to or from school or educational activities."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SchoolRouteAbduction"
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    abduction_location: Optional[str] = field(default=None)
-    abduction_time: Optional[datetime] = field(default=None)
-    abduction_type: Optional[str] = field(default=None)
-    reported_time: Optional[datetime] = field(default=None)
-    response_time: Optional[float] = field(default=None)
-    risk_level: Optional[str] = field(default=None)
-    victim_age: Optional[int] = field(default=None)
-
-
-@dataclass
-class SchoolRouteTargeting:
-    """Targeting children on routes to or from school when they are alone and vulnerable."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SchoolRouteTargeting"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-
-
-@dataclass
-class SecondaryLocationControl:
-    """Movement of victim to secondary location for enhanced control and exploitation."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SecondaryLocationControl"
-
-
-@dataclass
-class SilenceEnforcement:
-    """Specific threats or actions to prevent victim from calling for help."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SilenceEnforcement"
-
-
-@dataclass
-class SizeBasedVulnerability:
-    """Exploitation of victim's small physical size relative to perpetrator."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SizeBasedVulnerability"
-
-
-@dataclass
-class SkiMaskConcealment:
-    """Use of ski mask or balaclava to conceal identity during approach."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SkiMaskConcealment"
-
-
-@dataclass
-class StrangerAbduction:
-    """Abduction of child by unknown perpetrator without prior relationship or contact."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#StrangerAbduction"
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    abduction_location: Optional[str] = field(default=None)
-    abduction_time: Optional[datetime] = field(default=None)
-    abduction_type: Optional[str] = field(default=None)
-    reported_time: Optional[datetime] = field(default=None)
-    response_time: Optional[float] = field(default=None)
-    risk_level: Optional[str] = field(default=None)
-    victim_age: Optional[int] = field(default=None)
-
-
-@dataclass
-class StrangerAbductionInvestigation:
-    """Specialized investigation of stranger abduction and sexual exploitation cases."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#StrangerAbductionInvestigation"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    object: list[UcoObject] = field(default_factory=list)
-    focus: list[str] = field(default_factory=list)
-    investigation_form: Optional[str] = field(default=None)
-    investigation_status: Optional[str] = field(default=None)
-    relevant_authorization: list[Authorization] = field(default_factory=list)
-    end_time: Optional[datetime] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
-
-
-@dataclass
-class StreetLevelAbduction:
-    """Abduction occurring on public streets or sidewalks during victim's routine activities."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#StreetLevelAbduction"
-    comment: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    abduction_location: Optional[str] = field(default=None)
-    abduction_time: Optional[datetime] = field(default=None)
-    abduction_type: Optional[str] = field(default=None)
-    reported_time: Optional[datetime] = field(default=None)
-    response_time: Optional[float] = field(default=None)
-    risk_level: Optional[str] = field(default=None)
-    victim_age: Optional[int] = field(default=None)
-
-
-@dataclass
-class SurveillanceEvidence:
-    """Video or photographic surveillance evidence of abduction or related activity."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SurveillanceEvidence"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
-
-
-@dataclass
-class SurvivalBehavior:
-    """Victim behavior focused on survival and minimizing harm."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SurvivalBehavior"
-
-
-@dataclass
-class ThreatBasedControl:
-    """Use of threats to maintain victim compliance and prevent resistance."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ThreatBasedControl"
-
-
-@dataclass
-class UnconventionalEntry:
-    """Use of non-standard entry methods to avoid detection or surveillance."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#UnconventionalEntry"
-
-
-@dataclass
-class VehicleConcealment:
-    """Use of vehicles to conceal approach or provide mobile concealment."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#VehicleConcealment"
-
-
-@dataclass
-class VerbalThreats:
-    """Use of verbal threats to maintain victim compliance."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#VerbalThreats"
-
-
-@dataclass
-class VictimAbductionResponse:
-    """Victim's response to stranger abduction and exploitation attempts."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#VictimAbductionResponse"
-
-
-@dataclass
-class VictimControlMechanism:
-    """Methods used to maintain control over victim during abduction and exploitation."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#VictimControlMechanism"
-
-
-@dataclass
-class VictimTargetingPattern:
-    """Patterns of victim selection and targeting in stranger abduction cases."""
-
-    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#VictimTargetingPattern"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-
-
-@dataclass
-class VulnerabilityExploitation:
+class VulnerabilityExploitation(_cac_core.ExploitationEvent):
     """Exploitation of specific victim vulnerabilities during stranger abduction."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#VulnerabilityExploitation"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class WeaponBasedCoercion:
+class AgeBasedVulnerability(VulnerabilityExploitation):
+    """Exploitation of victim's young age and limited ability to resist or escape."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#AgeBasedVulnerability"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class LocationIsolation(_cac_core.ExploitationEvent):
+    """Use of isolated or secluded locations to prevent victim escape or discovery."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#LocationIsolation"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class ApartmentIsolation(LocationIsolation):
+    """Use of apartment or residential unit for victim isolation and exploitation."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ApartmentIsolation"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class WeaponBasedCoercion(_cac_core.ExploitationEvent):
     """Use of weapons to threaten, intimidate, and control victims during abduction and exploitation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#WeaponBasedCoercion"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class WeaponDisplayIntimidation:
+class BluntObjectThreats(WeaponBasedCoercion):
+    """Use of blunt objects as weapons to threaten and control victim."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#BluntObjectThreats"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class DisguiseBasedConcealment(_cac_core.ExploitationEvent):
+    """Use of disguises or concealment methods to hide identity during approach and abduction."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#DisguiseBasedConcealment"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class ClothingDisguise(DisguiseBasedConcealment):
+    """Use of specific clothing to alter appearance or blend into environment."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ClothingDisguise"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class VictimControlMechanism(_cac_core.ExploitationEvent):
+    """Methods used to maintain control over victim during abduction and exploitation."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#VictimControlMechanism"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class ComplianceEnforcement(VictimControlMechanism):
+    """Methods used to enforce victim compliance with perpetrator demands."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ComplianceEnforcement"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class VictimAbductionResponse(_cac_core.Event):
+    """Victim's response to stranger abduction and exploitation attempts."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#VictimAbductionResponse"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class ComplianceUnderThreat(VictimAbductionResponse):
+    """Victim compliance due to weapon threats or intimidation."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ComplianceUnderThreat"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class LocationBasedExploitation(AbductionExploitationPattern):
+    """Exploitation occurring at specific location following victim transportation."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#LocationBasedExploitation"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class ControlledEnvironmentExploitation(LocationBasedExploitation):
+    """Exploitation in environment controlled by perpetrator to prevent escape or discovery."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ControlledEnvironmentExploitation"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class PostAbductionReporting(VictimAbductionResponse):
+    """Victim's reporting of abduction and exploitation to authorities or family."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#PostAbductionReporting"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class DelayedDisclosure(PostAbductionReporting):
+    """Delayed disclosure due to trauma, threats, or other factors."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#DelayedDisclosure"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class DisguiseEvidence(_cacontology_physical_evidence.DisguiseItem):
+    """Disguise items or concealment materials recovered as evidence."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#DisguiseEvidence"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class EscapeAttempt(VictimAbductionResponse):
+    """Victim's attempts to escape during or after abduction."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#EscapeAttempt"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class ExploitationSceneEvidence(_uco_observable.ObservableObject):
+    """Physical evidence collected from exploitation location."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ExploitationSceneEvidence"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+
+
+@dataclass
+class FacialConcealment(DisguiseBasedConcealment):
+    """Concealment of facial features to prevent identification."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#FacialConcealment"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class ForcedLocationEntry(_cac_core.ExploitationEvent):
+    """Forcing victim to enter buildings, apartments, or other locations for exploitation."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ForcedLocationEntry"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class FireEscapeEntry(ForcedLocationEntry):
+    """Forcing victim to climb fire escapes to enter buildings through windows."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#FireEscapeEntry"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class FirearmThreats(WeaponBasedCoercion):
+    """Use of firearm to threaten and control victim during abduction."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#FirearmThreats"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class HoodedConcealment(FacialConcealment):
+    """Use of hooded clothing to partially conceal identity."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#HoodedConcealment"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class HumiliationBasedExploitation(AbductionExploitationPattern):
+    """Exploitation designed to humiliate and degrade victim beyond sexual assault."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#HumiliationBasedExploitation"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class ImmediateDisclosure(PostAbductionReporting):
+    """Immediate disclosure of abduction and assault upon release or escape."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ImmediateDisclosure"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class ImmediateExploitation(AbductionExploitationPattern):
+    """Sexual exploitation occurring immediately following abduction without delay."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ImmediateExploitation"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class ImpliedWeaponThreats(WeaponBasedCoercion):
+    """Threats suggesting weapon possession without displaying actual weapon."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ImpliedWeaponThreats"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class InitialResistance(VictimAbductionResponse):
+    """Victim's initial attempts to resist abduction or escape."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#InitialResistance"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class VictimTargetingPattern(_uco_core.UcoObject):
+    """Patterns of victim selection and targeting in stranger abduction cases."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#VictimTargetingPattern"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+
+
+@dataclass
+class IsolatedChildTargeting(VictimTargetingPattern):
+    """Targeting children who are alone without adult supervision or companions."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#IsolatedChildTargeting"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class IsolationVulnerability(VulnerabilityExploitation):
+    """Exploitation of victim being alone without potential helpers or witnesses."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#IsolationVulnerability"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class KnifeThreats(WeaponBasedCoercion):
+    """Use of knife or bladed weapon to threaten and control victim."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#KnifeThreats"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class MaskConcealment(FacialConcealment):
+    """Use of masks or face coverings to hide identity."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#MaskConcealment"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class MovementRestriction(VictimControlMechanism):
+    """Physical or psychological restriction of victim movement and escape attempts."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#MovementRestriction"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class StrangerAbduction(_cacontology.ChildSexualAbuseEvent):
+    """Abduction of child by unknown perpetrator without prior relationship or contact."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#StrangerAbduction"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    comment: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:comment', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    abduction_location: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-stranger-abduction:abductionLocation', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    abduction_time: Optional[datetime] = field(default=None, metadata={'jsonld_key': 'cacontology-stranger-abduction:abductionTime', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': []})
+    abduction_type: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-stranger-abduction:abductionType', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    reported_time: Optional[datetime] = field(default=None, metadata={'jsonld_key': 'cacontology-stranger-abduction:reportedTime', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#dateTime', 'alternate_range_iris': []})
+    response_time: Optional[float] = field(default=None, metadata={'jsonld_key': 'cacontology-stranger-abduction:responseTime', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#decimal', 'alternate_range_iris': []})
+    risk_level: Optional[str] = field(default=None, metadata={'jsonld_key': 'cacontology-stranger-abduction:riskLevel', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+    victim_age: Optional[int] = field(default=None, metadata={'jsonld_key': 'cacontology-stranger-abduction:victimAge', 'required': True, 'cardinality': 'exactly_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#nonNegativeInteger', 'alternate_range_iris': []})
+
+
+@dataclass
+class OpportunisticPredation(StrangerAbduction):
+    """Spontaneous targeting and exploitation of vulnerable children encountered by chance."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#OpportunisticPredation"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class OpportunityBasedTargeting(VictimTargetingPattern):
+    """Targeting based on immediate opportunity rather than planned surveillance."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#OpportunityBasedTargeting"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class PhysicalForceWithWeapon(WeaponBasedCoercion):
+    """Combination of physical force and weapon use to control victim."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#PhysicalForceWithWeapon"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class PhysicalIntimidation(VictimControlMechanism):
+    """Use of physical presence and intimidation to control victim behavior."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#PhysicalIntimidation"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class PublicSpaceAbduction(StrangerAbduction):
+    """Abduction occurring in public spaces such as parks, playgrounds, or commercial areas."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#PublicSpaceAbduction"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class RandomVictimSelection(OpportunisticPredation):
+    """Selection of victim based on opportunity rather than specific targeting or grooming."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#RandomVictimSelection"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class RitualizedExploitation(AbductionExploitationPattern):
+    """Exploitation following specific ritualized patterns (forced showering, specific commands)."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#RitualizedExploitation"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class RoutineActivityTargeting(VictimTargetingPattern):
+    """Targeting children during predictable routine activities (school, recreation, errands)."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#RoutineActivityTargeting"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class StreetLevelAbduction(StrangerAbduction):
+    """Abduction occurring on public streets or sidewalks during victim's routine activities."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#StreetLevelAbduction"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class SchoolRouteAbduction(StreetLevelAbduction):
+    """Abduction of child while traveling to or from school or educational activities."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SchoolRouteAbduction"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class SchoolRouteTargeting(VictimTargetingPattern):
+    """Targeting children on routes to or from school when they are alone and vulnerable."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SchoolRouteTargeting"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class SecondaryLocationControl(LocationIsolation):
+    """Movement of victim to secondary location for enhanced control and exploitation."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SecondaryLocationControl"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class ThreatBasedControl(VictimControlMechanism):
+    """Use of threats to maintain victim compliance and prevent resistance."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#ThreatBasedControl"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class SilenceEnforcement(ThreatBasedControl):
+    """Specific threats or actions to prevent victim from calling for help."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SilenceEnforcement"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class SizeBasedVulnerability(VulnerabilityExploitation):
+    """Exploitation of victim's small physical size relative to perpetrator."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SizeBasedVulnerability"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class SkiMaskConcealment(FacialConcealment):
+    """Use of ski mask or balaclava to conceal identity during approach."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SkiMaskConcealment"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class StrangerAbductionInvestigation(_case_investigation.Investigation):
+    """Specialized investigation of stranger abduction and sexual exploitation cases."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#StrangerAbductionInvestigation"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+
+
+@dataclass
+class SurveillanceEvidence(_uco_observable.ObservableObject):
+    """Video or photographic surveillance evidence of abduction or related activity."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SurveillanceEvidence"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})
+
+
+@dataclass
+class SurvivalBehavior(VictimAbductionResponse):
+    """Victim behavior focused on survival and minimizing harm."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#SurvivalBehavior"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class UnconventionalEntry(ForcedLocationEntry):
+    """Use of non-standard entry methods to avoid detection or surveillance."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#UnconventionalEntry"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class VehicleConcealment(DisguiseBasedConcealment):
+    """Use of vehicles to conceal approach or provide mobile concealment."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#VehicleConcealment"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class VerbalThreats(ThreatBasedControl):
+    """Use of verbal threats to maintain victim compliance."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#VerbalThreats"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+
+
+@dataclass
+class WeaponDisplayIntimidation(WeaponBasedCoercion):
     """Display of weapon to intimidate victim into compliance without direct threats."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#WeaponDisplayIntimidation"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class WeaponEvidence:
+class WeaponEvidence(_cacontology_physical_evidence.PhysicalEvidence):
     """Weapons used in abduction and coercion recovered as evidence."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#WeaponEvidence"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class WindowEntry:
+class WindowEntry(ForcedLocationEntry):
     """Forcing victim to enter location through windows rather than doors."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#WindowEntry"
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
 
 
 @dataclass
-class WitnessEvidence:
+class WitnessEvidence(_uco_observable.ObservableObject):
     """Witness testimony regarding abduction or suspicious activity."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/abduction#WitnessEvidence"
-    created_by: Optional[IdentityAbstraction] = field(default=None)
-    description: list[str] = field(default_factory=list)
-    external_reference: list[ExternalReference] = field(default_factory=list)
-    has_facet: list[Facet] = field(default_factory=list)
-    modified_time: list[datetime] = field(default_factory=list)
-    name: Optional[str] = field(default=None)
-    object_created_time: Optional[datetime] = field(default=None)
-    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
-    object_status: Optional[str] = field(default=None)
-    spec_version: Optional[str] = field(default=None)
-    tag: list[str] = field(default_factory=list)
-    has_changed: Optional[bool] = field(default=None)
-    state: Optional[str] = field(default=None)
-
+    NAMESPACE_PREFIX: str = "cacontology-stranger-abduction"
+    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES
+    label: Optional[str] = field(default=None, metadata={'jsonld_key': 'rdfs:label', 'required': False, 'cardinality': 'zero_or_one', 'range_iri': 'http://www.w3.org/2001/XMLSchema#string', 'alternate_range_iris': []})

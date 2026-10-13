@@ -1123,6 +1123,21 @@
       "strict_concepts": true
     },
     {
+      "id": "resource-catalog",
+      "category": "catalog-coverage",
+      "recipe": "docs/recipes/resource-catalog.md",
+      "builder": "examples/recipes/build_resource_catalog.py",
+      "output": "examples/recipes/resource-catalog.jsonld",
+      "profiles": [],
+      "extensions": [
+        "cac:catalog"
+      ],
+      "strict_concepts": true,
+      "support_files": [
+        "examples/recipes/resource-catalog-sample.txt"
+      ]
+    },
+    {
       "id": "cac-icac-search-warrant-arrest",
       "category": "catalog-coverage",
       "recipe": "docs/recipes/cac-icac-search-warrant-arrest.md",

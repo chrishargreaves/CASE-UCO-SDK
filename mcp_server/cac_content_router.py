@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any
 
 import workspace_policy
+from document_genre import CATALOG_CHECKLIST, CATALOG_RECIPE, detect_document_genre
 from domain_index import MAPPING_GUIDE_INDEX, RECIPE_INDEX
 
 # Routing reads text only; anything larger belongs in process_document_file.
@@ -1128,6 +1129,25 @@ def route_cac_content(
             "related_core_recipes": ["docs/recipes/cac-grooming-chat-modeling.md"],
         }]
 
+    # Document-genre gate (#77): catalogs and training documents lead with
+    # the catalog recipe; the topical case recipes stay listed after it.
+    document_genre = detect_document_genre(text)
+    if document_genre:
+        for domain in matched_domains:
+            domain["genre_caveat"] = (
+                "Topic match only — the source is a "
+                f"{document_genre['genre']}, not case evidence."
+            )
+        matched_domains = [{
+            "domain_id": "resource-catalog",
+            "title": "Resource catalog / training material",
+            "score": document_genre["score"],
+            "layer": 0,
+            "recipe_file": CATALOG_RECIPE,
+            "mapping_source": None,
+            "related_core_recipes": [],
+        }, *matched_domains]
+
     trimmed = matched_domains[: max(1, max_recipes)]
     enriched: list[dict[str, Any]] = []
     for domain in trimmed:
@@ -1141,6 +1161,14 @@ def route_cac_content(
             "mapping_guide": _find_mapping_guide(domain.get("mapping_source")),
         })
 
+    workflow = build_workflow_steps(trimmed, normalized_format)
+    checklist = build_modeling_checklist(trimmed)
+    genre_fields: dict[str, Any] = {}
+    if document_genre:
+        workflow.insert(0, document_genre["guidance"])
+        checklist = CATALOG_CHECKLIST
+        genre_fields = {"document_genre": document_genre, "message": document_genre["guidance"]}
+
     return {
         "ok": True,
         "cac_detected": True,
@@ -1150,8 +1178,9 @@ def route_cac_content(
         "output_format": "json-ld" if normalized_format in {"jsonld", "json-ld", "json"} else "ttl",
         "matched_domains": enriched,
         "extraction_quality": extraction_quality,
-        "recommended_workflow": build_workflow_steps(trimmed, normalized_format),
-        "modeling_checklist": build_modeling_checklist(trimmed),
+        **genre_fields,
+        "recommended_workflow": workflow,
+        "modeling_checklist": checklist,
         "validation": build_validation_guidance(project_root, normalized_format),
         "integration_note": (
             "Agents share this MCP server. Return JSON-LD for default "

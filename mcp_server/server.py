@@ -1179,6 +1179,9 @@ def route_cac_content(
     combined with a source_path. Returns multiple matched CAC recipes (guidance
     only — the agent builds the graph), layer-ordered workflow steps, output
     format guidance (jsonld or ttl), and CAC SHACL validation instructions.
+    Resource catalogs and training documents return document_genre with the
+    resource-catalog recipe first and a catalog modeling checklist; the
+    topical CAC domains follow with a genre_caveat.
 
     For binary documents (PDF, Office, images), call process_document_file
     first and pass extracted text via content_text.
@@ -1243,6 +1246,12 @@ def route_investigation_content(
     Family recipes are anchors, not the whole catalog: follow up with
     get_recipes(scenario) for ranked matches across all 60+ recipes and
     guide_mapping(evidence_source) per evidence type.
+
+    A resource catalog, desk reference, or training document (task headers,
+    access badges, dense resource links, and no case artifacts) returns
+    document_genre and a single resource-catalog family pointing at
+    docs/recipes/resource-catalog.md; the topical families move to
+    topic_families with their case recipes deferred.
 
     When NOTHING matches — a previously unseen data type — it returns
     ordered_recommendations.ontology_gap_workflow (and extension_gap_guidance):

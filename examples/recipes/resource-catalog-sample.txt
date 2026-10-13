@@ -1,0 +1,63 @@
+EXAMPLE INVESTIGATOR QUICK REFERENCE GUIDE
+Essential Resources for New Investigators
+
+This guide is designed to help new investigators find trusted resources quickly.
+It is not intended to be a comprehensive list of every available resource. Use it
+alongside your agency's policies and the guidance of your prosecutor.
+
+DAY 1 STARTER KIT
+BOOKMARK THESE:
+Example Task Force Portal | Member Directory (Login Required)
+Find task force contacts and member resources.
+taskforce.example.org
+
+HOTLINES
+NEED TO:
+- Report suspected child sexual abuse material
+- Connect families with crisis support
+Example Hotline Network | Report Online
+Submit reports of child sexual abuse material online.
+hotline.example.org/report
+Example Family Helpline | Get Help Now
+Connect victims and families with crisis support resources.
+help.example.org
+
+TRAINING & CERTIFICATION
+NEED TO:
+- Learn new investigative techniques
+Example Training Center | ICAC Courses
+Access investigator and examiner training.
+training.example.org/courses
+Example Forensics Academy | Certification (Paid)
+Advanced computer forensics training and certification.
+academy.example.net
+
+DIGITAL FORENSICS RESOURCES
+NEED TO:
+- Acquire and examine digital evidence
+Example Imaging Tool | Free Download
+Acquire images of computers and storage media.
+tools.example.com/imager
+Example Hash Library | Hash Sets (Login Required)
+Access hash intelligence for victim identification.
+hashes.example.org
+
+PREVENTION & PARENT RESOURCES
+NEED TO:
+- Educate parents and schools
+Example Safety Nonprofit | For Parents
+Resources and technology to protect children online.
+parents.example.org
+Example Safety Nonprofit | School Program
+Internet safety education for children and communities.
+schools.example.org
+
+LEGAL RESOURCES
+NEED TO:
+- Serve legal process
+Example Legal Library | Federal Statutes
+Research federal child exploitation statutes.
+law.example.edu/statutes
+Example Warrant Builder | Draft Legal Process (Login Required)
+Draft legal process tailored to your jurisdiction and provider.
+warrants.example.org

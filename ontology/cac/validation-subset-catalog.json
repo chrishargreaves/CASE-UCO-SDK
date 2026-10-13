@@ -1,0 +1,31 @@
+{
+  "name": "cac-catalog-subset",
+  "description": "Named CAC validation profile for resource catalogs, desk references, and training directories: hotline, training, and prevention modules plus the core spine. Use extensions=['cac:catalog']. Distinct from the press-release default (extensions=['cac']) and the complete manifest (extensions=['cac:full']).",
+  "built_version": "case-1.5.0",
+  "case_utils": "0.18.0",
+  "cac_ontology": "3.1.0",
+  "cac_commit": "93de063951b758dd68a27611638c177fcf910eab",
+  "ontology_files": [
+    "ontology/ontology/cacontology-core-spine.ttl",
+    "ontology/ontology/cacontology-core.ttl",
+    "ontology/ontology/cacontology-core-shapes.ttl",
+    "ontology/ontology/cacontology-hotlines.ttl",
+    "ontology/ontology/cacontology-hotlines-shapes.ttl",
+    "ontology/ontology/cacontology-training.ttl",
+    "ontology/ontology/cacontology-training-shapes.ttl",
+    "ontology/ontology/cacontology-prevention.ttl",
+    "ontology/ontology/cacontology-prevention-shapes.ttl"
+  ],
+  "module_digests_sha256": {
+    "ontology/ontology/cacontology-core-spine.ttl": "ae883639f567d3ee7adb7d789a7df01f6f28890f06096fad6053d5625ea0960f",
+    "ontology/ontology/cacontology-core.ttl": "63b9e7ea4e941ef2c227c1657813c132737292e7d2726390b0a4ee3914b20d50",
+    "ontology/ontology/cacontology-core-shapes.ttl": "9b87301bac68824f3c4976b0691da29cd03c790ef4442e31e8cea624839de2fb",
+    "ontology/ontology/cacontology-hotlines.ttl": "4e14dc3fd093150958daf3ac3da3182a4b9e103275539662be808b4df0c43b49",
+    "ontology/ontology/cacontology-hotlines-shapes.ttl": "541785310c9ac5127a459a4340b92f12d86ca1f53410932b1671009f5b40433e",
+    "ontology/ontology/cacontology-training.ttl": "bada65f457693238be32a9cde1e654111f7d027c3a99aebb8c9bf87bb03f2e24",
+    "ontology/ontology/cacontology-training-shapes.ttl": "14b33924008ca8e7322f5b31159a3df395a9254661dd4993bfd3c98fb804b16c",
+    "ontology/ontology/cacontology-prevention.ttl": "57a90fd146497c5163bfe51803a4d4144dd8281c47f9044f90ae51a5f4c592f5",
+    "ontology/ontology/cacontology-prevention-shapes.ttl": "8e5d7d514aae3d42c900e2312ac8b5164303c5c5c6656ffb3d7cf71d50a77455"
+  },
+  "full_manifest_note": "Use extensions=['cac:full'] only after upstream CAC SHACL SPARQL constraints are safe for the installed pySHACL / case-utils build. Do not mint duplicate terms when a concept exists in ontology/cac/_registry.json but is outside this subset."
+}
