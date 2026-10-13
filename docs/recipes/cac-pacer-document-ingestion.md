@@ -189,3 +189,4 @@ See [`examples/pacer/anchorage_pd_2022_004/build_moore_dalaska_2020_case.py`](..
 - [cac-trafficking-recruitment-network.md](cac-trafficking-recruitment-network.md)
 - [forensic-lifecycle.md](forensic-lifecycle.md)
 - [technique-evidence-outcome.md](technique-evidence-outcome.md)
+- [resource-catalog.md](resource-catalog.md) — when the document is a resource guide or training catalog rather than a court filing

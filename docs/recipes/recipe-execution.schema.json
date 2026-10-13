@@ -34,7 +34,7 @@
     },
     "extensionName": {
       "type": "string",
-      "pattern": "^[a-z][a-z0-9-]*(:(subset|full))?$"
+      "pattern": "^[a-z][a-z0-9-]*(:[a-z][a-z0-9-]*)?$"
     },
     "expectInvalid": {
       "type": "object",

@@ -1572,6 +1572,7 @@ class CASEGraph:
         result: dict[str, Any] = {"@id": obj_id}
 
         cls = type(instance)
+        self._merge_class_context(cls)
         if hasattr(cls, "CLASS_IRI"):
             # Convert full IRI to prefixed form
             class_iri = cls.CLASS_IRI
@@ -1601,6 +1602,13 @@ class CASEGraph:
                 result[prop_key] = self._convert_value(value, range_iri=range_iri)
 
         return result
+
+    def _merge_class_context(self, cls: type) -> None:
+        """Add prefixes that extension classes declare in ``JSONLD_CONTEXT``."""
+        for klass in cls.__mro__:
+            declared = klass.__dict__.get("JSONLD_CONTEXT")
+            if isinstance(declared, dict):
+                self._merge_context(declared)
 
     def _property_key(self, instance: Any, field_info: Field[Any]) -> str:
         """Resolve the JSON-LD property key from generated field metadata when available."""

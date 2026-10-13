@@ -1,0 +1,467 @@
+{
+    "@context": {
+        "kb": "http://example.org/kb/resource-catalog/",
+        "uco-core": "https://ontology.unifiedcyberontology.org/uco/core/",
+        "uco-identity": "https://ontology.unifiedcyberontology.org/uco/identity/",
+        "uco-observable": "https://ontology.unifiedcyberontology.org/uco/observable/",
+        "uco-tool": "https://ontology.unifiedcyberontology.org/uco/tool/",
+        "uco-types": "https://ontology.unifiedcyberontology.org/uco/types/",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "cacontology-hotlines": "https://cacontology.projectvic.org/hotlines#",
+        "cacontology-prevention": "https://cacontology.projectvic.org/prevention#",
+        "cacontology-training": "https://cacontology.projectvic.org/training#",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+    },
+    "@graph": [
+        {
+            "@id": "kb:ObservableObject-093ee5a2-8259-439c-9422-c7293681e566",
+            "@type": "uco-observable:ObservableObject",
+            "uco-core:hasFacet": [
+                {
+                    "@id": "kb:FileFacet-b2b08fa7-9bbc-4ebb-8c9f-87b0a55b8324",
+                    "@type": "uco-observable:FileFacet",
+                    "uco-observable:fileName": "resource-catalog-sample.txt",
+                    "uco-observable:sizeInBytes": {
+                        "@type": "xsd:integer",
+                        "@value": "2050"
+                    }
+                },
+                {
+                    "@id": "kb:ContentDataFacet-cb3a6184-6063-4171-a1b7-eaa7adf7f9c8",
+                    "@type": "uco-observable:ContentDataFacet",
+                    "uco-observable:hash": [
+                        {
+                            "@id": "kb:Hash-d226be88-632f-47e1-a15f-08b9a8e6010b",
+                            "@type": "uco-types:Hash",
+                            "uco-types:hashMethod": "SHA256",
+                            "uco-types:hashValue": {
+                                "@type": "xsd:hexBinary",
+                                "@value": "5F139318C476357C39688A831E82CEA976699653638CEDE1DCDF2C71ACC6F2D1"
+                            }
+                        }
+                    ],
+                    "uco-observable:mimeType": "text/plain",
+                    "uco-observable:sizeInBytes": {
+                        "@type": "xsd:integer",
+                        "@value": "2050"
+                    }
+                }
+            ]
+        },
+        {
+            "@id": "kb:Organization-962feabd-5f0c-4bb4-b403-4086f45aa9d7",
+            "@type": "uco-identity:Organization",
+            "uco-core:externalReference": [
+                {
+                    "@id": "kb:ExternalReference-d81c186c-8819-4e27-91fa-b97274c0edb3",
+                    "@type": "uco-core:ExternalReference",
+                    "uco-core:definingContext": "Listed in the catalog; access: login required",
+                    "uco-core:referenceURL": {
+                        "@type": "xsd:anyURI",
+                        "@value": "https://taskforce.example.org"
+                    }
+                }
+            ],
+            "uco-core:name": "Example Task Force Portal"
+        },
+        {
+            "@id": "kb:Grouping-805df6b0-d9d8-4c7f-bf2c-fc763c38b352",
+            "@type": "uco-core:Grouping",
+            "uco-core:name": "Day 1 starter kit",
+            "uco-core:object": [
+                {
+                    "@id": "kb:Organization-962feabd-5f0c-4bb4-b403-4086f45aa9d7"
+                }
+            ],
+            "uco-core:context": [
+                "Resource catalog section"
+            ]
+        },
+        {
+            "@id": "kb:Relationship-1875ad36-84a0-4913-8a9f-ff2f4aefe506",
+            "@type": "uco-core:Relationship",
+            "uco-core:isDirectional": {
+                "@type": "xsd:boolean",
+                "@value": "true"
+            },
+            "uco-core:kindOfRelationship": "Contained_Within",
+            "uco-core:source": [
+                {
+                    "@id": "kb:Grouping-805df6b0-d9d8-4c7f-bf2c-fc763c38b352"
+                }
+            ],
+            "uco-core:target": {
+                "@id": "kb:ObservableObject-093ee5a2-8259-439c-9422-c7293681e566"
+            }
+        },
+        {
+            "@id": "kb:HotlineOrganization-b858a885-05b4-418e-afd4-be505f1027bf",
+            "@type": "cacontology-hotlines:HotlineOrganization",
+            "uco-core:description": "Receives online reports of child sexual abuse material.",
+            "uco-core:externalReference": [
+                {
+                    "@id": "kb:ExternalReference-fffffe02-bcd2-4290-b305-1059b0d50834",
+                    "@type": "uco-core:ExternalReference",
+                    "uco-core:definingContext": "Listed in the catalog",
+                    "uco-core:referenceURL": {
+                        "@type": "xsd:anyURI",
+                        "@value": "https://hotline.example.org/report"
+                    }
+                }
+            ],
+            "uco-core:name": "Example Hotline Network",
+            "rdfs:label": "Example Hotline Network"
+        },
+        {
+            "@id": "kb:Organization-91c858d5-066b-4931-a7be-7e51c1a40e9a",
+            "@type": "uco-identity:Organization",
+            "uco-core:description": "Connects victims and families with crisis support resources.",
+            "uco-core:externalReference": [
+                {
+                    "@id": "kb:ExternalReference-6ed0c914-436b-4c93-8509-3ff6cfe27670",
+                    "@type": "uco-core:ExternalReference",
+                    "uco-core:definingContext": "Listed in the catalog",
+                    "uco-core:referenceURL": {
+                        "@type": "xsd:anyURI",
+                        "@value": "https://help.example.org"
+                    }
+                }
+            ],
+            "uco-core:name": "Example Family Helpline"
+        },
+        {
+            "@id": "kb:Grouping-7213d2ae-f4bc-40f8-b2e7-f039f5f3d862",
+            "@type": "uco-core:Grouping",
+            "uco-core:name": "Hotlines",
+            "uco-core:object": [
+                {
+                    "@id": "kb:HotlineOrganization-b858a885-05b4-418e-afd4-be505f1027bf"
+                },
+                {
+                    "@id": "kb:Organization-91c858d5-066b-4931-a7be-7e51c1a40e9a"
+                }
+            ],
+            "uco-core:context": [
+                "Resource catalog section"
+            ]
+        },
+        {
+            "@id": "kb:Relationship-beadded0-cf98-49c5-bffc-8e8c1142f481",
+            "@type": "uco-core:Relationship",
+            "uco-core:isDirectional": {
+                "@type": "xsd:boolean",
+                "@value": "true"
+            },
+            "uco-core:kindOfRelationship": "Contained_Within",
+            "uco-core:source": [
+                {
+                    "@id": "kb:Grouping-7213d2ae-f4bc-40f8-b2e7-f039f5f3d862"
+                }
+            ],
+            "uco-core:target": {
+                "@id": "kb:ObservableObject-093ee5a2-8259-439c-9422-c7293681e566"
+            }
+        },
+        {
+            "@id": "kb:TrainingInstitution-15bec173-4e6f-4e01-bd15-7504123d3a24",
+            "@type": "cacontology-training:TrainingInstitution",
+            "uco-core:description": "Investigator and examiner training.",
+            "uco-core:externalReference": [
+                {
+                    "@id": "kb:ExternalReference-df6fdbaf-65df-4967-81fa-aec045062f72",
+                    "@type": "uco-core:ExternalReference",
+                    "uco-core:definingContext": "Listed in the catalog",
+                    "uco-core:referenceURL": {
+                        "@type": "xsd:anyURI",
+                        "@value": "https://training.example.org/courses"
+                    }
+                }
+            ],
+            "uco-core:name": "Example Training Center",
+            "rdfs:label": "Example Training Center"
+        },
+        {
+            "@id": "kb:TrainingInstitution-8a77227d-bb61-4326-b136-f31931450fd1",
+            "@type": "cacontology-training:TrainingInstitution",
+            "uco-core:description": "Computer forensics training and certification.",
+            "uco-core:externalReference": [
+                {
+                    "@id": "kb:ExternalReference-58cf5380-545b-4a9e-b273-9ffd10240d17",
+                    "@type": "uco-core:ExternalReference",
+                    "uco-core:definingContext": "Listed in the catalog; access: paid",
+                    "uco-core:referenceURL": {
+                        "@type": "xsd:anyURI",
+                        "@value": "https://academy.example.net"
+                    }
+                }
+            ],
+            "uco-core:name": "Example Forensics Academy",
+            "rdfs:label": "Example Forensics Academy"
+        },
+        {
+            "@id": "kb:Grouping-e074f705-7d7e-4d4c-8b72-defbed17cc92",
+            "@type": "uco-core:Grouping",
+            "uco-core:name": "Training and certification",
+            "uco-core:object": [
+                {
+                    "@id": "kb:TrainingInstitution-15bec173-4e6f-4e01-bd15-7504123d3a24"
+                },
+                {
+                    "@id": "kb:TrainingInstitution-8a77227d-bb61-4326-b136-f31931450fd1"
+                }
+            ],
+            "uco-core:context": [
+                "Resource catalog section"
+            ]
+        },
+        {
+            "@id": "kb:Relationship-7dc5d130-4c1b-4def-ad20-64a06ee7b0c2",
+            "@type": "uco-core:Relationship",
+            "uco-core:isDirectional": {
+                "@type": "xsd:boolean",
+                "@value": "true"
+            },
+            "uco-core:kindOfRelationship": "Contained_Within",
+            "uco-core:source": [
+                {
+                    "@id": "kb:Grouping-e074f705-7d7e-4d4c-8b72-defbed17cc92"
+                }
+            ],
+            "uco-core:target": {
+                "@id": "kb:ObservableObject-093ee5a2-8259-439c-9422-c7293681e566"
+            }
+        },
+        {
+            "@id": "kb:Tool-986c67f7-d6cd-4c80-9fcc-4c87084a2507",
+            "@type": "uco-tool:Tool",
+            "uco-core:description": "Acquires images of computers and storage media.",
+            "uco-core:externalReference": [
+                {
+                    "@id": "kb:ExternalReference-802c3ffc-7a95-426d-996e-98e6fb9860ae",
+                    "@type": "uco-core:ExternalReference",
+                    "uco-core:definingContext": "Listed in the catalog; access: free download",
+                    "uco-core:referenceURL": {
+                        "@type": "xsd:anyURI",
+                        "@value": "https://tools.example.com/imager"
+                    }
+                }
+            ],
+            "uco-core:name": "Example Imaging Tool"
+        },
+        {
+            "@id": "kb:Tool-6b7db3bd-cdec-4861-a48f-fe0e2af71bfa",
+            "@type": "uco-tool:Tool",
+            "uco-core:description": "Hash sets for victim identification.",
+            "uco-core:externalReference": [
+                {
+                    "@id": "kb:ExternalReference-1aa39b4e-138b-4240-8d13-83deba51ea4b",
+                    "@type": "uco-core:ExternalReference",
+                    "uco-core:definingContext": "Listed in the catalog; access: login required",
+                    "uco-core:referenceURL": {
+                        "@type": "xsd:anyURI",
+                        "@value": "https://hashes.example.org"
+                    }
+                }
+            ],
+            "uco-core:name": "Example Hash Library"
+        },
+        {
+            "@id": "kb:Grouping-2c601aa3-7d31-4563-af70-61d4802f435b",
+            "@type": "uco-core:Grouping",
+            "uco-core:name": "Digital forensics resources",
+            "uco-core:object": [
+                {
+                    "@id": "kb:Tool-986c67f7-d6cd-4c80-9fcc-4c87084a2507"
+                },
+                {
+                    "@id": "kb:Tool-6b7db3bd-cdec-4861-a48f-fe0e2af71bfa"
+                }
+            ],
+            "uco-core:context": [
+                "Resource catalog section"
+            ]
+        },
+        {
+            "@id": "kb:Relationship-1993e395-4033-4a15-86f7-2b5d1dac1f86",
+            "@type": "uco-core:Relationship",
+            "uco-core:isDirectional": {
+                "@type": "xsd:boolean",
+                "@value": "true"
+            },
+            "uco-core:kindOfRelationship": "Contained_Within",
+            "uco-core:source": [
+                {
+                    "@id": "kb:Grouping-2c601aa3-7d31-4563-af70-61d4802f435b"
+                }
+            ],
+            "uco-core:target": {
+                "@id": "kb:ObservableObject-093ee5a2-8259-439c-9422-c7293681e566"
+            }
+        },
+        {
+            "@id": "kb:Organization-d8458b55-a664-46a4-b58b-8fb3e845d6b7",
+            "@type": "uco-identity:Organization",
+            "uco-core:externalReference": [
+                {
+                    "@id": "kb:ExternalReference-14e15de6-c3c0-46a3-8a53-f0e4c0983122",
+                    "@type": "uco-core:ExternalReference",
+                    "uco-core:definingContext": "Listed in the catalog",
+                    "uco-core:referenceURL": {
+                        "@type": "xsd:anyURI",
+                        "@value": "https://parents.example.org"
+                    }
+                }
+            ],
+            "uco-core:name": "Example Safety Nonprofit"
+        },
+        {
+            "@id": "kb:EducationalResource-8d482041-632b-4d92-9f71-956587e56595",
+            "@type": "cacontology-prevention:EducationalResource",
+            "uco-core:createdBy": {
+                "@id": "kb:Organization-d8458b55-a664-46a4-b58b-8fb3e845d6b7"
+            },
+            "uco-core:description": "Resources to protect children online.",
+            "uco-core:externalReference": [
+                {
+                    "@id": "kb:ExternalReference-78465acb-7da6-4ace-b510-a0c88300f3ae",
+                    "@type": "uco-core:ExternalReference",
+                    "uco-core:definingContext": "Listed in the catalog",
+                    "uco-core:referenceURL": {
+                        "@type": "xsd:anyURI",
+                        "@value": "https://parents.example.org"
+                    }
+                }
+            ],
+            "uco-core:name": "For Parents",
+            "rdfs:label": "For Parents",
+            "cacontology-prevention:targetAudience": "parents"
+        },
+        {
+            "@id": "kb:EducationalResource-97d333ca-37dc-48a3-9781-2e39f4792047",
+            "@type": "cacontology-prevention:EducationalResource",
+            "uco-core:createdBy": {
+                "@id": "kb:Organization-d8458b55-a664-46a4-b58b-8fb3e845d6b7"
+            },
+            "uco-core:description": "Internet safety education for children and communities.",
+            "uco-core:externalReference": [
+                {
+                    "@id": "kb:ExternalReference-e901f2be-25dc-46db-9931-9efeb0e1b0e1",
+                    "@type": "uco-core:ExternalReference",
+                    "uco-core:definingContext": "Listed in the catalog",
+                    "uco-core:referenceURL": {
+                        "@type": "xsd:anyURI",
+                        "@value": "https://schools.example.org"
+                    }
+                }
+            ],
+            "uco-core:name": "School Program",
+            "rdfs:label": "School Program",
+            "cacontology-prevention:targetAudience": "children"
+        },
+        {
+            "@id": "kb:Grouping-ae246a64-a424-4a8f-b708-dec1fb61e246",
+            "@type": "uco-core:Grouping",
+            "uco-core:name": "Prevention and parent resources",
+            "uco-core:object": [
+                {
+                    "@id": "kb:Organization-d8458b55-a664-46a4-b58b-8fb3e845d6b7"
+                },
+                {
+                    "@id": "kb:EducationalResource-8d482041-632b-4d92-9f71-956587e56595"
+                },
+                {
+                    "@id": "kb:EducationalResource-97d333ca-37dc-48a3-9781-2e39f4792047"
+                }
+            ],
+            "uco-core:context": [
+                "Resource catalog section"
+            ]
+        },
+        {
+            "@id": "kb:Relationship-9b1361ed-990a-48ed-8967-1d5f657344e5",
+            "@type": "uco-core:Relationship",
+            "uco-core:isDirectional": {
+                "@type": "xsd:boolean",
+                "@value": "true"
+            },
+            "uco-core:kindOfRelationship": "Contained_Within",
+            "uco-core:source": [
+                {
+                    "@id": "kb:Grouping-ae246a64-a424-4a8f-b708-dec1fb61e246"
+                }
+            ],
+            "uco-core:target": {
+                "@id": "kb:ObservableObject-093ee5a2-8259-439c-9422-c7293681e566"
+            }
+        },
+        {
+            "@id": "kb:EducationalResource-b0b2dd53-9ecf-4fd8-a73b-dd563e03cb80",
+            "@type": "cacontology-prevention:EducationalResource",
+            "uco-core:description": "Federal child exploitation statutes.",
+            "uco-core:externalReference": [
+                {
+                    "@id": "kb:ExternalReference-c720a328-9d5d-4f53-8f00-b3d61c871c03",
+                    "@type": "uco-core:ExternalReference",
+                    "uco-core:definingContext": "Listed in the catalog",
+                    "uco-core:referenceURL": {
+                        "@type": "xsd:anyURI",
+                        "@value": "https://law.example.edu/statutes"
+                    }
+                }
+            ],
+            "uco-core:name": "Federal Statutes",
+            "rdfs:label": "Federal Statutes",
+            "cacontology-prevention:targetAudience": "professionals"
+        },
+        {
+            "@id": "kb:Tool-010796d4-9862-4df0-b758-92f415206f9f",
+            "@type": "uco-tool:Tool",
+            "uco-core:description": "Drafts legal process for a jurisdiction and provider.",
+            "uco-core:externalReference": [
+                {
+                    "@id": "kb:ExternalReference-222e1fcb-e10f-4191-b41a-7a28cd7db786",
+                    "@type": "uco-core:ExternalReference",
+                    "uco-core:definingContext": "Listed in the catalog; access: login required",
+                    "uco-core:referenceURL": {
+                        "@type": "xsd:anyURI",
+                        "@value": "https://warrants.example.org"
+                    }
+                }
+            ],
+            "uco-core:name": "Example Warrant Builder"
+        },
+        {
+            "@id": "kb:Grouping-a134362d-4e41-4c55-83ff-13ce270b85b2",
+            "@type": "uco-core:Grouping",
+            "uco-core:name": "Legal resources",
+            "uco-core:object": [
+                {
+                    "@id": "kb:EducationalResource-b0b2dd53-9ecf-4fd8-a73b-dd563e03cb80"
+                },
+                {
+                    "@id": "kb:Tool-010796d4-9862-4df0-b758-92f415206f9f"
+                }
+            ],
+            "uco-core:context": [
+                "Resource catalog section"
+            ]
+        },
+        {
+            "@id": "kb:Relationship-0299f86a-abcd-461a-a4cf-3113547db8a8",
+            "@type": "uco-core:Relationship",
+            "uco-core:isDirectional": {
+                "@type": "xsd:boolean",
+                "@value": "true"
+            },
+            "uco-core:kindOfRelationship": "Contained_Within",
+            "uco-core:source": [
+                {
+                    "@id": "kb:Grouping-a134362d-4e41-4c55-83ff-13ce270b85b2"
+                }
+            ],
+            "uco-core:target": {
+                "@id": "kb:ObservableObject-093ee5a2-8259-439c-9422-c7293681e566"
+            }
+        }
+    ]
+}

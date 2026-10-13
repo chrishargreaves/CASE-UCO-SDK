@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import dataclasses
 import json
 import logging
 import re
@@ -244,7 +245,7 @@ def _cmd_generate_extension(args) -> int:
     ext_version = manifest["version"]
     display_name = manifest["display_name"]
     pkg_name = f"case-uco-{ext_name}"
-    py_pkg = f"case_uco_{ext_name}"
+    py_pkg = f"case_uco_{_sanitize_module_id(ext_name)}"
 
     repo_root = Path.cwd()
     ontology_dir = args.ontology_dir or repo_root / "ontology"
@@ -361,6 +362,8 @@ def _emit_extension_registry(ext_schema, full_schema, output_dir: Path, ext_name
         winner = (canonical or rivals)[-1]
         return cls.name if cls is winner else f"{cls.namespace_prefix}:{cls.name}"
 
+    py_pkg = f"case_uco_{_sanitize_module_id(ext_name)}"
+    module_of = _python_extension_module_map(ext_schema, ext_name)
     for cls in sorted(ext_schema.classes.values(), key=lambda c: (c.name, c.iri)):
         all_props = full_schema.resolve_all_properties(cls)
         props_data = []
@@ -381,6 +384,10 @@ def _emit_extension_registry(ext_schema, full_schema, output_dir: Path, ext_name
             "is_facet": cls.is_facet,
             "properties": props_data,
             "source": ext_name,
+            "python_class": (
+                f"{py_pkg}.{module_of[cls.iri]}."
+                f"{_ext_class_name(cls.name, 'python')}"
+            ),
         }
 
     path = output_dir / "_registry.json"
@@ -434,66 +441,343 @@ def _generate_extension_package(
     return 0
 
 
+RDFS_NAMESPACE = "http://www.w3.org/2000/01/rdf-schema#"
+RDFS_LABEL = f"{RDFS_NAMESPACE}label"
+
+
+@dataclasses.dataclass
+class _PythonExtensionLayout:
+    """Per-class decisions for a generated Python extension package."""
+
+    modules: dict[str, list] = dataclasses.field(default_factory=dict)
+    module_of: dict[str, str] = dataclasses.field(default_factory=dict)
+    # class IRI -> parent OntologyClass used as the Python base (or None)
+    base: dict[str, object] = dataclasses.field(default_factory=dict)
+    # class IRI -> [(field_name, OntologyProperty, jsonld_key)] added over the base
+    fields: dict[str, list] = dataclasses.field(default_factory=dict)
+    namespace_prefix: dict[str, str] = dataclasses.field(default_factory=dict)
+    typed_literal_iris: set[str] = dataclasses.field(default_factory=set)
+
+
+def _python_extension_module_map(ext_schema, ext_name: str) -> dict[str, str]:
+    return {
+        iri: _sanitize_module_id(_module_display_name(module_key, ext_name))
+        for module_key, iris in ext_schema.modules.items()
+        for iri in iris
+        if iri in ext_schema.classes
+    }
+
+
+def _python_extension_layout(ext_schema, full_schema, ext_name: str, namespaces: dict[str, str]):
+    """Choose bases and fields so extension classes subclass generated core classes.
+
+    Python keeps single inheritance like the core backend: the base is the
+    first parent with a path to a CASE/UCO class (so core fields such as
+    ``name`` are inherited), else the first parent generated in this package.
+    Fields restated by extension shapes are emitted only when the base chain
+    does not already provide them.
+    """
+    from case_uco_generator.backends.base import CodegenBackend
+    from case_uco_generator.schema_model import (
+        Cardinality,
+        OntologyProperty,
+        compact_ontology_iri,
+        iri_local_name,
+        iri_namespace,
+    )
+
+    rdfs_label = OntologyProperty(
+        iri=RDFS_LABEL,
+        name="label",
+        range_iri="http://www.w3.org/2001/XMLSchema#string",
+        range_is_class=False,
+        cardinality=Cardinality.ZERO_OR_ONE,
+        description="Human-readable label (rdfs:label).",
+    )
+    ns_to_prefix: dict[str, str] = {}
+    for prefix, uri in sorted(namespaces.items()):
+        ns_to_prefix.setdefault(uri, prefix)
+
+    def jsonld_key(iri: str) -> str:
+        compact = compact_ontology_iri(iri)
+        if compact != iri:
+            return compact
+        prefix = ns_to_prefix.get(iri_namespace(iri))
+        return f"{prefix}:{iri_local_name(iri)}" if prefix else iri
+
+    def field_name(prop) -> str:
+        return CodegenBackend.safe_identifier(CodegenBackend.to_snake_case(prop.name), "python")
+
+    def is_core(cls) -> bool:
+        return not cls.module.startswith("ext.")
+
+    layout = _PythonExtensionLayout(module_of=_python_extension_module_map(ext_schema, ext_name))
+    reaches_core: dict[str, bool] = {}
+
+    def has_core_path(cls, trail: frozenset = frozenset()) -> bool:
+        if is_core(cls):
+            return True
+        if cls.iri not in reaches_core:
+            reaches_core[cls.iri] = any(
+                parent is not None and has_core_path(parent, trail | {cls.iri})
+                for parent in (full_schema.resolve_class(p) for p in cls.parent_iris if p not in trail)
+            )
+        return reaches_core[cls.iri]
+
+    def nearest_core(cls, trail: frozenset = frozenset()):
+        if is_core(cls):
+            return cls
+        for parent_iri in cls.parent_iris:
+            parent = full_schema.resolve_class(parent_iri)
+            if parent is not None and parent_iri not in trail and has_core_path(parent):
+                return nearest_core(parent, trail | {cls.iri})
+        return None
+
+    def core_depth(cls) -> int:
+        depth, seen = 0, set()
+        while cls is not None and cls.iri not in seen:
+            seen.add(cls.iri)
+            depth += 1
+            cls = full_schema.resolve_class(cls.parent_iris[0]) if cls.parent_iris else None
+        return depth
+
+    def choose_base(cls):
+        candidates = []
+        for parent_iri in cls.parent_iris:
+            parent = full_schema.resolve_class(parent_iri)
+            if parent is None or parent.iri == cls.iri:
+                continue
+            if is_core(parent) or parent.iri in layout.module_of:
+                candidates.append(parent)
+        # The most specific core ancestor wins (uco-identity:Organization
+        # over a spine class that only reaches UcoObject); ties keep order.
+        rooted = [p for p in candidates if has_core_path(p)]
+        if rooted:
+            return max(rooted, key=lambda p: core_depth(nearest_core(p)))
+        return candidates[0] if candidates else None
+
+    field_cache: dict[str, dict[str, str]] = {}
+
+    def python_fields(cls, trail: frozenset = frozenset()) -> dict[str, str]:
+        """Field name -> property IRI for the generated Python class of ``cls``."""
+        if cls.iri in field_cache:
+            return field_cache[cls.iri]
+        if is_core(cls):
+            parent = full_schema.resolve_class(cls.parent_iris[0]) if cls.parent_iris else None
+            inherited = python_fields(parent, trail | {cls.iri}) if parent and parent.iri not in trail else {}
+            result = {**inherited, **{field_name(p): p.iri for p in cls.properties}}
+        else:
+            base = layout.base.get(cls.iri)
+            result = python_fields(base, trail | {cls.iri}) if base and base.iri not in trail else {}
+            result = {**result, **{name: prop.iri for name, prop, _ in layout.fields.get(cls.iri, [])}}
+        field_cache[cls.iri] = result
+        return result
+
+    ordered = sorted(ext_schema.classes.values(), key=lambda c: c.iri)
+    for cls in ordered:
+        layout.base[cls.iri] = choose_base(cls)
+
+    def resolve_fields(cls, trail: frozenset = frozenset()) -> None:
+        if cls.iri in layout.fields:
+            return
+        base = layout.base[cls.iri]
+        if base is not None and not is_core(base) and base.iri not in trail:
+            resolve_fields(base, trail | {cls.iri})
+        inherited = python_fields(base) if base is not None else {}
+        inherited_iris = set(inherited.values())
+        own: list = []
+        seen: set[str] = set()
+        if (base is None or is_core(base)) and RDFS_LABEL not in inherited_iris:
+            # Extension spines (CAC's gUFO shapes) require rdfs:label through
+            # shapes in other namespaces, which property extraction skips.
+            own.append(("label", rdfs_label, "rdfs:label"))
+            seen.add(RDFS_LABEL)
+        for prop in cls.properties:
+            if prop.iri in inherited_iris or prop.iri in seen or prop.forbidden:
+                continue
+            seen.add(prop.iri)
+            name = field_name(prop)
+            key = jsonld_key(prop.iri)
+            if name in inherited or any(name == n for n, _, _ in own):
+                name = f"{name}_{_sanitize_module_id(key.split(':', 1)[0])}"
+            own.append((name, prop, key))
+            if (
+                prop.is_custom_rdf_datatype
+                and prop.range_iri not in full_schema.vocabs
+                and not iri_local_name(prop.range_iri).endswith("Vocab")
+            ):
+                layout.typed_literal_iris.add(prop.iri)
+        layout.fields[cls.iri] = own
+
+    for cls in ordered:
+        resolve_fields(cls)
+        prefix = ns_to_prefix.get(iri_namespace(cls.iri))
+        layout.namespace_prefix[cls.iri] = prefix or _module_display_name(cls.module, ext_name)
+        layout.modules.setdefault(layout.module_of[cls.iri], []).append(cls)
+    return layout
+
+
+def _python_docstring(text: str, fallback: str) -> str:
+    desc = " ".join((text or fallback).split())[:200]
+    return desc.replace("\\", "\\\\").replace('"', '\\"')
+
+
+def _render_python_extension_module(layout, mod_name: str, display_name: str, py_pkg: str) -> str:
+    from case_uco_generator.backends.base import CodegenBackend
+
+    def class_name(cls) -> str:
+        return CodegenBackend.safe_identifier(cls.name, "python")
+
+    classes = sorted(layout.modules[mod_name], key=lambda c: c.name)
+    local = {c.iri for c in classes}
+    ordered: list = []
+    placed: set[str] = set()
+
+    def place(cls) -> None:
+        if cls.iri in placed:
+            return
+        placed.add(cls.iri)
+        base = layout.base[cls.iri]
+        if base is not None and base.iri in local:
+            place(base)
+        ordered.append(cls)
+
+    for cls in classes:
+        place(cls)
+
+    imports: set[str] = set()
+
+    def base_expr(base) -> str:
+        if base is None:
+            return ""
+        if base.iri in local:
+            return class_name(base)
+        if not base.module.startswith("ext."):
+            alias = "_" + base.module.replace(".", "_")
+            imports.add(f"import case_uco.{base.module} as {alias}")
+        else:
+            other = layout.module_of[base.iri]
+            alias = f"_{other}"
+            imports.add(f"from {py_pkg} import {other} as {alias}")
+        return f"{alias}.{class_name(base)}"
+
+    body: list[str] = []
+    typing_names = {"ClassVar"}
+    uses_field = False
+    uses_datetime = False
+    uses_typed_literal = False
+    for cls in ordered:
+        base = base_expr(layout.base[cls.iri])
+        body.append("@dataclass")
+        body.append(f"class {class_name(cls)}({base}):" if base else f"class {class_name(cls)}:")
+        body.append(f'    """{_python_docstring(cls.description, cls.name)}"""')
+        body.append("")
+        body.append(f'    CLASS_IRI: str = "{cls.iri}"')
+        body.append(f'    NAMESPACE_PREFIX: str = "{layout.namespace_prefix[cls.iri]}"')
+        body.append("    JSONLD_CONTEXT: ClassVar[dict[str, str]] = NAMESPACES")
+        for name, prop, key in layout.fields[cls.iri]:
+            uses_field = True
+            if prop.iri in layout.typed_literal_iris:
+                type_str = "Union[str, TypedLiteral]"
+                typing_names.add("Union")
+                uses_typed_literal = True
+            else:
+                type_str = prop.type_name_for("python")
+                if type_str == "Any":
+                    typing_names.add("Any")
+                if type_str == "datetime":
+                    uses_datetime = True
+            metadata = {
+                "jsonld_key": key,
+                "required": prop.cardinality.is_required,
+                "cardinality": prop.cardinality.value,
+                "range_iri": prop.range_iri,
+                "alternate_range_iris": prop.alternate_range_iris,
+            }
+            if prop.iri in layout.typed_literal_iris:
+                metadata["literal_datatype"] = True
+            if prop.cardinality.is_list:
+                body.append(f"    {name}: list[{type_str}] = field(default_factory=list, metadata={metadata})")
+            else:
+                typing_names.add("Optional")
+                body.append(f"    {name}: Optional[{type_str}] = field(default=None, metadata={metadata})")
+        body.append("")
+        body.append("")
+
+    header = [
+        f'"""{display_name} — {mod_name} module (generated; do not edit)."""',
+        "",
+        "from __future__ import annotations",
+        "",
+        "from dataclasses import dataclass, field" if uses_field else "from dataclasses import dataclass",
+    ]
+    if uses_datetime:
+        header.append("from datetime import datetime")
+    header.append(f"from typing import {', '.join(sorted(typing_names))}")
+    header.append("")
+    header.extend(sorted(i for i in imports if i.startswith("import ")))
+    if uses_typed_literal:
+        header.append("from case_uco.typed_literal import TypedLiteral")
+    header.extend(sorted({f"from {py_pkg}._context import NAMESPACES"} | {i for i in imports if i.startswith("from ")}))
+    header.append("")
+    names = ", ".join(f'"{class_name(c)}"' for c in classes)
+    header.append(f"__all__ = [{names}]")
+    header.append("")
+    header.append("")
+    return "\n".join(header + body).rstrip() + "\n"
+
+
 def _gen_python_extension(ext_schema, full_schema, output_dir, ext_name, ext_version, display_name, py_pkg, uco_dep, manifest) -> int:
     py_dir = output_dir / "python" / py_pkg
     py_dir.mkdir(parents=True, exist_ok=True)
     count = 0
 
-    namespaces = manifest.get("namespaces", {})
+    namespaces = {"rdfs": RDFS_NAMESPACE, **manifest.get("namespaces", {})}
     ns_lines = "\n".join(f'    "{prefix}": "{uri}",' for prefix, uri in sorted(namespaces.items()))
 
+    layout = _python_extension_layout(ext_schema, full_schema, ext_name, namespaces)
+    module_files = sorted(layout.modules)
+    modules_literal = "".join(f'    "{m}",\n' for m in module_files)
+
+    (py_dir / "_context.py").write_text(
+        f'"""JSON-LD prefixes for {display_name} terms."""\n\n'
+        f"NAMESPACES: dict[str, str] = {{\n{ns_lines}\n}}\n",
+        encoding="utf-8",
+    )
+    count += 1
+
     init_content = (
-        f'"""{display_name} — CASE/UCO SDK extension bindings."""\n\n'
+        f'"""{display_name} — CASE/UCO SDK extension bindings.\n\n'
+        "Each module holds typed dataclasses that work with ``CASEGraph.create``.\n"
+        "Call :func:`register` (or ``case_uco.graph.discover_extension_class_providers()``)\n"
+        'so ``CASEGraph.from_jsonld`` rehydrates these types.\n"""\n\n'
+        "from __future__ import annotations\n\n"
+        "import importlib\n\n"
+        f"from {py_pkg}._context import NAMESPACES\n\n"
         f'__version__ = "{ext_version}"\n\n'
-        f"NAMESPACES: dict[str, str] = {{\n{ns_lines}\n}}\n\n"
+        f"MODULES: tuple[str, ...] = (\n{modules_literal})\n\n"
         f'# Public so the case_uco.extensions entry point (and static analysis)\n'
         f'# can reference it: the SDK registry loader resolves this at runtime.\n'
-        f'REGISTRY_PATH = __file__.replace("__init__.py", "_registry.json")\n'
+        f'REGISTRY_PATH = __file__.replace("__init__.py", "_registry.json")\n\n\n'
+        "def classes() -> list[type]:\n"
+        '    """Every generated class; the ``case_uco.class_registry`` provider."""\n'
+        "    found: list[type] = []\n"
+        "    for name in MODULES:\n"
+        '        module = importlib.import_module(f"{__name__}.{name}")\n'
+        "        found.extend(getattr(module, cls_name) for cls_name in module.__all__)\n"
+        "    return found\n\n\n"
+        "def register() -> int:\n"
+        '    """Register the classes for typed ``CASEGraph.from_jsonld`` loading."""\n'
+        "    from case_uco.graph import register_extension_classes\n\n"
+        f'    return register_extension_classes(classes(), source="{ext_name}", context=NAMESPACES)\n\n\n'
+        '__all__ = ["MODULES", "NAMESPACES", "REGISTRY_PATH", "__version__", "classes", "register"]\n'
     )
     (py_dir / "__init__.py").write_text(init_content, encoding="utf-8")
     count += 1
 
-    modules_written: set[str] = set()
-    for module_key, class_iris in sorted(ext_schema.modules.items()):
-        parts = module_key.split(".", 2)
-        prefix = parts[-1] if len(parts) > 2 else parts[-1]
-        mod_name = _sanitize_module_id(prefix)
-        if mod_name in modules_written:
-            continue
-        modules_written.add(mod_name)
-
-        classes = [ext_schema.classes[iri] for iri in class_iris if iri in ext_schema.classes]
-        classes.sort(key=lambda c: c.name)
-        if not classes:
-            continue
-
-        lines = []
-        for cls in classes:
-            lines.append("@dataclass")
-            lines.append(f"class {_ext_class_name(cls.name, 'python')}:")
-            desc = cls.description[:200] if cls.description else cls.name
-            lines.append(f'    """{desc}"""\n')
-            lines.append(f'    CLASS_IRI: str = "{cls.iri}"')
-
-            all_props = full_schema.resolve_all_properties(cls)
-            for prop in all_props:
-                field_name = _to_snake(prop.name)
-                type_str = prop.type_name_for("python")
-                if prop.cardinality.is_list:
-                    lines.append(f"    {field_name}: list[{type_str}] = field(default_factory=list)")
-                else:
-                    lines.append(f"    {field_name}: Optional[{type_str}] = field(default=None)")
-            lines.append("\n")
-
-        body = "\n".join(lines)
-        uses_field = "= field(" in body
-        header = [
-            f'"""{display_name} — {prefix} module."""\n',
-            "from __future__ import annotations\n",
-            "from dataclasses import dataclass, field" if uses_field else "from dataclasses import dataclass",
-        ]
-        header.append("from typing import Optional\n\n" if "Optional[" in body else "\n")
-        (py_dir / f"{mod_name}.py").write_text("\n".join(header) + "\n" + body, encoding="utf-8")
+    for mod_name in module_files:
+        source = _render_python_extension_module(layout, mod_name, display_name, py_pkg)
+        (py_dir / f"{mod_name}.py").write_text(source, encoding="utf-8")
         count += 1
 
     pyproject = (
@@ -509,7 +793,9 @@ def _gen_python_extension(ext_schema, full_schema, output_dir, ext_name, ext_ver
         f'    "case-uco{uco_dep}",\n'
         "]\n\n"
         '[project.entry-points."case_uco.extensions"]\n'
-        f'{ext_name} = "{py_pkg}:REGISTRY_PATH"\n'
+        f'{ext_name} = "{py_pkg}:REGISTRY_PATH"\n\n'
+        '[project.entry-points."case_uco.class_registry"]\n'
+        f'{ext_name} = "{py_pkg}:classes"\n'
     )
     (output_dir / "python" / "pyproject.toml").write_text(pyproject, encoding="utf-8")
     count += 1

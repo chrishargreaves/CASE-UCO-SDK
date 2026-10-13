@@ -72,7 +72,7 @@ End-to-end mapping recipes that walk through source input, modeling choices, ant
 
 ### Crimes Against Children (CAC Ontology)
 
-Requires `CASE_UCO_EXTENSIONS=cac`. Use `route_cac_content` via the MCP server to detect which recipes apply to submitted content. Validate output with `validate_graph(..., extensions=['cac'])` (uses `ontology/cac/validation-subset.json` by default) or `extensions=['cac:full']` for the complete manifest.
+Requires `CASE_UCO_EXTENSIONS=cac`. Use `route_cac_content` via the MCP server to detect which recipes apply to submitted content. Validate output with `validate_graph(..., extensions=['cac'])` (uses `ontology/cac/validation-subset.json` by default), a named profile such as `cac:missing-child` or `cac:catalog`, or `extensions=['cac:full']` for the complete manifest. Typed Python classes for every CAC class ship in `case-uco-cac` (`case_uco_cac.<module>`).
 
 CAC recipes talk about **offenders** who target children and other vulnerable people. MITRE ATT&CK is not CAC community language; it models **hackers** and **attackers**. Do not emit ATT&CK techniques on a CAC graph unless the source describes that rare overlap. Use [cyber-threat-intelligence.md](cyber-threat-intelligence.md) for ATT&CK, and [technique-evidence-outcome.md](technique-evidence-outcome.md) for examiner SOLVE-IT methods.
 
@@ -85,6 +85,7 @@ CAC recipes talk about **offenders** who target children and other vulnerable pe
 | Federal Trial Proceedings | [cac-federal-trial-proceedings.md](cac-federal-trial-proceedings.md) | Superseding indictments, PACER docket lifecycle, trial briefs, anticipated evidence |
 | PACER Document Ingestion (MCP) | [cac-pacer-document-ingestion.md](cac-pacer-document-ingestion.md) | Agent workflow: process_document_file → route_cac_content → validated CAC graph |
 | Hotline Intake and Referral Lifecycle | [cac-hotline-intake-lifecycle.md](cac-hotline-intake-lifecycle.md) | Hotline intake, triage, referral, investigation escalation |
+| Resource Catalogs and Desk References | [resource-catalog.md](resource-catalog.md) | Quick-reference guides, hotline and training directories: the document plus listed organizations, tools, and material, no case nodes (`cac:catalog`) |
 | ICAC Search Warrant Arrest | [cac-icac-search-warrant-arrest.md](cac-icac-search-warrant-arrest.md) | Routine warrant execution, custody without incident, booking (Maryland/ICAC press releases) |
 | International Coordination | [cac-international-coordination.md](cac-international-coordination.md) | Cross-border operations, Europol/Interpol, evidence sharing |
 | Legal Charges and Sentencing Outcomes | [cac-legal-sentencing-outcomes.md](cac-legal-sentencing-outcomes.md) | Indictments, pleas, sentencing, registry outcomes |

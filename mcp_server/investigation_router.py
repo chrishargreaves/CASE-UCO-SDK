@@ -30,6 +30,7 @@ from cac_content_router import (
     detect_cac_domains,
     resolve_submission_text,
 )
+from document_genre import CATALOG_RECIPE, detect_document_genre
 
 MIN_FAMILY_SCORE = 2
 
@@ -1335,6 +1336,38 @@ def build_general_workflow(matches: list[dict[str, Any]], installed: dict[str, d
     return steps
 
 
+def _catalog_family(document_genre: dict[str, Any], cac_detected: bool) -> dict[str, Any]:
+    """Synthetic family that routes catalogs and training documents (#77)."""
+
+    confidence = (
+        semantic_retrieval.HIGH_CONFIDENCE
+        if document_genre["confidence"] == "high"
+        else (semantic_retrieval.ABSTAIN_CONFIDENCE + semantic_retrieval.HIGH_CONFIDENCE) / 2
+    )
+    return {
+        "family_id": "resource-catalog",
+        "title": "Resource catalog / training material",
+        "score": document_genre["score"],
+        "matched_keywords": document_genre["genre_signals"],
+        "match_stages": ["document-genre"],
+        "scoring": {
+            "keyword_score": document_genre["score"],
+            "semantic_score": 0.0,
+            "confidence": confidence,
+        },
+        "semantic_evidence": [],
+        "recipes": [CATALOG_RECIPE],
+        # CAC supplies EducationalResource, TrainingInstitution, VictimSupport, ...
+        "extensions": ["cac"] if cac_detected else [],
+        "core_namespaces": ["uco-core", "uco-identity", "uco-observable"],
+        "upper_profiles": [],
+        "notes": (
+            "Model the document and the resources it lists; do not create "
+            "investigations, suspects, victims, or offenses the source does not record."
+        ),
+    }
+
+
 def route_investigation_content(
     project_root: Path,
     content_text: str | None = None,
@@ -1389,6 +1422,24 @@ def route_investigation_content(
                 item["family_id"],
             )
         )
+
+    # Document-genre gate (#77): a resource catalog or training document
+    # shares vocabulary with case files but carries no case evidence, so its
+    # topic families become hints and the catalog recipe leads.
+    document_genre = detect_document_genre(text)
+    topic_families: list[dict[str, Any]] = []
+    if document_genre:
+        topic_families = [
+            {
+                "family_id": m["family_id"],
+                "title": m["title"],
+                "matched_keywords": m["matched_keywords"],
+                "scoring": m["scoring"],
+                "deferred_case_recipes": m["recipes"],
+            }
+            for m in matches
+        ]
+        matches = [_catalog_family(document_genre, cac_detected)]
 
     # Calibrated abstention: below the abstain threshold the router returns
     # gap guidance instead of a weak guess (candidates stay visible).
@@ -1457,6 +1508,10 @@ def route_investigation_content(
     }
     if apple_guidance:
         payload["apple_collect_guidance"] = apple_guidance
+    if document_genre:
+        payload["document_genre"] = document_genre
+        payload["topic_families"] = topic_families
+        payload["message"] = document_genre["guidance"]
     if integrity_failures:
         payload["extension_integrity_failures"] = integrity_failures
     if extraction_quality.get("noisy_extraction"):
