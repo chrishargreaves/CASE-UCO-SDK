@@ -65,9 +65,6 @@ class AnnualRegistrationReview:
     """Annual review and update of sex offender registration information."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sex-offender-registry#AnnualRegistrationReview"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     performer: Optional[Person] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
 
@@ -95,9 +92,6 @@ class CommunityNotification:
     """Notification to community about registered sex offender."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sex-offender-registry#CommunityNotification"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -105,9 +99,6 @@ class ComplianceBasedArrest:
     """Arrest coordinated with scheduled compliance activity such as annual registration review."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sex-offender-registry#ComplianceBasedArrest"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -120,7 +111,7 @@ class ComplianceBasedArrest:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -158,9 +149,6 @@ class ComplianceScheduleCoordination:
     """Coordination between law enforcement investigations and compliance schedules for arrest timing."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sex-offender-registry#ComplianceScheduleCoordination"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -217,7 +205,7 @@ class ConvictingOffense:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    conviction_date: Optional[date] = field(default=None)
+    conviction_date: Optional[TypedLiteral] = field(default=None)
     offense_description: Optional[str] = field(default=None)
     sentence_length: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -331,7 +319,7 @@ class EmploymentInformation:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    start_time: Optional[date] = field(default=None)
+    start_time: Optional[TypedLiteral] = field(default=None)
 
 
 @dataclass
@@ -368,7 +356,7 @@ class FailureToRegisterOffense:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    conviction_date: Optional[date] = field(default=None)
+    conviction_date: Optional[TypedLiteral] = field(default=None)
     offense_description: Optional[str] = field(default=None)
     sentence_length: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -390,7 +378,7 @@ class FalseInformationRegistrationOffense:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    conviction_date: Optional[date] = field(default=None)
+    conviction_date: Optional[TypedLiteral] = field(default=None)
     offense_description: Optional[str] = field(default=None)
     sentence_length: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -699,7 +687,7 @@ class PrimaryResidence:
     postal_code: Optional[str] = field(default=None)
     state: Optional[str] = field(default=None)
     street: Optional[str] = field(default=None)
-    start_time: Optional[date] = field(default=None)
+    start_time: Optional[TypedLiteral] = field(default=None)
 
 
 @dataclass
@@ -758,24 +746,7 @@ class RecidivistSexOffender:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    date_of_birth: Optional[date] = field(default=None)
+    date_of_birth: Optional[TypedLiteral] = field(default=None)
     full_name: Optional[str] = field(default=None)
     registered_in: list[SexOffenderRegistry] = field(default_factory=list)
     sex: Optional[str] = field(default=None)
@@ -822,24 +793,7 @@ class RegisteredSexOffender:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    date_of_birth: Optional[date] = field(default=None)
+    date_of_birth: Optional[TypedLiteral] = field(default=None)
     full_name: Optional[str] = field(default=None)
     registered_in: list[SexOffenderRegistry] = field(default_factory=list)
     sex: Optional[str] = field(default=None)
@@ -905,9 +859,9 @@ class RegistrationRecord:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    expiration_date: Optional[date] = field(default=None)
+    expiration_date: Optional[TypedLiteral] = field(default=None)
     lifetime_registration: Optional[bool] = field(default=None)
-    registration_date: Optional[date] = field(default=None)
+    registration_date: Optional[TypedLiteral] = field(default=None)
     registration_number: Optional[str] = field(default=None)
     tier: Optional[int] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -954,9 +908,6 @@ class RegistrationReviewArrest:
     """Arrest executed when offender arrives for scheduled registration review or update."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sex-offender-registry#RegistrationReviewArrest"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -969,7 +920,7 @@ class RegistrationReviewArrest:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1008,9 +959,6 @@ class RegistrationUpdate:
     """Update to sex offender registration information."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sex-offender-registry#RegistrationUpdate"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1047,23 +995,6 @@ class RegistryOfficer:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1190,9 +1121,6 @@ class VerificationCheck:
     """Official verification of sex offender registration information."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sex-offender-registry#VerificationCheck"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     performer: Optional[Person] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
 
@@ -1202,9 +1130,6 @@ class VictimDeviceForensics:
     """Forensic examination of victim's device to recover evidence of digital exploitation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/sex-offender-registry#VictimDeviceForensics"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -1217,7 +1142,7 @@ class VictimDeviceForensics:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)

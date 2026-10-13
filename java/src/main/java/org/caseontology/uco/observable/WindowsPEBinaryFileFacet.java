@@ -19,6 +19,7 @@ public class WindowsPEBinaryFileFacet extends Facet {
     private Long numberOfSymbols;
     private WindowsPEOptionalHeader optionalHeader;
     private String peType;
+    @org.caseontology.CaseDatatype("xsd:hexBinary")
     private List<byte[]> pointerToSymbolTable;
     private List<WindowsPESection> sections;
     private Long sizeOfOptionalHeader;

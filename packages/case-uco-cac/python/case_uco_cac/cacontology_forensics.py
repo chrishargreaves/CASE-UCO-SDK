@@ -11,28 +11,6 @@ class AcquisitionPhase:
     """Phase involving forensic acquisition of digital evidence."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#AcquisitionPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -52,7 +30,7 @@ class AdvancedSearchTechnique:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -71,28 +49,27 @@ class AnalysisPhase:
     """Phase involving detailed forensic analysis of acquired evidence."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#AnalysisPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
+
+
+@dataclass
+class AttributionAssessment:
+    """Analytic conclusion that two or more observables (accounts, IP addresses, devices) are controlled by the same subject, with stated confidence and method. The assessment is an interpretation layered ov"""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#AttributionAssessment"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    attribution_confidence: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -112,7 +89,7 @@ class AutomatedContentAnalysis:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -152,7 +129,7 @@ class BehavioralFingerprinting:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -177,9 +154,6 @@ class ChainOfCustodyAction:
     """An action that documents evidence handling, transfer, and custody maintaining legal admissibility."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#ChainOfCustodyAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -192,7 +166,7 @@ class ChainOfCustodyAction:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -205,6 +179,8 @@ class ChainOfCustodyAction:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
+    has_begin_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
+    has_end_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
     custody_integrity: Optional[str] = field(default=None)
     custody_reason: Optional[str] = field(default=None)
     custody_transferred_from: Optional[UcoObject] = field(default=None)
@@ -229,7 +205,7 @@ class CommunicationPatternAnalysis:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -266,7 +242,7 @@ class ContentCorrelationAnalysis:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -290,6 +266,29 @@ class ContentCorrelationAnalysis:
 
 
 @dataclass
+class CorrelationEvidence:
+    """Structured evidence that observables are linked by overlapping usage, records, or artifacts. Superclass for typed correlation evidence supporting attribution assessments."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#CorrelationEvidence"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    correlation_method: list[str] = field(default_factory=list)
+    correlation_time_window_end: Optional[datetime] = field(default=None)
+    correlation_time_window_start: Optional[datetime] = field(default=None)
+
+
+@dataclass
 class CrossPlatformCorrelation:
     """Analysis correlating evidence across multiple platforms and services to identify coordinated criminal activities."""
 
@@ -306,7 +305,7 @@ class CrossPlatformCorrelation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -335,9 +334,6 @@ class CrossReferenceAnalysis:
     """Cross-referencing of digital evidence across multiple cases and international databases for victim identification."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#CrossReferenceAnalysis"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -350,7 +346,7 @@ class CrossReferenceAnalysis:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -387,8 +383,7 @@ class CustodyDocument:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
+    has_begin_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
     document_status: Optional[str] = field(default=None)
     document_type: Optional[str] = field(default=None)
     created_time: Optional[datetime] = field(default=None)
@@ -411,7 +406,7 @@ class DatabaseIntelligenceIntegration:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -448,7 +443,7 @@ class DetectionDogAssist:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -479,7 +474,7 @@ class DistributedForensicProcessing:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -516,7 +511,7 @@ class ElectronicStorageDeviceDetection:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -548,25 +543,8 @@ class EvidenceCustodianRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
+    has_begin_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
+    has_end_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
     access_level: Optional[str] = field(default=None)
     custody_authority: Optional[str] = field(default=None)
 
@@ -588,7 +566,7 @@ class EvidenceTriageSystem:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -618,9 +596,6 @@ class EvidenceVerificationAction:
     """The action of verifying evidence integrity using cryptographic hashes and comparison methods."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#EvidenceVerificationAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -633,7 +608,7 @@ class EvidenceVerificationAction:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -646,6 +621,7 @@ class EvidenceVerificationAction:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
+    has_begin_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
     verification_hash: list[UcoObject] = field(default_factory=list)
     verification_method: list[str] = field(default_factory=list)
     verification_result: Optional[str] = field(default=None)
@@ -659,9 +635,6 @@ class ExtendedInvestigationTimeline:
     """Investigation timeline spanning weeks, months, or years for complex child exploitation cases."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#ExtendedInvestigationTimeline"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -674,7 +647,7 @@ class ExtendedInvestigationTimeline:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -687,6 +660,7 @@ class ExtendedInvestigationTimeline:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
+    has_begin_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
     temporal_accuracy: Optional[float] = field(default=None)
     timeline_event: list[UcoObject] = field(default_factory=list)
     timeline_scope: Optional[str] = field(default=None)
@@ -698,9 +672,6 @@ class ForensicAcquisitionAction:
     """The action of creating a forensically sound copy of digital evidence using write-blocking and verification procedures."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#ForensicAcquisitionAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -713,7 +684,7 @@ class ForensicAcquisitionAction:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -726,7 +697,10 @@ class ForensicAcquisitionAction:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
+    has_begin_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
+    has_end_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     acquisition_completeness: Optional[float] = field(default=None)
     acquisition_method: Optional[str] = field(default=None)
     acquisition_quality: Optional[str] = field(default=None)
@@ -754,25 +728,8 @@ class ForensicExaminerRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
+    has_begin_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
+    has_end_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
     certification_level: Optional[str] = field(default=None)
     specialization_area: Optional[str] = field(default=None)
 
@@ -795,9 +752,9 @@ class ForensicImage:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
+    has_begin_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     acquisition_method: Optional[str] = field(default=None)
     compression_used: Optional[bool] = field(default=None)
     image_format: Optional[str] = field(default=None)
@@ -852,7 +809,7 @@ class GeospatialCorrelation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -906,9 +863,6 @@ class HiddenDeviceRecovery:
     """Recovery of concealed or hidden electronic storage devices during search operations."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#HiddenDeviceRecovery"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -921,7 +875,7 @@ class HiddenDeviceRecovery:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -934,7 +888,10 @@ class HiddenDeviceRecovery:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
+    has_begin_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
+    has_end_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     acquisition_completeness: Optional[float] = field(default=None)
     acquisition_method: Optional[str] = field(default=None)
     acquisition_quality: Optional[str] = field(default=None)
@@ -948,13 +905,33 @@ class HiddenDeviceRecovery:
 
 
 @dataclass
+class IPCorrelationEvidence:
+    """Structured evidence of overlapping IP usage across accounts, sessions, or platforms within a date-time scope (e.g., 13 of 20 platform session IPs matching another platform's access logs for the same s"""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#IPCorrelationEvidence"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    correlation_method: list[str] = field(default_factory=list)
+    correlation_time_window_end: Optional[datetime] = field(default=None)
+    correlation_time_window_start: Optional[datetime] = field(default=None)
+
+
+@dataclass
 class ImageAnalysisForVictimID:
     """Analysis of seized images to identify and remove child victims from continued exploitation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#ImageAnalysisForVictimID"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -967,7 +944,7 @@ class ImageAnalysisForVictimID:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1004,7 +981,7 @@ class InternationalEvidenceProcessing:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1029,9 +1006,6 @@ class K9AssistedForensics:
     """Forensic process enhanced by K9 detection capabilities for electronic storage devices."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#K9AssistedForensics"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -1044,7 +1018,7 @@ class K9AssistedForensics:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1057,7 +1031,10 @@ class K9AssistedForensics:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
+    has_begin_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
+    has_end_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     acquisition_completeness: Optional[float] = field(default=None)
     acquisition_method: Optional[str] = field(default=None)
     acquisition_quality: Optional[str] = field(default=None)
@@ -1087,7 +1064,7 @@ class MachineLearningCorrelation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1127,7 +1104,7 @@ class MassDigitalEvidenceProcessing:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1165,7 +1142,6 @@ class MemoryDump:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1211,7 +1187,7 @@ class MetadataCorrelation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1239,9 +1215,6 @@ class MetadataExtractionAction:
     """The action of extracting metadata from digital artifacts including EXIF, file system timestamps, and application metadata."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#MetadataExtractionAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -1254,7 +1227,7 @@ class MetadataExtractionAction:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1267,6 +1240,7 @@ class MetadataExtractionAction:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
+    has_begin_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
     extraction_completeness: Optional[float] = field(default=None)
     metadata_types: Optional[str] = field(default=None)
     uses_tool: list[Tool] = field(default_factory=list)
@@ -1317,7 +1291,6 @@ class NetworkCapture:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1363,7 +1336,7 @@ class NetworkTrafficAnalysis:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1400,7 +1373,7 @@ class RealTimeCorrelation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1441,8 +1414,7 @@ class RecoveredFile:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
+    has_begin_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
     data_integrity: Optional[str] = field(default=None)
     recovery_confidence: Optional[float] = field(default=None)
     recovery_method: Optional[str] = field(default=None)
@@ -1456,28 +1428,6 @@ class ReportingPhase:
     """Phase involving preparation of forensic reports and findings."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#ReportingPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -1497,7 +1447,7 @@ class ScalableHashAnalysis:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1523,6 +1473,29 @@ class ScalableHashAnalysis:
 
 
 @dataclass
+class SubscriberRecordCorrelation:
+    """Evidence linking a platform account to carrier or ISP subscriber records (e.g., produced under legal process)."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#SubscriberRecordCorrelation"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    correlation_method: list[str] = field(default_factory=list)
+    correlation_time_window_end: Optional[datetime] = field(default=None)
+    correlation_time_window_start: Optional[datetime] = field(default=None)
+
+
+@dataclass
 class TemporalPatternAnalysis:
     """Analysis of temporal patterns and timing correlations across different pieces of evidence."""
 
@@ -1539,7 +1512,7 @@ class TemporalPatternAnalysis:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1568,28 +1541,6 @@ class TestimonyPhase:
     """Phase involving expert testimony and courtroom presentation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#TestimonyPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -1597,9 +1548,6 @@ class TimelineAnalysisAction:
     """The action of creating chronological sequences of digital artifacts and events for investigation analysis."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#TimelineAnalysisAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -1612,7 +1560,7 @@ class TimelineAnalysisAction:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1625,6 +1573,7 @@ class TimelineAnalysisAction:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
+    has_begin_point_in_xsd_date_time_stamp: Optional[TypedLiteral] = field(default=None)
     temporal_accuracy: Optional[float] = field(default=None)
     timeline_event: list[UcoObject] = field(default_factory=list)
     timeline_scope: Optional[str] = field(default=None)
@@ -1648,7 +1597,7 @@ class UserBehaviorForensics:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1673,9 +1622,6 @@ class VictimIdentificationProcess:
     """Systematic process for identifying child victims from seized images and videos during long-term investigations."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#VictimIdentificationProcess"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -1688,7 +1634,7 @@ class VictimIdentificationProcess:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1723,23 +1669,6 @@ class VictimIdentificationSpecialist:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1747,9 +1676,6 @@ class VictimRemovalAction:
     """Action taken to remove identified victims from further harm and exploitation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/forensics#VictimRemovalAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -1762,7 +1688,7 @@ class VictimRemovalAction:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)

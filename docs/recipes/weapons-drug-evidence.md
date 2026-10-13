@@ -124,7 +124,7 @@ or with the CLI (bridges included so CCO/gUFO grounding is materialized
 under RDFS inference):
 
 ```bash
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph extensions/weapons/weapons.ttl \
   --ontology-graph extensions/weapons/weapons-shapes.ttl \
   --ontology-graph extensions/weapons/weapons-profile-cco.ttl \

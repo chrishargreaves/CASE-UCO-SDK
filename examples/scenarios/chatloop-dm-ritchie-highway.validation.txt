@@ -1,0 +1,13 @@
+validator: case_validate
+built-version: case-1.5.0
+case-uco: 1.21.0
+graph: chatloop-dm-ritchie-highway.jsonld
+source: chatloop-dm-ritchie-highway-source.md
+source_sha256: de5405aea184187bd31e099f02bdb99eb13c4a812e211a7a994e5c55c1a48314
+graph_sha256: 9dcbd3487b1ff49e525ffd482c9569320bfc6933c4193707f513e8ce8a7a61ba
+exit_code: 0
+---
+Validation Report
+Conforms: True
+
+

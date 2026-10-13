@@ -21,7 +21,7 @@ class TestExtensionPaths:
             assert (found / "manifest.json").is_file()
 
     def test_sdk_native_extensions_live_under_extensions(self):
-        for name in ("attack-technique", "legalproc", "toolcap"):
+        for name in ("attack-technique", "legalproc", "toolcap", "trajectories"):
             found = extension_paths.find_extension_dir(name, PROJECT_ROOT)
             assert found is not None, name
             assert found.parent.name == "extensions", name
@@ -44,6 +44,22 @@ class TestExtensionPaths:
     def test_iter_extension_dirs_includes_both_roots(self):
         names = {p.name for p in extension_paths.iter_extension_dirs(PROJECT_ROOT)}
         assert {"cac", "aeo", "solveit", "legalproc", "attack-technique"} <= names
+
+    def test_no_extension_depends_on_a_threat_technique_catalog(self):
+        """ATT&CK and ATLAS describe adversary tradecraft; offense-conduct,
+        forensic-practice, and other domain vocabularies must not pull them in
+        automatically. Graphs that record observed hacking techniques request
+        the catalog explicitly."""
+        import json
+
+        catalogs = {"attack-technique", "atlas-technique"}
+        offenders = {}
+        for ext_dir in extension_paths.iter_extension_dirs(PROJECT_ROOT):
+            manifest = json.loads((ext_dir / "manifest.json").read_text(encoding="utf-8"))
+            pulled = catalogs & set(manifest.get("depends_on") or [])
+            if pulled:
+                offenders[ext_dir.name] = sorted(pulled)
+        assert offenders == {}
 
     def test_extension_dir_falls_back_to_native_root(self, tmp_path):
         path = extension_paths.extension_dir("brand-new", tmp_path)

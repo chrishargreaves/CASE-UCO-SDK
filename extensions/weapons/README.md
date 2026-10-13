@@ -54,7 +54,7 @@ gun = {
 Validate with the extension:
 
 ```bash
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph extensions/weapons/weapons.ttl \
   --ontology-graph extensions/weapons/weapons-shapes.ttl \
   --inference rdfs --allow-info graph.jsonld

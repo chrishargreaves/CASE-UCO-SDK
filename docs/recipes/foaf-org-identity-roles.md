@@ -86,7 +86,7 @@ python examples/upper-ontology/foaf-org/build_exemplar.py
 ```bash
 validate_graph("foaf-org-identity.jsonld", profiles=["foaf", "org"])
 
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph ontology/upper/shapes/sh-foaf.ttl \
   --ontology-graph ontology/upper/shapes/sh-org.ttl \
   --allow-info foaf-org-identity.jsonld

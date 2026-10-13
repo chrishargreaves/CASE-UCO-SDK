@@ -50,10 +50,10 @@ subclass of uco-action:Action and carries uco-action:techniqueID (the
 technique classes live in extensions/attack-technique/mitre-attack-catalog.ttl
 under canonical ATT&CK IRIs), and a concrete behavior Action that exhibits a
 technique is *typed with* that technique class (rdf:type) — the punning
-pattern the PR intends, anchored by the new top-level uco-core:UcoType. Until
-UCO 1.5.0 ships these terms, the local attack-technique extension declares
-them (in their released uco-core:/uco-action: IRIs), loaded by the builder via
-extensions=["attack-technique:full"]. See the recipe for the pattern.
+pattern the PR intends, anchored by the top-level uco-core:UcoType. UCO 1.5.0
+ships the metaclass natively; the technique classes come from the vendored
+ATT&CK catalog, loaded via extensions=["attack-technique:full"]. See the
+recipe for the pattern.
 
 All facts are drawn from the Talos article and its graphics. Uncertain OCR of
 hexdump artifacts is flagged in the relevant description strings.

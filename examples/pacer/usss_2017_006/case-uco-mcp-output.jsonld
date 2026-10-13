@@ -15,9 +15,9 @@
       "@id": "urn:uuid:4e4f0bac-48a8-5431-ad23-c69fd4c9f454",
       "@type": "uco-observable:ObservableObject",
       "uco-core:name": "Source file pacer -- usss_2017_006 -- Criminal Complaint .pdf",
-      "uco-core:description": "Link-Look pdf upload (upload reference usss-2017-006-complaint)",
+      "uco-core:description": "Uploaded pdf file (upload reference usss-2017-006-complaint)",
       "uco-core:tag": [
-        "link-look-file-kind:pdf"
+        "source-file-kind:pdf"
       ],
       "uco-core:hasFacet": [
         {

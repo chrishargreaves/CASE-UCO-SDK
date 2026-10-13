@@ -68,6 +68,113 @@ def test_heuristic_derived_no_hash_fixture():
     assert "CRIT-H-DERIVED-NO-HASH" in {f.rule_id for f in findings}
 
 
+def test_heuristic_legal_process_without_investigation(tmp_path):
+    payload = {
+        "@context": {
+            "uco-observable": "https://ontology.unifiedcyberontology.org/uco/observable/",
+        },
+        "@graph": [
+            {
+                "@id": "urn:uuid:bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+                "@type": "uco-observable:ExtractedString",
+                "uco-observable:stringValue": (
+                    "See the search warrant attached as Exhibit A."
+                ),
+            }
+        ],
+    }
+    path = tmp_path / "legal-process-no-investigation.jsonld"
+    path.write_text(json.dumps(payload), encoding="utf-8")
+    findings, _ = run_graph_heuristics(
+        load_canonical_graph(path), artifact_hash="legal"
+    )
+    assert "CRIT-H-LEGAL-PROCESS-NO-INVESTIGATION" in {f.rule_id for f in findings}
+
+
+def test_heuristic_legal_process_with_investigation_is_quiet(tmp_path):
+    payload = {
+        "@context": {
+            "case-investigation": "https://ontology.caseontology.org/case/investigation/",
+            "uco-core": "https://ontology.unifiedcyberontology.org/uco/core/",
+            "uco-observable": "https://ontology.unifiedcyberontology.org/uco/observable/",
+        },
+        "@graph": [
+            {
+                "@id": "urn:uuid:aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+                "@type": "case-investigation:Investigation",
+                "uco-core:name": "Warrant investigation",
+                "uco-core:object": [
+                    {"@id": "urn:uuid:bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"}
+                ],
+            },
+            {
+                "@id": "urn:uuid:bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+                "@type": "uco-observable:ExtractedString",
+                "uco-observable:stringValue": (
+                    "See the search warrant attached as Exhibit A."
+                ),
+            },
+        ],
+    }
+    path = tmp_path / "legal-process-with-investigation.jsonld"
+    path.write_text(json.dumps(payload), encoding="utf-8")
+    findings, _ = run_graph_heuristics(
+        load_canonical_graph(path), artifact_hash="legal-ok"
+    )
+    assert "CRIT-H-LEGAL-PROCESS-NO-INVESTIGATION" not in {
+        f.rule_id for f in findings
+    }
+
+
+def test_heuristic_broken_crypto_address_string(tmp_path):
+    payload = {
+        "@context": {
+            "uco-observable": "https://ontology.unifiedcyberontology.org/uco/observable/",
+        },
+        "@graph": [
+            {
+                "@id": "urn:uuid:cccccccc-cccc-cccc-cccc-cccccccccccc",
+                "@type": "uco-observable:ExtractedString",
+                "uco-observable:stringValue": (
+                    "Wallet 1A1zP1eP5Q Gefi2DMPTf TL5SLmv7DivfNa"
+                ),
+            }
+        ],
+    }
+    path = tmp_path / "broken-crypto.jsonld"
+    path.write_text(json.dumps(payload), encoding="utf-8")
+    findings, _ = run_graph_heuristics(
+        load_canonical_graph(path), artifact_hash="broken"
+    )
+    assert "CRIT-H-BROKEN-CRYPTO-ADDRESS-STRING" in {f.rule_id for f in findings}
+
+
+@pytest.mark.parametrize(
+    "prose",
+    [
+        "Figure 12 \u2014 Task Scheduler: GUID task 26b799fa-\u2026 at logon of DESKTOP-JGLLJLD\\admin.",
+        "The device was seized on 2024 01 15 at the residence.",
+        "Transaction 1234567890 confirmed by bank on 2024",
+        "Total of 14 photos recovered from the camera.",
+    ],
+)
+def test_broken_crypto_heuristic_ignores_prose(tmp_path, prose):
+    payload = {
+        "@context": {"uco-core": "https://ontology.unifiedcyberontology.org/uco/core/"},
+        "@graph": [
+            {
+                "@id": "urn:uuid:cccccccc-cccc-cccc-cccc-cccccccccccd",
+                "@type": "uco-core:UcoObject",
+                "uco-core:description": prose,
+            }
+        ],
+    }
+    path = tmp_path / "prose.jsonld"
+    path.write_text(json.dumps(payload), encoding="utf-8")
+    findings, _ = run_graph_heuristics(load_canonical_graph(path), artifact_hash="prose")
+    assert "CRIT-H-BROKEN-CRYPTO-ADDRESS-STRING" not in {f.rule_id for f in findings}
+
+
 def test_jsonld_turtle_semantic_equivalence(tmp_path):
     # Minimal equivalent graphs: Investigation without object
     jsonld = {
@@ -803,3 +910,48 @@ def test_serializer_too_large_skips_ast(tmp_path, monkeypatch):
     assert "critic_serializer_too_large" in review.errors
     assert review.analysis_status in {"partial", "failed"}
     assert review.status == "analysis_incomplete"
+
+
+def test_grouping_membership_is_a_container(tmp_path):
+    """Grouping subclasses ContextualCompilation, but has_type is nominal.
+
+    A file that is already uco-core:object of a Grouping must not be reported
+    as missing from every container.
+    """
+
+    graph = tmp_path / "grouping.jsonld"
+    graph.write_text(
+        json.dumps(
+            {
+                "@context": {
+                    "uco-core": "https://ontology.unifiedcyberontology.org/uco/core/",
+                    "uco-action": "https://ontology.unifiedcyberontology.org/uco/action/",
+                    "uco-observable": "https://ontology.unifiedcyberontology.org/uco/observable/",
+                    "kb": "http://example.org/kb/",
+                },
+                "@graph": [
+                    {
+                        "@id": "kb:grouping",
+                        "@type": "uco-core:Grouping",
+                        "uco-core:object": [{"@id": "kb:file"}],
+                    },
+                    {
+                        "@id": "kb:action",
+                        "@type": "uco-action:Action",
+                        "uco-action:result": [{"@id": "kb:file"}],
+                    },
+                    {
+                        "@id": "kb:file",
+                        "@type": "uco-observable:File",
+                        "uco-core:name": "capture.pdf",
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    view = load_canonical_graph(graph)
+    findings, _executions = run_graph_heuristics(view, artifact_hash="abc")
+    rules = {finding.rule_id for finding in findings}
+    assert "CRIT-H-CONTEXTUAL-COMPILATION-OMISSION" not in rules
+    assert "CRIT-H-DERIVED-NO-PROVENANCE" not in rules

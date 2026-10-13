@@ -7,13 +7,32 @@ from typing import Optional
 
 
 @dataclass
+class AVAAAssessment:
+    """Assessment under the Amy, Vicky, and Andy Child Pornography Victim Assistance Act of 2018 (18 U.S.C. § 2259A)."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#AVAAAssessment"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    concurrent_with: list[CriminalSentence] = field(default_factory=list)
+    sentence_concurrency: Optional[str] = field(default=None)
+
+
+@dataclass
 class AppealProcess:
     """Legal process to challenge conviction or sentence in higher court. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#AppealProcess"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     bail_status: Optional[str] = field(default=None)
 
 
@@ -35,7 +54,6 @@ class AppellateDisposition:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     disposition_type: Optional[str] = field(default=None)
 
 
@@ -57,7 +75,6 @@ class AppellateIssue:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     applies_standard_of_review: list[StandardOfReview] = field(default_factory=list)
     cites_evidence_rule: list[EvidenceRule] = field(default_factory=list)
     issue_disposition: list[AppellateDisposition] = field(default_factory=list)
@@ -68,9 +85,6 @@ class ArraignmentProceeding:
     """Initial court appearance where charges are formally read and plea is entered. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#ArraignmentProceeding"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     bail_status: Optional[str] = field(default=None)
 
 
@@ -92,7 +106,6 @@ class CSAM_AccessingAndViewing:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -113,7 +126,6 @@ class CSAM_CausingProduction:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -134,7 +146,6 @@ class CSAM_Distribution:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -155,7 +166,6 @@ class CSAM_Possession:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -176,7 +186,6 @@ class CSAM_Production:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -197,7 +206,6 @@ class CSAM_ReceivingOnCellularDevice:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -218,7 +226,6 @@ class CarriageServiceCSAMTransmission:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -239,7 +246,28 @@ class CarriageServiceIndecentCommunication:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
+
+
+@dataclass
+class ChargingInstrument:
+    """Abstract superclass for formal charging documents: criminal complaint, indictment, criminal information, and superseding instruments. Modeled as gUFO Object."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#ChargingInstrument"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    charging_instrument_counts: Optional[int] = field(default=None)
+    filed_date: Optional[TypedLiteral] = field(default=None)
 
 
 @dataclass
@@ -260,7 +288,6 @@ class CommonwealthChildAbuseOffense:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -279,12 +306,33 @@ class CommunityService:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     concurrent_with: list[CriminalSentence] = field(default_factory=list)
     sentence_concurrency: Optional[str] = field(default=None)
+
+
+@dataclass
+class ComputerInternetMonitoringCondition:
+    """Condition requiring participation in a computer and internet monitoring program, commonly including device inventory, disclosure of accounts and credentials, consent to unannounced examination, and pr"""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#ComputerInternetMonitoringCondition"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    condition_text: Optional[str] = field(default=None)
+    defendant_pays_cost: Optional[bool] = field(default=None)
+    requires_probation_approval: Optional[bool] = field(default=None)
 
 
 @dataclass
@@ -305,7 +353,7 @@ class ComputerSeduceSolicitLure:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[langString] = field(default=None)
+    label: Optional[TypedLiteral] = field(default=None)
     charge_classification: Optional[str] = field(default=None)
     florida_statute: Optional[str] = field(default=None)
     computer_lure_method: Optional[str] = field(default=None)
@@ -329,10 +377,34 @@ class ContributingToDelinquency:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[langString] = field(default=None)
+    label: Optional[TypedLiteral] = field(default=None)
     charge_classification: Optional[str] = field(default=None)
     florida_statute: Optional[str] = field(default=None)
     child_delinquency_contribution: Optional[bool] = field(default=None)
+
+
+@dataclass
+class ConvictionRecord:
+    """A durable record that a person was convicted of one or more criminal charges (e.g., by jury verdict, bench trial, or plea agreement). Used for current-case dispositions and for limited prior-convictio"""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#ConvictionRecord"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    charge_count: Optional[int] = field(default=None)
+    conviction_date: Optional[datetime] = field(default=None)
+    conviction_type: Optional[str] = field(default=None)
+    prior_convictions: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -353,7 +425,50 @@ class CriminalCharge:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
+
+
+@dataclass
+class CriminalComplaint:
+    """A written statement of the essential facts constituting the offense charged, made under oath before a magistrate judge (or clerk where authorized) prior to indictment. Fed. R. Crim. P. 3. Modeled as g"""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#CriminalComplaint"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    charging_instrument_counts: Optional[int] = field(default=None)
+    filed_date: Optional[TypedLiteral] = field(default=None)
+
+
+@dataclass
+class CriminalInformation:
+    """A charging instrument filed by the prosecutor without grand-jury action, typically after the defendant waives indictment. Fed. R. Crim. P. 7(b). Modeled as gUFO Object."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#CriminalInformation"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    charging_instrument_counts: Optional[int] = field(default=None)
+    filed_date: Optional[TypedLiteral] = field(default=None)
 
 
 @dataclass
@@ -372,8 +487,6 @@ class CriminalSentence:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     concurrent_with: list[CriminalSentence] = field(default_factory=list)
@@ -396,23 +509,6 @@ class DefendantRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -431,23 +527,6 @@ class DefenseAttorneyRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -468,7 +547,7 @@ class DirectPromotionOfSexualPerformance:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[langString] = field(default=None)
+    label: Optional[TypedLiteral] = field(default=None)
     charge_classification: Optional[str] = field(default=None)
     florida_statute: Optional[str] = field(default=None)
     sexual_performance_promotion: Optional[bool] = field(default=None)
@@ -492,7 +571,6 @@ class EvidenceRule:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     rule_citation: Optional[str] = field(default=None)
 
 
@@ -514,7 +592,6 @@ class EvidentiaryRuling:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     applies_standard_of_review: list[StandardOfReview] = field(default_factory=list)
     cites_evidence_rule: list[EvidenceRule] = field(default_factory=list)
     issue_disposition: list[AppellateDisposition] = field(default_factory=list)
@@ -538,7 +615,24 @@ class FederalCharge:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
+
+
+@dataclass
+class FederalProsecution:
+    """Alias for cacontology-usa-federal:FederalProsecution, provided for continuity with existing graphs pending the namespace-alignment decision in CAC-Ontology issue #40."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#FederalProsecution"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -559,7 +653,7 @@ class FloridaStateCharge:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[langString] = field(default=None)
+    label: Optional[TypedLiteral] = field(default=None)
     charge_classification: Optional[str] = field(default=None)
     florida_statute: Optional[str] = field(default=None)
 
@@ -582,7 +676,72 @@ class GeorgiaStateCharge:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
+
+
+@dataclass
+class Indictment:
+    """A grand-jury charging instrument. Fed. R. Crim. P. 6, 7. Modeled as gUFO Object."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#Indictment"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    charging_instrument_counts: Optional[int] = field(default=None)
+    filed_date: Optional[TypedLiteral] = field(default=None)
+
+
+@dataclass
+class InstallmentPaymentSchedule:
+    """Payment schedule requiring periodic installments, typically with a monthly minimum and a commencement trigger."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#InstallmentPaymentSchedule"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    due_timing: Optional[str] = field(default=None)
+    total_amount_usd: Optional[Any] = field(default=None)
+
+
+@dataclass
+class JVTAAssessment:
+    """Assessment under the Justice for Victims of Trafficking Act of 2015 (18 U.S.C. § 3014)."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#JVTAAssessment"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    concurrent_with: list[CriminalSentence] = field(default_factory=list)
+    sentence_concurrency: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -601,23 +760,6 @@ class JudgeRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -625,7 +767,6 @@ class JudicialSystemSituation:
     """Broader situation involving judicial system processing of CAC cases. Modeled as gUFO Situation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#JudicialSystemSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -644,23 +785,6 @@ class JuryRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -668,7 +792,6 @@ class LegalCaseSituation:
     """Complex situation encompassing the entire legal case from charges to resolution. Modeled as gUFO Situation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#LegalCaseSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -676,9 +799,6 @@ class LegalProceeding:
     """Formal judicial process for prosecuting cacontology-related crimes. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#LegalProceeding"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     bail_status: Optional[str] = field(default=None)
 
 
@@ -698,8 +818,6 @@ class LifeImprisonmentSentence:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     concurrent_with: list[CriminalSentence] = field(default_factory=list)
@@ -724,7 +842,50 @@ class LiveStreamingOffense:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
+
+
+@dataclass
+class LumpSumPaymentSchedule:
+    """Payment schedule requiring a lump-sum payment (e.g., due immediately, on a date, or after release)."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#LumpSumPaymentSchedule"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    due_timing: Optional[str] = field(default=None)
+    total_amount_usd: Optional[Any] = field(default=None)
+
+
+@dataclass
+class MagistrateComplaint:
+    """A criminal complaint sworn before a federal magistrate judge, typically supported by a law-enforcement agent affidavit or statement of facts. Modeled as gUFO Object."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#MagistrateComplaint"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    charging_instrument_counts: Optional[int] = field(default=None)
+    filed_date: Optional[TypedLiteral] = field(default=None)
 
 
 @dataclass
@@ -743,12 +904,33 @@ class MandatoryMinimumSentencing:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     concurrent_with: list[CriminalSentence] = field(default_factory=list)
     sentence_concurrency: Optional[str] = field(default=None)
+
+
+@dataclass
+class MinorContactRestrictionCondition:
+    """Condition restricting contact with persons under a specified age, typically requiring written probation approval and/or presence of a responsible adult aware of the offense history."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#MinorContactRestrictionCondition"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    condition_text: Optional[str] = field(default=None)
+    defendant_pays_cost: Optional[bool] = field(default=None)
+    requires_probation_approval: Optional[bool] = field(default=None)
 
 
 @dataclass
@@ -767,8 +949,6 @@ class MonetaryPenalty:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     concurrent_with: list[CriminalSentence] = field(default_factory=list)
@@ -793,7 +973,28 @@ class OnlineEnticement:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
+
+
+@dataclass
+class PaymentSchedule:
+    """Schedule of criminal monetary payments imposed in a judgment (AO 245B Schedule of Payments). Modeled as gUFO Object."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#PaymentSchedule"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    due_timing: Optional[str] = field(default=None)
+    total_amount_usd: Optional[Any] = field(default=None)
 
 
 @dataclass
@@ -801,9 +1002,6 @@ class PleaBargaining:
     """Negotiation process between prosecution and defense for plea agreement. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#PleaBargaining"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     bail_status: Optional[str] = field(default=None)
 
 
@@ -812,28 +1010,6 @@ class PostConvictionPhase:
     """Phase after conviction including appeals and compliance. Modeled as anti-rigid gUFO Phase."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#PostConvictionPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -841,28 +1017,6 @@ class PreTrialPhase:
     """Phase before trial including arraignment and plea bargaining. Modeled as anti-rigid gUFO Phase."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#PreTrialPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -881,8 +1035,6 @@ class PrisonSentence:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     concurrent_with: list[CriminalSentence] = field(default_factory=list)
@@ -905,23 +1057,29 @@ class ProbationOfficerRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
+
+
+@dataclass
+class ProbationSearchCondition:
+    """Condition authorizing probation-officer searches of person, property, residence, vehicle, or devices, typically on reasonable suspicion and at a reasonable time and manner."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#ProbationSearchCondition"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    condition_text: Optional[str] = field(default=None)
+    defendant_pays_cost: Optional[bool] = field(default=None)
+    requires_probation_approval: Optional[bool] = field(default=None)
 
 
 @dataclass
@@ -940,8 +1098,6 @@ class ProbationSentence:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     concurrent_with: list[CriminalSentence] = field(default_factory=list)
@@ -969,7 +1125,6 @@ class ProfessionalLicenseSurrenderCondition:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     condition_applies_to_person: list[Person] = field(default_factory=list)
     requires_license_surrender: list[ProfessionalLicense] = field(default_factory=list)
 
@@ -990,23 +1145,29 @@ class ProsecutorRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
+
+
+@dataclass
+class SORNAComplianceCondition:
+    """Condition requiring compliance with the Sex Offender Registration and Notification Act (34 U.S.C. § 20901 et seq.) as directed by the probation officer or registration authority."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#SORNAComplianceCondition"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    condition_text: Optional[str] = field(default=None)
+    defendant_pays_cost: Optional[bool] = field(default=None)
+    requires_probation_approval: Optional[bool] = field(default=None)
 
 
 @dataclass
@@ -1014,9 +1175,6 @@ class SentencingHearing:
     """Court proceeding where sentence is determined and imposed. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#SentencingHearing"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     bail_status: Optional[str] = field(default=None)
 
 
@@ -1025,28 +1183,6 @@ class SentencingPhase:
     """Phase focused on sentencing determination and imposition. Modeled as anti-rigid gUFO Phase."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#SentencingPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -1067,10 +1203,32 @@ class SentencingReasonablenessIssue:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     applies_standard_of_review: list[StandardOfReview] = field(default_factory=list)
     cites_evidence_rule: list[EvidenceRule] = field(default_factory=list)
     issue_disposition: list[AppellateDisposition] = field(default_factory=list)
+
+
+@dataclass
+class SexOffenderTreatmentCondition:
+    """Condition requiring participation in a sex-offense-specific treatment program, commonly including polygraph examination, confidentiality waiver, and cost provisions."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#SexOffenderTreatmentCondition"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    condition_text: Optional[str] = field(default=None)
+    defendant_pays_cost: Optional[bool] = field(default=None)
+    requires_probation_approval: Optional[bool] = field(default=None)
 
 
 @dataclass
@@ -1091,7 +1249,6 @@ class SexTrafficking:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1112,7 +1269,6 @@ class SextortionCharge:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1133,7 +1289,6 @@ class SexualExploitationOfMinorCharge:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1154,7 +1309,28 @@ class SolicitingExplicitMaterial:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
+
+
+@dataclass
+class SpecialAssessment:
+    """Mandatory special assessment imposed per count of conviction (18 U.S.C. § 3013), or a statute-specific additional assessment. Modeled as gUFO Object."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#SpecialAssessment"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    concurrent_with: list[CriminalSentence] = field(default_factory=list)
+    sentence_concurrency: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -1175,7 +1351,6 @@ class StandardOfReview:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     standard_of_review_type: Optional[str] = field(default=None)
 
 
@@ -1197,7 +1372,29 @@ class StateCharge:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
+
+
+@dataclass
+class SubstanceAbuseTreatmentCondition:
+    """Condition requiring substance-abuse testing and/or treatment (residential or outpatient), commonly with urinalysis limits, abstinence requirements, and cost provisions."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#SubstanceAbuseTreatmentCondition"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    condition_text: Optional[str] = field(default=None)
+    defendant_pays_cost: Optional[bool] = field(default=None)
+    requires_probation_approval: Optional[bool] = field(default=None)
 
 
 @dataclass
@@ -1218,10 +1415,31 @@ class SufficiencyOfEvidenceIssue:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     applies_standard_of_review: list[StandardOfReview] = field(default_factory=list)
     cites_evidence_rule: list[EvidenceRule] = field(default_factory=list)
     issue_disposition: list[AppellateDisposition] = field(default_factory=list)
+
+
+@dataclass
+class SupersedingIndictment:
+    """An indictment that replaces an earlier charging instrument in the same case, typically adding, modifying, or dropping counts or defendants. Modeled as gUFO Object."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#SupersedingIndictment"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    charging_instrument_counts: Optional[int] = field(default=None)
+    filed_date: Optional[TypedLiteral] = field(default=None)
 
 
 @dataclass
@@ -1240,12 +1458,33 @@ class SupervisedRelease:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
     concurrent_with: list[CriminalSentence] = field(default_factory=list)
     sentence_concurrency: Optional[str] = field(default=None)
+
+
+@dataclass
+class SupervisedReleaseCondition:
+    """A special condition of supervised release or probation imposed in a criminal judgment. Modeled as gUFO Object."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#SupervisedReleaseCondition"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    has_changed: Optional[bool] = field(default=None)
+    state: Optional[str] = field(default=None)
+    condition_text: Optional[str] = field(default=None)
+    defendant_pays_cost: Optional[bool] = field(default=None)
+    requires_probation_approval: Optional[bool] = field(default=None)
 
 
 @dataclass
@@ -1266,7 +1505,6 @@ class TraffickingOfPersonsForSexualServitudeCharge:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1287,7 +1525,7 @@ class TravelingToMeetAfterComputerLure:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[langString] = field(default=None)
+    label: Optional[TypedLiteral] = field(default=None)
     charge_classification: Optional[str] = field(default=None)
     florida_statute: Optional[str] = field(default=None)
     electronic_communication_used: Optional[bool] = field(default=None)
@@ -1299,28 +1537,6 @@ class TrialPhase:
     """Active trial phase with proceedings and evidence presentation. Modeled as anti-rigid gUFO Phase."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#TrialPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -1328,9 +1544,6 @@ class TrialProceeding:
     """Formal trial process with jury or judge determining guilt or innocence. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-outcomes#TrialProceeding"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     bail_status: Optional[str] = field(default=None)
 
 
@@ -1350,21 +1563,4 @@ class VictimRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 

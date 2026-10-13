@@ -7,6 +7,8 @@ from pathlib import Path
 from case_uco_generator.backends.base import CodegenBackend
 from case_uco_generator.schema_model import (
     OntologyClass,
+    OntologyProperty,
+    OntologySchema,
     OntologyVocab,
     compact_ontology_iri,
 )
@@ -14,6 +16,10 @@ from case_uco_generator.schema_model import (
 
 class RustBackend(CodegenBackend):
     """Generate Rust structs for CASE/UCO."""
+
+    def __init__(self, schema: OntologySchema, output_dir: Path):
+        super().__init__(schema, output_dir)
+        self._flat_cache: dict[str, list[OntologyProperty]] = {}
 
     def generate(self) -> list[Path]:
         created: list[Path] = []
@@ -107,10 +113,30 @@ class RustBackend(CodegenBackend):
         path.write_text("\n".join(lines), encoding="utf-8")
         return path
 
+    def _props(self, cls: OntologyClass) -> list[OntologyProperty]:
+        """Own and inherited properties, flattened because Rust structs do not inherit.
+
+        A subclass redeclaration wins over the inherited one, and two IRIs that
+        map to the same Rust field name keep the most derived declaration.
+        """
+        cached = self._flat_cache.get(cls.iri)
+        if cached is not None:
+            return cached
+        own_iris = {prop.iri for prop in cls.properties}
+        by_field: dict[str, OntologyProperty] = {}
+        for prop in self.schema.resolve_all_properties(cls):
+            field_name = self.safe_identifier(self.to_snake_case(prop.name), "rust")
+            if field_name in by_field and by_field[field_name].iri in own_iris:
+                continue
+            by_field[field_name] = prop
+        flat = sorted(by_field.values(), key=lambda p: p.iri)
+        self._flat_cache[cls.iri] = flat
+        return flat
+
     def _vocabs_for_module(self, classes: list[OntologyClass]) -> list[OntologyVocab]:
         vocab_iris: set[str] = set()
         for cls in classes:
-            for prop in cls.properties:
+            for prop in self._props(cls):
                 if prop.is_vocab_type and prop.range_iri in self.schema.vocabs:
                     vocab_iris.add(prop.range_iri)
         return [self.schema.vocabs[iri] for iri in sorted(vocab_iris)]
@@ -162,7 +188,7 @@ class RustBackend(CodegenBackend):
         }
 
         for cls in classes:
-            for prop in cls.properties:
+            for prop in self._props(cls):
                 if prop.is_xsd_type or prop.is_union:
                     continue
                 # Custom RDF datatypes serialize as lexical String — not imports.
@@ -223,11 +249,17 @@ class RustBackend(CodegenBackend):
         lines.append("    #[serde(skip_serializing)]")
         lines.append(f"    pub class_iri: &'static str,")
 
-        for prop in cls.properties:
+        for prop in self._props(cls):
             field_name = self.to_snake_case(prop.name)
             field_name = self.safe_identifier(field_name, "rust")
-            rs_type = self._rust_type(prop)
+            rs_type = self._rust_type(prop, cls)
             lines.append(f'    #[serde(rename = "{compact_ontology_iri(prop.iri)}")]')
+            if prop.binary_datatype:
+                encoding = "base64" if prop.binary_datatype == "xsd:base64Binary" else "hex"
+                shape = "vec" if prop.cardinality.is_list else "opt"
+                lines.append(
+                    f'    #[serde(serialize_with = "crate::graph::serialize_{encoding}_binary_{shape}")]'
+                )
             lines.append(f"    pub {field_name}: {rs_type},")
 
         lines.append("}")
@@ -240,7 +272,7 @@ class RustBackend(CodegenBackend):
         lines.append("")
         lines.append(f"    pub fn builder() -> {cls.name}Builder {{")
         lines.append(f"        {cls.name}Builder {{")
-        for prop in cls.properties:
+        for prop in self._props(cls):
             field_name = self.to_snake_case(prop.name)
             field_name = self.safe_identifier(field_name, "rust")
             default_value = "Vec::new()" if prop.cardinality.is_list else "None"
@@ -253,16 +285,16 @@ class RustBackend(CodegenBackend):
         # Builder struct
         lines.append(f"#[derive(Debug, Default, Clone)]")
         lines.append(f"pub struct {cls.name}Builder {{")
-        for prop in cls.properties:
+        for prop in self._props(cls):
             field_name = self.to_snake_case(prop.name)
             field_name = self.safe_identifier(field_name, "rust")
-            rs_type = self._rust_builder_type(prop)
+            rs_type = self._rust_type(prop, cls)
             lines.append(f"    {field_name}: {rs_type},")
         lines.append("}")
         lines.append("")
 
         lines.append(f"impl {cls.name}Builder {{")
-        for prop in cls.properties:
+        for prop in self._props(cls):
             field_name = self.to_snake_case(prop.name)
             field_name = self.safe_identifier(field_name, "rust")
             base_type = prop.type_name_for("rust")
@@ -275,6 +307,8 @@ class RustBackend(CodegenBackend):
             lines.append(f"    pub fn {field_name}(mut self, value: {param_type}) -> Self {{")
             if prop.cardinality.is_list:
                 lines.append(f"        self.{field_name} = value;")
+            elif self._is_self_reference(prop, cls):
+                lines.append(f"        self.{field_name} = Some(Box::new(value));")
             else:
                 lines.append(f"        self.{field_name} = Some(value);")
             lines.append("        self")
@@ -284,7 +318,7 @@ class RustBackend(CodegenBackend):
         lines.append(f"    pub fn build(self) -> {cls.name} {{")
         lines.append(f"        {cls.name} {{")
         lines.append(f'            class_iri: {cls.name}::CLASS_IRI,')
-        for prop in cls.properties:
+        for prop in self._props(cls):
             field_name = self.to_snake_case(prop.name)
             field_name = self.safe_identifier(field_name, "rust")
             lines.append(f"            {field_name}: self.{field_name},")
@@ -297,7 +331,7 @@ class RustBackend(CodegenBackend):
         lines.append(f'    fn class_iri() -> &\'static str {{ {cls.name}::CLASS_IRI }}')
         lines.append(f'    fn type_name() -> &\'static str {{ "{cls.name}" }}')
 
-        required_props = [p for p in cls.properties if p.cardinality.is_required]
+        required_props = [p for p in self._props(cls) if p.cardinality.is_required]
         if required_props:
             lines.append("    fn validate(&self) -> Result<(), String> {")
             for prop in required_props:
@@ -317,14 +351,14 @@ class RustBackend(CodegenBackend):
 
         return lines
 
-    def _rust_type(self, prop: OntologyProperty) -> str:
-        base = prop.type_name_for("rust")
-        if prop.cardinality.is_list:
-            return f"Vec<{base}>"
-        return f"Option<{base}>"
+    def _is_self_reference(self, prop: OntologyProperty, cls: OntologyClass) -> bool:
+        return not prop.cardinality.is_list and prop.type_name_for("rust") == cls.name
 
-    def _rust_builder_type(self, prop: OntologyProperty) -> str:
+    def _rust_type(self, prop: OntologyProperty, cls: OntologyClass) -> str:
         base = prop.type_name_for("rust")
         if prop.cardinality.is_list:
             return f"Vec<{base}>"
+        if self._is_self_reference(prop, cls):
+            # A struct cannot hold itself by value (IdentityAbstraction.created_by).
+            return f"Option<Box<{base}>>"
         return f"Option<{base}>"

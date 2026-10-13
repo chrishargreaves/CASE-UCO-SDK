@@ -11,6 +11,7 @@ public class AndroidDeviceFacet extends Facet {
     public static final String NAMESPACE_PREFIX = "uco-observable";
 
     private String androidFingerprint;
+    @org.caseontology.CaseDatatype("xsd:hexBinary")
     private byte[] androidID;
     private String androidVersion;
     private Boolean isADBRootEnabled;

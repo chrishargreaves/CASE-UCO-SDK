@@ -1,5 +1,5 @@
 {
-  "description": "Suggested SOLVE-IT techniques for common law-enforcement digital forensics products. These are capability hints, not asserted executions. Record usedTechnique only when the source establishes that the technique was performed.",
+  "description": "Suggested SOLVE-IT techniques for common law-enforcement digital forensics products. These are capability hints, not asserted executions. Type an action with a SOLVE-IT technique class only when the source establishes that the technique was performed.",
   "issue": 126,
   "products": [
     {

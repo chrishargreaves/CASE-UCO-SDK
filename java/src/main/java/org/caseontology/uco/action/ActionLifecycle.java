@@ -11,6 +11,7 @@ public class ActionLifecycle extends Action {
     public static final String NAMESPACE_PREFIX = "uco-action";
 
     private List<Long> actionCount;
+    private String actionStatus;
     private List<java.time.ZonedDateTime> endTime;
     private List<UcoObject> error;
     @org.caseontology.CaseRequired
@@ -26,6 +27,9 @@ public class ActionLifecycle extends Action {
 
     public List<Long> getActionCountValue() { return this.actionCount; }
     public ActionLifecycle setActionCountValue(List<Long> value) { this.actionCount = value; return this; }
+
+    public String getActionStatusValue() { return this.actionStatus; }
+    public ActionLifecycle setActionStatusValue(String value) { this.actionStatus = value; return this; }
 
     public List<java.time.ZonedDateTime> getEndTimeValue() { return this.endTime; }
     public ActionLifecycle setEndTimeValue(List<java.time.ZonedDateTime> value) { this.endTime = value; return this; }

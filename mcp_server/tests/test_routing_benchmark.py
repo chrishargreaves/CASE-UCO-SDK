@@ -126,6 +126,18 @@ BENCHMARK = [
         [],
         "negative",
     ),
+    (
+        "Observation of a new particle in the search for the Standard Model "
+        "Higgs boson with the ATLAS detector. A local significance is reported.",
+        [],
+        "negative",
+    ),
+    (
+        "Netflix paid memberships, retention, and content assets over a decade "
+        "of public filings.",
+        [],
+        "negative",
+    ),
 ]
 
 

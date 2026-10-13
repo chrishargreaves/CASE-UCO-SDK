@@ -162,14 +162,13 @@ def build_lab_join(
 
     graph.upsert_node(
         "kb:action-hashset",
-        types="solveit-core:SolveitInvestigativeAction",
+        types=["solveit-core:SolveitInvestigativeAction", DFT_1050],
         properties={
             "uco-core:name": "Locate known CSAM with a hashset",
             "uco-core:description": (
                 "Lab hash-match CSV: known-CSAM digest matched NCMEC set. "
                 "Source: lab/hashmatch.csv."
             ),
-            "solveit-core:usedTechnique": {"@id": DFT_1050},
             "uco-action:instrument": {"@id": graph.get_id(hash_tool)},
             "uco-action:object": {"@id": graph.get_id(evidence)},
             "uco-action:result": {"@id": graph.get_id(evidence)},
@@ -177,14 +176,13 @@ def build_lab_join(
     )
     graph.upsert_node(
         "kb:action-mobile",
-        types="solveit-core:SolveitInvestigativeAction",
+        types=["solveit-core:SolveitInvestigativeAction", DFT_1020],
         properties={
             "uco-core:name": "Extract mobile file system",
             "uco-core:description": (
                 f"UFED-style summary for {ufed['device_name']}. "
                 "Source: lab/ufed_summary.json."
             ),
-            "solveit-core:usedTechnique": {"@id": DFT_1020},
             "uco-action:instrument": {"@id": graph.get_id(ufed_tool)},
             "uco-action:result": {"@id": graph.get_id(extract)},
         },

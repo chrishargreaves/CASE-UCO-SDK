@@ -19,7 +19,7 @@ transfer. The held-out corpus is evaluation data the router implementation
 must not be tuned against.
 
 The MCP server is always driven by *some* LLM agent — anything from a small
-local model (e.g. Gemma-class, on closed Link-Look deployments) to a
+local model (e.g. Gemma-class, on closed deployments) to a
 frontier model. The deterministic router is the stage that must behave
 identically regardless of which model calls it, which is exactly what this
 harness measures: the corpus is evaluated **without any LLM in the loop**,

@@ -358,6 +358,109 @@ def _extract_properties(
     return sorted(resolved, key=lambda p: p.iri)
 
 
+def _forbidden_paths(
+    g: Graph,
+    shape_iris: list[str],
+    class_iri: str | None = None,
+) -> set[str]:
+    """Return property paths that a class's own shapes cap at ``sh:maxCount 0``.
+
+    Only shapes at the default ``sh:Violation`` severity count. UCO uses
+    ``sh:maxCount 0`` with ``sh:severity sh:Warning`` to announce deprecations
+    (``manufacturer`` on ``OperatingSystemFacet``), which stay usable.
+    """
+    class_ns = iri_namespace(class_iri) if class_iri else None
+    paths: set[str] = set()
+    for shape_iri in shape_iris:
+        if class_ns is not None and iri_namespace(shape_iri) != class_ns:
+            continue
+        for prop_shape in g.objects(URIRef(shape_iri), SH.property):
+            path = g.value(prop_shape, SH.path)
+            max_raw = g.value(prop_shape, SH.maxCount)
+            severity = g.value(prop_shape, SH.severity)
+            if severity is not None and severity != SH.Violation:
+                continue
+            if isinstance(path, URIRef) and max_raw is not None and int(max_raw) == 0:
+                paths.add(str(path))
+    return paths
+
+
+def _with_required(cardinality: Cardinality) -> Cardinality:
+    return Cardinality.ONE_OR_MORE if cardinality.is_list else Cardinality.EXACTLY_ONE
+
+
+def _without_required(cardinality: Cardinality) -> Cardinality:
+    return Cardinality.ZERO_OR_MORE if cardinality.is_list else Cardinality.ZERO_OR_ONE
+
+
+def _reconcile_inherited_constraints(
+    schema: OntologySchema, forbidden_by_class: dict[str, set[str]]
+) -> None:
+    """Carry parent shape constraints onto subclasses that redeclare a property.
+
+    SHACL shapes on a parent class also apply to every subclass instance, so a
+    subclass that redeclares ``uco-core:source`` without ``sh:minCount`` is
+    still bound by the parent's ``sh:minCount 1``. A subclass shape with
+    ``sh:maxCount 0`` forbids the property for itself and its descendants.
+    List-ness stays as the subclass declares it, so generated APIs keep their
+    shape.
+    """
+    effective: dict[str, dict[str, OntologyProperty]] = {}
+
+    def resolve(cls: OntologyClass, stack: frozenset[str]) -> dict[str, OntologyProperty]:
+        if cls.iri in effective:
+            return effective[cls.iri]
+        inherited: dict[str, OntologyProperty] = {}
+        for parent_iri in cls.parent_iris:
+            parent = schema.classes.get(parent_iri)
+            if parent is None or parent_iri in stack:
+                continue
+            for iri, prop in resolve(parent, stack | {cls.iri}).items():
+                current = inherited.get(iri)
+                if current is None:
+                    inherited[iri] = prop
+                else:
+                    inherited[iri] = replace(
+                        current,
+                        cardinality=_merge_cardinality(current.cardinality, prop.cardinality),
+                        forbidden=current.forbidden or prop.forbidden,
+                    )
+
+        own: list[OntologyProperty] = []
+        for prop in cls.properties:
+            parent_prop = inherited.get(prop.iri)
+            forbidden = prop.forbidden or prop.iri in forbidden_by_class.get(cls.iri, ())
+            if parent_prop is not None:
+                forbidden = forbidden or parent_prop.forbidden
+                if parent_prop.cardinality.is_required and not prop.cardinality.is_required:
+                    prop = replace(prop, cardinality=_with_required(prop.cardinality))
+            if forbidden:
+                prop = replace(prop, forbidden=True, cardinality=_without_required(prop.cardinality))
+            own.append(prop)
+
+        own_iris = {prop.iri for prop in own}
+        for path in sorted(forbidden_by_class.get(cls.iri, ())):
+            if path in own_iris or path not in inherited:
+                continue
+            parent_prop = inherited[path]
+            own.append(
+                replace(
+                    parent_prop,
+                    forbidden=True,
+                    cardinality=_without_required(parent_prop.cardinality),
+                )
+            )
+        cls.properties = sorted(own, key=lambda p: p.iri)
+
+        merged = dict(inherited)
+        merged.update({prop.iri: prop for prop in cls.properties})
+        effective[cls.iri] = merged
+        return merged
+
+    for cls in list(schema.classes.values()):
+        resolve(cls, frozenset())
+
+
 def _extract_vocab_members(g: Graph, vocab_iri: str) -> list[str]:
     """Extract the enumerated members of a vocabulary type."""
     members: list[str] = []
@@ -419,6 +522,8 @@ _NON_EXTENSION_DIRS = {"CASE", "UCO", "upper"}
 def load_extensions(
     g: Graph,
     extensions_dir: Path | list[Path],
+    catalogs: dict[str, str] | None = None,
+    include_private: frozenset[str] = frozenset(),
 ) -> dict[str, tuple[str, str]]:
     """Load extension ontology TTL files into the graph and return namespace mappings.
 
@@ -432,6 +537,11 @@ def load_extensions(
     heuristic for directories without a manifest (e.g., toolcap) — but only
     inside an ``extensions/`` root, so that CASE/UCO submodules and vendored
     upper ontologies under ``ontology/`` are never swept in as extensions.
+
+    An extension whose manifest sets ``class_registry: false`` is not loaded;
+    its name and display name are recorded in ``catalogs`` instead. An
+    extension with ``distribution: private`` is not loaded or listed at all
+    unless its name is in ``include_private``.
 
     Returns a dict mapping namespace URI -> (top_level, module) for each
     extension directory found.
@@ -455,6 +565,13 @@ def load_extensions(
             manifest = load_extension_manifest(ext_dir)
             if manifest is not None:
                 seen_names.add(ext_name)
+                if manifest.get("distribution") == "private" and ext_name not in include_private:
+                    logger.info("Skipping private extension %s", ext_name)
+                    continue
+                if manifest.get("class_registry", True) is False:
+                    if catalogs is not None:
+                        catalogs[manifest["name"]] = manifest.get("display_name", manifest["name"])
+                    continue
                 ttl_count += _load_extension_from_manifest(g, ext_dir, manifest, ext_modules)
             elif root.name == "extensions":
                 seen_names.add(ext_name)
@@ -545,6 +662,7 @@ def _load_extension_legacy(
 def parse_ontology(
     ontology_root: Path,
     extensions_dir: Path | list[Path] | None = None,
+    include_private: frozenset[str] = frozenset(),
 ) -> OntologySchema:
     """Parse the UCO/CASE ontology and return a typed schema model.
 
@@ -555,10 +673,11 @@ def parse_ontology(
     g = load_ontology(ontology_root)
 
     ext_modules: dict[str, tuple[str, str]] = {}
+    catalogs: dict[str, str] = {}
     if extensions_dir is not None:
-        ext_modules = load_extensions(g, extensions_dir)
+        ext_modules = load_extensions(g, extensions_dir, catalogs, include_private)
 
-    schema = OntologySchema()
+    schema = OntologySchema(catalog_extensions=catalogs)
 
     # Extract namespace prefixes from the graph
     for prefix, ns_uri in g.namespaces():
@@ -621,6 +740,7 @@ def parse_ontology(
         len(class_data) - shape_class_count,
     )
 
+    forbidden_by_class: dict[str, set[str]] = {}
     for cls_iri, data in class_data.items():
         classification = _classify_module(cls_iri, ext_modules)
         if classification is None:
@@ -631,6 +751,9 @@ def parse_ontology(
 
         is_facet = _is_subclass_of(g, cls_iri, FACET_IRI)
         properties = _extract_properties(g, sorted(data["shapes"]), class_iri=cls_iri)
+        forbidden = _forbidden_paths(g, sorted(data["shapes"]), class_iri=cls_iri)
+        if forbidden:
+            forbidden_by_class[cls_iri] = forbidden
 
         ont_class = OntologyClass(
             iri=cls_iri,
@@ -641,12 +764,17 @@ def parse_ontology(
             properties=properties,
             is_facet=is_facet,
             description=data["comment"],
+            equivalent_iris=sorted(
+                str(o) for o in g.objects(URIRef(cls_iri), OWL.equivalentClass) if isinstance(o, URIRef)
+            ),
         )
         schema.classes[cls_iri] = ont_class
 
         if module_key not in schema.modules:
             schema.modules[module_key] = []
         schema.modules[module_key].append(cls_iri)
+
+    _reconcile_inherited_constraints(schema, forbidden_by_class)
 
     # Extract vocabulary types
     vocab_results = g.query(VOCABS_QUERY)

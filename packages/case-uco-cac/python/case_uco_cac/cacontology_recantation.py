@@ -22,8 +22,6 @@ class CommunityPressureRisk:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     risk_factor_category: Optional[str] = field(default=None)
 
 
@@ -45,7 +43,6 @@ class DisclosureStatement:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     statement_about_event: Optional[Crime] = field(default=None)
     statement_date: Optional[datetime] = field(default=None)
     statement_made_by: Optional[Person] = field(default=None)
@@ -68,8 +65,6 @@ class OffenderContactRisk:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     risk_factor_category: Optional[str] = field(default=None)
 
 
@@ -91,7 +86,6 @@ class PartialRecantationStatement:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     statement_about_event: Optional[Crime] = field(default=None)
     statement_date: Optional[datetime] = field(default=None)
     statement_made_by: Optional[Person] = field(default=None)
@@ -117,7 +111,6 @@ class PostDisclosureDenialStatement:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     statement_about_event: Optional[Crime] = field(default=None)
     statement_date: Optional[datetime] = field(default=None)
     statement_made_by: Optional[Person] = field(default=None)
@@ -129,9 +122,6 @@ class PostRecantationForensicInterview:
     """A follow-up forensic interview conducted after recantation or denial to explore circumstances, pressure, and statement change dynamics."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/recantation#PostRecantationForensicInterview"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -144,7 +134,7 @@ class PostRecantationForensicInterview:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -178,7 +168,6 @@ class ReaffirmedDisclosureStatement:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     statement_about_event: Optional[Crime] = field(default=None)
     statement_date: Optional[datetime] = field(default=None)
     statement_made_by: Optional[Person] = field(default=None)
@@ -191,9 +180,6 @@ class RecantationAssessment:
     """An investigative or prosecutorial assessment of a recantation, its credibility, surrounding pressures, and implications for case strategy."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/recantation#RecantationAssessment"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -206,7 +192,7 @@ class RecantationAssessment:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -227,9 +213,6 @@ class RecantationNotification:
     """An action in which a family member, caregiver, professional, or other person reports that a child has recanted or denied an earlier disclosure."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/recantation#RecantationNotification"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     notification_channel: Optional[str] = field(default=None)
 
 
@@ -238,9 +221,6 @@ class RecantationPressure:
     """A coercive or inducement-bearing action intended to influence a victim to deny, minimize, or retract a disclosure."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/recantation#RecantationPressure"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     pressure_method: Optional[str] = field(default=None)
 
 
@@ -260,8 +240,6 @@ class RecantationRiskFactor:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     risk_factor_category: Optional[str] = field(default=None)
 
 
@@ -283,7 +261,6 @@ class RecantationStatement:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     statement_about_event: Optional[Crime] = field(default=None)
     statement_date: Optional[datetime] = field(default=None)
     statement_made_by: Optional[Person] = field(default=None)
@@ -307,8 +284,6 @@ class SiblingSeparationConcern:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     risk_factor_category: Optional[str] = field(default=None)
 
 
@@ -317,7 +292,6 @@ class StatementChangeContext:
     """A situation capturing the social, familial, investigative, and coercive conditions surrounding a victim's change in statement."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/recantation#StatementChangeContext"
-    label: list[str] = field(default_factory=list)
     assessed_by_action: list[RecantationAssessment] = field(default_factory=list)
     has_recantation_risk_factor: list[RecantationRiskFactor] = field(default_factory=list)
     reported_through_notification: Optional[RecantationNotification] = field(default=None)
@@ -339,8 +313,6 @@ class SystemInterventionFear:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     risk_factor_category: Optional[str] = field(default=None)
 
 
@@ -362,7 +334,6 @@ class TentativeDisclosureStatement:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     statement_about_event: Optional[Crime] = field(default=None)
     statement_date: Optional[datetime] = field(default=None)
     statement_made_by: Optional[Person] = field(default=None)
@@ -385,8 +356,6 @@ class UnsupportiveFamilyResponse:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     risk_factor_category: Optional[str] = field(default=None)
 
 
@@ -408,7 +377,6 @@ class VictimStatement:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     statement_about_event: Optional[Crime] = field(default=None)
     statement_date: Optional[datetime] = field(default=None)
     statement_made_by: Optional[Person] = field(default=None)

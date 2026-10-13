@@ -113,6 +113,12 @@ _STANDARD_PREFIXES: dict[str, str] = {
     "prof": "http://www.w3.org/ns/dx/prof/",
     "gufo": "http://purl.org/nemo/gufo#",
     "obo": "http://purl.obolibrary.org/obo/",
+    "qudt": "http://qudt.org/schema/qudt/",
+    "unit": "http://qudt.org/vocab/unit/",
+    "quantitykind": "http://qudt.org/vocab/quantitykind/",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "ssn": "http://www.w3.org/ns/ssn/",
+    "ssn-system": "http://www.w3.org/ns/ssn/systems/",
 }
 _FOUNDATIONAL_NAMESPACES = frozenset(
     _STANDARD_PREFIXES[prefix] for prefix in _FOUNDATIONAL_PREFIXES
@@ -130,6 +136,7 @@ class OntologyCatalog:
     extensions: tuple[str, ...] = ()
     profiles: tuple[str, ...] = ()
     parse_errors: tuple[str, ...] = ()
+    validation_subsets: frozenset[str] = frozenset()
 
 
 @dataclass(frozen=True)
@@ -293,6 +300,16 @@ def build_catalog(project_root: Path = PROJECT_ROOT) -> OntologyCatalog:
         other_terms.update(entry.get("individuals") or [])
         other_terms.update(entry.get("datatypes") or [])
 
+    validation_subsets = set()
+    for manifest_path, data in manifests:
+        name = str(data.get("name") or "")
+        if not name:
+            continue
+        validation_subsets.add(f"{name}:full")
+        for subset in manifest_path.parent.glob("validation-subset-*.json"):
+            mode = subset.stem.removeprefix("validation-subset-")
+            validation_subsets.add(f"{name}:{mode}")
+
     parse_errors = tuple(unresolved_parse_errors)
     return OntologyCatalog(
         prefixes=prefixes,
@@ -304,6 +321,7 @@ def build_catalog(project_root: Path = PROJECT_ROOT) -> OntologyCatalog:
         extensions=extension_names,
         profiles=tuple(sorted(profiles)),
         parse_errors=parse_errors,
+        validation_subsets=frozenset(validation_subsets),
     )
 
 
@@ -801,6 +819,8 @@ def lint_recipe_text(
                 continue
             seen_line_terms.add(dedupe_key)
             terms_checked += 1
+            if term in catalog.validation_subsets:
+                continue
             exclusion = _exclusion_for(
                 line_index=index,
                 role=role,
@@ -825,6 +845,13 @@ def lint_recipe_text(
                 continue
             iri = f"{namespace}{local}"
             if namespace in _FOUNDATIONAL_NAMESPACES:
+                continue
+            class_part, dot, property_part = local.partition(".")
+            if (
+                dot
+                and f"{namespace}{class_part}" in catalog.classes
+                and f"{namespace}{property_part}" in catalog.properties
+            ):
                 continue
             if role == "class":
                 if iri in catalog.classes or iri in catalog.other_terms:
@@ -983,7 +1010,7 @@ def lint_recipe_text(
                     )
                 else:
                     local = label
-                    valid = label in relationship_kinds
+                    valid = label in relationship_kinds or label in catalog.class_local_names
                 if valid:
                     continue
                 exclusion = _exclusion_for(

@@ -15,23 +15,23 @@
   },
   "@graph": [
     {
-      "@id": "kb:Identity-355390ba-8158-4b82-a473-f8e7351344fb",
+      "@id": "kb:Identity-4b4996cf-09e2-48ad-aacd-8e04eb485d8a",
       "@type": "uco-identity:Identity",
       "uco-core:name": "Apple Inc."
     },
     {
-      "@id": "kb:ObservableObject-39c9de57-504f-466c-bbd7-753ba6e6f2bd",
+      "@id": "kb:ObservableObject-8a1287d8-916b-4ecd-bccd-5266a0e8c822",
       "@type": "uco-observable:ObservableObject",
       "uco-core:description": [
         "Hardware model iPhone12,1 (iPhone 11) from crashes_and_spins/stacks-2024-08-02-161926.ips header (\"product\": \"iPhone12,1\")."
       ],
       "uco-core:hasFacet": [
         {
-          "@id": "kb:DeviceFacet-fad81627-e47f-4dec-a2da-1e739de03889",
+          "@id": "kb:DeviceFacet-627d0218-eb7c-4704-9c3c-04b15ff89a03",
           "@type": "uco-observable:DeviceFacet",
           "uco-observable:deviceType": "Mobile Phone",
           "uco-observable:manufacturer": {
-            "@id": "kb:Identity-355390ba-8158-4b82-a473-f8e7351344fb"
+            "@id": "kb:Identity-4b4996cf-09e2-48ad-aacd-8e04eb485d8a"
           },
           "uco-observable:model": "iPhone12,1"
         }
@@ -39,7 +39,7 @@
       "uco-core:name": "iPhone (sysdiagnose 2024-08-02)"
     },
     {
-      "@id": "kb:OperatingSystem-5feec030-2f1f-47af-8d5c-c2d890862dc2",
+      "@id": "kb:OperatingSystem-7d0e4fe3-09ac-4bab-8028-7e24b5f30f4b",
       "@type": [
         "uco-observable:OperatingSystem",
         "uco-observable:Software"
@@ -49,10 +49,10 @@
       ],
       "uco-core:hasFacet": [
         {
-          "@id": "kb:SoftwareFacet-aca03499-4988-4fdc-94d9-500b5e0e5a21",
+          "@id": "kb:SoftwareFacet-c9336213-49ac-44bc-b1e9-9e1686e23fea",
           "@type": "uco-observable:SoftwareFacet",
           "uco-observable:manufacturer": {
-            "@id": "kb:Identity-355390ba-8158-4b82-a473-f8e7351344fb"
+            "@id": "kb:Identity-4b4996cf-09e2-48ad-aacd-8e04eb485d8a"
           },
           "uco-observable:version": "17.3"
         }
@@ -60,7 +60,7 @@
       "uco-core:name": "iPhone OS 17.3 (21D50)"
     },
     {
-      "@id": "kb:ObservableRelationship-213440cd-1bad-43e2-abe9-06194a5d55a0",
+      "@id": "kb:ObservableRelationship-87831090-471f-421d-b459-2eb6416adf29",
       "@type": "uco-observable:ObservableRelationship",
       "uco-core:isDirectional": {
         "@type": "xsd:boolean",
@@ -69,22 +69,22 @@
       "uco-core:kindOfRelationship": "Characterized_By",
       "uco-core:source": [
         {
-          "@id": "kb:ObservableObject-39c9de57-504f-466c-bbd7-753ba6e6f2bd"
+          "@id": "kb:ObservableObject-8a1287d8-916b-4ecd-bccd-5266a0e8c822"
         }
       ],
       "uco-core:target": {
-        "@id": "kb:OperatingSystem-5feec030-2f1f-47af-8d5c-c2d890862dc2"
+        "@id": "kb:OperatingSystem-7d0e4fe3-09ac-4bab-8028-7e24b5f30f4b"
       }
     },
     {
-      "@id": "kb:ObservableObject-4083924b-573b-4e9e-b884-82a44275d7d1",
+      "@id": "kb:ObservableObject-1ce1d8a7-439e-4c46-bf7c-3938e704c147",
       "@type": "uco-observable:ObservableObject",
       "uco-core:description": [
         "Apple sysdiagnose archive root: summaries/, logs/, WiFi/, system_logs.logarchive, crashes_and_spins/, Preferences/, etc."
       ],
       "uco-core:hasFacet": [
         {
-          "@id": "kb:FileFacet-c07be958-53b6-43ce-88a7-3412758c315b",
+          "@id": "kb:FileFacet-03bc80ba-dc82-45c4-a914-73e2797b4e43",
           "@type": "uco-observable:FileFacet",
           "uco-observable:fileName": [
             "sysdiagnose_2024.08.02_16-19-26-0400_iPhone-OS_iPhone_21D50"
@@ -107,7 +107,7 @@
       ]
     },
     {
-      "@id": "kb:ObservableRelationship-0c3ab32c-7d5c-41e3-95d7-bfb378e69caa",
+      "@id": "kb:ObservableRelationship-a89ead35-7f5b-44b0-a2d2-6c0d5a6b434d",
       "@type": "uco-observable:ObservableRelationship",
       "uco-core:isDirectional": {
         "@type": "xsd:boolean",
@@ -116,15 +116,15 @@
       "uco-core:kindOfRelationship": "Extracted_From",
       "uco-core:source": [
         {
-          "@id": "kb:ObservableObject-4083924b-573b-4e9e-b884-82a44275d7d1"
+          "@id": "kb:ObservableObject-1ce1d8a7-439e-4c46-bf7c-3938e704c147"
         }
       ],
       "uco-core:target": {
-        "@id": "kb:ObservableObject-39c9de57-504f-466c-bbd7-753ba6e6f2bd"
+        "@id": "kb:ObservableObject-8a1287d8-916b-4ecd-bccd-5266a0e8c822"
       }
     },
     {
-      "@id": "kb:AppleUnifiedLogArchive-1b0a7ab7-79d5-40d2-bba5-058dff985cc4",
+      "@id": "kb:AppleUnifiedLogArchive-9dc1bbbc-c8bb-46c2-a7df-cd5a9b174258",
       "@type": [
         "solveit-observable:AppleUnifiedLogArchive",
         "uco-observable:EventLog"
@@ -134,7 +134,7 @@
       ],
       "uco-core:hasFacet": [
         {
-          "@id": "kb:FileFacet-fdeac571-705c-4be6-88e3-51f944cb72db",
+          "@id": "kb:FileFacet-1dd370b6-6ffe-4be0-97cc-4c578d65ace1",
           "@type": "uco-observable:FileFacet",
           "uco-observable:fileName": [
             "system_logs.logarchive"
@@ -161,7 +161,7 @@
       ]
     },
     {
-      "@id": "kb:ObservableRelationship-ccb77d4e-ac0d-4fe0-bb42-f9ec75dfa785",
+      "@id": "kb:ObservableRelationship-12f1ff2f-2648-4781-b64a-c503ee7eac0c",
       "@type": "uco-observable:ObservableRelationship",
       "uco-core:isDirectional": {
         "@type": "xsd:boolean",
@@ -170,19 +170,19 @@
       "uco-core:kindOfRelationship": "Contained_Within",
       "uco-core:source": [
         {
-          "@id": "kb:AppleUnifiedLogArchive-1b0a7ab7-79d5-40d2-bba5-058dff985cc4"
+          "@id": "kb:AppleUnifiedLogArchive-9dc1bbbc-c8bb-46c2-a7df-cd5a9b174258"
         }
       ],
       "uco-core:target": {
-        "@id": "kb:ObservableObject-4083924b-573b-4e9e-b884-82a44275d7d1"
+        "@id": "kb:ObservableObject-1ce1d8a7-439e-4c46-bf7c-3938e704c147"
       }
     },
     {
-      "@id": "kb:ObservableObject-3c258d53-b3d4-4643-80fc-7818814efb36",
+      "@id": "kb:ObservableObject-8d41d9e6-d9a6-4e51-842e-395dc0e41ed0",
       "@type": "uco-observable:ObservableObject",
       "uco-core:hasFacet": [
         {
-          "@id": "kb:FileFacet-06b1faf6-4a67-4c8d-b661-0c2f0a7fae92",
+          "@id": "kb:FileFacet-89a3e8aa-e079-40db-9ea8-9f4d3ac78a6d",
           "@type": "uco-observable:FileFacet",
           "uco-observable:fileName": [
             "com.apple.wifi-private-mac-networks.plist"
@@ -203,7 +203,7 @@
       ]
     },
     {
-      "@id": "kb:ObservableRelationship-d7f46703-1503-4d8e-ba77-5b65ab525cbe",
+      "@id": "kb:ObservableRelationship-56cc07f7-8a7d-4dd1-8534-70be9486f349",
       "@type": "uco-observable:ObservableRelationship",
       "uco-core:isDirectional": {
         "@type": "xsd:boolean",
@@ -212,19 +212,19 @@
       "uco-core:kindOfRelationship": "Contained_Within",
       "uco-core:source": [
         {
-          "@id": "kb:ObservableObject-3c258d53-b3d4-4643-80fc-7818814efb36"
+          "@id": "kb:ObservableObject-8d41d9e6-d9a6-4e51-842e-395dc0e41ed0"
         }
       ],
       "uco-core:target": {
-        "@id": "kb:ObservableObject-4083924b-573b-4e9e-b884-82a44275d7d1"
+        "@id": "kb:ObservableObject-1ce1d8a7-439e-4c46-bf7c-3938e704c147"
       }
     },
     {
-      "@id": "kb:ObservableObject-113a3866-2a1f-44ec-97b8-a12f9d4b0103",
+      "@id": "kb:ObservableObject-69fd1b72-9770-4121-aee1-30abc85278c8",
       "@type": "uco-observable:ObservableObject",
       "uco-core:hasFacet": [
         {
-          "@id": "kb:MACAddressFacet-dc96ef72-02df-47c5-8a60-5137f87bf4a9",
+          "@id": "kb:MACAddressFacet-c132f519-4d6e-4760-8231-c43a962ec878",
           "@type": "uco-observable:MACAddressFacet",
           "uco-observable:addressValue": "6a:22:32:98:f4:df"
         }
@@ -232,14 +232,14 @@
       "uco-core:name": "BSSID 6a:22:32:98:f4:df"
     },
     {
-      "@id": "kb:WirelessNetworkConnection-f0e3cc9e-8120-410a-9dc7-8d2900b95756",
+      "@id": "kb:WirelessNetworkConnection-ac493a4b-dbe0-4c73-8f42-3a02f6ae4d33",
       "@type": "uco-observable:WirelessNetworkConnection",
       "uco-core:description": [
         "Source: WiFi/com.apple.wifi-private-mac-networks.plist entry SSID_STR=Matt_Foley, BSSID=6a:22:32:98:f4:df, lastJoined=2023-07-15 19:44:33"
       ],
       "uco-core:hasFacet": [
         {
-          "@id": "kb:WirelessNetworkConnectionFacet-38d7b195-dcf5-45de-a998-366fa6ec7422",
+          "@id": "kb:WirelessNetworkConnectionFacet-e2cb27d4-dff9-4169-918d-1db7a1bd1c05",
           "@type": "uco-observable:WirelessNetworkConnectionFacet",
           "uco-observable:baseStation": "6a:22:32:98:f4:df",
           "uco-observable:ssid": "Matt_Foley"
@@ -248,7 +248,7 @@
       "uco-core:name": "Wi-Fi network Matt_Foley"
     },
     {
-      "@id": "kb:ObservableRelationship-67cbc069-36cf-46d7-ab5b-b3d992c283c1",
+      "@id": "kb:ObservableRelationship-41130e6d-66e7-4ada-8825-c74ef031ddea",
       "@type": "uco-observable:ObservableRelationship",
       "uco-core:isDirectional": {
         "@type": "xsd:boolean",
@@ -257,15 +257,15 @@
       "uco-core:kindOfRelationship": "Characterized_By",
       "uco-core:source": [
         {
-          "@id": "kb:WirelessNetworkConnection-f0e3cc9e-8120-410a-9dc7-8d2900b95756"
+          "@id": "kb:WirelessNetworkConnection-ac493a4b-dbe0-4c73-8f42-3a02f6ae4d33"
         }
       ],
       "uco-core:target": {
-        "@id": "kb:ObservableObject-3c258d53-b3d4-4643-80fc-7818814efb36"
+        "@id": "kb:ObservableObject-8d41d9e6-d9a6-4e51-842e-395dc0e41ed0"
       }
     },
     {
-      "@id": "kb:ObservableRelationship-fec8acd8-3249-4660-b326-e96a5b4bcded",
+      "@id": "kb:ObservableRelationship-14fefd3a-ac9b-457f-b0a9-50c9a81746fb",
       "@type": "uco-observable:ObservableRelationship",
       "uco-core:isDirectional": {
         "@type": "xsd:boolean",
@@ -274,22 +274,22 @@
       "uco-core:kindOfRelationship": "Resolved_To",
       "uco-core:source": [
         {
-          "@id": "kb:WirelessNetworkConnection-f0e3cc9e-8120-410a-9dc7-8d2900b95756"
+          "@id": "kb:WirelessNetworkConnection-ac493a4b-dbe0-4c73-8f42-3a02f6ae4d33"
         }
       ],
       "uco-core:target": {
-        "@id": "kb:ObservableObject-113a3866-2a1f-44ec-97b8-a12f9d4b0103"
+        "@id": "kb:ObservableObject-69fd1b72-9770-4121-aee1-30abc85278c8"
       }
     },
     {
-      "@id": "kb:ObservableObject-9075ef6a-2e98-4dbf-9796-81bf371b9f2b",
+      "@id": "kb:ObservableObject-609e6a7a-11b9-4228-89c2-40fd078d7a2b",
       "@type": "uco-observable:ObservableObject",
       "uco-core:description": [
         "Battery Data Collection daily CSV: TimeStamp, WeightedRa, Qmax0, CycleCount, NominalChargeCapacity, ..."
       ],
       "uco-core:hasFacet": [
         {
-          "@id": "kb:FileFacet-9643079f-0624-4600-b767-1fb75ad3aedc",
+          "@id": "kb:FileFacet-29ed30a2-27c5-4554-bbc9-9f2bd02c1d26",
           "@type": "uco-observable:FileFacet",
           "uco-observable:fileName": [
             "BDC_Daily_version2.0_2023-07-01_20_16_03.csv"
@@ -306,7 +306,7 @@
       ]
     },
     {
-      "@id": "kb:ObservableRelationship-cc594455-7c26-4567-9cdc-2aef8c669b1a",
+      "@id": "kb:ObservableRelationship-5b271c34-a8a1-4d97-b9af-4e9905ef819c",
       "@type": "uco-observable:ObservableRelationship",
       "uco-core:isDirectional": {
         "@type": "xsd:boolean",
@@ -315,22 +315,22 @@
       "uco-core:kindOfRelationship": "Contained_Within",
       "uco-core:source": [
         {
-          "@id": "kb:ObservableObject-9075ef6a-2e98-4dbf-9796-81bf371b9f2b"
+          "@id": "kb:ObservableObject-609e6a7a-11b9-4228-89c2-40fd078d7a2b"
         }
       ],
       "uco-core:target": {
-        "@id": "kb:ObservableObject-4083924b-573b-4e9e-b884-82a44275d7d1"
+        "@id": "kb:ObservableObject-1ce1d8a7-439e-4c46-bf7c-3938e704c147"
       }
     },
     {
-      "@id": "kb:EventRecord-09ac9345-d3c5-4ecf-a443-11830c46e27b",
+      "@id": "kb:EventRecord-ec7604da-0f0f-4fd7-b4ac-58bae1947fbd",
       "@type": "uco-observable:EventRecord",
       "uco-core:hasFacet": [
         {
-          "@id": "kb:EventRecordFacet-8369781c-cbdd-4a99-9603-c76802c2a5da",
+          "@id": "kb:EventRecordFacet-297bb29c-8076-4b77-adfc-d25ae7a75d13",
           "@type": "uco-observable:EventRecordFacet",
           "uco-observable:eventRecordDevice": {
-            "@id": "kb:ObservableObject-39c9de57-504f-466c-bbd7-753ba6e6f2bd"
+            "@id": "kb:ObservableObject-8a1287d8-916b-4ecd-bccd-5266a0e8c822"
           },
           "uco-observable:eventRecordID": "BDC-2023-07-01T20:16:03",
           "uco-observable:eventRecordServiceName": "BatteryBDC",
@@ -349,7 +349,7 @@
       "uco-core:name": "BDC Daily sample 2023-07-01T20:16:03"
     },
     {
-      "@id": "kb:ObservableRelationship-90b9f784-b521-4634-9c02-8a6676eb88fb",
+      "@id": "kb:ObservableRelationship-705b7589-9b24-416a-876d-4a640f26081d",
       "@type": "uco-observable:ObservableRelationship",
       "uco-core:isDirectional": {
         "@type": "xsd:boolean",
@@ -358,42 +358,42 @@
       "uco-core:kindOfRelationship": "Contained_Within",
       "uco-core:source": [
         {
-          "@id": "kb:EventRecord-09ac9345-d3c5-4ecf-a443-11830c46e27b"
+          "@id": "kb:EventRecord-ec7604da-0f0f-4fd7-b4ac-58bae1947fbd"
         }
       ],
       "uco-core:target": {
-        "@id": "kb:ObservableObject-9075ef6a-2e98-4dbf-9796-81bf371b9f2b"
+        "@id": "kb:ObservableObject-609e6a7a-11b9-4228-89c2-40fd078d7a2b"
       }
     },
     {
-      "@id": "kb:Event-30bde36d-ae42-4d4b-9e91-a199ff9dd95d",
+      "@id": "kb:Event-cd75ae1a-d67c-4abd-bb2a-78db2ac66dbd",
       "@type": "uco-core:Event",
       "uco-core:name": "Battery health sample 2023-07-01",
       "uco-core:eventAttribute": [
         {
-          "@id": "kb:Dictionary-237b5642-1465-4e7c-8f87-eb54890767c7",
+          "@id": "kb:Dictionary-c6ceda36-7027-441f-8eb4-d0aa5ca3e5a7",
           "@type": "uco-types:Dictionary",
           "uco-types:entry": [
             {
-              "@id": "kb:DictionaryEntry-2376f22b-1eea-4168-86ff-523b8279527f",
+              "@id": "kb:DictionaryEntry-5d5f60d4-21d6-418b-bd3a-4a024a49468c",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "CycleCount",
               "uco-types:value": "811"
             },
             {
-              "@id": "kb:DictionaryEntry-0ffa6606-c24e-4f57-96af-0c938b850a1b",
+              "@id": "kb:DictionaryEntry-1c369a3c-9010-4685-b206-b655050d6b18",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "NominalChargeCapacity",
               "uco-types:value": "2432"
             },
             {
-              "@id": "kb:DictionaryEntry-209cf00f-35a9-4ffc-ac87-3a736c25d1af",
+              "@id": "kb:DictionaryEntry-aff29c96-4670-4795-9be7-2a8ade99d38a",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "WeightedRa",
               "uco-types:value": "244"
             },
             {
-              "@id": "kb:DictionaryEntry-634bcc14-3206-43ce-86f9-7cb504233bd7",
+              "@id": "kb:DictionaryEntry-20364110-2970-4a2e-b1e4-a8207eaec9b0",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "Qmax0",
               "uco-types:value": "2988"
@@ -403,10 +403,10 @@
       ],
       "uco-core:eventContext": [
         {
-          "@id": "kb:EventRecord-09ac9345-d3c5-4ecf-a443-11830c46e27b"
+          "@id": "kb:EventRecord-ec7604da-0f0f-4fd7-b4ac-58bae1947fbd"
         },
         {
-          "@id": "kb:ObservableObject-9075ef6a-2e98-4dbf-9796-81bf371b9f2b"
+          "@id": "kb:ObservableObject-609e6a7a-11b9-4228-89c2-40fd078d7a2b"
         }
       ],
       "uco-core:eventType": [
@@ -420,7 +420,7 @@
       ]
     },
     {
-      "@id": "kb:Tool-2a051373-132e-4832-baba-f6a68ce153db",
+      "@id": "kb:Tool-95f2992f-09b4-4269-bca1-e6e4ac0f6054",
       "@type": "uco-tool:Tool",
       "uco-core:description": [
         "Workshop tool tree: Tools/UFADE_0.9.9_win_x64"
@@ -430,7 +430,7 @@
       "uco-tool:version": "0.9.9"
     },
     {
-      "@id": "kb:Tool-8beb90ee-861f-48ac-a7b9-8de7617aaf00",
+      "@id": "kb:Tool-85b5a96a-5a25-4ffa-a9a7-00569c92bb07",
       "@type": "uco-tool:Tool",
       "uco-core:description": [
         "Supports syslog live and crash pull; workshop Tools/pymobiledevice3-master"
@@ -439,7 +439,7 @@
       "uco-tool:toolType": "Mobile Device Bridge"
     },
     {
-      "@id": "kb:InvestigativeAction-2be9cffe-6349-4cc0-ac35-ae5d71db01ff",
+      "@id": "kb:InvestigativeAction-ad8b7256-912b-47b6-9b91-521e67fdaeaf",
       "@type": "case-investigation:InvestigativeAction",
       "uco-core:description": [
         "Preserve sysdiagnose package containing system_logs.logarchive and ancillary logs/WiFi/summaries (SOLVE-IT DFO-1006 / DFT-1016)."
@@ -451,23 +451,23 @@
       },
       "uco-action:instrument": [
         {
-          "@id": "kb:Tool-2a051373-132e-4832-baba-f6a68ce153db"
+          "@id": "kb:Tool-95f2992f-09b4-4269-bca1-e6e4ac0f6054"
         },
         {
-          "@id": "kb:Tool-8beb90ee-861f-48ac-a7b9-8de7617aaf00"
+          "@id": "kb:Tool-85b5a96a-5a25-4ffa-a9a7-00569c92bb07"
         }
       ],
       "uco-action:object": [
         {
-          "@id": "kb:ObservableObject-39c9de57-504f-466c-bbd7-753ba6e6f2bd"
+          "@id": "kb:ObservableObject-8a1287d8-916b-4ecd-bccd-5266a0e8c822"
         }
       ],
       "uco-action:result": [
         {
-          "@id": "kb:ObservableObject-4083924b-573b-4e9e-b884-82a44275d7d1"
+          "@id": "kb:ObservableObject-1ce1d8a7-439e-4c46-bf7c-3938e704c147"
         },
         {
-          "@id": "kb:AppleUnifiedLogArchive-1b0a7ab7-79d5-40d2-bba5-058dff985cc4"
+          "@id": "kb:AppleUnifiedLogArchive-9dc1bbbc-c8bb-46c2-a7df-cd5a9b174258"
         }
       ],
       "uco-action:startTime": {
@@ -476,7 +476,7 @@
       }
     },
     {
-      "@id": "kb:AnalyticTool-5aa65441-447f-433a-97af-752d4aa61c9c",
+      "@id": "kb:AnalyticTool-1c5a9c73-0f79-41e0-9899-1bc6af0f7f26",
       "@type": "uco-tool:AnalyticTool",
       "uco-core:description": [
         "Mandiant/macos-unifiedlogs iterator; workshop binary Tools/unifiedlog_iterator-v0.4.0-x86_64-pc-windows-msvc"
@@ -486,7 +486,7 @@
       "uco-tool:version": "0.4.0"
     },
     {
-      "@id": "kb:AnalyticTool-2116e00e-7323-4f4e-a4ff-f94a076e4b2d",
+      "@id": "kb:AnalyticTool-78c047bf-2e02-4cd5-9ae2-48944415b557",
       "@type": "uco-tool:AnalyticTool",
       "uco-core:description": [
         "Parses .logarchive via log show \u2192 JSON \u2192 SQLite full + filtered DBs and forensic report (workshop Tools/iOS Unified Logs v2)"
@@ -495,7 +495,7 @@
       "uco-tool:toolType": "Unified Log Parser"
     },
     {
-      "@id": "kb:AnalyticTool-15f5cd2f-b716-4732-a1eb-4642032112c8",
+      "@id": "kb:AnalyticTool-adeb6171-f3d4-4117-ac24-5deef3cb7798",
       "@type": "uco-tool:AnalyticTool",
       "uco-core:description": [
         "Workshop Tools/iLEAPP-main \u2014 artifact HTML/TSV reports"
@@ -504,14 +504,14 @@
       "uco-tool:toolType": "Mobile Artifact Parser"
     },
     {
-      "@id": "kb:ObservableObject-4539b76b-2d7d-4a69-9198-760635886e28",
+      "@id": "kb:ObservableObject-44fb78b3-9565-4fdb-a76d-5a017086c1c4",
       "@type": "uco-observable:ObservableObject",
       "uco-core:description": [
         "Retained excerpt of Mandiant unifiedlog_iterator v0.4.0 log-archive JSONL parse of the workshop system_logs.logarchive. Full parse completed exit=0; archive has no timesync DB so tool wall-clock timestamps stay epoch-relative \u2014 model mach_continuous_time / boot_uuid / timezone_name instead."
       ],
       "uco-core:hasFacet": [
         {
-          "@id": "kb:FileFacet-5272b651-e3bb-428a-8d7c-c7409e0a1aca",
+          "@id": "kb:FileFacet-df3f9983-0d07-4b73-9fd4-457f7d2cdd40",
           "@type": "uco-observable:FileFacet",
           "uco-observable:fileName": [
             "unifiedlog_iterator_excerpt.jsonl"
@@ -521,16 +521,16 @@
           ]
         },
         {
-          "@id": "kb:ContentDataFacet-98d10ee2-fc62-4154-9a3c-33f31378f246",
+          "@id": "kb:ContentDataFacet-5861d053-4e38-47f3-ac55-8e36fec4cba2",
           "@type": "uco-observable:ContentDataFacet",
           "uco-observable:hash": [
             {
-              "@id": "kb:Hash-0e608666-8b04-4acc-9f2c-45c40d9bc60a",
+              "@id": "kb:Hash-cc8914f5-d214-43db-8fd6-620cc2a6d651",
               "@type": "uco-types:Hash",
               "uco-types:hashMethod": "SHA256",
               "uco-types:hashValue": {
                 "@type": "xsd:hexBinary",
-                "@value": "8021b5b1b9cacb0fefc906424450642f80f24cd7bc8dc228b96e7dacae08b7eb"
+                "@value": "8021B5B1B9CACB0FEFC906424450642F80F24CD7BC8DC228B96E7DACAE08B7EB"
               }
             }
           ]
@@ -539,14 +539,14 @@
       "uco-core:name": "unifiedlog_iterator_excerpt.jsonl"
     },
     {
-      "@id": "kb:ObservableObject-f00c1d5b-4e84-45b2-b3b6-54cff5f88347",
+      "@id": "kb:ObservableObject-6e93a7b5-5785-472a-aec2-d661ed4bdc59",
       "@type": "uco-observable:ObservableObject",
       "uco-core:description": [
         "Tier T0 shape of Notari filtered SQLite DB of unified log events (rule-based / custom_rules.json) \u2014 dual-tool companion to the iterator excerpt."
       ],
       "uco-core:hasFacet": [
         {
-          "@id": "kb:FileFacet-86ba6ed8-2d49-46b8-89d2-470bb93ff048",
+          "@id": "kb:FileFacet-054073fe-fe46-4243-9936-340548da777a",
           "@type": "uco-observable:FileFacet",
           "uco-observable:fileName": [
             "notari-unified-logs-filtered.sqlite"
@@ -563,14 +563,14 @@
       ]
     },
     {
-      "@id": "kb:ObservableObject-42c1954a-c580-4f67-be95-ebf51979d76d",
+      "@id": "kb:ObservableObject-ec09737a-5cae-4bbd-97ee-ce784458a28f",
       "@type": "uco-observable:ObservableObject",
       "uco-core:description": [
         "Tier T0 exemplar of iLEAPP HTML artifact report tree"
       ],
       "uco-core:hasFacet": [
         {
-          "@id": "kb:FileFacet-b1176d79-3f6d-4eed-9780-e990951caf16",
+          "@id": "kb:FileFacet-bacecde6-8b75-4bb4-9279-370597edccca",
           "@type": "uco-observable:FileFacet",
           "uco-observable:fileName": [
             "iLEAPP_Report"
@@ -593,11 +593,11 @@
       ]
     },
     {
-      "@id": "kb:ObservableObject-555e984b-2d9d-47e9-aa90-144fc0688546",
+      "@id": "kb:ObservableObject-3f914ada-75bc-4550-8f14-03f6b11a1c36",
       "@type": "uco-observable:ObservableObject",
       "uco-core:hasFacet": [
         {
-          "@id": "kb:ApplicationFacet-a9e8031f-1c2c-4db7-8563-694f92057633",
+          "@id": "kb:ApplicationFacet-38984c76-58c8-46c0-b64f-687fe85ac878",
           "@type": "uco-observable:ApplicationFacet",
           "uco-observable:applicationIdentifier": "com.apple.analyticsd"
         }
@@ -605,20 +605,20 @@
       "uco-core:name": "analyticsd"
     },
     {
-      "@id": "kb:EventRecord-d09d2675-176f-4ebc-b6e0-6b8dd00e4156",
+      "@id": "kb:EventRecord-abedd99f-1693-419f-838e-5b549fc76bec",
       "@type": "uco-observable:EventRecord",
       "uco-core:description": [
         "Source: unifiedlog_iterator log-archive parse of workshop system_logs.logarchive (see unifiedlog_iterator_sample_rows.json). Wall-clock timestamp_tool is unanchored (no timesync)."
       ],
       "uco-core:hasFacet": [
         {
-          "@id": "kb:EventRecordFacet-9908c317-c004-4157-a935-8544e013cd8b",
+          "@id": "kb:EventRecordFacet-c4360acb-9fe5-4952-bc24-ece684182e45",
           "@type": "uco-observable:EventRecordFacet",
           "uco-observable:application": {
-            "@id": "kb:ObservableObject-555e984b-2d9d-47e9-aa90-144fc0688546"
+            "@id": "kb:ObservableObject-3f914ada-75bc-4550-8f14-03f6b11a1c36"
           },
           "uco-observable:eventRecordDevice": {
-            "@id": "kb:ObservableObject-39c9de57-504f-466c-bbd7-753ba6e6f2bd"
+            "@id": "kb:ObservableObject-8a1287d8-916b-4ecd-bccd-5266a0e8c822"
           },
           "uco-observable:eventRecordID": "excerpt-row-0",
           "uco-observable:eventRecordServiceName": "system",
@@ -629,7 +629,7 @@
       "uco-core:name": "Unified log row 1: system"
     },
     {
-      "@id": "kb:ObservableRelationship-74ff5b54-c36e-46ee-b877-ee7adfef0019",
+      "@id": "kb:ObservableRelationship-dcc3cdf3-841e-442f-90cf-c0cada9566bf",
       "@type": "uco-observable:ObservableRelationship",
       "uco-core:isDirectional": {
         "@type": "xsd:boolean",
@@ -638,15 +638,15 @@
       "uco-core:kindOfRelationship": "Extracted_From",
       "uco-core:source": [
         {
-          "@id": "kb:EventRecord-d09d2675-176f-4ebc-b6e0-6b8dd00e4156"
+          "@id": "kb:EventRecord-abedd99f-1693-419f-838e-5b549fc76bec"
         }
       ],
       "uco-core:target": {
-        "@id": "kb:AppleUnifiedLogArchive-1b0a7ab7-79d5-40d2-bba5-058dff985cc4"
+        "@id": "kb:AppleUnifiedLogArchive-9dc1bbbc-c8bb-46c2-a7df-cd5a9b174258"
       }
     },
     {
-      "@id": "kb:ObservableRelationship-1e12fa70-f4a0-40b4-bdfa-26f1e32eb8e7",
+      "@id": "kb:ObservableRelationship-f0ca7165-d4e2-4860-9548-23789635b2cb",
       "@type": "uco-observable:ObservableRelationship",
       "uco-core:isDirectional": {
         "@type": "xsd:boolean",
@@ -655,15 +655,15 @@
       "uco-core:kindOfRelationship": "Contained_Within",
       "uco-core:source": [
         {
-          "@id": "kb:EventRecord-d09d2675-176f-4ebc-b6e0-6b8dd00e4156"
+          "@id": "kb:EventRecord-abedd99f-1693-419f-838e-5b549fc76bec"
         }
       ],
       "uco-core:target": {
-        "@id": "kb:ObservableObject-4539b76b-2d7d-4a69-9198-760635886e28"
+        "@id": "kb:ObservableObject-44fb78b3-9565-4fdb-a76d-5a017086c1c4"
       }
     },
     {
-      "@id": "kb:Event-cfe652c1-16f6-4b9c-8408-a5a91b87343d",
+      "@id": "kb:Event-b5acd93b-28d2-48ec-a0f0-c15b37998b94",
       "@type": "uco-core:Event",
       "uco-core:description": [
         "Absolute wall-clock time omitted: archive has no timesync; see eventAttribute mach_continuous_time / boot_uuid."
@@ -671,71 +671,71 @@
       "uco-core:name": "Unified log event 1",
       "uco-core:eventAttribute": [
         {
-          "@id": "kb:Dictionary-8518aa50-63fe-41c5-afd2-524c5d99d970",
+          "@id": "kb:Dictionary-bcd05a9f-e89d-452b-8314-73b0c6d3c300",
           "@type": "uco-types:Dictionary",
           "uco-types:entry": [
             {
-              "@id": "kb:DictionaryEntry-01d53779-2a82-40a4-aed1-d5f69ab7b8e7",
+              "@id": "kb:DictionaryEntry-a5754151-5572-44eb-8636-a134b69c5748",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "subsystem",
               "uco-types:value": "system"
             },
             {
-              "@id": "kb:DictionaryEntry-35c10469-51b4-42d5-a658-fd54738da0dc",
+              "@id": "kb:DictionaryEntry-f2fa40df-9ec7-4192-aeef-acc720e9bf52",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "mach_continuous_time",
               "uco-types:value": "4390314937785.0"
             },
             {
-              "@id": "kb:DictionaryEntry-4611778b-fd3a-4d21-9f4b-3f87e456010b",
+              "@id": "kb:DictionaryEntry-372c1684-a2d5-44d7-a33f-086d81b4daa5",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "boot_uuid",
               "uco-types:value": "284A47572E0C4F9FB63582FA436F4444"
             },
             {
-              "@id": "kb:DictionaryEntry-a1e31dfa-849e-4741-afac-f2cdc380e364",
+              "@id": "kb:DictionaryEntry-79694bbd-e27a-4e53-97a3-2610069e464b",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "timezone_name",
               "uco-types:value": "New_York"
             },
             {
-              "@id": "kb:DictionaryEntry-5dc2f495-75ad-4be8-bdd1-015170d973f5",
+              "@id": "kb:DictionaryEntry-8084ed6d-47e3-48b2-add7-9c2ba101489d",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "timestamp_tool",
               "uco-types:value": "1970-01-01T01:13:10.314937785Z"
             },
             {
-              "@id": "kb:DictionaryEntry-3529c359-2e9f-499d-850a-eed06e148036",
+              "@id": "kb:DictionaryEntry-e95065c1-6870-451c-9c40-83c4341c13f5",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "pid",
               "uco-types:value": "1"
             },
             {
-              "@id": "kb:DictionaryEntry-9ce3ce3f-d25a-4cf9-aec2-e325de0969b6",
+              "@id": "kb:DictionaryEntry-174c46cd-fb24-4e9f-a451-91e7b94b7f7c",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "thread_id",
               "uco-types:value": "92449"
             },
             {
-              "@id": "kb:DictionaryEntry-163b0b1e-e191-43b8-a49c-b08d2d9c0005",
+              "@id": "kb:DictionaryEntry-def6845f-8c5a-4231-91a1-9795bcc603fd",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "log_type",
               "uco-types:value": "Simpledump"
             },
             {
-              "@id": "kb:DictionaryEntry-2ed5fe13-3a79-4c41-ba39-3abbb2be6bde",
+              "@id": "kb:DictionaryEntry-a8d5d5b0-454c-4777-958e-c2485a1332b5",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "event_type",
               "uco-types:value": "Simpledump"
             },
             {
-              "@id": "kb:DictionaryEntry-0d1c61e6-9ba3-43af-b735-219e80b0527d",
+              "@id": "kb:DictionaryEntry-4151e42c-08e2-446d-9ff1-b5ea8d45676d",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "euid",
               "uco-types:value": "0"
             },
             {
-              "@id": "kb:DictionaryEntry-cdea3cda-b5a7-4234-8317-be12dc173f81",
+              "@id": "kb:DictionaryEntry-c010dcd1-144a-4ee5-985d-e7d742c313f9",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "activity_id",
               "uco-types:value": "0"
@@ -745,10 +745,10 @@
       ],
       "uco-core:eventContext": [
         {
-          "@id": "kb:EventRecord-d09d2675-176f-4ebc-b6e0-6b8dd00e4156"
+          "@id": "kb:EventRecord-abedd99f-1693-419f-838e-5b549fc76bec"
         },
         {
-          "@id": "kb:ObservableObject-39c9de57-504f-466c-bbd7-753ba6e6f2bd"
+          "@id": "kb:ObservableObject-8a1287d8-916b-4ecd-bccd-5266a0e8c822"
         }
       ],
       "uco-core:eventType": [
@@ -757,17 +757,17 @@
       ]
     },
     {
-      "@id": "kb:EventRecord-926079bc-987f-4704-94ab-1c31ff233a40",
+      "@id": "kb:EventRecord-a87af583-7ed4-4469-8511-693aa5d69789",
       "@type": "uco-observable:EventRecord",
       "uco-core:description": [
         "Source: unifiedlog_iterator log-archive parse of workshop system_logs.logarchive (see unifiedlog_iterator_sample_rows.json). Wall-clock timestamp_tool is unanchored (no timesync)."
       ],
       "uco-core:hasFacet": [
         {
-          "@id": "kb:EventRecordFacet-a6f84e0d-feda-4cfd-80e1-10db35262a8f",
+          "@id": "kb:EventRecordFacet-1859c3c5-97cd-4c22-bc66-348b4594b13c",
           "@type": "uco-observable:EventRecordFacet",
           "uco-observable:eventRecordDevice": {
-            "@id": "kb:ObservableObject-39c9de57-504f-466c-bbd7-753ba6e6f2bd"
+            "@id": "kb:ObservableObject-8a1287d8-916b-4ecd-bccd-5266a0e8c822"
           },
           "uco-observable:eventRecordID": "excerpt-row-1",
           "uco-observable:eventRecordServiceName": "user/501/com.apple.iconservices.iconservicesagent [326]",
@@ -778,7 +778,7 @@
       "uco-core:name": "Unified log row 2: user/501/com.apple.iconservices.iconservicesagent [326]"
     },
     {
-      "@id": "kb:ObservableRelationship-96c4ec48-6eee-4cf8-a913-a6d24c256c98",
+      "@id": "kb:ObservableRelationship-a7b8f4da-6e64-4434-8d35-776c3c3a349f",
       "@type": "uco-observable:ObservableRelationship",
       "uco-core:isDirectional": {
         "@type": "xsd:boolean",
@@ -787,15 +787,15 @@
       "uco-core:kindOfRelationship": "Extracted_From",
       "uco-core:source": [
         {
-          "@id": "kb:EventRecord-926079bc-987f-4704-94ab-1c31ff233a40"
+          "@id": "kb:EventRecord-a87af583-7ed4-4469-8511-693aa5d69789"
         }
       ],
       "uco-core:target": {
-        "@id": "kb:AppleUnifiedLogArchive-1b0a7ab7-79d5-40d2-bba5-058dff985cc4"
+        "@id": "kb:AppleUnifiedLogArchive-9dc1bbbc-c8bb-46c2-a7df-cd5a9b174258"
       }
     },
     {
-      "@id": "kb:ObservableRelationship-b8d33444-57a1-4692-8db9-cfd0a9f3cd60",
+      "@id": "kb:ObservableRelationship-40639965-a664-4910-8c0e-0837eb45b9b8",
       "@type": "uco-observable:ObservableRelationship",
       "uco-core:isDirectional": {
         "@type": "xsd:boolean",
@@ -804,15 +804,15 @@
       "uco-core:kindOfRelationship": "Contained_Within",
       "uco-core:source": [
         {
-          "@id": "kb:EventRecord-926079bc-987f-4704-94ab-1c31ff233a40"
+          "@id": "kb:EventRecord-a87af583-7ed4-4469-8511-693aa5d69789"
         }
       ],
       "uco-core:target": {
-        "@id": "kb:ObservableObject-4539b76b-2d7d-4a69-9198-760635886e28"
+        "@id": "kb:ObservableObject-44fb78b3-9565-4fdb-a76d-5a017086c1c4"
       }
     },
     {
-      "@id": "kb:Event-be1909d5-088a-4eb2-8b06-ed23dd01de4a",
+      "@id": "kb:Event-5cc547d3-6a6c-4d34-9e1e-438759646928",
       "@type": "uco-core:Event",
       "uco-core:description": [
         "Absolute wall-clock time omitted: archive has no timesync; see eventAttribute mach_continuous_time / boot_uuid."
@@ -820,71 +820,71 @@
       "uco-core:name": "Unified log event 2",
       "uco-core:eventAttribute": [
         {
-          "@id": "kb:Dictionary-5222a24b-13e9-42a5-a57c-96b06abf5cc5",
+          "@id": "kb:Dictionary-8690fef5-72db-4a5d-9c1c-f3b9af648e5b",
           "@type": "uco-types:Dictionary",
           "uco-types:entry": [
             {
-              "@id": "kb:DictionaryEntry-37445516-5db3-4d01-b821-03456803bd70",
+              "@id": "kb:DictionaryEntry-b3c8778c-c4c5-44f0-8684-1896c8245010",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "subsystem",
               "uco-types:value": "user/501/com.apple.iconservices.iconservicesagent [326]"
             },
             {
-              "@id": "kb:DictionaryEntry-1108ef04-c15e-4ebf-a311-1c260c0ef13d",
+              "@id": "kb:DictionaryEntry-5487075c-5b1f-429d-b0b1-28e6ef8ba6d6",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "mach_continuous_time",
               "uco-types:value": "4390146762438.0"
             },
             {
-              "@id": "kb:DictionaryEntry-29db7cc7-20a6-4827-9730-205db8e16706",
+              "@id": "kb:DictionaryEntry-2bacfa78-2ff2-48ac-9ad6-57f1efee6345",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "boot_uuid",
               "uco-types:value": "284A47572E0C4F9FB63582FA436F4444"
             },
             {
-              "@id": "kb:DictionaryEntry-eef98b23-6c45-4652-9273-c501317356bd",
+              "@id": "kb:DictionaryEntry-5c610b44-c587-4073-9873-82fce30d0f26",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "timezone_name",
               "uco-types:value": "New_York"
             },
             {
-              "@id": "kb:DictionaryEntry-5c343215-f5bf-49a2-9df3-2ff4464e55d2",
+              "@id": "kb:DictionaryEntry-739f5d87-fc5e-446c-88fc-ce2e0e97c9bc",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "timestamp_tool",
               "uco-types:value": "1970-01-01T01:13:10.146762438Z"
             },
             {
-              "@id": "kb:DictionaryEntry-04d33aaa-b7dd-47bb-b6ae-b65531900eb8",
+              "@id": "kb:DictionaryEntry-4ff2caf2-0639-4947-82a8-8f6027ede9f9",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "pid",
               "uco-types:value": "1"
             },
             {
-              "@id": "kb:DictionaryEntry-b8d38c28-2327-4d2d-b780-39f03f8b60ef",
+              "@id": "kb:DictionaryEntry-d2fa5143-dd8e-40d8-9681-1784e544d6c4",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "thread_id",
               "uco-types:value": "92488"
             },
             {
-              "@id": "kb:DictionaryEntry-bab7e2d5-7477-4365-b02e-a2a81ebf79ef",
+              "@id": "kb:DictionaryEntry-137e72ac-de3d-4d89-b2e7-d28eeeb37e4c",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "log_type",
               "uco-types:value": "Simpledump"
             },
             {
-              "@id": "kb:DictionaryEntry-e52ac485-1cad-4772-bcbf-8c80101b4d3c",
+              "@id": "kb:DictionaryEntry-ff972753-3d1a-4d04-8632-8a404ed134b5",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "event_type",
               "uco-types:value": "Simpledump"
             },
             {
-              "@id": "kb:DictionaryEntry-9ee9850d-eaa7-4b14-9c10-87b47a6a696c",
+              "@id": "kb:DictionaryEntry-1a0e61d3-b313-47d6-acac-db68b4c8dc0d",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "euid",
               "uco-types:value": "0"
             },
             {
-              "@id": "kb:DictionaryEntry-7eeb8cc6-adc8-4f32-b535-ea402a78de48",
+              "@id": "kb:DictionaryEntry-4701e5d6-bd93-432e-9f47-be2478c2cd7d",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "activity_id",
               "uco-types:value": "0"
@@ -894,10 +894,10 @@
       ],
       "uco-core:eventContext": [
         {
-          "@id": "kb:EventRecord-926079bc-987f-4704-94ab-1c31ff233a40"
+          "@id": "kb:EventRecord-a87af583-7ed4-4469-8511-693aa5d69789"
         },
         {
-          "@id": "kb:ObservableObject-39c9de57-504f-466c-bbd7-753ba6e6f2bd"
+          "@id": "kb:ObservableObject-8a1287d8-916b-4ecd-bccd-5266a0e8c822"
         }
       ],
       "uco-core:eventType": [
@@ -906,17 +906,17 @@
       ]
     },
     {
-      "@id": "kb:EventRecord-635147ea-6a70-4b79-b483-c050a7905fb3",
+      "@id": "kb:EventRecord-5fab5427-fcba-402b-b0c3-d1984afd6afc",
       "@type": "uco-observable:EventRecord",
       "uco-core:description": [
         "Source: unifiedlog_iterator log-archive parse of workshop system_logs.logarchive (see unifiedlog_iterator_sample_rows.json). Wall-clock timestamp_tool is unanchored (no timesync)."
       ],
       "uco-core:hasFacet": [
         {
-          "@id": "kb:EventRecordFacet-013248c2-76eb-41ac-b59d-885f17ca3033",
+          "@id": "kb:EventRecordFacet-6e03f704-1e43-46ac-a172-f4008057f515",
           "@type": "uco-observable:EventRecordFacet",
           "uco-observable:eventRecordDevice": {
-            "@id": "kb:ObservableObject-39c9de57-504f-466c-bbd7-753ba6e6f2bd"
+            "@id": "kb:ObservableObject-8a1287d8-916b-4ecd-bccd-5266a0e8c822"
           },
           "uco-observable:eventRecordID": "excerpt-row-2",
           "uco-observable:eventRecordServiceName": "user/501/com.apple.aggregated.addaily [327]",
@@ -927,7 +927,7 @@
       "uco-core:name": "Unified log row 3: user/501/com.apple.aggregated.addaily [327]"
     },
     {
-      "@id": "kb:ObservableRelationship-2f890aec-3b0b-49cd-abe2-fcae26279705",
+      "@id": "kb:ObservableRelationship-b9d74509-ca5e-408c-a5c9-91da56c1e7a5",
       "@type": "uco-observable:ObservableRelationship",
       "uco-core:isDirectional": {
         "@type": "xsd:boolean",
@@ -936,15 +936,15 @@
       "uco-core:kindOfRelationship": "Extracted_From",
       "uco-core:source": [
         {
-          "@id": "kb:EventRecord-635147ea-6a70-4b79-b483-c050a7905fb3"
+          "@id": "kb:EventRecord-5fab5427-fcba-402b-b0c3-d1984afd6afc"
         }
       ],
       "uco-core:target": {
-        "@id": "kb:AppleUnifiedLogArchive-1b0a7ab7-79d5-40d2-bba5-058dff985cc4"
+        "@id": "kb:AppleUnifiedLogArchive-9dc1bbbc-c8bb-46c2-a7df-cd5a9b174258"
       }
     },
     {
-      "@id": "kb:ObservableRelationship-f10bd78a-20e7-4d3e-8d32-7e11e87ad3ae",
+      "@id": "kb:ObservableRelationship-292dfcd4-a476-4914-ad49-72c1bf83de10",
       "@type": "uco-observable:ObservableRelationship",
       "uco-core:isDirectional": {
         "@type": "xsd:boolean",
@@ -953,15 +953,15 @@
       "uco-core:kindOfRelationship": "Contained_Within",
       "uco-core:source": [
         {
-          "@id": "kb:EventRecord-635147ea-6a70-4b79-b483-c050a7905fb3"
+          "@id": "kb:EventRecord-5fab5427-fcba-402b-b0c3-d1984afd6afc"
         }
       ],
       "uco-core:target": {
-        "@id": "kb:ObservableObject-4539b76b-2d7d-4a69-9198-760635886e28"
+        "@id": "kb:ObservableObject-44fb78b3-9565-4fdb-a76d-5a017086c1c4"
       }
     },
     {
-      "@id": "kb:Event-02c798d0-6aed-4d29-87d4-ef3494585a9a",
+      "@id": "kb:Event-d78ffc4d-f283-4f6e-9dde-063814b1e50c",
       "@type": "uco-core:Event",
       "uco-core:description": [
         "Absolute wall-clock time omitted: archive has no timesync; see eventAttribute mach_continuous_time / boot_uuid."
@@ -969,71 +969,71 @@
       "uco-core:name": "Unified log event 3",
       "uco-core:eventAttribute": [
         {
-          "@id": "kb:Dictionary-a035f57d-bc08-44b0-a311-77582aecabf7",
+          "@id": "kb:Dictionary-9169422a-a08b-4b9d-800a-10c0dbcec6ad",
           "@type": "uco-types:Dictionary",
           "uco-types:entry": [
             {
-              "@id": "kb:DictionaryEntry-f876ca7d-c980-4c49-bf02-4d63711bd736",
+              "@id": "kb:DictionaryEntry-bec13267-8b41-4fbd-b6fa-45be2f21ad4d",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "subsystem",
               "uco-types:value": "user/501/com.apple.aggregated.addaily [327]"
             },
             {
-              "@id": "kb:DictionaryEntry-1e5bb0a4-7593-4db2-9bba-7f7a8e875725",
+              "@id": "kb:DictionaryEntry-08dddb92-faae-4505-ad05-13239973e922",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "mach_continuous_time",
               "uco-types:value": "4390268743811.0"
             },
             {
-              "@id": "kb:DictionaryEntry-86b8abd4-d73c-4e4a-b9aa-7312bfca24ec",
+              "@id": "kb:DictionaryEntry-fef65ca7-34f3-4e04-ae9d-7129d00ae0c3",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "boot_uuid",
               "uco-types:value": "284A47572E0C4F9FB63582FA436F4444"
             },
             {
-              "@id": "kb:DictionaryEntry-3025c404-bda8-4b23-8f3c-65203240d506",
+              "@id": "kb:DictionaryEntry-59ec51f1-42eb-4ab1-89c5-c4e9ad1b489c",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "timezone_name",
               "uco-types:value": "New_York"
             },
             {
-              "@id": "kb:DictionaryEntry-952d7dbe-6154-4be7-85ca-c20f349055d6",
+              "@id": "kb:DictionaryEntry-435c8952-6fb6-4e29-bd41-489476a548b2",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "timestamp_tool",
               "uco-types:value": "1970-01-01T01:13:10.268743811Z"
             },
             {
-              "@id": "kb:DictionaryEntry-2dee2a27-0be9-4fd5-93ca-2b009e15d0f9",
+              "@id": "kb:DictionaryEntry-73827890-829b-4671-a089-7d02aaa5544f",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "pid",
               "uco-types:value": "1"
             },
             {
-              "@id": "kb:DictionaryEntry-71fcda13-d0ab-4858-91c6-e40c1fc28349",
+              "@id": "kb:DictionaryEntry-6495eb08-8400-45c3-9daf-9059769fc912",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "thread_id",
               "uco-types:value": "92449"
             },
             {
-              "@id": "kb:DictionaryEntry-b39b112d-b3a4-4233-816a-4b23ef4b00c1",
+              "@id": "kb:DictionaryEntry-c3f1dfd4-72e9-42f6-b2c9-a692ba25df8c",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "log_type",
               "uco-types:value": "Simpledump"
             },
             {
-              "@id": "kb:DictionaryEntry-9f778fc0-d7d1-476f-b05b-13d891d0c3a4",
+              "@id": "kb:DictionaryEntry-4c966536-cb15-4a75-8389-8377ede0cbd0",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "event_type",
               "uco-types:value": "Simpledump"
             },
             {
-              "@id": "kb:DictionaryEntry-1bcdd833-5291-433e-b549-3ddf44e905d7",
+              "@id": "kb:DictionaryEntry-df5fb432-8d48-4c83-b1b6-95bb62895da1",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "euid",
               "uco-types:value": "0"
             },
             {
-              "@id": "kb:DictionaryEntry-bf31cb72-8ee5-41e9-82f4-0ed5a47f526c",
+              "@id": "kb:DictionaryEntry-4970c8e0-b088-4f71-8283-870bc8fae34b",
               "@type": "uco-types:DictionaryEntry",
               "uco-types:key": "activity_id",
               "uco-types:value": "0"
@@ -1043,10 +1043,10 @@
       ],
       "uco-core:eventContext": [
         {
-          "@id": "kb:EventRecord-635147ea-6a70-4b79-b483-c050a7905fb3"
+          "@id": "kb:EventRecord-5fab5427-fcba-402b-b0c3-d1984afd6afc"
         },
         {
-          "@id": "kb:ObservableObject-39c9de57-504f-466c-bbd7-753ba6e6f2bd"
+          "@id": "kb:ObservableObject-8a1287d8-916b-4ecd-bccd-5266a0e8c822"
         }
       ],
       "uco-core:eventType": [
@@ -1055,8 +1055,12 @@
       ]
     },
     {
-      "@id": "kb:SolveitInvestigativeAction-bde631ab-dd49-4415-94a0-fa5c6021a709",
-      "@type": "solveit-core:SolveitInvestigativeAction",
+      "@id": "kb:SolveitInvestigativeAction-62b3623e-07ba-4c7b-93cf-8811d1a5f890",
+      "@type": [
+        "solveit-core:SolveitInvestigativeAction",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1066",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1076"
+      ],
       "uco-core:description": [
         "SOLVE-IT DFT-1066 / DFT-1076: extract OS unified-log artifacts from system_logs.logarchive to JSONL (DFM-1027 dual-tool verify with Notari parser). Applied DFM-1179 timezone/timesync check: archive lacks timesync \u2014 absolute times not asserted."
       ],
@@ -1067,49 +1071,41 @@
       },
       "uco-action:instrument": [
         {
-          "@id": "kb:AnalyticTool-5aa65441-447f-433a-97af-752d4aa61c9c"
+          "@id": "kb:AnalyticTool-1c5a9c73-0f79-41e0-9899-1bc6af0f7f26"
         }
       ],
       "uco-action:object": [
         {
-          "@id": "kb:AppleUnifiedLogArchive-1b0a7ab7-79d5-40d2-bba5-058dff985cc4"
+          "@id": "kb:AppleUnifiedLogArchive-9dc1bbbc-c8bb-46c2-a7df-cd5a9b174258"
         }
       ],
       "uco-action:result": [
         {
-          "@id": "kb:ObservableObject-4539b76b-2d7d-4a69-9198-760635886e28"
+          "@id": "kb:ObservableObject-44fb78b3-9565-4fdb-a76d-5a017086c1c4"
         },
         {
-          "@id": "kb:EventRecord-d09d2675-176f-4ebc-b6e0-6b8dd00e4156"
+          "@id": "kb:EventRecord-abedd99f-1693-419f-838e-5b549fc76bec"
         },
         {
-          "@id": "kb:EventRecord-926079bc-987f-4704-94ab-1c31ff233a40"
+          "@id": "kb:EventRecord-a87af583-7ed4-4469-8511-693aa5d69789"
         },
         {
-          "@id": "kb:EventRecord-635147ea-6a70-4b79-b483-c050a7905fb3"
+          "@id": "kb:EventRecord-5fab5427-fcba-402b-b0c3-d1984afd6afc"
         },
         {
-          "@id": "kb:Event-cfe652c1-16f6-4b9c-8408-a5a91b87343d"
+          "@id": "kb:Event-b5acd93b-28d2-48ec-a0f0-c15b37998b94"
         },
         {
-          "@id": "kb:Event-be1909d5-088a-4eb2-8b06-ed23dd01de4a"
+          "@id": "kb:Event-5cc547d3-6a6c-4d34-9e1e-438759646928"
         },
         {
-          "@id": "kb:Event-02c798d0-6aed-4d29-87d4-ef3494585a9a"
+          "@id": "kb:Event-d78ffc4d-f283-4f6e-9dde-063814b1e50c"
         }
       ],
       "uco-action:startTime": {
         "@type": "xsd:dateTime",
         "@value": "2026-07-27T15:35:00+00:00"
       },
-      "solveit-core:usedTechnique": [
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1066"
-        },
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1076"
-        }
-      ],
       "solveit-core:appliedMitigation": [
         {
           "@id": "https://ontology.solveit-df.org/solveit/data/mitigationDFM-1027"
@@ -1123,8 +1119,12 @@
       ]
     },
     {
-      "@id": "kb:SolveitInvestigativeAction-9bbde9d7-a1ef-4563-859d-2bceca75a3cb",
-      "@type": "solveit-core:SolveitInvestigativeAction",
+      "@id": "kb:SolveitInvestigativeAction-aad61df2-ae72-42ca-a7e4-3f05619bda8d",
+      "@type": [
+        "solveit-core:SolveitInvestigativeAction",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1066",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1076"
+      ],
       "uco-core:description": [
         "SOLVE-IT DFT-1066 / DFT-1076: build full + filtered SQLite databases and forensic report from the same .logarchive \u2014 the DFM-1027 dual-tool companion to the unifiedlog_iterator parse."
       ],
@@ -1135,31 +1135,23 @@
       },
       "uco-action:instrument": [
         {
-          "@id": "kb:AnalyticTool-2116e00e-7323-4f4e-a4ff-f94a076e4b2d"
+          "@id": "kb:AnalyticTool-78c047bf-2e02-4cd5-9ae2-48944415b557"
         }
       ],
       "uco-action:object": [
         {
-          "@id": "kb:AppleUnifiedLogArchive-1b0a7ab7-79d5-40d2-bba5-058dff985cc4"
+          "@id": "kb:AppleUnifiedLogArchive-9dc1bbbc-c8bb-46c2-a7df-cd5a9b174258"
         }
       ],
       "uco-action:result": [
         {
-          "@id": "kb:ObservableObject-f00c1d5b-4e84-45b2-b3b6-54cff5f88347"
+          "@id": "kb:ObservableObject-6e93a7b5-5785-472a-aec2-d661ed4bdc59"
         }
       ],
       "uco-action:startTime": {
         "@type": "xsd:dateTime",
         "@value": "2026-07-25T19:00:00+00:00"
       },
-      "solveit-core:usedTechnique": [
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1066"
-        },
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1076"
-        }
-      ],
       "solveit-core:appliedMitigation": [
         {
           "@id": "https://ontology.solveit-df.org/solveit/data/mitigationDFM-1027"
@@ -1167,8 +1159,12 @@
       ]
     },
     {
-      "@id": "kb:SolveitInvestigativeAction-37b1ab8e-0e77-45ef-bed1-da10c80fb2b6",
-      "@type": "solveit-core:SolveitInvestigativeAction",
+      "@id": "kb:SolveitInvestigativeAction-d1a0daaf-f47d-4ea6-8038-5dcf6cf38b88",
+      "@type": [
+        "solveit-core:SolveitInvestigativeAction",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1066",
+        "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1076"
+      ],
       "uco-core:description": [
         "SOLVE-IT DFT-1066 / DFT-1076: parse sysdiagnose-contained OS-stored artifacts (WiFi, location, powerlog, etc.) into HTML/TSV report modules."
       ],
@@ -1179,71 +1175,63 @@
       },
       "uco-action:instrument": [
         {
-          "@id": "kb:AnalyticTool-15f5cd2f-b716-4732-a1eb-4642032112c8"
+          "@id": "kb:AnalyticTool-adeb6171-f3d4-4117-ac24-5deef3cb7798"
         }
       ],
       "uco-action:object": [
         {
-          "@id": "kb:ObservableObject-4083924b-573b-4e9e-b884-82a44275d7d1"
+          "@id": "kb:ObservableObject-1ce1d8a7-439e-4c46-bf7c-3938e704c147"
         }
       ],
       "uco-action:result": [
         {
-          "@id": "kb:ObservableObject-42c1954a-c580-4f67-be95-ebf51979d76d"
+          "@id": "kb:ObservableObject-ec09737a-5cae-4bbd-97ee-ce784458a28f"
         },
         {
-          "@id": "kb:WirelessNetworkConnection-f0e3cc9e-8120-410a-9dc7-8d2900b95756"
+          "@id": "kb:WirelessNetworkConnection-ac493a4b-dbe0-4c73-8f42-3a02f6ae4d33"
         }
       ],
       "uco-action:startTime": {
         "@type": "xsd:dateTime",
         "@value": "2026-07-25T20:00:00+00:00"
-      },
-      "solveit-core:usedTechnique": [
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1066"
-        },
-        {
-          "@id": "https://ontology.solveit-df.org/solveit/data/techniqueDFT-1076"
-        }
-      ]
+      }
     },
     {
-      "@id": "kb:ProvenanceRecord-e0234df1-7bf6-4484-9c5b-2a11d58b9327",
+      "@id": "kb:ProvenanceRecord-35895dbf-db0e-496f-93f2-651f02ea0f47",
       "@type": "case-investigation:ProvenanceRecord",
       "uco-core:description": [
         "Sysdiagnose + unified log examination package"
       ],
       "uco-core:object": [
         {
-          "@id": "kb:InvestigativeAction-2be9cffe-6349-4cc0-ac35-ae5d71db01ff"
+          "@id": "kb:InvestigativeAction-ad8b7256-912b-47b6-9b91-521e67fdaeaf"
         },
         {
-          "@id": "kb:SolveitInvestigativeAction-bde631ab-dd49-4415-94a0-fa5c6021a709"
+          "@id": "kb:SolveitInvestigativeAction-62b3623e-07ba-4c7b-93cf-8811d1a5f890"
         },
         {
-          "@id": "kb:SolveitInvestigativeAction-9bbde9d7-a1ef-4563-859d-2bceca75a3cb"
+          "@id": "kb:SolveitInvestigativeAction-aad61df2-ae72-42ca-a7e4-3f05619bda8d"
         },
         {
-          "@id": "kb:SolveitInvestigativeAction-37b1ab8e-0e77-45ef-bed1-da10c80fb2b6"
+          "@id": "kb:SolveitInvestigativeAction-d1a0daaf-f47d-4ea6-8038-5dcf6cf38b88"
         },
         {
-          "@id": "kb:ObservableObject-4083924b-573b-4e9e-b884-82a44275d7d1"
+          "@id": "kb:ObservableObject-1ce1d8a7-439e-4c46-bf7c-3938e704c147"
         },
         {
-          "@id": "kb:AppleUnifiedLogArchive-1b0a7ab7-79d5-40d2-bba5-058dff985cc4"
+          "@id": "kb:AppleUnifiedLogArchive-9dc1bbbc-c8bb-46c2-a7df-cd5a9b174258"
         },
         {
-          "@id": "kb:ObservableObject-4539b76b-2d7d-4a69-9198-760635886e28"
+          "@id": "kb:ObservableObject-44fb78b3-9565-4fdb-a76d-5a017086c1c4"
         },
         {
-          "@id": "kb:ObservableObject-f00c1d5b-4e84-45b2-b3b6-54cff5f88347"
+          "@id": "kb:ObservableObject-6e93a7b5-5785-472a-aec2-d661ed4bdc59"
         }
       ],
       "case-investigation:exhibitNumber": "EX-SYSDIAG-2024-0802"
     },
     {
-      "@id": "kb:Investigation-5eab0d72-6150-4bfa-8cc6-fadb9e300618",
+      "@id": "kb:Investigation-5ceff06e-1d8e-40c1-9722-fde16c4468d0",
       "@type": "case-investigation:Investigation",
       "uco-core:description": [
         "Model raw Apple sysdiagnose (including system_logs.logarchive) and structured analytic outputs (unifiedlog_iterator JSONL excerpt, Notari SQLite, iLEAPP reports). Grounded in DFRWS USA Sysdiagnosis workshop data; iterator rows are real parse excerpts."
@@ -1251,139 +1239,139 @@
       "uco-core:name": "Case dfrws-sysdiagnose-2024-08-02: iOS sysdiagnose and unified logs",
       "uco-core:object": [
         {
-          "@id": "kb:Identity-355390ba-8158-4b82-a473-f8e7351344fb"
+          "@id": "kb:Identity-4b4996cf-09e2-48ad-aacd-8e04eb485d8a"
         },
         {
-          "@id": "kb:ObservableObject-39c9de57-504f-466c-bbd7-753ba6e6f2bd"
+          "@id": "kb:ObservableObject-8a1287d8-916b-4ecd-bccd-5266a0e8c822"
         },
         {
-          "@id": "kb:OperatingSystem-5feec030-2f1f-47af-8d5c-c2d890862dc2"
+          "@id": "kb:OperatingSystem-7d0e4fe3-09ac-4bab-8028-7e24b5f30f4b"
         },
         {
-          "@id": "kb:ObservableObject-4083924b-573b-4e9e-b884-82a44275d7d1"
+          "@id": "kb:ObservableObject-1ce1d8a7-439e-4c46-bf7c-3938e704c147"
         },
         {
-          "@id": "kb:AppleUnifiedLogArchive-1b0a7ab7-79d5-40d2-bba5-058dff985cc4"
+          "@id": "kb:AppleUnifiedLogArchive-9dc1bbbc-c8bb-46c2-a7df-cd5a9b174258"
         },
         {
-          "@id": "kb:ObservableObject-3c258d53-b3d4-4643-80fc-7818814efb36"
+          "@id": "kb:ObservableObject-8d41d9e6-d9a6-4e51-842e-395dc0e41ed0"
         },
         {
-          "@id": "kb:WirelessNetworkConnection-f0e3cc9e-8120-410a-9dc7-8d2900b95756"
+          "@id": "kb:WirelessNetworkConnection-ac493a4b-dbe0-4c73-8f42-3a02f6ae4d33"
         },
         {
-          "@id": "kb:ObservableObject-113a3866-2a1f-44ec-97b8-a12f9d4b0103"
+          "@id": "kb:ObservableObject-69fd1b72-9770-4121-aee1-30abc85278c8"
         },
         {
-          "@id": "kb:ObservableObject-9075ef6a-2e98-4dbf-9796-81bf371b9f2b"
+          "@id": "kb:ObservableObject-609e6a7a-11b9-4228-89c2-40fd078d7a2b"
         },
         {
-          "@id": "kb:EventRecord-09ac9345-d3c5-4ecf-a443-11830c46e27b"
+          "@id": "kb:EventRecord-ec7604da-0f0f-4fd7-b4ac-58bae1947fbd"
         },
         {
-          "@id": "kb:Event-30bde36d-ae42-4d4b-9e91-a199ff9dd95d"
+          "@id": "kb:Event-cd75ae1a-d67c-4abd-bb2a-78db2ac66dbd"
         },
         {
-          "@id": "kb:Tool-2a051373-132e-4832-baba-f6a68ce153db"
+          "@id": "kb:Tool-95f2992f-09b4-4269-bca1-e6e4ac0f6054"
         },
         {
-          "@id": "kb:Tool-8beb90ee-861f-48ac-a7b9-8de7617aaf00"
+          "@id": "kb:Tool-85b5a96a-5a25-4ffa-a9a7-00569c92bb07"
         },
         {
-          "@id": "kb:AnalyticTool-5aa65441-447f-433a-97af-752d4aa61c9c"
+          "@id": "kb:AnalyticTool-1c5a9c73-0f79-41e0-9899-1bc6af0f7f26"
         },
         {
-          "@id": "kb:AnalyticTool-2116e00e-7323-4f4e-a4ff-f94a076e4b2d"
+          "@id": "kb:AnalyticTool-78c047bf-2e02-4cd5-9ae2-48944415b557"
         },
         {
-          "@id": "kb:AnalyticTool-15f5cd2f-b716-4732-a1eb-4642032112c8"
+          "@id": "kb:AnalyticTool-adeb6171-f3d4-4117-ac24-5deef3cb7798"
         },
         {
-          "@id": "kb:ObservableObject-555e984b-2d9d-47e9-aa90-144fc0688546"
+          "@id": "kb:ObservableObject-3f914ada-75bc-4550-8f14-03f6b11a1c36"
         },
         {
-          "@id": "kb:ObservableObject-4539b76b-2d7d-4a69-9198-760635886e28"
+          "@id": "kb:ObservableObject-44fb78b3-9565-4fdb-a76d-5a017086c1c4"
         },
         {
-          "@id": "kb:ObservableObject-f00c1d5b-4e84-45b2-b3b6-54cff5f88347"
+          "@id": "kb:ObservableObject-6e93a7b5-5785-472a-aec2-d661ed4bdc59"
         },
         {
-          "@id": "kb:ObservableObject-42c1954a-c580-4f67-be95-ebf51979d76d"
+          "@id": "kb:ObservableObject-ec09737a-5cae-4bbd-97ee-ce784458a28f"
         },
         {
-          "@id": "kb:EventRecord-d09d2675-176f-4ebc-b6e0-6b8dd00e4156"
+          "@id": "kb:EventRecord-abedd99f-1693-419f-838e-5b549fc76bec"
         },
         {
-          "@id": "kb:EventRecord-926079bc-987f-4704-94ab-1c31ff233a40"
+          "@id": "kb:EventRecord-a87af583-7ed4-4469-8511-693aa5d69789"
         },
         {
-          "@id": "kb:EventRecord-635147ea-6a70-4b79-b483-c050a7905fb3"
+          "@id": "kb:EventRecord-5fab5427-fcba-402b-b0c3-d1984afd6afc"
         },
         {
-          "@id": "kb:Event-cfe652c1-16f6-4b9c-8408-a5a91b87343d"
+          "@id": "kb:Event-b5acd93b-28d2-48ec-a0f0-c15b37998b94"
         },
         {
-          "@id": "kb:Event-be1909d5-088a-4eb2-8b06-ed23dd01de4a"
+          "@id": "kb:Event-5cc547d3-6a6c-4d34-9e1e-438759646928"
         },
         {
-          "@id": "kb:Event-02c798d0-6aed-4d29-87d4-ef3494585a9a"
+          "@id": "kb:Event-d78ffc4d-f283-4f6e-9dde-063814b1e50c"
         },
         {
-          "@id": "kb:InvestigativeAction-2be9cffe-6349-4cc0-ac35-ae5d71db01ff"
+          "@id": "kb:InvestigativeAction-ad8b7256-912b-47b6-9b91-521e67fdaeaf"
         },
         {
-          "@id": "kb:SolveitInvestigativeAction-bde631ab-dd49-4415-94a0-fa5c6021a709"
+          "@id": "kb:SolveitInvestigativeAction-62b3623e-07ba-4c7b-93cf-8811d1a5f890"
         },
         {
-          "@id": "kb:SolveitInvestigativeAction-9bbde9d7-a1ef-4563-859d-2bceca75a3cb"
+          "@id": "kb:SolveitInvestigativeAction-aad61df2-ae72-42ca-a7e4-3f05619bda8d"
         },
         {
-          "@id": "kb:SolveitInvestigativeAction-37b1ab8e-0e77-45ef-bed1-da10c80fb2b6"
+          "@id": "kb:SolveitInvestigativeAction-d1a0daaf-f47d-4ea6-8038-5dcf6cf38b88"
         },
         {
-          "@id": "kb:ProvenanceRecord-e0234df1-7bf6-4484-9c5b-2a11d58b9327"
+          "@id": "kb:ProvenanceRecord-35895dbf-db0e-496f-93f2-651f02ea0f47"
         },
         {
-          "@id": "kb:ObservableRelationship-213440cd-1bad-43e2-abe9-06194a5d55a0"
+          "@id": "kb:ObservableRelationship-87831090-471f-421d-b459-2eb6416adf29"
         },
         {
-          "@id": "kb:ObservableRelationship-0c3ab32c-7d5c-41e3-95d7-bfb378e69caa"
+          "@id": "kb:ObservableRelationship-a89ead35-7f5b-44b0-a2d2-6c0d5a6b434d"
         },
         {
-          "@id": "kb:ObservableRelationship-ccb77d4e-ac0d-4fe0-bb42-f9ec75dfa785"
+          "@id": "kb:ObservableRelationship-12f1ff2f-2648-4781-b64a-c503ee7eac0c"
         },
         {
-          "@id": "kb:ObservableRelationship-d7f46703-1503-4d8e-ba77-5b65ab525cbe"
+          "@id": "kb:ObservableRelationship-56cc07f7-8a7d-4dd1-8534-70be9486f349"
         },
         {
-          "@id": "kb:ObservableRelationship-67cbc069-36cf-46d7-ab5b-b3d992c283c1"
+          "@id": "kb:ObservableRelationship-41130e6d-66e7-4ada-8825-c74ef031ddea"
         },
         {
-          "@id": "kb:ObservableRelationship-fec8acd8-3249-4660-b326-e96a5b4bcded"
+          "@id": "kb:ObservableRelationship-14fefd3a-ac9b-457f-b0a9-50c9a81746fb"
         },
         {
-          "@id": "kb:ObservableRelationship-cc594455-7c26-4567-9cdc-2aef8c669b1a"
+          "@id": "kb:ObservableRelationship-5b271c34-a8a1-4d97-b9af-4e9905ef819c"
         },
         {
-          "@id": "kb:ObservableRelationship-90b9f784-b521-4634-9c02-8a6676eb88fb"
+          "@id": "kb:ObservableRelationship-705b7589-9b24-416a-876d-4a640f26081d"
         },
         {
-          "@id": "kb:ObservableRelationship-74ff5b54-c36e-46ee-b877-ee7adfef0019"
+          "@id": "kb:ObservableRelationship-dcc3cdf3-841e-442f-90cf-c0cada9566bf"
         },
         {
-          "@id": "kb:ObservableRelationship-1e12fa70-f4a0-40b4-bdfa-26f1e32eb8e7"
+          "@id": "kb:ObservableRelationship-f0ca7165-d4e2-4860-9548-23789635b2cb"
         },
         {
-          "@id": "kb:ObservableRelationship-96c4ec48-6eee-4cf8-a913-a6d24c256c98"
+          "@id": "kb:ObservableRelationship-a7b8f4da-6e64-4434-8d35-776c3c3a349f"
         },
         {
-          "@id": "kb:ObservableRelationship-b8d33444-57a1-4692-8db9-cfd0a9f3cd60"
+          "@id": "kb:ObservableRelationship-40639965-a664-4910-8c0e-0837eb45b9b8"
         },
         {
-          "@id": "kb:ObservableRelationship-2f890aec-3b0b-49cd-abe2-fcae26279705"
+          "@id": "kb:ObservableRelationship-b9d74509-ca5e-408c-a5c9-91da56c1e7a5"
         },
         {
-          "@id": "kb:ObservableRelationship-f10bd78a-20e7-4d3e-8d32-7e11e87ad3ae"
+          "@id": "kb:ObservableRelationship-292dfcd4-a476-4914-ad49-72c1bf83de10"
         }
       ]
     }

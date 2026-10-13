@@ -15,9 +15,9 @@
       "@id": "urn:uuid:30a5f14b-75b7-58e0-ae65-38e66feb5a32",
       "@type": "uco-observable:ObservableObject",
       "uco-core:name": "Source file pacer -- racketeering -- superseding indictment.pdf",
-      "uco-core:description": "Link-Look pdf upload",
+      "uco-core:description": "Uploaded pdf file",
       "uco-core:tag": [
-        "link-look-file-kind:pdf"
+        "source-file-kind:pdf"
       ],
       "uco-core:hasFacet": [
         {

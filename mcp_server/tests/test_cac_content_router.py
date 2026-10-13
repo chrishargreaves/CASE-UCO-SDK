@@ -352,3 +352,29 @@ def test_route_hawaii_trafficking_includes_victim_bundle_checklist() -> None:
     assert "trial-brief-anticipated-evidence" in checklist_ids
     recipe_files = {item["recipe_file"] for item in result["matched_domains"]}
     assert "docs/recipes/cac-federal-trial-proceedings.md" in recipe_files
+
+
+def test_routers_enforce_read_roots_and_do_not_echo_absolute_paths(tmp_path, monkeypatch) -> None:
+    import workspace_policy
+    from investigation_router import route_investigation_content
+
+    read_root = tmp_path / "read"
+    write_root = tmp_path / "write"
+    outside = tmp_path / "outside"
+    for directory in (read_root, write_root, outside):
+        directory.mkdir()
+    secret = outside / "secret.txt"
+    secret.write_text("A stranger blackmailed a child online.", encoding="utf-8")
+    inside = read_root / "notes.txt"
+    inside.write_text("A stranger blackmailed a child online.", encoding="utf-8")
+    monkeypatch.setenv(workspace_policy.SECURE_MODE_ENV, "1")
+    monkeypatch.setenv(workspace_policy.READ_ROOTS_ENV, str(read_root))
+    monkeypatch.setenv(workspace_policy.WRITE_ROOTS_ENV, str(write_root))
+
+    with pytest.raises(ValueError, match="source_outside_read_roots"):
+        route_cac_content(PROJECT_ROOT, source_path=str(secret), include_recipe_content=False)
+    with pytest.raises(ValueError, match="source_outside_read_roots"):
+        route_investigation_content(PROJECT_ROOT, source_path=str(secret))
+
+    routed = route_investigation_content(PROJECT_ROOT, source_path=str(inside))
+    assert routed["source_path"] == "notes.txt"

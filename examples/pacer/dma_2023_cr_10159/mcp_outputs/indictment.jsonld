@@ -15,9 +15,9 @@
       "@id": "urn:uuid:d0be2e53-d46c-5db4-a2ff-dffeaac3e3b6",
       "@type": "uco-observable:ObservableObject",
       "uco-core:name": "Source file pacer -- espionage -- indictment.pdf",
-      "uco-core:description": "Link-Look pdf upload",
+      "uco-core:description": "Uploaded pdf file",
       "uco-core:tag": [
-        "link-look-file-kind:pdf"
+        "source-file-kind:pdf"
       ],
       "uco-core:hasFacet": [
         {

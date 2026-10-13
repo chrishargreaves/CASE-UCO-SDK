@@ -1,0 +1,31 @@
+{
+  "name": "smishviz",
+  "display_name": "SmishViz Campaign and Social-Engineering Annotation Extension",
+  "version": "0.1.0",
+  "upstream_repo": "https://github.com/varnicm/smishviz-case-uco",
+  "upstream_ref": "main",
+  "license": "Apache-2.0",
+  "namespaces": {
+    "smish": "https://reactlab.org/smishviz/ontology/"
+  },
+  "owl_files": [
+    "smishviz.ttl"
+  ],
+  "shacl_files": [
+    "smishviz-shapes.ttl"
+  ],
+  "bridge_files": [],
+  "exemplar_files": [
+    "smishviz-exemplar.ttl"
+  ],
+  "uco_compat": ["1.4.0", "1.5.0"],
+  "upper_ontology": "none",
+  "cdo_shapes_compatibility": {
+    "CDO-Shapes-gufo": "compatible",
+    "CDO-Shapes-BFO": "compatible",
+    "CDO-Shapes-PROV-O": "compatible",
+    "CDO-Shapes-Time": "compatible",
+    "CDO-Shapes-GeoSPARQL": "compatible",
+    "CDO-Shapes-FOAF": "compatible"
+  }
+}

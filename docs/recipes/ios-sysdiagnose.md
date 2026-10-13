@@ -310,7 +310,7 @@ and apply DFM-1179 guidance.
 PYTHONPATH=python:packages/case-uco-solveit/python:mcp_server \
   python3 examples/sysdiagnose/build_ios_sysdiagnose_unified_logs.py
 # → examples/sysdiagnose/ios-sysdiagnose-unified-logs.jsonld
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph ontology/solveit/solve_it_core.ttl \
   # (or: validate_graph(..., extensions=['solveit']))
 ```

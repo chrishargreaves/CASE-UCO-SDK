@@ -146,7 +146,7 @@ graph.write("email-export.jsonld")
 ## Validation
 
 ```bash
-case_validate --built-version case-1.4.0 email-export.jsonld
+case_validate --built-version case-1.5.0 email-export.jsonld
 ```
 
 ## Related

@@ -1,0 +1,22 @@
+{
+  "@context": {
+    "kb": "https://example.org/kb/",
+    "case-investigation": "https://ontology.caseontology.org/case/investigation/",
+    "uco-core": "https://ontology.unifiedcyberontology.org/uco/core/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "cacontology": "https://cacontology.projectvic.org#",
+    "cacontology-case": "https://cacontology.projectvic.org/case-management#"
+  },
+  "@graph": [
+    {
+      "@id": "urn:uuid:11111111-2222-4333-8444-555555555555",
+      "@type": [
+        "case-investigation:Investigation",
+        "cacontology:InventedMediaAuthScore"
+      ],
+      "uco-core:name": "T0 invented-term negative fixture",
+      "uco-core:description": "Uses a term that does not exist in CAC 3.1.0 or CASE/UCO 1.5.0."
+    }
+  ]
+}

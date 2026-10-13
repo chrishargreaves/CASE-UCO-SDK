@@ -61,7 +61,7 @@ def test_extension_ontology_args_uses_cac_subset_by_default() -> None:
         pytest.skip("CAC ontology submodule not initialized")
     args = graph_validator.extension_ontology_args(["cac"], project_root=project_root)
     assert "--built-version" in args
-    assert "case-1.4.0" in args
+    assert "case-1.5.0" in args
     assert "--allow-info" in args
     assert "--inference" not in args
     ontology_flags = [

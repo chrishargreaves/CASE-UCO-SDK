@@ -2,7 +2,7 @@
 """Agent Layer-2 PACER investigation graphs from MCP Layer-1 hashes.
 
 Fail-closed: statute-backed FederalCharge only; named defendants only;
-no usedTechnique; no invented victims, hashes, or ATT&CK.
+no SOLVE-IT technique types; no invented victims, hashes, or ATT&CK.
 """
 
 from __future__ import annotations

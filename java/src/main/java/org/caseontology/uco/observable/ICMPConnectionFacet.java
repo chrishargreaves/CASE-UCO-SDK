@@ -10,7 +10,9 @@ public class ICMPConnectionFacet extends Facet {
     public static final String CLASS_IRI = "https://ontology.unifiedcyberontology.org/uco/observable/ICMPConnectionFacet";
     public static final String NAMESPACE_PREFIX = "uco-observable";
 
+    @org.caseontology.CaseDatatype("xsd:hexBinary")
     private List<byte[]> icmpCode;
+    @org.caseontology.CaseDatatype("xsd:hexBinary")
     private List<byte[]> icmpType;
 
     public ICMPConnectionFacet() {

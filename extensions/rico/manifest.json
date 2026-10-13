@@ -15,12 +15,18 @@
     "rico-shapes.ttl"
   ],
   "bridge_files": [],
-  "depends_on": ["legalproc"],
+  "depends_on": [
+    "legalproc"
+  ],
   "exemplar_files": [
     "rico-exemplar.ttl"
   ],
-  "uco_compat": ["1.4.0", "1.5.0"],
-  "upper_ontology": "none (RacketeeringEnterprise subClassOf uco-identity:Organization; EnterpriseRole subClassOf uco-role:Role)",
+  "uco_compat": [
+    "1.4.0",
+    "1.5.0"
+  ],
+  "upper_ontology": "none",
+  "upper_ontology_notes": "none (RacketeeringEnterprise subClassOf uco-identity:Organization; EnterpriseRole subClassOf uco-role:Role)",
   "cdo_shapes_compatibility": {
     "CDO-Shapes-gufo": "compatible",
     "CDO-Shapes-BFO": "compatible",

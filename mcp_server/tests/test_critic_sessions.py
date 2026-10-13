@@ -272,6 +272,32 @@ def test_finalize_rejects_open_critical(workspace, monkeypatch):
     assert exc.value.code == "critic_session_blockers_remain"
 
 
+def test_finalize_graph_scope_does_not_hash_unreviewed_serializer(workspace):
+    """A graph-scoped review may record a serializer path without hashing it.
+
+    Finalize must use that same empty serializer hash. Hashing the file
+    anyway raises artifact-set mismatch after a clean review.
+    """
+
+    read, _write = workspace
+    graph = _copy_gold(read)
+    serializer = read / "build_graph.py"
+    serializer.write_text("print('builder')\n", encoding="utf-8")
+    started = start_critic_review(
+        graph_path=str(graph),
+        serializer_path=str(serializer),
+        critic_scope="graph",
+    )
+    assert started["prompt_package"]["artifact_hashes"].get("serializer_sha256") is None
+    sid = started["session_id"]
+    submit_manual_critic_response(sid, _empty_critic_response(started))
+    revised = submit_critic_revision(sid, graph_path=str(graph))
+    assert revised["prompt_package"]["artifact_hashes"].get("serializer_sha256") is None
+    submit_manual_critic_response(sid, _empty_critic_response(revised))
+    finalized = finalize_critic_review(sid)
+    assert finalized["state"] == "finalized"
+
+
 def test_finalize_rejects_post_review_file_modification(workspace):
     read, _ = workspace
     graph = _copy_gold(read)

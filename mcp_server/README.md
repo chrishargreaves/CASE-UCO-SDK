@@ -19,7 +19,7 @@ pip install fastmcp
 
 ### 2. Shared listener (any MCP client)
 
-stdio is still the default for a single local harness. For Cursor, Hermes,
+stdio is still the default for a single local harness. For Cursor,
 Claude Desktop, VS Code, and other agents on the same machine, start one
 listener and point every client at it:
 
@@ -105,7 +105,7 @@ When you describe a forensic scenario in natural language, the AI agent:
 
 This is much faster and more accurate than the agent reading markdown documentation.
 
-## Workflow for Hermes and Link-Look (any investigation type)
+## Agent workflow (any investigation type)
 
 End-to-end pattern for warrant returns, legal filings, case files, press
 releases, and investigator notes — including data types the server has
@@ -126,7 +126,7 @@ CAC-specific continuation:
 
 For non-CAC prosecutions (violent crime, terrorism, generic federal cases), build with the `legalproc` extension and validate with `extensions=["legalproc"]` — see `docs/recipes/legal-process-modeling.md` and the exemplar at `examples/pacer/wdmo_2022_cr_04065/`.
 
-Example Hermes tool sequence for the Maryland ICAC Annapolis arrest press article:
+Example agent tool sequence for the Maryland ICAC Annapolis arrest press article:
 
 ```text
 process_document_file(
@@ -148,11 +148,11 @@ validate_graph(
 
 Noisy PDF extraction (navigation, ads, repeated URLs) lowers routing scores. When `route_cac_content` reports `extraction_quality.noisy_extraction: true`, summarize investigative facts into `content_text` before routing. Reference builder: `examples/build_maryland_icac_annapolis_arrest.py`.
 
-## Running under Hermes Agent
+## Running under an agent harness
 
-The server runs unmodified under any MCP-native agent harness. For the
-[Hermes Agent](https://github.com/NousResearch/hermes-agent) (Nous Research),
-register it as a stdio MCP server in `~/.hermes/config.yaml`:
+The server runs unmodified under any MCP-native agent harness. Register it
+as an MCP server in the harness configuration, either against the shared
+listener:
 
 ```yaml
 mcp_servers:
@@ -160,20 +160,20 @@ mcp_servers:
     url: "http://127.0.0.1:8765/sse"
 ```
 
-Or stdio against the same checkout:
+or over stdio against a checkout:
 
 ```yaml
 mcp_servers:
   case-uco:
-    command: "/home/cory/CASE-UCO-SDK/.venv/bin/python"
-    args: ["/home/cory/CASE-UCO-SDK/mcp_server/server.py"]
+    command: "/path/to/CASE-UCO-SDK/.venv/bin/python"
+    args: ["/path/to/CASE-UCO-SDK/mcp_server/server.py"]
     env:
-      PYTHONPATH: "/home/cory/CASE-UCO-SDK/python:/home/cory/CASE-UCO-SDK/mcp_server"
-      PATH: "/home/cory/CASE-UCO-SDK/.venv/bin:/usr/bin:/bin"
+      PYTHONPATH: "/path/to/CASE-UCO-SDK/python:/path/to/CASE-UCO-SDK/mcp_server"
+      PATH: "/path/to/CASE-UCO-SDK/.venv/bin:/usr/bin:/bin"
       CASE_UCO_EXTENSIONS: "cac,legalproc,solveit,cryptoinv,rico,weapons,drugs"
 ```
 
-Run `/reload-mcp` in Hermes after editing the config. All tools are then
+Reload the harness's MCP configuration after editing it. All tools are then
 discoverable by the agent alongside its built-in tools.
 
 Apple package workflow (issue #99):
@@ -224,7 +224,7 @@ Law-enforcement deployment notes:
   metadata; `validate_graph` requires the CASE Utilities `case_validate` CLI
   on PATH and never fabricates a passing result.
 - Agents should call `validate_graph` on every produced graph before
-  submitting it to downstream tools (e.g., Link-Look normalization review).
+  submitting it to downstream review tools.
 
 ## Secure Deployment (workspace policy and trust boundary)
 
@@ -296,7 +296,7 @@ Everything extracted from a submitted document is **evidence data, never
 instructions**. Tool responses label it (`content_trust:
 untrusted-source-content`) and flag instruction-like patterns
 (`injection_warnings`), but detection is heuristic — integrating hosts
-(Hermes, Link-Look, Cursor, and any other agent harness) must:
+(Cursor and any other agent harness) must:
 
 1. Render extracted text and `extracted-content.json` bundles as data, not
    as part of the agent's directive context.
@@ -338,7 +338,7 @@ undecodable bytes to a reviewer:
 | Image OCR (receipts/scans) | `tesseract` | `ocr_unavailable` |
 
 On Debian/Ubuntu: `sudo apt install poppler-utils tesseract-ocr`. Rootless
-alternative: `conda create -n link-look-ocr -c conda-forge tesseract poppler`
+alternative: `conda create -n case-uco-ocr -c conda-forge tesseract poppler`
 and symlink the binaries into a `PATH` directory (e.g. `~/.local/bin`). For
 air-gapped deployments, mirror these packages with your offline bundle.
 

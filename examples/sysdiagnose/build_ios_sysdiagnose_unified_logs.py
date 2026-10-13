@@ -575,7 +575,8 @@ def build() -> CASEGraph:
         ul_events.append(event)
 
     # SolveitInvestigativeAction (case_uco_solveit >= 0.2.0) serializes
-    # uco-action:* keys and SOLVE-IT method links natively.
+    # uco-action:* keys and SOLVE-IT mitigation links natively; the technique
+    # performed is an extra rdf:type (SOLVE-IT 0.2.x metaclass pattern).
     parse_iterator = graph.create(
         SolveitInvestigativeAction,
         name="Parse logarchive with unifiedlog_iterator",
@@ -590,10 +591,6 @@ def build() -> CASEGraph:
         result=[csv_out, *ul_records, *ul_events],
         start_time=datetime(2026, 7, 27, 15, 35, 0, tzinfo=timezone.utc),
         end_time=datetime(2026, 7, 27, 15, 36, 0, tzinfo=timezone.utc),
-        used_technique=[
-            {"@id": SOLVEIT_DATA + "techniqueDFT-1066"},
-            {"@id": SOLVEIT_DATA + "techniqueDFT-1076"},
-        ],
         applied_mitigation=[
             {"@id": SOLVEIT_DATA + "mitigationDFM-1027"},
             {"@id": SOLVEIT_DATA + "mitigationDFM-1175"},
@@ -614,10 +611,6 @@ def build() -> CASEGraph:
         result=[sqlite_out],
         start_time=datetime(2026, 7, 25, 19, 0, 0, tzinfo=timezone.utc),
         end_time=datetime(2026, 7, 25, 19, 50, 0, tzinfo=timezone.utc),
-        used_technique=[
-            {"@id": SOLVEIT_DATA + "techniqueDFT-1066"},
-            {"@id": SOLVEIT_DATA + "techniqueDFT-1076"},
-        ],
         applied_mitigation=[
             {"@id": SOLVEIT_DATA + "mitigationDFM-1027"},
         ],
@@ -636,11 +629,11 @@ def build() -> CASEGraph:
         result=[ileapp_report, wifi_net],
         start_time=datetime(2026, 7, 25, 20, 0, 0, tzinfo=timezone.utc),
         end_time=datetime(2026, 7, 25, 20, 20, 0, tzinfo=timezone.utc),
-        used_technique=[
-            {"@id": SOLVEIT_DATA + "techniqueDFT-1066"},
-            {"@id": SOLVEIT_DATA + "techniqueDFT-1076"},
-        ],
     )
+
+    for parse_action in (parse_iterator, parse_notari, parse_ileapp):
+        for technique in ("techniqueDFT-1066", "techniqueDFT-1076"):
+            graph.add_type(graph.get_id(parse_action), SOLVEIT_DATA + technique)
 
     provenance = graph.create(
         ProvenanceRecord,

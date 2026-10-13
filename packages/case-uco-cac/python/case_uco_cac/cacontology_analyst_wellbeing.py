@@ -30,7 +30,6 @@ class OccupationalHarm:
     """Occupational harm experienced by investigators or content analysts arising from exposure to traumatic materials or sustained operational stressors."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/analyst-wellbeing#OccupationalHarm"
-    label: list[str] = field(default_factory=list)
     harm_severity: Optional[str] = field(default=None)
 
 
@@ -39,7 +38,6 @@ class SecondaryTraumaticStress:
     """Occupational stress reactions arising from indirect exposure to others' trauma, including exposure through content review and investigative materials."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/analyst-wellbeing#SecondaryTraumaticStress"
-    label: list[str] = field(default_factory=list)
     harm_severity: Optional[str] = field(default=None)
 
 
@@ -48,6 +46,5 @@ class VicariousTrauma:
     """A form of occupational harm in which repeated exposure to traumatic material produces trauma-like impacts in the reviewer."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/analyst-wellbeing#VicariousTrauma"
-    label: list[str] = field(default_factory=list)
     harm_severity: Optional[str] = field(default=None)
 

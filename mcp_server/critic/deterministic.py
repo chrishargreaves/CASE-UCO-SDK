@@ -34,7 +34,7 @@ from critic.models import (
 )
 from critic.review_schema import validate_critic_review
 from critic.scorecard import build_deterministic_scorecard, merge_scorecards
-from critic.serializer_python import analyze_python_serializer
+from critic.serializer_python import SerializerTooComplexError, analyze_python_serializer
 
 RULE_VERSION = "1.1.0"
 MAX_SERIALIZER_AST_BYTES = 256 * 1024
@@ -249,8 +249,11 @@ def analyze_artifact(request: CriticArtifactRequest) -> CriticReview:
     serializer_is_python: bool | None = None
     if serializer_path and request.critic_scope in {"serializer", "both"}:
         serializer_is_python = serializer_path.suffix.lower() == ".py"
-        raw_full = serializer_path.read_bytes()
-        if serializer_is_python and len(raw_full) > MAX_SERIALIZER_AST_BYTES:
+        too_large = serializer_is_python and (
+            serializer_path.stat().st_size > MAX_SERIALIZER_AST_BYTES
+        )
+        raw_full = b"" if too_large else serializer_path.read_bytes()
+        if too_large:
             errors.append("critic_serializer_too_large")
             rule_executions.append(
                 RuleExecution(
@@ -273,24 +276,42 @@ def analyze_artifact(request: CriticArtifactRequest) -> CriticReview:
             serializer_overview = {
                 "path": serializer_path.name,
                 "note": "serializer_too_large_for_ast",
-                "byte_size": len(raw_full),
+                "byte_size": serializer_path.stat().st_size,
             }
         elif serializer_is_python:
             source_text = raw_full.decode("utf-8", errors="replace")
-            ser_findings, ser_exec = analyze_python_serializer(
-                serializer_path,
-                source_text,
-                serializer_mode=request.serializer_mode,
-                artifact_hash=hashes.serializer_sha256 or "",
-            )
+            try:
+                ser_findings, ser_exec = analyze_python_serializer(
+                    serializer_path,
+                    source_text,
+                    serializer_mode=request.serializer_mode,
+                    artifact_hash=hashes.serializer_sha256 or "",
+                )
+                serializer_excerpts = excerpt_serializer(
+                    source_text, ser_findings, path_name=serializer_path.name
+                )
+                serializer_overview = build_serializer_overview(
+                    source_text, path_name=serializer_path.name
+                )
+            except (SerializerTooComplexError, RecursionError):
+                errors.append("critic_serializer_too_complex")
+                ser_findings, ser_exec = [], [
+                    RuleExecution(
+                        rule_id="CRIT-S-PY-SUITE",
+                        rule_version=RULE_VERSION,
+                        status="skipped",
+                        input_artifact_hash=hashes.serializer_sha256 or "",
+                        error_code="critic_serializer_too_complex",
+                        required_for_scope=True,
+                    )
+                ]
+                serializer_excerpts = []
+                serializer_overview = {
+                    "path": serializer_path.name,
+                    "note": "serializer_too_complex_for_ast",
+                }
             findings.extend(ser_findings)
             rule_executions.extend(e.to_dict() for e in ser_exec)
-            serializer_excerpts = excerpt_serializer(
-                source_text, ser_findings, path_name=serializer_path.name
-            )
-            serializer_overview = build_serializer_overview(
-                source_text, path_name=serializer_path.name
-            )
         else:
             serializer_overview = {
                 "path": serializer_path.name,
@@ -694,8 +715,8 @@ def _validation_findings(validation: ValidationSummary) -> list[CriticFinding]:
             status="new",
             target=CriticTarget(
                 node_id=(
-                    str(item.get("term"))
-                    if isinstance(item, dict) and item.get("term")
+                    str(item.get("iri") or item.get("term"))
+                    if isinstance(item, dict) and (item.get("iri") or item.get("term"))
                     else None
                 )
             ),
@@ -720,7 +741,10 @@ def _analysis_status(
 ) -> str:
     if any(e.get("status") == "failed" and e.get("required_for_scope", True) for e in rule_executions):
         return "failed"
-    if blocking_incomplete or "critic_serializer_too_large" in errors:
+    if blocking_incomplete or {
+        "critic_serializer_too_large",
+        "critic_serializer_too_complex",
+    } & set(errors):
         return "partial"
     if "critic_validation_unavailable" in errors:
         return "partial"

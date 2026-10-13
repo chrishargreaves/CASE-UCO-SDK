@@ -4,9 +4,9 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 
 | Metric | Count |
 |--------|-------|
-| Classes | 2933 |
-| Direct properties | 2467 |
-| Modules | 79 |
+| Classes | 2961 |
+| Direct properties | 2544 |
+| Modules | 84 |
 | Vocabulary types | 54 |
 
 ## Table of Contents
@@ -16,7 +16,6 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 - [ext.aeo.engagement](#extaeoengagement) (22 classes)
 - [ext.aeo.identity](#extaeoidentity) (2 classes)
 - [ext.aeo.objective](#extaeoobjective) (1 classes)
-- [ext.attack-technique.attack](#extattack-techniqueattack) (27 classes)
 - [ext.cac.cac-core](#extcaccac-core) (20 classes)
 - [ext.cac.cacontology](#extcaccacontology) (34 classes)
 - [ext.cac.cacontology-ai-csam](#extcaccacontology-ai-csam) (37 classes)
@@ -64,18 +63,24 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 - [ext.cac.cacontology-usa-federal-law](#extcaccacontology-usa-federal-law) (40 classes)
 - [ext.cac.cacontology-usa-legislative](#extcaccacontology-usa-legislative) (18 classes)
 - [ext.cac.cacontology-victim-impact](#extcaccacontology-victim-impact) (72 classes)
-- [ext.cryptoinv.cryptoinv](#extcryptoinvcryptoinv) (13 classes)
+- [ext.cryptoinv.cryptoinv](#extcryptoinvcryptoinv) (14 classes)
 - [ext.drugs.drug](#extdrugsdrug) (1 classes)
-- [ext.legalproc.legalproc](#extlegalproclegalproc) (8 classes)
+- [ext.elder-fraud.ef](#extelder-fraudef) (8 classes)
+- [ext.extortion.ex](#extextortionex) (3 classes)
+- [ext.legalproc.legalproc](#extlegalproclegalproc) (18 classes)
 - [ext.rico.rico](#extricorico) (2 classes)
-- [ext.solveit.solveit-analysis](#extsolveitsolveit-analysis) (9 classes)
-- [ext.solveit.solveit-core](#extsolveitsolveit-core) (6 classes)
-- [ext.solveit.solveit-data](#extsolveitsolveit-data) (191 classes)
+- [ext.smishviz.smish](#extsmishvizsmish) (5 classes)
+- [ext.solveit.solveit-analysis](#extsolveitsolveit-analysis) (12 classes)
+- [ext.solveit.solveit-core](#extsolveitsolveit-core) (7 classes)
+- [ext.solveit.solveit-data](#extsolveitsolveit-data) (200 classes)
 - [ext.solveit.solveit-observable](#extsolveitsolveit-observable) (88 classes)
 - [ext.solveit.solveit-tool-profile](#extsolveitsolveit-tool-profile) (4 classes)
 - [ext.solveit.solveit-wa](#extsolveitsolveit-wa) (2 classes)
 - [ext.toolcap.capability](#exttoolcapcapability) (3 classes)
 - [ext.toolcap.toolcap](#exttoolcaptoolcap) (5 classes)
+- [ext.trafficking.traf](#exttraffickingtraf) (3 classes)
+- [ext.trajectories.traj](#exttrajectoriestraj) (6 classes)
+- [ext.uas.uas](#extuasuas) (6 classes)
 - [ext.weapons.weap](#extweaponsweap) (8 classes)
 - [uco.action](#ucoaction) (8 classes)
 - [uco.analysis](#ucoanalysis) (5 classes)
@@ -177,18 +182,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
 | specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
 | tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_more | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_more | No | The time at which performance of the action ended. |
 | environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
 | instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
 | location | Location | zero_or_more | No | The locations where an action occurs. |
 | object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
 | participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
 | performer | UcoObject | zero_or_one | No | The primary performer of an action. |
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_more | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
 | phase | ArrayOfAction | exactly_one | Yes | The ordered set of actions or sub action-lifecycles that represent the action lifecycle. |
 
@@ -335,18 +335,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
 | specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
 | tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_more | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_more | No | The time at which performance of the action ended. |
 | environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
 | instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
 | location | Location | zero_or_more | No | The locations where an action occurs. |
 | object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
 | participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
 | performer | UcoObject | zero_or_one | No | The primary performer of an action. |
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_more | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
 | phase | ArrayOfAction | exactly_one | Yes | The ordered set of actions or sub action-lifecycles that represent the action lifecycle. |
 
@@ -369,18 +364,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
 | specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
 | tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_more | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_more | No | The time at which performance of the action ended. |
 | environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
 | instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
 | location | Location | zero_or_more | No | The locations where an action occurs. |
 | object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
 | participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
 | performer | UcoObject | zero_or_one | No | The primary performer of an action. |
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_more | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
 | phase | ArrayOfAction | exactly_one | Yes | The ordered set of actions or sub action-lifecycles that represent the action lifecycle. |
 
@@ -439,18 +429,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
 | specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
 | tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_more | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_more | No | The time at which performance of the action ended. |
 | environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
 | instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
 | location | Location | zero_or_more | No | The locations where an action occurs. |
 | object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
 | participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
 | performer | UcoObject | zero_or_one | No | The primary performer of an action. |
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_more | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
 | phase | ArrayOfAction | exactly_one | Yes | The ordered set of actions or sub action-lifecycles that represent the action lifecycle. |
 
@@ -609,7 +594,7 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
 | tag | string | zero_or_more | No | A generic tag/label. |
 | hasAttackSurface | UcoObject | one_or_more | Yes | hasAttackSurface is an object property which describes the UcoObjects which compose the attack surface which is expec... |
-| hasCharacterization | UcoObject | zero_or_more | No | hasCharacterization is an object property which describes the UcoObjects which compose a deception object or adversar... |
+| hasCharacterization | UcoObject | one_or_more | Yes | hasCharacterization is an object property which describes the UcoObjects which compose a deception object or adversar... |
 | hasPerceptionCharacterization | UcoObject | one_or_more | Yes | hasPerceptionCharacterization is an object property which describes the UcoObjects which compose the perception objec... |
 | breadcrumbTargetObject | UcoObject | one_or_more | Yes | breadcrumbTargetObject specifies the target object or resource which the breadcrumb is luring an adversary to. |
 
@@ -1132,899 +1117,6 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
 | specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
 | tag | string | zero_or_more | No | A generic tag/label. |
-
-## ext.attack-technique.attack
-
-### T1016
-
-*Tactic: Discovery. Platforms: ESXi, Linux, macOS, Network Devices, Windows. Adversaries may look for details about the network configuration and settings, such as IP and/or MAC addresses, of systems they access or through information discovery of remote systems. Several operating system administration utilities exist that can be used to gather this information. Examples include [Arp](https://attack.mitre.org/software/S0099), [ipconfig](https://attack.mitre.org/software/S0*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1016`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1027.002
-
-*Tactic: Stealth. Platforms: Linux, macOS, Windows. Adversaries may perform software packing or virtual machine software protection to conceal their code. Software packing is a method of compressing or encrypting an executable. Packing an executable changes the file signature in an attempt to avoid signature-based detection. Most decompression techniques decompress the executable code in memory. Virtual machine software protection translates an exe*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1027.002`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1036
-
-*Tactic: Stealth. Platforms: Containers, ESXi, Linux, macOS, Windows. Adversaries may attempt to manipulate features of their artifacts to make them appear legitimate or benign to users and/or security tools. Masquerading occurs when the name or location of an object, legitimate or malicious, is manipulated or abused for the sake of evading defenses and observation. This may include manipulating file metadata, tricking users into misidentifying the file type, and gi*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1036`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1036.008
-
-*Tactic: Stealth. Platforms: Linux, macOS, Windows. Adversaries may masquerade malicious payloads as legitimate files through changes to the payload's formatting, including the file’s signature, extension, icon, and contents. Various file types have a typical standard format, including how they are encoded and organized. For example, a file’s signature (also known as header or magic bytes) is the beginning bytes of a file and is often used to ident*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1036.008`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1041
-
-*Tactic: Exfiltration. Platforms: ESXi, Linux, macOS, Windows. Adversaries may steal data by exfiltrating it over an existing command and control channel. Stolen data is encoded into the normal communications channel using the same protocol as command and control communications.*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1041`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1047
-
-*Tactic: Execution. Platforms: Windows. Adversaries may abuse Windows Management Instrumentation (WMI) to execute malicious commands and payloads. WMI is designed for programmers and is the infrastructure for management data and operations on Windows systems.(Citation: WMI 1-3) WMI is an administration feature that provides a uniform environment to access Windows system components.*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1047`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1053.005
-
-*Tactics: Execution, Persistence, Privilege Escalation. Platforms: Windows. Adversaries may abuse the Windows Task Scheduler to perform task scheduling for initial or recurring execution of malicious code. There are multiple ways to access the Task Scheduler in Windows. The [schtasks](https://attack.mitre.org/software/S0111) utility can be run directly on the command line, or the Task Scheduler can be opened through the GUI within the Administrator Tools section of the Co*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1053.005`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1055.001
-
-*Tactics: Stealth, Privilege Escalation. Platforms: Windows. Adversaries may inject dynamic-link libraries (DLLs) into processes in order to evade process-based defenses as well as possibly elevate privileges. DLL injection is a method of executing arbitrary code in the address space of a separate live process.*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1055.001`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1056.001
-
-*Tactics: Collection, Credential Access. Platforms: Linux, macOS, Network Devices, Windows. Adversaries may log user keystrokes to intercept credentials as the user types them. Keylogging is likely to be used to acquire credentials for new access opportunities when [OS Credential Dumping](https://attack.mitre.org/techniques/T1003) efforts are not effective, and may require an adversary to intercept keystrokes on a system for a substantial period of time before credentials can be successf*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1056.001`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1059.001
-
-*Tactic: Execution. Platforms: Windows. Adversaries may abuse PowerShell commands and scripts for execution. PowerShell is a powerful interactive command-line interface and scripting environment included in the Windows operating system.(Citation: TechNet PowerShell) Adversaries can use PowerShell to perform a number of actions, including discovery of information and execution of code. Examples include the <code>Start-Process</code> cmdl*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1059.001`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1059.007
-
-*Tactic: Execution. Platforms: Linux, macOS, Windows. Adversaries may abuse various implementations of JavaScript for execution. JavaScript (JS) is a platform-independent scripting language (compiled just-in-time at runtime) commonly associated with scripts in webpages, though JS can be executed in runtime environments outside the browser.(Citation: NodeJS)*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1059.007`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1071.001
-
-*Tactic: Command And Control. Platforms: ESXi, Linux, macOS, Network Devices, Windows. Adversaries may communicate using application layer protocols associated with web traffic to avoid detection/network filtering by blending in with existing traffic. Commands to the remote system, and often the results of those commands, will be embedded within the protocol traffic between the client and server.*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1071.001`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1082
-
-*Tactic: Discovery. Platforms: ESXi, IaaS, Linux, macOS, Network Devices, Windows. An adversary may attempt to get detailed information about the operating system and hardware, including version, patches, hotfixes, service packs, and architecture. Adversaries may use this information to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions. This behavior is distinct from [Local Storage Discovery](https://attac*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1082`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1090.001
-
-*Tactic: Command And Control. Platforms: ESXi, Linux, macOS, Network Devices, Windows. Adversaries may use an internal proxy to direct command and control traffic between two or more systems in a compromised environment. Many tools exist that enable traffic redirection through proxies or port redirection, including [HTRAN](https://attack.mitre.org/software/S0040), ZXProxy, and ZXPortMap. (Citation: Trend Micro APT Attack Tools) Adversaries use internal proxies to manage command and*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1090.001`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1102.002
-
-*Tactic: Command And Control. Platforms: ESXi, Linux, macOS, Windows. Adversaries may use an existing, legitimate external Web service as a means for sending commands to and receiving output from a compromised system over the Web service channel. Compromised systems may leverage popular websites and social media to host command and control (C2) instructions. Those infected systems can then send the output from those commands back over that Web service channel. The r*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1102.002`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1105
-
-*Tactic: Command And Control. Platforms: ESXi, Linux, macOS, Network Devices, Windows. Adversaries may transfer tools or other files from an external system into a compromised environment. Tools or files may be copied from an external adversary-controlled system to the victim network through the command and control channel or through alternate protocols such as [ftp](https://attack.mitre.org/software/S0095). Once present, adversaries may also transfer/spread tools between victim dev*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1105`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1112
-
-*Tactics: Defense Impairment, Persistence. Platforms: Windows. Adversaries may interact with the Windows Registry as part of a variety of other techniques to aid in defense evasion, persistence, and execution.*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1112`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1115
-
-*Tactic: Collection. Platforms: Linux, macOS, Windows. Adversaries may collect data stored in the clipboard from users copying information within or between applications.*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1115`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1140
-
-*Tactic: Stealth. Platforms: ESXi, Linux, macOS, Windows. Adversaries may use [Obfuscated Files or Information](https://attack.mitre.org/techniques/T1027) to hide artifacts of an intrusion from analysis. They may require separate mechanisms to decode or deobfuscate that information depending on how they intend to use it. Methods for doing that include built-in functionality of malware or by using utilities present on the system.*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1140`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1204.002
-
-*Tactic: Execution. Platforms: Linux, macOS, Windows. An adversary may rely upon a user opening a malicious file in order to gain execution. Users may be subjected to social engineering to get them to open a file that will lead to code execution. This user action will typically be observed as follow-on behavior from [Spearphishing Attachment](https://attack.mitre.org/techniques/T1566/001). Adversaries may use several types of files that require a use*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1204.002`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1490
-
-*Tactic: Impact. Platforms: Containers, ESXi, IaaS, Linux, macOS, Network Devices, Windows. Adversaries may delete or remove built-in data and turn off services designed to aid in the recovery of a corrupted system to prevent recovery.(Citation: Talos Olympic Destroyer 2018)(Citation: FireEye WannaCry 2017) This may deny access to available backups and recovery options.*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1490`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1518.001
-
-*Tactic: Discovery. Platforms: IaaS, Linux, macOS, Windows. Adversaries may attempt to get a listing of security software, configurations, defensive tools, and sensors that are installed on a system or in a cloud environment. This may include things such as cloud monitoring agents and anti-virus. Adversaries may use the information from [Security Software Discovery](https://attack.mitre.org/techniques/T1518/001) during automated discovery to shape follow-o*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1518.001`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1539
-
-*Tactic: Credential Access. Platforms: Linux, macOS, Office Suite, SaaS, Windows. An adversary may steal web application or service session cookies and use them to gain access to web applications or Internet services as an authenticated user without needing credentials. Web applications and services often use session cookies as an authentication token after a user has authenticated to a website.*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1539`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1543.003
-
-*Tactics: Persistence, Privilege Escalation. Platforms: Windows. Adversaries may create or modify Windows services to repeatedly execute malicious payloads as part of persistence. When Windows boots up, it starts programs or applications called services that perform background system functions.(Citation: TechNet Services) Windows service configuration information, including the file path to the service's executable or recovery programs/commands, is stored in th*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1543.003`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1560.001
-
-*Tactic: Collection. Platforms: Linux, macOS, Windows. Adversaries may use utilities to compress and/or encrypt collected data prior to exfiltration. Many utilities include functionalities to compress, encrypt, or otherwise package data into a format that is easier/more secure to transport.*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1560.001`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1566.001
-
-*Tactic: Initial Access. Platforms: Linux, macOS, Windows. Adversaries may send spearphishing emails with a malicious attachment in an attempt to gain access to victim systems. Spearphishing attachment is a specific variant of spearphishing. Spearphishing attachment is different from other forms of spearphishing in that it employs the use of malware attached to an email. All forms of spearphishing are electronically delivered social engineering targeted a*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1566.001`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
-### T1568.002
-
-*Tactic: Command And Control. Platforms: ESXi, Linux, macOS, Windows. Adversaries may make use of Domain Generation Algorithms (DGAs) to dynamically identify a destination domain for command and control traffic rather than relying on a list of static IP addresses or domains. This has the advantage of making it much harder for defenders to block, track, or take over the command and control channel, as there potentially could be thousands of domains that malware can c*
-
-**Parents:** Action | **IRI:** `https://attack.mitre.org/techniques/T1568.002`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
 
 ## ext.cac.cac-core
 
@@ -2839,21 +1931,9 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 
 *Continuity alias for the investigation-subject role. Deprecated in favor of case-investigation:Subject (a uco-role:Role whose conduct is within the scope of an investigation); new graphs should use the CASE class directly.*
 
-**Parents:** Role | **IRI:** `https://cacontology.projectvic.org#Subject`
+**IRI:** `https://cacontology.projectvic.org#Subject`
 
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
+*No direct or inherited properties.*
 
 ### UnknownVictimSubmission
 
@@ -14973,7 +14053,7 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
 | hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
 | modifiedTime | dateTime | zero_or_one | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| name | string | exactly_one | Yes | The name of a particular concept characterization. |
 | objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
 | objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
 | objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
@@ -19001,7 +18081,7 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 
 *A durable record that a person was convicted of one or more criminal charges (e.g., by jury verdict, bench trial, or plea agreement). Used for current-case dispositions and for limited prior-conviction history relevant to charging or sentencing. Trauma-informed modeling: store only structured legal facts needed for interoperability; do not encode graphic offense narrative in this class. Modeled as gUFO Object.*
 
-**Parents:** Artifact, UcoObject, ObservableObject | **IRI:** `https://cacontology.projectvic.org/legal-outcomes#ConvictionRecord`
+**Parents:** Artifact, ObservableObject | **IRI:** `https://cacontology.projectvic.org/legal-outcomes#ConvictionRecord`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -42920,7 +42000,7 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | confirmationCount | integer | zero_or_one | No | The number of blockchain confirmations at the time of observation. This is a point-in-time snapshot, not a time-varyi... |
 | transactionFee | decimal | zero_or_one | No | The transaction fee in the native cryptocurrency unit of the network (https://developer.bitcoin.org/devguide/transact... |
 | transactionHash | string | exactly_one | Yes | The unique hash identifier of the blockchain transaction, e.g. '6e0d701ac2ea3ad87fc8bcaa786b994aa943f5eb9a67a1e345769... |
-| transactionStatus | string | zero_or_one | No | The status of the transaction at the time of observation, as an open vocabulary. Recommended values: 'Confirmed', 'Pe... |
+| transactionStatus | string | zero_or_one | No | The status of the transaction or ledger row at the time of observation, as an open vocabulary. Recommended values: 'C... |
 | transactionType | string | zero_or_one | No | The investigative characterization of the transaction, as an open vocabulary. Recommended values: 'Transfer', 'Exchan... |
 
 ### CryptocurrencyWalletFacet
@@ -42932,6 +42012,7 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
 | addressCount | nonNegativeInteger | zero_or_one | No | The number of virtual currency addresses contained in the wallet at the time of observation (a wallet may include man... |
+| hostedWalletCompartment | string | zero_or_one | No | The provider-hosted wallet compartment reported by a VASP, as an open vocabulary. Recommended values observed on exch... |
 | walletIdentifier | string | zero_or_one | No | An investigative identifier for the wallet or address cluster, e.g. the first characters of a representative address ... |
 | walletType | string | zero_or_one | No | The custody model and form factor of the wallet, as an open vocabulary. Recommended values: 'hosted' (a third party r... |
 
@@ -43056,11 +42137,29 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
-| assetQuantity | decimal | exactly_one | Yes | The quantity of the virtual asset in its native unit at the observation time, e.g. 94643.29837084. |
-| assetSymbol | string | exactly_one | Yes | The ticker symbol of the held virtual asset, as an open vocabulary (same recommended values as cryptoinv:cryptocurren... |
+| assetQuantity | decimal | exactly_one | Yes | The quantity of the virtual asset in its native unit at the observation time, e.g. 94643.29837084. Used on cryptoinv:... |
+| assetSymbol | string | exactly_one | Yes | The ticker symbol of the held or transferred virtual asset, as an open vocabulary (same recommended values as cryptoi... |
 | fiatCurrencyCode | string | zero_or_one | No | The ISO 4217 alphabetic currency code of the fiat valuation, e.g. 'USD' (https://www.iso.org/iso-4217-currency-codes.... |
 | fiatValue | decimal | zero_or_one | No | The fiat-currency valuation of the holding at the valuation date. Fiat money is a currency established as money by go... |
 | valuationDate | dateTime | zero_or_one | No | The date and time at which the fiat valuation of the holding was made. The trading value of virtual assets fluctuates... |
+
+### VirtualAssetLedgerRecordFacet
+
+*A virtual asset ledger record facet is a grouping of characteristics unique to a VASP-reported movement, exchange, or balance snapshot on a provider ledger rather than (or in addition to) a public-blockchain transaction. FATF defines VASP activity to include exchange between virtual assets and fiat currencies, exchange between one or more forms of virtual assets, and transfer of virtual assets for or on behalf of another natural or legal person (FATF Guidance for a Risk-Based Approach to Virtual Assets and VASPs, 2021, https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Guidance-rba-virtual-assets-2021.html). Electronic-service-provider warrant returns commonly deliver this activity as deposit, withdrawal, order, P2P, Pay, and fiat worksheets. Attach to the uco-core:Event that represents the source row. When the same row also reports a public transaction hash, also attach cryptoinv:CryptocurrencyTransactionFacet; do not treat a provider order identifier as a blockchain transactionHash.*
+
+**Parents:** Facet | **Type:** Facet | **IRI:** `http://example.org/ontology/cryptoinv/VirtualAssetLedgerRecordFacet`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| addressTag | string | zero_or_one | No | A destination tag, memo, or payment identifier required by some networks and VASPs to credit a deposit (for example X... |
+| assetQuantity | decimal | zero_or_one | No | The quantity of the virtual asset in its native unit at the observation time, e.g. 94643.29837084. Used on cryptoinv:... |
+| assetSymbol | string | zero_or_one | No | The ticker symbol of the held or transferred virtual asset, as an open vocabulary (same recommended values as cryptoi... |
+| isOnChain | boolean | zero_or_one | No | True when the ledger row includes a public-blockchain transaction hash in addition to the provider identifier. False ... |
+| ledgerRecordType | string | exactly_one | Yes | The provider-ledger activity type as an open vocabulary. Recommended values: 'Deposit', 'Withdrawal', 'Trade', 'P2P',... |
+| providerTransactionId | string | zero_or_one | No | The VASP-assigned identifier for the ledger row (deposit ID, withdrawal ID, order ID, or transfer ID). This is not a ... |
+| transactionFee | decimal | zero_or_one | No | The transaction fee in the native cryptocurrency unit of the network (https://developer.bitcoin.org/devguide/transact... |
+| transactionStatus | string | zero_or_one | No | The status of the transaction or ledger row at the time of observation, as an open vocabulary. Recommended values: 'C... |
+| transferNetwork | string | zero_or_one | No | The provider-reported chain or token network used for a deposit or withdrawal, e.g. 'BTC', 'ERC20', 'TRC20', 'BSC', '... |
 
 ### VirtualAssetServiceProvider
 
@@ -43111,6 +42210,373 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | quantityDescription | string | zero_or_one | No | The quantity as stated verbatim in the source record, to avoid fabricating precision, e.g. '500 grams or more of a mi... |
 | substanceForm | string | zero_or_one | No | The physical form of the portion, as an open vocabulary. Recommended values: 'powder', 'crystal', 'tablet', 'capsule'... |
 | substanceName | string | zero_or_one | No | The substance name as recorded in the source record, kept verbatim, e.g. 'methamphetamine', 'a mixture and substance ... |
+
+## ext.elder-fraud.ef
+
+### a_coopt
+
+*Directing an unwitting third party — most often a rideshare driver, occasionally a relative sent by a co-conspirator — to physically collect or relay a cash package from the victim without the intermediary's knowledge that a fraud is underway. Source: Aff. (rideshare driver messaged to collect 'documents' from a 'grandmother').*
+
+**Parents:** Action | **IRI:** `http://example.org/ontology/elder-fraud/a_coopt`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+
+### a_deposit
+
+*Deposit structuring <$10k to evade BSA reporting: depositing scam-proceeds cash in amounts kept below the $10,000 currency-transaction-report threshold to avoid Bank Secrecy Act reporting obligations. Source: Aff. (deposits typically structured between $7,000 and $9,500).*
+
+**Parents:** Action | **IRI:** `http://example.org/ontology/elder-fraud/a_deposit`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+
+### a_direct
+
+*The Closer (posing as the grandchild's attorney) specifies the cash form and hand-off method — courier/rideshare pickup, commercial-carrier shipment, or delivery — that converts the conditioned victim into executing a concrete payment. Operational pivot from emotional conditioning to logistics; produces ExtractionInstruction. Source: Aff. (closers 'directed the victims to send or deliver cash'; rideshare packages framed as 'documents'; UPS cash shipment to runner addresses).*
+
+**Parents:** Action | **IRI:** `http://example.org/ontology/elder-fraud/a_direct`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+
+### a_fakeid
+
+*Routing scam proceeds through bank accounts held in the names of purported (non-existent) businesses — e.g. a Bank of America account in the name of a purported vape-supply wholesaler supplied by NUÑEZ NUÑEZ. Source: Aff. (STRUCTURAL wiring: ProceedsCollection -> Laundering. Closers also impersonate attorneys per Aff., but that fact is carried in Conditioning occupancy text, not as this Technique's arriving-edge action.)*
+
+**Parents:** Action | **IRI:** `http://example.org/ontology/elder-fraud/a_fakeid`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+
+### a_script
+
+*Deployment of pre-authored call-center scripts that openers (and related roles) follow when cold-calling victims — e.g. the photographed opener script recovered from a CASTANOS GARCIA call center. Source: Aff. (call-center managers provided employees with scripts; opener-script photos).*
+
+**Parents:** Action | **IRI:** `http://example.org/ontology/elder-fraud/a_script`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+
+### a_secrecy
+
+*Instructing the victim to isolate the matter from others — in the Aff. opener script, the grandchild persona asks the victim to 'keep this between us until i get out.' Source: Aff. (opener script). FACT NOTE: this language is in the OPENER (InitialContact) script, not the Closer/Conditioning phase.*
+
+**Parents:** Action | **IRI:** `http://example.org/ontology/elder-fraud/a_secrecy`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+
+### a_spoof
+
+*Use of Voice over IP technology to place calls over the internet so that they appear to originate from a U.S. telephone number, concealing the call center's true (Dominican Republic) origin. Source: Aff.*
+
+**Parents:** Action | **IRI:** `http://example.org/ontology/elder-fraud/a_spoof`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+
+### a_transmit
+
+*Transmitting or hand-delivering collected scam proceeds from the United States to the Dominican Republic through a money-transmitter/courier network, for a fee — the action that produces the Completed terminal. Source: Aff. (money transmitter charged an eight percent fee; runner-to-nephew hand deliveries in New York).*
+
+**Parents:** Action | **IRI:** `http://example.org/ontology/elder-fraud/a_transmit`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+
+## ext.extortion.ex
+
+### a_credential_theft
+
+*Use of stolen login credentials to gain unauthorized access to a victim organization's protected computer network. Affordance abused: credential theft. Source: press release, para. 3.*
+
+**Parents:** Action | **IRI:** `http://example.org/ontology/extortion/a_credential_theft`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+
+### a_exfiltrate
+
+*Abuse of the gained protected-network access to transfer victim data to attacker-leased infrastructure. Affordance abused: protected-network access. Source: press release, para. 3 (data transferred to a server leased in Ukraine).*
+
+**Parents:** Action | **IRI:** `http://example.org/ontology/extortion/a_exfiltrate`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+
+### a_leak_threat
+
+*Threatening to publicly disseminate exfiltrated data unless a ransom is paid, using the stolen dataset itself as leverage. Affordance abused: leak-as-leverage. Source: press release, paras. 2-3 (quoted threats).*
+
+**Parents:** Action | **IRI:** `http://example.org/ontology/extortion/a_leak_threat`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
 
 ## ext.legalproc.legalproc
 
@@ -43184,6 +42650,102 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | tag | string | zero_or_more | No | A generic tag/label. |
 | proceedingType | string | exactly_one | Yes | The type of criminal proceeding, as an open vocabulary. Recommended values: 'arraignment', 'detention-hearing', 'prel... |
 
+### DisclosureObligation
+
+*A prosecutor's sourced duty to disclose specified information or evidence to the defense. Use disclosureKind to record the governing doctrine (Brady, Giglio, Jencks, or Federal Rule of Criminal Procedure 16) and disclosureStatus for the current production state. Do not infer an obligation from the mere existence of exam notes or statements. See Brady v. Maryland, 373 U.S. 83 (1963) (https://supreme.justia.com/cases/federal/us/373/83/), Giglio v. United States, 405 U.S. 150 (1972) (https://supreme.justia.com/cases/federal/us/405/150/), the Jencks Act, 18 U.S.C. § 3500 (https://www.law.cornell.edu/uscode/text/18/3500), and Federal Rule of Criminal Procedure 16 (https://www.law.cornell.edu/rules/frcrmp/rule_16).*
+
+**Parents:** UcoObject | **IRI:** `https://ontology.caseontology.org/case/criminal/DisclosureObligation`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| concernsCharge | CriminalCharge | zero_or_more | No | Links a plea, proceeding, verdict, sentence, forfeiture order, or restitution order to the criminal charge(s) it conc... |
+| concernsEvidence | UcoObject | one_or_more | Yes | Links a disclosure obligation or discovery production to the evidence, statement, or report IRI it concerns. The targ... |
+| disclosureKind | string | exactly_one | Yes | The doctrine that creates the disclosure obligation. Closed vocabulary: 'brady', 'giglio', 'jencks', 'rule-16', 'othe... |
+| disclosureSourceCitation | string | exactly_one | Yes | Citation of the filing, log, or prosecutor source that established the disclosure obligation or production (for examp... |
+| disclosureStatus | string | exactly_one | Yes | Whether the obligated material has been reviewed or produced. Closed vocabulary: 'not-reviewed', 'disclosed', 'withhe... |
+
+### DiscoveryProduction
+
+*A sourced act of producing discovery material to the defense in satisfaction of a DisclosureObligation. See Federal Rule of Criminal Procedure 16 (https://www.law.cornell.edu/rules/frcrmp/rule_16).*
+
+**Parents:** UcoObject | **IRI:** `https://ontology.caseontology.org/case/criminal/DiscoveryProduction`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| disclosureSourceCitation | string | exactly_one | Yes | Citation of the filing, log, or prosecutor source that established the disclosure obligation or production (for examp... |
+| satisfiesObligation | DisclosureObligation | one_or_more | Yes | Links a DiscoveryProduction to the DisclosureObligation it fulfills. |
+
+### FederalCharge
+
+*A criminal charge under federal or national law, used when the source establishes federal jurisdiction. Pair with a FederalJurisdiction (or equivalent) node via a registered uco-core:Relationship when a jurisdiction node is available.*
+
+**Parents:** CriminalCharge | **IRI:** `https://ontology.caseontology.org/case/criminal/FederalCharge`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| assertedIn | ChargingInstrument | zero_or_more | No | Links a criminal charge to the charging instrument (complaint, indictment, superseding indictment, information) in wh... |
+| chargeClassification | string | zero_or_one | No | The offense classification in the governing jurisdiction, e.g. 'Class A Felony' per 18 U.S.C. § 3559 (https://www.law... |
+| chargeDisposition | string | zero_or_more | No | The current disposition of the charge, as an open vocabulary. Recommended values: 'pending', 'dismissed', 'acquitted'... |
+| countLabel | string | zero_or_one | No | The count designation as printed in the charging instrument, e.g. 'Count 1', 'Counts 4-10', 'Count 1sss' (PACER super... |
+| countNumber | nonNegativeInteger | zero_or_more | No | Ordinal count number of the charge within its charging instrument. A charge asserted in a range of counts (e.g. Count... |
+| objectOffense | CriminalCharge | zero_or_more | No | Links an inchoate or derivative criminal charge (conspiracy, attempt, solicitation, aiding-abetting, predicate-linked... |
+| offenseForm | string | zero_or_one | No | The form of the charged offense, as an open vocabulary. Recommended values: 'substantive' (completed offense), 'consp... |
+| statuteCitation | string | one_or_more | Yes | Citation of the charged offense in the governing jurisdiction, e.g. '18 U.S.C. §§ 1117 & 1114'. |
+| jurisdictionKind | string | zero_or_one | No | Whether a charge or proceeding is state, federal, or unknown from the source. Closed vocabulary: 'state', 'federal', ... |
+
+### FederalJurisdiction
+
+*A federal or national criminal jurisdiction. Link charges and proceedings to this node with a registered uco-core:Relationship until a direct ontology property is adopted. Compatible with the CAC multi-jurisdiction class of the same local name when both extensions are loaded.*
+
+**Parents:** UcoObject | **IRI:** `https://ontology.caseontology.org/case/criminal/FederalJurisdiction`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+
 ### ForfeitureOrder
 
 *A forfeiture order is an order, or pre-conviction allegation, requiring surrender to the state of property involved in or traceable to an offense. See 18 U.S.C. §§ 981-982 (https://www.law.cornell.edu/uscode/text/18/981).*
@@ -43226,7 +42788,75 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
 | tag | string | zero_or_more | No | A generic tag/label. |
 | concernsCharge | CriminalCharge | zero_or_more | No | Links a plea, proceeding, verdict, sentence, forfeiture order, or restitution order to the criminal charge(s) it conc... |
+| outcomeScope | string | zero_or_one | No | Whether a charge, plea, verdict, sentence, conviction, or potential penalty belongs to the current matter or to prior... |
 | pleaType | string | exactly_one | Yes | The type of plea entered, as an open vocabulary. Recommended values: 'guilty', 'not-guilty', 'nolo-contendere'. |
+
+### PleaAgreement
+
+*A plea agreement is a negotiated agreement between the prosecution and a defendant concerning the plea that will be entered and any agreed dispositions or sentencing recommendations, as recognized by Federal Rule of Criminal Procedure 11(c) (https://www.law.cornell.edu/rules/frcrmp/rule_11). The plea itself remains a separate Plea resource linked by recordsPlea. This class is the jurisdiction-neutral plea-agreement concept for CASE/UCO graphs; do not use domain-specific homonyms such as cryptoinv:PleaAgreement.*
+
+**Parents:** UcoObject | **IRI:** `https://ontology.caseontology.org/case/criminal/PleaAgreement`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| concernsCharge | CriminalCharge | zero_or_more | No | Links a plea, proceeding, verdict, sentence, forfeiture order, or restitution order to the criminal charge(s) it conc... |
+| outcomeScope | string | zero_or_one | No | Whether a charge, plea, verdict, sentence, conviction, or potential penalty belongs to the current matter or to prior... |
+| recordsPlea | Plea | one_or_more | Yes | Links a plea agreement to the Plea resource that records the plea entered under that agreement. See Federal Rule of C... |
+
+### PotentialPenalty
+
+*A potential penalty is a statutory maximum, mandatory minimum, or advisory guideline range that a source reports as possible exposure, not as a sentence that a tribunal has imposed. See 18 U.S.C. § 3559 (https://www.law.cornell.edu/uscode/text/18/3559) and the U.S. Sentencing Guidelines (https://www.ussc.gov/guidelines). Never type a potential penalty as Sentence.*
+
+**Parents:** UcoObject | **IRI:** `https://ontology.caseontology.org/case/criminal/PotentialPenalty`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| concernsCharge | CriminalCharge | zero_or_more | No | Links a plea, proceeding, verdict, sentence, forfeiture order, or restitution order to the criminal charge(s) it conc... |
+| outcomeScope | string | zero_or_one | No | Whether a charge, plea, verdict, sentence, conviction, or potential penalty belongs to the current matter or to prior... |
+| potentialPenaltyKind | string | exactly_one | Yes | The kind of potential penalty. Closed vocabulary: 'statutory-maximum', 'mandatory-minimum', 'guideline-range'. |
+
+### PretrialReleaseCondition
+
+*A pretrial release condition is a bail, bond, personal-recognizance, or detention-without-bond condition that governs liberty before conviction. See 18 U.S.C. § 3142 (https://www.law.cornell.edu/uscode/text/18/3142). Never type bail or bond as an imposed Sentence.*
+
+**Parents:** UcoObject | **IRI:** `https://ontology.caseontology.org/case/criminal/PretrialReleaseCondition`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| releaseConditionKind | string | exactly_one | Yes | The kind of pretrial release or detention condition. Closed vocabulary: 'bail', 'bond', 'personal-recognizance', 'det... |
 
 ### RestitutionOrder
 
@@ -43252,7 +42882,7 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 
 ### Sentence
 
-*A sentence is a penalty recommended by a party or imposed by a tribunal upon conviction of a criminal charge, including custodial terms, supervised release, and special assessments. See 18 U.S.C. § 3553 (https://www.law.cornell.edu/uscode/text/18/3553).*
+*A sentence is a penalty recommended by a party or imposed by a tribunal upon conviction of a criminal charge. Use sentenceKind to record the kind of imposed or recommended sentence (custodial term, supervised release, probation, community service, or a fine imposed as part of the sentence). Do not use this class for bail, bond, pretrial detention conditions, restitution, forfeiture, special assessments, statutory maxima, guideline ranges, or other potential penalties; those facts use PretrialReleaseCondition, RestitutionOrder, ForfeitureOrder, or PotentialPenalty. See 18 U.S.C. § 3553 (https://www.law.cornell.edu/uscode/text/18/3553).*
 
 **Parents:** UcoObject | **IRI:** `https://ontology.caseontology.org/case/criminal/Sentence`
 
@@ -43269,8 +42899,81 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
 | specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
 | tag | string | zero_or_more | No | A generic tag/label. |
+| outcomeScope | string | zero_or_one | No | Whether a charge, plea, verdict, sentence, conviction, or potential penalty belongs to the current matter or to prior... |
+| sentenceKind | string | zero_or_one | No | The kind of sentence when the resource is a Sentence. Closed vocabulary: 'custodial', 'supervised-release', 'probatio... |
 | sentenceStatus | string | exactly_one | Yes | Whether the sentence is a party recommendation, an imposed judgment, or has been vacated, as an open vocabulary. Reco... |
 | sentenceTerm | string | zero_or_one | No | The custodial term as stated in the record, kept verbatim to avoid fabricating precision, e.g. 'Life', '165 years', '... |
+
+### StateCharge
+
+*A criminal charge under the law of a constituent state, province, or equivalent subnational jurisdiction, used when the source establishes that the charge is not federal. Pair with a StateJurisdiction (or equivalent) node via a registered uco-core:Relationship when a jurisdiction node is available. Keep state-specific charge subclasses outside this extension.*
+
+**Parents:** CriminalCharge | **IRI:** `https://ontology.caseontology.org/case/criminal/StateCharge`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| assertedIn | ChargingInstrument | zero_or_more | No | Links a criminal charge to the charging instrument (complaint, indictment, superseding indictment, information) in wh... |
+| chargeClassification | string | zero_or_one | No | The offense classification in the governing jurisdiction, e.g. 'Class A Felony' per 18 U.S.C. § 3559 (https://www.law... |
+| chargeDisposition | string | zero_or_more | No | The current disposition of the charge, as an open vocabulary. Recommended values: 'pending', 'dismissed', 'acquitted'... |
+| countLabel | string | zero_or_one | No | The count designation as printed in the charging instrument, e.g. 'Count 1', 'Counts 4-10', 'Count 1sss' (PACER super... |
+| countNumber | nonNegativeInteger | zero_or_more | No | Ordinal count number of the charge within its charging instrument. A charge asserted in a range of counts (e.g. Count... |
+| objectOffense | CriminalCharge | zero_or_more | No | Links an inchoate or derivative criminal charge (conspiracy, attempt, solicitation, aiding-abetting, predicate-linked... |
+| offenseForm | string | zero_or_one | No | The form of the charged offense, as an open vocabulary. Recommended values: 'substantive' (completed offense), 'consp... |
+| statuteCitation | string | one_or_more | Yes | Citation of the charged offense in the governing jurisdiction, e.g. '18 U.S.C. §§ 1117 & 1114'. |
+| jurisdictionKind | string | zero_or_one | No | Whether a charge or proceeding is state, federal, or unknown from the source. Closed vocabulary: 'state', 'federal', ... |
+
+### StateJurisdiction
+
+*A state, provincial, or equivalent subnational criminal jurisdiction. Link charges and proceedings to this node with a registered uco-core:Relationship until a direct ontology property is adopted. Compatible with the CAC multi-jurisdiction class of the same local name when both extensions are loaded.*
+
+**Parents:** UcoObject | **IRI:** `https://ontology.caseontology.org/case/criminal/StateJurisdiction`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+
+### SuppressionMotion
+
+*A defense motion to exclude evidence, typically under the Fourth Amendment or Federal Rule of Criminal Procedure 12. Model only when a docket or filing establishes the motion. See Federal Rule of Criminal Procedure 12 (https://www.law.cornell.edu/rules/frcrmp/rule_12).*
+
+**Parents:** CriminalProceeding | **IRI:** `https://ontology.caseontology.org/case/criminal/SuppressionMotion`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| proceedingType | string | exactly_one | Yes | The type of criminal proceeding, as an open vocabulary. Recommended values: 'arraignment', 'detention-hearing', 'prel... |
+| disclosureSourceCitation | string | exactly_one | Yes | Citation of the filing, log, or prosecutor source that established the disclosure obligation or production (for examp... |
 
 ### Verdict
 
@@ -43338,6 +43041,109 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | tag | string | zero_or_more | No | A generic tag/label. |
 | enterpriseType | string | exactly_one | Yes | The statutory branch of the enterprise definition the charged enterprise falls under, as an open vocabulary. Recommen... |
 
+## ext.smishviz.smish
+
+### CampaignCluster
+
+*An analytic partition of smishing messages produced by the SmishViz clustering pipeline (merged cluster label such as MC(5)). This is an ML-derived grouping for corpus analysis, not a confirmed adversary operation. See the SmishViz CASE/UCO repository (https://github.com/varnicm/smishviz-case-uco) and NIST SP 800-83 Rev. 1 guidance on analyzing malicious messaging campaigns (https://csrc.nist.gov/publications/detail/sp/800-83/rev-1/final).*
+
+**Parents:** UcoObject | **IRI:** `https://reactlab.org/smishviz/ontology/CampaignCluster`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | exactly_one | Yes | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+
+### CampaignSubcluster
+
+*A finer analytic sub-partition within a SmishViz campaign cluster (adjusted subgroup label such as MC(5)-S1). Subclusters are partitions within clusters, not a subtype of CampaignCluster. See https://github.com/varnicm/smishviz-case-uco.*
+
+**Parents:** UcoObject | **IRI:** `https://reactlab.org/smishviz/ontology/CampaignSubcluster`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | exactly_one | Yes | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| partOfCluster | CampaignCluster | exactly_one | Yes | Links a CampaignSubcluster to its parent CampaignCluster in the SmishViz hierarchy (for example MC(5)-S1 partOfCluste... |
+
+### Keyword
+
+*A top topic term associated with a smishing message by the SmishViz BERTopic analysis (for example 'netflix' or 'billing'). This is an analytic vocabulary node for graph queries, not a forensic keyword-search hit. BERTopic documentation: https://maartengr.github.io/BERTopic/.*
+
+**Parents:** UcoObject | **IRI:** `https://reactlab.org/smishviz/ontology/Keyword`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | exactly_one | Yes | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+
+### PersuasionTechnique
+
+*A message-side social-engineering tactic annotated on a smishing message (for example pretexting, urgency, or impersonation). Labels follow the SmishViz PF/PT annotation vocabulary (https://github.com/varnicm/smishviz-case-uco). This class is a vocabulary term for analytic annotation, not a subclass of uco-action:Technique.*
+
+**Parents:** UcoObject | **IRI:** `https://reactlab.org/smishviz/ontology/PersuasionTechnique`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | exactly_one | Yes | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+
+### PsychologicalFactor
+
+*A victim-side psychological lever annotated on a smishing message (for example authority, fear, liking, or trust). Labels follow the SmishViz PF/PT annotation vocabulary (https://github.com/varnicm/smishviz-case-uco). Related social-engineering principles are surveyed in NIST SP 800-83 Rev. 1 (https://csrc.nist.gov/publications/detail/sp/800-83/rev-1/final).*
+
+**Parents:** UcoObject | **IRI:** `https://reactlab.org/smishviz/ontology/PsychologicalFactor`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | exactly_one | Yes | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+
 ## ext.solveit.solveit-analysis
 
 ### ForensicToolTagBasedReport
@@ -43363,7 +43169,7 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 
 ### Hypothesis
 
-*A proposition or explanation put forward for consideration during forensic analysis, which may be supported or contradicted by observable artifacts.*
+*A statement that is either true or false, the truth of which is uncertain.*
 
 **Parents:** AnalyticResult | **IRI:** `https://ontology.solveit-df.org/solveit/analysis/Hypothesis`
 
@@ -43424,6 +43230,30 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | tag | string | zero_or_more | No | A generic tag/label. |
 | statement | string | zero_or_more | No | A textual statement of an assertion. |
 
+### HypothesisedConfiguration
+
+*A configuration proposed from the artefacts it left behind, where the configuration itself was never observed - as distinct from one read directly from a settings file or a live system. Settings are given with uco-configuration:configurationEntry and what was configured with uco-configuration:isConfigurationOf.*
+
+**Parents:** Hypothesis, Configuration | **IRI:** `https://ontology.solveit-df.org/solveit/analysis/HypothesisedConfiguration`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| statement | string | zero_or_more | No | A textual statement of an assertion. |
+| configurationEntry | ConfigurationEntry | zero_or_more | No | A single configuration setting entry item for a tool or other software. |
+| dependencies | Dependency | zero_or_more | No | The relevant configuration dependencies for a tool, application, software, or other cyber object. |
+| usageContextAssumptions | string | zero_or_more | No | Description of the various relevant usage context assumptions for a tool or other software . |
+
 ### HypothesisedDevice
 
 *A device that is hypothesised to have been involved, such as a device inferred from artifacts but not yet physically identified or examined.*
@@ -43466,11 +43296,11 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | tag | string | zero_or_more | No | A generic tag/label. |
 | statement | string | zero_or_more | No | A textual statement of an assertion. |
 
-### HypothesisedRelationship
+### HypothesisedRecord
 
-*A relationship between entities that is hypothesised to exist, such as an inferred association between persons, accounts, devices, or locations based on co-occurrence patterns, shared identifiers, or behavioural analysis.*
+*A database record hypothesised to have existed, typically reconstructed from deallocated or partially overwritten storage such as freeblocks, unallocated page space, or freelist pages. The claim it makes is one of extent: that these bytes constituted one record, beginning and ending where the reconstruction says. That claim can fail - a sequence of ordinary integers can decode as a plausible record header, adjacent deletions can merge into one freeblock, and a later write can overwrite the leading bytes - so a HypothesisedRecord is deliberately not a solveit-observable:SQLiteRecord. Decoded values are linked with solveit-analysis:hasField, and the page the bytes came from with solveit-observable:recoveredFromPage. Which table the record belonged to is a separate claim, and is not asserted here: it is made by a solveit-analysis:HypothesisedTableAttribution, so that one reconstruction can carry several competing attributions without being duplicated.*
 
-**Parents:** Hypothesis | **IRI:** `https://ontology.solveit-df.org/solveit/analysis/HypothesisedRelationship`
+**Parents:** Hypothesis | **IRI:** `https://ontology.solveit-df.org/solveit/analysis/HypothesisedRecord`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -43487,9 +43317,63 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | tag | string | zero_or_more | No | A generic tag/label. |
 | statement | string | zero_or_more | No | A textual statement of an assertion. |
 
+### HypothesisedRelationship
+
+*A relationship between entities that is hypothesised to exist. This covers inferred associations between persons, accounts, devices or locations - drawn from co-occurrence patterns, shared identifiers, or behavioural analysis - and also structural claims such as attributing a recovered database record to the table it belonged to. Being a uco-core:Relationship, the entities are named with uco-core:source and uco-core:target and the nature of the claim with uco-core:kindOfRelationship. What is uncertain is the relationship, not the entities: source and target may both be perfectly ordinary observed objects.*
+
+**Parents:** Hypothesis, Relationship | **IRI:** `https://ontology.solveit-df.org/solveit/analysis/HypothesisedRelationship`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| statement | string | zero_or_more | No | A textual statement of an assertion. |
+| endTime | dateTime | zero_or_more | No | The ending time of a time range. |
+| isDirectional | boolean | exactly_one | Yes | A specification whether or not a relationship assertion is limited to the context FROM a source object(s) TO a target... |
+| kindOfRelationship | string | zero_or_one | No | A characterization of the nature of a relationship between objects. |
+| source | UcoObject | one_or_more | Yes | The originating node of a specified relationship. |
+| startTime | dateTime | zero_or_more | No | The initial time of a time range. |
+| target | UcoObject | exactly_one | Yes | The terminating node of a specified relationship. |
+
+### HypothesisedTableAttribution
+
+*The claim that a recovered record belonged to a particular table. The record is the uco-core:source and the table the uco-core:target; neither is itself in doubt, only the link between them. Attribution rests on different grounds in different cases - a record recovered from a freeblock sits on a page owned by a known table, whereas one recovered from a freelist page has lost that context and can only be matched by column shape. Where several tables are possible, one HypothesisedTableAttribution is made per candidate and they are collected in a solveit-analysis:HypothesisSet as mutually exclusive alternatives.*
+
+**Parents:** HypothesisedRelationship | **IRI:** `https://ontology.solveit-df.org/solveit/analysis/HypothesisedTableAttribution`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| statement | string | zero_or_more | No | A textual statement of an assertion. |
+| endTime | dateTime | zero_or_more | No | The ending time of a time range. |
+| isDirectional | boolean | exactly_one | Yes | A specification whether or not a relationship assertion is limited to the context FROM a source object(s) TO a target... |
+| kindOfRelationship | string | zero_or_one | No | A characterization of the nature of a relationship between objects. |
+| source | UcoObject | one_or_more | Yes | The originating node of a specified relationship. |
+| startTime | dateTime | zero_or_more | No | The initial time of a time range. |
+| target | UcoObject | exactly_one | Yes | The terminating node of a specified relationship. |
+
 ### HypothesisedUserAccount
 
-*A user account that is hypothesised to have existed, for example inferred from recovered deleted account records, carved registry artifacts, or references to the account in other artifacts. Supporting artifacts can be linked with solveit-analysis:supportedBy.*
+*A user account that is hypothesised to have existed, for example inferred from recovered deleted account records, carved registry artifacts, or references to the account in other artifacts.*
 
 **Parents:** Hypothesis | **IRI:** `https://ontology.solveit-df.org/solveit/analysis/HypothesisedUserAccount`
 
@@ -43538,6 +43422,26 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 **IRI:** `https://ontology.solveit-df.org/solveit/core/ASTMErrorCategory`
 
 *No direct or inherited properties.*
+
+### Citation
+
+*An academic or professional reference cited by a Technique, Weakness or Mitigation. Each citation carries an identifier (DFCite-NNNN), a plain text form, and where available a BibTeX form.*
+
+**Parents:** UcoObject | **IRI:** `https://ontology.solveit-df.org/solveit/core/Citation`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
 
 ### Mitigation
 
@@ -43595,7 +43499,7 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 
 ### SolveitInvestigativeAction
 
-*A SOLVE-IT aware InvestigativeAction that links an investigative action to the SOLVE-IT technique(s) used (1..n via usedTechnique) and any mitigations applied (0..n via appliedMitigation) during its execution.*
+*An investigative action performed as an instance of one or more SOLVE-IT techniques, recording any mitigations applied on that occasion (0..n via appliedMitigation). The technique(s) used are expressed by rdf:type against the technique class(es), not by a separate property.*
 
 **Parents:** InvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/core/SolveitInvestigativeAction`
 
@@ -43629,9 +43533,39 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 
 ### Technique
 
-*A digital forensic technique representing how one might achieve an objective by performing an action. Based on the SOLVE-IT knowledge base.*
+*A digital forensic technique representing how one might achieve an objective by performing an action. Based on the SOLVE-IT knowledge base. This class is a metaclass: its instances are owl:Class entities whose own instances are performed investigative actions.*
 
-**Parents:** InvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/core/Technique`
+**Parents:** Technique | **IRI:** `https://ontology.solveit-df.org/solveit/core/Technique`
+
+*No direct or inherited properties.*
+
+### Weakness
+
+*A potential problem resulting from using a technique, classified according to ASTM E3016-18 error categories.*
+
+**Parents:** UcoObject | **IRI:** `https://ontology.solveit-df.org/solveit/core/Weakness`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+
+## ext.solveit.solveit-data
+
+### techniqueDFT-1001
+
+*SOLVE-IT technique DFT-1001: Triage devices or media. Objective(s): Prioritize digital evidence sources. See https://solveit-df.org for weaknesses and mitigations.*
+
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1001`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -43661,66 +43595,11 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
 | wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
-### Weakness
-
-*A potential problem resulting from using a technique, classified according to ASTM E3016-18 error categories.*
-
-**Parents:** UcoObject | **IRI:** `https://ontology.solveit-df.org/solveit/core/Weakness`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-
-## ext.solveit.solveit-data
-
-### techniqueDFT-1001
-
-*SOLVE-IT technique DFT-1001: Triage devices or media. Objective(s): Prioritize digital evidence sources. See https://solveit-df.org for weaknesses and mitigations.*
-
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1001`
-
-| Property | Type | Cardinality | Required | Description |
-|----------|------|-------------|----------|-------------|
-| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
-| description | string | zero_or_more | No | A description of a particular concept characterization. |
-| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
-| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
-| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
-| name | string | zero_or_one | No | The name of a particular concept characterization. |
-| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
-| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
-| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
-| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
-| tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
-| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
-| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
-| location | Location | zero_or_more | No | The locations where an action occurs. |
-| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
-| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
-| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
-| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
-| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
-
 ### techniqueDFT-1002
 
 *SOLVE-IT technique DFT-1002: Copy sectors from storage media. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1002`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1002`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -43748,12 +43627,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1003
 
 *SOLVE-IT technique DFT-1003: Copy pages from physical memory. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1003`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1003`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -43781,12 +43661,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1004
 
 *SOLVE-IT technique DFT-1004: Collect logical files selectively. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1004`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1004`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -43814,12 +43695,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1005
 
 *SOLVE-IT technique DFT-1005: Search a crime scene for relevant physical evidence. Objective(s): Find potential digital evidence sources. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1005`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1005`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -43847,12 +43729,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1006
 
 *SOLVE-IT technique DFT-1006: Search a crime scene using digital sniffer dogs. Objective(s): Find potential digital evidence sources. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1006`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1006`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -43880,12 +43763,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1007
 
 *SOLVE-IT technique DFT-1007: Detect the potential existence of digital devices using a SyncTriage-based approach. Objective(s): Find potential digital evidence sources. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1007`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1007`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -43913,12 +43797,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1008
 
 *SOLVE-IT technique DFT-1008: Detect the potential existence of digital devices by profiling network traffic. Objective(s): Find potential digital evidence sources. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1008`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1008`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -43946,12 +43831,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1009
 
 *SOLVE-IT technique DFT-1009: Locate potential digital evidence sources via cloud account identifiers. Objective(s): Find potential digital evidence sources. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1009`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1009`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -43979,12 +43865,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1010
 
 *SOLVE-IT technique DFT-1010: Place device in a faraday environment. Objective(s): Preserve digital evidence. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1010`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1010`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44012,12 +43899,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1011
 
 *SOLVE-IT technique DFT-1011: Store seized devices or media in evidence bags. Objective(s): Preserve digital evidence. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1011`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1011`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44045,12 +43933,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1012
 
 *SOLVE-IT technique DFT-1012: Write protect storage media using a hardware write blocker. Objective(s): Preserve digital evidence. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1012`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1012`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44078,12 +43967,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1013
 
 *SOLVE-IT technique DFT-1013: Write protect storage media using a software write blocker. Objective(s): Preserve digital evidence. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1013`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1013`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44111,12 +44001,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1014
 
 *SOLVE-IT technique DFT-1014: Document the chain of custody. Objective(s): Document digital forensic activities. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1014`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1014`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44144,12 +44035,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1015
 
 *SOLVE-IT technique DFT-1015: Collect logical files selectively based on privacy preserving criteria. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1015`
+**Parents:** techniqueDFT-1004 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1015`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44177,12 +44069,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1016
 
 *SOLVE-IT technique DFT-1016: Collect specific pieces of information from a live running device. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1016`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1016`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44210,12 +44103,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1017
 
 *SOLVE-IT technique DFT-1017: Capture network packets. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1017`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1017`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44243,12 +44137,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1018
 
 *SOLVE-IT technique DFT-1018: Collect data from a remote networked device. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1018`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1018`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44276,12 +44171,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1019
 
 *SOLVE-IT technique DFT-1019: Extract a backup from a mobile device. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1019`
+**Parents:** techniqueDFT-1157 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1019`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44309,12 +44205,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1020
 
 *SOLVE-IT technique DFT-1020: Extract the file system from a mobile device. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1020`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1020`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44342,12 +44239,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1021
 
 *SOLVE-IT technique DFT-1021: Extract artifacts from a configuration file. Objective(s): Extract specific artifact types. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1021`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1021`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44375,12 +44273,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1022
 
 *SOLVE-IT technique DFT-1022: Capture mobile device screenshots (manually). Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1022`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1022`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44408,12 +44307,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1023
 
 *SOLVE-IT technique DFT-1023: Collect data from cloud service via a live web page using credentials. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1023`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1023`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44441,12 +44341,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1024
 
 *SOLVE-IT technique DFT-1024: Collect data from cloud service via submission of request to service provider. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1024`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1024`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44474,12 +44375,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1025
 
 *SOLVE-IT technique DFT-1025: Store bitstream data in a forensic image format. Objective(s): Store acquired data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1025`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1025`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44507,12 +44409,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1026
 
 *SOLVE-IT technique DFT-1026: Store data in standard archive format. Objective(s): Store acquired data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1026`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1026`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44540,12 +44443,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1027
 
 *SOLVE-IT technique DFT-1027: Read data from a device using JTAG. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1027`
+**Parents:** techniqueDFT-1162 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1027`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44573,12 +44477,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1028
 
 *SOLVE-IT technique DFT-1028: Physically remove a storage chip from a device (chip-off). Objective(s): Access device data for acquisition. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1028`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1028`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44606,12 +44511,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1029
 
 *SOLVE-IT technique DFT-1029: Read data from a desoldered eMMC via a chip reader. Objective(s): Access device data for acquisition. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1029`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1029`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44639,12 +44545,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1030
 
 *SOLVE-IT technique DFT-1030: Read data from unmanaged NAND. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1030`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1030`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44672,12 +44579,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1031
 
 *SOLVE-IT technique DFT-1031: Recover encryption/decryption key from memory. Objective(s): Overcome protection mechanisms. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1031`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1031`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44705,12 +44613,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1032
 
 *SOLVE-IT technique DFT-1032: Recover encryption/decryption key information using side channel attacks. Objective(s): Overcome protection mechanisms. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1032`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1032`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44738,12 +44647,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1033
 
 *SOLVE-IT technique DFT-1033: Extract credential(s) from an accessible device to attempt access to a more secure device or service. Objective(s): Overcome protection mechanisms. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1033`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1033`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44771,12 +44681,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1034
 
 *SOLVE-IT technique DFT-1034: Attack a stored credential or device using a brute force approach. Objective(s): Overcome protection mechanisms. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1034`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1034`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44804,12 +44715,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1035
 
 *SOLVE-IT technique DFT-1035: Attack a stored credential or device using a dictionary-based approach. Objective(s): Overcome protection mechanisms. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1035`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1035`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44837,12 +44749,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1036
 
 *SOLVE-IT technique DFT-1036: Recover information about a potential device PIN or pattern lock using a smudge attack. Objective(s): Overcome protection mechanisms. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1036`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1036`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44870,12 +44783,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1037
 
 *SOLVE-IT technique DFT-1037: Obtain password from the device's owner. Objective(s): Overcome protection mechanisms. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1037`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1037`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44903,12 +44817,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1038
 
 *SOLVE-IT technique DFT-1038: Attack a stored credential or device using a rainbow table-based approach. Objective(s): Overcome protection mechanisms. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1038`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1038`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44936,12 +44851,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1039
 
 *SOLVE-IT technique DFT-1039: Downgrade apps to facilitate data extraction. Objective(s): Overcome protection mechanisms. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1039`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1039`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -44969,12 +44885,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1040
 
 *SOLVE-IT technique DFT-1040: Exploit a mobile device to facilitate privileged access for data extraction. Objective(s): Overcome protection mechanisms. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1040`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1040`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45002,12 +44919,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1041
 
 *SOLVE-IT technique DFT-1041: Gain access to a device via a Pin2Pwn approach. Objective(s): Overcome protection mechanisms. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1041`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1041`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45035,12 +44953,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1042
 
-*SOLVE-IT technique DFT-1042: Verify hash of imaged data matches the hash of the source device. Objective(s): Read data from digital evidence storage formats. See https://solveit-df.org for weaknesses and mitigations.*
+*SOLVE-IT technique DFT-1042: Verify hash of copied data matches the hash of the data read from source device. Objective(s): Read data from digital evidence storage formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1042`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1042`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45068,12 +44987,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1043
 
 *SOLVE-IT technique DFT-1043: Read bitstream from forensic image container file(s). Objective(s): Read data from digital evidence storage formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1043`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1043`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45101,12 +45021,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1044
 
 *SOLVE-IT technique DFT-1044: Decode data stored in a mobile backup format. Objective(s): Read data from digital evidence storage formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1044`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1044`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45134,12 +45055,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1045
 
 *SOLVE-IT technique DFT-1045: Read contents from standard archive file(s). Objective(s): Read data from digital evidence storage formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1045`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1045`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45167,12 +45089,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1046
 
 *SOLVE-IT technique DFT-1046: Redact digital forensic tool results to protect privileged material. Objective(s): Reduce data under consideration. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1046`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1046`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45200,12 +45123,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1047
 
 *SOLVE-IT technique DFT-1047: Filter files using a hashset to reduce files examined. Objective(s): Reduce data under consideration. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1047`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1047`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45233,12 +45157,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1048
 
 *SOLVE-IT technique DFT-1048: Protect privacy by only partially processing data from a source. Objective(s): Reduce data under consideration. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1048`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1048`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45266,12 +45191,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1049
 
 *SOLVE-IT technique DFT-1049: Keyword search. Objective(s): Locate potentially relevant content. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1049`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1049`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45299,12 +45225,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1050
 
 *SOLVE-IT technique DFT-1050: Locate relevant files using a hashset to identify files of interest. Objective(s): Locate potentially relevant content. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1050`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1050`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45332,12 +45259,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1051
 
 *SOLVE-IT technique DFT-1051: Locate potentially relevant files using fuzzy hash matching. Objective(s): Locate potentially relevant content. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1051`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1051`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45365,12 +45293,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1052
 
 *SOLVE-IT technique DFT-1052: Generate timeline. Objective(s): Extract specific artifact types. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1052`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1052`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45398,12 +45327,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1053
 
 *SOLVE-IT technique DFT-1053: Extract 'entities' from a data source. Objective(s): Extract specific artifact types. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1053`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1053`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45431,12 +45361,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1054
 
 *SOLVE-IT technique DFT-1054: Review artifacts or content manually for relevant material. Objective(s): Review content for relevance. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1054`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1054`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45464,12 +45395,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1055
 
 *SOLVE-IT technique DFT-1055: Examine file and folder structure. Objective(s): Review content for relevance. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1055`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1055`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45497,12 +45429,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1056
 
 *SOLVE-IT technique DFT-1056: Enumerate connections between artifacts. Objective(s): Extract specific artifact types. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1056`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1056`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45530,12 +45463,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1057
 
 *SOLVE-IT technique DFT-1057: Search for indicators of steganography. Objective(s): Detect anti-forensics and other anomalies. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1057`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1057`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45563,12 +45497,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1058
 
 *SOLVE-IT technique DFT-1058: Search for mismatched file extensions. Objective(s): Detect anti-forensics and other anomalies. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1058`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1058`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45596,12 +45531,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1059
 
 *SOLVE-IT technique DFT-1059: Identify partitions. Objective(s): Access partitions, volumes and file systems data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1059`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1059`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45629,12 +45565,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1060
 
 *SOLVE-IT technique DFT-1060: Enumerate allocated files and folders. Objective(s): Access partitions, volumes and file systems data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1060`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1060`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45662,12 +45599,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1061
 
 *SOLVE-IT technique DFT-1061: Recover non-allocated files. Objective(s): Access partitions, volumes and file systems data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1061`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1061`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45695,12 +45633,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1062
 
 *SOLVE-IT technique DFT-1062: Decrypt encrypted file systems/volumes. Objective(s): Access partitions, volumes and file systems data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1062`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1062`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45728,12 +45667,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1063
 
 *SOLVE-IT technique DFT-1063: Identify file types. Objective(s): Access partitions, volumes and file systems data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1063`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1063`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45761,12 +45701,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1064
 
 *SOLVE-IT technique DFT-1064: Carve non-allocated files. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1064`
+**Parents:** techniqueDFT-1061 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1064`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45794,12 +45735,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1065
 
 *SOLVE-IT technique DFT-1065: Extract artifacts from operating system-level content indexer(s). Objective(s): Extract artifacts stored by the operating system. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1065`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1065`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45827,12 +45769,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1066
 
 *SOLVE-IT technique DFT-1066: Extract artifacts from operating system log files. Objective(s): Extract artifacts stored by the operating system. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1066`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1066`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45860,12 +45803,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1067
 
 *SOLVE-IT technique DFT-1067: Extract artifacts from operating system cloud synchronization features. Objective(s): Extract artifacts stored by the operating system. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1067`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1067`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45893,12 +45837,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1068
 
 *SOLVE-IT technique DFT-1068: Extract operating system artifacts indicating recently used files. Objective(s): Extract artifacts stored by the operating system. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1068`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1068`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45926,12 +45871,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1069
 
 *SOLVE-IT technique DFT-1069: Extract artifacts from a web browser. Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1069`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1069`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45959,12 +45905,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1070
 
 *SOLVE-IT technique DFT-1070: Extract artifacts from email client(s) or webmail access. Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1070`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1070`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -45992,12 +45939,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1071
 
 *SOLVE-IT technique DFT-1071: Extract data from SQLite database(s). Objective(s): Extract data from specific formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1071`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1071`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46025,12 +45973,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1072
 
 *SOLVE-IT technique DFT-1072: Extract artifacts from chat app(s). Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1072`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1072`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46058,12 +46007,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1073
 
 *SOLVE-IT technique DFT-1073: Extract artifacts from calendar app(s). Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1073`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1073`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46091,12 +46041,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1074
 
 *SOLVE-IT technique DFT-1074: Extract artifacts from social network app(s). Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1074`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1074`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46124,12 +46075,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1075
 
 *SOLVE-IT technique DFT-1075: Extract artifacts from maps/travel app(s). Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1075`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1075`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46157,12 +46109,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1076
 
 *SOLVE-IT technique DFT-1076: Extract artifacts from log files. Objective(s): Extract specific artifact types. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1076`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1076`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46190,12 +46143,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1077
 
 *SOLVE-IT technique DFT-1077: Extract artifacts from photo management app(s). Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1077`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1077`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46223,12 +46177,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1078
 
 *SOLVE-IT technique DFT-1078: Extract artifacts from cloud synchronization app(s). Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1078`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1078`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46256,12 +46211,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1079
 
 *SOLVE-IT technique DFT-1079: Examine audio content. Objective(s): Review content for relevance. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1079`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1079`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46289,12 +46245,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1080
 
 *SOLVE-IT technique DFT-1080: Examine video content. Objective(s): Review content for relevance. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1080`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1080`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46322,12 +46279,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1081
 
 *SOLVE-IT technique DFT-1081: Examine image/picture content. Objective(s): Review content for relevance. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1081`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1081`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46355,12 +46313,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1082
 
 *SOLVE-IT technique DFT-1082: Examine document content. Objective(s): Review content for relevance. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1082`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1082`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46388,12 +46347,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1083
 
 *SOLVE-IT technique DFT-1083: Extract artifacts from operating system memory structures. Objective(s): Extract artifacts stored by the operating system. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1083`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1083`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46421,12 +46381,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1084
 
 *SOLVE-IT technique DFT-1084: Extract potentially user-identifying content from account information. Objective(s): Establish identities. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1084`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1084`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46454,12 +46415,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1085
 
 *SOLVE-IT technique DFT-1085: Conflate specific account identifiers to a single user identity. Objective(s): Establish identities. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1085`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1085`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46487,12 +46449,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1086
 
 *SOLVE-IT technique DFT-1086: Analyze timeline. Objective(s): Locate potentially relevant content. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1086`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1086`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46520,12 +46483,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1087
 
 *SOLVE-IT technique DFT-1087: Reconstruct the location-based properties of an event. Objective(s): Reconstruct events. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1087`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1087`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46553,12 +46517,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1088
 
-*SOLVE-IT technique DFT-1088: Reconstruct an relations between events properties of events. Objective(s): Reconstruct events. See https://solveit-df.org for weaknesses and mitigations.*
+*SOLVE-IT technique DFT-1088: Reconstruct relations between events or properties of events. Objective(s): Reconstruct events. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1088`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1088`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46586,12 +46551,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1089
 
 *SOLVE-IT technique DFT-1089: Review source code of software. Objective(s): Conduct research. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1089`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1089`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46619,12 +46585,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1090
 
 *SOLVE-IT technique DFT-1090: Experiment with software to ascertain forensic artifacts. Objective(s): Conduct research. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1090`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1090`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46652,12 +46619,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1091
 
 *SOLVE-IT technique DFT-1091: Tag artifacts. Objective(s): Document digital forensic activities. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1091`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1091`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46685,12 +46653,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1092
 
 *SOLVE-IT technique DFT-1092: Generate tag-based automated report. Objective(s): Document digital forensic activities. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1092`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1092`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46718,12 +46687,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1093
 
 *SOLVE-IT technique DFT-1093: Write expert report. Objective(s): Document digital forensic activities. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1093`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1093`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46751,12 +46721,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1094
 
 *SOLVE-IT technique DFT-1094: Disclose investigation material to an authorized legal authority. Objective(s): Document digital forensic activities. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1094`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1094`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46784,12 +46755,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1095
 
 *SOLVE-IT technique DFT-1095: Instrument a piece of running software. Objective(s): Conduct research. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1095`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1095`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46817,12 +46789,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1096
 
 *SOLVE-IT technique DFT-1096: Extract operating system artifacts indicating program execution. Objective(s): Extract artifacts stored by the operating system. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1096`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1096`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46850,12 +46823,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1097
 
 *SOLVE-IT technique DFT-1097: Extract operating system artifacts indicating installed software. Objective(s): Extract artifacts stored by the operating system. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1097`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1097`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46883,12 +46857,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1098
 
 *SOLVE-IT technique DFT-1098: Enumerate operating system user accounts. Objective(s): Extract artifacts stored by the operating system. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1098`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1098`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46916,12 +46891,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1099
 
 *SOLVE-IT technique DFT-1099: Repair a damaged or incomplete file using `grafting`. Objective(s): Extract data from specific formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1099`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1099`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46949,12 +46925,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1100
 
 *SOLVE-IT technique DFT-1100: Extract metadata from within images. Objective(s): Extract data from specific formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1100`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1100`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -46982,12 +46959,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1101
 
 *SOLVE-IT technique DFT-1101: Conduct cell site survey. Objective(s): Conduct research. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1101`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1101`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47015,12 +46993,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1102
 
 *SOLVE-IT technique DFT-1102: Decode data extracted from unmanaged NAND. Objective(s): Read data from digital evidence storage formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1102`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1102`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47048,12 +47027,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1103
 
 *SOLVE-IT technique DFT-1103: Virtualize suspect system for previewing. Objective(s): Create visualizations. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1103`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1103`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47081,12 +47061,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1104
 
 *SOLVE-IT technique DFT-1104: Collect data using open source intelligence. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1104`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1104`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47114,12 +47095,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1105
 
 *SOLVE-IT technique DFT-1105: Examine memory dump from an application. Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1105`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1105`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47147,12 +47129,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1106
 
 *SOLVE-IT technique DFT-1106: Classify if a video is potentially synthetically generated. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1106`
+**Parents:** techniqueDFT-1080 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1106`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47180,12 +47163,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1107
 
 *SOLVE-IT technique DFT-1107: Extract artifacts from health/fitness app(s). Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1107`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1107`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47213,12 +47197,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1108
 
 *SOLVE-IT technique DFT-1108: Extract artifacts from reminders app(s). Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1108`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1108`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47246,12 +47231,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1109
 
 *SOLVE-IT technique DFT-1109: Extract artifacts from payment app(s). Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1109`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1109`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47279,12 +47265,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1110
 
 *SOLVE-IT technique DFT-1110: Preserve reference data. Objective(s): Prepare for a digital investigation. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1110`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1110`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47312,12 +47299,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1111
 
 *SOLVE-IT technique DFT-1111: Record system clock offset. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1111`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1111`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47345,12 +47333,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1112
 
 *SOLVE-IT technique DFT-1112: Locate and remove physical disks from a device. Objective(s): Access device data for acquisition. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1112`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1112`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47378,12 +47367,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1113
 
 *SOLVE-IT technique DFT-1113: Access internal storage via bootable environment. Objective(s): Access device data for acquisition. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1113`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1113`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47411,12 +47401,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1114
 
 *SOLVE-IT technique DFT-1114: Preserve memory contents via Cold Boot Attack. Objective(s): Preserve digital evidence. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1114`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1114`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47444,12 +47435,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1115
 
 *SOLVE-IT technique DFT-1115: Visualize geolocation information. Objective(s): Create visualizations. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1115`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1115`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47477,12 +47469,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1116
 
 *SOLVE-IT technique DFT-1116: Extract references to connected devices. Objective(s): Extract artifacts stored by the operating system. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1116`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1116`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47510,12 +47503,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1117
 
 *SOLVE-IT technique DFT-1117: Reconstruct the time that an event may have occurred. Objective(s): Reconstruct events. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1117`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1117`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47543,12 +47537,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1118
 
 *SOLVE-IT technique DFT-1118: Locate relevant files by path. Objective(s): Locate potentially relevant content. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1118`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1118`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47576,12 +47571,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1119
 
 *SOLVE-IT technique DFT-1119: Automatically scan for artifact changes caused by app updates. Objective(s): Conduct research. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1119`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1119`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47609,12 +47605,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1120
 
 *SOLVE-IT technique DFT-1120: Extract artifacts from app data automatically. Objective(s): Extract specific artifact types. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1120`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1120`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47642,12 +47639,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1121
 
 *SOLVE-IT technique DFT-1121: Index a data source for keyword searching. Objective(s): Extract specific artifact types. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1121`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1121`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47675,12 +47673,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1122
 
 *SOLVE-IT technique DFT-1122: Keyword search (case-type wordlists). See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1122`
+**Parents:** techniqueDFT-1049 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1122`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47708,12 +47707,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1123
 
 *SOLVE-IT technique DFT-1123: Keyword search (case-specific wordlists). See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1123`
+**Parents:** techniqueDFT-1049 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1123`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47741,12 +47741,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1124
 
 *SOLVE-IT technique DFT-1124: Keyword search (indexed). See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1124`
+**Parents:** techniqueDFT-1049 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1124`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47774,12 +47775,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1125
 
 *SOLVE-IT technique DFT-1125: Keyword search (live). See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1125`
+**Parents:** techniqueDFT-1049 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1125`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47807,12 +47809,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1126
 
 *SOLVE-IT technique DFT-1126: Keyword search (live) (physical). See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1126`
+**Parents:** techniqueDFT-1049 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1126`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47840,12 +47843,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1127
 
 *SOLVE-IT technique DFT-1127: Keyword search (live) (logical). See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1127`
+**Parents:** techniqueDFT-1049 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1127`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47873,12 +47877,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1128
 
 *SOLVE-IT technique DFT-1128: Search for indicators of malware. Objective(s): Detect anti-forensics and other anomalies. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1128`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1128`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47906,12 +47911,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1129
 
 *SOLVE-IT technique DFT-1129: Search for indicators of clock tampering. Objective(s): Detect anti-forensics and other anomalies. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1129`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1129`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47939,12 +47945,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1130
 
 *SOLVE-IT technique DFT-1130: Search for indicators of encrypted data. Objective(s): Detect anti-forensics and other anomalies. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1130`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1130`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -47972,12 +47979,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1131
 
 *SOLVE-IT technique DFT-1131: Search for indicators of trail obfuscation. Objective(s): Detect anti-forensics and other anomalies. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1131`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1131`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48005,12 +48013,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1132
 
 *SOLVE-IT technique DFT-1132: Search for indicators of artifact wiping. Objective(s): Detect anti-forensics and other anomalies. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1132`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1132`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48038,12 +48047,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1133
 
 *SOLVE-IT technique DFT-1133: Extract artifacts from AI companion app(s). Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1133`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1133`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48071,12 +48081,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1134
 
 *SOLVE-IT technique DFT-1134: Use time anchors to estimate clock offset. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1134`
+**Parents:** techniqueDFT-1086 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1134`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48104,12 +48115,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1137
 
 *SOLVE-IT technique DFT-1137: Extract browser history artifacts. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1137`
+**Parents:** techniqueDFT-1069 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1137`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48137,12 +48149,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1138
 
 *SOLVE-IT technique DFT-1138: Extract browser cache artifacts. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1138`
+**Parents:** techniqueDFT-1069 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1138`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48170,12 +48183,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1139
 
 *SOLVE-IT technique DFT-1139: Extract browser session artifacts. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1139`
+**Parents:** techniqueDFT-1069 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1139`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48203,12 +48217,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1140
 
 *SOLVE-IT technique DFT-1140: Extract browser autofill artifacts. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1140`
+**Parents:** techniqueDFT-1069 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1140`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48236,12 +48251,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1141
 
 *SOLVE-IT technique DFT-1141: Extract browser bookmark artifacts. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1141`
+**Parents:** techniqueDFT-1069 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1141`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48269,12 +48285,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1142
 
 *SOLVE-IT technique DFT-1142: Extract browser download artifacts. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1142`
+**Parents:** techniqueDFT-1069 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1142`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48302,12 +48319,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1143
 
 *SOLVE-IT technique DFT-1143: Extract browser configuration artifacts. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1143`
+**Parents:** techniqueDFT-1069 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1143`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48335,12 +48353,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1144
 
 *SOLVE-IT technique DFT-1144: Enumerate browser profiles. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1144`
+**Parents:** techniqueDFT-1069 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1144`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48368,12 +48387,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1145
 
 *SOLVE-IT technique DFT-1145: Extract browser extensions artifacts. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1145`
+**Parents:** techniqueDFT-1069 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1145`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48401,12 +48421,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1146
 
 *SOLVE-IT technique DFT-1146: Extract browser synchronization artifacts. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1146`
+**Parents:** techniqueDFT-1069 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1146`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48434,12 +48455,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1147
 
 *SOLVE-IT technique DFT-1147: Extract browser cookie artifacts. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1147`
+**Parents:** techniqueDFT-1069 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1147`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48467,12 +48489,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1148
 
 *SOLVE-IT technique DFT-1148: Extract browser web storage artifacts. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1148`
+**Parents:** techniqueDFT-1069 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1148`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48500,12 +48523,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1149
 
 *SOLVE-IT technique DFT-1149: Extract artifacts from the file versioning feature. Objective(s): Extract artifacts stored by the operating system. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1149`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1149`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48533,12 +48557,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1150
 
 *SOLVE-IT technique DFT-1150: Recover non-allocated files using residual file metadata. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1150`
+**Parents:** techniqueDFT-1061 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1150`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48566,12 +48591,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1151
 
 *SOLVE-IT technique DFT-1151: Keyword search (over extracted artifacts). See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1151`
+**Parents:** techniqueDFT-1049 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1151`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48599,12 +48625,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1153
 
 *SOLVE-IT technique DFT-1153: Apply offset to a timestamp. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1153`
+**Parents:** techniqueDFT-1052 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1153`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48632,12 +48659,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1154
 
 *SOLVE-IT technique DFT-1154: Reconstruct an identity associated with an event. Objective(s): Reconstruct events. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1154`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1154`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48665,12 +48693,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1155
 
 *SOLVE-IT technique DFT-1155: Reconstruct that a specific event may have occurred. Objective(s): Reconstruct events. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1155`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1155`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48698,12 +48727,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1156
 
 *SOLVE-IT technique DFT-1156: Reconstruct if an event could have functionally occurred on a system given its capabilities. Objective(s): Reconstruct events. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1156`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1156`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48731,12 +48761,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1157
 
 *SOLVE-IT technique DFT-1157: Extract device data using exposed service. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1157`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1157`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48764,12 +48795,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1158
 
 *SOLVE-IT technique DFT-1158: Configure device to enable a service needed for data extraction. Objective(s): Overcome protection mechanisms. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1158`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1158`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48797,12 +48829,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1159
 
 *SOLVE-IT technique DFT-1159: Extract mobile data via deployed agent. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1159`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1159`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48830,12 +48863,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1160
 
 *SOLVE-IT technique DFT-1160: Collect data with 'cloud backup restore' approach. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1160`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1160`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48863,12 +48897,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1161
 
 *SOLVE-IT technique DFT-1161: Collect data from cloud service via API using credentials. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1161`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1161`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48896,12 +48931,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1162
 
 *SOLVE-IT technique DFT-1162: Read data from a device via In-System Programming (ISP). Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1162`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1162`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48929,12 +48965,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1163
 
 *SOLVE-IT technique DFT-1163: Capture mobile device screenshots (automatically). Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1163`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1163`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48962,12 +48999,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1164
 
 *SOLVE-IT technique DFT-1164: Read data directly from a block device. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1164`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1164`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -48995,12 +49033,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1165
 
 *SOLVE-IT technique DFT-1165: Extract software configuration information. Objective(s): Extract specific artifact types. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1165`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1165`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49028,12 +49067,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1166
 
 *SOLVE-IT technique DFT-1166: Connect directly to storage media. Objective(s): Access device data for acquisition. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1166`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1166`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49061,12 +49101,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1167
 
 *SOLVE-IT technique DFT-1167: Extract search terms from URLs. Objective(s): Extract data from specific formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1167`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1167`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49094,12 +49135,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1168
 
 *SOLVE-IT technique DFT-1168: Identify volumes. Objective(s): Access partitions, volumes and file systems data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1168`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1168`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49127,12 +49169,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1169
 
 *SOLVE-IT technique DFT-1169: Filter files related to an application. Objective(s): Extract specific artifact types. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1169`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1169`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49160,12 +49203,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1170
 
 *SOLVE-IT technique DFT-1170: Read contents from logical forensic container file(s). Objective(s): Read data from digital evidence storage formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1170`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1170`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49193,12 +49237,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1171
 
 *SOLVE-IT technique DFT-1171: Access a file system via live operating system. Objective(s): Access device data for acquisition. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1171`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1171`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49226,12 +49271,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1172
 
 *SOLVE-IT technique DFT-1172: Read bitstream from raw image file(s). Objective(s): Read data from digital evidence storage formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1172`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1172`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49259,12 +49305,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1173
 
 *SOLVE-IT technique DFT-1173: Extract data from captured screenshots. Objective(s): Read data from digital evidence storage formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1173`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1173`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49292,12 +49339,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1174
 
 *SOLVE-IT technique DFT-1174: Read evidential files stored directly on local file system. Objective(s): Read data from digital evidence storage formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1174`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1174`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49325,12 +49373,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1175
 
 *SOLVE-IT technique DFT-1175: Extract data from an Android device using content queries. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1175`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1175`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49358,12 +49407,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1176
 
 *SOLVE-IT technique DFT-1176: Classify if an image is potentially synthetically generated. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1176`
+**Parents:** techniqueDFT-1081 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1176`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49391,12 +49441,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1177
 
 *SOLVE-IT technique DFT-1177: Extract artifacts from multiplayer game app(s). Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1177`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1177`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49424,12 +49475,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1178
 
 *SOLVE-IT technique DFT-1178: Store bitstream data in a raw image format. Objective(s): Store acquired data. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1178`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1178`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49457,12 +49509,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1179
 
 *SOLVE-IT technique DFT-1179: Extract artifacts from drone/UAV app(s). Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1179`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1179`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49490,12 +49543,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1180
 
 *SOLVE-IT technique DFT-1180: Extract file(s) from a pre-deletion container. Objective(s): Extract artifacts stored by the operating system. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1180`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1180`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49523,12 +49577,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1181
 
 *SOLVE-IT technique DFT-1181: Extract artifacts from smart home app(s). Objective(s): Extract artifacts stored by applications. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1181`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1181`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49556,12 +49611,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1182
 
 *SOLVE-IT technique DFT-1182: Filter a timeline for relevant entries. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1182`
+**Parents:** techniqueDFT-1086 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1182`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49589,12 +49645,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1184
 
 *SOLVE-IT technique DFT-1184: Sort a timeline so entries are ordered chronologically. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1184`
+**Parents:** techniqueDFT-1086 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1184`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49622,12 +49679,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1185
 
 *SOLVE-IT technique DFT-1185: Extract data from operating system notifications. Objective(s): Extract artifacts stored by the operating system. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1185`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1185`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49655,12 +49713,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1186
 
 *SOLVE-IT technique DFT-1186: Compute per-file hash values. Objective(s): Extract specific artifact types. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1186`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1186`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49688,12 +49747,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1187
 
 *SOLVE-IT technique DFT-1187: Extract content from compound files. Objective(s): Extract data from specific formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1187`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1187`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49721,12 +49781,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1190
 
 *SOLVE-IT technique DFT-1190: Extract operating system version(s) from data source. Objective(s): Extract artifacts stored by the operating system. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1190`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1190`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49754,12 +49815,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1191
 
 *SOLVE-IT technique DFT-1191: Parse allocated structures in Windows HIVE files. Objective(s): Extract data from specific formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1191`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1191`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49787,12 +49849,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1192
 
 *SOLVE-IT technique DFT-1192: Disable connectivity using device configuration settings. Objective(s): Preserve digital evidence. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1192`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1192`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49820,12 +49883,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1193
 
 *SOLVE-IT technique DFT-1193: Read metadata from within a forensic image container. Objective(s): Read data from digital evidence storage formats. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1193`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1193`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49853,12 +49917,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1194
 
 *SOLVE-IT technique DFT-1194: Classify if audio is potentially synthetically generated. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1194`
+**Parents:** techniqueDFT-1079 | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1194`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49886,12 +49951,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1195
 
 *SOLVE-IT technique DFT-1195: Generate Alternative Hypotheses. Objective(s): Evaluate evidence. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1195`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1195`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49919,12 +49985,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1196
 
 *SOLVE-IT technique DFT-1196: Extract operating system installation date. Objective(s): Extract artifacts stored by the operating system. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1196`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1196`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49952,12 +50019,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ### techniqueDFT-1197
 
 *SOLVE-IT technique DFT-1197: Determine mount point mappings within an operating system. Objective(s): Extract artifacts stored by the operating system. See https://solveit-df.org for weaknesses and mitigations.*
 
-**Parents:** Action | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1197`
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1197`
 
 | Property | Type | Cardinality | Required | Description |
 |----------|------|-------------|----------|-------------|
@@ -49985,6 +50053,313 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
 | startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
+
+### techniqueDFT-1198
+
+*SOLVE-IT technique DFT-1198: Compute hash of data read from source device. Objective(s): Acquire data. See https://solveit-df.org for weaknesses and mitigations.*
+
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1198`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
+
+### techniqueDFT-1199
+
+*SOLVE-IT technique DFT-1199: Compute hash of stored bitstream data. Objective(s): Read data from digital evidence storage formats. See https://solveit-df.org for weaknesses and mitigations.*
+
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1199`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
+
+### techniqueDFT-1200
+
+*SOLVE-IT technique DFT-1200: Evaluate observations in light of hypotheses. Objective(s): Evaluate evidence. See https://solveit-df.org for weaknesses and mitigations.*
+
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1200`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
+
+### techniqueDFT-1202
+
+*SOLVE-IT technique DFT-1202: Verify automated results manually. Objective(s): Evaluate evidence. See https://solveit-df.org for weaknesses and mitigations.*
+
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1202`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
+
+### techniqueDFT-1203
+
+*SOLVE-IT technique DFT-1203: Use an AI-based prompt for interrogating case data. Objective(s): Locate potentially relevant content. See https://solveit-df.org for weaknesses and mitigations.*
+
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1203`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
+
+### techniqueDFT-1204
+
+*SOLVE-IT technique DFT-1204: Verify hash of stored bitstream data matches a stored hash. Objective(s): Read data from digital evidence storage formats. See https://solveit-df.org for weaknesses and mitigations.*
+
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1204`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
+
+### techniqueDFT-1205
+
+*SOLVE-IT technique DFT-1205: Decode raw data into data value(s). Objective(s): Extract data from specific formats. See https://solveit-df.org for weaknesses and mitigations.*
+
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1205`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
+
+### techniqueDFT-1206
+
+*SOLVE-IT technique DFT-1206: Decode a number from raw data. Objective(s): Extract data from specific formats. See https://solveit-df.org for weaknesses and mitigations.*
+
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1206`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
+
+### techniqueDFT-1208
+
+*SOLVE-IT technique DFT-1208: Store acquisition metadata along with a forensic image format. Objective(s): Store acquired data. See https://solveit-df.org for weaknesses and mitigations.*
+
+**Parents:** SolveitInvestigativeAction | **IRI:** `https://ontology.solveit-df.org/solveit/data/techniqueDFT-1208`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+| wasInformedBy | InvestigativeAction | zero_or_more | No | A re-implementation of the wasInformedBy property in W3C PROV-O, where an entity is exchanged by two activities, 'one... |
 
 ## ext.solveit.solveit-observable
 
@@ -51960,6 +52335,8 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
 | specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
 | tag | string | zero_or_more | No | A generic tag/label. |
+| establishedForWeakness | Weakness | one_or_more | Yes | The weaknesses this capability was established against. One mitigation typically addresses many weaknesses, and a cap... |
+| supportingCitation | Citation | zero_or_more | No | Evidence for this capability - a test report, a validation study, a published paper. The idiom here is that the profi... |
 
 ### SolveitAwareInstrument
 
@@ -52005,6 +52382,7 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
 | specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
 | tag | string | zero_or_more | No | A generic tag/label. |
+| publishedBy | Identity | zero_or_one | No | The party that published this profile - a vendor, a testing programme, or a lab. An Identity rather than a name, for ... |
 
 ## ext.solveit.solveit-wa
 
@@ -52057,6 +52435,7 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | object | UcoObject | zero_or_more | No | Specifies one or more UcoObjects. |
 | evaluatedBy | Identity | one_or_more | Yes | The identity (person or organisation) that performed the evaluation. |
 | hasEvaluation | WeaknessEvaluation | one_or_more | Yes | Links an evaluation set to its constituent weakness evaluations. |
+| scoringScheme | string | zero_or_one | No | The rating scheme the evaluations in this set were authored under: 'fi' (Frequency x Impact, ratings 1-3), 'fmea' (FM... |
 
 ## ext.toolcap.capability
 
@@ -52259,6 +52638,378 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
 | specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
 | tag | string | zero_or_more | No | A generic tag/label. |
+
+## ext.trafficking.traf
+
+### a_advertise
+
+*Placing online advertisements for a victim to solicit commercial sex buyers; affordance abused: online-ad platform. Source: press release para. 3 ('placing online ads for the victims').*
+
+**Parents:** Action | **IRI:** `http://example.org/ontology/trafficking/a_advertise`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+
+### a_coerce
+
+*Causing a victim to engage in commercial sex by force, threats of force, fraud, or coercion, including setting pricing and rules for the victim. Source: press release paras. 2, 4-5.*
+
+**Parents:** Action | **IRI:** `http://example.org/ontology/trafficking/a_coerce`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+
+### a_collect_earnings
+
+*Taking the proceeds from commercial sex acts performed by a victim. Source: press release paras. 3-4 ('taking the proceeds ... Young received all the proceeds').*
+
+**Parents:** Action | **IRI:** `http://example.org/ontology/trafficking/a_collect_earnings`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| actionCount | nonNegativeInteger | zero_or_one | No | The number of times that the action was performed. |
+| actionStatus | string | zero_or_one | No | The current state of the action. |
+| endTime | dateTime | zero_or_one | No | The time at which performance of the action ended. |
+| environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
+| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
+| instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
+| location | Location | zero_or_more | No | The locations where an action occurs. |
+| object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
+| participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
+| performer | UcoObject | zero_or_one | No | The primary performer of an action. |
+| result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
+| startTime | dateTime | zero_or_one | No | The time at which performance of the action began. |
+| subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
+
+## ext.trajectories.traj
+
+### PhaseAssertion
+
+*An OBSERVED assertion that a subject occupied a traj:State during an owl-time interval, derived from evidence (prov:wasDerivedFrom) and carrying a uco-core:ConfidenceFacet via uco-core:hasFacet. Must never be used for inferred model outputs — those are traj:StateMachineModel / traj:TransitionEstimate.*
+
+**Parents:** UcoObject | **IRI:** `http://example.org/ontology/trajectories/PhaseAssertion`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| assertsState | State | exactly_one | Yes | The state this observed assertion claims was occupied. |
+| isTerminal | boolean | zero_or_one | No | Marks this PhaseAssertion as the terminal (final observed) occupancy in its traj:Trajectory. When true, traj:terminal... |
+| sequenceIndex | nonNegativeInteger | exactly_one | Yes | Zero-based (or one-based, consistently per graph) order of this PhaseAssertion within its Trajectory. Prefer this ove... |
+| terminalPolarity | string | zero_or_one | No | Controlled-vocabulary outcome type for a terminal traj:PhaseAssertion (traj:isTerminal true). Current vocabulary: 'co... |
+
+### State
+
+*A vocabulary-agnostic state in a state machine or offense/investigation phase model. Domain phase types (e.g. CAC grooming phases, AEO CyberKillChain phases) plug in as instances of traj:State (often also skos:Concept in a SKOS scheme), rather than requiring this class to subclass every domain taxonomy. See NIST SP 800-61r2 incident lifecycle practice for phase-based modeling motivation (https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final).*
+
+**Parents:** UcoObject | **IRI:** `http://example.org/ontology/trajectories/State`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+
+### StateMachineModel
+
+*An INFERRED analytic artifact representing a learned or estimated state machine over traj:State / traj:Transition. Must carry prov:wasGeneratedBy to the producing tool run (uco-tool:Tool / uco-action:Action / InvestigativeAction). Takes traj:Trajectory instances as inputs via traj:learnedFrom; never the reverse.*
+
+**Parents:** UcoObject | **IRI:** `http://example.org/ontology/trajectories/StateMachineModel`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| hasTransitionEstimate | TransitionEstimate | one_or_more | Yes | Links a state-machine model to one of its transition estimates. |
+| initialState | State | zero_or_one | No | Marks the s₀ (start) traj:State of a traj:StateMachineModel. At most one per model (SHACL sh:maxCount 1); models with... |
+| learnedFrom | Trajectory | one_or_more | Yes | Observed trajectory(ies) used as input when estimating this state-machine model. Models take trajectories as inputs; ... |
+
+### Trajectory
+
+*An ordered per-case (or per-subject) instance history of observed phase occupancy. Ordering uses traj:sequenceIndex on each traj:PhaseAssertion referenced by traj:hasPhaseAssertion — preferred over rdf:List for SHACL/query friendliness, and preferred over AEO ArrayOfAction which models planned action sequences rather than case occupancy. Complements CAC EventSequence (investigation events) without replacing it.*
+
+**Parents:** UcoObject | **IRI:** `http://example.org/ontology/trajectories/Trajectory`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| hasPhaseAssertion | PhaseAssertion | one_or_more | Yes | Links a trajectory to an observed phase-occupancy assertion. Order is given by traj:sequenceIndex on the assertion. |
+
+### Transition
+
+*A directed transition from one traj:State to another, with a trigger (the event or condition that fires the edge) and an optional guard (additional enabling condition). Maps conceptually onto CAC cacontology-temporal:PhaseTransitionEvent (which specialises investigation-lifecycle edges with transitionsFrom/transitionsTo) but is domain-agnostic and supports arbitrary state vocabularies.*
+
+**Parents:** UcoObject | **IRI:** `http://example.org/ontology/trajectories/Transition`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| enactsAction | Action | zero_or_more | No | The concrete uco-action:Action instance(s) that constitute this transition — distinct from traj:trigger (which may be... |
+| fromState | State | exactly_one | Yes | Source state of a directed transition. |
+| guard | string | zero_or_one | No | Optional enabling condition on a transition, as an open-vocabulary string (e.g. analyst note or expression). Absent w... |
+| toState | State | exactly_one | Yes | Target state of a directed transition. |
+
+### TransitionEstimate
+
+*An INFERRED estimate (probability or weight) for a traj:Transition, produced as part of a traj:StateMachineModel. Must carry prov:wasGeneratedBy and must not be typed as traj:PhaseAssertion.*
+
+**Parents:** UcoObject | **IRI:** `http://example.org/ontology/trajectories/TransitionEstimate`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| ofTransition | Transition | exactly_one | Yes | The transition whose probability or weight is estimated. |
+| transitionProbability | decimal | exactly_one | Yes | Estimated probability or normalized weight in [0,1] for the transition under the model. |
+
+## ext.uas.uas
+
+### Flight
+
+*A flight is a single sortie of an unmanned aircraft, bounded by the transitions that make it airworthy and inert again — typically motor arming and disarming. Use the inherited uco-core:startTime and uco-core:endTime for those bounds, uas:takeoffLocation for the launch point the autopilot recorded, and uas:flightTrack to reach the ordered position fixes. A log file may contain several flights; model each as its own instance so that per-sortie findings do not bleed across them.*
+
+**Parents:** Event | **IRI:** `http://example.org/ontology/uas/Flight`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| endTime | dateTime | zero_or_more | No | The ending time of a time range. |
+| eventAttribute | Dictionary | zero_or_more | No | An event attribute specifies an ad-hoc attribute/value for an event. |
+| eventContext | UcoObject | zero_or_more | No | An event context describes the association of actions and objects relating to an event. |
+| eventType | string | zero_or_more | No | An event type specifies a classification type for the event. |
+| startTime | dateTime | zero_or_more | No | The initial time of a time range. |
+| flightTrack | GeoLocationTrack | zero_or_one | No | The ordered sequence of position fixes flown during this flight, as a uco-observable:GeoLocationTrack whose entries a... |
+| maximumAltitudeAboveTakeoff | decimal | zero_or_one | No | The greatest altitude reached during the flight relative to the takeoff point, in metres. Stated relative to takeoff ... |
+| takeoffLocation | Location | zero_or_one | No | The launch point of the flight as the autopilot recorded it — for ArduPilot, the EKF origin and home position capture... |
+
+### FlightLog
+
+*A flight log is a log written by an unmanned aircraft's autopilot or by a ground control station, recording telemetry, state transitions, operator commands and text messages for one or more sorties. Examples: ArduPilot DataFlash logs (.BIN) written onboard, MAVLink telemetry logs (.tlog) written by the ground station, PX4 ULog (.ulg), and DJI TXT/DAT flight records. Use uas:logFormat to record which, and attach uco-observable:FileFacet plus uco-observable:ContentDataFacet for the container and its hash. Individual rows are uco-observable:EventRecord instances related to this log.*
+
+**Parents:** EventLog | **IRI:** `http://example.org/ontology/uas/FlightLog`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| hasChanged | boolean | zero_or_one | No |  |
+| state | string | zero_or_one | No |  |
+| logFormat | string | zero_or_one | No | The concrete log format of the flight log, as an open vocabulary, so a reader knows what parser produced the records ... |
+
+### FlightModeChange
+
+*A flight mode change is a transition of the autopilot from one flight mode to another — for example from a pilot-commanded mode to a return-to-launch or landing mode. The forensically decisive part is not the destination mode but the authority behind it: uas:flightModeChangeReason distinguishes a stick input from a ground-station command from an autonomous failsafe, and uas:commandedBy names the control-link endpoint that issued it when the log identifies one. Attributing an unexpected mode change is the central question in most drone incident investigations.*
+
+**Parents:** Event | **IRI:** `http://example.org/ontology/uas/FlightModeChange`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| endTime | dateTime | zero_or_more | No | The ending time of a time range. |
+| eventAttribute | Dictionary | zero_or_more | No | An event attribute specifies an ad-hoc attribute/value for an event. |
+| eventContext | UcoObject | zero_or_more | No | An event context describes the association of actions and objects relating to an event. |
+| eventType | string | zero_or_more | No | An event type specifies a classification type for the event. |
+| startTime | dateTime | zero_or_more | No | The initial time of a time range. |
+| autopilotFamily | string | zero_or_one | No | The autopilot firmware family whose vocabulary the recorded mode and reason strings belong to, as an open vocabulary.... |
+| flightMode | string | zero_or_one | No | The autopilot flight mode entered, as the vendor names it and kept verbatim — for example 'GUIDED', 'RTL', 'LOITER', ... |
+| flightModeChangeReason | string | zero_or_one | No | Why the autopilot changed mode, kept as the vendor's own reason string where one exists (ArduPilot logs a ModeReason ... |
+| previousFlightMode | string | zero_or_one | No | The flight mode the autopilot was in immediately before this change, using the same vendor vocabulary as uas:flightMo... |
+
+### MavlinkEndpointFacet
+
+*A MAVLink endpoint facet is a grouping of characteristics unique to a node addressable on a MAVLink control link, identified by the (system id, component id) pair that every MAVLink frame carries. Attach it to whichever observable plays the role — the aircraft itself, a ground control station, a companion computer, or an unattributed node observed only as a source address in the log. Because MAVLink v1 and v2 carry no authentication by default, the system id is an assertion by the sender and not proof of identity; record uas:senderAuthenticationEnforced so a reader can tell how much weight the address bears.*
+
+**Parents:** Facet | **Type:** Facet | **IRI:** `http://example.org/ontology/uas/MavlinkEndpointFacet`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| authorizedGroundControlStationId | nonNegativeInteger | zero_or_one | No | The MAVLink system id that the autopilot was configured to accept as its ground control station — ArduPilot's SYSID_M... |
+| mavlinkComponentId | nonNegativeInteger | zero_or_one | No | The MAVLink component id carried in every frame this endpoint sends, distinguishing components within one system per ... |
+| mavlinkComponentName | string | zero_or_one | No | The MAV_COMPONENT enumeration name for the component id, recorded alongside the number so the graph is readable witho... |
+| mavlinkDialect | string | zero_or_one | No | The MAVLink dialect and wire version the endpoint speaks, kept verbatim — for example 'ardupilotmega v2.0', 'common v... |
+| mavlinkSystemId | nonNegativeInteger | zero_or_one | No | The MAVLink system id carried in every frame this endpoint sends. It addresses a vehicle or a ground station on the l... |
+| senderAuthenticationEnforced | boolean | zero_or_one | No | Whether the autopilot was configured to reject commands whose source did not match its authorised ground control stat... |
+
+### UASFacet
+
+*A UAS facet is a grouping of characteristics unique to the regulated identity and airframe configuration of an unmanned aircraft: the Remote ID broadcast under ASTM F3411, the civil aviation authority registration, the operator identifier, and the physical configuration that constrains how the aircraft can fly. Attach to a uas:UnmannedAircraft via uco-core:hasFacet.*
+
+**Parents:** Facet | **Type:** Facet | **IRI:** `http://example.org/ontology/uas/UASFacet`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| airframeConfiguration | string | zero_or_one | No | The physical motor and arm layout as the autopilot reports it, kept verbatim — for example 'QUAD/PLUS', 'QUAD/X', 'HE... |
+| autopilotIdentifier | string | zero_or_one | No | The autopilot's own hardware or board identifier as recorded in the log or in the MAVLink AUTOPILOT_VERSION uid/uid2 ... |
+| operatorId | string | zero_or_one | No | The operator identifier broadcast in the ASTM F3411 Operator ID message, which identifies the responsible operator ra... |
+| registrationNumber | string | zero_or_one | No | The registration number issued by a civil aviation authority for this aircraft, kept verbatim including any prefix — ... |
+| remoteIdSerialNumber | string | zero_or_one | No | The aircraft serial number broadcast as the ASTM F3411 Basic ID, formatted per ANSI/CTA-2063-A (manufacturer code, le... |
+| remoteIdType | string | zero_or_one | No | Which ASTM F3411 UAS ID type the recorded identifier is, as an open vocabulary. Recommended values: 'Serial Number' (... |
+| unmannedAircraftType | string | zero_or_one | No | The aircraft category as an open vocabulary aligned with the ASTM F3411 UA Type field. Recommended values: 'Aeroplane... |
+
+### UnmannedAircraft
+
+*An unmanned aircraft is an aircraft operated without a pilot on board, together with the avionics that fly it (flight controller, sensors, radio links, parameter store). It specialises uco-observable:Drone, which already covers the aircraft itself, by adding the avionics as a programmable networked node: identifiable firmware, persistent configuration, written logs, and commands accepted over a control link. Attach uas:UASFacet for regulated identity, uas:MavlinkEndpointFacet for its address on the control link, and uco-observable:DeviceFacet for manufacturer, model and serial number. Terminology follows ICAO Doc 10019 and 14 CFR Part 89, which regulate the aircraft rather than the wider system.*
+
+**Parents:** Drone | **IRI:** `http://example.org/ontology/uas/UnmannedAircraft`
+
+| Property | Type | Cardinality | Required | Description |
+|----------|------|-------------|----------|-------------|
+| createdBy | IdentityAbstraction | zero_or_one | No | The identity that created a characterization of a concept. |
+| description | string | zero_or_more | No | A description of a particular concept characterization. |
+| externalReference | ExternalReference | zero_or_more | No | Specifies a reference to a resource outside of the UCO. |
+| hasFacet | Facet | zero_or_more | No | Further sets of properties characterizing a concept based on the particular context of the class and of the particula... |
+| modifiedTime | dateTime | zero_or_more | No | Specifies the time that this particular version of the object was modified. The object creator can use the time it de... |
+| name | string | zero_or_one | No | The name of a particular concept characterization. |
+| objectCreatedTime | dateTime | zero_or_one | No | The time at which a characterization of a concept is created. This time pertains to the time of creating the record o... |
+| objectMarking | MarkingDefinitionAbstraction | zero_or_more | No | Marking definitions to be applied to a particular concept characterization in its entirety. |
+| objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
+| specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
+| tag | string | zero_or_more | No | A generic tag/label. |
+| hasChanged | boolean | zero_or_one | No |  |
+| state | string | zero_or_one | No |  |
 
 ## ext.weapons.weap
 
@@ -52553,18 +53304,13 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
 | specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
 | tag | string | zero_or_more | No | A generic tag/label. |
-| actionCount | nonNegativeInteger | zero_or_more | No | The number of times that the action was performed. |
-| actionStatus | string | zero_or_one | No | The current state of the action. |
-| endTime | dateTime | zero_or_more | No | The time at which performance of the action ended. |
 | environment | UcoObject | zero_or_one | No | The environment wherein an action occurs. |
-| error | UcoObject | zero_or_more | No | A characterization of the differences between the expected and the actual performance of the action. |
 | instrument | UcoObject | zero_or_more | No | The things used to perform an action. |
 | location | Location | zero_or_more | No | The locations where an action occurs. |
 | object | UcoObject | zero_or_more | No | The things that the action is performed on/against. |
 | participant | UcoObject | zero_or_more | No | The supporting (non-primary) performers of an action. |
 | performer | UcoObject | zero_or_one | No | The primary performer of an action. |
 | result | UcoObject | zero_or_more | No | The things resulting from performing an action. |
-| startTime | dateTime | zero_or_more | No | The time at which performance of the action began. |
 | subaction | Action | zero_or_more | No | References to other actions that make up part of a larger more complex action. |
 | phase | ArrayOfAction | exactly_one | Yes | The ordered set of actions or sub action-lifecycles that represent the action lifecycle. |
 
@@ -56965,9 +57711,9 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | endTime | dateTime | zero_or_more | No | The ending time of a time range. |
 | isDirectional | boolean | exactly_one | Yes | A specification whether or not a relationship assertion is limited to the context FROM a source object(s) TO a target... |
 | kindOfRelationship | string | zero_or_one | No | A characterization of the nature of a relationship between objects. |
-| source | Observable | zero_or_more | No | The originating node of a specified relationship. |
+| source | Observable | one_or_more | Yes | The originating node of a specified relationship. |
 | startTime | dateTime | zero_or_more | No | The initial time of a time range. |
-| target | Observable | zero_or_more | No | The terminating node of a specified relationship. |
+| target | Observable | one_or_more | Yes | The terminating node of a specified relationship. |
 
 ### Observation
 
@@ -59984,6 +60730,15 @@ Auto-generated reference for all classes, properties, and vocabulary types in th
 | objectStatus | string | zero_or_one | No | The current state of formality and acceptance for a UCO object. |
 | specVersion | string | zero_or_one | No | The version of UCO ontology or subontology specification used to characterize a concept. |
 | tag | string | zero_or_more | No | A generic tag/label. |
+
+## Technique Catalogs
+
+These extensions ship complete technique catalogs as Turtle for validation. Their classes are not listed here or in the generated class registries; search them with the `search_adversary_techniques` and `get_adversary_technique` MCP tools.
+
+| Extension | Catalog |
+|-----------|---------|
+| [`atlas-technique`](extensions/atlas-technique/) | MITRE ATLAS Technique Catalog (uco-action:Technique, UCO 1.5.0) |
+| [`attack-technique`](extensions/attack-technique/) | MITRE ATT&CK Technique Catalog (uco-action:Technique, UCO 1.5.0) |
 
 ## Vocabulary Types
 

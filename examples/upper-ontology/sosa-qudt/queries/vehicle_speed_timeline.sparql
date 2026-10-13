@@ -1,0 +1,21 @@
+# Competency question: what speeds did the vehicle's GNSS receiver record,
+# in which unit, and when, and which extracted file is each reading from?
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX qudt: <http://qudt.org/schema/qudt/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX kb: <http://example.org/kb/>
+
+SELECT ?time ?speed ?unit ?source
+WHERE {
+  ?observation a sosa:Observation ;
+      sosa:madeBySensor kb:gnss-receiver-1 ;
+      sosa:observedProperty kb:vehicle-speed ;
+      sosa:resultTime ?t ;
+      sosa:hasResult ?result ;
+      prov:wasDerivedFrom ?source .
+  ?result qudt:value ?v ;
+      qudt:hasUnit ?unit .
+  BIND (STR(?t) AS ?time)
+  BIND (STR(?v) AS ?speed)
+}
+ORDER BY ?time

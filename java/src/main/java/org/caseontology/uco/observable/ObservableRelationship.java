@@ -10,7 +10,9 @@ public class ObservableRelationship extends Relationship {
     public static final String CLASS_IRI = "https://ontology.unifiedcyberontology.org/uco/observable/ObservableRelationship";
     public static final String NAMESPACE_PREFIX = "uco-observable";
 
+    @org.caseontology.CaseRequired
     private List<Observable> source;
+    @org.caseontology.CaseRequired
     private List<Observable> target;
 
     public ObservableRelationship() {

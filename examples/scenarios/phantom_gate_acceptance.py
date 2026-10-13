@@ -268,6 +268,11 @@ def add_weakness_evaluation_set(
             "solveit-wa:hasEvaluation": [{"@id": evaluation}],
         },
     )
+    from solveit_index import technique_catalog_entry
+
+    entry = technique_catalog_entry(technique)
+    if not any(node.get("@id") == entry["@id"] for node in g):
+        add(entry)
 
 
 def run_acceptance_gates(

@@ -12,10 +12,13 @@ refreshes them:
 1. Downloads the ontology module TTLs and the compiled knowledge base from
    ``solve-it-ontology`` at a pinned commit (or reads them from
    ``--source-dir`` for air-gapped rebuilds).
-2. Regenerates ``solveit-technique-catalog.ttl`` — every SOLVE-IT technique
-   punned as an ``owl:Class`` typed ``uco-action:Technique`` per the UCO
-   1.5.0 metaclass pattern (ucoProject/UCO PR #676), matching the bundled
-   MITRE ATT&CK catalog in ``extensions/attack-technique/``.
+2. Regenerates ``solveit-technique-catalog.ttl``, the UCO bridge for the
+   knowledge base. Since SOLVE-IT 0.2.1 every technique is an ``owl:Class``
+   typed ``solveit-core:Technique`` (a subclass of ``uco-action:Technique``)
+   and subclassing ``solveit-core:SolveitInvestigativeAction``. The bridge
+   adds what SOLVE-IT leaves out: an explicit ``uco-action:Technique`` type,
+   so UCO's shapes apply without inference, and ``uco-action:techniqueID``,
+   so SOLVE-IT and MITRE techniques can be queried together.
 3. Rewrites the ``provenance`` block in ``ontology/solveit/manifest.json``
    (commit SHA, upstream release tag, ontology version, retrieval time).
 
@@ -33,6 +36,7 @@ about.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import shutil
 import sys
@@ -55,12 +59,14 @@ KB_REPO = "SOLVE-IT-DF/solve-it"
 # Ontology module files vendored verbatim from solve-it-ontology.
 ONTOLOGY_FILES = [
     "solve_it_core.ttl",
+    "solve_it_core_shapes.ttl",
     "solve_it_observable.ttl",
     "solve_it_observable_acquisition.ttl",
     "solve_it_observable_search.ttl",
     "solve_it_observable_timeline.ttl",
     "solve_it_observable_shapes.ttl",
     "solve_it_analysis.ttl",
+    "solve_it_analysis_shapes.ttl",
     "solve_it_sqlite.ttl",
     "solve_it_tool_profile.ttl",
     "solve_it_weakness_assessment.ttl",
@@ -128,17 +134,15 @@ def _ttl_escape(text: str) -> str:
 def generate_technique_catalog() -> int:
     """Emit ``solveit-technique-catalog.ttl`` from the vendored KB.
 
-    Each SOLVE-IT technique keeps its canonical knowledge-base IRI and is
-    punned as an ``owl:Class`` typed ``uco-action:Technique`` subclassing
-    ``uco-action:Action`` and carrying ``uco-action:techniqueID`` — the UCO
-    1.5.0 metaclass pattern (PR #676), identical in shape to
-    ``extensions/attack-technique/mitre-attack-catalog.ttl``. The punning is
-    additive: the same IRIs remain ``solveit-core:Technique`` individuals in
-    the knowledge base, so both modeling styles interoperate in one graph.
+    The knowledge base already declares each technique an ``owl:Class``
+    typed ``solveit-core:Technique`` with an ``rdfs:subClassOf``. The bridge
+    asserts ``uco-action:Technique`` and ``uco-action:techniqueID`` on the
+    same IRI (the UCO 1.5.0 ``uco-action:Technique`` metaclass pattern).
+    A technique the knowledge base does not declare a class is an error.
     """
 
     import rdflib
-    from rdflib import RDF, RDFS, URIRef
+    from rdflib import OWL, RDF, RDFS, URIRef
 
     graph = rdflib.Graph()
     graph.parse(str(EXT_DIR / KB_FILE), format="turtle")
@@ -160,9 +164,13 @@ def generate_technique_catalog() -> int:
             objectives_of.setdefault(str(tech), []).append(str(name_lit))
 
     entries: list[tuple[str, str]] = []  # (technique id, turtle block)
+    not_classes: list[str] = []
     for tech in graph.subjects(RDF.type, technique_class):
         tid = graph.value(tech, technique_id)
         if tid is None:
+            continue
+        if (tech, RDF.type, OWL.Class) not in graph or graph.value(tech, RDFS.subClassOf) is None:
+            not_classes.append(str(tid))
             continue
         name_lit = graph.value(tech, technique_name)
         label = _ttl_escape(str(name_lit)) if name_lit else str(tid)
@@ -173,8 +181,7 @@ def generate_technique_catalog() -> int:
         comment += " See https://solveit-df.org for weaknesses and mitigations."
         block = (
             f"<{tech}>\n"
-            f"\ta owl:Class , action:Technique ;\n"
-            f"\trdfs:subClassOf action:Action ;\n"
+            f"\ta action:Technique ;\n"
             f'\trdfs:label "{_ttl_escape(str(tid))}: {label}"@en ;\n'
             f'\trdfs:comment "{_ttl_escape(comment)}"@en ;\n'
             f'\taction:techniqueID "{_ttl_escape(str(tid))}" ;\n'
@@ -182,22 +189,26 @@ def generate_technique_catalog() -> int:
         )
         entries.append((str(tid), block))
 
+    if not_classes:
+        raise SystemExit(
+            "knowledge base techniques not declared as owl:Class with a parent "
+            f"(SOLVE-IT older than 0.2.1?): {', '.join(sorted(not_classes)[:10])}"
+        )
     entries.sort(key=lambda item: item[0])
     header = (
         "# SOLVE-IT technique catalog — GENERATED FILE, do not edit by hand.\n"
         "# Regenerate with: python3 mcp_server/tools/sync_solveit.py --skip-fetch\n"
         "#\n"
-        "# Every SOLVE-IT technique punned as an owl:Class typed\n"
-        "# uco-action:Technique per the UCO 1.5.0 metaclass pattern\n"
-        "# (ucoProject/UCO PR #676), forward-implemented by the bundled\n"
-        "# attack-technique extension. IRIs are the canonical SOLVE-IT\n"
-        "# knowledge-base IRIs, so the punned classes and the native\n"
-        "# solveit-core:Technique individuals coexist in one graph.\n"
+        "# UCO bridge for the SOLVE-IT knowledge base. The knowledge base\n"
+        "# declares each technique an owl:Class typed solveit-core:Technique\n"
+        "# (a subclass of uco-action:Technique) and subclassing\n"
+        "# solveit-core:SolveitInvestigativeAction. This file adds an explicit\n"
+        "# uco-action:Technique type and uco-action:techniqueID on the same\n"
+        "# IRIs (the UCO 1.5.0 uco-action:Technique metaclass pattern).\n"
         "#\n"
         f"# Source: {SOLVEIT_DATA} (see manifest.json provenance block)\n"
         "\n"
         "@prefix action: <https://ontology.unifiedcyberontology.org/uco/action/> .\n"
-        "@prefix owl: <http://www.w3.org/2002/07/owl#> .\n"
         "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n"
         "\n"
     )
@@ -239,7 +250,16 @@ def update_manifest_provenance(
         provenance["knowledge_base_repo"] = f"https://github.com/{KB_REPO}"
         provenance["knowledge_base_release"] = release_tag
     provenance["ontology_version"] = ontology_version
+    if commit:
+        provenance["knowledge_base_source"] = (
+            f"docs/data/{KB_FILE} at solve-it-ontology {commit[:12]}, compiled "
+            "hourly from SOLVE-IT main; it can be newer than knowledge_base_release"
+        )
     provenance["technique_count"] = technique_count
+    provenance["sha256"] = {
+        name: hashlib.sha256((EXT_DIR / name).read_bytes()).hexdigest()
+        for name in ONTOLOGY_FILES + [KB_FILE, CATALOG_FILE]
+    }
     provenance["synced"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     provenance["sync_tool"] = "mcp_server/tools/sync_solveit.py"
     manifest["version"] = ontology_version

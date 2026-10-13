@@ -29,7 +29,7 @@ fixtures describe the same synthetic T0 workflow.
 | Concern | Canonical model |
 | --- | --- |
 | Case context | `case-investigation:Investigation` |
-| Work execution | `case-investigation:InvestigativeAction`; SOLVE-IT `SolveitInvestigativeAction`, `usedTechnique`, and `appliedMitigation` when applicable |
+| Work execution | `case-investigation:InvestigativeAction`; SOLVE-IT `SolveitInvestigativeAction` typed with the DFT-* technique class, and `appliedMitigation`, when applicable |
 | Authority | `case-investigation:Authorization`; CAC authorization subclasses such as `JurisdictionalWarrant` when the facts warrant them |
 | Inputs and outputs | `uco-action:object`, `uco-action:result` |
 | Chain of custody/provenance | CASE `ProvenanceRecord`, relationships, and explicit action performer/time/tool links |
@@ -63,9 +63,9 @@ validate upstream change proposals rather than minting private vocabulary.
 ```bash
 python -m jsonschema -i docs/work-package/example.work-package.json \
   docs/work-package/work-package.schema.json
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   docs/work-package/example.case.jsonld
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   docs/work-package/example.case.ttl
 ```
 

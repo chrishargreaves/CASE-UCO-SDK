@@ -15,9 +15,9 @@
       "@id": "urn:uuid:5901043b-d6fa-5f54-995f-790e85ac52cb",
       "@type": "uco-observable:ObservableObject",
       "uco-core:name": "Source file pacer -- export control -- sentencing memorandum.pdf",
-      "uco-core:description": "Link-Look pdf upload",
+      "uco-core:description": "Uploaded pdf file",
       "uco-core:tag": [
-        "link-look-file-kind:pdf"
+        "source-file-kind:pdf"
       ],
       "uco-core:hasFacet": [
         {

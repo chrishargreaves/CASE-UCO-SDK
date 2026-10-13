@@ -73,9 +73,6 @@ class AnimalAbuseCoercion:
     """Coercion of victims to abuse pets or animals as part of exploitation and control."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#AnimalAbuseCoercion"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     degradation_level: Optional[str] = field(default=None)
 
 
@@ -99,8 +96,8 @@ class ChildExploitationEnterprise:
     has_hierarchy: Optional[EnterpriseHierarchy] = field(default=None)
     has_leadership_relation: list[Relator] = field(default_factory=list)
     has_member: list[Person] = field(default_factory=list)
-    has_operational_begin_date: Optional[dateTimeStamp] = field(default=None)
-    has_operational_end_date: Optional[dateTimeStamp] = field(default=None)
+    has_operational_begin_date: Optional[TypedLiteral] = field(default=None)
+    has_operational_end_date: Optional[TypedLiteral] = field(default=None)
     leadership_count: Optional[int] = field(default=None)
     membership_requirements: Optional[str] = field(default=None)
     operates_in_situation: list[Situation] = field(default_factory=list)
@@ -111,9 +108,6 @@ class ContentBasedRecruitment:
     """Recruitment of new members based on quality and notoriety of content they produce."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#ContentBasedRecruitment"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -139,9 +133,6 @@ class ContentCurationAction:
     """Action of curating and organizing exploitative content for enterprise purposes."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#ContentCurationAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -168,9 +159,6 @@ class ContentEditingProcess:
     """Process of editing and organizing victim content into compilations for enterprise distribution."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#ContentEditingProcess"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     editing_quality: Optional[str] = field(default=None)
 
 
@@ -190,23 +178,6 @@ class ContentProducerRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -214,9 +185,6 @@ class ContentValueAssessment:
     """Assessment of content value based on quality, notoriety, and enterprise utility."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#ContentValueAssessment"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     content_value: Optional[float] = field(default=None)
 
 
@@ -236,23 +204,6 @@ class CoordinatorRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -260,9 +211,6 @@ class CovertEmployeeOperation:
     """Operation using online covert employees (OCE) to infiltrate and monitor extremist networks."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#CovertEmployeeOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -275,7 +223,7 @@ class CovertEmployeeOperation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -296,9 +244,6 @@ class CrossPlatformCoordination:
     """Coordination of enterprise activities across multiple internet platforms and channels."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#CrossPlatformCoordination"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     platform_count: Optional[int] = field(default=None)
 
 
@@ -307,9 +252,6 @@ class CrossPlatformEvidenceCorrelation:
     """Correlation of evidence across multiple platforms to establish identity and network connections."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#CrossPlatformEvidenceCorrelation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -322,7 +264,7 @@ class CrossPlatformEvidenceCorrelation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -366,9 +308,6 @@ class EncryptedChannelInfiltration:
     """Infiltration of encrypted channels used by extremist networks for evidence collection."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#EncryptedChannelInfiltration"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -381,7 +320,7 @@ class EncryptedChannelInfiltration:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -456,23 +395,6 @@ class EnterpriseLeaderRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -491,23 +413,6 @@ class EnterpriseRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -515,9 +420,6 @@ class ExtremeDegradationCoercion:
     """Coercion of victims to engage in extreme degrading activities beyond typical exploitation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#ExtremeDegradationCoercion"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     degradation_level: Optional[str] = field(default=None)
 
 
@@ -550,9 +452,6 @@ class IdentityCorrelationAnalysis:
     """Analysis correlating multiple accounts and identities across platforms to establish single individual control."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#IdentityCorrelationAnalysis"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -565,7 +464,7 @@ class IdentityCorrelationAnalysis:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -617,23 +516,6 @@ class InnerCoreMemberRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -673,7 +555,6 @@ class Lorebook:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     compilation_complexity: Optional[str] = field(default=None)
     contains_victim_content: list[ObservableObject] = field(default_factory=list)
     content_notoriety: Optional[str] = field(default=None)
@@ -705,28 +586,6 @@ class MembershipTier:
     """Membership tier within enterprise hierarchy determining access and privileges."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#MembershipTier"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -748,9 +607,6 @@ class MentalHealthVulnerabilityTargeting:
     """Targeting of minors with mental health challenges and psychological vulnerabilities."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#MentalHealthVulnerabilityTargeting"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     targeting_precision: Optional[str] = field(default=None)
     vulnerability_type: Optional[str] = field(default=None)
 
@@ -760,13 +616,10 @@ class NameCuttingCoercion:
     """Coercion of victims to cut enterprise member names into their bodies as ownership marking."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#NameCuttingCoercion"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     coercion_effectiveness: Optional[float] = field(default=None)
     coercion_severity: Optional[str] = field(default=None)
     creates_victimization_situation: list[Situation] = field(default_factory=list)
-    has_coercion_event_begin_date: Optional[dateTimeStamp] = field(default=None)
+    has_coercion_event_begin_date: Optional[TypedLiteral] = field(default=None)
     self_harm_type: Optional[str] = field(default=None)
 
 
@@ -775,9 +628,6 @@ class NetworkMappingInvestigation:
     """Investigation mapping the structure and relationships within extremist child exploitation networks."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#NetworkMappingInvestigation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -790,7 +640,7 @@ class NetworkMappingInvestigation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -835,9 +685,6 @@ class PlatformMigrationStrategy:
     """Strategy for migrating operations between platforms when accounts are terminated or restricted."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#PlatformMigrationStrategy"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -845,9 +692,6 @@ class PrivateGroupManagement:
     """Management of private groups and channels with restricted access for enterprise operations."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#PrivateGroupManagement"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -885,23 +729,6 @@ class RecruitmentSpecialistRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -909,13 +736,10 @@ class SelfHarmCoercion:
     """Coercion of victims to engage in self-harm activities including cutting, burning, and extreme degradation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#SelfHarmCoercion"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     coercion_effectiveness: Optional[float] = field(default=None)
     coercion_severity: Optional[str] = field(default=None)
     creates_victimization_situation: list[Situation] = field(default_factory=list)
-    has_coercion_event_begin_date: Optional[dateTimeStamp] = field(default=None)
+    has_coercion_event_begin_date: Optional[TypedLiteral] = field(default=None)
     self_harm_type: Optional[str] = field(default=None)
 
 
@@ -924,13 +748,10 @@ class SelfImmolationCoercion:
     """Coercion of victims to set themselves on fire or engage in burning activities."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#SelfImmolationCoercion"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     coercion_effectiveness: Optional[float] = field(default=None)
     coercion_severity: Optional[str] = field(default=None)
     creates_victimization_situation: list[Situation] = field(default_factory=list)
-    has_coercion_event_begin_date: Optional[dateTimeStamp] = field(default=None)
+    has_coercion_event_begin_date: Optional[TypedLiteral] = field(default=None)
     self_harm_type: Optional[str] = field(default=None)
 
 
@@ -939,9 +760,6 @@ class SiblingAbuseCoercion:
     """Coercion of victims to abuse siblings or family members as part of exploitation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#SiblingAbuseCoercion"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     degradation_level: Optional[str] = field(default=None)
 
 
@@ -950,9 +768,6 @@ class SocialEngineeringCampaign:
     """Systematic social engineering campaign to gain victim trust and facilitate exploitation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#SocialEngineeringCampaign"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     social_engineering_complexity: Optional[str] = field(default=None)
 
 
@@ -961,9 +776,6 @@ class SuicideCoercion:
     """Coercion of victims toward suicide as ultimate form of exploitation and control."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#SuicideCoercion"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     degradation_level: Optional[str] = field(default=None)
 
 
@@ -972,9 +784,6 @@ class TrustBuildingProcess:
     """Process of building trust with vulnerable victims before exploitation begins."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#TrustBuildingProcess"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     social_engineering_complexity: Optional[str] = field(default=None)
     trust_building_duration: Optional[float] = field(default=None)
 
@@ -997,7 +806,6 @@ class VictimContentCompilation:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     compilation_complexity: Optional[str] = field(default=None)
     contains_victim_content: list[ObservableObject] = field(default_factory=list)
     content_notoriety: Optional[str] = field(default=None)
@@ -1009,9 +817,6 @@ class VictimProfileDevelopment:
     """Development of detailed victim profiles including vulnerabilities and exploitation opportunities."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#VictimProfileDevelopment"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1019,9 +824,6 @@ class VulnerablePopulationTargeting:
     """Systematic targeting of vulnerable populations including minors with mental health challenges."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/extremist-enterprises#VulnerablePopulationTargeting"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     targeting_precision: Optional[str] = field(default=None)
     vulnerability_type: Optional[str] = field(default=None)
 

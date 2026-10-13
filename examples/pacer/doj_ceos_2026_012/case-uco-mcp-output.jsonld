@@ -15,9 +15,9 @@
       "@id": "urn:uuid:860946d1-c111-5195-bb56-1869811facbd",
       "@type": "uco-observable:ObservableObject",
       "uco-core:name": "Source file pacer -- doj_ceos_2026_012 -- statement of reasons.pdf",
-      "uco-core:description": "Link-Look pdf upload (upload reference doj-ceos-2026-012-judgment)",
+      "uco-core:description": "Uploaded pdf file (upload reference doj-ceos-2026-012-judgment)",
       "uco-core:tag": [
-        "link-look-file-kind:pdf"
+        "source-file-kind:pdf"
       ],
       "uco-core:hasFacet": [
         {

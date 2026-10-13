@@ -15,9 +15,9 @@
       "@id": "urn:uuid:260b6d65-4053-58dd-a159-12153d34ed65",
       "@type": "uco-observable:ObservableObject",
       "uco-core:name": "Source file pacer -- elder fraud -- factual basis.pdf",
-      "uco-core:description": "Link-Look pdf upload",
+      "uco-core:description": "Uploaded pdf file",
       "uco-core:tag": [
-        "link-look-file-kind:pdf"
+        "source-file-kind:pdf"
       ],
       "uco-core:hasFacet": [
         {

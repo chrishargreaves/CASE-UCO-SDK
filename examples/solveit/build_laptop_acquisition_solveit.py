@@ -7,21 +7,20 @@ documented the SOLVE-IT way (https://solveit-df.org):
 
 * The investigation states its objective — SOLVE-IT objective DFO-1006
   "Acquire data".
-* The acquisition is a solveit-core:SolveitInvestigativeAction whose
-  solveit-core:usedTechnique points at the canonical knowledge-base
-  technique DFT-1002 ("Copy sectors from storage media") and whose
+* The acquisition is a solveit-core:SolveitInvestigativeAction that is
+  also typed with the canonical knowledge-base technique class DFT-1002
+  ("Copy sectors from storage media", a uco-action:Technique) and whose
   solveit-core:appliedMitigation records the mitigations actively applied
   (DFM-1003 image-size check, DFM-1004 source/image hash comparison).
 * The technique's known weakness DFW-1004 (incomplete sector copy, ASTM
   E3016-18 category INCOMP) is risk-rated for this specific acquisition
   with solveit-wa:WeaknessEvaluation — SOLVE-IT's systematic Error
   Mitigation Analysis.
-* The hash verification is also shown in the UCO 1.5.0 *metaclass* style:
-  the action is typed directly with the punned technique class
-  solveit-data:techniqueDFT-1042 from
-  ontology/solveit/solveit-technique-catalog.ttl (ucoProject/UCO PR #676
-  pattern, same as MITRE ATT&CK techniques in
-  extensions/attack-technique/).
+* The hash verification uses the same uco-action:Technique metaclass
+  pattern on a plain uco-action:Action typed with
+  solveit-data:techniqueDFT-1042 (ontology/solveit/solveit-technique-catalog.ttl
+  bridges each knowledge-base technique to uco-action:Technique, the same
+  pattern as MITRE ATT&CK techniques in extensions/attack-technique/).
 
 The technique/weakness/mitigation IRIs are the canonical SOLVE-IT
 knowledge-base IRIs vendored in ontology/solveit/solve-it-kb.ttl, so
@@ -42,6 +41,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "mcp_server"))
 
 from graph_validator import validate_graph_file, validator_available  # noqa: E402
+from solveit_index import technique_catalog_entry  # noqa: E402
 
 CASE_ID = "solveit-laptop-acquisition-2026"
 NS = f"https://example.org/cases/{CASE_ID}/"
@@ -126,20 +126,17 @@ def build_graph() -> dict:
         "uco-core:name": "SHA-256 of image matches SHA-256 of source device",
     })
 
-    # Native SOLVE-IT style: the action records which technique was executed
-    # and which mitigations were actively applied.
+    # SOLVE-IT 0.2.x style: the action is typed with the technique class it
+    # performed and records which mitigations were actively applied.
     g.append({
         "@id": uid("acquire-action"),
-        "@type": "solveit-core:SolveitInvestigativeAction",
+        "@type": ["solveit-core:SolveitInvestigativeAction", SOLVEIT_DATA + "techniqueDFT-1002"],
         "uco-core:name": "acquire-laptop-image",
         "uco-core:description": (
             "Physical acquisition of the seized laptop SSD (SOLVE-IT "
             "DFT-1002) with image-size check (DFM-1003) and source/image "
             "hash verification (DFM-1004) applied."
         ),
-        "solveit-core:usedTechnique": [
-            {"@id": SOLVEIT_DATA + "techniqueDFT-1002"},
-        ],
         "solveit-core:appliedMitigation": [
             {"@id": SOLVEIT_DATA + "mitigationDFM-1003"},
             {"@id": SOLVEIT_DATA + "mitigationDFM-1004"},
@@ -180,16 +177,17 @@ def build_graph() -> dict:
         "solveit-wa:hasEvaluation": [{"@id": evaluation}],
         "solveit-wa:evaluationDate": lit("xsd:date", "2026-06-01"),
     })
+    # scopedToTechnique uses DFT-1002 as a value: restate its catalogue entry.
+    g.append(technique_catalog_entry("DFT-1002"))
 
-    # UCO 1.5.0 metaclass style: the hash-verification action is typed
-    # directly with the punned SOLVE-IT technique class (DFT-1042).
+    # The same metaclass pattern on a plain uco-action:Action (DFT-1042).
     g.append({
         "@id": uid("verify-hash-action"),
         "@type": ["uco-action:Action", "solveit-data:techniqueDFT-1042"],
         "uco-core:name": "verify-image-hash",
         "uco-core:description": (
             "Computed SHA-256 over the acquired image and compared with the "
-            "source-device hash (SOLVE-IT DFT-1042, metaclass style)."
+            "source-device hash (SOLVE-IT DFT-1042)."
         ),
         "uco-action:performer": {"@id": examiner},
         "uco-action:result": [{"@id": hash_result}],

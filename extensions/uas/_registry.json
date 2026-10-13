@@ -1,0 +1,713 @@
+{
+  "extension": "uas",
+  "modules": [
+    "uas"
+  ],
+  "classes": {
+    "Flight": {
+      "iri": "http://example.org/ontology/uas/Flight",
+      "module": "uas",
+      "description": "A flight is a single sortie of an unmanned aircraft, bounded by the transitions that make it airworthy and inert again — typically motor arming and disarming. Use the inherited uco-core:startTime and uco-core:endTime for those bounds, uas:takeoffLocation for the launch point the autopilot recorded, and uas:flightTrack to reach the ordered position fixes. A log file may contain several flights; model each as its own instance so that per-sortie findings do not bleed across them.",
+      "parents": [
+        "Event"
+      ],
+      "is_facet": false,
+      "properties": [
+        {
+          "name": "createdBy",
+          "type": "IdentityAbstraction",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/IdentityAbstraction",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The identity that created a characterization of a concept."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "A description of a particular concept characterization."
+        },
+        {
+          "name": "externalReference",
+          "type": "ExternalReference",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/ExternalReference",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Specifies a reference to a resource outside of the UCO."
+        },
+        {
+          "name": "hasFacet",
+          "type": "Facet",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/Facet",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Further sets of properties characterizing a concept based on the particular context of the class and of the particular instance of the concept being characterized."
+        },
+        {
+          "name": "modifiedTime",
+          "type": "dateTime",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Specifies the time that this particular version of the object was modified. The object creator can use the time it deems most appropriate as the time this version of the object was modified. The value of the modified property for a given object version MUST be later than or equal to the value of the created property. Object creators MUST update the modified property when creating a new version of an object. The modified timestamp MUST be precise to the nearest millisecond (exactly three digits after the decimal place in seconds)."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The name of a particular concept characterization."
+        },
+        {
+          "name": "objectCreatedTime",
+          "type": "dateTime",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The time at which a characterization of a concept is created. This time pertains to the time of creating the record object, and is not an intrinsic characteristic of the concept."
+        },
+        {
+          "name": "objectMarking",
+          "type": "MarkingDefinitionAbstraction",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/MarkingDefinitionAbstraction",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Marking definitions to be applied to a particular concept characterization in its entirety."
+        },
+        {
+          "name": "objectStatus",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The current state of formality and acceptance for a UCO object."
+        },
+        {
+          "name": "specVersion",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The version of UCO ontology or subontology specification used to characterize a concept."
+        },
+        {
+          "name": "tag",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "A generic tag/label."
+        },
+        {
+          "name": "endTime",
+          "type": "dateTime",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "The ending time of a time range."
+        },
+        {
+          "name": "eventAttribute",
+          "type": "Dictionary",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/types/Dictionary",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "An event attribute specifies an ad-hoc attribute/value for an event."
+        },
+        {
+          "name": "eventContext",
+          "type": "UcoObject",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/UcoObject",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "An event context describes the association of actions and objects relating to an event."
+        },
+        {
+          "name": "eventType",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "An event type specifies a classification type for the event."
+        },
+        {
+          "name": "startTime",
+          "type": "dateTime",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "The initial time of a time range."
+        },
+        {
+          "name": "flightTrack",
+          "type": "GeoLocationTrack",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/observable/GeoLocationTrack",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The ordered sequence of position fixes flown during this flight, as a uco-observable:GeoLocationTrack whose entries are uco-observable:GeoLocationEntry instances."
+        },
+        {
+          "name": "maximumAltitudeAboveTakeoff",
+          "type": "decimal",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#decimal",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The greatest altitude reached during the flight relative to the takeoff point, in metres. Stated relative to takeoff because that is the datum most aviation rules use (for example the 400 ft above-ground limit in 14 CFR 107.51) and the one autopilots compute directly; an above-mean-sea-level figure for the same instant belongs on the position fix, qualified with an altitude reference."
+        },
+        {
+          "name": "takeoffLocation",
+          "type": "Location",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/location/Location",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The launch point of the flight as the autopilot recorded it — for ArduPilot, the EKF origin and home position captured at arming. This is the aircraft's own belief about where it started, which is evidence in its own right and may differ from where it actually started if the position solution was spoofed or degraded."
+        }
+      ],
+      "source": "uas"
+    },
+    "FlightLog": {
+      "iri": "http://example.org/ontology/uas/FlightLog",
+      "module": "uas",
+      "description": "A flight log is a log written by an unmanned aircraft's autopilot or by a ground control station, recording telemetry, state transitions, operator commands and text messages for one or more sorties. Examples: ArduPilot DataFlash logs (.BIN) written onboard, MAVLink telemetry logs (.tlog) written by the ground station, PX4 ULog (.ulg), and DJI TXT/DAT flight records. Use uas:logFormat to record which, and attach uco-observable:FileFacet plus uco-observable:ContentDataFacet for the container and its hash. Individual rows are uco-observable:EventRecord instances related to this log.",
+      "parents": [
+        "EventLog"
+      ],
+      "is_facet": false,
+      "properties": [
+        {
+          "name": "createdBy",
+          "type": "IdentityAbstraction",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/IdentityAbstraction",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The identity that created a characterization of a concept."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "A description of a particular concept characterization."
+        },
+        {
+          "name": "externalReference",
+          "type": "ExternalReference",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/ExternalReference",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Specifies a reference to a resource outside of the UCO."
+        },
+        {
+          "name": "hasFacet",
+          "type": "Facet",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/Facet",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Further sets of properties characterizing a concept based on the particular context of the class and of the particular instance of the concept being characterized."
+        },
+        {
+          "name": "modifiedTime",
+          "type": "dateTime",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Specifies the time that this particular version of the object was modified. The object creator can use the time it deems most appropriate as the time this version of the object was modified. The value of the modified property for a given object version MUST be later than or equal to the value of the created property. Object creators MUST update the modified property when creating a new version of an object. The modified timestamp MUST be precise to the nearest millisecond (exactly three digits after the decimal place in seconds)."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The name of a particular concept characterization."
+        },
+        {
+          "name": "objectCreatedTime",
+          "type": "dateTime",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The time at which a characterization of a concept is created. This time pertains to the time of creating the record object, and is not an intrinsic characteristic of the concept."
+        },
+        {
+          "name": "objectMarking",
+          "type": "MarkingDefinitionAbstraction",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/MarkingDefinitionAbstraction",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Marking definitions to be applied to a particular concept characterization in its entirety."
+        },
+        {
+          "name": "objectStatus",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The current state of formality and acceptance for a UCO object."
+        },
+        {
+          "name": "specVersion",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The version of UCO ontology or subontology specification used to characterize a concept."
+        },
+        {
+          "name": "tag",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "A generic tag/label."
+        },
+        {
+          "name": "hasChanged",
+          "type": "boolean",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#boolean",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "state",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "logFormat",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The concrete log format of the flight log, as an open vocabulary, so a reader knows what parser produced the records and what the timestamps mean. Recommended values: 'ArduPilot DataFlash', 'MAVLink telemetry log', 'PX4 ULog', 'DJI TXT', 'DJI DAT'."
+        }
+      ],
+      "source": "uas"
+    },
+    "FlightModeChange": {
+      "iri": "http://example.org/ontology/uas/FlightModeChange",
+      "module": "uas",
+      "description": "A flight mode change is a transition of the autopilot from one flight mode to another — for example from a pilot-commanded mode to a return-to-launch or landing mode. The forensically decisive part is not the destination mode but the authority behind it: uas:flightModeChangeReason distinguishes a stick input from a ground-station command from an autonomous failsafe, and uas:commandedBy names the control-link endpoint that issued it when the log identifies one. Attributing an unexpected mode change is the central question in most drone incident investigations.",
+      "parents": [
+        "Event"
+      ],
+      "is_facet": false,
+      "properties": [
+        {
+          "name": "createdBy",
+          "type": "IdentityAbstraction",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/IdentityAbstraction",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The identity that created a characterization of a concept."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "A description of a particular concept characterization."
+        },
+        {
+          "name": "externalReference",
+          "type": "ExternalReference",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/ExternalReference",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Specifies a reference to a resource outside of the UCO."
+        },
+        {
+          "name": "hasFacet",
+          "type": "Facet",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/Facet",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Further sets of properties characterizing a concept based on the particular context of the class and of the particular instance of the concept being characterized."
+        },
+        {
+          "name": "modifiedTime",
+          "type": "dateTime",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Specifies the time that this particular version of the object was modified. The object creator can use the time it deems most appropriate as the time this version of the object was modified. The value of the modified property for a given object version MUST be later than or equal to the value of the created property. Object creators MUST update the modified property when creating a new version of an object. The modified timestamp MUST be precise to the nearest millisecond (exactly three digits after the decimal place in seconds)."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The name of a particular concept characterization."
+        },
+        {
+          "name": "objectCreatedTime",
+          "type": "dateTime",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The time at which a characterization of a concept is created. This time pertains to the time of creating the record object, and is not an intrinsic characteristic of the concept."
+        },
+        {
+          "name": "objectMarking",
+          "type": "MarkingDefinitionAbstraction",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/MarkingDefinitionAbstraction",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Marking definitions to be applied to a particular concept characterization in its entirety."
+        },
+        {
+          "name": "objectStatus",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The current state of formality and acceptance for a UCO object."
+        },
+        {
+          "name": "specVersion",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The version of UCO ontology or subontology specification used to characterize a concept."
+        },
+        {
+          "name": "tag",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "A generic tag/label."
+        },
+        {
+          "name": "endTime",
+          "type": "dateTime",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "The ending time of a time range."
+        },
+        {
+          "name": "eventAttribute",
+          "type": "Dictionary",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/types/Dictionary",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "An event attribute specifies an ad-hoc attribute/value for an event."
+        },
+        {
+          "name": "eventContext",
+          "type": "UcoObject",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/UcoObject",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "An event context describes the association of actions and objects relating to an event."
+        },
+        {
+          "name": "eventType",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "An event type specifies a classification type for the event."
+        },
+        {
+          "name": "startTime",
+          "type": "dateTime",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "The initial time of a time range."
+        },
+        {
+          "name": "autopilotFamily",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The autopilot firmware family whose vocabulary the recorded mode and reason strings belong to, as an open vocabulary. Recommended values: 'ArduPilot', 'PX4', 'DJI', 'Autel', 'Betaflight', 'INAV'. Without it, a bare mode string such as 'AUTO' is not interpretable."
+        },
+        {
+          "name": "flightMode",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The autopilot flight mode entered, as the vendor names it and kept verbatim — for example 'GUIDED', 'RTL', 'LOITER', 'AUTO' (ArduPilot); 'Position', 'Return' (PX4). Do not normalise across vendors: the same label can mean different behaviour on different firmware, and the mapping belongs in analysis, not ingest."
+        },
+        {
+          "name": "flightModeChangeReason",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "Why the autopilot changed mode, kept as the vendor's own reason string where one exists (ArduPilot logs a ModeReason with every MODE record; PX4 records a navigation state change source). This is the property that separates an operator decision from an autonomous failsafe from a remote command: 'RC_COMMAND' means a stick input, 'GCS_COMMAND' means a ground-station command arrived over the control link, and the various failsafe reasons mean the aircraft decided for itself. Where the firmware supplies no reason, leave unset rather than inferring one."
+        },
+        {
+          "name": "previousFlightMode",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The flight mode the autopilot was in immediately before this change, using the same vendor vocabulary as uas:flightMode. Assert it only when the log or a prior record establishes it."
+        }
+      ],
+      "source": "uas"
+    },
+    "MavlinkEndpointFacet": {
+      "iri": "http://example.org/ontology/uas/MavlinkEndpointFacet",
+      "module": "uas",
+      "description": "A MAVLink endpoint facet is a grouping of characteristics unique to a node addressable on a MAVLink control link, identified by the (system id, component id) pair that every MAVLink frame carries. Attach it to whichever observable plays the role — the aircraft itself, a ground control station, a companion computer, or an unattributed node observed only as a source address in the log. Because MAVLink v1 and v2 carry no authentication by default, the system id is an assertion by the sender and not proof of identity; record uas:senderAuthenticationEnforced so a reader can tell how much weight the address bears.",
+      "parents": [
+        "Facet"
+      ],
+      "is_facet": true,
+      "properties": [
+        {
+          "name": "authorizedGroundControlStationId",
+          "type": "nonNegativeInteger",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The MAVLink system id that the autopilot was configured to accept as its ground control station — ArduPilot's SYSID_MYGCS parameter, or the equivalent on other firmware. Comparing it with the system ids actually observed on the link is the basic test for whether commands came from the expected station."
+        },
+        {
+          "name": "mavlinkComponentId",
+          "type": "nonNegativeInteger",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The MAVLink component id carried in every frame this endpoint sends, distinguishing components within one system per the MAV_COMPONENT enumeration — for example 1 (autopilot), 190 (Mission Planner ground station), 191 (QGroundControl), 240 (peripheral)."
+        },
+        {
+          "name": "mavlinkComponentName",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The MAV_COMPONENT enumeration name for the component id, recorded alongside the number so the graph is readable without a lookup table — for example 'MAV_COMP_ID_AUTOPILOT1', 'MAV_COMP_ID_MISSIONPLANNER'."
+        },
+        {
+          "name": "mavlinkDialect",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The MAVLink dialect and wire version the endpoint speaks, kept verbatim — for example 'ardupilotmega v2.0', 'common v1.0'. The dialect determines which message identifiers decode to which semantics, so a parse is only reproducible if it is recorded."
+        },
+        {
+          "name": "mavlinkSystemId",
+          "type": "nonNegativeInteger",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The MAVLink system id carried in every frame this endpoint sends. It addresses a vehicle or a ground station on the link. The wire field is 8-bit, so the shape admits 0-255 and recovered or partial logs validate, but 0 is reserved for broadcast and a well-formed sender therefore uses 1-255. It is self-asserted by the sender and, unless message signing is in use, trivially forgeable; treat an unexpected system id as an observation about the link, not as an identification of an operator."
+        },
+        {
+          "name": "senderAuthenticationEnforced",
+          "type": "boolean",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#boolean",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "Whether the autopilot was configured to reject commands whose source did not match its authorised ground control station — ArduPilot's SYSID_ENFORCE parameter, or an equivalent such as MAVLink 2 message signing. When false, any node that can reach the radio link can command the aircraft, and the system id in the log is an unverified claim. Recording this is what lets a later reader judge how much an observed sender address proves."
+        }
+      ],
+      "source": "uas"
+    },
+    "UASFacet": {
+      "iri": "http://example.org/ontology/uas/UASFacet",
+      "module": "uas",
+      "description": "A UAS facet is a grouping of characteristics unique to the regulated identity and airframe configuration of an unmanned aircraft: the Remote ID broadcast under ASTM F3411, the civil aviation authority registration, the operator identifier, and the physical configuration that constrains how the aircraft can fly. Attach to a uas:UnmannedAircraft via uco-core:hasFacet.",
+      "parents": [
+        "Facet"
+      ],
+      "is_facet": true,
+      "properties": [
+        {
+          "name": "airframeConfiguration",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The physical motor and arm layout as the autopilot reports it, kept verbatim — for example 'QUAD/PLUS', 'QUAD/X', 'HEXA/X', 'OCTA/V'. Retain the vendor string rather than normalising it: the layout constrains achievable dynamics and is used when testing whether a claimed flight profile is physically possible."
+        },
+        {
+          "name": "autopilotIdentifier",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The autopilot's own hardware or board identifier as recorded in the log or in the MAVLink AUTOPILOT_VERSION uid/uid2 field — for ArduPilot, the board UID written to the log at startup. It survives reflashing and parameter resets, so it links logs to a physical flight controller even when the airframe or registration changes."
+        },
+        {
+          "name": "operatorId",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The operator identifier broadcast in the ASTM F3411 Operator ID message, which identifies the responsible operator rather than the airframe. Model the operator as a uco-identity:Identity and relate it to the aircraft with a uco-core:Relationship; this property records the raw broadcast value."
+        },
+        {
+          "name": "registrationNumber",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The registration number issued by a civil aviation authority for this aircraft, kept verbatim including any prefix — for example an FAA registration under 14 CFR Part 48 or an EASA operator-linked registration."
+        },
+        {
+          "name": "remoteIdSerialNumber",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The aircraft serial number broadcast as the ASTM F3411 Basic ID, formatted per ANSI/CTA-2063-A (manufacturer code, length code, then the manufacturer's serial). This is the identifier a Remote ID receiver observes over the air and the one that ties a broadcast to a registered airframe."
+        },
+        {
+          "name": "remoteIdType",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "Which ASTM F3411 UAS ID type the recorded identifier is, as an open vocabulary. Recommended values: 'Serial Number' (ANSI/CTA-2063-A), 'CAA Registration ID', 'UTM Assigned UUID', 'Specific Session ID'. The type matters because only the serial number is durably bound to the airframe; session identifiers are deliberately ephemeral."
+        },
+        {
+          "name": "unmannedAircraftType",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The aircraft category as an open vocabulary aligned with the ASTM F3411 UA Type field. Recommended values: 'Aeroplane', 'Helicopter or Multirotor', 'Gyroplane', 'Hybrid Lift', 'Ornithopter', 'Glider', 'Kite', 'Free Balloon', 'Captive Balloon', 'Airship', 'Free Fall or Parachute', 'Rocket', 'Tethered Powered Aircraft', 'Ground Obstacle'."
+        }
+      ],
+      "source": "uas"
+    },
+    "UnmannedAircraft": {
+      "iri": "http://example.org/ontology/uas/UnmannedAircraft",
+      "module": "uas",
+      "description": "An unmanned aircraft is an aircraft operated without a pilot on board, together with the avionics that fly it (flight controller, sensors, radio links, parameter store). It specialises uco-observable:Drone, which already covers the aircraft itself, by adding the avionics as a programmable networked node: identifiable firmware, persistent configuration, written logs, and commands accepted over a control link. Attach uas:UASFacet for regulated identity, uas:MavlinkEndpointFacet for its address on the control link, and uco-observable:DeviceFacet for manufacturer, model and serial number. Terminology follows ICAO Doc 10019 and 14 CFR Part 89, which regulate the aircraft rather than the wider system.",
+      "parents": [
+        "Drone"
+      ],
+      "is_facet": false,
+      "properties": [
+        {
+          "name": "createdBy",
+          "type": "IdentityAbstraction",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/IdentityAbstraction",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The identity that created a characterization of a concept."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "A description of a particular concept characterization."
+        },
+        {
+          "name": "externalReference",
+          "type": "ExternalReference",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/ExternalReference",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Specifies a reference to a resource outside of the UCO."
+        },
+        {
+          "name": "hasFacet",
+          "type": "Facet",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/Facet",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Further sets of properties characterizing a concept based on the particular context of the class and of the particular instance of the concept being characterized."
+        },
+        {
+          "name": "modifiedTime",
+          "type": "dateTime",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Specifies the time that this particular version of the object was modified. The object creator can use the time it deems most appropriate as the time this version of the object was modified. The value of the modified property for a given object version MUST be later than or equal to the value of the created property. Object creators MUST update the modified property when creating a new version of an object. The modified timestamp MUST be precise to the nearest millisecond (exactly three digits after the decimal place in seconds)."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The name of a particular concept characterization."
+        },
+        {
+          "name": "objectCreatedTime",
+          "type": "dateTime",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#dateTime",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The time at which a characterization of a concept is created. This time pertains to the time of creating the record object, and is not an intrinsic characteristic of the concept."
+        },
+        {
+          "name": "objectMarking",
+          "type": "MarkingDefinitionAbstraction",
+          "type_iri": "https://ontology.unifiedcyberontology.org/uco/core/MarkingDefinitionAbstraction",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "Marking definitions to be applied to a particular concept characterization in its entirety."
+        },
+        {
+          "name": "objectStatus",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The current state of formality and acceptance for a UCO object."
+        },
+        {
+          "name": "specVersion",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The version of UCO ontology or subontology specification used to characterize a concept."
+        },
+        {
+          "name": "tag",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_more",
+          "required": false,
+          "description": "A generic tag/label."
+        },
+        {
+          "name": "hasChanged",
+          "type": "boolean",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#boolean",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "state",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "source": "uas"
+    }
+  },
+  "vocabs": {}
+}

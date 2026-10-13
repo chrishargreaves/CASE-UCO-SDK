@@ -175,7 +175,7 @@ of the FBI search, directed device destruction). It validates with
 ## Validation
 
 ```bash
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph extensions/rico/rico.ttl \
   --ontology-graph extensions/rico/rico-shapes.ttl \
   --ontology-graph extensions/legalproc/legalproc.ttl \

@@ -13,6 +13,9 @@ Replaces the former [cross-domain-extensions.md](cross-domain-extensions.md) gui
 3. **Adopting profiles may be composed when dependencies and constraints are compatible.** PROV-O, OWL-Time, GeoSPARQL, FOAF, ORG, and PROF may coexist with each other and with either foundational choice when their import closures and SHACL constraints do not conflict.
 4. **Extensions declare dependencies.** Use manifest `depends_on` (e.g. `rico` → `legalproc`) — validate with the top-level extension name.
 5. **Public graph API only.** Use `create()`, `upsert_node()`, `add_type()`, `add_property()`, `link()` (for `prov:*` and other ontology edges), `create_relationship()` (UCO `Relationship` only), `get()` — not `graph.add_node` or direct `graph._objects` mutation.
+6. **Compose only on evidence.** Each vocabulary describes a different kind of fact, and most pairs are unrelated: MITRE ATT&CK and ATLAS describe adversary tradecraft against computer and AI systems; `trafficking`, `elder-fraud`, `extortion` and `trajectories` describe offense conduct; SOLVE-IT describes forensic practice; CAC describes crimes against children. Bring a second vocabulary into a graph only when something in the evidence is a fact of that kind, and type only the nodes that fact supports. No extension pulls in a technique catalog through `depends_on`, and none should.
+
+   *Example.* An offender extorts a victim and coerces them into planting malware on their employer's network, and the case holds the coercive messages plus host evidence of the implant. The extortion phases and actions use `extortion` on the trajectories state machine. The implant's execution, persistence and command-and-control use ATT&CK technique classes, typed only onto the `uco-action:Action` nodes the host evidence shows, and linked to the extortion actions by the shared performer and timeline. Without that host evidence the same case is extortion only, and ATT&CK stays out. A shared word ("credential theft", "spoofing") is not evidence; an artifact is.
 
 ## Composition policy matrix
 
@@ -118,7 +121,7 @@ validate_graph("cross-ontology-composite.jsonld",
     profiles=["gufo", "prov-o", "owl-time", "geosparql", "foaf", "org"])
 
 # CLI
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph ontology/upper/shapes/sh-gufo.ttl \
   --ontology-graph ontology/upper/shapes/sh-prov-o.ttl \
   --ontology-graph ontology/upper/shapes/sh-time.ttl \
@@ -147,6 +150,8 @@ validate_graph("cac-composite.jsonld", extensions=["cac"],
 | Upper ontology replaces domain typing | Domain `@type` always present |
 | Validation result on `prof:Profile` | Separate report resource — see [prof-validation-profile-metadata.md](prof-validation-profile-metadata.md) |
 | Merging unrelated investigations for size | Partition by forensic boundary — [large-datasets.md](large-datasets.md) |
+| Adding ATT&CK/ATLAS techniques to an offense-conduct or CAC graph because a step "sounds like" hacking | Add a technique catalog only when evidence shows that tradecraft (principle 6), and type only the actions that evidence supports |
+| Enabling every extension a router lists without checking its `matched_keywords` against the evidence | Drop a family whose match is incidental wording rather than evidence |
 
 ## Recipe index (upper ontology)
 

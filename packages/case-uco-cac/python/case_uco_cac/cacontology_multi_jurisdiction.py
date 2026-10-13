@@ -11,14 +11,12 @@ class AllFBIFieldOfficesOperation:
     """Operation involving all 55 FBI field offices in coordinated enforcement effort."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#AllFBIFieldOfficesOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
     has_validation_level: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     coordination_level: Optional[str] = field(default=None)
     has_complexity_level: Optional[str] = field(default=None)
     has_coordination_effectiveness: Optional[str] = field(default=None)
@@ -50,7 +48,7 @@ class AutomatedEvidenceDistribution:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -69,14 +67,12 @@ class CEOSCoordinatedOperation:
     """Operation coordinated by Child Exploitation and Obscenity Section (CEOS)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#CEOSCoordinatedOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
     has_validation_level: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     coordination_level: Optional[str] = field(default=None)
     has_complexity_level: Optional[str] = field(default=None)
     has_coordination_effectiveness: Optional[str] = field(default=None)
@@ -108,7 +104,7 @@ class ChildRescueCoordination:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -127,9 +123,6 @@ class CommunityOutreachTriggeredInvestigation:
     """Investigation triggered by victim disclosure following community outreach presentation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#CommunityOutreachTriggeredInvestigation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -141,9 +134,6 @@ class ComplianceMonitoringOperation:
     """Large-scale operation monitoring sex offender compliance and registration requirements."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#ComplianceMonitoringOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -167,7 +157,7 @@ class ComplianceVisitCoordination:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -186,9 +176,6 @@ class CoordinatedArrestWave:
     """Coordinated arrests conducted as part of larger operation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#CoordinatedArrestWave"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -212,7 +199,7 @@ class CoordinatedCharging:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -242,23 +229,6 @@ class CoordinatingAgent:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -266,9 +236,6 @@ class CrossBorderOperation:
     """Law enforcement operation that crosses state or national borders."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#CrossBorderOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -296,7 +263,6 @@ class CrossStateEvidence:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -335,7 +301,6 @@ class ExtraditionRequest:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -354,7 +319,6 @@ class FederalAgency:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
     has_capability_level: Optional[str] = field(default=None)
     has_cooperation_willingness: Optional[float] = field(default=None)
     has_resource_capacity: Optional[str] = field(default=None)
@@ -376,9 +340,6 @@ class FederalJurisdiction:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    has_compliance_score: Optional[float] = field(default=None)
-    has_harmonization_level: Optional[str] = field(default=None)
-    jurisdiction_type: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -404,9 +365,6 @@ class HandsOnOffenseInvestigation:
     """Investigation specifically targeting hands-on sexual offenses against children."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#HandsOnOffenseInvestigation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -418,9 +376,6 @@ class InformationSharing:
     """Formal sharing of intelligence or evidence between jurisdictions."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#InformationSharing"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     classification_level: Optional[str] = field(default=None)
     has_actionability: Optional[float] = field(default=None)
     has_intelligence_value: Optional[str] = field(default=None)
@@ -451,7 +406,6 @@ class InformationSharingAgreement:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -459,28 +413,6 @@ class InformationSynthesisPhase:
     """Phase involving compilation and analysis of multi-jurisdictional evidence."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#InformationSynthesisPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -488,28 +420,6 @@ class InitialCoordinationPhase:
     """Phase involving initial contact and coordination between jurisdictions."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#InitialCoordinationPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -530,7 +440,6 @@ class InteragencyAgreement:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -538,7 +447,6 @@ class InteragencyCooperationSituation:
     """Situation involving successful coordination between agencies."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#InteragencyCooperationSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -557,7 +465,6 @@ class InternationalAgency:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
     has_capability_level: Optional[str] = field(default=None)
     has_cooperation_willingness: Optional[float] = field(default=None)
     has_resource_capacity: Optional[str] = field(default=None)
@@ -579,9 +486,6 @@ class InternationalJurisdiction:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    has_compliance_score: Optional[float] = field(default=None)
-    has_harmonization_level: Optional[str] = field(default=None)
-    jurisdiction_type: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -589,9 +493,6 @@ class InternationalLegalHarmonization:
     """Harmonization of legal approaches across countries for consistent prosecution of global platform users."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#InternationalLegalHarmonization"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -606,9 +507,6 @@ class InternationalProsecutionFramework:
     """Framework for coordinating prosecutions across multiple countries for global platform takedowns."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#InternationalProsecutionFramework"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -623,9 +521,6 @@ class InterstateCoordination:
     """Coordination between law enforcement agencies across state lines."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#InterstateCoordination"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     classification_level: Optional[str] = field(default=None)
     has_actionability: Optional[float] = field(default=None)
     has_intelligence_value: Optional[str] = field(default=None)
@@ -655,7 +550,7 @@ class InterstateFlightFromProsecution:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -685,7 +580,6 @@ class InterstateTraffickingNetwork:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -693,9 +587,6 @@ class InterstateTransportationOffense:
     """Criminal offense involving transportation of victim across state lines."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#InterstateTransportationOffense"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -715,7 +606,7 @@ class InterstateVictimTransport:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -734,28 +625,6 @@ class JointExecutionPhase:
     """Phase involving coordinated execution of multi-jurisdictional operations."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#JointExecutionPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -763,9 +632,6 @@ class JointInvestigation:
     """Investigation conducted jointly by multiple law enforcement agencies."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#JointInvestigation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -788,9 +654,6 @@ class Jurisdiction:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    has_compliance_score: Optional[float] = field(default=None)
-    has_harmonization_level: Optional[str] = field(default=None)
-    jurisdiction_type: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -798,7 +661,6 @@ class JurisdictionalConflictSituation:
     """Situation involving disputes over jurisdictional authority."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#JurisdictionalConflictSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -818,7 +680,7 @@ class JurisdictionalHandoff:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -837,28 +699,6 @@ class JurisdictionalNegotiationPhase:
     """Phase involving determination of lead agency and jurisdictional authority."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#JurisdictionalNegotiationPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -879,7 +719,6 @@ class JurisdictionalWarrant:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -887,14 +726,12 @@ class LargeScaleOperation:
     """Operation involving 100+ law enforcement actions or extensive coordination."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#LargeScaleOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
     has_validation_level: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     coordination_level: Optional[str] = field(default=None)
     has_complexity_level: Optional[str] = field(default=None)
     has_coordination_effectiveness: Optional[str] = field(default=None)
@@ -925,7 +762,6 @@ class LawEnforcementAgency:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
     has_capability_level: Optional[str] = field(default=None)
     has_cooperation_willingness: Optional[float] = field(default=None)
     has_resource_capacity: Optional[str] = field(default=None)
@@ -947,23 +783,6 @@ class LeadAgency:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -982,23 +801,6 @@ class LiaisonOfficer:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1017,7 +819,6 @@ class LocalAgency:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
     has_capability_level: Optional[str] = field(default=None)
     has_cooperation_willingness: Optional[float] = field(default=None)
     has_resource_capacity: Optional[str] = field(default=None)
@@ -1039,9 +840,6 @@ class LocalJurisdiction:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    has_compliance_score: Optional[float] = field(default=None)
-    has_harmonization_level: Optional[str] = field(default=None)
-    jurisdiction_type: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -1061,7 +859,7 @@ class MassChildRescueOperation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1080,14 +878,12 @@ class MassProsecutionCoordination:
     """Coordination of prosecutions for massive user bases from large-scale platform takedowns requiring simultaneous action across multiple jurisdictions (nearly 2 million users for Kidflix operation)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#MassProsecutionCoordination"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
     has_validation_level: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     coordination_level: Optional[str] = field(default=None)
     has_complexity_level: Optional[str] = field(default=None)
     has_coordination_effectiveness: Optional[str] = field(default=None)
@@ -1119,7 +915,7 @@ class MassUserJurisdictionMapping:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1138,9 +934,6 @@ class MultiJurisdictionalInvestigation:
     """Investigation spanning multiple legal jurisdictions requiring coordination between agencies."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#MultiJurisdictionalInvestigation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -1152,7 +945,6 @@ class MultiJurisdictionalSituation:
     """Complex situation requiring coordination across multiple jurisdictions."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#MultiJurisdictionalSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1160,9 +952,6 @@ class MultiStateTraffickingInvestigation:
     """Child sex trafficking investigation spanning multiple states."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#MultiStateTraffickingInvestigation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -1190,7 +979,6 @@ class MutualAidRequest:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1198,14 +986,12 @@ class NamedMultiJurisdictionalOperation:
     """Formally named multi-phase operation coordinated across jurisdictions."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#NamedMultiJurisdictionalOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
     has_validation_level: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     coordination_level: Optional[str] = field(default=None)
     has_complexity_level: Optional[str] = field(default=None)
     has_coordination_effectiveness: Optional[str] = field(default=None)
@@ -1225,14 +1011,12 @@ class NationalCoordinatedOperation:
     """Operation coordinated across multiple CAC task forces nationally."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#NationalCoordinatedOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
     has_validation_level: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     coordination_level: Optional[str] = field(default=None)
     has_complexity_level: Optional[str] = field(default=None)
     has_coordination_effectiveness: Optional[str] = field(default=None)
@@ -1264,7 +1048,7 @@ class NationwideChildRescueCoordination:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1283,14 +1067,12 @@ class NationwideOperation:
     """Law enforcement operation coordinated across entire country involving all FBI field offices."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#NationwideOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
     has_validation_level: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     coordination_level: Optional[str] = field(default=None)
     has_complexity_level: Optional[str] = field(default=None)
     has_coordination_effectiveness: Optional[str] = field(default=None)
@@ -1321,8 +1103,6 @@ class OperationMetricsTracking:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
 
 
 @dataclass
@@ -1330,14 +1110,12 @@ class OperationSafeOnlineSummerType:
     """Type of national operation coordinated across 61+ CAC Task Forces."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#OperationSafeOnlineSummerType"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
     has_validation_level: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     coordination_level: Optional[str] = field(default=None)
     has_complexity_level: Optional[str] = field(default=None)
     has_coordination_effectiveness: Optional[str] = field(default=None)
@@ -1368,23 +1146,6 @@ class ParticipatingAgency:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1404,7 +1165,7 @@ class PriorityProsecutionTrack:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1423,9 +1184,6 @@ class ProactiveInvestigationCampaign:
     """Campaign focused on proactive investigation rather than reactive response."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#ProactiveInvestigationCampaign"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -1437,14 +1195,12 @@ class ProjectSafeChildhoodOperation:
     """Operation conducted under Project Safe Childhood initiative framework."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#ProjectSafeChildhoodOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
     has_validation_level: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     coordination_level: Optional[str] = field(default=None)
     has_complexity_level: Optional[str] = field(default=None)
     has_coordination_effectiveness: Optional[str] = field(default=None)
@@ -1476,7 +1232,7 @@ class ProsecutionCapacityAnalysis:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1507,7 +1263,7 @@ class RapidResponseCoordination:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1544,9 +1300,6 @@ class ResourceSharing:
     """Sharing of personnel, equipment, or expertise between agencies."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#ResourceSharing"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     cost_sharing: Optional[str] = field(default=None)
     has_availability: Optional[float] = field(default=None)
     has_cost_effectiveness: Optional[str] = field(default=None)
@@ -1573,7 +1326,7 @@ class SchoolPresentationDisclosureWorkflow:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1604,7 +1357,7 @@ class SexOffenderComplianceCheck:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1635,7 +1388,7 @@ class SimultaneousChildRescue:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1665,7 +1418,6 @@ class StateAgency:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
     has_capability_level: Optional[str] = field(default=None)
     has_cooperation_willingness: Optional[float] = field(default=None)
     has_resource_capacity: Optional[str] = field(default=None)
@@ -1687,9 +1439,6 @@ class StateJurisdiction:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    has_compliance_score: Optional[float] = field(default=None)
-    has_harmonization_level: Optional[str] = field(default=None)
-    jurisdiction_type: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -1709,7 +1458,7 @@ class StateLineCrossing:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1728,9 +1477,6 @@ class StatewideSweep:
     """Statewide operation conducting compliance checks across all jurisdictions."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#StatewideSweep"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -1753,7 +1499,6 @@ class TaskForce:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
     has_cohesion_level: Optional[float] = field(default=None)
     has_expertise_level: Optional[str] = field(default=None)
     has_operational_readiness: Optional[str] = field(default=None)
@@ -1775,23 +1520,6 @@ class TaskForceLeader:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1799,9 +1527,6 @@ class TaskForceOperation:
     """Coordinated operation conducted by multi-agency task force."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#TaskForceOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
@@ -1843,7 +1568,7 @@ class TraffickingInvestigationTask:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1862,9 +1587,6 @@ class TransportationForIllegalPurpose:
     """Transportation with intent to engage in criminal sexual activity."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#TransportationForIllegalPurpose"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1872,14 +1594,12 @@ class USAttorneyOfficeParticipation:
     """Participation of US Attorney's Offices around the country in coordinated operation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/multi-jurisdiction#USAttorneyOfficeParticipation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: Optional[str] = field(default=None)
     has_data_completeness: Optional[float] = field(default=None)
     has_data_consistency: Optional[float] = field(default=None)
     has_data_quality: Optional[str] = field(default=None)
     has_validation_level: Optional[str] = field(default=None)
     comment: Optional[str] = field(default=None)
+    label: Optional[str] = field(default=None)
     coordination_level: Optional[str] = field(default=None)
     has_complexity_level: Optional[str] = field(default=None)
     has_coordination_effectiveness: Optional[str] = field(default=None)
@@ -1911,7 +1631,7 @@ class UserTriageProsecution:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1942,7 +1662,7 @@ class VictimIdentificationTask:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)

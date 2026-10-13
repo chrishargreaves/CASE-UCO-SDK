@@ -635,17 +635,24 @@ namespace CaseUco
         private static object ConvertToClrType(object value, Type target)
         {
             if (value == null) return null;
+            target = Nullable.GetUnderlyingType(target) ?? target;
 
             if (value is Dictionary<string, object> dict && dict.TryGetValue("@value", out var raw))
             {
                 if (raw is string rawStr)
                 {
                     if (target == typeof(string)) return rawStr;
+                    if (target == typeof(byte[]))
+                        return DecodeBinary(rawStr, dict.TryGetValue("@type", out var dt) ? dt as string : null);
                     if (target == typeof(int)) return int.Parse(rawStr, CultureInfo.InvariantCulture);
                     if (target == typeof(long)) return long.Parse(rawStr, CultureInfo.InvariantCulture);
                     if (target == typeof(double)) return double.Parse(rawStr, CultureInfo.InvariantCulture);
                     if (target == typeof(bool)) return rawStr == "true";
-                    if (target == typeof(DateTime)) return DateTime.Parse(rawStr, CultureInfo.InvariantCulture);
+                    if (target == typeof(DateTime))
+                        return DateTime.Parse(
+                            System.Text.RegularExpressions.Regex.Replace(rawStr, @"\[[^\]]*\]$", ""),
+                            CultureInfo.InvariantCulture,
+                            DateTimeStyles.AdjustToUniversal);
                 }
                 return raw;
             }
@@ -1994,19 +2001,68 @@ namespace CaseUco
 
                 var attribute = prop.GetCustomAttribute<JsonLdPropertyAttribute>(inherit: true);
                 var propKey = attribute != null ? attribute.Key : InferPropertyKey(prop, type);
-                result[propKey] = ConvertValue(value);
+                result[propKey] = ConvertValue(value, attribute?.Datatype);
             }
 
             return result;
         }
 
-        private object ConvertValue(object value)
+        private object ConvertValue(object value) => ConvertValue(value, null);
+
+        /// <summary>Canonical xsd:dateTime: seconds always present, Z for UTC, numeric offset otherwise.</summary>
+        internal static string FormatDateTime(DateTime value)
+        {
+            var text = value.ToString("yyyy-MM-dd'T'HH:mm:ss", CultureInfo.InvariantCulture);
+            var fraction = value.ToString("FFFFFFF", CultureInfo.InvariantCulture);
+            if (fraction.Length > 0)
+                text += "." + fraction;
+            switch (value.Kind)
+            {
+                case DateTimeKind.Utc:
+                    return text + "Z";
+                case DateTimeKind.Local:
+                    return text + new DateTimeOffset(value).ToString("zzz", CultureInfo.InvariantCulture);
+                default:
+                    return text;
+            }
+        }
+
+        internal static string EncodeBinary(byte[] bytes, string datatype)
+        {
+            if (datatype == "xsd:base64Binary")
+                return Convert.ToBase64String(bytes);
+            var sb = new System.Text.StringBuilder(bytes.Length * 2);
+            foreach (var b in bytes)
+                sb.Append(b.ToString("X2", CultureInfo.InvariantCulture));
+            return sb.ToString();
+        }
+
+        internal static byte[] DecodeBinary(string lexical, string datatype)
+        {
+            var text = lexical.Trim();
+            if (datatype != null && datatype.EndsWith("base64Binary", StringComparison.Ordinal))
+                return Convert.FromBase64String(text);
+            if (text.Length % 2 != 0)
+                throw new FormatException($"hexBinary has odd length: {text.Length}");
+            var bytes = new byte[text.Length / 2];
+            for (var i = 0; i < bytes.Length; i++)
+                bytes[i] = byte.Parse(text.Substring(2 * i, 2), NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+            return bytes;
+        }
+
+        private object ConvertValue(object value, string datatype)
         {
             if (value == null)
                 return null;
 
             if (value is string)
                 return value;
+
+            if (value is byte[] bytes)
+            {
+                var binaryType = datatype == "xsd:base64Binary" ? datatype : "xsd:hexBinary";
+                return TypedLiteral(binaryType, EncodeBinary(bytes, binaryType));
+            }
 
             if (value is bool boolValue)
                 return TypedLiteral("xsd:boolean", boolValue ? "true" : "false");
@@ -2019,13 +2075,20 @@ namespace CaseUco
                 return TypedLiteral("xsd:decimal", Convert.ToString(value, CultureInfo.InvariantCulture));
 
             if (value is DateTime dateTime)
-                return TypedLiteral("xsd:dateTime", dateTime.ToString("o", CultureInfo.InvariantCulture));
+                return TypedLiteral("xsd:dateTime", FormatDateTime(dateTime));
+
+            if (value is DateTimeOffset dateTimeOffset)
+                return TypedLiteral(
+                    "xsd:dateTime",
+                    dateTimeOffset.Offset == TimeSpan.Zero
+                        ? FormatDateTime(dateTimeOffset.UtcDateTime)
+                        : FormatDateTime(dateTimeOffset.DateTime) + dateTimeOffset.ToString("zzz", CultureInfo.InvariantCulture));
 
             if (!(value is string) && value is IEnumerable enumerable)
             {
                 var items = new List<object>();
                 foreach (var item in enumerable)
-                    items.Add(ConvertValue(item));
+                    items.Add(ConvertValue(item, datatype));
                 return items;
             }
 
@@ -2152,12 +2215,27 @@ namespace CaseUco
 
         private static string Escape(string value)
         {
-            return value
-                .Replace("\\", "\\\\")
-                .Replace("\"", "\\\"")
-                .Replace("\n", "\\n")
-                .Replace("\r", "\\r")
-                .Replace("\t", "\\t");
+            var sb = new System.Text.StringBuilder(value.Length);
+            foreach (var c in value)
+            {
+                switch (c)
+                {
+                    case '\\': sb.Append("\\\\"); break;
+                    case '"': sb.Append("\\\""); break;
+                    case '\n': sb.Append("\\n"); break;
+                    case '\r': sb.Append("\\r"); break;
+                    case '\t': sb.Append("\\t"); break;
+                    case '\b': sb.Append("\\b"); break;
+                    case '\f': sb.Append("\\f"); break;
+                    default:
+                        if (c < 0x20)
+                            sb.Append("\\u").Append(((int)c).ToString("x4", CultureInfo.InvariantCulture));
+                        else
+                            sb.Append(c);
+                        break;
+                }
+            }
+            return sb.ToString();
         }
 
         private static Dictionary<string, object> ParseJson(string json)
@@ -2242,10 +2320,20 @@ namespace CaseUco
                     {
                         case '"': sb.Append('"'); break;
                         case '\\': sb.Append('\\'); break;
+                        case '/': sb.Append('/'); break;
+                        case 'b': sb.Append('\b'); break;
+                        case 'f': sb.Append('\f'); break;
                         case 'n': sb.Append('\n'); break;
                         case 'r': sb.Append('\r'); break;
                         case 't': sb.Append('\t'); break;
-                        default: sb.Append(json[pos]); break;
+                        case 'u':
+                            if (pos + 4 >= json.Length)
+                                throw new FormatException("truncated \\u escape in JSON string");
+                            sb.Append((char)int.Parse(json.Substring(pos + 1, 4), NumberStyles.HexNumber, CultureInfo.InvariantCulture));
+                            pos += 4;
+                            break;
+                        default:
+                            throw new FormatException($"invalid JSON escape \\{json[pos]}");
                     }
                 }
                 else

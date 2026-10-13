@@ -570,6 +570,14 @@
           "description": "The number of virtual currency addresses contained in the wallet at the time of observation (a wallet may include many addresses, each with a corresponding private key)."
         },
         {
+          "name": "hostedWalletCompartment",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The provider-hosted wallet compartment reported by a VASP, as an open vocabulary. Recommended values observed on exchange legal returns: 'Spot', 'Funding', 'Earn', 'Futures', 'Margin', 'Card'. A hosted wallet is one where a third party retains the customer's funds (INTERPOL DW-VA Taxonomy: https://interpol-innovation-centre.github.io/DW-VA-Taxonomy/taxonomies/entities#hosted-wallet). This is a ledger partition, not proof of on-chain control."
+        },
+        {
           "name": "walletIdentifier",
           "type": "string",
           "type_iri": "http://www.w3.org/2001/XMLSchema#string",
@@ -1240,6 +1248,90 @@
           "cardinality": "zero_or_one",
           "required": false,
           "description": "The date and time at which the fiat valuation of the holding was made. The trading value of virtual assets fluctuates over time depending on market demand."
+        }
+      ],
+      "source": "cryptoinv"
+    },
+    "VirtualAssetLedgerRecordFacet": {
+      "iri": "http://example.org/ontology/cryptoinv/VirtualAssetLedgerRecordFacet",
+      "module": "cryptoinv",
+      "description": "A virtual asset ledger record facet is a grouping of characteristics unique to a VASP-reported movement, exchange, or balance snapshot on a provider ledger rather than (or in addition to) a public-blockchain transaction. FATF defines VASP activity to include exchange between virtual assets and fiat currencies, exchange between one or more forms of virtual assets, and transfer of virtual assets for or on behalf of another natural or legal person (FATF Guidance for a Risk-Based Approach to Virtual Assets and VASPs, 2021, https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Guidance-rba-virtual-assets-2021.html). Electronic-service-provider warrant returns commonly deliver this activity as deposit, withdrawal, order, P2P, Pay, and fiat worksheets. Attach to the uco-core:Event that represents the source row. When the same row also reports a public transaction hash, also attach cryptoinv:CryptocurrencyTransactionFacet; do not treat a provider order identifier as a blockchain transactionHash.",
+      "parents": [
+        "Facet"
+      ],
+      "is_facet": true,
+      "properties": [
+        {
+          "name": "addressTag",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "A destination tag, memo, or payment identifier required by some networks and VASPs to credit a deposit (for example XRP destination tags or XLM memos). This is routing metadata, not an account-holder identity."
+        },
+        {
+          "name": "assetQuantity",
+          "type": "decimal",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#decimal",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The quantity of the virtual asset in its native unit at the observation time."
+        },
+        {
+          "name": "assetSymbol",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The ticker symbol of the held or transferred virtual asset."
+        },
+        {
+          "name": "isOnChain",
+          "type": "boolean",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#boolean",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "True when the ledger row includes a public-blockchain transaction hash in addition to the provider identifier."
+        },
+        {
+          "name": "ledgerRecordType",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "exactly_one",
+          "required": true,
+          "description": "The provider-ledger activity type as an open vocabulary. Recommended values: 'Deposit', 'Withdrawal', 'Trade', 'P2P', 'Pay', 'FiatDeposit', 'FiatWithdrawal', 'InternalTransfer', 'BalanceSnapshot'."
+        },
+        {
+          "name": "providerTransactionId",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The VASP-assigned identifier for the ledger row (deposit ID, withdrawal ID, order ID, or transfer ID). This is not a blockchain transaction hash."
+        },
+        {
+          "name": "transactionFee",
+          "type": "decimal",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#decimal",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The transaction fee in the native cryptocurrency unit of the network."
+        },
+        {
+          "name": "transactionStatus",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The status of the transaction or ledger row at the time of observation."
+        },
+        {
+          "name": "transferNetwork",
+          "type": "string",
+          "type_iri": "http://www.w3.org/2001/XMLSchema#string",
+          "cardinality": "zero_or_one",
+          "required": false,
+          "description": "The provider-reported chain or token network used for a deposit or withdrawal, e.g. 'BTC', 'ERC20', 'TRC20', 'BSC'."
         }
       ],
       "source": "cryptoinv"

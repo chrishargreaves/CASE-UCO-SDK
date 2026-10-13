@@ -117,7 +117,7 @@ The decomposed model uses `uco-core:Relationship` instances with these `kindOfRe
 Validate the exemplar with `case_validate` (from `pip install case-utils`):
 
 ```bash
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph change_proposals/capability-namespace.ttl \
   --ontology-graph change_proposals/capability-namespace-shapes.ttl \
   --ontology-graph extensions/toolcap/toolcap.ttl \

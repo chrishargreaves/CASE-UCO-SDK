@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Shared CASE/UCO MCP listener for Cursor, Hermes, Claude Desktop, and others.
+# Shared CASE/UCO MCP listener for Cursor, Claude Desktop, and others.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 export PATH="$ROOT/.venv/bin:${PATH:-/usr/local/bin:/usr/bin:/bin}"

@@ -710,5 +710,91 @@ namespace CaseUco.Tests
                     return null;
                 }).Keys.OrderBy(x => x).ToArray());
         }
+    
+        private static JsonElement FirstNode(CaseGraph graph)
+        {
+            using var doc = JsonDocument.Parse(graph.Serialize());
+            return doc.RootElement.GetProperty("@graph")[0].Clone();
+        }
+
+        [Fact]
+        public void HashValue_SerializesAsUppercaseHexBinary()
+        {
+            var graph = new CaseGraph();
+            var hash = new CaseUco.Uco.Types.Hash
+            {
+                HashMethod = "SHA256",
+                HashValue = new byte[] { 0xde, 0xad, 0xbe, 0xef },
+            };
+            graph.AddWithId(hash, "kb:hash-1");
+
+            var literal = FirstNode(graph).GetProperty("uco-types:hashValue");
+            Assert.Equal("xsd:hexBinary", literal.GetProperty("@type").GetString());
+            Assert.Equal("DEADBEEF", literal.GetProperty("@value").GetString());
+
+            var back = (CaseUco.Uco.Types.Hash)CaseGraph.FromJsonLd(graph.Serialize()).Objects[0];
+            Assert.Equal(hash.HashValue, back.HashValue);
+        }
+
+        [Fact]
+        public void DateTime_SerializesCanonicalLexicalForms()
+        {
+            Assert.Equal("2024-01-02T03:04:05Z",
+                CaseGraph.FormatDateTime(new DateTime(2024, 1, 2, 3, 4, 5, DateTimeKind.Utc)));
+            Assert.Equal("2024-01-02T03:04:05.25Z",
+                CaseGraph.FormatDateTime(new DateTime(2024, 1, 2, 3, 4, 5, 250, DateTimeKind.Utc)));
+            Assert.Equal("2024-01-02T03:04:05",
+                CaseGraph.FormatDateTime(new DateTime(2024, 1, 2, 3, 4, 5, DateTimeKind.Unspecified)));
+
+            var local = new DateTime(2024, 1, 2, 3, 4, 5, DateTimeKind.Local);
+            var offset = TimeZoneInfo.Local.GetUtcOffset(local);
+            var sign = offset < TimeSpan.Zero ? "-" : "+";
+            Assert.Equal("2024-01-02T03:04:05" + sign + offset.Duration().ToString(@"hh\:mm"), CaseGraph.FormatDateTime(local));
+        }
+
+        [Fact]
+        public void DateTime_ParsesZoneSuffixAsUtc()
+        {
+            var json = "{\"@context\":{\"uco-action\":\"https://ontology.unifiedcyberontology.org/uco/action/\"}," +
+                "\"@graph\":[{\"@id\":\"kb:a\",\"@type\":\"uco-action:Action\"," +
+                "\"uco-action:startTime\":{\"@type\":\"xsd:dateTime\",\"@value\":\"2024-01-02T03:04:05Z[UTC]\"}}]}";
+            var action = (CaseUco.Uco.Action.Action)CaseGraph.FromJsonLd(json).Objects[0];
+            Assert.Equal(new DateTime(2024, 1, 2, 3, 4, 5, DateTimeKind.Utc), action.StartTime);
+            Assert.Equal(DateTimeKind.Utc, action.StartTime?.Kind);
+        }
+
+        [Fact]
+        public void NullableValueTypes_RoundTrip()
+        {
+            var graph = new CaseGraph();
+            graph.AddWithId(new CaseUco.Uco.Observable.FileFacet { SizeInBytes = 4096 }, "kb:ff");
+            var back = (CaseUco.Uco.Observable.FileFacet)CaseGraph.FromJsonLd(graph.Serialize()).Objects[0];
+            Assert.Equal(4096L, back.SizeInBytes);
+        }
+
+        [Fact]
+        public void StringEscapes_RoundTrip()
+        {
+            var json = "{\"@context\":{\"uco-core\":\"https://ontology.unifiedcyberontology.org/uco/core/\"," +
+                "\"uco-tool\":\"https://ontology.unifiedcyberontology.org/uco/tool/\"}," +
+                "\"@graph\":[{\"@id\":\"kb:t\",\"@type\":\"uco-tool:Tool\",\"uco-core:name\":\"caf\\u00e9 \\/ \\b\\f\"}]}";
+            var tool = (Tool)CaseGraph.FromJsonLd(json).Objects[0];
+            Assert.Equal("caf\u00e9 / \b\f", tool.Name);
+
+            var graph = new CaseGraph();
+            graph.AddWithId(new Tool { Name = "ctl\u0001\b\f\"\\" }, "kb:t2");
+            var reparsed = (Tool)CaseGraph.FromJsonLd(graph.Serialize()).Objects[0];
+            Assert.Equal("ctl\u0001\b\f\"\\", reparsed.Name);
+            using var doc = JsonDocument.Parse(graph.Serialize());
+            Assert.Equal("ctl\u0001\b\f\"\\", doc.RootElement.GetProperty("@graph")[0].GetProperty("uco-core:name").GetString());
+        }
+
+        [Fact]
+        public void StringEscapes_InvalidEscapeIsRejected()
+        {
+            Assert.Throws<FormatException>(() =>
+                CaseGraph.FromJsonLd("{\"@graph\":[{\"@id\":\"kb:t\",\"uco-core:name\":\"bad\\q\"}]}"));
+        }
     }
 }
+

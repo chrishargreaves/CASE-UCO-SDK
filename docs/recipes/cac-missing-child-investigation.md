@@ -50,9 +50,25 @@ graph.write("missing-child.jsonld")
 
 ## Validation
 
+Use the named missing-child profile so abduction, case-management, and
+temporal terms are in the SHACL closure. The default `cac` press-release
+subset will reject those terms as a **subset miss**, not as a missing
+ontology concept.
+
 ```bash
-make validate-extension EXT=cac DATA=missing-child.jsonld
+# SDK / MCP
+# validate_graph(..., extensions=["cac:missing-child"])
+# CASE_UCO_EXTENSIONS=cac
+
+case_validate --built-version case-1.5.0 \
+  --ontology-graph ontology/cac/ontology/ontology/cacontology-core-spine.ttl \
+  --ontology-graph ontology/cac/ontology/ontology/cacontology-stranger-abduction.ttl \
+  examples/cac/t0-missing-child.jsonld
 ```
+
+The T0 fixture `examples/cac/t0-missing-child.jsonld` is the conformance
+target for `cac:missing-child`. Use `extensions=['cac:full']` only when
+the complete CAC SPARQL shapes are safe for the installed case-utils.
 
 ## Related recipes
 

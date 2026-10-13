@@ -2,7 +2,7 @@
 
 > See [Recipe Index](INDEX.md) for all recipes.
 
-End-to-end workflow for agents (and Link-Look/Hermes callers) that receive **PACER PDF bundles** — indictments, trial briefs, judgments, complaints — and must return **validated CASE/UCO/CAC JSON-LD**.
+End-to-end workflow for agents and other MCP callers that receive **PACER PDF bundles** — indictments, trial briefs, judgments, complaints — and must return **validated CASE/UCO/CAC JSON-LD**.
 
 This recipe composes:
 
@@ -160,7 +160,7 @@ PLATFORMS:
 | Fabricated timestamps | Never invent a day or clock time the filing does not state. "June 2019" or "January and February 2020" → record the period in the description or an `approximatePeriod=` facet string, not an `xsd:dateTime` |
 | `uco-action:startTime` on non-Actions | `uco-action:*` properties belong on `Action` subclasses (`InvestigativeAction`, `CSAMIncident`). Events, legal phases, and media observables use `uco-core:startTime` (media capture dates encoded as local midnight for date-only precision) |
 | Invented class/property names | Use only terms declared in the CAC TTLs: charge subtypes come from `cacontology-usa-federal` (`ChildPornographyProduction`, `SexTraffickingOfMinors`), forfeiture from `cacontology-asset-forfeiture:AssetForfeitureAction` + `relatedCriminalCharges`, verdicts as `cacontology-legal-outcomes:ConvictionRecord` with `convictionDate`, `convictionType` (`jury_verdict`), `chargeCount` |
-| Invented SOLVE-IT technique | If the filing names Cellebrite, FTK, PhotoDNA, or a hash match, record a versioned `uco-tool:Tool` and `InvestigativeAction`. Do not mint `solveit-core:usedTechnique` unless the filing identifies that method. See [technique-evidence-outcome.md](technique-evidence-outcome.md) |
+| Invented SOLVE-IT technique | If the filing names Cellebrite, FTK, PhotoDNA, or a hash match, record a versioned `uco-tool:Tool` and `InvestigativeAction`. Do not type the action with a SOLVE-IT DFT-* technique unless the filing identifies that method. See [technique-evidence-outcome.md](technique-evidence-outcome.md) |
 | Defendant as interview performer | Law enforcement performs the interview; the defendant is `uco-action:object` on the `InvestigativeAction` |
 | Possession media wired into production incident | Count 2 items received on the defendant's account link `Related_To` → possession incident only; if an item is a documented copy of a production series, add registered `Copied_From` → that series |
 

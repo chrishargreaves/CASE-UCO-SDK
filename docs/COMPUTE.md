@@ -21,23 +21,29 @@ cover source evidence, forensic images, exports, backups, or replicas. Those
 must use separately governed storage sized for the deployment's evidence
 volume and retention policy.
 
-Downstream deployment catalogs should keep their `case_uco_sdk` entry synchronized with this baseline during the same release cycle.
+Installers and deployment catalogs that list the SDK should keep their
+compute entry synchronized with this baseline.
 
 ## CPU architecture matrix
 
 | Package | Linux `x86_64` | Linux `aarch64` | Architecture-sensitive components |
 | --- | --- | --- | --- |
-| Python | Supported and CI-tested | Designed to be portable; native validation pending | The SDK wheel is pure Python. `rdflib`, `jinja2`, and SDK code are architecture-neutral; dependency wheels and `case-utils` availability must be verified on the target Python version. |
-| C# | Supported and CI-tested on .NET 8 | Supported by the .NET 8 runtime; native validation pending | `CaseUco` is managed IL and ships no native library. Install the matching .NET `linux-arm64` runtime/SDK. |
-| Java | Supported and CI-tested on JDK 11+ | Supported by a matching aarch64 JDK; native validation pending | The SDK JAR is architecture-neutral and contains no JNI library. |
-| Rust | Supported and CI-tested | Source-compatible; native validation pending | Rust produces a native binary/library for the selected target. Build on aarch64 or use the `aarch64-unknown-linux-gnu` target with an appropriate linker. |
+| Python | Supported and CI-tested | CI-tested on GitHub `ubuntu-24.04-arm` | The SDK wheel is pure Python. `rdflib`, `jinja2`, and SDK code are architecture-neutral; CI installs `case-utils==0.18.0` on the arm64 runner. |
+| C# | Supported and CI-tested on .NET 8 | CI-tested on GitHub `ubuntu-24.04-arm` with the .NET 8 `linux-arm64` SDK | `CaseUco` is managed IL and ships no native library. |
+| Java | Supported and CI-tested on JDK 11+ | CI-tested on GitHub `ubuntu-24.04-arm` with Temurin 17 | The SDK JAR is architecture-neutral and contains no JNI library. |
+| Rust | Supported and CI-tested | CI-tested on GitHub `ubuntu-24.04-arm` | Rust produces a native binary/library for the selected target. |
 
 The repository does not currently publish container images and has no CUDA or
 GPU runtime dependency. NVIDIA hardware does not accelerate ontology loading,
 code generation, or SHACL validation unless a downstream application adds its
 own GPU workload.
 
-Native Linux `aarch64` testing on NVIDIA Spark remains pending. Record successful native validation in the deployment matrix before claiming support.
+GitHub-hosted `ubuntu-24.04-arm` is the recorded Linux `aarch64` CI
+evidence.
+NVIDIA Spark remains unvalidated on this repository: this environment has
+no Spark host, and NVIDIA hardware does not change ontology loading or
+SHACL validation. Do not describe NVIDIA Spark as a release platform
+until a completed host checklist from this document is recorded for it.
 
 ## Native validation checklist
 

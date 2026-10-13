@@ -1,11 +1,37 @@
 """Tier T0 tests for deterministic document semantic mapping."""
 
+import hashlib
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from document_semantic_mapping import extract_semantic_entities
+from document_semantic_mapping import (
+    _B58_ALPHABET,
+    extract_semantic_entities,
+    repair_ocr_cyber_identifiers,
+)
+
+
+def _b58encode(data: bytes) -> str:
+    number = int.from_bytes(data, "big")
+    chars: list[str] = []
+    while number:
+        number, remainder = divmod(number, 58)
+        chars.append(_B58_ALPHABET[remainder])
+    pad = 0
+    for byte in data:
+        if byte == 0:
+            pad += 1
+        else:
+            break
+    return ("1" * pad) + "".join(reversed(chars))
+
+
+def _synthetic_base58check(version: int, payload20: bytes) -> str:
+    body = bytes([version]) + payload20
+    checksum = hashlib.sha256(hashlib.sha256(body).digest()).digest()[:4]
+    return _b58encode(body + checksum)
 
 SYNTHETIC_ARTICLE = """
 11/06/2026, 20:06
@@ -221,3 +247,63 @@ def test_semantic_mapping_extracts_multi_title_statutes_and_tools() -> None:
     assert any(count == "1" for count, _ in facts["count_statutes"])
     assert any(claim["technique_id"] == "DFT-1002" for claim in facts["method_claims"])
     assert any("Cellebrite" in tool for tool in facts["tools"])
+
+
+def test_semantic_mapping_emits_cryptoinv_address_facets() -> None:
+    eth = "0x" + "ab" * 20
+    btc = "bc1q" + "q" * 38
+    text = f"On-chain destinations {eth} and {btc}."
+    entities = extract_semantic_entities(text, run_seed="cryptoinv-address-t0")
+    facets = {
+        facet["cryptoinv:cryptocurrencyType"]: facet
+        for entity in entities
+        for facet in entity.graph_facets
+        if facet.get("@type") == "cryptoinv:CryptocurrencyAddressFacet"
+    }
+    assert facets["ETH"]["cryptoinv:addressValue"] == eth
+    assert facets["BTC"]["cryptoinv:addressValue"] == btc
+    assert facets["ETH"]["cryptoinv:addressFormat"] == "Hex"
+    assert facets["BTC"]["cryptoinv:addressFormat"] == "Bech32"
+
+
+def test_repair_ocr_joins_spaced_base58check_and_email_hosts() -> None:
+    address = _synthetic_base58check(0x00, bytes(range(20)))
+    broken = " ".join(address[i : i + 4] for i in range(0, len(address), 4))
+    text = f"Send to {broken} and email victim@hotmai1.com plus lead@9gc0m"
+    repaired = repair_ocr_cyber_identifiers(text)
+    assert address in repaired
+    assert "victim@hotmail.com" in repaired
+    assert "lead@qq.com" in repaired
+    assert broken not in repaired
+
+
+def test_semantic_mapping_models_warrant_investigation_and_p2pkh() -> None:
+    address = _synthetic_base58check(0x00, bytes(range(20)))
+    text = (
+        "ATTACHMENT A OF AFFIDAVIT\n"
+        "This search warrant concerns a cryptocurrency investment scam using "
+        f"Binance and wallet-portal.cc. Destination {address}. "
+        "Contact victim@example-agency.test."
+    )
+    entities = extract_semantic_entities(text, run_seed="warrant-model-t0")
+    classes = {entity.ontology_class for entity in entities}
+    assert "case-investigation:Investigation" in classes
+    assert "case-investigation:Authorization" in classes
+    assert "cryptoinv:VirtualAssetServiceProvider" in classes
+    assert "uco-observable:DomainName" in classes
+    assert "uco-observable:EmailAddress" in classes
+    facets = [
+        facet
+        for entity in entities
+        for facet in entity.graph_facets
+        if facet.get("@type") == "cryptoinv:CryptocurrencyAddressFacet"
+    ]
+    assert any(facet.get("cryptoinv:addressValue") == address for facet in facets)
+    assert any(facet.get("cryptoinv:addressFormat") == "Base58Check" for facet in facets)
+    domains = [
+        facet.get("uco-observable:value")
+        for entity in entities
+        for facet in entity.graph_facets
+        if facet.get("@type") == "uco-observable:DomainNameFacet"
+    ]
+    assert "wallet-portal.cc" in domains

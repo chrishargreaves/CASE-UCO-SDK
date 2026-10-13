@@ -52,6 +52,10 @@ impl CaseObject for ControlledDictionary {
 pub struct ControlledDictionaryEntry {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-types:key")]
+    pub key: Option<String>,
+    #[serde(rename = "uco-types:value")]
+    pub value: Option<String>,
 }
 
 impl ControlledDictionaryEntry {
@@ -60,18 +64,34 @@ impl ControlledDictionaryEntry {
 
     pub fn builder() -> ControlledDictionaryEntryBuilder {
         ControlledDictionaryEntryBuilder {
+            key: None,
+            value: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ControlledDictionaryEntryBuilder {
+    key: Option<String>,
+    value: Option<String>,
 }
 
 impl ControlledDictionaryEntryBuilder {
+    pub fn key(mut self, value: String) -> Self {
+        self.key = Some(value);
+        self
+    }
+
+    pub fn value(mut self, value: String) -> Self {
+        self.value = Some(value);
+        self
+    }
+
     pub fn build(self) -> ControlledDictionaryEntry {
         ControlledDictionaryEntry {
             class_iri: ControlledDictionaryEntry::CLASS_IRI,
+            key: self.key,
+            value: self.value,
         }
     }
 }
@@ -79,6 +99,15 @@ impl ControlledDictionaryEntryBuilder {
 impl CaseObject for ControlledDictionaryEntry {
     fn class_iri() -> &'static str { ControlledDictionaryEntry::CLASS_IRI }
     fn type_name() -> &'static str { "ControlledDictionaryEntry" }
+    fn validate(&self) -> Result<(), String> {
+        if self.key.is_none() {
+            return Err("ControlledDictionaryEntry.key is required but was not provided.".to_string());
+        }
+        if self.value.is_none() {
+            return Err("ControlledDictionaryEntry.value is required but was not provided.".to_string());
+        }
+        Ok(())
+    }
 }
 
 /// A dictionary is list of (term/key, value) pairs with each term/key having an expectation to exist no more than once.  types:Dictionary alone does not validate this expectation, but validation is avail
@@ -196,6 +225,7 @@ pub struct Hash {
     #[serde(rename = "uco-types:hashMethod")]
     pub hash_method: Option<String>,
     #[serde(rename = "uco-types:hashValue")]
+    #[serde(serialize_with = "crate::graph::serialize_hex_binary_opt")]
     pub hash_value: Option<Vec<u8>>,
 }
 
@@ -256,6 +286,8 @@ impl CaseObject for Hash {
 pub struct ImproperDictionary {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-types:entry")]
+    pub entry: Vec<DictionaryEntry>,
     #[serde(rename = "uco-types:repeatsKey")]
     pub repeats_key: Vec<String>,
 }
@@ -266,6 +298,7 @@ impl ImproperDictionary {
 
     pub fn builder() -> ImproperDictionaryBuilder {
         ImproperDictionaryBuilder {
+            entry: Vec::new(),
             repeats_key: Vec::new(),
         }
     }
@@ -273,10 +306,16 @@ impl ImproperDictionary {
 
 #[derive(Debug, Default, Clone)]
 pub struct ImproperDictionaryBuilder {
+    entry: Vec<DictionaryEntry>,
     repeats_key: Vec<String>,
 }
 
 impl ImproperDictionaryBuilder {
+    pub fn entry(mut self, value: Vec<DictionaryEntry>) -> Self {
+        self.entry = value;
+        self
+    }
+
     pub fn repeats_key(mut self, value: Vec<String>) -> Self {
         self.repeats_key = value;
         self
@@ -285,6 +324,7 @@ impl ImproperDictionaryBuilder {
     pub fn build(self) -> ImproperDictionary {
         ImproperDictionary {
             class_iri: ImproperDictionary::CLASS_IRI,
+            entry: self.entry,
             repeats_key: self.repeats_key,
         }
     }
@@ -300,6 +340,8 @@ impl CaseObject for ImproperDictionary {
 pub struct ProperDictionary {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-types:entry")]
+    pub entry: Vec<DictionaryEntry>,
 }
 
 impl ProperDictionary {
@@ -308,18 +350,26 @@ impl ProperDictionary {
 
     pub fn builder() -> ProperDictionaryBuilder {
         ProperDictionaryBuilder {
+            entry: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ProperDictionaryBuilder {
+    entry: Vec<DictionaryEntry>,
 }
 
 impl ProperDictionaryBuilder {
+    pub fn entry(mut self, value: Vec<DictionaryEntry>) -> Self {
+        self.entry = value;
+        self
+    }
+
     pub fn build(self) -> ProperDictionary {
         ProperDictionary {
             class_iri: ProperDictionary::CLASS_IRI,
+            entry: self.entry,
         }
     }
 }

@@ -24,22 +24,6 @@ class AbuseFacilitationItem:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    collection_date: Optional[datetime] = field(default=None)
-    collection_location: Optional[str] = field(default=None)
-    evidence_category: Optional[str] = field(default=None)
-    evidence_condition: Optional[str] = field(default=None)
-    evidence_number: Optional[str] = field(default=None)
-    evidence_status: Optional[str] = field(default=None)
-    evidence_type: Optional[str] = field(default=None)
-    has_contamination_level: Optional[float] = field(default=None)
-    has_evidence_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_integrity: Optional[str] = field(default=None)
-    has_evidence_reliability: Optional[float] = field(default=None)
-    has_forensic_value: Optional[str] = field(default=None)
-    has_preservation_quality: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -60,10 +44,6 @@ class BodycamFootage:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[langString] = field(default=None)
-    matches_selfie: Optional[bool] = field(default=None)
-    recording_date: Optional[datetime] = field(default=None)
-    used_for_identification: Optional[bool] = field(default=None)
 
 
 @dataclass
@@ -71,9 +51,6 @@ class CellphoneSearch:
     """Search of cellphone or mobile device for evidence. Typically requires consent or warrant (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#CellphoneSearch"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -86,7 +63,7 @@ class CellphoneSearch:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -99,11 +76,6 @@ class CellphoneSearch:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    has_search_completeness: Optional[float] = field(default=None)
-    has_search_efficiency: Optional[float] = field(default=None)
-    has_search_thoroughness: Optional[str] = field(default=None)
-    search_duration: Optional[float] = field(default=None)
-    search_scope: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -111,7 +83,6 @@ class ChainOfCustodyBreachSituation:
     """Situation where the chain of custody for evidence has been breached (gUFO Situation)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#ChainOfCustodyBreachSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -132,22 +103,6 @@ class ChildTargetedItem:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    collection_date: Optional[datetime] = field(default=None)
-    collection_location: Optional[str] = field(default=None)
-    evidence_category: Optional[str] = field(default=None)
-    evidence_condition: Optional[str] = field(default=None)
-    evidence_number: Optional[str] = field(default=None)
-    evidence_status: Optional[str] = field(default=None)
-    evidence_type: Optional[str] = field(default=None)
-    has_contamination_level: Optional[float] = field(default=None)
-    has_evidence_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_integrity: Optional[str] = field(default=None)
-    has_evidence_reliability: Optional[float] = field(default=None)
-    has_forensic_value: Optional[str] = field(default=None)
-    has_preservation_quality: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -168,26 +123,6 @@ class CommunicationDevice:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    collection_date: Optional[datetime] = field(default=None)
-    collection_location: Optional[str] = field(default=None)
-    evidence_category: Optional[str] = field(default=None)
-    evidence_condition: Optional[str] = field(default=None)
-    evidence_number: Optional[str] = field(default=None)
-    evidence_status: Optional[str] = field(default=None)
-    evidence_type: Optional[str] = field(default=None)
-    has_contamination_level: Optional[float] = field(default=None)
-    has_evidence_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_integrity: Optional[str] = field(default=None)
-    has_evidence_reliability: Optional[float] = field(default=None)
-    has_forensic_value: Optional[str] = field(default=None)
-    has_preservation_quality: Optional[str] = field(default=None)
-    device_brand: Optional[str] = field(default=None)
-    device_model: Optional[str] = field(default=None)
-    encryption_status: Optional[str] = field(default=None)
-    functional_status: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -208,26 +143,6 @@ class ComputerEquipment:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    collection_date: Optional[datetime] = field(default=None)
-    collection_location: Optional[str] = field(default=None)
-    evidence_category: Optional[str] = field(default=None)
-    evidence_condition: Optional[str] = field(default=None)
-    evidence_number: Optional[str] = field(default=None)
-    evidence_status: Optional[str] = field(default=None)
-    evidence_type: Optional[str] = field(default=None)
-    has_contamination_level: Optional[float] = field(default=None)
-    has_evidence_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_integrity: Optional[str] = field(default=None)
-    has_evidence_reliability: Optional[float] = field(default=None)
-    has_forensic_value: Optional[str] = field(default=None)
-    has_preservation_quality: Optional[str] = field(default=None)
-    device_brand: Optional[str] = field(default=None)
-    device_model: Optional[str] = field(default=None)
-    encryption_status: Optional[str] = field(default=None)
-    functional_status: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -248,26 +163,6 @@ class Condoms:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[langString] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    collection_date: Optional[datetime] = field(default=None)
-    collection_location: Optional[str] = field(default=None)
-    evidence_category: Optional[str] = field(default=None)
-    evidence_condition: Optional[str] = field(default=None)
-    evidence_number: Optional[str] = field(default=None)
-    evidence_status: Optional[str] = field(default=None)
-    evidence_type: Optional[str] = field(default=None)
-    has_contamination_level: Optional[float] = field(default=None)
-    has_evidence_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_integrity: Optional[str] = field(default=None)
-    has_evidence_reliability: Optional[float] = field(default=None)
-    has_forensic_value: Optional[str] = field(default=None)
-    has_preservation_quality: Optional[str] = field(default=None)
-    agreed_to_bring: Optional[bool] = field(default=None)
-    condom_brand: Optional[str] = field(default=None)
-    condom_quantity: Optional[int] = field(default=None)
-    found_in_location: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -288,14 +183,10 @@ class ConsentToSearchAuthorization:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[langString] = field(default=None)
     authorization_identifier: list[str] = field(default_factory=list)
     authorization_type: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
-    consent_given: Optional[bool] = field(default=None)
-    consent_scope: Optional[str] = field(default=None)
-    consent_type: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -303,15 +194,6 @@ class CriminalProcurement:
     """Action of acquiring items specifically for criminal purposes (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#CriminalProcurement"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_acquisition_risk: Optional[str] = field(default=None)
-    has_procurement_suspicion: Optional[str] = field(default=None)
-    has_traceability: Optional[float] = field(default=None)
-    payment_method: Optional[str] = field(default=None)
-    procurement_cost: Optional[float] = field(default=None)
-    procurement_method: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -332,10 +214,6 @@ class DashcamFootage:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[langString] = field(default=None)
-    matches_selfie: Optional[bool] = field(default=None)
-    recording_date: Optional[datetime] = field(default=None)
-    used_for_identification: Optional[bool] = field(default=None)
 
 
 @dataclass
@@ -356,14 +234,10 @@ class DeviceConsentSearch:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[langString] = field(default=None)
     authorization_identifier: list[str] = field(default_factory=list)
     authorization_type: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
-    consent_given: Optional[bool] = field(default=None)
-    consent_scope: Optional[str] = field(default=None)
-    consent_type: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -384,22 +258,6 @@ class DisguiseItem:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    collection_date: Optional[datetime] = field(default=None)
-    collection_location: Optional[str] = field(default=None)
-    evidence_category: Optional[str] = field(default=None)
-    evidence_condition: Optional[str] = field(default=None)
-    evidence_number: Optional[str] = field(default=None)
-    evidence_status: Optional[str] = field(default=None)
-    evidence_type: Optional[str] = field(default=None)
-    has_contamination_level: Optional[float] = field(default=None)
-    has_evidence_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_integrity: Optional[str] = field(default=None)
-    has_evidence_reliability: Optional[float] = field(default=None)
-    has_forensic_value: Optional[str] = field(default=None)
-    has_preservation_quality: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -420,22 +278,6 @@ class DocumentaryEvidence:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    collection_date: Optional[datetime] = field(default=None)
-    collection_location: Optional[str] = field(default=None)
-    evidence_category: Optional[str] = field(default=None)
-    evidence_condition: Optional[str] = field(default=None)
-    evidence_number: Optional[str] = field(default=None)
-    evidence_status: Optional[str] = field(default=None)
-    evidence_type: Optional[str] = field(default=None)
-    has_contamination_level: Optional[float] = field(default=None)
-    has_evidence_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_integrity: Optional[str] = field(default=None)
-    has_evidence_reliability: Optional[float] = field(default=None)
-    has_forensic_value: Optional[str] = field(default=None)
-    has_preservation_quality: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -443,28 +285,6 @@ class EvidenceAnalysisPhase:
     """Phase during which physical evidence is undergoing forensic analysis (gUFO Phase - anti-rigid)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#EvidenceAnalysisPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -472,9 +292,6 @@ class EvidenceCollectionAction:
     """Action of collecting and documenting physical evidence during search. Extends investigation:InvestigativeAction (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#EvidenceCollectionAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -487,7 +304,7 @@ class EvidenceCollectionAction:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -507,28 +324,6 @@ class EvidenceCollectionPhase:
     """Phase during which physical evidence is being collected (gUFO Phase - anti-rigid)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#EvidenceCollectionPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -536,7 +331,6 @@ class EvidenceContaminationSituation:
     """Situation where physical evidence has been contaminated or compromised (gUFO Situation)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#EvidenceContaminationSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -555,25 +349,6 @@ class EvidenceCustodianRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_custody_integrity: Optional[str] = field(default=None)
-    has_documentation_completeness: Optional[float] = field(default=None)
 
 
 @dataclass
@@ -581,28 +356,6 @@ class EvidenceDispositionPhase:
     """Phase during which evidence disposition is determined and executed (gUFO Phase - anti-rigid)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#EvidenceDispositionPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -610,7 +363,6 @@ class EvidenceRecoverySituation:
     """Situation involving the recovery of previously lost or missing evidence (gUFO Situation)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#EvidenceRecoverySituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -618,9 +370,6 @@ class EvidenceSeizure:
     """Legal seizure of physical items as evidence. Extends investigation:InvestigativeAction (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#EvidenceSeizure"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -633,7 +382,7 @@ class EvidenceSeizure:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -653,28 +402,6 @@ class EvidenceStoragePhase:
     """Phase during which physical evidence is in secure storage (gUFO Phase - anti-rigid)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#EvidenceStoragePhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -693,26 +420,6 @@ class ForensicAnalystRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_analysis_accuracy: Optional[float] = field(default=None)
-    has_analysis_reliability: Optional[str] = field(default=None)
-    has_method_validation: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -720,9 +427,6 @@ class GloveCompartmentSearch:
     """Search of vehicle glove compartment as specific evidence location (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#GloveCompartmentSearch"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -735,7 +439,7 @@ class GloveCompartmentSearch:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -748,11 +452,6 @@ class GloveCompartmentSearch:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    has_search_completeness: Optional[float] = field(default=None)
-    has_search_efficiency: Optional[float] = field(default=None)
-    has_search_thoroughness: Optional[str] = field(default=None)
-    search_duration: Optional[float] = field(default=None)
-    search_scope: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -773,22 +472,6 @@ class IntoxicatingSubstance:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    collection_date: Optional[datetime] = field(default=None)
-    collection_location: Optional[str] = field(default=None)
-    evidence_category: Optional[str] = field(default=None)
-    evidence_condition: Optional[str] = field(default=None)
-    evidence_number: Optional[str] = field(default=None)
-    evidence_status: Optional[str] = field(default=None)
-    evidence_type: Optional[str] = field(default=None)
-    has_contamination_level: Optional[float] = field(default=None)
-    has_evidence_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_integrity: Optional[str] = field(default=None)
-    has_evidence_reliability: Optional[float] = field(default=None)
-    has_forensic_value: Optional[str] = field(default=None)
-    has_preservation_quality: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -796,9 +479,6 @@ class ItemModification:
     """Alteration or customization of items to facilitate criminal activity (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#ItemModification"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -806,15 +486,6 @@ class OnlinePurchase:
     """Purchase of items through online platforms for criminal purposes (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#OnlinePurchase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_acquisition_risk: Optional[str] = field(default=None)
-    has_procurement_suspicion: Optional[str] = field(default=None)
-    has_traceability: Optional[float] = field(default=None)
-    payment_method: Optional[str] = field(default=None)
-    procurement_cost: Optional[float] = field(default=None)
-    procurement_method: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -835,22 +506,6 @@ class PersonalItem:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    collection_date: Optional[datetime] = field(default=None)
-    collection_location: Optional[str] = field(default=None)
-    evidence_category: Optional[str] = field(default=None)
-    evidence_condition: Optional[str] = field(default=None)
-    evidence_number: Optional[str] = field(default=None)
-    evidence_status: Optional[str] = field(default=None)
-    evidence_type: Optional[str] = field(default=None)
-    has_contamination_level: Optional[float] = field(default=None)
-    has_evidence_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_integrity: Optional[str] = field(default=None)
-    has_evidence_reliability: Optional[float] = field(default=None)
-    has_forensic_value: Optional[str] = field(default=None)
-    has_preservation_quality: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -871,22 +526,6 @@ class PhysicalEvidence:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    collection_date: Optional[datetime] = field(default=None)
-    collection_location: Optional[str] = field(default=None)
-    evidence_category: Optional[str] = field(default=None)
-    evidence_condition: Optional[str] = field(default=None)
-    evidence_number: Optional[str] = field(default=None)
-    evidence_status: Optional[str] = field(default=None)
-    evidence_type: Optional[str] = field(default=None)
-    has_contamination_level: Optional[float] = field(default=None)
-    has_evidence_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_integrity: Optional[str] = field(default=None)
-    has_evidence_reliability: Optional[float] = field(default=None)
-    has_forensic_value: Optional[str] = field(default=None)
-    has_preservation_quality: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -907,7 +546,6 @@ class PhysicalEvidenceProvenanceRecord:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     object: list[UcoObject] = field(default_factory=list)
     exhibit_number: Optional[str] = field(default=None)
     root_exhibit_number: list[str] = field(default_factory=list)
@@ -918,15 +556,6 @@ class PhysicalPurchase:
     """In-person purchase of items for criminal purposes (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#PhysicalPurchase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_acquisition_risk: Optional[str] = field(default=None)
-    has_procurement_suspicion: Optional[str] = field(default=None)
-    has_traceability: Optional[float] = field(default=None)
-    payment_method: Optional[str] = field(default=None)
-    procurement_cost: Optional[float] = field(default=None)
-    procurement_method: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -934,9 +563,6 @@ class PhysicalSearch:
     """Law enforcement search of physical premises for evidence. Extends investigation:InvestigativeAction for CASE ontology integration (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#PhysicalSearch"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -949,7 +575,7 @@ class PhysicalSearch:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -962,11 +588,6 @@ class PhysicalSearch:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    has_search_completeness: Optional[float] = field(default=None)
-    has_search_efficiency: Optional[float] = field(default=None)
-    has_search_thoroughness: Optional[str] = field(default=None)
-    search_duration: Optional[float] = field(default=None)
-    search_scope: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -987,22 +608,6 @@ class RecordingEquipment:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    collection_date: Optional[datetime] = field(default=None)
-    collection_location: Optional[str] = field(default=None)
-    evidence_category: Optional[str] = field(default=None)
-    evidence_condition: Optional[str] = field(default=None)
-    evidence_number: Optional[str] = field(default=None)
-    evidence_status: Optional[str] = field(default=None)
-    evidence_type: Optional[str] = field(default=None)
-    has_contamination_level: Optional[float] = field(default=None)
-    has_evidence_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_integrity: Optional[str] = field(default=None)
-    has_evidence_reliability: Optional[float] = field(default=None)
-    has_forensic_value: Optional[str] = field(default=None)
-    has_preservation_quality: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -1010,9 +615,6 @@ class ResidenceSearch:
     """Search of residential premises including homes and apartments (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#ResidenceSearch"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -1025,7 +627,7 @@ class ResidenceSearch:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1038,11 +640,6 @@ class ResidenceSearch:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    has_search_completeness: Optional[float] = field(default=None)
-    has_search_efficiency: Optional[float] = field(default=None)
-    has_search_thoroughness: Optional[str] = field(default=None)
-    search_duration: Optional[float] = field(default=None)
-    search_scope: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -1063,22 +660,6 @@ class RestraintItem:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    collection_date: Optional[datetime] = field(default=None)
-    collection_location: Optional[str] = field(default=None)
-    evidence_category: Optional[str] = field(default=None)
-    evidence_condition: Optional[str] = field(default=None)
-    evidence_number: Optional[str] = field(default=None)
-    evidence_status: Optional[str] = field(default=None)
-    evidence_type: Optional[str] = field(default=None)
-    has_contamination_level: Optional[float] = field(default=None)
-    has_evidence_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_integrity: Optional[str] = field(default=None)
-    has_evidence_reliability: Optional[float] = field(default=None)
-    has_forensic_value: Optional[str] = field(default=None)
-    has_preservation_quality: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -1097,23 +678,6 @@ class SearchOfficerRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1134,22 +698,6 @@ class StorageMedia:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[str] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    collection_date: Optional[datetime] = field(default=None)
-    collection_location: Optional[str] = field(default=None)
-    evidence_category: Optional[str] = field(default=None)
-    evidence_condition: Optional[str] = field(default=None)
-    evidence_number: Optional[str] = field(default=None)
-    evidence_status: Optional[str] = field(default=None)
-    evidence_type: Optional[str] = field(default=None)
-    has_contamination_level: Optional[float] = field(default=None)
-    has_evidence_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_integrity: Optional[str] = field(default=None)
-    has_evidence_reliability: Optional[float] = field(default=None)
-    has_forensic_value: Optional[str] = field(default=None)
-    has_preservation_quality: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -1170,7 +718,6 @@ class SurveillanceRecording:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1191,30 +738,6 @@ class SuspectVehicle:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[langString] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    collection_date: Optional[datetime] = field(default=None)
-    collection_location: Optional[str] = field(default=None)
-    evidence_category: Optional[str] = field(default=None)
-    evidence_condition: Optional[str] = field(default=None)
-    evidence_number: Optional[str] = field(default=None)
-    evidence_status: Optional[str] = field(default=None)
-    evidence_type: Optional[str] = field(default=None)
-    has_contamination_level: Optional[float] = field(default=None)
-    has_evidence_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_integrity: Optional[str] = field(default=None)
-    has_evidence_reliability: Optional[float] = field(default=None)
-    has_forensic_value: Optional[str] = field(default=None)
-    has_preservation_quality: Optional[str] = field(default=None)
-    registered_to_suspect: Optional[bool] = field(default=None)
-    used_in_offense: Optional[bool] = field(default=None)
-    vehicle_color: Optional[str] = field(default=None)
-    vehicle_license_plate: Optional[str] = field(default=None)
-    vehicle_make: Optional[str] = field(default=None)
-    vehicle_model: Optional[str] = field(default=None)
-    vehicle_vin: Optional[str] = field(default=None)
-    vehicle_year: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -1235,26 +758,6 @@ class VapeDevice:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[langString] = field(default=None)
-    comment: Optional[str] = field(default=None)
-    collection_date: Optional[datetime] = field(default=None)
-    collection_location: Optional[str] = field(default=None)
-    evidence_category: Optional[str] = field(default=None)
-    evidence_condition: Optional[str] = field(default=None)
-    evidence_number: Optional[str] = field(default=None)
-    evidence_status: Optional[str] = field(default=None)
-    evidence_type: Optional[str] = field(default=None)
-    has_contamination_level: Optional[float] = field(default=None)
-    has_evidence_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_evidence_integrity: Optional[str] = field(default=None)
-    has_evidence_reliability: Optional[float] = field(default=None)
-    has_forensic_value: Optional[str] = field(default=None)
-    has_preservation_quality: Optional[str] = field(default=None)
-    agreed_to_bring: Optional[bool] = field(default=None)
-    found_in_location: Optional[str] = field(default=None)
-    vape_brand: Optional[str] = field(default=None)
-    vape_flavor: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -1275,14 +778,10 @@ class VehicleConsentSearch:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: Optional[langString] = field(default=None)
     authorization_identifier: list[str] = field(default_factory=list)
     authorization_type: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
-    consent_given: Optional[bool] = field(default=None)
-    consent_scope: Optional[str] = field(default=None)
-    consent_type: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -1290,9 +789,6 @@ class VehicleSearch:
     """Search of motor vehicles for evidence or contraband. May be conducted with consent or warrant (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#VehicleSearch"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -1305,7 +801,7 @@ class VehicleSearch:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1318,11 +814,6 @@ class VehicleSearch:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    has_search_completeness: Optional[float] = field(default=None)
-    has_search_efficiency: Optional[float] = field(default=None)
-    has_search_thoroughness: Optional[str] = field(default=None)
-    search_duration: Optional[float] = field(default=None)
-    search_scope: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -1330,9 +821,6 @@ class WorkplaceSearch:
     """Search of workplace or commercial premises (gUFO Event)."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/physical#WorkplaceSearch"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -1345,7 +833,7 @@ class WorkplaceSearch:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1358,9 +846,4 @@ class WorkplaceSearch:
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
-    has_search_completeness: Optional[float] = field(default=None)
-    has_search_efficiency: Optional[float] = field(default=None)
-    has_search_thoroughness: Optional[str] = field(default=None)
-    search_duration: Optional[float] = field(default=None)
-    search_scope: Optional[str] = field(default=None)
 

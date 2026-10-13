@@ -76,7 +76,7 @@ The submitter is unaware of risks associated with this change.
 
 ## Competency 1
 
-An investigator exports a benign synthetic Link-Look case package for a prosecutor on a separate network. The package needs to communicate TLP:AMBER or TLP:AMBER+STRICT handling guidance alongside release-to and terms-of-use markings. The recipient can inspect the imported read-only package and see the TLP guidance, while Link-Look preserves provenance and states that the marking is sharing guidance rather than technical access control.
+An investigator exports a benign synthetic case package for a prosecutor on a separate network. The package needs to communicate TLP:AMBER or TLP:AMBER+STRICT handling guidance alongside release-to and terms-of-use markings. The recipient can inspect the imported read-only package and see the TLP guidance, while the exporting tool preserves provenance and states that the marking is sharing guidance rather than technical access control.
 
 ### Competency Question 1.1
 

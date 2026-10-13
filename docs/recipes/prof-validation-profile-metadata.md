@@ -49,10 +49,10 @@ graph.upsert_node(profile_id, types="prof:Profile", properties={
 
 descriptor_id = "kb:descriptor-shacl"
 graph.upsert_node(descriptor_id, types="prof:ResourceDescriptor", properties={
-    "prof:hasRole": {"@id": "http://www.w3.org/ns/dx/prof/role/ValidationRole"},
+    "prof:hasRole": {"@id": "http://www.w3.org/ns/dx/prof/role/validation"},
     "dcterms:format": {"@id": "https://www.iana.org/assignments/media-types/text/turtle"},
     "dcterms:description": "CASE/UCO SHACL shapes bundle.",
-    "prof:hasArtifact": {"@id": "https://github.com/casework/CASE-UCO/releases/download/case-1.4.0/case-shapes.ttl"},
+    "prof:hasArtifact": {"@id": "https://github.com/casework/CASE-UCO/releases/download/case-1.5.0/case-shapes.ttl"},
 })
 graph.add_property(profile_id, "prof:hasResource", {"@id": descriptor_id})
 
@@ -82,7 +82,7 @@ python examples/upper-ontology/prof-metadata/build_exemplar.py
 ```bash
 validate_graph("prof-metadata.jsonld", profiles=["prof"])
 
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph ontology/upper/shapes/sh-prof.ttl \
   --allow-info prof-metadata.jsonld
 ```

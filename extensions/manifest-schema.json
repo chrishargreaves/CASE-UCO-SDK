@@ -62,15 +62,88 @@
       "items": { "type": "string" },
       "description": "Relative paths to example instance data files (A-Box). Used for validation testing only."
     },
+    "invalid_exemplar_files": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Relative paths to expected-invalid negative fixtures (A-Box) that must fail SHACL validation. Used to test that the extension's shapes actually reject nonconformant data, rather than passing everything."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["candidate", "operational", "deprecated"],
+      "description": "Lifecycle status, per mcp_server/knowledge_lifecycle.py. Absent means operational (the bundled extensions predate the lifecycle). Candidate extensions are invisible to routing but can be loaded explicitly by name for validation."
+    },
+    "competency_queries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["file", "against"],
+        "additionalProperties": false,
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "Relative path to a SPARQL query file."
+          },
+          "against": {
+            "type": "string",
+            "description": "Relative path to the graph the query is run against."
+          },
+          "expect": {
+            "type": "string",
+            "enum": ["nonempty", "empty"],
+            "description": "Whether the query must return rows. Defaults to nonempty in the promotion gate."
+          }
+        }
+      },
+      "description": "Competency SPARQL queries verified by knowledge_lifecycle._gate_competency_queries."
+    },
+    "promotion": {
+      "type": "object",
+      "description": "Provenance recorded by `make promote-extension`: reviewer, timestamp, git commit, and deployment profile at the time of promotion."
+    },
+    "deprecation": {
+      "type": "object",
+      "description": "Provenance recorded by `make deprecate-extension`: reason and timestamp."
+    },
+    "class_registry": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the code generator adds this extension's classes to the generated per-language class registries and to ONTOLOGY_REFERENCE.md / MAPPING_GUIDE.md. Set false for large generated catalogs whose classes carry no properties of their own (e.g. the MITRE ATT&CK and ATLAS technique catalogs); they are listed by pointer instead and discovered through their MCP tools. Validation still loads the extension's files."
+    },
+    "distribution": {
+      "type": "string",
+      "enum": ["public", "private"],
+      "default": "public",
+      "description": "Where the extension may be distributed. A private extension is never loaded by the code generator, so the generated class registries and reference docs are identical with or without it, and scripts/public_export.py leaves its directory out of the public tree. Validation, the extension's own _registry.json and MCP discovery via CASE_UCO_EXTENSIONS work as for any other extension."
+    },
+    "depends_on": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Names of other extensions whose terms this extension's exemplars or shapes reuse; expanded by resolve_extension_dependencies()."
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Where the extension's definitions came from when they mirror or forward-implement terms authored elsewhere (e.g. an upstream pull request). Free-form; used for attribution and for recording a retirement condition."
+    },
     "uco_compat": {
       "type": "array",
       "items": { "type": "string" },
       "description": "List of UCO/CASE versions this extension is known to be compatible with (e.g., ['1.4.0', '1.5.0'])."
     },
     "upper_ontology": {
+      "description": "Which upper/foundational ontology this extension directly depends on, if any. Use an array when an extension bridges to more than one. Machine-readable by design: put any explanation in upper_ontology_notes rather than here.",
+      "oneOf": [
+        { "type": "string", "enum": ["gufo", "bfo", "none"] },
+        {
+          "type": "array",
+          "items": { "type": "string", "enum": ["gufo", "bfo"] },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      ]
+    },
+    "upper_ontology_notes": {
       "type": "string",
-      "enum": ["gufo", "bfo", "none"],
-      "description": "Which upper/foundational ontology this extension directly depends on, if any."
+      "description": "Prose describing how the upper-ontology alignment is realised — which bridge file carries it, which classes are mapped, and anything delegated by reference instead of modelled."
     },
     "cdo_shapes_compatibility": {
       "type": "object",
@@ -78,7 +151,12 @@
         "type": "string",
         "enum": ["compatible", "included", "not_recommended"]
       },
-      "description": "Compatibility status of each CDO Shapes profile with this extension. 'included' means the extension already provides this alignment. 'not_recommended' means loading both may produce conflicting axioms."
+      "description": "Compatibility status of each CDO Shapes profile with this extension. 'included' means the extension already provides this alignment. 'not_recommended' means loading both may produce conflicting axioms. Machine-readable by design: put any explanation in cdo_shapes_notes."
+    },
+    "cdo_shapes_notes": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "description": "Optional per-profile prose explaining a cdo_shapes_compatibility verdict. Keys should match those used there."
     }
   },
   "additionalProperties": false

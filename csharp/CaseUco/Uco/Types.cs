@@ -52,7 +52,7 @@ namespace CaseUco.Uco.Types
         [global::CaseUco.JsonLdProperty("uco-types:hashMethod")]
         public string HashMethod { get; set; }
         [global::CaseUco.CaseRequired]
-        [global::CaseUco.JsonLdProperty("uco-types:hashValue")]
+        [global::CaseUco.JsonLdProperty("uco-types:hashValue", Datatype = "xsd:hexBinary")]
         public byte[] HashValue { get; set; }
     }
 

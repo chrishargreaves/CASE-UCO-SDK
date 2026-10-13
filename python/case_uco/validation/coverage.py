@@ -107,10 +107,20 @@ PROFILE_ID_TO_NAMESPACE_PREFIXES: dict[str, tuple[str, ...]] = {
     "foaf": ("http://xmlns.com/foaf/0.1/",),
     "org": ("http://www.w3.org/ns/org#",),
     "prof": ("http://www.w3.org/ns/dx/prof/",),
+    # SDK-pinned without a CDO-Shapes profile (#60).
+    "qudt": (
+        "http://qudt.org/schema/qudt/",
+        "http://qudt.org/vocab/unit/",
+        "http://qudt.org/vocab/quantitykind/",
+        "http://qudt.org/vocab/prefix/",
+    ),
+    "sosa": ("http://www.w3.org/ns/sosa/",),
+    "ssn": ("http://www.w3.org/ns/ssn/",),
 }
 
 CORE_ONTOLOGY_GLOBS: tuple[str, ...] = (
     "ontology/UCO/ontology/uco/*/*.ttl",
+    "ontology/UCO/ontology/co/*.ttl",
     "ontology/CASE/ontology/*/*.ttl",
 )
 
@@ -124,7 +134,8 @@ GUIDANCE = (
     "it in the extension manifest / validation subset; (3) if the concept "
     "exists in an external/upper ontology, check get_uco_profiles() — exact "
     "declared terms from ontologies with a UCO profile (BFO, gUFO, PROV-O, "
-    "OWL-Time, GeoSPARQL, FOAF, ORG, PROF) are accepted when that profile is "
+    "OWL-Time, GeoSPARQL, FOAF, ORG, PROF) or an SDK-pinned profile (QUDT, "
+    "SOSA, SSN) are accepted when that profile is "
     "explicitly selected via profiles=[...]. Re-run validate_graph afterwards "
     "— the check passes as soon as the concept is declared."
 )
@@ -132,10 +143,13 @@ GUIDANCE = (
 UPPER_TERM_GUIDANCE = (
     "Terms flagged as unknown_upper_ontology_terms sit inside a profiled "
     "upper-ontology namespace (BFO, gUFO, PROV-O, OWL-Time, GeoSPARQL, FOAF, "
-    "ORG, PROF) but are not declared by the pinned release of that ontology "
-    "(see case_uco/validation/upper_ontology_registry.json for pinned versions). "
-    "Check the ontology's specification for the correct term name; do not "
-    "invent terms in external namespaces."
+    "ORG, PROF, QUDT, SOSA, SSN) but are not declared by the pinned release of "
+    "that ontology (see case_uco/validation/upper_ontology_registry.json for "
+    "pinned versions). This includes values such as QUDT unit and quantity-kind "
+    "IRIs. Check the ontology's specification for the correct term name (for "
+    "QUDT units, use the lookup_qudt_units MCP tool); do not invent terms in "
+    "external namespaces. QUDT 3 replaced qudt:unit with qudt:hasUnit and "
+    "qudt:numericValue with qudt:value."
 )
 
 ROLE_MISMATCH_GUIDANCE = (
@@ -155,6 +169,15 @@ PROFILE_NOT_SELECTED_GUIDANCE = (
     "(strict fail-closed mode)."
 )
 
+SUBSET_GAP_GUIDANCE = (
+    "If a flagged CAC term exists in ontology/cac/_registry.json but was "
+    "rejected here, it is outside the selected validation subset — not a "
+    "missing ontology concept. Use extensions=['cac:missing-child'] for "
+    "abduction, case-management, and temporal terms, or "
+    "extensions=['cac:full'] for the complete manifest. Do not mint "
+    "duplicate terms to work around a subset miss."
+)
+
 PARSE_ERROR_GUIDANCE = (
     "One or more ontology resources failed to parse while loading declared "
     "terms. Restore or fix the listed files; an unverifiable graph is never "
@@ -168,7 +191,7 @@ class ProfileNotSelected:
 
     iri: str
     required_profile: str
-    used_as: str  # "class" | "property"
+    used_as: str  # "class" | "property" | "value"
     selected_profiles: tuple[str, ...]
 
 
@@ -264,6 +287,29 @@ def clear_declared_term_cache() -> None:
         _UPPER_REGISTRY_CACHE.clear()
 
 
+def _built_ontology_path() -> Path | None:
+    """The case-utils build ``case_validate --built-version`` loads, if installed.
+
+    It carries the imported dependencies (the Collections Ontology ``co:``
+    terms, for example) that the vendored submodules leave uninitialized.
+    """
+    import importlib.util
+
+    from case_uco.validation.graph import DEFAULT_BUILT_VERSION
+
+    try:
+        spec = importlib.util.find_spec("case_utils.ontology")
+    except (ImportError, ValueError):
+        return None
+    if spec is None or not spec.submodule_search_locations:
+        return None
+    for location in spec.submodule_search_locations:
+        candidate = Path(location) / f"{DEFAULT_BUILT_VERSION}.ttl"
+        if candidate.is_file():
+            return candidate
+    return None
+
+
 def _core_ontology_paths(project_root: Path) -> list[Path]:
     paths: list[Path] = []
     for pattern in CORE_ONTOLOGY_GLOBS:
@@ -271,25 +317,28 @@ def _core_ontology_paths(project_root: Path) -> list[Path]:
             if "master" in path.parts or "dependencies" in path.parts:
                 continue
             paths.append(path)
+    built = _built_ontology_path()
+    if built is not None:
+        paths.append(built)
     return paths
 
 
 def _extension_ontology_paths(project_root: Path, extensions: list[str]) -> list[Path]:
     """Load extension ontology paths in the same mode SHACL uses (CQ-28).
 
-    Default (no ``:full`` suffix) prefers ``validation-subset.json``; the
-    ``:full`` suffix loads the full manifest. Callers that need literal
-    same-bundle semantics should pass ``bundle=`` instead.
+    Default (no suffix) prefers ``validation-subset.json``; ``:full`` loads
+    the full manifest; other suffixes load ``validation-subset-<name>.json``.
+    Callers that need literal same-bundle semantics should pass ``bundle=``.
     """
     from case_uco.validation.graph import (
         load_extension_ontology_paths,
+        parse_extension_token,
         resolve_extension_dependencies,
     )
 
     paths: list[Path] = []
     for ext_name in resolve_extension_dependencies(extensions, project_root):
-        mode = "full" if ext_name.endswith(":full") else "subset"
-        clean_name = ext_name.removesuffix(":full")
+        clean_name, mode = parse_extension_token(ext_name)
         paths.extend(
             load_extension_ontology_paths(clean_name, mode=mode, project_root=project_root)
         )
@@ -581,6 +630,12 @@ UCO_PROFILE_NAMESPACE_PREFIXES: tuple[str, ...] = tuple(
 )
 
 
+# Ontology and namespace IRIs themselves (e.g. rdfs:seeAlso <http://www.w3.org/ns/sosa/>).
+_UPPER_NAMESPACE_ROOTS: frozenset[str] = frozenset(
+    prefix.rstrip("/#_") for prefix in UCO_PROFILE_NAMESPACE_PREFIXES
+)
+
+
 def _is_upper_namespace(iri: str) -> bool:
     return iri.startswith(UCO_PROFILE_NAMESPACE_PREFIXES)
 
@@ -610,6 +665,9 @@ def _profile_for_upper_iri(iri: str) -> str | None:
         "foaf",
         "org",
         "prof",
+        "qudt",
+        "sosa",
+        "ssn",
         "owl-time",
     )
     for pid in preferred_order:
@@ -660,6 +718,13 @@ def check_graph_concepts(
         if isinstance(obj, URIRef)
     }
     used_properties = {str(pred) for pred in graph.predicates()}
+    # IRIs in object position inside a profiled namespace must be declared
+    # too, e.g. QUDT units (qudt:hasUnit unit:KiloM-PER-HR).
+    used_values = {
+        str(obj)
+        for pred, obj in graph.predicate_objects()
+        if pred != RDF.type and isinstance(obj, URIRef) and _is_upper_namespace(str(obj))
+    } - used_classes - used_properties
 
     if bundle is not None:
         declared = load_declared_terms(project_root=project_root, bundle=bundle)
@@ -692,11 +757,11 @@ def check_graph_concepts(
                 f"ontology_parse_error:{err.path}:{err.role}:{err.error}"
             )
 
-    def _handle_upper(iri: str, *, as_class: bool) -> bool:
+    def _handle_upper(iri: str, *, as_class: bool, as_value: bool = False) -> bool:
         """Return True if the IRI was handled as an upper-ontology term."""
         if not _is_upper_namespace(iri):
             return False
-        used_as = "class" if as_class else "property"
+        used_as = "value" if as_value else ("class" if as_class else "property")
         # CQ-29: empty/None profiles authorize zero upper namespaces.
         if not allowed_prefixes or not iri.startswith(tuple(allowed_prefixes)):
             pid = _profile_for_upper_iri(iri) or "unknown"
@@ -710,6 +775,13 @@ def check_graph_concepts(
             )
             return True
         if upper is None:
+            return True
+        if as_value:
+            if iri.rstrip("/#_") in _UPPER_NAMESPACE_ROOTS or any(
+                iri in upper[role] for role in ("classes", "properties", "individuals", "datatypes")
+            ):
+                return True
+            unknown_upper.add(iri)
             return True
         if as_class:
             if iri in upper["classes"] or iri in upper["datatypes"]:
@@ -755,6 +827,9 @@ def check_graph_concepts(
         else:
             undeclared_properties.append(iri)
 
+    for iri in sorted(used_values):
+        _handle_upper(iri, as_class=False, as_value=True)
+
     # Registry is required only when at least one *selected* upper term was
     # accepted into the registry-check path (not profile_not_selected).
     upper_terms_needing_registry = bool(unknown_upper) or any(
@@ -763,7 +838,7 @@ def check_graph_concepts(
     # Also: selected upper terms that passed (ok path) — detect via used ∩ selected.
     selected_upper_used = False
     if allowed_prefixes:
-        for iri in used_classes | used_properties:
+        for iri in used_classes | used_properties | used_values:
             if _is_upper_namespace(iri) and iri.startswith(tuple(allowed_prefixes)):
                 selected_upper_used = True
                 break
@@ -784,6 +859,12 @@ def check_graph_concepts(
     guidance_parts: list[str] = []
     if undeclared_classes or undeclared_properties:
         guidance_parts.append(GUIDANCE)
+        ext_tokens = list(extensions or [])
+        if not ext_tokens and bundle is not None:
+            ext_tokens = list(bundle.extensions)
+        if any(token == "cac" or token.startswith("cac:") for token in ext_tokens):
+            if not any(token == "cac:full" for token in ext_tokens):
+                guidance_parts.append(SUBSET_GAP_GUIDANCE)
     if unknown_upper:
         guidance_parts.append(UPPER_TERM_GUIDANCE)
     if unselected:

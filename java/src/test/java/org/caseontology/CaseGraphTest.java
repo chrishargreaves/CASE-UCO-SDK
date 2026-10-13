@@ -599,4 +599,58 @@ public class CaseGraphTest {
         assertFalse(a.containsKey("node_ids"));
         assertTrue(graph.verifyPartitionUnion(result.getPartitions()).isEquivalent());
     }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    public void testHashValueSerializesAsUppercaseHexBinary() {
+        CaseGraph graph = new CaseGraph();
+        org.caseontology.uco.types.Hash hash = new org.caseontology.uco.types.Hash();
+        hash.setHashMethod("SHA256");
+        hash.setHashValue(new byte[]{(byte) 0xde, (byte) 0xad, (byte) 0xbe, (byte) 0xef});
+        graph.addWithId(hash, "kb:hash-1");
+
+        List<Map<String, Object>> nodes = (List<Map<String, Object>>) graph.toMap().get("@graph");
+        Map<String, Object> literal = (Map<String, Object>) nodes.get(0).get("uco-types:hashValue");
+        assertEquals("xsd:hexBinary", literal.get("@type"));
+        assertEquals("DEADBEEF", literal.get("@value"));
+
+        CaseGraph.FromJsonLdResult parsed = CaseGraph.fromJsonLd(graph.serialize());
+        org.caseontology.uco.types.Hash back = (org.caseontology.uco.types.Hash) parsed.getObjects().get(0);
+        assertArrayEquals(hash.getHashValue(), back.getHashValue());
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    public void testZonedDateTimeSerializesWithoutRegionSuffix() {
+        CaseGraph graph = new CaseGraph();
+        org.caseontology.uco.action.Action action = new org.caseontology.uco.action.Action();
+        action.setStartTime(java.time.ZonedDateTime.of(2024, 1, 2, 3, 4, 5, 0, java.time.ZoneId.of("UTC")));
+        graph.addWithId(action, "kb:action-1");
+
+        List<Map<String, Object>> nodes = (List<Map<String, Object>>) graph.toMap().get("@graph");
+        Map<String, Object> literal = (Map<String, Object>) nodes.get(0).get("uco-action:startTime");
+        assertEquals("xsd:dateTime", literal.get("@type"));
+        assertEquals("2024-01-02T03:04:05Z", literal.get("@value"));
+
+        CaseGraph.FromJsonLdResult parsed = CaseGraph.fromJsonLd(
+            "{\"@graph\":[{\"@id\":\"kb:a\",\"@type\":\"uco-action:Action\"," +
+            "\"uco-action:startTime\":{\"@type\":\"xsd:dateTime\",\"@value\":\"2024-01-02T03:04:05Z[UTC]\"}}]," +
+            "\"@context\":{\"uco-action\":\"https://ontology.unifiedcyberontology.org/uco/action/\"}}");
+        org.caseontology.uco.action.Action back = (org.caseontology.uco.action.Action) parsed.getObjects().get(0);
+        assertEquals(action.getStartTime().toInstant(), back.getStartTime().toInstant());
+    }
+
+    @Test
+    public void testUnicodeEscapesRoundTrip() {
+        String json = "{\"@context\":{\"uco-core\":\"https://ontology.unifiedcyberontology.org/uco/core/\"," +
+            "\"uco-tool\":\"https://ontology.unifiedcyberontology.org/uco/tool/\"}," +
+            "\"@graph\":[{\"@id\":\"kb:t\",\"@type\":\"uco-tool:Tool\",\"uco-core:name\":\"caf\\u00e9 \\/ \\b\\f\"}]}";
+        Tool tool = (Tool) CaseGraph.fromJsonLd(json).getObjects().get(0);
+        assertEquals("caf\u00e9 / \b\f", tool.getName());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidStringEscapeIsRejected() {
+        CaseGraph.fromJsonLd("{\"@graph\":[{\"@id\":\"kb:t\",\"uco-core:name\":\"bad\\q\"}]}");
+    }
 }

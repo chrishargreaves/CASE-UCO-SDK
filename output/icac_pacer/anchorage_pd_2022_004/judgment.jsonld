@@ -15,9 +15,9 @@
       "@id": "urn:uuid:b7db67f7-d402-5c20-8bfa-44034363cf41",
       "@type": "uco-observable:ObservableObject",
       "uco-core:name": "Source file pacer -- anchorage_pd_2022_004 -- judgment.pdf",
-      "uco-core:description": "Link-Look pdf upload",
+      "uco-core:description": "Uploaded pdf file",
       "uco-core:tag": [
-        "link-look-file-kind:pdf"
+        "source-file-kind:pdf"
       ],
       "uco-core:hasFacet": [
         {

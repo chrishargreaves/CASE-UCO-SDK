@@ -3,7 +3,12 @@
 use serde::Serialize;
 use crate::graph::CaseObject;
 
+use crate::uco::action::Action;
 use crate::uco::configuration::Configuration;
+use crate::uco::core::ExternalReference;
+use crate::uco::core::Facet;
+use crate::uco::core::IdentityAbstraction;
+use crate::uco::core::MarkingDefinitionAbstraction;
 use crate::uco::core::UcoObject;
 use crate::uco::identity::Identity;
 use crate::uco::identity::Organization;
@@ -40,6 +45,32 @@ impl WindowsVolumeAttributeVocab {
 pub struct API {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl API {
@@ -48,18 +79,122 @@ impl API {
 
     pub fn builder() -> APIBuilder {
         APIBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct APIBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl APIBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> API {
         API {
             class_iri: API::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -74,6 +209,32 @@ impl CaseObject for API {
 pub struct ARPCache {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl ARPCache {
@@ -82,18 +243,122 @@ impl ARPCache {
 
     pub fn builder() -> ARPCacheBuilder {
         ARPCacheBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ARPCacheBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ARPCacheBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> ARPCache {
         ARPCache {
             class_iri: ARPCache::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -108,6 +373,32 @@ impl CaseObject for ARPCache {
 pub struct ARPCacheEntry {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl ARPCacheEntry {
@@ -116,18 +407,122 @@ impl ARPCacheEntry {
 
     pub fn builder() -> ARPCacheEntryBuilder {
         ARPCacheEntryBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ARPCacheEntryBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ARPCacheEntryBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> ARPCacheEntry {
         ARPCacheEntry {
             class_iri: ARPCacheEntry::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -142,6 +537,32 @@ impl CaseObject for ARPCacheEntry {
 pub struct Account {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Account {
@@ -150,18 +571,122 @@ impl Account {
 
     pub fn builder() -> AccountBuilder {
         AccountBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct AccountBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl AccountBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Account {
         Account {
             class_iri: Account::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -354,6 +879,32 @@ impl CaseObject for AccountFacet {
 pub struct Adaptor {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Adaptor {
@@ -362,18 +913,122 @@ impl Adaptor {
 
     pub fn builder() -> AdaptorBuilder {
         AdaptorBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct AdaptorBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl AdaptorBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Adaptor {
         Adaptor {
             class_iri: Adaptor::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -388,6 +1043,32 @@ impl CaseObject for Adaptor {
 pub struct Address {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Address {
@@ -396,18 +1077,122 @@ impl Address {
 
     pub fn builder() -> AddressBuilder {
         AddressBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct AddressBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl AddressBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Address {
         Address {
             class_iri: Address::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -422,6 +1207,32 @@ impl CaseObject for Address {
 pub struct AlternateDataStream {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl AlternateDataStream {
@@ -430,18 +1241,122 @@ impl AlternateDataStream {
 
     pub fn builder() -> AlternateDataStreamBuilder {
         AlternateDataStreamBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct AlternateDataStreamBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl AlternateDataStreamBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> AlternateDataStream {
         AlternateDataStream {
             class_iri: AlternateDataStream::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -520,6 +1435,32 @@ impl CaseObject for AlternateDataStreamFacet {
 pub struct AndroidDevice {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl AndroidDevice {
@@ -528,18 +1469,122 @@ impl AndroidDevice {
 
     pub fn builder() -> AndroidDeviceBuilder {
         AndroidDeviceBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct AndroidDeviceBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl AndroidDeviceBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> AndroidDevice {
         AndroidDevice {
             class_iri: AndroidDevice::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -557,6 +1602,7 @@ pub struct AndroidDeviceFacet {
     #[serde(rename = "uco-observable:androidFingerprint")]
     pub android_fingerprint: Option<String>,
     #[serde(rename = "uco-observable:androidID")]
+    #[serde(serialize_with = "crate::graph::serialize_hex_binary_opt")]
     pub android_id: Option<Vec<u8>>,
     #[serde(rename = "uco-observable:androidVersion")]
     pub android_version: Option<String>,
@@ -638,6 +1684,32 @@ impl CaseObject for AndroidDeviceFacet {
 pub struct AndroidPhone {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl AndroidPhone {
@@ -646,18 +1718,122 @@ impl AndroidPhone {
 
     pub fn builder() -> AndroidPhoneBuilder {
         AndroidPhoneBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct AndroidPhoneBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl AndroidPhoneBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> AndroidPhone {
         AndroidPhone {
             class_iri: AndroidPhone::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -766,6 +1942,32 @@ impl CaseObject for AntennaFacet {
 pub struct AppleDevice {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl AppleDevice {
@@ -774,18 +1976,122 @@ impl AppleDevice {
 
     pub fn builder() -> AppleDeviceBuilder {
         AppleDeviceBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct AppleDeviceBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl AppleDeviceBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> AppleDevice {
         AppleDevice {
             class_iri: AppleDevice::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -800,6 +2106,32 @@ impl CaseObject for AppleDevice {
 pub struct Appliance {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Appliance {
@@ -808,18 +2140,122 @@ impl Appliance {
 
     pub fn builder() -> ApplianceBuilder {
         ApplianceBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ApplianceBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ApplianceBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Appliance {
         Appliance {
             class_iri: Appliance::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -834,6 +2270,32 @@ impl CaseObject for Appliance {
 pub struct Application {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Application {
@@ -842,18 +2304,122 @@ impl Application {
 
     pub fn builder() -> ApplicationBuilder {
         ApplicationBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ApplicationBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ApplicationBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Application {
         Application {
             class_iri: Application::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -868,6 +2434,32 @@ impl CaseObject for Application {
 pub struct ApplicationAccount {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl ApplicationAccount {
@@ -876,18 +2468,122 @@ impl ApplicationAccount {
 
     pub fn builder() -> ApplicationAccountBuilder {
         ApplicationAccountBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ApplicationAccountBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ApplicationAccountBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> ApplicationAccount {
         ApplicationAccount {
             class_iri: ApplicationAccount::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -1094,6 +2790,32 @@ impl CaseObject for ApplicationVersion {
 pub struct ArchiveFile {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl ArchiveFile {
@@ -1102,18 +2824,122 @@ impl ArchiveFile {
 
     pub fn builder() -> ArchiveFileBuilder {
         ArchiveFileBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ArchiveFileBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ArchiveFileBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> ArchiveFile {
         ArchiveFile {
             class_iri: ArchiveFile::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -1192,6 +3018,32 @@ impl CaseObject for ArchiveFileFacet {
 pub struct Audio {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Audio {
@@ -1200,18 +3052,122 @@ impl Audio {
 
     pub fn builder() -> AudioBuilder {
         AudioBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct AudioBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl AudioBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Audio {
         Audio {
             class_iri: Audio::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -1300,6 +3256,32 @@ impl CaseObject for AudioFacet {
 pub struct AutonomousSystem {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl AutonomousSystem {
@@ -1308,18 +3290,122 @@ impl AutonomousSystem {
 
     pub fn builder() -> AutonomousSystemBuilder {
         AutonomousSystemBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct AutonomousSystemBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl AutonomousSystemBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> AutonomousSystem {
         AutonomousSystem {
             class_iri: AutonomousSystem::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -1398,6 +3484,32 @@ impl CaseObject for AutonomousSystemFacet {
 pub struct BlackberryPhone {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl BlackberryPhone {
@@ -1406,18 +3518,122 @@ impl BlackberryPhone {
 
     pub fn builder() -> BlackberryPhoneBuilder {
         BlackberryPhoneBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct BlackberryPhoneBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl BlackberryPhoneBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> BlackberryPhone {
         BlackberryPhone {
             class_iri: BlackberryPhone::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -1432,6 +3648,32 @@ impl CaseObject for BlackberryPhone {
 pub struct BlockDeviceNode {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl BlockDeviceNode {
@@ -1440,18 +3682,122 @@ impl BlockDeviceNode {
 
     pub fn builder() -> BlockDeviceNodeBuilder {
         BlockDeviceNodeBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct BlockDeviceNodeBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl BlockDeviceNodeBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> BlockDeviceNode {
         BlockDeviceNode {
             class_iri: BlockDeviceNode::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -1466,6 +3812,32 @@ impl CaseObject for BlockDeviceNode {
 pub struct BluetoothAddress {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl BluetoothAddress {
@@ -1474,18 +3846,122 @@ impl BluetoothAddress {
 
     pub fn builder() -> BluetoothAddressBuilder {
         BluetoothAddressBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct BluetoothAddressBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl BluetoothAddressBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> BluetoothAddress {
         BluetoothAddress {
             class_iri: BluetoothAddress::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -1500,6 +3976,10 @@ impl CaseObject for BluetoothAddress {
 pub struct BluetoothAddressFacet {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-observable:addressValue")]
+    pub address_value: Option<String>,
+    #[serde(rename = "uco-observable:displayName")]
+    pub display_name: Option<String>,
 }
 
 impl BluetoothAddressFacet {
@@ -1508,18 +3988,34 @@ impl BluetoothAddressFacet {
 
     pub fn builder() -> BluetoothAddressFacetBuilder {
         BluetoothAddressFacetBuilder {
+            address_value: None,
+            display_name: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct BluetoothAddressFacetBuilder {
+    address_value: Option<String>,
+    display_name: Option<String>,
 }
 
 impl BluetoothAddressFacetBuilder {
+    pub fn address_value(mut self, value: String) -> Self {
+        self.address_value = Some(value);
+        self
+    }
+
+    pub fn display_name(mut self, value: String) -> Self {
+        self.display_name = Some(value);
+        self
+    }
+
     pub fn build(self) -> BluetoothAddressFacet {
         BluetoothAddressFacet {
             class_iri: BluetoothAddressFacet::CLASS_IRI,
+            address_value: self.address_value,
+            display_name: self.display_name,
         }
     }
 }
@@ -1534,6 +4030,32 @@ impl CaseObject for BluetoothAddressFacet {
 pub struct BotConfiguration {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl BotConfiguration {
@@ -1542,18 +4064,122 @@ impl BotConfiguration {
 
     pub fn builder() -> BotConfigurationBuilder {
         BotConfigurationBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct BotConfigurationBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl BotConfigurationBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> BotConfiguration {
         BotConfiguration {
             class_iri: BotConfiguration::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -1568,6 +4194,32 @@ impl CaseObject for BotConfiguration {
 pub struct BrowserBookmark {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl BrowserBookmark {
@@ -1576,18 +4228,122 @@ impl BrowserBookmark {
 
     pub fn builder() -> BrowserBookmarkBuilder {
         BrowserBookmarkBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct BrowserBookmarkBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl BrowserBookmarkBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> BrowserBookmark {
         BrowserBookmark {
             class_iri: BrowserBookmark::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -1706,6 +4462,32 @@ impl CaseObject for BrowserBookmarkFacet {
 pub struct BrowserCookie {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl BrowserCookie {
@@ -1714,18 +4496,122 @@ impl BrowserCookie {
 
     pub fn builder() -> BrowserCookieBuilder {
         BrowserCookieBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct BrowserCookieBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl BrowserCookieBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> BrowserCookie {
         BrowserCookie {
             class_iri: BrowserCookie::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -1854,6 +4740,32 @@ impl CaseObject for BrowserCookieFacet {
 pub struct Calendar {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Calendar {
@@ -1862,18 +4774,122 @@ impl Calendar {
 
     pub fn builder() -> CalendarBuilder {
         CalendarBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct CalendarBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl CalendarBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Calendar {
         Calendar {
             class_iri: Calendar::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -1888,6 +4904,32 @@ impl CaseObject for Calendar {
 pub struct CalendarEntry {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl CalendarEntry {
@@ -1896,18 +4938,122 @@ impl CalendarEntry {
 
     pub fn builder() -> CalendarEntryBuilder {
         CalendarEntryBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct CalendarEntryBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl CalendarEntryBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> CalendarEntry {
         CalendarEntry {
             class_iri: CalendarEntry::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -2160,6 +5306,32 @@ impl CaseObject for CalendarFacet {
 pub struct Call {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Call {
@@ -2168,18 +5340,122 @@ impl Call {
 
     pub fn builder() -> CallBuilder {
         CallBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct CallBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl CallBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Call {
         Call {
             class_iri: Call::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -2308,6 +5584,32 @@ impl CaseObject for CallFacet {
 pub struct CapturedTelecommunicationsInformation {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl CapturedTelecommunicationsInformation {
@@ -2316,18 +5618,122 @@ impl CapturedTelecommunicationsInformation {
 
     pub fn builder() -> CapturedTelecommunicationsInformationBuilder {
         CapturedTelecommunicationsInformationBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct CapturedTelecommunicationsInformationBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl CapturedTelecommunicationsInformationBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> CapturedTelecommunicationsInformation {
         CapturedTelecommunicationsInformation {
             class_iri: CapturedTelecommunicationsInformation::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -2422,6 +5828,32 @@ impl CaseObject for CapturedTelecommunicationsInformationFacet {
 pub struct CellSite {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl CellSite {
@@ -2430,18 +5862,122 @@ impl CellSite {
 
     pub fn builder() -> CellSiteBuilder {
         CellSiteBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct CellSiteBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl CellSiteBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> CellSite {
         CellSite {
             class_iri: CellSite::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -2540,6 +6076,32 @@ impl CaseObject for CellSiteFacet {
 pub struct CharacterDeviceNode {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl CharacterDeviceNode {
@@ -2548,18 +6110,122 @@ impl CharacterDeviceNode {
 
     pub fn builder() -> CharacterDeviceNodeBuilder {
         CharacterDeviceNodeBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct CharacterDeviceNodeBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl CharacterDeviceNodeBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> CharacterDeviceNode {
         CharacterDeviceNode {
             class_iri: CharacterDeviceNode::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -2574,6 +6240,32 @@ impl CaseObject for CharacterDeviceNode {
 pub struct Code {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Code {
@@ -2582,18 +6274,122 @@ impl Code {
 
     pub fn builder() -> CodeBuilder {
         CodeBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct CodeBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl CodeBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Code {
         Code {
             class_iri: Code::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -2662,6 +6458,32 @@ impl CaseObject for CompressedStreamFacet {
 pub struct Computer {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Computer {
@@ -2670,18 +6492,122 @@ impl Computer {
 
     pub fn builder() -> ComputerBuilder {
         ComputerBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ComputerBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ComputerBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Computer {
         Computer {
             class_iri: Computer::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -2696,6 +6622,32 @@ impl CaseObject for Computer {
 pub struct ComputerSpecification {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl ComputerSpecification {
@@ -2704,18 +6656,122 @@ impl ComputerSpecification {
 
     pub fn builder() -> ComputerSpecificationBuilder {
         ComputerSpecificationBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ComputerSpecificationBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ComputerSpecificationBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> ComputerSpecification {
         ComputerSpecification {
             class_iri: ComputerSpecification::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -2968,6 +7024,32 @@ pub struct ConfiguredSoftware {
     pub is_configuration_of: Option<Software>,
     #[serde(rename = "uco-configuration:usesConfiguration")]
     pub uses_configuration: Option<Configuration>,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl ConfiguredSoftware {
@@ -2978,6 +7060,19 @@ impl ConfiguredSoftware {
         ConfiguredSoftwareBuilder {
             is_configuration_of: None,
             uses_configuration: None,
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
@@ -2986,6 +7081,19 @@ impl ConfiguredSoftware {
 pub struct ConfiguredSoftwareBuilder {
     is_configuration_of: Option<Software>,
     uses_configuration: Option<Configuration>,
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ConfiguredSoftwareBuilder {
@@ -2999,11 +7107,89 @@ impl ConfiguredSoftwareBuilder {
         self
     }
 
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> ConfiguredSoftware {
         ConfiguredSoftware {
             class_iri: ConfiguredSoftware::CLASS_IRI,
             is_configuration_of: self.is_configuration_of,
             uses_configuration: self.uses_configuration,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -3018,6 +7204,32 @@ impl CaseObject for ConfiguredSoftware {
 pub struct Contact {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Contact {
@@ -3026,18 +7238,122 @@ impl Contact {
 
     pub fn builder() -> ContactBuilder {
         ContactBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ContactBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ContactBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Contact {
         Contact {
             class_iri: Contact::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -3548,6 +7864,32 @@ impl CaseObject for ContactFacet {
 pub struct ContactList {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl ContactList {
@@ -3556,18 +7898,122 @@ impl ContactList {
 
     pub fn builder() -> ContactListBuilder {
         ContactListBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ContactListBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ContactListBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> ContactList {
         ContactList {
             class_iri: ContactList::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -3906,6 +8352,32 @@ impl CaseObject for ContactURL {
 pub struct ContentData {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl ContentData {
@@ -3914,18 +8386,122 @@ impl ContentData {
 
     pub fn builder() -> ContentDataBuilder {
         ContentDataBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ContentDataBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ContentDataBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> ContentData {
         ContentData {
             class_iri: ContentData::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -4074,6 +8650,32 @@ impl CaseObject for ContentDataFacet {
 pub struct CookieHistory {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl CookieHistory {
@@ -4082,18 +8684,122 @@ impl CookieHistory {
 
     pub fn builder() -> CookieHistoryBuilder {
         CookieHistoryBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct CookieHistoryBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl CookieHistoryBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> CookieHistory {
         CookieHistory {
             class_iri: CookieHistory::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -4108,6 +8814,32 @@ impl CaseObject for CookieHistory {
 pub struct Credential {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Credential {
@@ -4116,18 +8848,122 @@ impl Credential {
 
     pub fn builder() -> CredentialBuilder {
         CredentialBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct CredentialBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl CredentialBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Credential {
         Credential {
             class_iri: Credential::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -4142,6 +8978,32 @@ impl CaseObject for Credential {
 pub struct CredentialDump {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl CredentialDump {
@@ -4150,18 +9012,122 @@ impl CredentialDump {
 
     pub fn builder() -> CredentialDumpBuilder {
         CredentialDumpBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct CredentialDumpBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl CredentialDumpBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> CredentialDump {
         CredentialDump {
             class_iri: CredentialDump::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -4176,6 +9142,32 @@ impl CaseObject for CredentialDump {
 pub struct DNSCache {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl DNSCache {
@@ -4184,18 +9176,122 @@ impl DNSCache {
 
     pub fn builder() -> DNSCacheBuilder {
         DNSCacheBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct DNSCacheBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl DNSCacheBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> DNSCache {
         DNSCache {
             class_iri: DNSCache::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -4210,6 +9306,32 @@ impl CaseObject for DNSCache {
 pub struct DNSRecord {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl DNSRecord {
@@ -4218,18 +9340,122 @@ impl DNSRecord {
 
     pub fn builder() -> DNSRecordBuilder {
         DNSRecordBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct DNSRecordBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl DNSRecordBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> DNSRecord {
         DNSRecord {
             class_iri: DNSRecord::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -4342,6 +9568,32 @@ impl CaseObject for DefinedEffectFacet {
 pub struct Device {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Device {
@@ -4350,18 +9602,122 @@ impl Device {
 
     pub fn builder() -> DeviceBuilder {
         DeviceBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct DeviceBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl DeviceBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Device {
         Device {
             class_iri: Device::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -4460,6 +9816,32 @@ impl CaseObject for DeviceFacet {
 pub struct DigitalAccount {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl DigitalAccount {
@@ -4468,18 +9850,122 @@ impl DigitalAccount {
 
     pub fn builder() -> DigitalAccountBuilder {
         DigitalAccountBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct DigitalAccountBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl DigitalAccountBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> DigitalAccount {
         DigitalAccount {
             class_iri: DigitalAccount::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -4578,6 +10064,32 @@ impl CaseObject for DigitalAccountFacet {
 pub struct DigitalAddress {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl DigitalAddress {
@@ -4586,18 +10098,122 @@ impl DigitalAddress {
 
     pub fn builder() -> DigitalAddressBuilder {
         DigitalAddressBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct DigitalAddressBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl DigitalAddressBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> DigitalAddress {
         DigitalAddress {
             class_iri: DigitalAddress::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -4666,6 +10282,32 @@ impl CaseObject for DigitalAddressFacet {
 pub struct DigitalCamera {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl DigitalCamera {
@@ -4674,18 +10316,122 @@ impl DigitalCamera {
 
     pub fn builder() -> DigitalCameraBuilder {
         DigitalCameraBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct DigitalCameraBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl DigitalCameraBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> DigitalCamera {
         DigitalCamera {
             class_iri: DigitalCamera::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -4700,6 +10446,32 @@ impl CaseObject for DigitalCamera {
 pub struct DigitalSignatureInfo {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl DigitalSignatureInfo {
@@ -4708,18 +10480,122 @@ impl DigitalSignatureInfo {
 
     pub fn builder() -> DigitalSignatureInfoBuilder {
         DigitalSignatureInfoBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct DigitalSignatureInfoBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl DigitalSignatureInfoBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> DigitalSignatureInfo {
         DigitalSignatureInfo {
             class_iri: DigitalSignatureInfo::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -4818,6 +10694,32 @@ impl CaseObject for DigitalSignatureInfoFacet {
 pub struct Directory {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Directory {
@@ -4826,18 +10728,122 @@ impl Directory {
 
     pub fn builder() -> DirectoryBuilder {
         DirectoryBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct DirectoryBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl DirectoryBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Directory {
         Directory {
             class_iri: Directory::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -4852,6 +10858,32 @@ impl CaseObject for Directory {
 pub struct Disk {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Disk {
@@ -4860,18 +10892,122 @@ impl Disk {
 
     pub fn builder() -> DiskBuilder {
         DiskBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct DiskBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl DiskBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Disk {
         Disk {
             class_iri: Disk::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -4960,6 +11096,32 @@ impl CaseObject for DiskFacet {
 pub struct DiskPartition {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl DiskPartition {
@@ -4968,18 +11130,122 @@ impl DiskPartition {
 
     pub fn builder() -> DiskPartitionBuilder {
         DiskPartitionBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct DiskPartitionBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl DiskPartitionBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> DiskPartition {
         DiskPartition {
             class_iri: DiskPartition::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -5118,6 +11384,32 @@ impl CaseObject for DiskPartitionFacet {
 pub struct DomainName {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl DomainName {
@@ -5126,18 +11418,122 @@ impl DomainName {
 
     pub fn builder() -> DomainNameBuilder {
         DomainNameBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct DomainNameBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl DomainNameBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> DomainName {
         DomainName {
             class_iri: DomainName::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -5206,6 +11602,32 @@ impl CaseObject for DomainNameFacet {
 pub struct Drone {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Drone {
@@ -5214,18 +11636,122 @@ impl Drone {
 
     pub fn builder() -> DroneBuilder {
         DroneBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct DroneBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl DroneBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Drone {
         Drone {
             class_iri: Drone::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -5284,6 +11810,32 @@ impl CaseObject for EXIFFacet {
 pub struct EmailAccount {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl EmailAccount {
@@ -5292,18 +11844,122 @@ impl EmailAccount {
 
     pub fn builder() -> EmailAccountBuilder {
         EmailAccountBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct EmailAccountBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl EmailAccountBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> EmailAccount {
         EmailAccount {
             class_iri: EmailAccount::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -5362,6 +12018,32 @@ impl CaseObject for EmailAccountFacet {
 pub struct EmailAddress {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl EmailAddress {
@@ -5370,18 +12052,122 @@ impl EmailAddress {
 
     pub fn builder() -> EmailAddressBuilder {
         EmailAddressBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct EmailAddressBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl EmailAddressBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> EmailAddress {
         EmailAddress {
             class_iri: EmailAddress::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -5396,6 +12182,10 @@ impl CaseObject for EmailAddress {
 pub struct EmailAddressFacet {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-observable:addressValue")]
+    pub address_value: Option<String>,
+    #[serde(rename = "uco-observable:displayName")]
+    pub display_name: Option<String>,
 }
 
 impl EmailAddressFacet {
@@ -5404,18 +12194,34 @@ impl EmailAddressFacet {
 
     pub fn builder() -> EmailAddressFacetBuilder {
         EmailAddressFacetBuilder {
+            address_value: None,
+            display_name: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct EmailAddressFacetBuilder {
+    address_value: Option<String>,
+    display_name: Option<String>,
 }
 
 impl EmailAddressFacetBuilder {
+    pub fn address_value(mut self, value: String) -> Self {
+        self.address_value = Some(value);
+        self
+    }
+
+    pub fn display_name(mut self, value: String) -> Self {
+        self.display_name = Some(value);
+        self
+    }
+
     pub fn build(self) -> EmailAddressFacet {
         EmailAddressFacet {
             class_iri: EmailAddressFacet::CLASS_IRI,
+            address_value: self.address_value,
+            display_name: self.display_name,
         }
     }
 }
@@ -5430,6 +12236,32 @@ impl CaseObject for EmailAddressFacet {
 pub struct EmailMessage {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl EmailMessage {
@@ -5438,18 +12270,122 @@ impl EmailMessage {
 
     pub fn builder() -> EmailMessageBuilder {
         EmailMessageBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct EmailMessageBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl EmailMessageBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> EmailMessage {
         EmailMessage {
             class_iri: EmailMessage::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -5788,6 +12724,32 @@ impl CaseObject for EmailMessageFacet {
 pub struct EmbeddedDevice {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl EmbeddedDevice {
@@ -5796,18 +12758,122 @@ impl EmbeddedDevice {
 
     pub fn builder() -> EmbeddedDeviceBuilder {
         EmbeddedDeviceBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct EmbeddedDeviceBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl EmbeddedDeviceBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> EmbeddedDevice {
         EmbeddedDevice {
             class_iri: EmbeddedDevice::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -5994,6 +13060,32 @@ impl CaseObject for EnvironmentVariable {
 pub struct EventLog {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl EventLog {
@@ -6002,18 +13094,122 @@ impl EventLog {
 
     pub fn builder() -> EventLogBuilder {
         EventLogBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct EventLogBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl EventLogBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> EventLog {
         EventLog {
             class_iri: EventLog::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -6028,6 +13224,32 @@ impl CaseObject for EventLog {
 pub struct EventRecord {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl EventRecord {
@@ -6036,18 +13258,122 @@ impl EventRecord {
 
     pub fn builder() -> EventRecordBuilder {
         EventRecordBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct EventRecordBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl EventRecordBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> EventRecord {
         EventRecord {
             class_iri: EventRecord::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -6351,6 +13677,7 @@ pub struct ExtractedString {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
     #[serde(rename = "uco-observable:byteStringValue")]
+    #[serde(serialize_with = "crate::graph::serialize_base64_binary_opt")]
     pub byte_string_value: Option<Vec<u8>>,
     #[serde(rename = "uco-observable:encoding")]
     pub encoding: Option<String>,
@@ -6488,6 +13815,32 @@ impl CaseObject for ExtractedStringsFacet {
 pub struct File {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl File {
@@ -6496,18 +13849,122 @@ impl File {
 
     pub fn builder() -> FileBuilder {
         FileBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct FileBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl FileBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> File {
         File {
             class_iri: File::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -6700,6 +14157,32 @@ impl CaseObject for FilePermissionsFacet {
 pub struct FileSystem {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl FileSystem {
@@ -6708,18 +14191,122 @@ impl FileSystem {
 
     pub fn builder() -> FileSystemBuilder {
         FileSystemBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct FileSystemBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl FileSystemBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> FileSystem {
         FileSystem {
             class_iri: FileSystem::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -6788,6 +14375,32 @@ impl CaseObject for FileSystemFacet {
 pub struct FileSystemObject {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl FileSystemObject {
@@ -6796,18 +14409,122 @@ impl FileSystemObject {
 
     pub fn builder() -> FileSystemObjectBuilder {
         FileSystemObjectBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct FileSystemObjectBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl FileSystemObjectBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> FileSystemObject {
         FileSystemObject {
             class_iri: FileSystemObject::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -6822,6 +14539,32 @@ impl CaseObject for FileSystemObject {
 pub struct ForumPost {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl ForumPost {
@@ -6830,18 +14573,122 @@ impl ForumPost {
 
     pub fn builder() -> ForumPostBuilder {
         ForumPostBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ForumPostBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ForumPostBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> ForumPost {
         ForumPost {
             class_iri: ForumPost::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -6856,6 +14703,32 @@ impl CaseObject for ForumPost {
 pub struct ForumPrivateMessage {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl ForumPrivateMessage {
@@ -6864,18 +14737,122 @@ impl ForumPrivateMessage {
 
     pub fn builder() -> ForumPrivateMessageBuilder {
         ForumPrivateMessageBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ForumPrivateMessageBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ForumPrivateMessageBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> ForumPrivateMessage {
         ForumPrivateMessage {
             class_iri: ForumPrivateMessage::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -6944,6 +14921,32 @@ impl CaseObject for FragmentFacet {
 pub struct GUI {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl GUI {
@@ -6952,18 +14955,122 @@ impl GUI {
 
     pub fn builder() -> GUIBuilder {
         GUIBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct GUIBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl GUIBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> GUI {
         GUI {
             class_iri: GUI::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -6978,6 +15085,32 @@ impl CaseObject for GUI {
 pub struct GamingConsole {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl GamingConsole {
@@ -6986,18 +15119,122 @@ impl GamingConsole {
 
     pub fn builder() -> GamingConsoleBuilder {
         GamingConsoleBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct GamingConsoleBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl GamingConsoleBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> GamingConsole {
         GamingConsole {
             class_iri: GamingConsole::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -7012,6 +15249,32 @@ impl CaseObject for GamingConsole {
 pub struct GenericObservableObject {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl GenericObservableObject {
@@ -7020,18 +15283,122 @@ impl GenericObservableObject {
 
     pub fn builder() -> GenericObservableObjectBuilder {
         GenericObservableObjectBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct GenericObservableObjectBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl GenericObservableObjectBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> GenericObservableObject {
         GenericObservableObject {
             class_iri: GenericObservableObject::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -7046,6 +15413,32 @@ impl CaseObject for GenericObservableObject {
 pub struct GeoLocationEntry {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl GeoLocationEntry {
@@ -7054,18 +15447,122 @@ impl GeoLocationEntry {
 
     pub fn builder() -> GeoLocationEntryBuilder {
         GeoLocationEntryBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct GeoLocationEntryBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl GeoLocationEntryBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> GeoLocationEntry {
         GeoLocationEntry {
             class_iri: GeoLocationEntry::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -7144,6 +15641,32 @@ impl CaseObject for GeoLocationEntryFacet {
 pub struct GeoLocationLog {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl GeoLocationLog {
@@ -7152,18 +15675,122 @@ impl GeoLocationLog {
 
     pub fn builder() -> GeoLocationLogBuilder {
         GeoLocationLogBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct GeoLocationLogBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl GeoLocationLogBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> GeoLocationLog {
         GeoLocationLog {
             class_iri: GeoLocationLog::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -7232,6 +15859,32 @@ impl CaseObject for GeoLocationLogFacet {
 pub struct GeoLocationTrack {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl GeoLocationTrack {
@@ -7240,18 +15893,122 @@ impl GeoLocationTrack {
 
     pub fn builder() -> GeoLocationTrackBuilder {
         GeoLocationTrackBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct GeoLocationTrackBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl GeoLocationTrackBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> GeoLocationTrack {
         GeoLocationTrack {
             class_iri: GeoLocationTrack::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -7345,6 +16102,7 @@ pub struct GlobalFlagType {
     #[serde(rename = "uco-observable:destination")]
     pub destination: Option<String>,
     #[serde(rename = "uco-observable:hexadecimalValue")]
+    #[serde(serialize_with = "crate::graph::serialize_hex_binary_vec")]
     pub hexadecimal_value: Vec<Vec<u8>>,
     #[serde(rename = "uco-observable:symbolicName")]
     pub symbolic_name: Option<String>,
@@ -7414,6 +16172,32 @@ impl CaseObject for GlobalFlagType {
 pub struct HTTPConnection {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl HTTPConnection {
@@ -7422,18 +16206,122 @@ impl HTTPConnection {
 
     pub fn builder() -> HTTPConnectionBuilder {
         HTTPConnectionBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct HTTPConnectionBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl HTTPConnectionBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> HTTPConnection {
         HTTPConnection {
             class_iri: HTTPConnection::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -7542,6 +16430,32 @@ impl CaseObject for HTTPConnectionFacet {
 pub struct Hostname {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Hostname {
@@ -7550,18 +16464,122 @@ impl Hostname {
 
     pub fn builder() -> HostnameBuilder {
         HostnameBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct HostnameBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl HostnameBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Hostname {
         Hostname {
             class_iri: Hostname::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -7576,6 +16594,32 @@ impl CaseObject for Hostname {
 pub struct ICMPConnection {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl ICMPConnection {
@@ -7584,18 +16628,122 @@ impl ICMPConnection {
 
     pub fn builder() -> ICMPConnectionBuilder {
         ICMPConnectionBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ICMPConnectionBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ICMPConnectionBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> ICMPConnection {
         ICMPConnection {
             class_iri: ICMPConnection::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -7611,8 +16759,10 @@ pub struct ICMPConnectionFacet {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
     #[serde(rename = "uco-observable:icmpCode")]
+    #[serde(serialize_with = "crate::graph::serialize_hex_binary_vec")]
     pub icmp_code: Vec<Vec<u8>>,
     #[serde(rename = "uco-observable:icmpType")]
+    #[serde(serialize_with = "crate::graph::serialize_hex_binary_vec")]
     pub icmp_type: Vec<Vec<u8>>,
 }
 
@@ -7792,6 +16942,32 @@ impl CaseObject for IExecActionType {
 pub struct IPAddress {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl IPAddress {
@@ -7800,18 +16976,122 @@ impl IPAddress {
 
     pub fn builder() -> IPAddressBuilder {
         IPAddressBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct IPAddressBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl IPAddressBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> IPAddress {
         IPAddress {
             class_iri: IPAddress::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -7826,6 +17106,10 @@ impl CaseObject for IPAddress {
 pub struct IPAddressFacet {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-observable:addressValue")]
+    pub address_value: Option<String>,
+    #[serde(rename = "uco-observable:displayName")]
+    pub display_name: Option<String>,
 }
 
 impl IPAddressFacet {
@@ -7834,18 +17118,34 @@ impl IPAddressFacet {
 
     pub fn builder() -> IPAddressFacetBuilder {
         IPAddressFacetBuilder {
+            address_value: None,
+            display_name: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct IPAddressFacetBuilder {
+    address_value: Option<String>,
+    display_name: Option<String>,
 }
 
 impl IPAddressFacetBuilder {
+    pub fn address_value(mut self, value: String) -> Self {
+        self.address_value = Some(value);
+        self
+    }
+
+    pub fn display_name(mut self, value: String) -> Self {
+        self.display_name = Some(value);
+        self
+    }
+
     pub fn build(self) -> IPAddressFacet {
         IPAddressFacet {
             class_iri: IPAddressFacet::CLASS_IRI,
+            address_value: self.address_value,
+            display_name: self.display_name,
         }
     }
 }
@@ -7860,6 +17160,32 @@ impl CaseObject for IPAddressFacet {
 pub struct IPNetmask {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl IPNetmask {
@@ -7868,18 +17194,122 @@ impl IPNetmask {
 
     pub fn builder() -> IPNetmaskBuilder {
         IPNetmaskBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct IPNetmaskBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl IPNetmaskBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> IPNetmask {
         IPNetmask {
             class_iri: IPNetmask::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -7894,6 +17324,32 @@ impl CaseObject for IPNetmask {
 pub struct IPhone {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl IPhone {
@@ -7902,18 +17358,122 @@ impl IPhone {
 
     pub fn builder() -> IPhoneBuilder {
         IPhoneBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct IPhoneBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl IPhoneBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> IPhone {
         IPhone {
             class_iri: IPhone::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -7928,6 +17488,32 @@ impl CaseObject for IPhone {
 pub struct IPv4Address {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl IPv4Address {
@@ -7936,18 +17522,122 @@ impl IPv4Address {
 
     pub fn builder() -> IPv4AddressBuilder {
         IPv4AddressBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct IPv4AddressBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl IPv4AddressBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> IPv4Address {
         IPv4Address {
             class_iri: IPv4Address::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -7962,6 +17652,10 @@ impl CaseObject for IPv4Address {
 pub struct IPv4AddressFacet {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-observable:addressValue")]
+    pub address_value: Option<String>,
+    #[serde(rename = "uco-observable:displayName")]
+    pub display_name: Option<String>,
 }
 
 impl IPv4AddressFacet {
@@ -7970,18 +17664,34 @@ impl IPv4AddressFacet {
 
     pub fn builder() -> IPv4AddressFacetBuilder {
         IPv4AddressFacetBuilder {
+            address_value: None,
+            display_name: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct IPv4AddressFacetBuilder {
+    address_value: Option<String>,
+    display_name: Option<String>,
 }
 
 impl IPv4AddressFacetBuilder {
+    pub fn address_value(mut self, value: String) -> Self {
+        self.address_value = Some(value);
+        self
+    }
+
+    pub fn display_name(mut self, value: String) -> Self {
+        self.display_name = Some(value);
+        self
+    }
+
     pub fn build(self) -> IPv4AddressFacet {
         IPv4AddressFacet {
             class_iri: IPv4AddressFacet::CLASS_IRI,
+            address_value: self.address_value,
+            display_name: self.display_name,
         }
     }
 }
@@ -7996,6 +17706,32 @@ impl CaseObject for IPv4AddressFacet {
 pub struct IPv6Address {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl IPv6Address {
@@ -8004,18 +17740,122 @@ impl IPv6Address {
 
     pub fn builder() -> IPv6AddressBuilder {
         IPv6AddressBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct IPv6AddressBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl IPv6AddressBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> IPv6Address {
         IPv6Address {
             class_iri: IPv6Address::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -8030,6 +17870,10 @@ impl CaseObject for IPv6Address {
 pub struct IPv6AddressFacet {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-observable:addressValue")]
+    pub address_value: Option<String>,
+    #[serde(rename = "uco-observable:displayName")]
+    pub display_name: Option<String>,
 }
 
 impl IPv6AddressFacet {
@@ -8038,18 +17882,34 @@ impl IPv6AddressFacet {
 
     pub fn builder() -> IPv6AddressFacetBuilder {
         IPv6AddressFacetBuilder {
+            address_value: None,
+            display_name: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct IPv6AddressFacetBuilder {
+    address_value: Option<String>,
+    display_name: Option<String>,
 }
 
 impl IPv6AddressFacetBuilder {
+    pub fn address_value(mut self, value: String) -> Self {
+        self.address_value = Some(value);
+        self
+    }
+
+    pub fn display_name(mut self, value: String) -> Self {
+        self.display_name = Some(value);
+        self
+    }
+
     pub fn build(self) -> IPv6AddressFacet {
         IPv6AddressFacet {
             class_iri: IPv6AddressFacet::CLASS_IRI,
+            address_value: self.address_value,
+            display_name: self.display_name,
         }
     }
 }
@@ -8118,6 +17978,32 @@ impl CaseObject for IShowMessageActionType {
 pub struct Image {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Image {
@@ -8126,18 +18012,122 @@ impl Image {
 
     pub fn builder() -> ImageBuilder {
         ImageBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ImageBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ImageBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Image {
         Image {
             class_iri: Image::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -8196,6 +18186,32 @@ impl CaseObject for ImageFacet {
 pub struct InstantMessagingAddress {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl InstantMessagingAddress {
@@ -8204,18 +18220,122 @@ impl InstantMessagingAddress {
 
     pub fn builder() -> InstantMessagingAddressBuilder {
         InstantMessagingAddressBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct InstantMessagingAddressBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl InstantMessagingAddressBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> InstantMessagingAddress {
         InstantMessagingAddress {
             class_iri: InstantMessagingAddress::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -8230,6 +18350,10 @@ impl CaseObject for InstantMessagingAddress {
 pub struct InstantMessagingAddressFacet {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-observable:addressValue")]
+    pub address_value: Option<String>,
+    #[serde(rename = "uco-observable:displayName")]
+    pub display_name: Option<String>,
 }
 
 impl InstantMessagingAddressFacet {
@@ -8238,18 +18362,34 @@ impl InstantMessagingAddressFacet {
 
     pub fn builder() -> InstantMessagingAddressFacetBuilder {
         InstantMessagingAddressFacetBuilder {
+            address_value: None,
+            display_name: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct InstantMessagingAddressFacetBuilder {
+    address_value: Option<String>,
+    display_name: Option<String>,
 }
 
 impl InstantMessagingAddressFacetBuilder {
+    pub fn address_value(mut self, value: String) -> Self {
+        self.address_value = Some(value);
+        self
+    }
+
+    pub fn display_name(mut self, value: String) -> Self {
+        self.display_name = Some(value);
+        self
+    }
+
     pub fn build(self) -> InstantMessagingAddressFacet {
         InstantMessagingAddressFacet {
             class_iri: InstantMessagingAddressFacet::CLASS_IRI,
+            address_value: self.address_value,
+            display_name: self.display_name,
         }
     }
 }
@@ -8264,6 +18404,32 @@ impl CaseObject for InstantMessagingAddressFacet {
 pub struct Junction {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Junction {
@@ -8272,18 +18438,122 @@ impl Junction {
 
     pub fn builder() -> JunctionBuilder {
         JunctionBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct JunctionBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl JunctionBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Junction {
         Junction {
             class_iri: Junction::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -8298,6 +18568,32 @@ impl CaseObject for Junction {
 pub struct Laptop {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Laptop {
@@ -8306,18 +18602,122 @@ impl Laptop {
 
     pub fn builder() -> LaptopBuilder {
         LaptopBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct LaptopBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl LaptopBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Laptop {
         Laptop {
             class_iri: Laptop::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -8332,6 +18732,32 @@ impl CaseObject for Laptop {
 pub struct Library {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Library {
@@ -8340,18 +18766,122 @@ impl Library {
 
     pub fn builder() -> LibraryBuilder {
         LibraryBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct LibraryBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl LibraryBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Library {
         Library {
             class_iri: Library::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -8410,6 +18940,32 @@ impl CaseObject for LibraryFacet {
 pub struct MACAddress {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl MACAddress {
@@ -8418,18 +18974,122 @@ impl MACAddress {
 
     pub fn builder() -> MACAddressBuilder {
         MACAddressBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct MACAddressBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl MACAddressBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> MACAddress {
         MACAddress {
             class_iri: MACAddress::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -8444,6 +19104,10 @@ impl CaseObject for MACAddress {
 pub struct MACAddressFacet {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-observable:addressValue")]
+    pub address_value: Option<String>,
+    #[serde(rename = "uco-observable:displayName")]
+    pub display_name: Option<String>,
 }
 
 impl MACAddressFacet {
@@ -8452,18 +19116,34 @@ impl MACAddressFacet {
 
     pub fn builder() -> MACAddressFacetBuilder {
         MACAddressFacetBuilder {
+            address_value: None,
+            display_name: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct MACAddressFacetBuilder {
+    address_value: Option<String>,
+    display_name: Option<String>,
 }
 
 impl MACAddressFacetBuilder {
+    pub fn address_value(mut self, value: String) -> Self {
+        self.address_value = Some(value);
+        self
+    }
+
+    pub fn display_name(mut self, value: String) -> Self {
+        self.display_name = Some(value);
+        self
+    }
+
     pub fn build(self) -> MACAddressFacet {
         MACAddressFacet {
             class_iri: MACAddressFacet::CLASS_IRI,
+            address_value: self.address_value,
+            display_name: self.display_name,
         }
     }
 }
@@ -8478,6 +19158,32 @@ impl CaseObject for MACAddressFacet {
 pub struct Memory {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Memory {
@@ -8486,18 +19192,122 @@ impl Memory {
 
     pub fn builder() -> MemoryBuilder {
         MemoryBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct MemoryBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl MemoryBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Memory {
         Memory {
             class_iri: Memory::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -8523,10 +19333,12 @@ pub struct MemoryFacet {
     #[serde(rename = "uco-observable:isVolatile")]
     pub is_volatile: Option<bool>,
     #[serde(rename = "uco-observable:regionEndAddress")]
+    #[serde(serialize_with = "crate::graph::serialize_hex_binary_vec")]
     pub region_end_address: Vec<Vec<u8>>,
     #[serde(rename = "uco-observable:regionSize")]
     pub region_size: Option<i64>,
     #[serde(rename = "uco-observable:regionStartAddress")]
+    #[serde(serialize_with = "crate::graph::serialize_hex_binary_vec")]
     pub region_start_address: Vec<Vec<u8>>,
 }
 
@@ -8626,6 +19438,32 @@ impl CaseObject for MemoryFacet {
 pub struct Message {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Message {
@@ -8634,18 +19472,122 @@ impl Message {
 
     pub fn builder() -> MessageBuilder {
         MessageBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct MessageBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl MessageBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Message {
         Message {
             class_iri: Message::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -8774,6 +19716,32 @@ impl CaseObject for MessageFacet {
 pub struct MessageThread {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl MessageThread {
@@ -8782,18 +19750,122 @@ impl MessageThread {
 
     pub fn builder() -> MessageThreadBuilder {
         MessageThreadBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct MessageThreadBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl MessageThreadBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> MessageThread {
         MessageThread {
             class_iri: MessageThread::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -9100,6 +20172,32 @@ impl CaseObject for MimePartType {
 pub struct MobileAccount {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl MobileAccount {
@@ -9108,18 +20206,122 @@ impl MobileAccount {
 
     pub fn builder() -> MobileAccountBuilder {
         MobileAccountBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct MobileAccountBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl MobileAccountBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> MobileAccount {
         MobileAccount {
             class_iri: MobileAccount::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -9198,6 +20400,32 @@ impl CaseObject for MobileAccountFacet {
 pub struct MobileDevice {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl MobileDevice {
@@ -9206,18 +20434,122 @@ impl MobileDevice {
 
     pub fn builder() -> MobileDeviceBuilder {
         MobileDeviceBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct MobileDeviceBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl MobileDeviceBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> MobileDevice {
         MobileDevice {
             class_iri: MobileDevice::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -9356,6 +20688,32 @@ impl CaseObject for MobileDeviceFacet {
 pub struct MobilePhone {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl MobilePhone {
@@ -9364,18 +20722,122 @@ impl MobilePhone {
 
     pub fn builder() -> MobilePhoneBuilder {
         MobilePhoneBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct MobilePhoneBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl MobilePhoneBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> MobilePhone {
         MobilePhone {
             class_iri: MobilePhone::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -9390,6 +20852,32 @@ impl CaseObject for MobilePhone {
 pub struct Mutex {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Mutex {
@@ -9398,18 +20886,122 @@ impl Mutex {
 
     pub fn builder() -> MutexBuilder {
         MutexBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct MutexBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl MutexBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Mutex {
         Mutex {
             class_iri: Mutex::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -9478,6 +21070,32 @@ impl CaseObject for MutexFacet {
 pub struct NTFSFile {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl NTFSFile {
@@ -9486,18 +21104,122 @@ impl NTFSFile {
 
     pub fn builder() -> NTFSFileBuilder {
         NTFSFileBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct NTFSFileBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl NTFSFileBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> NTFSFile {
         NTFSFile {
             class_iri: NTFSFile::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -9610,6 +21332,32 @@ impl CaseObject for NTFSFilePermissionsFacet {
 pub struct NamedPipe {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl NamedPipe {
@@ -9618,18 +21366,122 @@ impl NamedPipe {
 
     pub fn builder() -> NamedPipeBuilder {
         NamedPipeBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct NamedPipeBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl NamedPipeBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> NamedPipe {
         NamedPipe {
             class_iri: NamedPipe::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -9644,6 +21496,32 @@ impl CaseObject for NamedPipe {
 pub struct NetworkAppliance {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl NetworkAppliance {
@@ -9652,18 +21530,122 @@ impl NetworkAppliance {
 
     pub fn builder() -> NetworkApplianceBuilder {
         NetworkApplianceBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct NetworkApplianceBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl NetworkApplianceBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> NetworkAppliance {
         NetworkAppliance {
             class_iri: NetworkAppliance::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -9678,6 +21660,32 @@ impl CaseObject for NetworkAppliance {
 pub struct NetworkConnection {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl NetworkConnection {
@@ -9686,18 +21694,122 @@ impl NetworkConnection {
 
     pub fn builder() -> NetworkConnectionBuilder {
         NetworkConnectionBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct NetworkConnectionBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl NetworkConnectionBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> NetworkConnection {
         NetworkConnection {
             class_iri: NetworkConnection::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -9826,6 +21938,32 @@ impl CaseObject for NetworkConnectionFacet {
 pub struct NetworkFlow {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl NetworkFlow {
@@ -9834,18 +21972,122 @@ impl NetworkFlow {
 
     pub fn builder() -> NetworkFlowBuilder {
         NetworkFlowBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct NetworkFlowBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl NetworkFlowBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> NetworkFlow {
         NetworkFlow {
             class_iri: NetworkFlow::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -9964,6 +22206,32 @@ impl CaseObject for NetworkFlowFacet {
 pub struct NetworkInterface {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl NetworkInterface {
@@ -9972,18 +22240,122 @@ impl NetworkInterface {
 
     pub fn builder() -> NetworkInterfaceBuilder {
         NetworkInterfaceBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct NetworkInterfaceBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl NetworkInterfaceBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> NetworkInterface {
         NetworkInterface {
             class_iri: NetworkInterface::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -10102,6 +22474,32 @@ impl CaseObject for NetworkInterfaceFacet {
 pub struct NetworkProtocol {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl NetworkProtocol {
@@ -10110,18 +22508,122 @@ impl NetworkProtocol {
 
     pub fn builder() -> NetworkProtocolBuilder {
         NetworkProtocolBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct NetworkProtocolBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl NetworkProtocolBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> NetworkProtocol {
         NetworkProtocol {
             class_iri: NetworkProtocol::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -10136,6 +22638,32 @@ impl CaseObject for NetworkProtocol {
 pub struct NetworkRoute {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl NetworkRoute {
@@ -10144,18 +22672,122 @@ impl NetworkRoute {
 
     pub fn builder() -> NetworkRouteBuilder {
         NetworkRouteBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct NetworkRouteBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl NetworkRouteBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> NetworkRoute {
         NetworkRoute {
             class_iri: NetworkRoute::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -10170,6 +22802,32 @@ impl CaseObject for NetworkRoute {
 pub struct NetworkSubnet {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl NetworkSubnet {
@@ -10178,18 +22836,122 @@ impl NetworkSubnet {
 
     pub fn builder() -> NetworkSubnetBuilder {
         NetworkSubnetBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct NetworkSubnetBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl NetworkSubnetBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> NetworkSubnet {
         NetworkSubnet {
             class_iri: NetworkSubnet::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -10204,6 +22966,32 @@ impl CaseObject for NetworkSubnet {
 pub struct Note {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Note {
@@ -10212,18 +23000,122 @@ impl Note {
 
     pub fn builder() -> NoteBuilder {
         NoteBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct NoteBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl NoteBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Note {
         Note {
             class_iri: Note::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -10312,6 +23204,28 @@ impl CaseObject for NoteFacet {
 pub struct Observable {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl Observable {
@@ -10320,18 +23234,106 @@ impl Observable {
 
     pub fn builder() -> ObservableBuilder {
         ObservableBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ObservableBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl ObservableBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
     pub fn build(self) -> Observable {
         Observable {
             class_iri: Observable::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -10346,6 +23348,54 @@ impl CaseObject for Observable {
 pub struct ObservableAction {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-action:actionCount")]
+    pub action_count: Option<u64>,
+    #[serde(rename = "uco-action:actionStatus")]
+    pub action_status: Option<String>,
+    #[serde(rename = "uco-action:endTime")]
+    pub end_time: Option<String>,
+    #[serde(rename = "uco-action:environment")]
+    pub environment: Option<UcoObject>,
+    #[serde(rename = "uco-action:error")]
+    pub error: Vec<UcoObject>,
+    #[serde(rename = "uco-action:instrument")]
+    pub instrument: Vec<UcoObject>,
+    #[serde(rename = "uco-action:location")]
+    pub location: Vec<Location>,
+    #[serde(rename = "uco-action:object")]
+    pub object: Vec<UcoObject>,
+    #[serde(rename = "uco-action:participant")]
+    pub participant: Vec<UcoObject>,
+    #[serde(rename = "uco-action:performer")]
+    pub performer: Option<UcoObject>,
+    #[serde(rename = "uco-action:result")]
+    pub result: Vec<UcoObject>,
+    #[serde(rename = "uco-action:startTime")]
+    pub start_time: Option<String>,
+    #[serde(rename = "uco-action:subaction")]
+    pub subaction: Vec<Action>,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl ObservableAction {
@@ -10354,18 +23404,210 @@ impl ObservableAction {
 
     pub fn builder() -> ObservableActionBuilder {
         ObservableActionBuilder {
+            action_count: None,
+            action_status: None,
+            end_time: None,
+            environment: None,
+            error: Vec::new(),
+            instrument: Vec::new(),
+            location: Vec::new(),
+            object: Vec::new(),
+            participant: Vec::new(),
+            performer: None,
+            result: Vec::new(),
+            start_time: None,
+            subaction: Vec::new(),
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ObservableActionBuilder {
+    action_count: Option<u64>,
+    action_status: Option<String>,
+    end_time: Option<String>,
+    environment: Option<UcoObject>,
+    error: Vec<UcoObject>,
+    instrument: Vec<UcoObject>,
+    location: Vec<Location>,
+    object: Vec<UcoObject>,
+    participant: Vec<UcoObject>,
+    performer: Option<UcoObject>,
+    result: Vec<UcoObject>,
+    start_time: Option<String>,
+    subaction: Vec<Action>,
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl ObservableActionBuilder {
+    pub fn action_count(mut self, value: u64) -> Self {
+        self.action_count = Some(value);
+        self
+    }
+
+    pub fn action_status(mut self, value: String) -> Self {
+        self.action_status = Some(value);
+        self
+    }
+
+    pub fn end_time(mut self, value: String) -> Self {
+        self.end_time = Some(value);
+        self
+    }
+
+    pub fn environment(mut self, value: UcoObject) -> Self {
+        self.environment = Some(value);
+        self
+    }
+
+    pub fn error(mut self, value: Vec<UcoObject>) -> Self {
+        self.error = value;
+        self
+    }
+
+    pub fn instrument(mut self, value: Vec<UcoObject>) -> Self {
+        self.instrument = value;
+        self
+    }
+
+    pub fn location(mut self, value: Vec<Location>) -> Self {
+        self.location = value;
+        self
+    }
+
+    pub fn object(mut self, value: Vec<UcoObject>) -> Self {
+        self.object = value;
+        self
+    }
+
+    pub fn participant(mut self, value: Vec<UcoObject>) -> Self {
+        self.participant = value;
+        self
+    }
+
+    pub fn performer(mut self, value: UcoObject) -> Self {
+        self.performer = Some(value);
+        self
+    }
+
+    pub fn result(mut self, value: Vec<UcoObject>) -> Self {
+        self.result = value;
+        self
+    }
+
+    pub fn start_time(mut self, value: String) -> Self {
+        self.start_time = Some(value);
+        self
+    }
+
+    pub fn subaction(mut self, value: Vec<Action>) -> Self {
+        self.subaction = value;
+        self
+    }
+
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
     pub fn build(self) -> ObservableAction {
         ObservableAction {
             class_iri: ObservableAction::CLASS_IRI,
+            action_count: self.action_count,
+            action_status: self.action_status,
+            end_time: self.end_time,
+            environment: self.environment,
+            error: self.error,
+            instrument: self.instrument,
+            location: self.location,
+            object: self.object,
+            participant: self.participant,
+            performer: self.performer,
+            result: self.result,
+            start_time: self.start_time,
+            subaction: self.subaction,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -10380,6 +23622,28 @@ impl CaseObject for ObservableAction {
 pub struct ObservableObject {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
     #[serde(rename = "uco-observable:hasChanged")]
     pub has_changed: Option<bool>,
     #[serde(rename = "uco-observable:state")]
@@ -10392,6 +23656,17 @@ impl ObservableObject {
 
     pub fn builder() -> ObservableObjectBuilder {
         ObservableObjectBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
             has_changed: None,
             state: None,
         }
@@ -10400,11 +23675,77 @@ impl ObservableObject {
 
 #[derive(Debug, Default, Clone)]
 pub struct ObservableObjectBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
     has_changed: Option<bool>,
     state: Option<String>,
 }
 
 impl ObservableObjectBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
     pub fn has_changed(mut self, value: bool) -> Self {
         self.has_changed = Some(value);
         self
@@ -10418,6 +23759,17 @@ impl ObservableObjectBuilder {
     pub fn build(self) -> ObservableObject {
         ObservableObject {
             class_iri: ObservableObject::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
             has_changed: self.has_changed,
             state: self.state,
         }
@@ -10434,6 +23786,28 @@ impl CaseObject for ObservableObject {
 pub struct ObservablePattern {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl ObservablePattern {
@@ -10442,18 +23816,106 @@ impl ObservablePattern {
 
     pub fn builder() -> ObservablePatternBuilder {
         ObservablePatternBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ObservablePatternBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl ObservablePatternBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
     pub fn build(self) -> ObservablePattern {
         ObservablePattern {
             class_iri: ObservablePattern::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -10468,8 +23930,38 @@ impl CaseObject for ObservablePattern {
 pub struct ObservableRelationship {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:endTime")]
+    pub end_time: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:isDirectional")]
+    pub is_directional: Option<bool>,
+    #[serde(rename = "uco-core:kindOfRelationship")]
+    pub kind_of_relationship: Option<String>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
     #[serde(rename = "uco-core:source")]
     pub source: Vec<Observable>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:startTime")]
+    pub start_time: Vec<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
     #[serde(rename = "uco-core:target")]
     pub target: Vec<Observable>,
 }
@@ -10480,7 +23972,22 @@ impl ObservableRelationship {
 
     pub fn builder() -> ObservableRelationshipBuilder {
         ObservableRelationshipBuilder {
+            created_by: None,
+            description: Vec::new(),
+            end_time: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            is_directional: None,
+            kind_of_relationship: None,
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
             source: Vec::new(),
+            spec_version: None,
+            start_time: Vec::new(),
+            tag: Vec::new(),
             target: Vec::new(),
         }
     }
@@ -10488,13 +23995,103 @@ impl ObservableRelationship {
 
 #[derive(Debug, Default, Clone)]
 pub struct ObservableRelationshipBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    end_time: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    is_directional: Option<bool>,
+    kind_of_relationship: Option<String>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
     source: Vec<Observable>,
+    spec_version: Option<String>,
+    start_time: Vec<String>,
+    tag: Vec<String>,
     target: Vec<Observable>,
 }
 
 impl ObservableRelationshipBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn end_time(mut self, value: Vec<String>) -> Self {
+        self.end_time = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn is_directional(mut self, value: bool) -> Self {
+        self.is_directional = Some(value);
+        self
+    }
+
+    pub fn kind_of_relationship(mut self, value: String) -> Self {
+        self.kind_of_relationship = Some(value);
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
     pub fn source(mut self, value: Vec<Observable>) -> Self {
         self.source = value;
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn start_time(mut self, value: Vec<String>) -> Self {
+        self.start_time = value;
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
         self
     }
 
@@ -10506,7 +24103,22 @@ impl ObservableRelationshipBuilder {
     pub fn build(self) -> ObservableRelationship {
         ObservableRelationship {
             class_iri: ObservableRelationship::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            end_time: self.end_time,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            is_directional: self.is_directional,
+            kind_of_relationship: self.kind_of_relationship,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
             source: self.source,
+            spec_version: self.spec_version,
+            start_time: self.start_time,
+            tag: self.tag,
             target: self.target,
         }
     }
@@ -10515,6 +24127,18 @@ impl ObservableRelationshipBuilder {
 impl CaseObject for ObservableRelationship {
     fn class_iri() -> &'static str { ObservableRelationship::CLASS_IRI }
     fn type_name() -> &'static str { "ObservableRelationship" }
+    fn validate(&self) -> Result<(), String> {
+        if self.is_directional.is_none() {
+            return Err("ObservableRelationship.is_directional is required but was not provided.".to_string());
+        }
+        if self.source.is_empty() {
+            return Err("ObservableRelationship.source requires at least one value.".to_string());
+        }
+        if self.target.is_empty() {
+            return Err("ObservableRelationship.target requires at least one value.".to_string());
+        }
+        Ok(())
+    }
 }
 
 /// An observation is a temporal perception of an observable.
@@ -10522,8 +24146,54 @@ impl CaseObject for ObservableRelationship {
 pub struct Observation {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-action:actionCount")]
+    pub action_count: Option<u64>,
+    #[serde(rename = "uco-action:actionStatus")]
+    pub action_status: Option<String>,
+    #[serde(rename = "uco-action:endTime")]
+    pub end_time: Option<String>,
+    #[serde(rename = "uco-action:environment")]
+    pub environment: Option<UcoObject>,
+    #[serde(rename = "uco-action:error")]
+    pub error: Vec<UcoObject>,
+    #[serde(rename = "uco-action:instrument")]
+    pub instrument: Vec<UcoObject>,
+    #[serde(rename = "uco-action:location")]
+    pub location: Vec<Location>,
+    #[serde(rename = "uco-action:object")]
+    pub object: Vec<UcoObject>,
+    #[serde(rename = "uco-action:participant")]
+    pub participant: Vec<UcoObject>,
+    #[serde(rename = "uco-action:performer")]
+    pub performer: Option<UcoObject>,
+    #[serde(rename = "uco-action:result")]
+    pub result: Vec<UcoObject>,
+    #[serde(rename = "uco-action:startTime")]
+    pub start_time: Option<String>,
+    #[serde(rename = "uco-action:subaction")]
+    pub subaction: Vec<Action>,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
     #[serde(rename = "uco-core:name")]
     pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
 }
 
 impl Observation {
@@ -10532,26 +24202,210 @@ impl Observation {
 
     pub fn builder() -> ObservationBuilder {
         ObservationBuilder {
+            action_count: None,
+            action_status: None,
+            end_time: None,
+            environment: None,
+            error: Vec::new(),
+            instrument: Vec::new(),
+            location: Vec::new(),
+            object: Vec::new(),
+            participant: Vec::new(),
+            performer: None,
+            result: Vec::new(),
+            start_time: None,
+            subaction: Vec::new(),
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
             name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ObservationBuilder {
+    action_count: Option<u64>,
+    action_status: Option<String>,
+    end_time: Option<String>,
+    environment: Option<UcoObject>,
+    error: Vec<UcoObject>,
+    instrument: Vec<UcoObject>,
+    location: Vec<Location>,
+    object: Vec<UcoObject>,
+    participant: Vec<UcoObject>,
+    performer: Option<UcoObject>,
+    result: Vec<UcoObject>,
+    start_time: Option<String>,
+    subaction: Vec<Action>,
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
     name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
 }
 
 impl ObservationBuilder {
+    pub fn action_count(mut self, value: u64) -> Self {
+        self.action_count = Some(value);
+        self
+    }
+
+    pub fn action_status(mut self, value: String) -> Self {
+        self.action_status = Some(value);
+        self
+    }
+
+    pub fn end_time(mut self, value: String) -> Self {
+        self.end_time = Some(value);
+        self
+    }
+
+    pub fn environment(mut self, value: UcoObject) -> Self {
+        self.environment = Some(value);
+        self
+    }
+
+    pub fn error(mut self, value: Vec<UcoObject>) -> Self {
+        self.error = value;
+        self
+    }
+
+    pub fn instrument(mut self, value: Vec<UcoObject>) -> Self {
+        self.instrument = value;
+        self
+    }
+
+    pub fn location(mut self, value: Vec<Location>) -> Self {
+        self.location = value;
+        self
+    }
+
+    pub fn object(mut self, value: Vec<UcoObject>) -> Self {
+        self.object = value;
+        self
+    }
+
+    pub fn participant(mut self, value: Vec<UcoObject>) -> Self {
+        self.participant = value;
+        self
+    }
+
+    pub fn performer(mut self, value: UcoObject) -> Self {
+        self.performer = Some(value);
+        self
+    }
+
+    pub fn result(mut self, value: Vec<UcoObject>) -> Self {
+        self.result = value;
+        self
+    }
+
+    pub fn start_time(mut self, value: String) -> Self {
+        self.start_time = Some(value);
+        self
+    }
+
+    pub fn subaction(mut self, value: Vec<Action>) -> Self {
+        self.subaction = value;
+        self
+    }
+
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
     pub fn name(mut self, value: String) -> Self {
         self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
         self
     }
 
     pub fn build(self) -> Observation {
         Observation {
             class_iri: Observation::CLASS_IRI,
+            action_count: self.action_count,
+            action_status: self.action_status,
+            end_time: self.end_time,
+            environment: self.environment,
+            error: self.error,
+            instrument: self.instrument,
+            location: self.location,
+            object: self.object,
+            participant: self.participant,
+            performer: self.performer,
+            result: self.result,
+            start_time: self.start_time,
+            subaction: self.subaction,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
             name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
         }
     }
 }
@@ -10572,6 +24426,32 @@ impl CaseObject for Observation {
 pub struct OnlineService {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl OnlineService {
@@ -10580,18 +24460,122 @@ impl OnlineService {
 
     pub fn builder() -> OnlineServiceBuilder {
         OnlineServiceBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct OnlineServiceBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl OnlineServiceBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> OnlineService {
         OnlineService {
             class_iri: OnlineService::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -10670,6 +24654,32 @@ impl CaseObject for OnlineServiceFacet {
 pub struct OperatingSystem {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl OperatingSystem {
@@ -10678,18 +24688,122 @@ impl OperatingSystem {
 
     pub fn builder() -> OperatingSystemBuilder {
         OperatingSystemBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct OperatingSystemBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl OperatingSystemBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> OperatingSystem {
         OperatingSystem {
             class_iri: OperatingSystem::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -10808,6 +24922,32 @@ impl CaseObject for OperatingSystemFacet {
 pub struct PDFFile {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl PDFFile {
@@ -10816,18 +24956,122 @@ impl PDFFile {
 
     pub fn builder() -> PDFFileBuilder {
         PDFFileBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct PDFFileBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl PDFFileBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> PDFFile {
         PDFFile {
             class_iri: PDFFile::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -10990,6 +25234,32 @@ impl CaseObject for PathRelationFacet {
 pub struct PaymentCard {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl PaymentCard {
@@ -10998,18 +25268,122 @@ impl PaymentCard {
 
     pub fn builder() -> PaymentCardBuilder {
         PaymentCardBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct PaymentCardBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl PaymentCardBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> PaymentCard {
         PaymentCard {
             class_iri: PaymentCard::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -11024,6 +25398,32 @@ impl CaseObject for PaymentCard {
 pub struct PhoneAccount {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl PhoneAccount {
@@ -11032,18 +25432,122 @@ impl PhoneAccount {
 
     pub fn builder() -> PhoneAccountBuilder {
         PhoneAccountBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct PhoneAccountBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl PhoneAccountBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> PhoneAccount {
         PhoneAccount {
             class_iri: PhoneAccount::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -11102,6 +25606,32 @@ impl CaseObject for PhoneAccountFacet {
 pub struct Pipe {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Pipe {
@@ -11110,18 +25640,122 @@ impl Pipe {
 
     pub fn builder() -> PipeBuilder {
         PipeBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct PipeBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl PipeBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Pipe {
         Pipe {
             class_iri: Pipe::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -11136,6 +25770,32 @@ impl CaseObject for Pipe {
 pub struct Post {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Post {
@@ -11144,18 +25804,122 @@ impl Post {
 
     pub fn builder() -> PostBuilder {
         PostBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct PostBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl PostBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Post {
         Post {
             class_iri: Post::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -11170,6 +25934,32 @@ impl CaseObject for Post {
 pub struct Process {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Process {
@@ -11178,18 +25968,122 @@ impl Process {
 
     pub fn builder() -> ProcessBuilder {
         ProcessBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ProcessBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ProcessBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Process {
         Process {
             class_iri: Process::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -11358,6 +26252,32 @@ impl CaseObject for ProcessFacet {
 pub struct ProcessThread {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl ProcessThread {
@@ -11366,18 +26286,122 @@ impl ProcessThread {
 
     pub fn builder() -> ProcessThreadBuilder {
         ProcessThreadBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ProcessThreadBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ProcessThreadBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> ProcessThread {
         ProcessThread {
             class_iri: ProcessThread::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -11392,6 +26416,32 @@ impl CaseObject for ProcessThread {
 pub struct Profile {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Profile {
@@ -11400,18 +26450,122 @@ impl Profile {
 
     pub fn builder() -> ProfileBuilder {
         ProfileBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ProfileBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ProfileBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Profile {
         Profile {
             class_iri: Profile::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -11688,6 +26842,32 @@ impl CaseObject for PropertyReadEffectFacet {
 pub struct ProtocolConverter {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl ProtocolConverter {
@@ -11696,18 +26876,122 @@ impl ProtocolConverter {
 
     pub fn builder() -> ProtocolConverterBuilder {
         ProtocolConverterBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ProtocolConverterBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ProtocolConverterBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> ProtocolConverter {
         ProtocolConverter {
             class_iri: ProtocolConverter::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -11722,6 +27006,32 @@ impl CaseObject for ProtocolConverter {
 pub struct RasterPicture {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl RasterPicture {
@@ -11730,18 +27040,122 @@ impl RasterPicture {
 
     pub fn builder() -> RasterPictureBuilder {
         RasterPictureBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct RasterPictureBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl RasterPictureBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> RasterPicture {
         RasterPicture {
             class_iri: RasterPicture::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -11850,6 +27264,32 @@ impl CaseObject for RasterPictureFacet {
 pub struct RecoveredObject {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl RecoveredObject {
@@ -11858,18 +27298,122 @@ impl RecoveredObject {
 
     pub fn builder() -> RecoveredObjectBuilder {
         RecoveredObjectBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct RecoveredObjectBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl RecoveredObjectBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> RecoveredObject {
         RecoveredObject {
             class_iri: RecoveredObject::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -11948,6 +27492,32 @@ impl CaseObject for RecoveredObjectFacet {
 pub struct ReparsePoint {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl ReparsePoint {
@@ -11956,18 +27526,122 @@ impl ReparsePoint {
 
     pub fn builder() -> ReparsePointBuilder {
         ReparsePointBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ReparsePointBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ReparsePointBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> ReparsePoint {
         ReparsePoint {
             class_iri: ReparsePoint::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -11982,6 +27656,32 @@ impl CaseObject for ReparsePoint {
 pub struct SIMCard {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl SIMCard {
@@ -11990,18 +27690,122 @@ impl SIMCard {
 
     pub fn builder() -> SIMCardBuilder {
         SIMCardBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct SIMCardBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl SIMCardBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> SIMCard {
         SIMCard {
             class_iri: SIMCard::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -12130,6 +27934,32 @@ impl CaseObject for SIMCardFacet {
 pub struct SIPAddress {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl SIPAddress {
@@ -12138,18 +27968,122 @@ impl SIPAddress {
 
     pub fn builder() -> SIPAddressBuilder {
         SIPAddressBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct SIPAddressBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl SIPAddressBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> SIPAddress {
         SIPAddress {
             class_iri: SIPAddress::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -12164,6 +28098,10 @@ impl CaseObject for SIPAddress {
 pub struct SIPAddressFacet {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-observable:addressValue")]
+    pub address_value: Option<String>,
+    #[serde(rename = "uco-observable:displayName")]
+    pub display_name: Option<String>,
 }
 
 impl SIPAddressFacet {
@@ -12172,18 +28110,34 @@ impl SIPAddressFacet {
 
     pub fn builder() -> SIPAddressFacetBuilder {
         SIPAddressFacetBuilder {
+            address_value: None,
+            display_name: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct SIPAddressFacetBuilder {
+    address_value: Option<String>,
+    display_name: Option<String>,
 }
 
 impl SIPAddressFacetBuilder {
+    pub fn address_value(mut self, value: String) -> Self {
+        self.address_value = Some(value);
+        self
+    }
+
+    pub fn display_name(mut self, value: String) -> Self {
+        self.display_name = Some(value);
+        self
+    }
+
     pub fn build(self) -> SIPAddressFacet {
         SIPAddressFacet {
             class_iri: SIPAddressFacet::CLASS_IRI,
+            address_value: self.address_value,
+            display_name: self.display_name,
         }
     }
 }
@@ -12198,6 +28152,32 @@ impl CaseObject for SIPAddressFacet {
 pub struct SMSMessage {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl SMSMessage {
@@ -12206,18 +28186,122 @@ impl SMSMessage {
 
     pub fn builder() -> SMSMessageBuilder {
         SMSMessageBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct SMSMessageBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl SMSMessageBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> SMSMessage {
         SMSMessage {
             class_iri: SMSMessage::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -12276,6 +28360,32 @@ impl CaseObject for SMSMessageFacet {
 pub struct SQLiteBlob {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl SQLiteBlob {
@@ -12284,18 +28394,122 @@ impl SQLiteBlob {
 
     pub fn builder() -> SQLiteBlobBuilder {
         SQLiteBlobBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct SQLiteBlobBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl SQLiteBlobBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> SQLiteBlob {
         SQLiteBlob {
             class_iri: SQLiteBlob::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -12384,6 +28598,32 @@ impl CaseObject for SQLiteBlobFacet {
 pub struct SecurityAppliance {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl SecurityAppliance {
@@ -12392,18 +28632,122 @@ impl SecurityAppliance {
 
     pub fn builder() -> SecurityApplianceBuilder {
         SecurityApplianceBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct SecurityApplianceBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl SecurityApplianceBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> SecurityAppliance {
         SecurityAppliance {
             class_iri: SecurityAppliance::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -12418,6 +28762,32 @@ impl CaseObject for SecurityAppliance {
 pub struct Semaphore {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Semaphore {
@@ -12426,18 +28796,122 @@ impl Semaphore {
 
     pub fn builder() -> SemaphoreBuilder {
         SemaphoreBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct SemaphoreBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl SemaphoreBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Semaphore {
         Semaphore {
             class_iri: Semaphore::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -12496,6 +28970,32 @@ impl CaseObject for SendControlCodeEffectFacet {
 pub struct Server {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Server {
@@ -12504,18 +29004,122 @@ impl Server {
 
     pub fn builder() -> ServerBuilder {
         ServerBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ServerBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ServerBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Server {
         Server {
             class_iri: Server::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -12530,6 +29134,32 @@ impl CaseObject for Server {
 pub struct ShopListing {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl ShopListing {
@@ -12538,18 +29168,122 @@ impl ShopListing {
 
     pub fn builder() -> ShopListingBuilder {
         ShopListingBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct ShopListingBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl ShopListingBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> ShopListing {
         ShopListing {
             class_iri: ShopListing::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -12564,6 +29298,32 @@ impl CaseObject for ShopListing {
 pub struct SmartDevice {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl SmartDevice {
@@ -12572,18 +29332,122 @@ impl SmartDevice {
 
     pub fn builder() -> SmartDeviceBuilder {
         SmartDeviceBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct SmartDeviceBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl SmartDeviceBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> SmartDevice {
         SmartDevice {
             class_iri: SmartDevice::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -12598,6 +29462,32 @@ impl CaseObject for SmartDevice {
 pub struct SmartPhone {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl SmartPhone {
@@ -12606,18 +29496,122 @@ impl SmartPhone {
 
     pub fn builder() -> SmartPhoneBuilder {
         SmartPhoneBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct SmartPhoneBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl SmartPhoneBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> SmartPhone {
         SmartPhone {
             class_iri: SmartPhone::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -12632,6 +29626,32 @@ impl CaseObject for SmartPhone {
 pub struct Snapshot {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Snapshot {
@@ -12640,18 +29660,122 @@ impl Snapshot {
 
     pub fn builder() -> SnapshotBuilder {
         SnapshotBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct SnapshotBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl SnapshotBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Snapshot {
         Snapshot {
             class_iri: Snapshot::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -12666,6 +29790,32 @@ impl CaseObject for Snapshot {
 pub struct Socket {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Socket {
@@ -12674,18 +29824,122 @@ impl Socket {
 
     pub fn builder() -> SocketBuilder {
         SocketBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct SocketBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl SocketBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Socket {
         Socket {
             class_iri: Socket::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -12700,6 +29954,32 @@ impl CaseObject for Socket {
 pub struct SocketAddress {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl SocketAddress {
@@ -12708,18 +29988,122 @@ impl SocketAddress {
 
     pub fn builder() -> SocketAddressBuilder {
         SocketAddressBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct SocketAddressBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl SocketAddressBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> SocketAddress {
         SocketAddress {
             class_iri: SocketAddress::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -12734,6 +30118,32 @@ impl CaseObject for SocketAddress {
 pub struct Software {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Software {
@@ -12742,18 +30152,122 @@ impl Software {
 
     pub fn builder() -> SoftwareBuilder {
         SoftwareBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct SoftwareBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl SoftwareBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Software {
         Software {
             class_iri: Software::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -12906,6 +30420,32 @@ impl CaseObject for StateChangeEffectFacet {
 pub struct StorageMedium {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl StorageMedium {
@@ -12914,18 +30454,122 @@ impl StorageMedium {
 
     pub fn builder() -> StorageMediumBuilder {
         StorageMediumBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct StorageMediumBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl StorageMediumBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> StorageMedium {
         StorageMedium {
             class_iri: StorageMedium::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -12984,6 +30628,32 @@ impl CaseObject for StorageMediumFacet {
 pub struct SymbolicLink {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl SymbolicLink {
@@ -12992,18 +30662,122 @@ impl SymbolicLink {
 
     pub fn builder() -> SymbolicLinkBuilder {
         SymbolicLinkBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct SymbolicLinkBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl SymbolicLinkBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> SymbolicLink {
         SymbolicLink {
             class_iri: SymbolicLink::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -13062,6 +30836,32 @@ impl CaseObject for SymbolicLinkFacet {
 pub struct TCPConnection {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl TCPConnection {
@@ -13070,18 +30870,122 @@ impl TCPConnection {
 
     pub fn builder() -> TCPConnectionBuilder {
         TCPConnectionBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct TCPConnectionBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl TCPConnectionBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> TCPConnection {
         TCPConnection {
             class_iri: TCPConnection::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -13097,8 +31001,10 @@ pub struct TCPConnectionFacet {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
     #[serde(rename = "uco-observable:destinationFlags")]
+    #[serde(serialize_with = "crate::graph::serialize_hex_binary_vec")]
     pub destination_flags: Vec<Vec<u8>>,
     #[serde(rename = "uco-observable:sourceFlags")]
+    #[serde(serialize_with = "crate::graph::serialize_hex_binary_vec")]
     pub source_flags: Vec<Vec<u8>>,
 }
 
@@ -13150,6 +31056,32 @@ impl CaseObject for TCPConnectionFacet {
 pub struct TableField {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl TableField {
@@ -13158,18 +31090,122 @@ impl TableField {
 
     pub fn builder() -> TableFieldBuilder {
         TableFieldBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct TableFieldBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl TableFieldBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> TableField {
         TableField {
             class_iri: TableField::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -13278,6 +31314,32 @@ impl CaseObject for TableFieldFacet {
 pub struct Tablet {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Tablet {
@@ -13286,18 +31348,122 @@ impl Tablet {
 
     pub fn builder() -> TabletBuilder {
         TabletBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct TabletBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl TabletBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Tablet {
         Tablet {
             class_iri: Tablet::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -13520,6 +31686,32 @@ impl CaseObject for TriggerType {
 pub struct Tweet {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Tweet {
@@ -13528,18 +31720,122 @@ impl Tweet {
 
     pub fn builder() -> TweetBuilder {
         TweetBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct TweetBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl TweetBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Tweet {
         Tweet {
             class_iri: Tweet::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -13748,6 +32044,32 @@ impl CaseObject for TwitterProfileFacet {
 pub struct UNIXAccount {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl UNIXAccount {
@@ -13756,18 +32078,122 @@ impl UNIXAccount {
 
     pub fn builder() -> UNIXAccountBuilder {
         UNIXAccountBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct UNIXAccountBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl UNIXAccountBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> UNIXAccount {
         UNIXAccount {
             class_iri: UNIXAccount::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -13836,6 +32262,32 @@ impl CaseObject for UNIXAccountFacet {
 pub struct UNIXFile {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl UNIXFile {
@@ -13844,18 +32296,122 @@ impl UNIXFile {
 
     pub fn builder() -> UNIXFileBuilder {
         UNIXFileBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct UNIXFileBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl UNIXFileBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> UNIXFile {
         UNIXFile {
             class_iri: UNIXFile::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -13904,6 +32460,32 @@ impl CaseObject for UNIXFilePermissionsFacet {
 pub struct UNIXProcess {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl UNIXProcess {
@@ -13912,18 +32494,122 @@ impl UNIXProcess {
 
     pub fn builder() -> UNIXProcessBuilder {
         UNIXProcessBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct UNIXProcessBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl UNIXProcessBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> UNIXProcess {
         UNIXProcess {
             class_iri: UNIXProcess::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -14046,6 +32732,32 @@ impl CaseObject for UNIXVolumeFacet {
 pub struct URL {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl URL {
@@ -14054,18 +32766,122 @@ impl URL {
 
     pub fn builder() -> URLBuilder {
         URLBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct URLBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl URLBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> URL {
         URL {
             class_iri: URL::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -14204,6 +33020,32 @@ impl CaseObject for URLFacet {
 pub struct URLHistory {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl URLHistory {
@@ -14212,18 +33054,122 @@ impl URLHistory {
 
     pub fn builder() -> URLHistoryBuilder {
         URLHistoryBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct URLHistoryBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl URLHistoryBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> URLHistory {
         URLHistory {
             class_iri: URLHistory::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -14436,6 +33382,32 @@ impl CaseObject for URLHistoryFacet {
 pub struct URLVisit {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl URLVisit {
@@ -14444,18 +33416,122 @@ impl URLVisit {
 
     pub fn builder() -> URLVisitBuilder {
         URLVisitBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct URLVisitBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl URLVisitBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> URLVisit {
         URLVisit {
             class_iri: URLVisit::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -14564,6 +33640,32 @@ impl CaseObject for URLVisitFacet {
 pub struct UserAccount {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl UserAccount {
@@ -14572,18 +33674,122 @@ impl UserAccount {
 
     pub fn builder() -> UserAccountBuilder {
         UserAccountBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct UserAccountBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl UserAccountBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> UserAccount {
         UserAccount {
             class_iri: UserAccount::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -14672,6 +33878,32 @@ impl CaseObject for UserAccountFacet {
 pub struct UserSession {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl UserSession {
@@ -14680,18 +33912,122 @@ impl UserSession {
 
     pub fn builder() -> UserSessionBuilder {
         UserSessionBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct UserSessionBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl UserSessionBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> UserSession {
         UserSession {
             class_iri: UserSession::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -14834,6 +34170,32 @@ impl CaseObject for ValuesEnumeratedEffectFacet {
 pub struct Volume {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Volume {
@@ -14842,18 +34204,122 @@ impl Volume {
 
     pub fn builder() -> VolumeBuilder {
         VolumeBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct VolumeBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl VolumeBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Volume {
         Volume {
             class_iri: Volume::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -14922,6 +34388,32 @@ impl CaseObject for VolumeFacet {
 pub struct WearableDevice {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WearableDevice {
@@ -14930,18 +34422,122 @@ impl WearableDevice {
 
     pub fn builder() -> WearableDeviceBuilder {
         WearableDeviceBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WearableDeviceBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WearableDeviceBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WearableDevice {
         WearableDevice {
             class_iri: WearableDevice::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -14956,6 +34552,32 @@ impl CaseObject for WearableDevice {
 pub struct WebPage {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WebPage {
@@ -14964,18 +34586,122 @@ impl WebPage {
 
     pub fn builder() -> WebPageBuilder {
         WebPageBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WebPageBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WebPageBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WebPage {
         WebPage {
             class_iri: WebPage::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -14990,6 +34716,32 @@ impl CaseObject for WebPage {
 pub struct WhoIs {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WhoIs {
@@ -14998,18 +34750,122 @@ impl WhoIs {
 
     pub fn builder() -> WhoIsBuilder {
         WhoIsBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WhoIsBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WhoIsBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WhoIs {
         WhoIs {
             class_iri: WhoIs::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -15228,6 +35084,52 @@ impl CaseObject for WhoIsFacet {
 pub struct WhoisContactFacet {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-identity:birthdate")]
+    pub birthdate: Option<String>,
+    #[serde(rename = "uco-observable:contactAddress")]
+    pub contact_address: Vec<ContactAddress>,
+    #[serde(rename = "uco-observable:contactAffiliation")]
+    pub contact_affiliation: Vec<ContactAffiliation>,
+    #[serde(rename = "uco-observable:contactEmail")]
+    pub contact_email: Vec<ContactEmail>,
+    #[serde(rename = "uco-observable:contactGroup")]
+    pub contact_group: Vec<String>,
+    #[serde(rename = "uco-observable:contactID")]
+    pub contact_id: Option<String>,
+    #[serde(rename = "uco-observable:contactMessaging")]
+    pub contact_messaging: Vec<ContactMessaging>,
+    #[serde(rename = "uco-observable:contactNote")]
+    pub contact_note: Vec<String>,
+    #[serde(rename = "uco-observable:contactPhone")]
+    pub contact_phone: Vec<ContactPhone>,
+    #[serde(rename = "uco-observable:contactProfile")]
+    pub contact_profile: Vec<ContactProfile>,
+    #[serde(rename = "uco-observable:contactSIP")]
+    pub contact_sip: Vec<ContactSIP>,
+    #[serde(rename = "uco-observable:contactURL")]
+    pub contact_url: Vec<ContactURL>,
+    #[serde(rename = "uco-observable:displayName")]
+    pub display_name: Option<String>,
+    #[serde(rename = "uco-observable:firstName")]
+    pub first_name: Option<String>,
+    #[serde(rename = "uco-observable:lastName")]
+    pub last_name: Option<String>,
+    #[serde(rename = "uco-observable:lastTimeContacted")]
+    pub last_time_contacted: Option<String>,
+    #[serde(rename = "uco-observable:middleName")]
+    pub middle_name: Option<String>,
+    #[serde(rename = "uco-observable:namePhonetic")]
+    pub name_phonetic: Option<String>,
+    #[serde(rename = "uco-observable:namePrefix")]
+    pub name_prefix: Option<String>,
+    #[serde(rename = "uco-observable:nameSuffix")]
+    pub name_suffix: Option<String>,
+    #[serde(rename = "uco-observable:nickname")]
+    pub nickname: Vec<String>,
+    #[serde(rename = "uco-observable:numberTimesContacted")]
+    pub number_times_contacted: Option<i64>,
+    #[serde(rename = "uco-observable:sourceApplication")]
+    pub source_application: Option<ObservableObject>,
     #[serde(rename = "uco-observable:whoisContactType")]
     pub whois_contact_type: Option<String>,
 }
@@ -15238,6 +35140,29 @@ impl WhoisContactFacet {
 
     pub fn builder() -> WhoisContactFacetBuilder {
         WhoisContactFacetBuilder {
+            birthdate: None,
+            contact_address: Vec::new(),
+            contact_affiliation: Vec::new(),
+            contact_email: Vec::new(),
+            contact_group: Vec::new(),
+            contact_id: None,
+            contact_messaging: Vec::new(),
+            contact_note: Vec::new(),
+            contact_phone: Vec::new(),
+            contact_profile: Vec::new(),
+            contact_sip: Vec::new(),
+            contact_url: Vec::new(),
+            display_name: None,
+            first_name: None,
+            last_name: None,
+            last_time_contacted: None,
+            middle_name: None,
+            name_phonetic: None,
+            name_prefix: None,
+            name_suffix: None,
+            nickname: Vec::new(),
+            number_times_contacted: None,
+            source_application: None,
             whois_contact_type: None,
         }
     }
@@ -15245,10 +35170,148 @@ impl WhoisContactFacet {
 
 #[derive(Debug, Default, Clone)]
 pub struct WhoisContactFacetBuilder {
+    birthdate: Option<String>,
+    contact_address: Vec<ContactAddress>,
+    contact_affiliation: Vec<ContactAffiliation>,
+    contact_email: Vec<ContactEmail>,
+    contact_group: Vec<String>,
+    contact_id: Option<String>,
+    contact_messaging: Vec<ContactMessaging>,
+    contact_note: Vec<String>,
+    contact_phone: Vec<ContactPhone>,
+    contact_profile: Vec<ContactProfile>,
+    contact_sip: Vec<ContactSIP>,
+    contact_url: Vec<ContactURL>,
+    display_name: Option<String>,
+    first_name: Option<String>,
+    last_name: Option<String>,
+    last_time_contacted: Option<String>,
+    middle_name: Option<String>,
+    name_phonetic: Option<String>,
+    name_prefix: Option<String>,
+    name_suffix: Option<String>,
+    nickname: Vec<String>,
+    number_times_contacted: Option<i64>,
+    source_application: Option<ObservableObject>,
     whois_contact_type: Option<String>,
 }
 
 impl WhoisContactFacetBuilder {
+    pub fn birthdate(mut self, value: String) -> Self {
+        self.birthdate = Some(value);
+        self
+    }
+
+    pub fn contact_address(mut self, value: Vec<ContactAddress>) -> Self {
+        self.contact_address = value;
+        self
+    }
+
+    pub fn contact_affiliation(mut self, value: Vec<ContactAffiliation>) -> Self {
+        self.contact_affiliation = value;
+        self
+    }
+
+    pub fn contact_email(mut self, value: Vec<ContactEmail>) -> Self {
+        self.contact_email = value;
+        self
+    }
+
+    pub fn contact_group(mut self, value: Vec<String>) -> Self {
+        self.contact_group = value;
+        self
+    }
+
+    pub fn contact_id(mut self, value: String) -> Self {
+        self.contact_id = Some(value);
+        self
+    }
+
+    pub fn contact_messaging(mut self, value: Vec<ContactMessaging>) -> Self {
+        self.contact_messaging = value;
+        self
+    }
+
+    pub fn contact_note(mut self, value: Vec<String>) -> Self {
+        self.contact_note = value;
+        self
+    }
+
+    pub fn contact_phone(mut self, value: Vec<ContactPhone>) -> Self {
+        self.contact_phone = value;
+        self
+    }
+
+    pub fn contact_profile(mut self, value: Vec<ContactProfile>) -> Self {
+        self.contact_profile = value;
+        self
+    }
+
+    pub fn contact_sip(mut self, value: Vec<ContactSIP>) -> Self {
+        self.contact_sip = value;
+        self
+    }
+
+    pub fn contact_url(mut self, value: Vec<ContactURL>) -> Self {
+        self.contact_url = value;
+        self
+    }
+
+    pub fn display_name(mut self, value: String) -> Self {
+        self.display_name = Some(value);
+        self
+    }
+
+    pub fn first_name(mut self, value: String) -> Self {
+        self.first_name = Some(value);
+        self
+    }
+
+    pub fn last_name(mut self, value: String) -> Self {
+        self.last_name = Some(value);
+        self
+    }
+
+    pub fn last_time_contacted(mut self, value: String) -> Self {
+        self.last_time_contacted = Some(value);
+        self
+    }
+
+    pub fn middle_name(mut self, value: String) -> Self {
+        self.middle_name = Some(value);
+        self
+    }
+
+    pub fn name_phonetic(mut self, value: String) -> Self {
+        self.name_phonetic = Some(value);
+        self
+    }
+
+    pub fn name_prefix(mut self, value: String) -> Self {
+        self.name_prefix = Some(value);
+        self
+    }
+
+    pub fn name_suffix(mut self, value: String) -> Self {
+        self.name_suffix = Some(value);
+        self
+    }
+
+    pub fn nickname(mut self, value: Vec<String>) -> Self {
+        self.nickname = value;
+        self
+    }
+
+    pub fn number_times_contacted(mut self, value: i64) -> Self {
+        self.number_times_contacted = Some(value);
+        self
+    }
+
+    pub fn source_application(mut self, value: ObservableObject) -> Self {
+        self.source_application = Some(value);
+        self
+    }
+
     pub fn whois_contact_type(mut self, value: String) -> Self {
         self.whois_contact_type = Some(value);
         self
@@ -15257,6 +35320,29 @@ impl WhoisContactFacetBuilder {
     pub fn build(self) -> WhoisContactFacet {
         WhoisContactFacet {
             class_iri: WhoisContactFacet::CLASS_IRI,
+            birthdate: self.birthdate,
+            contact_address: self.contact_address,
+            contact_affiliation: self.contact_affiliation,
+            contact_email: self.contact_email,
+            contact_group: self.contact_group,
+            contact_id: self.contact_id,
+            contact_messaging: self.contact_messaging,
+            contact_note: self.contact_note,
+            contact_phone: self.contact_phone,
+            contact_profile: self.contact_profile,
+            contact_sip: self.contact_sip,
+            contact_url: self.contact_url,
+            display_name: self.display_name,
+            first_name: self.first_name,
+            last_name: self.last_name,
+            last_time_contacted: self.last_time_contacted,
+            middle_name: self.middle_name,
+            name_phonetic: self.name_phonetic,
+            name_prefix: self.name_prefix,
+            name_suffix: self.name_suffix,
+            nickname: self.nickname,
+            number_times_contacted: self.number_times_contacted,
+            source_application: self.source_application,
             whois_contact_type: self.whois_contact_type,
         }
     }
@@ -15386,6 +35472,32 @@ impl CaseObject for WhoisRegistrarInfoType {
 pub struct WifiAddress {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WifiAddress {
@@ -15394,18 +35506,122 @@ impl WifiAddress {
 
     pub fn builder() -> WifiAddressBuilder {
         WifiAddressBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WifiAddressBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WifiAddressBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WifiAddress {
         WifiAddress {
             class_iri: WifiAddress::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -15420,6 +35636,10 @@ impl CaseObject for WifiAddress {
 pub struct WifiAddressFacet {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-observable:addressValue")]
+    pub address_value: Option<String>,
+    #[serde(rename = "uco-observable:displayName")]
+    pub display_name: Option<String>,
 }
 
 impl WifiAddressFacet {
@@ -15428,18 +35648,34 @@ impl WifiAddressFacet {
 
     pub fn builder() -> WifiAddressFacetBuilder {
         WifiAddressFacetBuilder {
+            address_value: None,
+            display_name: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WifiAddressFacetBuilder {
+    address_value: Option<String>,
+    display_name: Option<String>,
 }
 
 impl WifiAddressFacetBuilder {
+    pub fn address_value(mut self, value: String) -> Self {
+        self.address_value = Some(value);
+        self
+    }
+
+    pub fn display_name(mut self, value: String) -> Self {
+        self.display_name = Some(value);
+        self
+    }
+
     pub fn build(self) -> WifiAddressFacet {
         WifiAddressFacet {
             class_iri: WifiAddressFacet::CLASS_IRI,
+            address_value: self.address_value,
+            display_name: self.display_name,
         }
     }
 }
@@ -15454,6 +35690,32 @@ impl CaseObject for WifiAddressFacet {
 pub struct Wiki {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl Wiki {
@@ -15462,18 +35724,122 @@ impl Wiki {
 
     pub fn builder() -> WikiBuilder {
         WikiBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WikiBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WikiBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> Wiki {
         Wiki {
             class_iri: Wiki::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -15488,6 +35854,32 @@ impl CaseObject for Wiki {
 pub struct WikiArticle {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WikiArticle {
@@ -15496,18 +35888,122 @@ impl WikiArticle {
 
     pub fn builder() -> WikiArticleBuilder {
         WikiArticleBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WikiArticleBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WikiArticleBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WikiArticle {
         WikiArticle {
             class_iri: WikiArticle::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -15522,6 +36018,32 @@ impl CaseObject for WikiArticle {
 pub struct WindowsAccount {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsAccount {
@@ -15530,18 +36052,122 @@ impl WindowsAccount {
 
     pub fn builder() -> WindowsAccountBuilder {
         WindowsAccountBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsAccountBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsAccountBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsAccount {
         WindowsAccount {
             class_iri: WindowsAccount::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -15600,6 +36226,32 @@ impl CaseObject for WindowsAccountFacet {
 pub struct WindowsActiveDirectoryAccount {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsActiveDirectoryAccount {
@@ -15608,18 +36260,122 @@ impl WindowsActiveDirectoryAccount {
 
     pub fn builder() -> WindowsActiveDirectoryAccountBuilder {
         WindowsActiveDirectoryAccountBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsActiveDirectoryAccountBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsActiveDirectoryAccountBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsActiveDirectoryAccount {
         WindowsActiveDirectoryAccount {
             class_iri: WindowsActiveDirectoryAccount::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -15688,6 +36444,32 @@ impl CaseObject for WindowsActiveDirectoryAccountFacet {
 pub struct WindowsComputerSpecification {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsComputerSpecification {
@@ -15696,18 +36478,122 @@ impl WindowsComputerSpecification {
 
     pub fn builder() -> WindowsComputerSpecificationBuilder {
         WindowsComputerSpecificationBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsComputerSpecificationBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsComputerSpecificationBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsComputerSpecification {
         WindowsComputerSpecification {
             class_iri: WindowsComputerSpecification::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -15886,6 +36772,32 @@ impl CaseObject for WindowsComputerSpecificationFacet {
 pub struct WindowsCriticalSection {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsCriticalSection {
@@ -15894,18 +36806,122 @@ impl WindowsCriticalSection {
 
     pub fn builder() -> WindowsCriticalSectionBuilder {
         WindowsCriticalSectionBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsCriticalSectionBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsCriticalSectionBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsCriticalSection {
         WindowsCriticalSection {
             class_iri: WindowsCriticalSection::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -15920,6 +36936,32 @@ impl CaseObject for WindowsCriticalSection {
 pub struct WindowsEvent {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsEvent {
@@ -15928,18 +36970,122 @@ impl WindowsEvent {
 
     pub fn builder() -> WindowsEventBuilder {
         WindowsEventBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsEventBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsEventBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsEvent {
         WindowsEvent {
             class_iri: WindowsEvent::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -15954,6 +37100,32 @@ impl CaseObject for WindowsEvent {
 pub struct WindowsFilemapping {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsFilemapping {
@@ -15962,18 +37134,122 @@ impl WindowsFilemapping {
 
     pub fn builder() -> WindowsFilemappingBuilder {
         WindowsFilemappingBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsFilemappingBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsFilemappingBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsFilemapping {
         WindowsFilemapping {
             class_iri: WindowsFilemapping::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -15988,6 +37264,32 @@ impl CaseObject for WindowsFilemapping {
 pub struct WindowsHandle {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsHandle {
@@ -15996,18 +37298,122 @@ impl WindowsHandle {
 
     pub fn builder() -> WindowsHandleBuilder {
         WindowsHandleBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsHandleBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsHandleBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsHandle {
         WindowsHandle {
             class_iri: WindowsHandle::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -16022,6 +37428,32 @@ impl CaseObject for WindowsHandle {
 pub struct WindowsHook {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsHook {
@@ -16030,18 +37462,122 @@ impl WindowsHook {
 
     pub fn builder() -> WindowsHookBuilder {
         WindowsHookBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsHookBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsHookBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsHook {
         WindowsHook {
             class_iri: WindowsHook::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -16056,6 +37592,32 @@ impl CaseObject for WindowsHook {
 pub struct WindowsMailslot {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsMailslot {
@@ -16064,18 +37626,122 @@ impl WindowsMailslot {
 
     pub fn builder() -> WindowsMailslotBuilder {
         WindowsMailslotBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsMailslotBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsMailslotBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsMailslot {
         WindowsMailslot {
             class_iri: WindowsMailslot::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -16090,6 +37756,32 @@ impl CaseObject for WindowsMailslot {
 pub struct WindowsNetworkShare {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsNetworkShare {
@@ -16098,18 +37790,122 @@ impl WindowsNetworkShare {
 
     pub fn builder() -> WindowsNetworkShareBuilder {
         WindowsNetworkShareBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsNetworkShareBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsNetworkShareBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsNetworkShare {
         WindowsNetworkShare {
             class_iri: WindowsNetworkShare::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -16124,6 +37920,32 @@ impl CaseObject for WindowsNetworkShare {
 pub struct WindowsPEBinaryFile {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsPEBinaryFile {
@@ -16132,18 +37954,122 @@ impl WindowsPEBinaryFile {
 
     pub fn builder() -> WindowsPEBinaryFileBuilder {
         WindowsPEBinaryFileBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsPEBinaryFileBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsPEBinaryFileBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsPEBinaryFile {
         WindowsPEBinaryFile {
             class_iri: WindowsPEBinaryFile::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -16175,6 +38101,7 @@ pub struct WindowsPEBinaryFileFacet {
     #[serde(rename = "uco-observable:peType")]
     pub pe_type: Option<String>,
     #[serde(rename = "uco-observable:pointerToSymbolTable")]
+    #[serde(serialize_with = "crate::graph::serialize_hex_binary_vec")]
     pub pointer_to_symbol_table: Vec<Vec<u8>>,
     #[serde(rename = "uco-observable:sections")]
     pub sections: Vec<WindowsPESection>,
@@ -16754,6 +38681,32 @@ impl CaseObject for WindowsPESection {
 pub struct WindowsPrefetch {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsPrefetch {
@@ -16762,18 +38715,122 @@ impl WindowsPrefetch {
 
     pub fn builder() -> WindowsPrefetchBuilder {
         WindowsPrefetchBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsPrefetchBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsPrefetchBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsPrefetch {
         WindowsPrefetch {
             class_iri: WindowsPrefetch::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -16902,6 +38959,32 @@ impl CaseObject for WindowsPrefetchFacet {
 pub struct WindowsProcess {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsProcess {
@@ -16910,18 +38993,122 @@ impl WindowsProcess {
 
     pub fn builder() -> WindowsProcessBuilder {
         WindowsProcessBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsProcessBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsProcessBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsProcess {
         WindowsProcess {
             class_iri: WindowsProcess::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -17030,6 +39217,32 @@ impl CaseObject for WindowsProcessFacet {
 pub struct WindowsRegistryHive {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsRegistryHive {
@@ -17038,18 +39251,122 @@ impl WindowsRegistryHive {
 
     pub fn builder() -> WindowsRegistryHiveBuilder {
         WindowsRegistryHiveBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsRegistryHiveBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsRegistryHiveBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsRegistryHive {
         WindowsRegistryHive {
             class_iri: WindowsRegistryHive::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -17108,6 +39425,32 @@ impl CaseObject for WindowsRegistryHiveFacet {
 pub struct WindowsRegistryKey {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsRegistryKey {
@@ -17116,18 +39459,122 @@ impl WindowsRegistryKey {
 
     pub fn builder() -> WindowsRegistryKeyBuilder {
         WindowsRegistryKeyBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsRegistryKeyBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsRegistryKeyBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsRegistryKey {
         WindowsRegistryKey {
             class_iri: WindowsRegistryKey::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -17290,6 +39737,32 @@ impl CaseObject for WindowsRegistryValue {
 pub struct WindowsService {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsService {
@@ -17298,18 +39771,122 @@ impl WindowsService {
 
     pub fn builder() -> WindowsServiceBuilder {
         WindowsServiceBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsServiceBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsServiceBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsService {
         WindowsService {
             class_iri: WindowsService::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -17438,6 +40015,32 @@ impl CaseObject for WindowsServiceFacet {
 pub struct WindowsSystemRestore {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsSystemRestore {
@@ -17446,18 +40049,122 @@ impl WindowsSystemRestore {
 
     pub fn builder() -> WindowsSystemRestoreBuilder {
         WindowsSystemRestoreBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsSystemRestoreBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsSystemRestoreBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsSystemRestore {
         WindowsSystemRestore {
             class_iri: WindowsSystemRestore::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -17472,6 +40179,32 @@ impl CaseObject for WindowsSystemRestore {
 pub struct WindowsTask {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsTask {
@@ -17480,18 +40213,122 @@ impl WindowsTask {
 
     pub fn builder() -> WindowsTaskBuilder {
         WindowsTaskBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsTaskBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsTaskBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsTask {
         WindowsTask {
             class_iri: WindowsTask::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -17740,6 +40577,32 @@ impl CaseObject for WindowsTaskFacet {
 pub struct WindowsThread {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsThread {
@@ -17748,18 +40611,122 @@ impl WindowsThread {
 
     pub fn builder() -> WindowsThreadBuilder {
         WindowsThreadBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsThreadBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsThreadBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsThread {
         WindowsThread {
             class_iri: WindowsThread::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -17783,6 +40750,7 @@ pub struct WindowsThreadFacet {
     #[serde(rename = "uco-observable:observableCreatedTime")]
     pub observable_created_time: Option<String>,
     #[serde(rename = "uco-observable:parameterAddress")]
+    #[serde(serialize_with = "crate::graph::serialize_hex_binary_vec")]
     pub parameter_address: Vec<Vec<u8>>,
     #[serde(rename = "uco-observable:priority")]
     pub priority: Option<i64>,
@@ -17793,6 +40761,7 @@ pub struct WindowsThreadFacet {
     #[serde(rename = "uco-observable:stackSize")]
     pub stack_size: Vec<u64>,
     #[serde(rename = "uco-observable:startAddress")]
+    #[serde(serialize_with = "crate::graph::serialize_hex_binary_vec")]
     pub start_address: Vec<Vec<u8>>,
     #[serde(rename = "uco-observable:threadID")]
     pub thread_id: Vec<u64>,
@@ -17982,6 +40951,32 @@ impl CaseObject for WindowsVolumeFacet {
 pub struct WindowsWaitableTime {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WindowsWaitableTime {
@@ -17990,18 +40985,122 @@ impl WindowsWaitableTime {
 
     pub fn builder() -> WindowsWaitableTimeBuilder {
         WindowsWaitableTimeBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WindowsWaitableTimeBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WindowsWaitableTimeBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WindowsWaitableTime {
         WindowsWaitableTime {
             class_iri: WindowsWaitableTime::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -18016,6 +41115,32 @@ impl CaseObject for WindowsWaitableTime {
 pub struct WirelessNetworkConnection {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WirelessNetworkConnection {
@@ -18024,18 +41149,122 @@ impl WirelessNetworkConnection {
 
     pub fn builder() -> WirelessNetworkConnectionBuilder {
         WirelessNetworkConnectionBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WirelessNetworkConnectionBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WirelessNetworkConnectionBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WirelessNetworkConnection {
         WirelessNetworkConnection {
             class_iri: WirelessNetworkConnection::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -18124,6 +41353,32 @@ impl CaseObject for WirelessNetworkConnectionFacet {
 pub struct WriteBlocker {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl WriteBlocker {
@@ -18132,18 +41387,122 @@ impl WriteBlocker {
 
     pub fn builder() -> WriteBlockerBuilder {
         WriteBlockerBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct WriteBlockerBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl WriteBlockerBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> WriteBlocker {
         WriteBlocker {
             class_iri: WriteBlocker::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -18158,6 +41517,32 @@ impl CaseObject for WriteBlocker {
 pub struct X509Certificate {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl X509Certificate {
@@ -18166,18 +41551,122 @@ impl X509Certificate {
 
     pub fn builder() -> X509CertificateBuilder {
         X509CertificateBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct X509CertificateBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl X509CertificateBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> X509Certificate {
         X509Certificate {
             class_iri: X509Certificate::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }
@@ -18386,6 +41875,32 @@ impl CaseObject for X509CertificateFacet {
 pub struct X509V3Certificate {
     #[serde(skip_serializing)]
     pub class_iri: &'static str,
+    #[serde(rename = "uco-core:createdBy")]
+    pub created_by: Option<IdentityAbstraction>,
+    #[serde(rename = "uco-core:description")]
+    pub description: Vec<String>,
+    #[serde(rename = "uco-core:externalReference")]
+    pub external_reference: Vec<ExternalReference>,
+    #[serde(rename = "uco-core:hasFacet")]
+    pub has_facet: Vec<Facet>,
+    #[serde(rename = "uco-core:modifiedTime")]
+    pub modified_time: Vec<String>,
+    #[serde(rename = "uco-core:name")]
+    pub name: Option<String>,
+    #[serde(rename = "uco-core:objectCreatedTime")]
+    pub object_created_time: Option<String>,
+    #[serde(rename = "uco-core:objectMarking")]
+    pub object_marking: Vec<MarkingDefinitionAbstraction>,
+    #[serde(rename = "uco-core:objectStatus")]
+    pub object_status: Option<String>,
+    #[serde(rename = "uco-core:specVersion")]
+    pub spec_version: Option<String>,
+    #[serde(rename = "uco-core:tag")]
+    pub tag: Vec<String>,
+    #[serde(rename = "uco-observable:hasChanged")]
+    pub has_changed: Option<bool>,
+    #[serde(rename = "uco-observable:state")]
+    pub state: Option<String>,
 }
 
 impl X509V3Certificate {
@@ -18394,18 +41909,122 @@ impl X509V3Certificate {
 
     pub fn builder() -> X509V3CertificateBuilder {
         X509V3CertificateBuilder {
+            created_by: None,
+            description: Vec::new(),
+            external_reference: Vec::new(),
+            has_facet: Vec::new(),
+            modified_time: Vec::new(),
+            name: None,
+            object_created_time: None,
+            object_marking: Vec::new(),
+            object_status: None,
+            spec_version: None,
+            tag: Vec::new(),
+            has_changed: None,
+            state: None,
         }
     }
 }
 
 #[derive(Debug, Default, Clone)]
 pub struct X509V3CertificateBuilder {
+    created_by: Option<IdentityAbstraction>,
+    description: Vec<String>,
+    external_reference: Vec<ExternalReference>,
+    has_facet: Vec<Facet>,
+    modified_time: Vec<String>,
+    name: Option<String>,
+    object_created_time: Option<String>,
+    object_marking: Vec<MarkingDefinitionAbstraction>,
+    object_status: Option<String>,
+    spec_version: Option<String>,
+    tag: Vec<String>,
+    has_changed: Option<bool>,
+    state: Option<String>,
 }
 
 impl X509V3CertificateBuilder {
+    pub fn created_by(mut self, value: IdentityAbstraction) -> Self {
+        self.created_by = Some(value);
+        self
+    }
+
+    pub fn description(mut self, value: Vec<String>) -> Self {
+        self.description = value;
+        self
+    }
+
+    pub fn external_reference(mut self, value: Vec<ExternalReference>) -> Self {
+        self.external_reference = value;
+        self
+    }
+
+    pub fn has_facet(mut self, value: Vec<Facet>) -> Self {
+        self.has_facet = value;
+        self
+    }
+
+    pub fn modified_time(mut self, value: Vec<String>) -> Self {
+        self.modified_time = value;
+        self
+    }
+
+    pub fn name(mut self, value: String) -> Self {
+        self.name = Some(value);
+        self
+    }
+
+    pub fn object_created_time(mut self, value: String) -> Self {
+        self.object_created_time = Some(value);
+        self
+    }
+
+    pub fn object_marking(mut self, value: Vec<MarkingDefinitionAbstraction>) -> Self {
+        self.object_marking = value;
+        self
+    }
+
+    pub fn object_status(mut self, value: String) -> Self {
+        self.object_status = Some(value);
+        self
+    }
+
+    pub fn spec_version(mut self, value: String) -> Self {
+        self.spec_version = Some(value);
+        self
+    }
+
+    pub fn tag(mut self, value: Vec<String>) -> Self {
+        self.tag = value;
+        self
+    }
+
+    pub fn has_changed(mut self, value: bool) -> Self {
+        self.has_changed = Some(value);
+        self
+    }
+
+    pub fn state(mut self, value: String) -> Self {
+        self.state = Some(value);
+        self
+    }
+
     pub fn build(self) -> X509V3Certificate {
         X509V3Certificate {
             class_iri: X509V3Certificate::CLASS_IRI,
+            created_by: self.created_by,
+            description: self.description,
+            external_reference: self.external_reference,
+            has_facet: self.has_facet,
+            modified_time: self.modified_time,
+            name: self.name,
+            object_created_time: self.object_created_time,
+            object_marking: self.object_marking,
+            object_status: self.object_status,
+            spec_version: self.spec_version,
+            tag: self.tag,
+            has_changed: self.has_changed,
+            state: self.state,
         }
     }
 }

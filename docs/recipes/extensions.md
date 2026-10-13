@@ -165,7 +165,7 @@ Extensions and their exemplar data MUST validate with `case_validate` before the
 ```bash
 pip install case-utils  # one-time install
 
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph myext.ttl \
   --ontology-graph myext-shapes.ttl \
   myext-exemplar.ttl
@@ -176,7 +176,7 @@ case_validate --built-version case-1.4.0 \
 When your extension adds subclasses of `uco-core:Facet`, `uco-core:UcoObject`, or other UCO classes, include `--inference rdfs` so the validator infers the property hierarchy. Add `--allow-info` so informational results (UUID IRI suggestions, vocabulary hints) don't cause failure:
 
 ```bash
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph myext.ttl \
   --ontology-graph myext-shapes.ttl \
   --inference rdfs --allow-info \
@@ -188,7 +188,7 @@ case_validate --built-version case-1.4.0 \
 If your exemplar uses classes from multiple extension ontologies, pass each with a separate `--ontology-graph`:
 
 ```bash
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph ontology/action-ai-ext.ttl \
   --ontology-graph ontology/observable-ai-ext.ttl \
   exemplars/action-ai-ext-exemplar.ttl
@@ -259,9 +259,11 @@ Complex extensions with multiple modules can provide a `manifest.json` file in t
 | `shacl_files` | No | Relative paths to SHACL shapes files |
 | `bridge_files` | No | Relative paths to bridge/alignment modules |
 | `exemplar_files` | No | Relative paths to example instance data |
+| `invalid_exemplar_files` | No | Relative paths to expected-invalid negative fixtures that must fail SHACL validation |
 | `uco_compat` | Yes | List of compatible UCO versions |
 | `upper_ontology` | No | `"gufo"`, `"bfo"`, or `"none"` |
 | `cdo_shapes_compatibility` | No | Map of CDO Shapes profile → compatibility status |
+| `status` | No | Staged promotion lifecycle state: `"candidate"`, `"operational"`, or `"deprecated"` (see [`mcp_server/knowledge_lifecycle.py`](../../mcp_server/knowledge_lifecycle.py)). Manifests without this field are treated as `"operational"`. |
 
 ### Example Manifest
 

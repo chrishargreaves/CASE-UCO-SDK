@@ -12,6 +12,7 @@ from pathlib import Path
 
 from rdflib import Graph, URIRef
 
+from case_uco_generator.backends.base import CodegenBackend
 from case_uco_generator.schema_model import (
     OntologyClass,
     OntologySchema,
@@ -140,7 +141,7 @@ def scaffold_python(schema: OntologySchema, prefix: str, ns: str) -> str:
 
     for cls in sorted(schema.classes.values(), key=lambda c: c.name):
         lines.append("@dataclass")
-        lines.append(f"class {cls.name}:")
+        lines.append(f"class {CodegenBackend.safe_identifier(cls.name, 'python')}:")
         desc = cls.description[:200] if cls.description else cls.name
         lines.append(f'    """{desc}"""')
         lines.append("")
@@ -180,7 +181,7 @@ def scaffold_csharp(schema: OntologySchema, prefix: str, ns: str) -> str:
     lines.append("{")
     for cls in sorted(schema.classes.values(), key=lambda c: c.name):
         lines.append(f"    /// <summary>{cls.description[:120] if cls.description else cls.name}</summary>")
-        lines.append(f"    public class {cls.name}")
+        lines.append(f"    public class {CodegenBackend.safe_identifier(cls.name, 'csharp')}")
         lines.append("    {")
         lines.append(f'        public static readonly string ClassIri = "{cls.iri}";')
         lines.append(f'        public static readonly string NamespacePrefix = "{prefix}";')
@@ -208,7 +209,7 @@ def scaffold_java(schema: OntologySchema, prefix: str, ns: str) -> str:
     lines.append("")
     for cls in sorted(schema.classes.values(), key=lambda c: c.name):
         lines.append(f"/** {cls.description[:120] if cls.description else cls.name} */")
-        lines.append(f"public class {cls.name} {{")
+        lines.append(f"public class {CodegenBackend.safe_identifier(cls.name, 'java')} {{")
         lines.append(f'    public static final String CLASS_IRI = "{cls.iri}";')
         lines.append(f'    public static final String NAMESPACE_PREFIX = "{prefix}";')
         lines.append("")
@@ -227,7 +228,7 @@ def scaffold_java(schema: OntologySchema, prefix: str, ns: str) -> str:
                 lines.append(f"    public List<{java_type}> {getter_name}() {{ return {prop.name}; }}")
             else:
                 lines.append(f"    public {java_type} {getter_name}() {{ return {prop.name}; }}")
-                lines.append(f"    public {cls.name} {setter_name}({java_type} {prop.name}) {{ this.{prop.name} = {prop.name}; return this; }}")
+                lines.append(f"    public {CodegenBackend.safe_identifier(cls.name, 'java')} {setter_name}({java_type} {prop.name}) {{ this.{prop.name} = {prop.name}; return this; }}")
         lines.append("}")
         lines.append("")
     return "\n".join(lines)
@@ -242,7 +243,7 @@ def scaffold_rust(schema: OntologySchema, prefix: str, ns: str) -> str:
     for cls in sorted(schema.classes.values(), key=lambda c: c.name):
         lines.append(f"/// {cls.description[:120] if cls.description else cls.name}")
         lines.append("#[derive(Debug, Clone, Serialize, Default)]")
-        lines.append(f"pub struct {cls.name} {{")
+        lines.append(f"pub struct {CodegenBackend.safe_identifier(cls.name, 'rust')} {{")
         for prop in cls.properties:
             rust_type = prop.type_name_for("rust")
             field_name = _to_snake(prop.name)
@@ -252,7 +253,7 @@ def scaffold_rust(schema: OntologySchema, prefix: str, ns: str) -> str:
                 lines.append(f"    pub {field_name}: Option<{rust_type}>,")
         lines.append("}")
         lines.append("")
-        lines.append(f"impl {cls.name} {{")
+        lines.append(f"impl {CodegenBackend.safe_identifier(cls.name, 'rust')} {{")
         lines.append(f'    pub fn class_iri() -> &\'static str {{ "{cls.iri}" }}')
         lines.append("}")
         lines.append("")

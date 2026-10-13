@@ -22,8 +22,6 @@ class Claim:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    in_report: Optional[Report] = field(default=None)
-    supported_by_evidence_pointer: list[TextEvidencePointer] = field(default_factory=list)
 
 
 @dataclass
@@ -42,8 +40,6 @@ class DistributionObservation:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    in_report: Optional[Report] = field(default=None)
-    supported_by_evidence_pointer: list[TextEvidencePointer] = field(default_factory=list)
 
 
 @dataclass
@@ -62,8 +58,6 @@ class EvidenceGap:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    in_report: Optional[Report] = field(default=None)
-    supported_by_evidence_pointer: list[TextEvidencePointer] = field(default_factory=list)
 
 
 @dataclass
@@ -154,9 +148,6 @@ class KeyFinding:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    in_report: Optional[Report] = field(default=None)
-    supported_by_evidence_pointer: list[TextEvidencePointer] = field(default_factory=list)
-    finding_number: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -175,8 +166,6 @@ class MethodologyStatement:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    in_report: Optional[Report] = field(default=None)
-    supported_by_evidence_pointer: list[TextEvidencePointer] = field(default_factory=list)
 
 
 @dataclass
@@ -231,9 +220,6 @@ class Recommendation:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    in_report: Optional[Report] = field(default=None)
-    supported_by_evidence_pointer: list[TextEvidencePointer] = field(default_factory=list)
-    recommendation_number: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -326,8 +312,6 @@ class ResearchQuestion:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    in_report: Optional[Report] = field(default=None)
-    supported_by_evidence_pointer: list[TextEvidencePointer] = field(default_factory=list)
 
 
 @dataclass
@@ -346,8 +330,6 @@ class ScopeConstraint:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    in_report: Optional[Report] = field(default=None)
-    supported_by_evidence_pointer: list[TextEvidencePointer] = field(default_factory=list)
 
 
 @dataclass
@@ -366,5 +348,4 @@ class TextEvidencePointer:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    references_artifact: Optional[ObservableObject] = field(default=None)
 

@@ -1,0 +1,12 @@
+# CQ 1.1: What values are recorded for CampaignCluster instances?
+PREFIX uco-observable: <https://ontology.unifiedcyberontology.org/uco/observable/>
+PREFIX uco-core: <https://ontology.unifiedcyberontology.org/uco/core/>
+PREFIX proposed: <http://example.org/ontology/proposed/>
+
+SELECT ?obj ?name
+WHERE {
+    ?obj a uco-observable:ObservableObject ;
+         uco-core:hasFacet ?facet .
+    ?facet a proposed:CampaignCluster ;
+           proposed:name ?name .
+}

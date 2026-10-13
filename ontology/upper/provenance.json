@@ -110,6 +110,58 @@
       "source_commit": "1610ae59f2aea8f074410f3eba78a38136e19426",
       "sha256": "1b8a2e7833698935845a2e422f92d5e3d82dc32fbbe9a82be8cc9a80092d6dbf",
       "fetched": "2026-07-11T04:16:34.105690+00:00"
+    },
+    "qudt-schema.ttl": {
+      "ontology": "qudt",
+      "source_url": "https://github.com/qudt/qudt-public-repo/releases/download/v3.5.2/qudt-public-repo-3.5.2.zip",
+      "sha256": "642c8304d5137670ecad2db076181d7266b608d4a799c81fe7ed29fb40edd193",
+      "fetched": "2026-10-12T18:03:19.598938+00:00",
+      "archive_member": "schema/SCHEMA_QUDT.ttl"
+    },
+    "qudt-units.ttl": {
+      "ontology": "qudt-units",
+      "source_url": "https://github.com/qudt/qudt-public-repo/releases/download/v3.5.2/qudt-public-repo-3.5.2.zip",
+      "sha256": "1578ec226340ab2b3265f8d3f10f82a585e2dc8ed66c07a86b7008ab66dd990f",
+      "fetched": "2026-10-12T18:03:19.633818+00:00",
+      "archive_member": "vocab/unit/VOCAB_QUDT-UNITS-ALL.ttl"
+    },
+    "qudt-quantitykinds.ttl": {
+      "ontology": "qudt-quantitykinds",
+      "source_url": "https://github.com/qudt/qudt-public-repo/releases/download/v3.5.2/qudt-public-repo-3.5.2.zip",
+      "sha256": "32575971bbadadb9dc397720fa0d3abaee063ace0ae44866566b9d48f88ecc73",
+      "fetched": "2026-10-12T18:03:19.638898+00:00",
+      "archive_member": "vocab/quantitykinds/VOCAB_QUDT-QUANTITY-KINDS-ALL.ttl"
+    },
+    "qudt-prefixes.ttl": {
+      "ontology": "qudt-prefixes",
+      "source_url": "https://github.com/qudt/qudt-public-repo/releases/download/v3.5.2/qudt-public-repo-3.5.2.zip",
+      "sha256": "cd6ce06729eb1982551b2b0f3d82ce0323685eeffc84231a7f5384d3d6b9fa44",
+      "fetched": "2026-10-12T18:03:19.639438+00:00",
+      "archive_member": "vocab/prefixes/VOCAB_QUDT-PREFIXES.ttl"
+    },
+    "sosa.ttl": {
+      "ontology": "sosa",
+      "source_url": "https://www.w3.org/ns/sosa/",
+      "sha256": "c70b0d1c843c0047e4c98e0a89392e46a05752ff6365bda7f7f55303905a0392",
+      "fetched": "2026-10-12T18:03:19.797255+00:00"
+    },
+    "ssn.ttl": {
+      "ontology": "ssn",
+      "source_url": "https://www.w3.org/ns/ssn/",
+      "sha256": "184d86189191146e314cc52b1bceb96fca11e70aacbc160d71588102a5153eb9",
+      "fetched": "2026-10-12T18:03:19.936914+00:00"
+    },
+    "ssn-systems.ttl": {
+      "ontology": "ssn-systems",
+      "source_url": "https://www.w3.org/ns/ssn/systems/",
+      "sha256": "1750d2b3bb5635261586ef49ecd43278942e84e3328b172a046011b18a11af02",
+      "fetched": "2026-10-12T18:03:20.087484+00:00"
+    },
+    "prof-roles.ttl": {
+      "ontology": "prof-roles",
+      "source_url": "https://www.w3.org/ns/dx/prof/role/",
+      "sha256": "f83fee5962ebc4190506a034ae928ac1b2fa68303014b1cfcf7f375829dd2be6",
+      "fetched": "2026-10-12T18:17:45.707479+00:00"
     }
   }
 }

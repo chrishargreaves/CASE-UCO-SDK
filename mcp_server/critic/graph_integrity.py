@@ -172,9 +172,10 @@ def analyze_graph_integrity(
     object_iris = collect_object_iris_from_rdf(view)
     dangling_ids: list[str] = []
     examined_refs = 0
-    for obj_iri in object_iris:
+    kb_base = view.prefixes.get("kb")
+    for obj_iri in sorted(object_iris):
         examined_refs += 1
-        if not _is_local_resolvable(obj_iri):
+        if not (_is_local_resolvable(obj_iri) or (kb_base and obj_iri.startswith(kb_base))):
             continue
         if obj_iri not in known:
             f = _f(

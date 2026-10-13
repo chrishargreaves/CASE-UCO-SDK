@@ -50,4 +50,5 @@ class WeaknessEvaluationSet:
     object: list[UcoObject] = field(default_factory=list)
     evaluated_by: list[Identity] = field(default_factory=list)
     has_evaluation: list[WeaknessEvaluation] = field(default_factory=list)
+    scoring_scheme: Optional[str] = field(default=None)
 

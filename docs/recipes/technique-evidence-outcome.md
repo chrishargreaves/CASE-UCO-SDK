@@ -17,32 +17,32 @@ hash-match CSV + UFED-style summary, and a PACER method-claim graph).
 - A PACER affidavit or expert report names a product or method
 - You need to keep one matter identity across a press release, PACER docket,
   and later lab graph
-- You are answering effectiveness questions that require `usedTechnique`
-  plus `legalproc:Sentence`
+- You are answering effectiveness questions that require the SOLVE-IT
+  technique an action performed plus `legalproc:Sentence`
 
 Use [cac-legal-sentencing-outcomes.md](cac-legal-sentencing-outcomes.md) for
 press-release legal stages. Use
 [solve-it-investigation-planning.md](solve-it-investigation-planning.md) for
 technique selection and error mitigation. Use
 [cyber-threat-intelligence.md](cyber-threat-intelligence.md) for **hacker /
-attacker** ATT&CK techniques on CTI reports — do not put ATT&CK IRIs on
-`solveit-core:usedTechnique`, and do not use ATT&CK as the vocabulary for
+attacker** ATT&CK techniques on CTI reports — do not type examiner
+actions with ATT&CK techniques, and do not use ATT&CK as the vocabulary for
 a crimes-against-children offender.
 
 ## Source-fidelity table
 
 | Source | Record | Do not record |
 |---|---|---|
-| Press release | Named evidence types (`CSAMIncident`, CyberTip, statement), `legalproc` charges/outcomes, source publication vs retrieval time | `usedTechnique`, empty `ContentDataFacet`, invented tool versions |
+| Press release | Named evidence types (`CSAMIncident`, CyberTip, statement), `legalproc` charges/outcomes, source publication vs retrieval time | A DFT-* technique type, empty `ContentDataFacet`, invented tool versions |
 | PACER affidavit / trial brief / expert report | Named `uco-tool:Tool` + `case-investigation:InvestigativeAction` when the filing names the method; `ProvenanceRecord` to the PACER page | A DFT-* IRI the filing does not support |
-| Lab / PD export (UFED summary, hash-match CSV, FTK/Autopsy log) | `solveit-core:SolveitInvestigativeAction` + `usedTechnique` + versioned `instrument` + `object`/`result` + `ContentDataFacet` with `hash` | Placeholder facets; auto-asserted DFT-* from product name alone |
+| Lab / PD export (UFED summary, hash-match CSV, FTK/Autopsy log) | `solveit-core:SolveitInvestigativeAction` typed with the DFT-* technique class + versioned `instrument` + `object`/`result` + `ContentDataFacet` with `hash` | Placeholder facets; auto-asserted DFT-* from product name alone |
 | CTI / ATT&CK report | Hacker / attacker behavior as `uco-action:Action` typed with the `attack-technique` catalog | SOLVE-IT examiner techniques; CAC offender conduct (grooming, CSAM, sextortion); LE product runs the report does not describe |
 
 Suggested DFT-* IDs for common LE products live in
 [`examples/technique-evidence-outcome/le_tool_solveit_profiles.json`](../../examples/technique-evidence-outcome/le_tool_solveit_profiles.json).
 Those rows are **capability hints**. Call
-`suggest_techniques_for_product(name)` to review candidates; write
-`usedTechnique` only when the source establishes the technique.
+`suggest_techniques_for_product(name)` to review candidates; type an
+action with a DFT-* class only when the source establishes the technique.
 
 ## Classes and properties
 
@@ -50,7 +50,7 @@ Those rows are **capability hints**. Call
 |---|---|
 | `case-investigation:Investigation` | Matter container; reuse `legalproc:caseIdentifier` across sources |
 | `solveit-core:SolveitInvestigativeAction` | Lab execution that records method |
-| `solveit-core:usedTechnique` | SOLVE-IT DFT-* individual actually performed |
+| `solveit-data:techniqueDFT-*` (extra `@type` on the action) | SOLVE-IT technique actually performed (`usedTechnique` is deprecated since SOLVE-IT 0.2.x) |
 | `case-investigation:InvestigativeAction` | PACER method claim when no DFT-* is sourced |
 | `uco-tool:Tool` | Versioned product (`instrument`) |
 | `uco-observable:ObservableObject` + `FileFacet` + `ContentDataFacet` | Evidence; `hash` is required when this facet is used |
@@ -65,8 +65,7 @@ Those rows are **capability hints**. Call
 ```
 Investigation (legalproc:caseIdentifier)
   ├── Related_To ──▶ FederalCharge / StateCharge
-  ├── SolveitInvestigativeAction
-  │     ├── solveit-core:usedTechnique ──▶ DFT-1050 / DFT-1020 / …
+  ├── SolveitInvestigativeAction + DFT-1050 / DFT-1020 / … (rdf:type)
   │     ├── uco-action:instrument ──▶ Tool
   │     ├── uco-action:object / result ──▶ ObservableObject + Hash
   │     └── Related_To ──▶ charge
@@ -93,7 +92,7 @@ native Cellebrite, Magnet, or FTK export formats.
 
 ## Anti-patterns
 
-- Minting `solveit-core:usedTechnique` because a press release mentioned a
+- Typing an action with a DFT-* technique because a press release mentioned a
   CyberTip or “digital evidence”
 - Attaching `ContentDataFacet()` with no `hash`, size, MIME type, or payload
 - Collapsing ATT&CK attacker techniques into SOLVE-IT examiner techniques
@@ -108,7 +107,7 @@ native Cellebrite, Magnet, or FTK export formats.
 
 1. Classify the source with the fidelity table before creating method nodes.
 2. Reuse `legalproc:caseIdentifier` and the investigation IRI for the matter.
-3. If the source is a lab export, record `usedTechnique` and real hashes.
+3. If the source is a lab export, type the action with the DFT-* technique and record real hashes.
 4. If the source is PACER, record a named tool only when the filing names it.
 5. If the source is a press release, stop at legal outcomes and named evidence.
 6. Validate with `validate_graph(..., extensions=["solveit", "legalproc"])`.

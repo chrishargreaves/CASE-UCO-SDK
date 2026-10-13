@@ -30,12 +30,33 @@ UCO_INDICATORS: list[str] = [
 ]
 
 
-def suggest_target_repo(concept: str, description: str = "") -> dict[str, str]:
-    """Suggest whether a proposed concept belongs in UCO or CASE.
+# Narrow on purpose: "child" alone also means a child process or node.
+CAC_INDICATORS: list[str] = [
+    "crimes against children", "child exploitation", "child sexual",
+    "child abuse", "child victim", "minor victim", "csam", "cacontology",
+    "cac ontology", "icac", "ncmec", "cybertip", "grooming", "sextortion",
+    "enticement", "sex trafficking",
+]
 
-    Returns ``{"suggestion": "UCO"|"CASE"|"unsure", "reasoning": "..."}``.
+
+def suggest_target_repo(concept: str, description: str = "") -> dict[str, str]:
+    """Suggest whether a proposed concept belongs in UCO, CASE, or the CAC Ontology.
+
+    Returns ``{"suggestion": "UCO"|"CASE"|"CAC"|"unsure", "reasoning": "..."}``.
     """
     text = f"{concept} {description}".lower()
+
+    cac_hits = [kw for kw in CAC_INDICATORS if kw in text]
+    if cac_hits:
+        return {
+            "suggestion": "CAC",
+            "reasoning": (
+                f"The concept matches crimes-against-children indicators "
+                f"({', '.join(cac_hits)}). Domain terms for these investigations "
+                f"belong in the CAC Ontology tracker; propose to CASE or UCO only "
+                f"if the concept is useful outside that domain."
+            ),
+        }
 
     case_score = sum(1 for kw in CASE_INDICATORS if kw in text)
     uco_score = sum(1 for kw in UCO_INDICATORS if kw in text)
@@ -93,34 +114,6 @@ def suggest_target_repo(concept: str, description: str = "") -> dict[str, str]:
         ),
     }
 
-
-# ---------------------------------------------------------------------------
-# Change proposal template sections
-# ---------------------------------------------------------------------------
-
-CHANGE_PROPOSAL_SECTIONS: dict[str, str] = {
-    "background": (
-        "# Background\n\n"
-        "{background}\n"
-    ),
-    "requirements": (
-        "# Requirements\n\n"
-        "{requirements}\n"
-    ),
-    "risk_benefit": (
-        "# Risk / Benefit analysis\n\n"
-        "## Benefits\n\n{benefits}\n\n"
-        "## Risks\n\n{risks}\n"
-    ),
-    "competencies": (
-        "# Competencies demonstrated\n\n"
-        "{competencies}\n"
-    ),
-    "solution": (
-        "# Solution suggestion\n\n"
-        "{solution}\n"
-    ),
-}
 
 TASK_TO_CLASSES: dict[str, list[tuple[str, str]]] = {
     "model a forensic disk image extraction": [
@@ -431,7 +424,7 @@ DOMAIN_CATEGORIES: list[dict[str, Any]] = [
         "title": "Devices and Hardware",
         "description": "Computers, phones, storage devices, and hardware components.",
         "keywords": ["device", "computer", "phone", "sim", "storage", "hardware",
-                     "disk", "usb", "bluetooth"],
+                     "disk", "usb", "bluetooth", "sensor", "wearable", "infotainment"],
     },
     {
         "name": "applications_and_software",
@@ -783,6 +776,93 @@ UCO_PROFILES: list[dict[str, Any]] = [
             "aeo": "compatible",
         },
     },
+    # SDK-pinned ontologies with no CDO-Shapes profile yet (#60). UCO
+    # adoption is discussed in ucoProject/UCO#404; the SDK ships minimal
+    # shapes under ontology/upper/sdk-shapes/.
+    {
+        "id": "qudt",
+        "name": "SDK-pinned QUDT",
+        "full_name": "QUDT 3.5.2 (Quantities, Units, Dimensions and Types)",
+        "ontology_url": "https://qudt.org/",
+        "repo_url": "https://github.com/qudt/qudt-public-repo",
+        "profile_type": "sdk-pinned",
+        "ontology_file": "qudt-schema.ttl",
+        "local_source": "ontology/upper/qudt-schema.ttl",
+        "local_shapes": "ontology/upper/sdk-shapes/sh-qudt-sdk.ttl",
+        "status": "sdk-pinned (no CDO-Shapes profile; see ucoProject/UCO#404)",
+        "description": (
+            "Quantity values with units and quantity kinds: speed, altitude, "
+            "temperature, distance, battery level, step and heart-rate counts. "
+            "Strict coverage checks unit and quantity-kind IRIs against the "
+            "pinned vocabularies; look units up with lookup_qudt_units."
+        ),
+        "keywords": ["qudt", "quantity", "quantities", "unit", "units",
+                      "measurement", "measure", "speed", "velocity", "altitude",
+                      "temperature", "distance", "pressure", "heart rate",
+                      "battery", "kph", "mph", "celsius", "metre", "meter"],
+        "related_domains": ["devices_and_hardware", "mobile_forensics"],
+        "related_recipes": ["docs/recipes/qudt-quantities-and-units.md",
+                            "docs/recipes/sosa-sensor-observations.md"],
+        "extension_compatibility": {
+            "cac": "compatible",
+            "aeo": "compatible",
+        },
+    },
+    {
+        "id": "sosa",
+        "name": "SDK-pinned SOSA",
+        "full_name": "W3C Sensor, Observation, Sample, and Actuator (SOSA)",
+        "ontology_url": "https://www.w3.org/TR/vocab-ssn/",
+        "repo_url": "https://github.com/w3c/sdw-sosa-ssn",
+        "profile_type": "sdk-pinned",
+        "ontology_file": "sosa.ttl",
+        "local_source": "ontology/upper/sosa.ttl",
+        "local_shapes": "ontology/upper/sdk-shapes/sh-sosa-sdk.ttl",
+        "status": "sdk-pinned (no CDO-Shapes profile; see ucoProject/UCO#404)",
+        "description": (
+            "Sensors, the observations they make, samples, and actuations: "
+            "vehicle telemetry, wearable and phone sensors, IoT device logs. "
+            "Use for genuine sensor observations, not for events such as a "
+            "device unlock or for lookups such as a wallet balance."
+        ),
+        "keywords": ["sosa", "sensor", "sensors", "observation", "telemetry",
+                      "iot", "wearable", "accelerometer", "gyroscope", "barometer",
+                      "gps receiver", "smart device", "fitness tracker",
+                      "infotainment", "actuator", "sample"],
+        "related_domains": ["devices_and_hardware", "mobile_forensics"],
+        "related_recipes": ["docs/recipes/sosa-sensor-observations.md",
+                            "docs/recipes/qudt-quantities-and-units.md"],
+        "extension_compatibility": {
+            "cac": "compatible",
+            "aeo": "compatible",
+        },
+    },
+    {
+        "id": "ssn",
+        "name": "SDK-pinned SSN",
+        "full_name": "W3C Semantic Sensor Network (SSN) with SSN-System",
+        "ontology_url": "https://www.w3.org/TR/vocab-ssn/",
+        "repo_url": "https://github.com/w3c/sdw-sosa-ssn",
+        "profile_type": "sdk-pinned",
+        "ontology_file": "ssn.ttl",
+        "local_source": "ontology/upper/ssn.ttl",
+        "local_shapes": None,
+        "status": "sdk-pinned (no CDO-Shapes profile; see ucoProject/UCO#404)",
+        "description": (
+            "SSN extends SOSA with systems, deployments, stimuli, and, through "
+            "SSN-System, sensor capabilities such as accuracy, precision, "
+            "resolution, and operating range. Selecting ssn also selects sosa."
+        ),
+        "keywords": ["ssn", "semantic sensor network", "sensor capability",
+                      "accuracy", "precision", "resolution", "deployment",
+                      "operating range", "system capability"],
+        "related_domains": ["devices_and_hardware"],
+        "related_recipes": ["docs/recipes/sosa-sensor-observations.md"],
+        "extension_compatibility": {
+            "cac": "compatible",
+            "aeo": "compatible",
+        },
+    },
 ]
 
 CORE_PATTERNS: list[dict[str, str]] = [
@@ -844,6 +924,16 @@ RECIPE_INDEX: list[dict[str, str]] = [
         "description": "Create an investigation with a tool and investigative action.",
         "keywords": "tool investigation action forensic workflow",
         "file": "docs/recipes/forensic-tool.md",
+    },
+    {
+        "title": "Public-Record Capture Bundles",
+        "description": "Map a manifest of fetched public web records, redirects, failed rows, renditions, verified citations, and curator labels.",
+        "keywords": (
+            "public record capture manifest http retrieval hash url redirect "
+            "federal register executive order web page citation curator see_also "
+            "provenance sidecar mime"
+        ),
+        "file": "docs/recipes/public-record-capture.md",
     },
     {
         "title": "File System Forensics",
@@ -1152,7 +1242,7 @@ RECIPE_INDEX: list[dict[str, str]] = [
     },
     {
         "title": "PACER Document Ingestion (MCP Agent Workflow)",
-        "description": "Submit PACER PDF bundles via process_document_file, route CAC recipes, build merged validated investigation graphs for agents and Link-Look.",
+        "description": "Submit PACER PDF bundles via process_document_file, route CAC recipes, build merged validated investigation graphs for agents and review tools.",
         "keywords": "pacer pdf indictment judgment trial brief process_document_file validate_graph icac federal court ecf docket ao 245b agent workflow cac ontology crimes against children",
         "file": "docs/recipes/cac-pacer-document-ingestion.md",
     },
@@ -1206,20 +1296,26 @@ RECIPE_INDEX: list[dict[str, str]] = [
     },
     {
         "title": "Cyber Threat Intelligence and APT Reporting",
-        "description": "Model an open-source CTI/APT threat report: the report and its graphics captured by hash, the threat actor as an Organization (no ThreatActor class), malware families/variants and toolkit, registry/service-DLL persistence (native UCO coverage), third-party cloud C2, victimology, IOCs, and MITRE ATT&CK techniques via the uco-action:Technique metaclass (UCO PR #676: a technique is an owl:Class subclassing uco-action:Action with techniqueID, punned onto the exhibiting Action; released in UCO 1.5.0 and mirrored by the attack-technique extension while case_validate remains pinned to case-1.4.0).",
+        "description": "Model an open-source CTI/APT threat report: the report and its graphics captured by hash, the threat actor as an Organization (no ThreatActor class), malware families/variants and toolkit, registry/service-DLL persistence (native UCO coverage), third-party cloud C2, victimology, IOCs, and MITRE ATT&CK techniques via the UCO 1.5.0 uco-action:Technique metaclass (a technique is an owl:Class subclassing uco-action:Action with techniqueID, punned onto the exhibiting Action). The attack-technique extension vendors the complete ATT&CK v19.2 catalog (Enterprise, Mobile, ICS); find IDs with search_adversary_techniques.",
         "keywords": "apt advanced persistent threat threat actor cyber espionage group nation-state sagerunex darkwatchman fileless registry buffer keylogger dga tordwm spearphishing pony express backdoor implant rat malware family variant loader dll injection vmprotect command and control c2 beacon exfiltration lateral movement impacket wmi persistence service dll servicedll registry reg add windows service scheduled task cookie stealer venom proxy port relay htran mtrain victimology campaign threat spotlight ttp ttps mitre att&ck technique ioc yara clamav snort talos mandiant prevailion pact dropbox twitter zimbra cloud c2 windowsregistrykey registrydatatype",
         "file": "docs/recipes/cyber-threat-intelligence.md",
     },
     {
+        "title": "Attacks on AI Systems (MITRE ATLAS)",
+        "description": "Model an incident or report where an AI system is the target — prompt injection, jailbreak, model evasion, training-data or RAG poisoning, model extraction or theft, AI-agent tool abuse — by typing each evidenced uco-action:Action with its MITRE ATLAS technique class (the complete ATLAS 2026.09 catalog in the atlas-technique extension, UCO 1.5.0 Technique metaclass). Add ATT&CK only where the evidence also shows conventional intrusion; an offense that merely uses AI tools is not an AI-system attack.",
+        "keywords": "mitre atlas ai system attack adversarial machine learning prompt injection indirect prompt injection jailbreak system prompt extraction llm application ai agent agentic tool invocation exfiltration model evasion adversarial example data poisoning training data poisoning rag poisoning model extraction model inversion membership inference model theft model weights ai supply chain malicious model unsafe ai artifact aml.t technique",
+        "file": "docs/recipes/ai-system-attacks.md",
+    },
+    {
         "title": "SOLVE-IT Investigation Planning and Error Mitigation",
-        "description": "Plan and document forensic method with the pinned SOLVE-IT knowledge base (23 objectives, 187 techniques, 339 weaknesses, 270 mitigations): state objectives, record SolveitInvestigativeAction with usedTechnique/appliedMitigation, type acquisition outputs with SOLVE-IT observables, rate weaknesses (ASTM E3016-18) with solveit-wa:WeaknessEvaluation, and optionally type actions with punned DFT-* technique classes (UCO 1.5.0 metaclass style). Discover techniques with plan_solveit_workflow / search_solveit / get_solveit_details.",
+        "description": "Plan and document forensic method with the pinned SOLVE-IT knowledge base (24 objectives, 200 techniques, 441 weaknesses, 336 mitigations): state objectives, record each SolveitInvestigativeAction typed with the DFT-* technique class it performed (uco-action:Technique metaclass pattern; usedTechnique is deprecated) plus appliedMitigation, type acquisition outputs with SOLVE-IT observables, and rate weaknesses (ASTM E3016-18) with solveit-wa:WeaknessEvaluation. Discover techniques with plan_solveit_workflow / search_solveit / get_solveit_details.",
         "keywords": "solve-it solveit technique selection objective forensic method methodology error mitigation analysis weakness mitigation astm e3016 disk imaging acquisition plan hash verification write blocker dual-tool verification tool testing quality assurance qa lab accreditation error rate daubert examination report investigative action dft dfw dfm dfo weakness evaluation rpn likelihood impact",
         "file": "docs/recipes/solve-it-investigation-planning.md",
     },
     {
         "title": "Technique, Evidence, and Legal-Outcome Join",
-        "description": "Join sourced SOLVE-IT examiner techniques, hashed digital evidence, and legalproc charges/sentences. Press releases omit usedTechnique; PACER records named tools only; lab exports assert DFT-* with real hashes. Keep ATT&CK attacker/hacker techniques on CTI graphs; do not use ATT&CK as CAC offender vocabulary.",
-        "keywords": "technique evidence outcome join usedTechnique solveit hash match photodna ufed cellebrite axiom ftk autopsy legalproc sentence effectiveness competency sparql lab importer pacer method claim empty contentdatafacet",
+        "description": "Join sourced SOLVE-IT examiner techniques, hashed digital evidence, and legalproc charges/sentences. Press releases never establish a DFT-* technique type; PACER records named tools only; lab exports assert DFT-* with real hashes. Keep ATT&CK attacker/hacker techniques on CTI graphs; do not use ATT&CK as CAC offender vocabulary.",
+        "keywords": "technique evidence outcome join technique type usedTechnique solveit hash match photodna ufed cellebrite axiom ftk autopsy legalproc sentence effectiveness competency sparql lab importer pacer method claim empty contentdatafacet",
         "file": "docs/recipes/technique-evidence-outcome.md",
     },
     {
@@ -1263,6 +1359,12 @@ RECIPE_INDEX: list[dict[str, str]] = [
         "description": "Model freight route theft, geofence deviations, manifest anomalies, and warehouse staging.",
         "keywords": "cargo theft freight route staging warehouse geofence manifest trailer tractor logistics supply chain",
         "file": "docs/recipes/cargo-theft-route-staging.md",
+    },
+    {
+        "title": "ICS/SCADA and OT Network Intrusion",
+        "description": "Model PLC/HMI assets, OT VLAN captures, Modbus/TCP process writes, historian alarms, and engineering workstation project files.",
+        "keywords": "ics scada ot plc rtu hmi dcs historian modbus dnp3 ethernet/ip opc ua setpoint ladder logic industrial control process control operational technology",
+        "file": "docs/recipes/otics-scada-intrusion.md",
     },
     {
         "title": "Starter Kit: Filesystem Report Mapping",
@@ -1357,6 +1459,18 @@ RECIPE_INDEX: list[dict[str, str]] = [
         "description": "Distinguish planned forensic methods from executed SolveitInvestigativeAction occurrences with PROV-O and OWL-Time.",
         "keywords": "solve-it plan execution provenance deviation mitigation weakness re-execution",
         "file": "docs/recipes/solveit-plan-execution-provenance.md",
+    },
+    {
+        "title": "SOSA/SSN Sensor Observations",
+        "description": "Model sensor readings such as vehicle telemetry and wearable heart rate as SOSA observations with QUDT results, hosted sensors, and SSN-System accuracy.",
+        "keywords": "sosa ssn sensor observation telemetry vehicle infotainment gnss speed heading wearable fitness heart rate step count accelerometer iot reading accuracy",
+        "file": "docs/recipes/sosa-sensor-observations.md",
+    },
+    {
+        "title": "QUDT Quantities and Units",
+        "description": "Attach numbers to QUDT 3.5.2 units and quantity kinds; look up unit IRIs; model valuations and other computed values as quantities, not observations.",
+        "keywords": "qudt quantity unit units measurement value currency usd btc valuation exchange rate quantity kind hasunit speed km/h battery",
+        "file": "docs/recipes/qudt-quantities-and-units.md",
     },
     {
         "title": "Cross-Domain Extensions",
@@ -1477,14 +1591,14 @@ MAPPING_GUIDE_INDEX: list[dict] = [
             "hash match", "hashset", "photodna", "ncmec", "ufed", "cellebrite",
             "lab export", "usedtechnique", "dft-1050", "dft-1020",
         ],
-        "pattern": "SolveitInvestigativeAction + usedTechnique + Tool + ContentDataFacet hash + legalproc charge/sentence",
+        "pattern": "SolveitInvestigativeAction typed with DFT-* technique class + Tool + ContentDataFacet hash + legalproc charge/sentence",
         "classes": [
             "Investigation", "SolveitInvestigativeAction", "Tool",
             "ObservableObject", "FileFacet", "ContentDataFacet", "Hash",
             "FederalCharge", "Sentence", "ProvenanceRecord",
         ],
         "anti_patterns": [
-            "Don't assert usedTechnique from a press release or product name alone",
+            "Don't type an action with a DFT-* technique from a press release or product name alone",
             "Don't emit ContentDataFacet without hash, size, MIME type, or payload",
             "Don't collapse ATT&CK attacker techniques into SOLVE-IT examiner techniques",
             "Don't use ATT&CK as the vocabulary for a CAC offender",
@@ -1506,7 +1620,7 @@ MAPPING_GUIDE_INDEX: list[dict] = [
         "anti_patterns": [
             "Don't keep caselinker:/resource/vocab/* predicates",
             "Don't infer Brady from unlabeled exam notes",
-            "Don't mint PhotoDNA hex or usedTechnique from a CyberTipline method IRI",
+            "Don't mint PhotoDNA hex or a DFT-* technique type from a CyberTipline method IRI",
             "Don't map CAC offender conduct to ATT&CK or call the subject a threat actor",
         ],
         "starter_kit": "docs/recipes/caselinker-icac-remodel.md",
@@ -1592,6 +1706,19 @@ MAPPING_GUIDE_INDEX: list[dict] = [
         ],
         "starter_kit": None,
         "code_skeleton": "graph.create(ObservableObject, has_facet=[NetworkConnectionFacet(src_ip=..., dst_ip=..., dst_port=...)])",
+    },
+    {
+        "source": "ICS/SCADA or OT network intrusion",
+        "keywords": ["ics", "scada", "plc", "hmi", "modbus", "dnp3", "opc ua", "historian", "setpoint", "operational technology", "engineering workstation"],
+        "pattern": "Device + DeviceFacet per controller and workstation; TCPConnection for protocol writes; ObservableObject + EventRecordFacet for historian alarms and HMI audit rows; Action typed with ATT&CK for ICS only where the evidence shows it",
+        "classes": ["Device", "DeviceFacet", "TCPConnection", "NetworkConnectionFacet", "NetworkFlowFacet", "IPAddressFacet", "EventRecordFacet", "File", "ContentDataFacet", "Action", "InvestigativeAction", "ProvenanceRecord"],
+        "anti_patterns": [
+            "Don't put PLC rack, slot, firmware, or tag values in description text when you need to query them; propose a facet (see change_proposals/industrial-control-device-facet.md)",
+            "Don't use EventRecordFacet event_id; the property is event_record_id (uco-observable:eventRecordID)",
+            "Don't type an Action with an ATT&CK for ICS technique the evidence doesn't show, or name a performer from an account name alone",
+        ],
+        "starter_kit": "docs/recipes/otics-scada-intrusion.md",
+        "code_skeleton": "write = graph.create(TCPConnection, has_facet=[NetworkConnectionFacet(src=ip_eng, dst=ip_plc, destination_port=502)]); act = graph.create(Action, object=[plc], instrument=[write]); graph.add_type(graph.get_id(act), 'https://attack.mitre.org/techniques/T0836')",
     },
     {
         "source": "disk image",

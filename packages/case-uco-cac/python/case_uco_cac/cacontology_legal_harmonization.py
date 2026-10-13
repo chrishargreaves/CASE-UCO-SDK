@@ -11,9 +11,6 @@ class AdvocacyProcess:
     """Process used in legislative advocacy."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#AdvocacyProcess"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -34,7 +31,6 @@ class AgeVerificationLaw:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -42,11 +38,6 @@ class AmendmentProcess:
     """Process of amending legislation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#AmendmentProcess"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    process_date: Optional[date] = field(default=None)
-    process_status: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -54,9 +45,6 @@ class AnnualReview:
     """Annual compliance review process."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#AnnualReview"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -64,9 +52,6 @@ class AuditProcess:
     """Audit for compliance verification."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#AuditProcess"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -87,7 +72,6 @@ class BestPractice:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -95,11 +79,6 @@ class BillDrafting:
     """Process of drafting legislation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#BillDrafting"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    process_date: Optional[date] = field(default=None)
-    process_status: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -118,23 +97,6 @@ class BillSponsor:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -155,7 +117,6 @@ class CSAMCriminalization:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -176,10 +137,6 @@ class CSAMModelLaw:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_data_quality: Optional[str] = field(default=None)
-    has_legal_effectiveness: Optional[str] = field(default=None)
-    legal_system_type: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -187,9 +144,6 @@ class CapacityBuilding:
     """Building legal capacity for child protection."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#CapacityBuilding"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -197,9 +151,6 @@ class CertificationProcess:
     """Process for obtaining compliance certification."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#CertificationProcess"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -220,7 +171,6 @@ class ChildExploitationLaw:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -241,7 +191,6 @@ class ChildTraffickingLaw:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -249,9 +198,6 @@ class CoalitionBuilding:
     """Building coalitions to support advocacy goals."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#CoalitionBuilding"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -270,23 +216,6 @@ class CommitteeMember:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -294,11 +223,6 @@ class CommitteeReview:
     """Review of legislation by a committee."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#CommitteeReview"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    process_date: Optional[date] = field(default=None)
-    process_status: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -317,8 +241,6 @@ class ComplianceBenchmark:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
 
 
 @dataclass
@@ -339,8 +261,6 @@ class ComplianceDocumentationArtifact:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    verification_status: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -377,9 +297,6 @@ class ComplianceMetrics:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
-    has_data_quality: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -387,9 +304,6 @@ class ComplianceProcess:
     """Process for ensuring legal compliance."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#ComplianceProcess"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -410,8 +324,6 @@ class Correspondence:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    corresponds_about: list[LegislativeInstrument] = field(default_factory=list)
 
 
 @dataclass
@@ -432,7 +344,6 @@ class DataProtectionForMinorsLaw:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -444,7 +355,7 @@ class ExtraditionAgreement:
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
     has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
+    modified_time: list[datetime] = field(default_factory=list)
     name: Optional[str] = field(default=None)
     object_created_time: Optional[datetime] = field(default=None)
     object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
@@ -453,8 +364,6 @@ class ExtraditionAgreement:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    created_time: Optional[datetime] = field(default=None)
 
 
 @dataclass
@@ -462,11 +371,6 @@ class FloorVote:
     """Vote on legislation by the full legislative body."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#FloorVote"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    process_date: Optional[date] = field(default=None)
-    process_status: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -487,11 +391,6 @@ class GlobalLegalReview:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    countries_analyzed: Optional[int] = field(default=None)
-    has_data_quality: Optional[str] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
 
 
 @dataclass
@@ -499,9 +398,6 @@ class GrantCompliance:
     """Compliance with grant requirements."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#GrantCompliance"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -509,9 +405,6 @@ class GrassrootsAdvocacy:
     """Mobilizing public support for advocacy goals."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#GrassrootsAdvocacy"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -519,7 +412,6 @@ class HarmonizationInitiative:
     """Organized effort to harmonize laws across jurisdictions."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#HarmonizationInitiative"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -538,8 +430,6 @@ class HarmonizationProgress:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
 
 
 @dataclass
@@ -547,9 +437,6 @@ class ImpactAssessment:
     """Assessing the impact of proposed legislation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#ImpactAssessment"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -557,10 +444,6 @@ class InternationalLawEnforcement:
     """Law enforcement cooperation across international boundaries."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#InternationalLawEnforcement"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_cooperation_intensity: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -581,7 +464,6 @@ class InternationalStandard:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -625,7 +507,6 @@ class KnowingParadox:
     """A policy incentive conflict where platforms face liability both for detecting content (creating knowledge) and for failing to detect content, discouraging proactive detection."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#KnowingParadox"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -644,23 +525,6 @@ class LawEnforcementOfficer:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -668,7 +532,6 @@ class LegalCompliance:
     """Situation of compliance with international standards."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#LegalCompliance"
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -680,9 +543,6 @@ class LegalCompliance:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    has_compliance_level: Optional[float] = field(default=None)
-    legal_alignment_level: Optional[str] = field(default=None)
-    measured_by: list[ComplianceMetrics] = field(default_factory=list)
 
 
 @dataclass
@@ -701,8 +561,6 @@ class LegalCoverageAssessment:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
 
 
 @dataclass
@@ -721,8 +579,6 @@ class LegalEffectiveness:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
 
 
 @dataclass
@@ -741,9 +597,6 @@ class LegalFrameworkGap:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    has_gap_severity: Optional[str] = field(default=None)
-    policy_gap_severity: Optional[str] = field(default=None)
-    requires_reform: list[LegalReform] = field(default_factory=list)
 
 
 @dataclass
@@ -751,12 +604,6 @@ class LegalReform:
     """Process of reforming child protection legislation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#LegalReform"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_reform_urgency: Optional[str] = field(default=None)
-    reform_priority: Optional[str] = field(default=None)
-    name: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -764,7 +611,6 @@ class LegalSystemCompatibility:
     """Compatibility situation between different legal systems."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#LegalSystemCompatibility"
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -794,23 +640,6 @@ class LegislativeAdvocate:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -829,14 +658,6 @@ class LegislativeAssessment:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
-    has_assessment_reliability: Optional[float] = field(default=None)
-    has_data_quality: Optional[str] = field(default=None)
-    legislative_compliance: Optional[float] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
-    end_time: Optional[datetime] = field(default=None)
-    start_time: Optional[datetime] = field(default=None)
 
 
 @dataclass
@@ -844,9 +665,6 @@ class LegislativeDrafting:
     """Process of drafting child protection legislation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#LegislativeDrafting"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -854,9 +672,6 @@ class LegislativeEducation:
     """Educating legislators on issues."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#LegislativeEducation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -864,8 +679,6 @@ class LegislativeInstrument:
     """A bill, resolution, or other legislative document."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#LegislativeInstrument"
-    involves_process: list[LegislativeProcess] = field(default_factory=list)
-    name: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -873,11 +686,6 @@ class LegislativeProcess:
     """A step in the legislative lifecycle - applicable across jurisdictions."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#LegislativeProcess"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    process_date: Optional[date] = field(default=None)
-    process_status: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -896,23 +704,6 @@ class LegislativeRole:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -931,23 +722,6 @@ class Legislator:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -955,9 +729,6 @@ class MandatoryReporting:
     """Required reporting to authorities."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#MandatoryReporting"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -978,7 +749,6 @@ class MandatoryReportingLaw:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -986,9 +756,6 @@ class MediaOutreach:
     """Engaging media to support advocacy goals."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#MediaOutreach"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1009,7 +776,6 @@ class MinimumStandard:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1030,7 +796,6 @@ class MutualLegalAssistance:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1042,7 +807,7 @@ class NationalLegislation:
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
     has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
+    modified_time: list[datetime] = field(default_factory=list)
     name: Optional[str] = field(default=None)
     object_created_time: Optional[datetime] = field(default=None)
     object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
@@ -1051,14 +816,6 @@ class NationalLegislation:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    applies_to_country: Optional[Location] = field(default=None)
-    has_implementation_quality: Optional[str] = field(default=None)
-    has_legal_effectiveness: Optional[str] = field(default=None)
-    has_legal_robustness: Optional[str] = field(default=None)
-    implementation_status: Optional[str] = field(default=None)
-    legal_system_type: Optional[str] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
 
 
 @dataclass
@@ -1079,7 +836,6 @@ class OnlineGroomingLaw:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1100,7 +856,6 @@ class OnlineSafetyLaw:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1121,7 +876,6 @@ class PlatformAccountabilityLaw:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1140,23 +894,6 @@ class PolicyAnalyst:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1164,9 +901,6 @@ class PolicyDevelopment:
     """Development of child protection policies."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#PolicyDevelopment"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1174,10 +908,6 @@ class PolicyHarmonization:
     """Process of harmonizing policies across jurisdictions."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#PolicyHarmonization"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_harmonization_degree: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -1196,23 +926,6 @@ class ProsecutorAdvocate:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1220,11 +933,6 @@ class PublicHearing:
     """Public hearing on proposed legislation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#PublicHearing"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    process_date: Optional[date] = field(default=None)
-    process_status: Optional[str] = field(default=None)
 
 
 @dataclass
@@ -1245,7 +953,6 @@ class RegionalFramework:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1266,9 +973,6 @@ class SafeHarbor:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    good_faith_criteria: Optional[str] = field(default=None)
-    supported_by_framework: list[ComplianceIntelligenceFramework] = field(default_factory=list)
 
 
 @dataclass
@@ -1289,7 +993,6 @@ class SextortionLaw:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1297,9 +1000,6 @@ class StakeholderEngagement:
     """Engaging stakeholders in advocacy efforts."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#StakeholderEngagement"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1307,7 +1007,6 @@ class Statute:
     """Enacted law within a jurisdiction."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#Statute"
-    name: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1315,9 +1014,6 @@ class StatutoryReporting:
     """Reporting required by statute."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#StatutoryReporting"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1336,23 +1032,6 @@ class TaskForceLiaison:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1360,9 +1039,6 @@ class TechnicalAssistance:
     """Technical assistance for legal framework development."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#TechnicalAssistance"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1370,9 +1046,6 @@ class TestimonySubmission:
     """Submitting testimony to legislative bodies."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/legal-harmonization#TestimonySubmission"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1384,7 +1057,7 @@ class TreatyFramework:
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
     has_facet: list[Facet] = field(default_factory=list)
-    modified_time: Optional[datetime] = field(default=None)
+    modified_time: list[datetime] = field(default_factory=list)
     name: Optional[str] = field(default=None)
     object_created_time: Optional[datetime] = field(default=None)
     object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
@@ -1393,11 +1066,6 @@ class TreatyFramework:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    applies_to_country: list[Location] = field(default_factory=list)
-    facilitates_cooperation: list[InternationalLawEnforcement] = field(default_factory=list)
-    has_treaty_strength: Optional[str] = field(default=None)
-    created_time: Optional[datetime] = field(default=None)
 
 
 @dataclass
@@ -1416,23 +1084,6 @@ class VictimAdvocate:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    participates_in_investigation: list[CACInvestigation] = field(default_factory=list)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_authority_level: Optional[str] = field(default=None)
-    has_responsiveness: Optional[str] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_effectiveness: Optional[float] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_role_end_point: Optional[dateTimeStamp] = field(default=None)
 
 
 @dataclass
@@ -1453,5 +1104,4 @@ class VictimProtectionLaw:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 

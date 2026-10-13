@@ -126,7 +126,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: actions/setup-java@v5
+      - uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: "17"
@@ -201,6 +201,8 @@ jobs:
         run: sha256sum * > SHA256SUMS.txt
 
       - name: Attest build provenance
+        # Artifact attestations are unavailable on private repositories.
+        if: ${{ !github.event.repository.private }}
         uses: actions/attest-build-provenance@v4
         with:
           subject-path: release-assets/*
@@ -226,7 +228,11 @@ jobs:
           # Append the verification + checksum footer (kept in a separate file
           # so the heredoc inside this run script does not collide with YAML
           # parsing of column-0 markers like --- or ***).
-          cat .github/release-footer.md >> release-body.md
+          if [ "${{ github.event.repository.private }}" = "true" ]; then
+            printf '\n---\n\nRelease artifacts include SHA256 checksums (`SHA256SUMS.txt`) and a\nPython SBOM (`sbom-python.cdx.json`). Verify with `sha256sum -c SHA256SUMS.txt`.\n' >> release-body.md
+          else
+            cat .github/release-footer.md >> release-body.md
+          fi
           echo "wrote $(wc -l < release-body.md) lines to release-body.md"
 
       - name: Create GitHub Release
@@ -239,7 +245,7 @@ jobs:
   publish-pypi:
     name: Publish to PyPI
     needs: release
-    if: vars.PUBLISH_PACKAGES == 'true'
+    if: ${{ vars.PUBLISH_PACKAGES == 'true' && !github.event.repository.private }}
     runs-on: ubuntu-latest
     environment: publish
     permissions:
@@ -261,7 +267,7 @@ jobs:
   publish-nuget:
     name: Publish to NuGet
     needs: release
-    if: vars.PUBLISH_PACKAGES == 'true'
+    if: ${{ vars.PUBLISH_PACKAGES == 'true' && !github.event.repository.private }}
     runs-on: ubuntu-latest
     environment: publish
     steps:
@@ -281,13 +287,13 @@ jobs:
   publish-maven:
     name: Publish to Maven Central
     needs: release
-    if: vars.PUBLISH_PACKAGES == 'true'
+    if: ${{ vars.PUBLISH_PACKAGES == 'true' && !github.event.repository.private }}
     runs-on: ubuntu-latest
     environment: publish
     steps:
       - uses: actions/checkout@v7
 
-      - uses: actions/setup-java@v5
+      - uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: "17"
@@ -314,7 +320,7 @@ jobs:
   publish-crates:
     name: Publish to crates.io
     needs: release
-    if: vars.PUBLISH_PACKAGES == 'true'
+    if: ${{ vars.PUBLISH_PACKAGES == 'true' && !github.event.repository.private }}
     runs-on: ubuntu-latest
     environment: publish
     steps:

@@ -39,7 +39,7 @@ description: Process image files into validated CASE/UCO or CAC knowledge graphs
      - Processing provenance: `InvestigativeAction` with `instrument=[Tool(...)]`, `object=[source_image]`, and `result=[derived_event]`
 
 6. Validate before reporting success:
-   - Run `case_validate --built-version case-1.4.0 output.jsonld`.
+   - Run `case_validate --built-version case-1.5.0 output.jsonld`.
    - If validation fails, fix the graph and re-run validation.
    - Do not call the graph complete until validation reports `Conforms: True`.
 

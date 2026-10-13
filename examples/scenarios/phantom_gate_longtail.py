@@ -763,12 +763,12 @@ def add_longtail(ctx: dict[str, Any]) -> list[str]:
             "solveit-core:SolveitInvestigativeAction",
             "case-investigation:InvestigativeAction",
             "uco-core:UcoObject",
+            SOLVEIT_DATA + "techniqueDFT-1019",
         ],
         "uco-core:name": "PROC-009 — Juvenile J-1 partial logical acquisition",
         "uco-core:description": "DFT-1048 chat-only scope; partial iOS gap documented.",
         "uco-action:object": [{"@id": art_006}],
         "uco-action:result": [{"@id": art_006_image}],
-        "solveit-core:usedTechnique": [{"@id": SOLVEIT_DATA + "techniqueDFT-1019"}],
     })
     authorize_action(
         proc_009_action,
@@ -831,6 +831,7 @@ def add_longtail(ctx: dict[str, Any]) -> list[str]:
                 "solveit-core:SolveitInvestigativeAction",
                 "case-investigation:InvestigativeAction",
                 "uco-core:UcoObject",
+                *(SOLVEIT_DATA + f"technique{d}" for d in dfts),
             ]
         action = {
             "@id": proc_id,
@@ -841,10 +842,6 @@ def add_longtail(ctx: dict[str, Any]) -> list[str]:
             "uco-action:object": [{"@id": o} for o in objects],
             "uco-action:result": [{"@id": r} for r in results],
         }
-        if dfts:
-            action["solveit-core:usedTechnique"] = [
-                {"@id": SOLVEIT_DATA + f"technique{d}"} for d in dfts
-            ]
         add(action)
         track(proc_id)
 

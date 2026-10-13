@@ -6,11 +6,11 @@ This extension integrates the [Crimes Against Children (CAC) Ontology](https://g
 
 The CAC Ontology is developed by [Project VIC International](https://projectvic.org/) and provides a comprehensive vocabulary for modeling crimes against children investigations, spanning grooming, sextortion, forensics, detection, legal outcomes, and more.
 
-- **Version**: 3.0.0
+- **Version**: 3.1.0
 - **Modules**: 47 domain modules (~97 TTL files), all indexed in `_registry.json`
 - **Classes**: 1,993 OWL classes (T-Box-complete, including classes without SHACL shapes)
 - **Upper Ontology**: gUFO (directly imported via the semantic spine)
-- **UCO Compatibility**: 1.4.0
+- **UCO Compatibility**: 1.5.0 (validate with case-utils 0.18.0 / `--built-version case-1.5.0`)
 
 ## Architecture
 
@@ -45,6 +45,12 @@ Set the `CASE_UCO_EXTENSIONS` environment variable to include CAC:
   }
 }
 ```
+
+Validation subsets:
+
+- `extensions=['cac']` — press-release subset (`validation-subset.json`)
+- `extensions=['cac:missing-child']` — abduction / case-management / temporal profile (`validation-subset-missing-child.json`)
+- `extensions=['cac:full']` — complete manifest (only when upstream SPARQL shapes are safe)
 
 ## CDO Shapes Compatibility
 

@@ -1,0 +1,8 @@
+# Actions typed with any SOLVE-IT technique class. A PACER method claim
+# names a tool only, so this must return nothing.
+SELECT DISTINCT ?action
+WHERE {
+  ?action a ?technique .
+  FILTER(STRSTARTS(STR(?technique), "https://ontology.solveit-df.org/solveit/data/technique"))
+}
+ORDER BY ?action

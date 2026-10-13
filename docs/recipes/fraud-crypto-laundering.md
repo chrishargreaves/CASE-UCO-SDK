@@ -194,7 +194,8 @@ Core CASE/UCO has no cryptocurrency facets yet (pending [UCO #675](https://githu
 |---|---|
 | Blockchain address | `ObservableObject` + `cryptoinv:CryptocurrencyAddressFacet` (`addressValue`, `cryptocurrencyType`, `blockchainNetwork`, `addressFormat`) |
 | Transaction | `ObservableObject` + `cryptoinv:CryptocurrencyTransactionFacet`; input/output address edges use registered `Related_To`, `cryptoinv:transferAmount`, and a description that states whether the address is an input or output |
-| Wallet / cluster | `cryptoinv:CryptocurrencyWalletFacet` (`walletType`, `walletIdentifier`, `addressCount`) |
+| Wallet / cluster | `cryptoinv:CryptocurrencyWalletFacet` (`walletType`, `walletIdentifier`, `addressCount`, `hostedWalletCompartment` for VASP Spot/Funding/…) |
+| VASP ledger row (deposit, withdrawal, trade, P2P, Pay, fiat) | `uco-core:Event` + `cryptoinv:VirtualAssetLedgerRecordFacet`; add `CryptocurrencyTransactionFacet` only when a public tx hash is present |
 | Point-in-time holdings / seized value | `cryptoinv:VirtualAssetHoldingFacet` (`assetSymbol`, `assetQuantity`, `fiatValue`, `valuationDate`) — snapshots only; time-varying balances are blocked by [UCO #535](https://github.com/ucoProject/UCO/issues/535) |
 | Exchanges, darknet markets, mixers | `cryptoinv:VirtualAssetServiceProvider`, `cryptoinv:DarknetMarket`, `cryptoinv:CryptocurrencyMixingService` |
 | Laundering conduct | `uco-action:Action` + `cryptoinv:launderingTechnique` (peel-chain, chain-hopping, mixing, …) |

@@ -148,26 +148,42 @@ def list_classes(module: str | None = None) -> list[str]:
     "uco.observable").
     """
     reg = _load()
-    names = []
+    names = set()
     for name, info in reg["classes"].items():
+        display = info.get("name", name)
         if module is None:
-            names.append(name)
+            names.add(display)
         else:
             m = module.lower()
             mod = info["module"].lower()
             if mod == m or mod.endswith(f".{m}"):
-                names.append(name)
+                names.add(display)
     return sorted(names)
 
 
-def get_class(name: str) -> dict[str, Any] | None:
-    """Look up a class by name (case-insensitive). Returns full info dict or None."""
+def is_extension_class(info: dict[str, Any]) -> bool:
+    """True when a registry entry comes from an extension module (``ext.*``)."""
+    return str(info.get("module", "")).startswith("ext.")
+
+
+def get_class(name: str, *, core_only: bool = False) -> dict[str, Any] | None:
+    """Look up a class by name (case-insensitive). Returns full info dict or None.
+
+    Accepts a bare name (``Subject``) or a registry key (``Subject@ext.cac.cacontology``).
+    A CASE/UCO class wins over an extension class with the same local name;
+    ``core_only=True`` never returns an extension class.
+    """
     reg = _load()
     name_lower = name.lower()
+    matches: list[dict[str, Any]] = []
     for cls_name, info in reg["classes"].items():
-        if cls_name.lower() == name_lower:
-            return {"name": cls_name, **info}
-    return None
+        display = info.get("name", cls_name)
+        if cls_name.lower() == name_lower or display.lower() == name_lower:
+            matches.append({"name": display, **info})
+    if core_only:
+        matches = [m for m in matches if not is_extension_class(m)]
+    matches.sort(key=is_extension_class)
+    return matches[0] if matches else None
 
 
 def find_by_property_type(type_name: str) -> list[dict[str, Any]]:
@@ -315,7 +331,7 @@ def did_you_mean(query: str) -> list[str]:
         replacement = deprecated[q]
         return [f"{replacement} (replaces deprecated '{query}')"]
 
-    all_names = list(reg["classes"].keys())
+    all_names = sorted({info.get("name", key) for key, info in reg["classes"].items()})
 
     substring_matches = [n for n in all_names if q in n.lower()]
     if substring_matches:

@@ -51,7 +51,7 @@ ForensicAcquisitionAction
 - Store correlation findings in the matching CAC correlation class, not only in `uco-core:description`.
 - When a lab hash-match or PhotoDNA report names the method, join it to
   charges and sentences with [technique-evidence-outcome.md](technique-evidence-outcome.md)
-  (`solveit-core:usedTechnique` DFT-1050 / DFT-1186). CAC acquisition
+  (`SolveitInvestigativeAction` typed with DFT-1050 / DFT-1186). CAC acquisition
   actions remain Layer 1 process; they do not replace SOLVE-IT technique
   IRIs.
 

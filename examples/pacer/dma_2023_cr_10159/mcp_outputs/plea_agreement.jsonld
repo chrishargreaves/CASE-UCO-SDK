@@ -15,9 +15,9 @@
       "@id": "urn:uuid:c60dba2a-41b5-51e3-8227-cf6e38d7d21c",
       "@type": "uco-observable:ObservableObject",
       "uco-core:name": "Source file pacer -- espionage -- Plea Agreement.pdf",
-      "uco-core:description": "Link-Look pdf upload",
+      "uco-core:description": "Uploaded pdf file",
       "uco-core:tag": [
-        "link-look-file-kind:pdf"
+        "source-file-kind:pdf"
       ],
       "uco-core:hasFacet": [
         {

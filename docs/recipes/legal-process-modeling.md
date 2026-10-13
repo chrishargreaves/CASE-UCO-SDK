@@ -143,7 +143,7 @@ internet searches). Keep the participation layer out of the charge nodes.
    direct `uco-action:startTime`, `object`/`result` links to items, recruits,
    and observables, registered `Related_To` to the conspiracy charge with an
    overt-act description, and `uco-action:participant` for co-conspirators.
-   This makes the graph timeline- and TTP-queryable for Link-Look exploration.
+   This makes the graph timeline- and TTP-queryable for downstream exploration.
 8. **Counsel**: attorneys as `uco-identity:Person` with registered
    `Related_To` links to represented people and appointment/termination
    history in descriptions.

@@ -117,6 +117,26 @@ def test_comparison_operator_cannot_mask_stacked_update() -> None:
         sparql_client.validate_query(query)
 
 
+@pytest.mark.parametrize(
+    "query",
+    [
+        "SELECT * WHERE { ?s ?p ?o FILTER(?o<1)SERVICE<http://169.254.169.254/latest/meta-data/>{?a ?b ?c} }",
+        "SELECT * WHERE { ?s ?p ?o FILTER(?o<1)LOAD<http://example.invalid/x> }",
+        "SELECT * WHERE { ?s ?p ?o FILTER(?o<1)INSERT{<http://example.invalid/s><http://example.invalid/p><http://example.invalid/o>} }",
+        "SELECT * WHERE { ?s ?p ?o FILTER(?o<1)DELETE{<http://example.invalid/s><http://example.invalid/p><http://example.invalid/o>} }",
+        "SELECT * WHERE { ?s ?p ?o FILTER(?o<1)INSERT DATA { <http://example.invalid/s> <http://example.invalid/p> <http://example.invalid/o> } }",
+    ],
+)
+def test_whitespace_free_comparison_cannot_hide_service_or_update(query: str) -> None:
+    with pytest.raises(sparql_client.SparqlClientError):
+        sparql_client.validate_query(query)
+
+
+def test_unparseable_query_is_rejected_before_any_request() -> None:
+    with pytest.raises(sparql_client.SparqlClientError, match="sparql_query_parse_failed"):
+        sparql_client.validate_query("SELECT ?s WHERE { ?s ?p }")
+
+
 def test_query_size_is_bounded(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(sparql_client, "MAX_QUERY_CHARS", 10)
     with pytest.raises(sparql_client.SparqlClientError, match="sparql_query_too_large"):

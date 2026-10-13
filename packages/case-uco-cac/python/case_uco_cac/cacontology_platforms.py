@@ -31,12 +31,56 @@ class AccountSuspensionAction:
     """An action to suspend or terminate a user account due to policy violations. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#AccountSuspensionAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     suspension_duration: Optional[int] = field(default=None)
     suspension_reason: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
+
+
+@dataclass
+class AffordanceMisuse:
+    """Annotation linking a platform affordance to the phase transition it enabled — affordances on offense trajectory edges rather than platform nodes alone."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#AffordanceMisuse"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+    end_time: list[datetime] = field(default_factory=list)
+    is_directional: Optional[bool] = field(default=None)
+    kind_of_relationship: Optional[str] = field(default=None)
+    source: list[UcoObject] = field(default_factory=list)
+    start_time: list[datetime] = field(default_factory=list)
+    target: Optional[UcoObject] = field(default=None)
+    affordance_class: Optional[PlatformAffordance] = field(default=None)
+    enables_transition_from: Optional[Phase] = field(default=None)
+    enables_transition_to: Optional[Phase] = field(default=None)
+    misuse_description: Optional[str] = field(default=None)
+    platform: Optional[DigitalService] = field(default=None)
+
+
+@dataclass
+class Anonymity:
+    """Platform affordance enabling pseudonymous or minimally verified contact."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#Anonymity"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -99,13 +143,57 @@ class AnonymousContactOpportunity:
 
 
 @dataclass
+class ChannelMigrationEvent:
+    """Documented offense pattern where contact is initiated on one platform and deliberately moved to a second platform before escalation, to access more capable channels and/or sever the evidence trail on """
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#ChannelMigrationEvent"
+    from_platform: Optional[DigitalService] = field(default=None)
+    migration_rationale: Optional[str] = field(default=None)
+    occurs_between: list[Phase] = field(default_factory=list)
+    to_platform: Optional[DigitalService] = field(default=None)
+
+
+@dataclass
+class CoercionLeverage:
+    """Platform affordance that amplifies coercive leverage (screenshots, forwarding, contact export, payment rails)."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#CoercionLeverage"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+
+
+@dataclass
+class ContactDiscovery:
+    """Platform affordance for finding or matching with new contacts (search, suggestions, random matching)."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#ContactDiscovery"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+
+
+@dataclass
 class ContentHashingAction:
     """An action by a platform to generate hashes of content for detection and matching. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#ContentHashingAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -113,9 +201,6 @@ class ContentModerationAction:
     """An action taken by a platform to moderate content (review, remove, restrict, etc.). Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#ContentModerationAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     moderation_decision: Optional[str] = field(default=None)
     start_time: Optional[datetime] = field(default=None)
 
@@ -159,6 +244,24 @@ class ContentModerationQueue:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     queue_size: Optional[int] = field(default=None)
+
+
+@dataclass
+class Coordination:
+    """Platform affordance for group coordination, encrypted channels, or multi-party planning."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#Coordination"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -226,9 +329,6 @@ class DataPreservationAction:
     """An action to preserve user data in response to legal requests. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#DataPreservationAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -241,7 +341,7 @@ class DataPreservationAction:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -276,7 +376,6 @@ class DataRetentionPolicy:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     anonymous_user_data_retention: Optional[int] = field(default=None)
     content_retention_period: Optional[int] = field(default=None)
     log_retention_period: Optional[int] = field(default=None)
@@ -299,8 +398,6 @@ class DeviceSocialMediaCorrelation:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
 
 
 @dataclass
@@ -320,7 +417,7 @@ class DigitalEvidenceCorrelation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -332,6 +429,24 @@ class DigitalEvidenceCorrelation:
     result: list[UcoObject] = field(default_factory=list)
     start_time: Optional[datetime] = field(default=None)
     subaction: list[Action] = field(default_factory=list)
+
+
+@dataclass
+class DistributionInfrastructure:
+    """Platform affordance for sharing or broadcasting content to audiences beyond direct dyadic chat."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#DistributionInfrastructure"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -370,7 +485,6 @@ class ElectronicServiceProvider:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
     accepts_legal_process: Optional[bool] = field(default=None)
     emergency_disclosure_capable: Optional[bool] = field(default=None)
     headquartered_in: Optional[str] = field(default=None)
@@ -382,9 +496,6 @@ class EmergencyDisclosureRequest:
     """Time-sensitive request by law enforcement/investigators to an electronic service provider for immediate disclosure of information based on an asserted emergency involving imminent danger (e.g., danger"""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#EmergencyDisclosureRequest"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: Optional[str] = field(default=None)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -397,7 +508,7 @@ class EmergencyDisclosureRequest:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -411,6 +522,24 @@ class EmergencyDisclosureRequest:
     subaction: list[Action] = field(default_factory=list)
     was_informed_by: list[InvestigativeAction] = field(default_factory=list)
     start_time: Optional[datetime] = field(default=None)
+
+
+@dataclass
+class Ephemerality:
+    """Platform affordance where messages or media auto-delete, reducing forensic retention on the platform."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#Ephemerality"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -456,6 +585,24 @@ class GamePlatform:
 
 
 @dataclass
+class GenerativeSynthesis:
+    """Platform affordance for AI-generated or synthetic media creation and manipulation."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#GenerativeSynthesis"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+
+
+@dataclass
 class GuestChatFeature:
     """Platform feature allowing users to chat without creating accounts or verifying identity."""
 
@@ -480,7 +627,6 @@ class IdentityDisclosurePolicy:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -488,9 +634,6 @@ class LargeScalePlatformTakedown:
     """Coordinated takedown of major exploitation platforms with user bases exceeding 1 million accounts, requiring specialized international coordination and mass forensic processing. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#LargeScalePlatformTakedown"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -503,7 +646,7 @@ class LargeScalePlatformTakedown:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -545,9 +688,6 @@ class LegalDataDisclosureAction:
     """An action to disclose user data to law enforcement in response to legal process. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#LegalDataDisclosureAction"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -560,7 +700,7 @@ class LegalDataDisclosureAction:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -583,9 +723,6 @@ class MassUserBehaviorAnalysis:
     """Analysis of user behavior patterns across massive user bases for investigation prioritization and automated threat assessment. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#MassUserBehaviorAnalysis"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -598,7 +735,7 @@ class MassUserBehaviorAnalysis:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -633,7 +770,6 @@ class MassUserDatabase:
     tag: list[str] = field(default_factory=list)
     has_changed: Optional[bool] = field(default=None)
     state: Optional[str] = field(default=None)
-    label: list[str] = field(default_factory=list)
     processing_timeframe_days: Optional[int] = field(default=None)
     user_count: Optional[int] = field(default=None)
 
@@ -643,7 +779,6 @@ class MassivePlatformSituation:
     """Situation involving platforms with massive user bases requiring specialized investigation approaches. Modeled as gUFO Situation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#MassivePlatformSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -703,8 +838,6 @@ class ModerationThroughputMetrics:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     flag_volume_per_month: Optional[int] = field(default=None)
     review_latency_hours: Optional[float] = field(default=None)
     throughput_per_day: Optional[int] = field(default=None)
@@ -715,7 +848,6 @@ class MultiPlatformSituation:
     """Situation involving coordination across multiple platforms and service providers. Modeled as gUFO Situation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#MultiPlatformSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -757,11 +889,28 @@ class OpenChatRooms:
 
 
 @dataclass
+class PlatformAffordance:
+    """A platform capability that offenders may misuse to advance an offense trajectory (anonymity, ephemerality, unmonitored communication, etc.)."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#PlatformAffordance"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
+
+
+@dataclass
 class PlatformCooperationSituation:
     """Situation involving cooperative efforts between platforms and law enforcement. Modeled as gUFO Situation."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#PlatformCooperationSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -769,28 +918,6 @@ class PlatformDeploymentPhase:
     """Phase when platform is deployed and becomes operational. Modeled as anti-rigid gUFO Phase."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#PlatformDeploymentPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -798,28 +925,6 @@ class PlatformGrowthPhase:
     """Phase of platform expansion and user base growth. Modeled as anti-rigid gUFO Phase."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#PlatformGrowthPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -839,7 +944,7 @@ class PlatformInvestigationCoordination:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -858,28 +963,6 @@ class PlatformInvestigationPhase:
     """Phase when platform is under law enforcement investigation. Modeled as anti-rigid gUFO Phase."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#PlatformInvestigationPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -887,28 +970,6 @@ class PlatformModerationPhase:
     """Phase of active content moderation and policy enforcement. Modeled as anti-rigid gUFO Phase."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#PlatformModerationPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -916,9 +977,6 @@ class PlatformOperation:
     """Coordinated law enforcement operation targeting specific platforms or services. Modeled as gUFO Event."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#PlatformOperation"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
     created_by: Optional[IdentityAbstraction] = field(default=None)
     description: list[str] = field(default_factory=list)
     external_reference: list[ExternalReference] = field(default_factory=list)
@@ -931,7 +989,7 @@ class PlatformOperation:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -951,28 +1009,6 @@ class PlatformTakedownPhase:
     """Phase of platform takedown and shutdown operations. Modeled as anti-rigid gUFO Phase."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#PlatformTakedownPhase"
-    has_begin_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    has_end_point_in_xsd_date_time_stamp: Optional[dateTimeStamp] = field(default=None)
-    label: list[str] = field(default_factory=list)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_coordination_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_begin_point: Optional[dateTimeStamp] = field(default=None)
-    has_production_phase_end_point: Optional[dateTimeStamp] = field(default=None)
-    has_legal_deadline: Optional[dateTimeStamp] = field(default=None)
-    has_maximum_duration: Optional[str] = field(default=None)
-    has_minimum_duration: Optional[str] = field(default=None)
-    has_typical_duration: Optional[str] = field(default=None)
-    phase_completion_rate: Optional[float] = field(default=None)
-    phase_efficiency: Optional[float] = field(default=None)
-    urgency_level: Optional[int] = field(default=None)
 
 
 @dataclass
@@ -1036,7 +1072,6 @@ class ReviewBacklogSituation:
     """Situation in which moderation review demand exceeds capacity, producing review backlog/latency risks."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#ReviewBacklogSituation"
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1056,7 +1091,7 @@ class SimultaneousSearchWarrant:
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
     action_count: Optional[int] = field(default=None)
-    action_status: list[str] = field(default_factory=list)
+    action_status: Optional[str] = field(default=None)
     end_time: Optional[datetime] = field(default=None)
     environment: Optional[UcoObject] = field(default=None)
     error: list[UcoObject] = field(default_factory=list)
@@ -1209,7 +1244,6 @@ class TechnicalServiceProvider:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1217,6 +1251,24 @@ class TemporaryAccountSystem:
     """System allowing creation of temporary accounts with minimal verification requirements."""
 
     CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#TemporaryAccountSystem"
+
+
+@dataclass
+class UnmonitoredCommunication:
+    """Platform affordance for private channels with limited proactive moderation or parental visibility."""
+
+    CLASS_IRI: str = "https://cacontology.projectvic.org/platforms#UnmonitoredCommunication"
+    created_by: Optional[IdentityAbstraction] = field(default=None)
+    description: list[str] = field(default_factory=list)
+    external_reference: list[ExternalReference] = field(default_factory=list)
+    has_facet: list[Facet] = field(default_factory=list)
+    modified_time: list[datetime] = field(default_factory=list)
+    name: Optional[str] = field(default=None)
+    object_created_time: Optional[datetime] = field(default=None)
+    object_marking: list[MarkingDefinitionAbstraction] = field(default_factory=list)
+    object_status: Optional[str] = field(default=None)
+    spec_version: Optional[str] = field(default=None)
+    tag: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -1235,8 +1287,6 @@ class UserRiskClassification:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     user_risk_level: Optional[str] = field(default=None)
 
 
@@ -1256,8 +1306,6 @@ class UserScaleClassification:
     object_status: Optional[str] = field(default=None)
     spec_version: Optional[str] = field(default=None)
     tag: list[str] = field(default_factory=list)
-    label: list[str] = field(default_factory=list)
-    has_confidence: Optional[float] = field(default=None)
     million_plus_users: Optional[bool] = field(default=None)
     platform_scale: Optional[str] = field(default=None)
 

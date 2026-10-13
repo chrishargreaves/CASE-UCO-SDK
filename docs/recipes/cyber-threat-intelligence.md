@@ -224,15 +224,23 @@ those appeared only in the issue's early draft and are not in the merged model.
 
 So model techniques with **punning**, in two layers:
 
-- **The technique is a class.** Declare each ATT&CK technique as an
-  `owl:Class` that is `a uco-action:Technique` and `rdfs:subClassOf
-  uco-action:Action`, carrying `uco-action:techniqueID` (e.g. `T1543.003`).
-  Keep these in an ontology/catalog graph, not the data graph — the local
-  [`attack-technique`](../../extensions/attack-technique/) extension ships a
-  partial MITRE ATT&CK catalog (`mitre-attack-catalog.ttl`) under the
-  canonical `https://attack.mitre.org/techniques/<id>` IRIs. Tactic/platform
-  context goes in each class's `rdfs:comment` (the merged UCO model keeps the
-  general class minimal).
+- **The technique is a class.** Each ATT&CK technique is an `owl:Class`
+  that is `a uco-action:Technique` and `rdfs:subClassOf uco-action:Action`,
+  carrying `uco-action:techniqueID` (e.g. `T1543.003`). You do not declare
+  these yourself: the [`attack-technique`](../../extensions/attack-technique/)
+  extension vendors the **complete** MITRE ATT&CK v19.2 catalog
+  (Enterprise, Mobile and ICS — 1,166 techniques and sub-techniques) under
+  the canonical `https://attack.mitre.org/techniques/<id>` IRIs, kept out of
+  the data graph. A sub-technique `rdfs:subClassOf` its parent (`T1543.003`
+  under `T1543`), so type an action with the most specific technique the
+  source supports and never with the parent as well. Tactics
+  (`dcterms:subject`), platforms (`dcterms:coverage`) and matrix
+  (`dcterms:isPartOf`) are annotations on the class, because the merged UCO
+  model keeps `uco-action:Technique` minimal. Deprecated and revoked
+  techniques stay in the catalog marked `owl:deprecated`, with
+  `dcterms:isReplacedBy` pointing at the successor; cite them only when the
+  source does. Find IDs with `search_adversary_techniques(query)` and check
+  one with `get_adversary_technique(id)`.
 - **A concrete action exhibits the technique.** Type the behavior
   `uco-action:Action` instance *with the technique class* (add the technique
   IRI to its `@type`). Because the technique class is a subclass of
@@ -240,6 +248,15 @@ So model techniques with **punning**, in two layers:
   type asserts which technique it exhibits. Do **not** create a separate
   Technique instance per action or link with a custom technique relationship —
   the punning `rdf:type` edge *is* the association.
+
+**Evidence first.** A technique type is a claim that the evidence shows that
+tradecraft. Add one only for a behavior the report or an artifact actually
+describes, and never because a step in another kind of case "sounds like"
+hacking. ATT&CK is not combined with the offense-conduct, SOLVE-IT, or CAC
+vocabularies by default (see
+[cross-ontology-composition.md](cross-ontology-composition.md) principle 6).
+Attacks on AI systems — prompt injection, model evasion, poisoning, model
+theft — use MITRE ATLAS instead: [ai-system-attacks.md](ai-system-attacks.md).
 
 Sourcing matters: a report that lists no ATT&CK IDs in its prose (this Talos
 post does not) is usually still mapped on the corresponding MITRE ATT&CK
@@ -289,12 +306,14 @@ property, so do not invent one.
 | Free-text registry data type (`REG_EXPAND_SZ`) | Use `RegistryDatatypeVocab` members (`reg_expand_sz`, `reg_dword`, …) |
 | Inventing a bespoke Technique/Malware/ThreatActor class | Actor abstraction per §2; malware → MaliciousTool; ATT&CK → `uco-action:Technique` metaclass via the `attack-technique` catalog |
 | Modeling a technique as a plain instance node (`x a uco-action:Technique` with `techniqueTactic`/`techniquePlatform`) | `uco-action:Technique` is a **metaclass**: a technique is an `owl:Class` (`a uco-action:Technique`, `rdfs:subClassOf uco-action:Action`) with `uco-action:techniqueID`; the merged PR has no framework/tactic/platform properties |
+| Typing an action with both a sub-technique and its parent | The sub-technique already `rdfs:subClassOf` its parent; keep only the most specific class |
+| Citing a revoked technique (e.g. `T1086`) for a current mapping | Use the successor named by `dcterms:isReplacedBy` (`get_adversary_technique` reports it); keep the revoked ID only when the source cites it |
 | Linking an action to its technique with a custom relationship | Type the action instance *with the technique class* (`rdf:type`); the punning type edge is the association — no relationship node |
 | Dropping ATT&CK techniques because the report's prose omits IDs | Enrich from MITRE group/software pages when available; always record mapping provenance |
 | Embedding builder/recipe files in the Investigation graph | Put implementation provenance in a sidecar manifest; keep the domain graph about the report |
 | Collapsing family, variant, and sample into one node | Family = `MaliciousTool`; variants/samples = `ObservableObject` + `FileFacet`/`ContentDataFacet`, `Related_To` the family |
 | Treating cloud C2 (Dropbox/Twitter/Zimbra) as benign | It is a C2 channel — `Connected_To` tagged `c2`, with exfil artifacts `Uploaded_To` it |
-| Putting ATT&CK IRIs on `solveit-core:usedTechnique` | ATT&CK describes **hacker / attacker** tradecraft, not examiner method and not CAC offender conduct. Examiner methods stay in SOLVE-IT. See [technique-evidence-outcome.md](technique-evidence-outcome.md) |
+| Typing examiner (SOLVE-IT) actions with ATT&CK techniques | ATT&CK describes **hacker / attacker** tradecraft, not examiner method and not CAC offender conduct. Examiner methods stay in SOLVE-IT. See [technique-evidence-outcome.md](technique-evidence-outcome.md) |
 
 ## Checklist
 
@@ -325,15 +344,13 @@ property, so do not invent one.
    variant's config-derived infrastructure to later variants that moved off
    it.
 8. Add ATT&CK techniques with the `uco-action:Technique` metaclass (from the
-   report and the MITRE group/software pages): declare each technique as an
-   `owl:Class` (subclass of `uco-action:Action`, with `techniqueID`) in the
-   `attack-technique` catalog, and type each exhibiting behavior `Action`
-   *with* that technique class. Add IOCs (campaign codes, signatures) and
-   vendor detection coverage.
+   report and the MITRE group/software pages): look up each technique in the
+   `attack-technique` catalog (`search_adversary_techniques`), and type each
+   exhibiting behavior `Action` *with* that technique class — the most
+   specific sub-technique the source supports. Add IOCs (campaign codes,
+   signatures) and vendor detection coverage.
 9. Validate: `validate_graph(path, extensions=["attack-technique:full"])`
-   (strict concept coverage) plus `case_validate --built-version case-1.4.0
-   --ontology-graph extensions/attack-technique/attack-technique.ttl
-   --ontology-graph extensions/attack-technique/attack-technique-shapes.ttl
+   (strict concept coverage) plus `case_validate --built-version case-1.5.0
    --ontology-graph extensions/attack-technique/mitre-attack-catalog.ttl
    --inference rdfs --allow-info`; `Conforms: True` before presenting.
 
@@ -355,9 +372,9 @@ property, so do not invent one.
    `attack-technique` catalog and typed onto the behavior `Action` that exhibits
    it. Passes `case_validate` (with RDFS inference) and strict concept
    coverage — all registry data against core UCO (which covers it natively) and
-   the technique metaclass/classes against the local `attack-technique` extension
-   (the [UCO #676](https://github.com/ucoProject/UCO/pull/676)
-   forward-implementation).
+   the technique classes against the `attack-technique` catalog (the
+   [UCO #676](https://github.com/ucoProject/UCO/pull/676) metaclass itself is
+   native in UCO 1.5.0).
 
 2. `examples/cti/darkwatchman_2021/build_darkwatchman.py` — the Prevailion
    PACT DarkWatchman report (2021-12-14), built with `CASEGraph` public upsert
@@ -378,6 +395,7 @@ property, so do not invent one.
 ## Related
 
 - [network-investigation.md](network-investigation.md) — single-incident network forensics with acquired pcap (contrast: one capture, not adversary intelligence)
+- [otics-scada-intrusion.md](otics-scada-intrusion.md) — ICS/SCADA OT intrusion modeling (PLC/HMI/Modbus; contrast: process-control evidence, not enterprise CTI)
 - [spear-phishing.md](spear-phishing.md) — delivery-chain attack narrative from a phishing email
 - [analysis.md](analysis.md) — the attribution/analysis layer with confidence-scored classifications
 - [network-artifacts.md](network-artifacts.md) — IPs, domains, and URLs as observables

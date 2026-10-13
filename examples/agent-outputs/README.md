@@ -16,5 +16,5 @@ Rebuild any example with the project virtualenv and re-validate:
 
 ```bash
 .venv/bin/python examples/agent-outputs/wifi_capture.py
-case_validate --built-version case-1.4.0 examples/agent-outputs/wifi_capture.jsonld
+case_validate --built-version case-1.5.0 examples/agent-outputs/wifi_capture.jsonld
 ```

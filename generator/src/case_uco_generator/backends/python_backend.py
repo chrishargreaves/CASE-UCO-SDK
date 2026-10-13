@@ -138,7 +138,14 @@ class PythonBackend(CodegenBackend):
             "vocabs": {},
         }
 
-        for cls in sorted(self.schema.classes.values(), key=lambda c: c.name):
+        # Core classes keep the bare-name key; an extension class that reuses a
+        # core local name (CAC Subject, SOLVE-IT Technique) is keyed
+        # "Name@module" so it cannot hide the CASE/UCO class.
+        ordered = sorted(
+            self.schema.classes.values(),
+            key=lambda c: (c.module.startswith("ext."), c.name, c.module),
+        )
+        for cls in ordered:
             all_props = self.schema.resolve_all_properties(cls)
             props_data = []
             for prop in all_props:
@@ -150,7 +157,9 @@ class PythonBackend(CodegenBackend):
                     "required": prop.cardinality.is_required,
                     "description": prop.description,
                 })
-            registry["classes"][cls.name] = {
+            key = cls.name if cls.name not in registry["classes"] else f"{cls.name}@{cls.module}"
+            registry["classes"][key] = {
+                "name": cls.name,
                 "iri": cls.iri,
                 "module": cls.module,
                 "description": cls.description,
@@ -158,6 +167,8 @@ class PythonBackend(CodegenBackend):
                 "is_facet": cls.is_facet,
                 "properties": props_data,
             }
+
+        registry["classes"] = dict(sorted(registry["classes"].items()))
 
         for vocab in sorted(self.schema.vocabs.values(), key=lambda v: v.name):
             members = [
@@ -480,4 +491,6 @@ class PythonBackend(CodegenBackend):
         }
         if self._is_typed_literal_prop(prop):
             metadata["literal_datatype"] = True
+        if prop.forbidden:
+            metadata["forbidden"] = True
         return f', metadata={metadata})'

@@ -95,7 +95,7 @@ python examples/upper-ontology/owl-time/build_exemplar.py
 ```bash
 validate_graph("owl-time-temporal.jsonld", profiles=["owl-time"])
 
-case_validate --built-version case-1.4.0 \
+case_validate --built-version case-1.5.0 \
   --ontology-graph ontology/upper/shapes/sh-time.ttl \
   --allow-info owl-time-temporal.jsonld
 ```
