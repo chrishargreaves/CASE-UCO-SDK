@@ -82,13 +82,13 @@ def build() -> CASEGraph:
         "rdfs:label": "Steps taken per calendar day",
         "qudt:hasQuantityKind": {"@id": "quantitykind:Count"},
     })
-    heart_rate = "kb:heart-rate"
-    graph.upsert_node(heart_rate, types=["sosa:ObservableProperty"], properties={
+    hr_property = "kb:heart-rate"
+    graph.upsert_node(hr_property, types=["sosa:ObservableProperty"], properties={
         "rdfs:label": "Heart rate",
         "qudt:hasQuantityKind": {"@id": "quantitykind:HeartRate"},
     })
     graph.link(step_counter_id, "sosa:observes", step_count)
-    graph.link(heart_sensor_id, "sosa:observes", heart_rate)
+    graph.link(heart_sensor_id, "sosa:observes", hr_property)
 
     # Published accuracy of the heart-rate sensor (SSN-System capability).
     accuracy_id = "kb:heart-rate-accuracy"
@@ -143,7 +143,7 @@ def build() -> CASEGraph:
     graph.upsert_node("kb:heart-rate-observation-1", types=["sosa:Observation"], properties={
         "sosa:madeBySensor": {"@id": heart_sensor_id},
         "sosa:hasFeatureOfInterest": {"@id": wearer_id},
-        "sosa:observedProperty": {"@id": heart_rate},
+        "sosa:observedProperty": {"@id": hr_property},
         "sosa:resultTime": _typed("xsd:dateTime", "2024-04-30T21:47:12-04:00"),
         "sosa:hasResult": {"@id": _quantity_value(graph, "kb:heart-rate-value-1", "142", "unit:BEAT-PER-MIN")},
         "prov:wasDerivedFrom": {"@id": health_db_id},

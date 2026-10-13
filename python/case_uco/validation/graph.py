@@ -457,9 +457,6 @@ def validate_graph_file(
             args.extend(extension_args)
         elif extensions:
             args.extend(["--built-version", DEFAULT_BUILT_VERSION])
-        if extra_ontology_graphs:
-            for graph_path_extra in extra_ontology_graphs:
-                args.extend(["--ontology-graph", str(graph_path_extra)])
         if force_rdfs_inference and "--inference" not in args:
             args.extend(["--inference", "rdfs"])
 

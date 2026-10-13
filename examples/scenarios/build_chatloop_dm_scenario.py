@@ -623,11 +623,15 @@ def build() -> Path:
         id=kid("Annotation", "generated-metadata"),
         object=[thread],
         statement=[
-            "Transcript ordinals 001–114 are stored only as ExternalReference "
-            "externalIdentifier values (definingContext documents them as "
-            "generator-created). No MessageFacet.messageID or sessionID was asserted.",
-            "Graph @id values are opaque UUIDv5 digests of "
-            "SHA256(source-transcript)|kind|key for reproducibility.",
+            (
+                "Transcript ordinals 001–114 are stored only as ExternalReference "
+                "externalIdentifier values (definingContext documents them as "
+                "generator-created). No MessageFacet.messageID or sessionID was asserted."
+            ),
+            (
+                "Graph @id values are opaque UUIDv5 digests of "
+                "SHA256(source-transcript)|kind|key for reproducibility."
+            ),
             f"Source transcript SHA-256: {source_sha}",
         ],
         tag=[GENERATOR_CREATED, "normalization"],
@@ -754,7 +758,7 @@ def build() -> Path:
         tag=["synthetic", "tier-t0"],
     )
 
-    investigation = graph.create(
+    graph.create(
         Investigation,
         id=kid("Investigation", "chatloop-dm"),
         name="ChatLoop DM — Target / Ritchie Highway (fictional)",
@@ -765,7 +769,7 @@ def build() -> Path:
         ],
         tag=["synthetic", "tier-t0"],
         focus=["messaging", "juvenile shoplifting discussion (fictional)"],
-        investigation_form=["case"],
+        investigation_form="case",
         investigation_status="open",
         object=[
             source_artifact,

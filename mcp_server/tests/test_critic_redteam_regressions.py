@@ -67,7 +67,7 @@ def test_bare_reference_is_dangling(tmp_path):
 
 
 def test_expanded_kb_reference_is_dangling(tmp_path):
-    view = _view(
+    _view(
         tmp_path,
         [
             {

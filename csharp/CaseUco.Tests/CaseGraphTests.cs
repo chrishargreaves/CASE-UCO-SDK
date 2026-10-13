@@ -760,7 +760,7 @@ namespace CaseUco.Tests
                 "\"uco-action:startTime\":{\"@type\":\"xsd:dateTime\",\"@value\":\"2024-01-02T03:04:05Z[UTC]\"}}]}";
             var action = (CaseUco.Uco.Action.Action)CaseGraph.FromJsonLd(json).Objects[0];
             Assert.Equal(new DateTime(2024, 1, 2, 3, 4, 5, DateTimeKind.Utc), action.StartTime);
-            Assert.Equal(DateTimeKind.Utc, action.StartTime.Value.Kind);
+            Assert.Equal(DateTimeKind.Utc, action.StartTime?.Kind);
         }
 
         [Fact]

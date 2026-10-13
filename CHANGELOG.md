@@ -377,6 +377,11 @@ CAC Ontology 3.1.0.
   "Discord logical export custody" (export as a noun) is no longer flagged
   as an inverted acquisition. This fixes a regression from the acquisition-verb change above,
   caught by the `phantom-gate-gold` oracle.
+- CodeQL fixes: the change-proposal lint compares the citation URL's host
+  with `github.com` instead of searching for the substring; generated
+  extension modules import only the `dataclasses` and `typing` names they
+  use; dead code is removed from `validate_graph`; the ChatLoop scenario
+  builder passes `investigation_form` as a single value.
 - Shared docs, tool descriptions and comments describe callers generically
   ("MCP agents", "upload front ends") instead of naming particular
   deployments.

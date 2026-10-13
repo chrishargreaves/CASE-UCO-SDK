@@ -24,6 +24,7 @@ import re
 import uuid
 from dataclasses import dataclass, field
 from typing import Any, Callable, Iterable
+from urllib.parse import urlsplit
 
 TRACKERS: dict[str, dict[str, str]] = {
     "UCO": {
@@ -616,7 +617,7 @@ def lint_proposal(
                     "A *[from …]* tag must link the exact comment or page quoted.")
             elif (
                 _github_person_citation(stmt)
-                and "github.com" in stmt.source_url
+                and urlsplit(stmt.source_url).hostname == "github.com"
                 and "#issuecomment-" not in stmt.source_url
             ):
                 add("citation_link_not_comment", "info", location,
@@ -833,8 +834,10 @@ def render_review(
         out += [f"- `{path}`" for path in companion_files]
         out += [
             "",
-            "These are a local sketch for testing, not part of the issue. Offer them in the "
-            "discussion if the committee asks for a design.",
+            (
+                "These are a local sketch for testing, not part of the issue. Offer them in the "
+                "discussion if the committee asks for a design."
+            ),
             "",
             f"Re-run with `make test-proposal PROPOSAL={slug}`.",
         ]
@@ -1143,8 +1146,10 @@ def design_sketch(proposal: Proposal) -> str | None:
     if not proposal.proposed_classes and not proposal.proposed_properties:
         return None
     lines = [
-        "A sketch offered for the committee to accept, revise, or discard. "
-        "Local test files are available on request. *[AI-drafted]*",
+        (
+            "A sketch offered for the committee to accept, revise, or discard. "
+            "Local test files are available on request. *[AI-drafted]*"
+        ),
         "",
     ]
     for cls in proposal.proposed_classes:

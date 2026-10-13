@@ -435,8 +435,6 @@ def _generate_extension_package(
 
 
 def _gen_python_extension(ext_schema, full_schema, output_dir, ext_name, ext_version, display_name, py_pkg, uco_dep, manifest) -> int:
-    from case_uco_generator.schema_model import iri_local_name
-
     py_dir = output_dir / "python" / py_pkg
     py_dir.mkdir(parents=True, exist_ok=True)
     count = 0
@@ -469,13 +467,7 @@ def _gen_python_extension(ext_schema, full_schema, output_dir, ext_name, ext_ver
         if not classes:
             continue
 
-        lines = [
-            f'"""{display_name} — {prefix} module."""\n',
-            "from __future__ import annotations\n",
-            "from dataclasses import dataclass, field",
-            "from typing import Optional\n\n",
-        ]
-
+        lines = []
         for cls in classes:
             lines.append("@dataclass")
             lines.append(f"class {_ext_class_name(cls.name, 'python')}:")
@@ -493,7 +485,15 @@ def _gen_python_extension(ext_schema, full_schema, output_dir, ext_name, ext_ver
                     lines.append(f"    {field_name}: Optional[{type_str}] = field(default=None)")
             lines.append("\n")
 
-        (py_dir / f"{mod_name}.py").write_text("\n".join(lines), encoding="utf-8")
+        body = "\n".join(lines)
+        uses_field = "= field(" in body
+        header = [
+            f'"""{display_name} — {prefix} module."""\n',
+            "from __future__ import annotations\n",
+            "from dataclasses import dataclass, field" if uses_field else "from dataclasses import dataclass",
+        ]
+        header.append("from typing import Optional\n\n" if "Optional[" in body else "\n")
+        (py_dir / f"{mod_name}.py").write_text("\n".join(header) + "\n" + body, encoding="utf-8")
         count += 1
 
     pyproject = (
