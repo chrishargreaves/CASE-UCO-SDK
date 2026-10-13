@@ -9,10 +9,10 @@ document, one Grouping per section, and the listed resources — nothing else.
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import sys
 from pathlib import Path
 
-import case_uco
 from case_uco import CASEGraph
 from case_uco.uco.core import ExternalReference, Grouping, Relationship
 from case_uco.uco.identity import Organization
@@ -20,10 +20,9 @@ from case_uco.uco.observable import ContentDataFacet, FileFacet, ObservableObjec
 from case_uco.uco.tool import Tool
 from case_uco.uco.types import Hash
 
-try:
-    import case_uco_cac  # noqa: F401
-except ImportError:  # checkout without `pip install case-uco-cac`
-    sys.path.insert(0, str(Path(case_uco.__file__).resolve().parents[2] / "packages" / "case-uco-cac" / "python"))
+if importlib.util.find_spec("case_uco_cac") is None:  # checkout without `pip install case-uco-cac`
+    sdk_root = Path(sys.modules["case_uco"].__file__).resolve().parents[2]
+    sys.path.insert(0, str(sdk_root / "packages" / "case-uco-cac" / "python"))
 
 from case_uco_cac.cacontology_hotlines import HotlineOrganization  # noqa: E402
 from case_uco_cac.cacontology_prevention import EducationalResource  # noqa: E402
