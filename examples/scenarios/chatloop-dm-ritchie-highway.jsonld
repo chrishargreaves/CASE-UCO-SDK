@@ -17,11 +17,11 @@
             "@id": "kb:Tool-0b223916-23eb-5d6f-9a97-e285630e54bf",
             "@type": "uco-tool:Tool",
             "uco-core:description": [
-                "Built with case-uco 1.21.0; validate with case_validate --built-version case-1.4.0 (CASE 1.4.0 / UCO 1.4.0)."
+                "Built with case-uco 1.31.0; validate with case_validate --built-version case-1.5.0 (CASE 1.5.0 / UCO 1.5.0)."
             ],
             "uco-core:name": "case-uco (Python SDK)",
             "uco-tool:toolType": "CASE/UCO graph serialization",
-            "uco-tool:version": "1.21.0"
+            "uco-tool:version": "1.31.0"
         },
         {
             "@id": "kb:Hash-afc95fe7-df72-584f-9420-9e91417b8fbc",
@@ -29,7 +29,7 @@
             "uco-types:hashMethod": "SHA256",
             "uco-types:hashValue": {
                 "@type": "xsd:hexBinary",
-                "@value": "de5405aea184187bd31e099f02bdb99eb13c4a812e211a7a994e5c55c1a48314"
+                "@value": "DE5405AEA184187BD31E099F02BDB99EB13C4A812E211A7A994E5C55C1A48314"
             }
         },
         {
@@ -40,7 +40,7 @@
                 "chatloop-dm-ritchie-highway-source.md"
             ],
             "uco-observable:filePath": [
-                "/home/cory/CASE-UCO-Libraries/examples/scenarios/chatloop-dm-ritchie-highway-source.md"
+                "examples/scenarios/chatloop-dm-ritchie-highway-source.md"
             ],
             "uco-observable:isDirectory": [
                 {
@@ -11386,7 +11386,7 @@
                 "chatloop-dm-ritchie-highway.jsonld"
             ],
             "uco-observable:filePath": [
-                "/home/cory/CASE-UCO-Libraries/examples/scenarios/chatloop-dm-ritchie-highway.jsonld"
+                "examples/scenarios/chatloop-dm-ritchie-highway.jsonld"
             ],
             "uco-observable:isDirectory": [
                 {
@@ -11406,7 +11406,7 @@
             "@id": "kb:ObservableObject-78c6a679-9336-5fed-bfde-dd638df32d75",
             "@type": "uco-observable:ObservableObject",
             "uco-core:description": [
-                "JSON-LD graph produced by transforming the source transcript with case-uco 1.21.0. SHA-256 of this file is recorded in chatloop-dm-ritchie-highway.validation.txt (not embedded here \u2014 circular otherwise)."
+                "JSON-LD graph produced by transforming the source transcript with case-uco 1.31.0. SHA-256 of this file is recorded in chatloop-dm-ritchie-highway.validation.txt (not embedded here \u2014 circular otherwise)."
             ],
             "uco-core:hasFacet": [
                 {
@@ -11494,7 +11494,7 @@
             "@type": "case-investigation:Investigation",
             "uco-core:description": [
                 "Fictional ChatLoop direct-message transcript (Tier T0). All persons, accounts, locations, and events are synthetic.",
-                "Builder: case-uco 1.21.0; CASE/UCO 1.4.0 validation target."
+                "Builder: case-uco 1.31.0; CASE/UCO 1.5.0 validation target."
             ],
             "uco-core:name": "ChatLoop DM \u2014 Target / Ritchie Highway (fictional)",
             "uco-core:tag": [
@@ -11540,9 +11540,7 @@
                 "messaging",
                 "juvenile shoplifting discussion (fictional)"
             ],
-            "case-investigation:investigationForm": [
-                "case"
-            ],
+            "case-investigation:investigationForm": "case",
             "case-investigation:investigationStatus": "open"
         }
     ]

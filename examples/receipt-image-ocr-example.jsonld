@@ -79,10 +79,10 @@
           "@type": "uco-observable:FileFacet",
           "uco-observable:extension": "png",
           "uco-observable:fileName": [
-            "c__Users_CoryHall_AppData_Roaming_Cursor_User_workspaceStorage_6b34393acb6837408b66cd24bdb90d18_images_receipt_example2-5ba939ca-cc29-4bdb-b7cc-dea3d7604ea7.png"
+            "receipt_example2.png"
           ],
           "uco-observable:filePath": [
-            "/home/cory/.cursor/projects/home-cory-CASE-UCO-Libraries/assets/c__Users_CoryHall_AppData_Roaming_Cursor_User_workspaceStorage_6b34393acb6837408b66cd24bdb90d18_images_receipt_example2-5ba939ca-cc29-4bdb-b7cc-dea3d7604ea7.png"
+            "images/receipt_example2.png"
           ],
           "uco-observable:sizeInBytes": {
             "@type": "xsd:integer",
